@@ -566,6 +566,7 @@
       |=  {cof/cafe for/mark bem/beam bim/beam}
       ^-  (bolt hood)
       %+  cool  |.(leaf+"ford: fade {<[(tope bem)]>}")
+      %+  cool  |.(leaf+"file://Urbit/{(body:earn `%hoon (flop s.bem))}")
       %+  cope  (liar cof %*(. bem s [for s.bem]))
       |=  {cof/cafe cay/cage}
       %+  (clef %hood)  (fine cof bim(r [%ud 0]) cay)
