@@ -7,6 +7,8 @@
 /=    dat    /^    tree-include    /tree-include/
 /=    kid    /^    (map knot tree-include)
              /_    /tree-include/
+/=    kid2   /^    (map knot (map knot tree-include))
+             /_    /_    /tree-include/
 !:
 ::::
   ::
@@ -32,6 +34,15 @@
   |=  a/schema  ^-  plist
   ?@(-.a [(to-item a) ~] [(to-item -.a) $(a +.a)])
 ::
+++  too-deep                          :: can't serve [%kids [%kids [%kids q]]]
+  |=  {a/@u b/(list query)}
+  ?~  b  |
+  ?:  $(b t.b)  &
+  ?.  ?=($kids -.i.b)
+    |
+  ?~  a  &
+  $(a (dec a), b p.i.b)
+::
 ++  to-item
   |=  b/{term $@(mark schema)}  ^-  {term $@(mark plist)}
   ?@(+.b b [-.b (schema-to-plist +.b)])
@@ -47,6 +58,7 @@
 ++  from-queries
   |=  {bem/beam quy/(list query)}
   =<  (jobe (turn quy .))
+  ?<  (too-deep 2 quy)                ::  XX recursion?
   |=  a/query
   :-  -.a
   ?-  -.a
@@ -60,10 +72,10 @@
     $meta  (from-type +.a meta.dat)
     $mime  (from-type +.a mime.dat)
     $body  (from-type +.a body.dat)
-    $kids  ?<  (~(has by (malt p.a)) %kids)  ::  XX recursion? 
-           =<  o+(~(urn by kid) .)
+    $kids  =<  o+(~(urn by kid) .)
            |=  {dir/knot dak/tree-include}  ^-  json
-           ^^$(quy p.a, s.bem [dir s.bem], dat dak, kid ~)
+           =.  kid  (~(get ja kid2) dir)
+           ^^$(quy p.a, s.bem [dir s.bem], dat dak, kid2 ~)
   ==
 --
 !:
