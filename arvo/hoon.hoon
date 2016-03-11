@@ -9190,6 +9190,7 @@
   %*(. vast bug bug, wer wer)
 ::
 ++  vast  !.
+  =+  tyl=|
   =+  [bug=`?`| was=*(set path) wer=*path]
   |%
   ++  gash  %+  cook
@@ -9620,7 +9621,7 @@
       :-  '('
         (stag %call (ifix [pel per] (most ace wide)))
       :-  '{'
-        (stag %bank (ifix [kel ker] (most ace wide)))
+        =.(tyl & (stag %bank (ifix [kel ker] (most ace wide))))
       :-  '*'
         ;~  pose
           (stag %bunt ;~(pfix tar wide))
@@ -9776,12 +9777,13 @@
                     ['^' (rune ket %cork expr)]
                     ['~' (rune sig %port expb)]
                     ['*' (rune tar %gill expb)]
-                    ['=' (rune tis %gate expb)]
+                    ['=' (rune tis %gate expb-x)]
                     ['?' (rune wut %tray expa)]
                 ==
               ==
             :-  '$'
               ;~  pfix  buc
+                =.  tyl  &
                 %-  stew
                 ^.  stet  ^.  limo
                 :~  ['@' (rune pat %claw expb)]
@@ -10128,6 +10130,7 @@
     ::
     ++  expa  |.(loaf)                                  ::  one twig
     ++  expb  |.(;~(gunk loaf loaf))                    ::  two twigs
+    ++  expb-x  |.(;~(gunk loaf(tyl &) loaf))                    ::  two twigs
     ++  expc  |.(;~(gunk loaf loaf loaf))               ::  three twigs
     ++  expd  |.(;~(gunk loaf loaf loaf loaf))          ::  four twigs
     ++  expe  |.(wisp)                                  ::  core tail
@@ -10230,7 +10233,7 @@
         ==
     ==
   ::
-  ++  lung
+  ++  lung  !:
     ~+
     %-  bend
     |=  lang
@@ -10247,6 +10250,11 @@
   ::
   ++  long
     %+  knee  *twig  |.  ~+
+::     %+  here
+::       |=  {a/pint b/twig}
+::       ~?  &(tyl ?=($rap -.b))
+::         tyl-rap+[wer a]
+::       b
     ;~  lung
       scat
       ;~  pose
@@ -10897,7 +10905,7 @@
   ++  jack                                              ::  dispatch card
     |=  {lac/? gum/muse}
     ^-  {{p/(list ovum) q/(list muse)} _niz}
-    ::  =.  lac  |(lac ?=(?(%g %f) p.gum))
+     =.  lac  |(lac ?=(?($g $f) p.gum))
     ::  =.  lac  &(lac !?=($b p.gum))
     %+  fire
       p.gum
