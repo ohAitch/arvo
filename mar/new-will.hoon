@@ -7,17 +7,27 @@
     %+  turn  wil
     |=  dee/deed:new-will
     %-  jobe  :~
-      sig+s+p.dee
-      pub+s+p.q.dee
-      who+(jape +:<`@p`q.q.dee>)
-      :-  %when
-      =*  wen  r.q.dee
-      %-  jobe  :~
-        tym+s+(scot %da p.wen)
-        lyf+(jone q.wen)
-        sein-lyf+(biff r.wen jone)
-      ==
+      sig+(jape (sifo sig.dee))
+      pub+(jape (sifo pub.dee))
+      tym+(jape <`@da`tym.dee>)
+      who+(jape +:<`@p`who.dee>)
+      lyf+(jone lyf.dee)
     ==
+  ++  tree-elem
+    ?~  wil  ;div.will.error: Empty will
+    ;div.will
+      ;h2: Will for {<who.i.wil>}
+      ;*  |-  ^-  marl
+          :_  ?~(t.wil ~ [;h4:"Using" $(wil t.wil)])
+          =+  i.wil
+          ;blockquote.blockquote.deed
+            ;p: pubkey ;{code "{(scow %uw pub)}"}
+            ;p: {<who>} #{<lyf>}, issued at {<tym>}
+            ;p
+              ; signature ;{code "{(scow %uw sig)}"} on
+              ; ;{code "{~(rend co many+~[$+uw+pub $+da+tym $+p+who $+ud+lyf])}"}
+            ==
+    ==    ==
   --
 ++  grab
   |%
@@ -26,8 +36,15 @@
     =+  jo
     |^  |=(a/json `new-will`(need (will a)))
     ++  will  (ar deed)
-    ++  deed  (ot sig+so pub+so who+(su fed:ag) when+when ~)
-    ++  when  (ot tym+time lyf+ni sein-lyf+(mu ni) ~)
+    ++  deed
+      %-  ot  :~
+        sig+so64
+        pub+so64
+        tym+time
+        who+(su fed:ag)
+        lyf+ni
+      ==
+    ++  so64  (cu ofis so)
     ++  time  (ci |=(a/@t `(unit @da)`(slaw %da a)) so)
     --
   ++  mime

@@ -1,6 +1,12 @@
 |^  {will}
 ++  will  (list deed)                 ::  certificate
-++  deed  {p/@ q/step}                ::  signed identity
-++  step  {p/@ q/ship r/when}         ::  public key, ship, instance
-++  when  {p/@da q/life r/(unit life)}::  time, own number, parent number
+++  deed
+  $:  sig/@                           ::  sign +
+      pub/@                           ::  that the pubkey
+      tym/@da                         ::  was once granted
+      who/ship                        ::  a ship's
+      lyf/life                        ::  incarnation
+  ==
+::
+++  mini  _!!
 --
