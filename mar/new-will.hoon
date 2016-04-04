@@ -29,12 +29,13 @@
             ==
     ==    ==
   --
+++  verify  |=(a/new-will a)  ::  XX crypto logic
 ++  grab
   |%
-  ++  noun  new-will
+  ++  noun    |=(a/* (verify (new-will a)))
   ++  json
     =+  jo
-    |^  |=(a/json `new-will`(need (will a)))
+    |^  |=(a/json (verify `new-will`(need (will a))))
     ++  will  (ar deed)
     ++  deed
       %-  ot  :~
@@ -51,5 +52,30 @@
     |=  a/^mime  ^-  new-will
     (json (need (poja q.q.a)))
   --
-++  grad  %mime
+++  grad
+  |%
+  ++  form  %new-will
+  ++  pact
+    |=  dif/new-will  ^-  new-will
+    =;  err  ?~(err dif ~|([wil=wil neu=dif] ~_(err !!)))
+    =:  wil  (flop wil)
+        dif  (flop (verify dif))
+      ==
+    |-  ^-  $@($~ tank)
+    ?~  wil  ~
+    ?~  dif  >[%shorter-will]<
+    ?.  =(i.wil i.dif)  >[deed-mismatch+[i.wil i.dif]]<
+    $(wil t.wil, dif t.dif)
+  ::
+  :: a will accpetable as a patch is a valid diff
+  ++  diff  |=(dif/new-will (pact dif))
+  ++  join
+    |=  {ali/new-will bob/new-will}  ^-  (unit new-will)
+    ?:  =(ali bob)  `ali
+    ?:  =((lent ali) (lent bob))
+      ~&(will-join-mismatch+[ali bob] ~)  
+    ?:  (lth (lent ali) (lent bob))
+      `(pact(wil ali) bob)
+    `(pact(wil bob) ali)
+  --
 --
