@@ -11,6 +11,7 @@
 ++  verify
   |=  {him/ship now/@da wil/(map ship new-will)}  ^-  unexpired/?
   =+  his=(~(get ja wil) him)
+  ~|  check-will+[him his]
   |^  apex
   ++  apex
     ?~  his  !!
@@ -28,6 +29,7 @@
     ::
     ++  succession
       |=  pre/new-deed  ^+  %&
+      ~|  succession-deed+cur
       ?:  ?=($pawn (clan him))  
         ?>(signed-by-sein %&)
       ?>  ?~(sig-sein.cur %& signed-by-sein)
@@ -35,36 +37,48 @@
     ::
     ++  self-signed-with
       |=  her/new-deed  ^+  %&
+      ~|  %own-signature
       (sure pub.dat.her (need sig-self.cur) dat.cur)
     ::
     ++  signed-by-sein
       ^+  %&
-      ?~  sig-sein.cur  !!
+      ?~  sig-sein.cur
+        ~|(%no-sein-signature !!)
       =+  sen=u.sig-sein.cur
+      ~|  signed-by+who.sen
       =+  her=(snag lyf.sen (will-sein who.sen))
-      ?>  expiry(cur her, now tym.dat.cur)
+      ?.  expiry(cur her, now tym.dat.cur)
+        ~|(expired-sein+[tym.dat.cur sen her] !!)
       (sure pub.dat.her sig.sen dat.cur)
     ::
     ++  will-sein      
       |=  her/ship  ^-  will
       =;  y/$&  (~(get ja wil) her)   ::  restructure into ++verify?
-      ?>  ^^$(him her)
-      ?+  (clan him)  ~|(sein-disallowed+[(clan him) her] !!)
-        $king  ?>(=(%czar (rank her)) %&)
-        $duke  ?>(=(%king (rank her)) %&)
+      ?>  ~|(%check-sein ^^$(him her))
+      ~|  sein-disallowed+[[(clan him) (clan her)] him her]
+      ?+  (clan him)  !!
+        $pawn  ?>(=(%czar (clan her)) %&)
+        $king  ?>(=(%czar (clan her)) %&)
+        $duke  ?>(=(%king (clan her)) %&)
       ==
     ::
     ++  launch
+      ~|  launch-deed+cur
       ?-    (clan him)
           ?($king $duke $earl)
-        ?>  =((sein him) who:(need sig-sein.cur))
+        ?^  sig-self.cur  ~|(self-signed+(clan him) !!)
+        ?~  sig-sein.cur  ~|(%unsigned !!)
+        ?.  =((sein him) who.u.sig-sein.cur)
+          ~|(bad-sein+[him=him got=who.u.sig-sein.cur want=(sein him)] !!)
         ?>(signed-by-sein %&)
       ::
           $pawn
+        ?^  sig-sein.cur  ~|(sein-signed+(clan him) !!)
         ?>  =(him (fingerprint pub.dat.cur))
         (self-signed-with cur)
       ::
           $czar
+        ?^  sig-sein.cur  ~|(sein-signed+(clan him) !!)
         ?>  =((zeno him) (fingerprint pub.dat.cur))
         (self-signed-with cur)
       ==
