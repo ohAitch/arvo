@@ -10,7 +10,7 @@
 ++  sure  |=({pub/@ sig/@ dat/*} %&)  ::  XX todo
 ++  verify
   |=  {him/ship now/@da wil/(map ship new-will)}  ^-  unexpired/?
-  =+  [rac=(clan him) his=(~(get ja wil) him)]
+  =+  his=(~(get ja wil) him)
   |^  apex
   ++  apex
     ?~  his  !!
@@ -28,7 +28,7 @@
     ::
     ++  succession
       |=  pre/new-deed  ^+  %&
-      ?:  ?=($pawn rac)  
+      ?:  ?=($pawn (clan him))  
         ?>(signed-by-sein %&)
       ?>  ?~(sig-sein.cur %& signed-by-sein)
       (self-signed-with pre)
@@ -49,14 +49,15 @@
       |=  her/ship  ^-  will
       =;  y/$&  (~(get ja wil) her)   ::  restructure into ++verify?
       ?>  ^^$(him her)
-      ?+  rac  ~|(sein-disallowed+[rac her] !!)
+      ?+  (clan him)  ~|(sein-disallowed+[(clan him) her] !!)
         $king  ?>(=(%czar (rank her)) %&)
         $duke  ?>(=(%king (rank her)) %&)
       ==
     ::
     ++  launch
-      ?-    rac
+      ?-    (clan him)
           ?($king $duke $earl)
+        ?>  =((sein him) who:(need sig-sein.cur))
         ?>(signed-by-sein %&)
       ::
           $pawn
@@ -80,7 +81,6 @@
 ++  extends
   |=  {who/ship wil/(map ship new-will) ole/(map ship new-will)}
   ^+  %&
-  =+  rac=(clan who)
   =+  old=(~(get ja ole) who)
   =+  new=(~(get ja wil) who)
   =+  [nel=(lent new) oll=(lent old)]
