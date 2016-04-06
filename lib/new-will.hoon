@@ -4,10 +4,16 @@
 ++  new-deed  deed:new-will
 --
 |%
-++  zeno  _0v0                        ::  XX todo
-++  crypto  |=(@ *acru)               ::  XX todo
-++  fingerprint  |=(pub/@ *@)         ::  XX todo
-++  sure  |=({pub/@ sig/@ dat/*} %&)  ::  XX todo
+++  zeno  _`@uv`0w3r.bBUZB.XoQ8w.veCeU.eGDIy            ::  XX todo
+++  signed-with
+  |=  {key/@uw sig/@uw dat/*}
+  =+  non=(shaf %meld (sham dat))
+  =+  ~|  decode-signature+sig
+      voc=(need (sure:as:(haul key) *code sig))
+  ?.  =(non voc)
+    ~|(signature-mismatch+[non voc] !!)
+  %&
+::
 ++  verify
   |=  {him/ship now/@da wil/(map ship new-will)}  ^-  unexpired/?
   =+  his=(~(get ja wil) him)
@@ -38,7 +44,12 @@
     ++  self-signed-with
       |=  her/new-deed  ^+  %&
       ~|  %own-signature
-      (sure pub.dat.her (need sig-self.cur) dat.cur)
+      (signed-with pub.dat.her (need sig-self.cur) dat.cur)
+    ::
+    ++  signed-with
+      |=  {key/@ sig/@ dat/*}
+      ?>  =((shaf %meld (sham dat)) (need (sure:as:(haul key) *code sig)))
+      %&
     ::
     ++  signed-by-sein
       ^+  %&
@@ -49,7 +60,7 @@
       =+  her=(snag lyf.sen (will-sein who.sen))
       ?.  expiry(cur her, now tym.dat.cur)
         ~|(expired-sein+[tym.dat.cur sen her] !!)
-      (sure pub.dat.her sig.sen dat.cur)
+      (signed-with pub.dat.her sig.sen dat.cur)
     ::
     ++  will-sein      
       |=  her/ship  ^-  will
@@ -74,12 +85,12 @@
       ::
           $pawn
         ?^  sig-sein.cur  ~|(sein-signed+(clan him) !!)
-        ?>  =(him (fingerprint pub.dat.cur))
+        ?>  =(him `@p`fig:ex:(haul pub.dat.cur))
         (self-signed-with cur)
       ::
           $czar
         ?^  sig-sein.cur  ~|(sein-signed+(clan him) !!)
-        ?>  =((zeno him) (fingerprint pub.dat.cur))
+        ?>  =((zeno him) fig:ex:(haul pub.dat.cur))
         (self-signed-with cur)
       ==
     --
