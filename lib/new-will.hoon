@@ -88,6 +88,7 @@
 ++  update
   |=  {who/ship now/@da wil/(map ship new-will) ole/(map ship new-will)}
   ^-  new-will
+  =.  wil  (~(uni by ole) wil)
   ?>  (verify who now wil)
   ?>  (extends who wil ole)
   (~(get ja wil) who)
@@ -110,6 +111,6 @@
   ?>  =(i.new(sig-sein ~) i.old(sig-sein ~))
   =+  sen=u.sig-sein.i.new
   ?>  =(who.sen who.u.sig-sein.i.old)
-  ?>  =(lyf.sen (lent (~(get ja wil) who.sen)))
+  ?>  =(lyf.sen (dec (lent (~(get ja wil) who.sen))))
   %&
 --
