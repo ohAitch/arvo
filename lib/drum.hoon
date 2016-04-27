@@ -139,6 +139,7 @@
     ++  card                                          ::  general card
       $%  {$conf wire dock $load ship term}           ::
           {$diff lime}                                ::
+          {$flog wire flog}                           ::
           {$peer wire dock path}                      ::
           {$poke wire dock pear}                      ::
           {$pull wire dock $~}                        ::
@@ -622,7 +623,7 @@
               ta-bel
             %-  ta-hom(kil `(scag pos.inp buf.say.inp), ris ~)
             (ta-cut 0 pos.inp)
-        $v  ta-bel
+        $v  +>(+> ~&(%drum-verb (se-emit ost %flog /drum %verb ~)))
         $x  +>(+> se-anon)
         $y  ?~  kil  ta-bel
             (ta-hom(ris ~) (ta-cat pos.inp u.kil))
