@@ -29,7 +29,7 @@
                 default: return encodeURIComponent(c)  // Control, UTF8
             }}).join('')};
             var send = function(str,cb){
-              $.getJSON("repl.json",
+              $.getJSON("/.repl-json",
                   // "now="+Date.now()+
                   "eval="+window.util.urle(str),
                 cb)
