@@ -917,16 +917,17 @@
     ::  ~&  [%his-clock ler.cal]
     ::  ~&  [%our-clock ven.say]
     =^  dat  say  (~(transceive sole say) cal)
-    ?.  ?&  ?=($del -.dat)
-            =(+(p.dat) (lent buf.say))
-        ==
-      +>.$
-    =+  foy=(he-dope (tufa buf.say))
-    ?:  ?=($& -.foy)  +>.$
-    ::  ~&  [%bad-change dat ted.cal]
-    =^  lic  say  (~(transmit sole say) dat)
-    ::  ~&  [%our-leg leg.say]
-    (he-diff %mor [%det lic] [%err q.p.foy] ~)
+    +>.$
+::     ?.  ?&  ?=($del -.dat)
+::             =(+(p.dat) (lent buf.say))
+::         ==
+::       +>.$
+::     =+  foy=(he-dope (tufa buf.say))
+::     ?:  ?=($& -.foy)  +>.$
+::     ::  ~&  [%bad-change dat ted.cal]
+::     =^  lic  say  (~(transmit sole say) dat)
+::     ::  ~&  [%our-leg leg.say]
+::     (he-diff %mor [%det lic] [%err q.p.foy] ~)
   ::
   ++  he-plan                                           ::  execute command
     |=  mad/dojo-command
