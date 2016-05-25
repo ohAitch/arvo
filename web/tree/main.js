@@ -325,7 +325,7 @@ extras = {
       var color, src;
       color = this.props.color;
       if (color === "white" || color === "black") {
-        src = "//storage.googleapis.com/urbit-extra/logo/logo-" + color + "-100x100.png";
+        src = "//media.urbit.org/logo/logo-" + color + "-100x100.png";
       }
       return a({
         href: "http://urbit.org",
