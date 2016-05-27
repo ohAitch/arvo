@@ -47,7 +47,7 @@ Persistence = _persistence({
         global = urb.user === urb.ship;
       }
       serial = util.uuid32();
-      audience = ["~" + window.urb.ship + "/home"];
+      audience = ["~doznec/urbit-meta"];
       _audi = {};
       for (k in audience) {
         v = audience[k];
