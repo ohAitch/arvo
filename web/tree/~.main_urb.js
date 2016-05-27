@@ -434,7 +434,7 @@ extras = {
         }, [
           "This page was made by Urbit. Feedback: ", a({
             href: "mailto:urbit@urbit.org"
-          }, "urbit@ubrit.org"), " ", a({
+          }, "urbit@urbit.org"), " ", a({
             href: "https://twitter.com/urbit_"
           }, "@urbit_")
         ])
