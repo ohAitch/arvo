@@ -47,7 +47,7 @@ Persistence = _persistence({
         global = urb.user === urb.ship;
       }
       serial = util.uuid32();
-      audience = _.uniq(audience);
+      audience = ["~" + window.urb.ship + "/home"];
       _audi = {};
       for (k in audience) {
         v = audience[k];
