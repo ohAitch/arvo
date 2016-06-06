@@ -3,7 +3,12 @@
   ::
 /?    310
 /=  urb-wasp-data-js    /:    /%/wasp-data    /js/
-!:
+/=  disable-autoreload
+  /:    /%/disable-autoreload
+  /!bean/  ::  set to & for no dependency updates, to | to re-enable
+::
+::::
+  ::
 |_  {{dep/@uvH hed/marl} {dep-bod/@uvH bod/marl}}
 ++  grow                                                ::  convert to
   |%
@@ -18,7 +23,8 @@
       ==
       ;body
         ;*  bod
-        ;*  ?~  dep  ~
+        ;*  ?:  disable-autoreload  ~
+            ?~  dep  ~
             :~  ;script@"/~/on/{<dep>}.js"(urb_injected "", async "", onload "setTimeout(urb.onDep,2000)");  
                 ;script(urb_injected "")
                   ;-  (trip urb-wasp-data-js)
