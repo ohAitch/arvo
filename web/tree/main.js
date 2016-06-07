@@ -50,6 +50,9 @@ module.exports = {
       obj
     ));
   },
+  registerScriptElement: function(elem) {
+    return TreePersistence.waspElem(elem);
+  },
   addVirtual: function(components) {
     return TreeDispatcher.handleViewAction({
       type: "addVirtual",
@@ -434,7 +437,7 @@ extras = {
         }, [
           "This page was made by Urbit. Feedback: ", a({
             href: "mailto:urbit@urbit.org"
-          }, "urbit@urbit.org"), " ", a({
+          }, "urbit@ubrit.org"), " ", a({
             href: "https://twitter.com/urbit_"
           }, "@urbit_")
         ])
@@ -1972,11 +1975,13 @@ module.exports = _.extend(reactify, {
 
 
 },{"../stores/TreeStore.coffee":27,"./LoadComponent.coffee":12}],18:[function(require,module,exports){
-var appendNext, recl, rele, waitingScripts;
+var TreeActions, appendNext, recl, rele, waitingScripts;
 
 recl = React.createClass;
 
 rele = React.createElement;
+
+TreeActions = require('../actions/TreeActions.coffee');
 
 waitingScripts = null;
 
@@ -1997,7 +2002,7 @@ module.exports = recl({
     var s;
     s = document.createElement('script');
     _.assign(s, this.props);
-    urb.waspElem(s);
+    TreeActions.registerScriptElement(s);
     s.onload = appendNext;
     this.js = s;
     if (waitingScripts != null) {
@@ -2018,7 +2023,7 @@ module.exports = recl({
 });
 
 
-},{}],19:[function(require,module,exports){
+},{"../actions/TreeActions.coffee":1}],19:[function(require,module,exports){
 var a, div, input, query, reactify, recl, ref,
   slice = [].slice;
 
@@ -2518,12 +2523,14 @@ module.exports = {
     return $.get(url, {}, function(data, status, xhr) {
       var dep;
       delete pending[url];
-      dep = urb.getXHRWasp(xhr);
-      urb.sources[dep] = url;
-      waspWait.push(dep);
-      if (_.isEmpty(pending)) {
-        waspWait.map(urb.waspData);
-        waspWait = [];
+      if (urb.wasp != null) {
+        dep = urb.getXHRWasp(xhr);
+        urb.sources[dep] = url;
+        waspWait.push(dep);
+        if (_.isEmpty(pending)) {
+          waspWait.map(urb.waspData);
+          waspWait = [];
+        }
       }
       if (cb) {
         return cb(null, data);
@@ -2540,6 +2547,11 @@ module.exports = {
         appl: appl
       });
     });
+  },
+  waspElem: function(a) {
+    if (urb.wasp != null) {
+      return urb.waspElem(a);
+    }
   },
   encode: function(obj) {
     var _encode, delim;

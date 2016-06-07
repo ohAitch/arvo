@@ -432,11 +432,11 @@ extras = {
           className: footerClas,
           key: 'footer-inner'
         }, [
-          "This page was made by Urbit. Feedback: ", a({
+          "This page was made by Urbit. ", a({
+            href: "urbit.org"
+          }, "urbit.org"), a({
             href: "mailto:urbit@urbit.org"
-          }, "urbit@urbit.org"), " ", a({
-            href: "https://twitter.com/urbit_"
-          }, "@urbit_")
+          }, "contact")
         ])
       ]);
     }
@@ -2518,12 +2518,14 @@ module.exports = {
     return $.get(url, {}, function(data, status, xhr) {
       var dep;
       delete pending[url];
-      dep = urb.getXHRWasp(xhr);
-      urb.sources[dep] = url;
-      waspWait.push(dep);
-      if (_.isEmpty(pending)) {
-        waspWait.map(urb.waspData);
-        waspWait = [];
+      if (urb.wasp != null) {
+        dep = urb.getXHRWasp(xhr);
+        urb.sources[dep] = url;
+        waspWait.push(dep);
+        if (_.isEmpty(pending)) {
+          waspWait.map(urb.waspData);
+          waspWait = [];
+        }
       }
       if (cb) {
         return cb(null, data);
@@ -3379,6 +3381,23 @@ function isUndefined(arg) {
 },{}]},{},[25]);
 window.urb = window.urb || {}
 window.urb.appl = window.urb.appl || null
+
+window.urb.init = function(onload){ // XX proper class?
+  onload = onload || function(){}
+  var $init = this.init
+  if($init.loaded) return onload()
+  if($init.loading) return $init.loading.push(onload)
+  $init.loading = [onload]
+  var s = document.createElement('script')
+  s.src = "/~/at/~/auth.js" // XX nop.js? auth.json?
+  s.onload = function(){
+    $init.loading.map(function(f){f()})
+    delete $init.loading
+    $init.loaded = true
+  }
+  document.body.appendChild(s)
+}
+window.urb.init.loaded = window.urb.oryx
 
 window.urb.req = function(method,url,params,json,cb) {
   var xhr = new XMLHttpRequest()
