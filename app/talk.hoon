@@ -3,7 +3,7 @@
   ::                                                    ::  ::   
 /?    310
 /-    talk, sole
-/+    talk, sole, time-to-id, twitter
+/+    talk, sole, time-to-id, twitter, tlon
 /=    seed  /~  !>(.)
 ::
 ::::
@@ -76,6 +76,7 @@
       ==                                                ::
     ++  card                                            ::  general card
       $%  {$diff lime}                                  ::
+          {$hiss wire $~ $tlon-nice api-call:tlon}      ::
           {$info wire @p @tas nori}                     ::
           {$peer wire dock path}                        ::
           {$poke wire dock pear}                        ::
@@ -1188,7 +1189,7 @@
         [[i.moves p.mor] q.mor]
     =+  :*  moz=(flop p.yop)
             ^=  foc  ^-  (unit sole-effect)
-            ?~  q.yop  ~ 
+            ?~  q.yop  ~
             ?~(t.q.yop `i.q.yop `[%mor (flop `(list sole-effect)`q.yop)])
         ==
     ?~(foc moz [[ost.hid %diff %sole-effect u.foc] moz])
@@ -1301,6 +1302,9 @@
   ++  ra-base-hart  .^(hart %e /(scot %p our.hid)/host/(scot %da now.hid))
   ++  ra-comment
     |=  {pax/path sup/spur txt/@t}
+    =.  ..ra-emit
+      %+  ra-emit  ost.hid
+      [%hiss /comment ~ %tlon-nice (wipe-long:tlon pax)]
     =.  ..ra-emit
       %+  ra-emit  ost.hid
       :*  %poke
@@ -2222,6 +2226,13 @@
 ++  poke-talk-comment
   |=  {pax/path sup/spur txt/@t}  ^-  (quip move +>)
   ra-abet:(ra-comment:ra pax sup txt)
+::
+++  sigh-tlon-nice
+  |=  {wire $~}
+  ::  :-  [%nice ~]~  XX end-to-end acks
+  `+>.$
+::
+++  sigh-tang  |=({wire tan/tang} (mean tan))
 ::
 ++  poke-talk-save
   |=  man/knot
