@@ -43,9 +43,10 @@ urb.onLoadUrbJS = function(){
 
   var _onupdate = urb.onupdate
   urb.onupdate = function(dep){
+    var partial = (urb.datadeps[dep] || dep.slice(0,5) === "weak/")
     if(urb.verb)
-      console.log("update", urb.datadeps[dep] ? "data" : "full", dep, urb.sources[dep])
-    if(urb.datadeps[dep]) urb.ondataupdate(dep)
+      console.log("update", partial ? "data" : "full", dep, urb.sources[dep])
+    if(partial) urb.ondataupdate(dep)
     else _onupdate(dep)
   }
   urb.waspDeps()
