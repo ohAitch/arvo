@@ -49,6 +49,10 @@ window.urb.req = function(method,url,params,json,cb) {
         }
         if(res.data.reload)
           res.reload = res.data.reload
+          
+        if(res.data.auth)
+          for(k in res.data.auth)
+            window.urb[k] = res.data.auth[k]
       } catch(e) {
         // if(urb.wall !== false) document.write(this.responseText) // XX
         err = {
