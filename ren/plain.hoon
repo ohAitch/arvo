@@ -3,6 +3,7 @@
   ::
 /?    310
 /^    {dep/@uvh hym/manx}    /#  /|(/hymn/ /~[;none;])
+/^    sib/(map knot $~)    /:  /%%/    /_    /~  ~
 /=    gas    /$  fuel
 ::
 ::::
@@ -24,7 +25,21 @@
     ;*  hed
   ==
   ;body
-    ;a/"../.plain": Up
+    ;+  =+  all=(sort (~(tap by sib)) aor)
+        =/  nex
+          ?~  all  ~
+          |-  ^-  marl
+          ?~  t.all  ~
+          ?:  =(fyl p.i.all)  [;a/"../{(trip p.i.t.all)}/.plain":"Next"]~
+          $(all t.all)
+        =.  all  (flop all)  
+        =/  pre
+          ?~  all  ~
+          |-  ^-  marl
+          ?~  t.all  ~
+          ?:  =(fyl p.i.all)  [;a/"../{(trip p.i.t.all)}/.plain":"Prev"]~
+          $(all t.all)
+        ;div: *{pre} ;{a/"../.plain" "Up"} *{nex}
     ;hr;
     ;*  bod
   ==
