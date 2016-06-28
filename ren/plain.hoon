@@ -3,6 +3,7 @@
   ::
 /?    310
 /^    {dep/@uvh hym/manx}    /#  /|(/hymn/ /~[;none;])
+/^    kid/(map knot $~)    /_    /~  ~
 /^    sib/(map knot $~)    /:  /%%/    /_    /~  ~
 /=    gas    /$  fuel
 ::
@@ -40,7 +41,13 @@
           ?:  =(fyl p.i.all)  [;a/"../{(trip p.i.t.all)}/.plain":"Prev"]~
           $(all t.all)
         ;div: *{pre} ;{a/"../.plain" "Up"} *{nex}
+    ;*  ?~  bod  ~
+        [;hr; bod]
     ;hr;
-    ;*  bod
+    ;ul
+      ;*  %+  turn  (sort (~(tap by kid)) aor)
+          |=  {sub/knot $~}
+          ;li: ;{a/"{(trip sub)}/.plain" "{(trip sub)}"}
+    ==
   ==
 ==
