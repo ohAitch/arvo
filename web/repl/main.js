@@ -1,3 +1,6 @@
+if(!window.tree.replOnce){
+window.tree.replOnce = true
+
 window.util = window.util || {}
 window.util.urle = function(s){
   // neither escape nor encodeURIComponent get '*'
@@ -62,3 +65,5 @@ window.tree.actions.registerComponent("repl", React.createClass({
     addRepl("(add 2 2)").execCommand("send")
   }
 }))
+
+}
