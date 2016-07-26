@@ -1,4 +1,5 @@
 !:  ::  %gall, agent execution  
+
 !?  163
 ::::
 |=  pit/vase
@@ -22,10 +23,10 @@
 ++  cote                                                ::  ++ap note
   $%  {$meta p/@tas q/vase}                             ::  
       {$send p/ship q/cush}                             ::  
-      {$hiss p/mark q/cage}
+      {$hiss p/(unit knot) q/mark r/cage}               ::
   ==                                                    ::
-++  cove  (pair bone (mold cote cuft))                  ::  internal move
-++  move  {p/duct q/(mold note-arvo gift-arvo)}         ::  typed move
+++  cove  (pair bone (wind cote cuft))                  ::  internal move
+++  move  {p/duct q/(wind note-arvo gift-arvo)}         ::  typed move
 --                                                      ::
 |%  ::::::::::::::::::::::::::::::::::::::::::::::::::::::    %gall state
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -488,6 +489,11 @@
     ^-  beak
     byk:(~(got by bum) dap)
   ::
+  ++  mo-peek
+    |=  {dap/dude pry/prey ren/@tas tyl/path}
+    ^-  (unit (unit cage))
+    (ap-peek:(ap-abed:ap dap pry) ren tyl)
+  ::
   ++  mo-clip                                           ::  apply club
     |=  {dap/dude pry/prey cub/club}
     ?:  ?=($puff -.cub)
@@ -504,6 +510,7 @@
     |=  {dap/dude pry/prey cub/club}
     ^+  +>
     ?:  |(!(~(has by bum) dap) (~(has by wub) dap))
+      ~&  >>  [%mo-not-running dap -.cub]
       ::  ~&  [%mo-club-qeu dap cub]
       =+  syf=(fall (~(get by wub) dap) *sofa)
       +>.$(wub (~(put by wub) dap syf(kys (~(put to kys.syf) [hen pry cub]))))
@@ -608,7 +615,7 @@
           $pass
         :+  %pass  `path`[%use dap p.q.cov]
         ?-  -.q.q.cov
-          $hiss  `note-arvo`[%e %hiss p.q.q.cov q.q.q.cov]
+          $hiss  `note-arvo`[%e %hiss +.q.q.cov]
           $send  `note-arvo`[%g %deal [our p.q.q.cov] q.q.q.cov]
           $meta  `note-arvo`[`@tas`p.q.q.cov %meta `vase`q.q.q.cov]
         ==
@@ -627,6 +634,26 @@
       =^  zem  +>.$  (ap-slam cog p.arm arg)
       ?:  ?=($| -.zem)  [`p.zem +>.$]
       (ap-sake p.zem) 
+    ::
+    ++  ap-peek
+      |=  {ren/@tas tyl/path}
+      ^-  (unit (unit cage))
+      =+  cug=(ap-find %peek ren tyl)
+      ?~  cug
+        ((slog leaf+"peek find fail" >tyl< ~) [~ ~])
+      =^  arm  +>.$  (ap-farm q.u.cug)
+      ?:  ?=($| -.arm)  ((slog leaf+"peek farm fail" p.arm) [~ ~])
+      =^  zem  +>.$  (ap-slam q.u.cug p.arm !>([ren (slag p.u.cug tyl)]))
+      ?:  ?=($| -.zem)  ((slog leaf+"peek slam fail" p.zem) [~ ~])
+      ?+  q.p.zem  ((slog leaf+"peek bad result" ~) [~ ~])
+        $~              ~
+        {$~ $~}         [~ ~]
+        {$~ $~ ^}
+          =+  caz=(spec (slot 7 p.zem))
+          ?.  &(?=({p/@ *} q.caz) ((sane %tas) p.q.caz))
+            ((slog leaf+"scry: malformed cage" ~) [~ ~])
+          ``[p.q.caz (slot 3 caz)]
+      ==
     ::
     ++  ap-club                                         ::  apply effect
       |=  cub/club
@@ -760,6 +787,7 @@
                (ap-move-pass -.q.vax +<.q.vax cav)
         $diff  (ap-move-diff -.q.vax cav)
         $hiss  (ap-move-hiss -.q.vax cav)
+        $peel  (ap-move-peel -.q.vax cav)
         $peer  (ap-move-peer -.q.vax cav)
         $pull  (ap-move-pull -.q.vax cav)
         $poke  (ap-move-poke -.q.vax cav)
@@ -786,19 +814,25 @@
     ++  ap-move-hiss                                    ::  pass %hiss
       |=  {sto/bone vax/vase}
       ^-  {(each cove tang) _+>}
-      ?.  &(?=({p/* q/@ q/^} q.vax) ((sane %tas) q.q.vax))
-        :_(+>.$ [%| (ap-suck "hiss: bad hiss ask.[%hiss wire mark cage]")])
-      =^  gaw  vel  (~(slot wa vel) 7 vax)
-      ?.  &(?=({p/@ q/^} q.gaw) ((sane %tas) p.q.gaw))
+      ?.  &(?=({p/* q/* r/@ s/{p/@ *}} q.vax) ((sane %tas) r.q.vax))
+        =+  args="[%hiss wire (unit knot) mark cage]"
+        :_(+>.$ [%| (ap-suck "hiss: bad hiss ask.{args}")])
+      =^  gaw  vel  (~(slot wa vel) 15 vax)
+      ?.  &(?=({p/@ *} q.gaw) ((sane %tas) p.q.gaw))
         :_(+>.$ [%| (ap-suck "hiss: malformed cage")])
+      =^  paw  vel  (~(stop wa vel) 3 gaw)
+      =+  usr=((soft (unit knot)) q.q.vax)
+      ?.  &(?=(^ usr) ?~(u.usr & ((sane %ta) u.u.usr)))
+        :_(+>.$ [%| (ap-suck "hiss: malformed (unit knot)")])
       =+  pux=((soft path) p.q.vax)
       ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
         :_(+>.$ [%| (ap-suck "hiss: malformed path")])
-      =^  paw  vel  (~(stop wa vel) 3 gaw)
       :_  +>.$
       :^  %&  sto  %pass
       :-  [(scot %p q.q.pry) %cay u.pux]
-      [%hiss q.q.vax [p.q.gaw paw]]
+      ~!  *cote
+      =-  ~!  -  `cote`-
+      [%hiss u.usr r.q.vax [p.q.gaw paw]]
     ::
     ++  ap-move-mess                                    ::  extract path, target
       |=  vax/vase
@@ -842,6 +876,22 @@
       :^  %&  sto  %pass
       :-  p.p.yep
       [%send q.p.yep r.p.yep %poke p.q.gaw paw]
+    ::
+    ++  ap-move-peel                                    ::  pass %peel
+      |=  {sto/bone vax/vase}
+      ^-  {(each cove tang) _+>}
+      =^  yep  +>.$  (ap-move-mess vax)
+      :_  +>.$
+      ?:  ?=($| -.yep)  yep
+      =+  mar=((soft mark) +>-.q.vax)
+      ?~  mar
+        [%| (ap-suck "peel: malformed mark")]
+      =+  pux=((soft path) +>+.q.vax)
+      ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
+        [%| (ap-suck "peel: malformed path")]
+      :^  %&  sto  %pass
+      :-  p.p.yep
+      [%send q.p.yep r.p.yep %peel u.mar u.pux]
     ::
     ++  ap-move-peer                                    ::  pass %peer
       |=  {sto/bone vax/vase}
@@ -1242,8 +1292,21 @@
 ::
 ++  scry
   |=  {fur/(unit (set monk)) ren/@tas who/ship syd/desk lot/coin tyl/path}
-  ^-  (unit (unit (pair mark *)))
-  [~ ~]
+  ^-  (unit (unit cage))
+  ?:  ?&  =(%u ren)
+          =(~ tyl)
+          =([%$ %da now] lot)
+          (~(has by pol.all) who)
+          (~(has by bum:(~(got by pol.all) who)) syd)
+      ==
+    ``[%null !>(~)]
+  ?.  (~(has by pol.all) who)
+    ~
+  ?.  =([%$ %da now] lot)
+    ~
+  ?.  (~(has by bum:(~(got by pol.all) who)) syd)
+    [~ ~]
+  (mo-peek:(mo-abed:mo who *duct) syd high+`who ren tyl)
 ::
 ++  stay                                                ::  save w+o cache
   `axle`all

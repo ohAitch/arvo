@@ -1,7 +1,9 @@
 ::    ++down rendering arms
-!:
+::
 ::::  /hoon/rend/down-jet/lib
   ::
+/?    310
+!:
 |%
 ++  into-inner
   |=  {a/marl b/manx}
@@ -208,7 +210,7 @@
     |=  a/tape  ^-  tape
     ?~  a  ~
     ?:  ?|  [?=(^ q)]:(alp 1^1 a)
-            (~(has in (silt "!*'();:@&=+$,/?/%.~_")) i.a) ::  XX  reparse
+            (~(has in (silt "#!*'();:@&=+$,/?/%.~_")) i.a) ::  XX  reparse
         ==
       [i.a $(a t.a)]
     (weld (urle (trip i.a)) $(a t.a))

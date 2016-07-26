@@ -1,6 +1,7 @@
 ::
 ::::  /hoon/tree-include/sur
   ::
+/?    310
 |-
 $:  mime/mime
     body/json
@@ -9,4 +10,5 @@ $:  mime/mime
     meta/json
     sect/json
     comt/json
+    plan/json
 ==

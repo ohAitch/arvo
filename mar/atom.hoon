@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/atom/mar
   ::
-/?  314
+/?    310
 !:
 ::::  A minimal atom mark
 |_  ato/@
@@ -11,4 +11,6 @@
           --
 ++  grow  |%
           ++  mime  [/application/x-urb-unknown (taco ato)]
---        --
+--        
+++  grad  %mime
+--

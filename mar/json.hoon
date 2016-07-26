@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/json/mar
   ::
-/?  314
+/?    310
   ::
 ::::  compute
   ::
@@ -9,7 +9,7 @@
 ::
 ++  grow                                                ::  convert to
   |%
-  ++  mime  [/text/json (taco txt)]                     ::  convert to %mime
+  ++  mime  [/application/json (taco txt)]                     ::  convert to %mime
   ++  txt   (crip (pojo jon))
   --
 ++  grab

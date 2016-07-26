@@ -1,11 +1,11 @@
 ::
-::::  /hoon+hello+gen
+::::  /hoon/hello/gen
   ::
-/?  314
+/?    310
 ::
 ::::
   !:
 :-  %say
 |=  {^ {{txt/@tas $~} $~}}
 :-  %noun
-(crip (weld "hello, " (flop (trip txt))))
+(crip (weld "hello, " (trip txt)))
