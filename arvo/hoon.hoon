@@ -1059,34 +1059,64 @@
 ++  fnv  |=(a/@ (end 5 1 (mul 16.777.619 a)))           ::  FNV scrambler
 ::
 ++  muk                                                 ::  standard murmur3
-  ~/  %muk
-  |=  {syd/@ key/@}
-  ?>  (lte (met 5 syd) 1)
-  =+  ^=  row
-      |=  {a/@ b/@}
-      (con (end 5 1 (lsh 0 a b)) (rsh 0 (sub 32 a) b))
-  =+  mow=|=({a/@ b/@} (end 5 1 (mul a b)))
-  =+  len=(met 5 key)
-  =-  =.  goc  (mix goc len)
-      =.  goc  (mix goc (rsh 4 1 goc))
-      =.  goc  (mow goc 0x85eb.ca6b)
-      =.  goc  (mix goc (rsh 0 13 goc))
-      =.  goc  (mow goc 0xc2b2.ae35)
-      (mix goc (rsh 4 1 goc))
-  ^=  goc
-  =+  [inx=0 goc=syd]
-  |-  ^-  @
-  ?:  =(inx len)  goc
-  =+  kop=(cut 5 [inx 1] key)
-  =.  kop  (mow kop 0xcc9e.2d51)
-  =.  kop  (row 15 kop)
-  =.  kop  (mow kop 0x1b87.3593)
-  =.  goc  (mix kop goc)
-  =.  goc  (row 13 goc)
-  =.  goc  (end 5 1 (add 0xe654.6b64 (mul 5 goc)))
-  $(inx +(inx))
-::
-++  mum                                                 ::  mug with murmur3
+  ~%  %muk  ..muk  ~
+  =+  ~(. fe 5)
+  |=  {syd/@ len/@ key/@}
+  ?>  &((lte (met 5 syd) 1) (lte (met 0 len) 31))
+  =/  pad      (sub len (met 3 key))
+  =/  data     (weld (rip 3 key) (reap pad 0))
+  =/  nblocks  (div len 4)  ::  intentionally off-by-one
+  =/  h1  syd
+  =+  [c1=0xcc9e.2d51 c2=0x1b87.3593]
+  =/  blocks  (rip 5 key)
+  =/  i  nblocks
+  =.  h1  =/  hi  h1  |-
+    ?:  =(0 i)  hi
+    =/  k1  (snag (sub nblocks i) blocks)  ::  negative array index
+    =.  k1  (sit (mul k1 c1))
+    =.  k1  (rol 0 15 k1)
+    =.  k1  (sit (mul k1 c2))
+    =.  hi  (mix hi k1)
+    =.  hi  (rol 0 13 hi)
+    =.  hi  (sum (sit (mul hi 5)) 0xe654.6b64)
+    $(i (dec i))
+  =/  tail  (slag (mul 4 nblocks) data)
+  =/  k1    0
+  =/  tlen  (dis len 3)
+  =.  h1
+    ?+  tlen  h1  ::  fallthrough switch
+      $3  =.  k1  (mix k1 (lsh 0 16 (snag 2 tail)))
+          =.  k1  (mix k1 (lsh 0 8 (snag 1 tail)))
+          =.  k1  (mix k1 (snag 0 tail))
+          =.  k1  (sit (mul k1 c1))
+          =.  k1  (rol 0 15 k1)
+          =.  k1  (sit (mul k1 c2))
+          (mix h1 k1)
+      $2  =.  k1  (mix k1 (lsh 0 8 (snag 1 tail)))
+          =.  k1  (mix k1 (snag 0 tail))
+          =.  k1  (sit (mul k1 c1))
+          =.  k1  (rol 0 15 k1)
+          =.  k1  (sit (mul k1 c2))
+          (mix h1 k1)
+      $1  =.  k1  (mix k1 (snag 0 tail))
+          =.  k1  (sit (mul k1 c1))
+          =.  k1  (rol 0 15 k1)
+          =.  k1  (sit (mul k1 c2))
+          (mix h1 k1)
+    ==
+  =.  h1  (mix h1 len)
+  |^  (fmix32 h1)
+  ++  fmix32
+    |=  h/@
+    =.  h  (mix h (rsh 0 16 h))
+    =.  h  (sit (mul h 0x85eb.ca6b))
+    =.  h  (mix h (rsh 0 13 h))
+    =.  h  (sit (mul h 0xc2b2.ae35))
+    =.  h  (mix h (rsh 0 16 h))
+    h
+  --
+  ::
+  ++  mum                                                 ::  mug with murmur3
   ~/  %mum
   |=  a/*
   |^  (trim ?@(a a (mix $(a -.a) (mix 0x7fff.ffff $(a +.a)))))
@@ -1094,7 +1124,7 @@
     |=  key/@
     =+  syd=0xcafe.babe
     |-  ^-  @
-    =+  haz=(muk syd key)
+    =+  haz=(muk syd (met 3 key) key)
     =+  ham=(mix (rsh 0 31 haz) (end 0 31 haz))
     ?.(=(0 ham) ham $(syd +(syd)))
   --
@@ -1130,7 +1160,7 @@
       /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
       /losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
       /rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
-      /ritpodmottamtolsavposnapnopsomfinfonbanporworsip\
+      /ritpodmottamtolsavposnapnopsomfinfonbandorworsip\
       /ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
       /sivtagpadsaldivdactansidfabtarmonranniswolmispal\
       /lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
@@ -1140,7 +1170,7 @@
       /tomdigfilfasmithobharmighinradmashalraglagfadtop\
       /mophabnilnosmilfopfamdatnoldinhatnacrisfotribhoc\
       /nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
-      /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
+      /laptalpitnambonrostonfodponsovnocsorlavmatmipfip'
       ^=  dex                                           ::  suffix syllables
       'zodnecbudwessevpersutletfulpensytdurwepserwylsun\
       /rypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnex\
@@ -3848,11 +3878,14 @@
   |%
   ++  bix  (bass 16 (stun [2 2] six))
   ++  fem  (sear |=(a/@ (cha:fa a)) aln)
-  ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
-  ++  huf  %+  cook
-             |=({a/@ b/@} (wred:un ~(zug mu ~(zag mu [a b]))))
-           ;~(plug hif ;~(pfix hep hif))
-  ++  hyf  (bass 0x1.0000.0000 ;~(plug huf ;~(pfix hep huf) (easy ~)))
+  ++  haf  (bass 256 ;~(plug tep tiq (easy ~)))
+  ++  hef  %+  sear  |=(a/@ ?:(=(a 0) ~ (some a)))
+           %+  bass  256
+           ;~(plug tip tiq (easy ~))
+  ++  hif  (bass 256 ;~(plug tip tiq (easy ~)))
+  ++  hof  (bass 0x1.0000 ;~(plug hef (stun [1 3] ;~(pfix hep hif))))
+  ++  huf  (bass 0x1.0000 ;~(plug hef (stun [0 3] ;~(pfix hep hif))))
+  ++  hyf  (bass 0x1.0000 ;~(plug hif (stun [3 3] ;~(pfix hep hif))))
   ++  pev  (bass 32 ;~(plug sev (stun [0 4] siv)))
   ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
   ++  piv  (bass 32 (stun [5 5] siv))
@@ -3880,6 +3913,7 @@
            ==
   ++  sox  (cook |=(a/@ (sub a 87)) (shim 'a' 'f'))
   ++  ted  (bass 10 ;~(plug sed (stun [0 2] sid)))
+  ++  tep  (sear |=(a/@ ?:(=(a 'doz') ~ (ins:po a))) til)
   ++  tip  (sear |=(a/@ (ins:po a)) til)
   ++  tiq  (sear |=(a/@ (ind:po a)) til)
   ++  tid  (bass 10 (stun [3 3] sid))
@@ -3913,14 +3947,16 @@
   ++  dem  (ape (bass 1.000 ;~(plug ted:ab (star ;~(pfix dog tid:ab)))))
   ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
   ++  dum  (bass 10 (plus sid:ab))
-  ++  fed  ;~  pose
-             %+  bass  0x1.0000.0000.0000.0000
-             ;~((glue doh) ;~(pose hyf:ab huf:ab) (more doh hyf:ab))
-           ::
-             hyf:ab
-             huf:ab
-             hif:ab
-             tiq:ab
+  ++  fed  %+  cook  fend:ob
+           ;~  pose
+             %+  bass  0x1.0000.0000.0000.0000          ::  oversized
+               ;~  plug
+                 huf:ab
+                 (plus ;~(pfix doh hyf:ab))
+               ==
+             hof:ab                                     ::  planet or moon
+             haf:ab                                     ::  star
+             tiq:ab                                     ::  galaxy
            ==
   ++  fim  (sear den:fa (bass 58 (plus fem:ab)))
   ++  hex  (ape (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab)))))
@@ -3995,37 +4031,27 @@
           ==
         ::
             $p
-          =+  dyx=(met 3 q.p.lot)
+          =+  sxz=(feen:ob q.p.lot)
+          =+  dyx=(met 3 sxz)
           :-  '~'
           ?:  (lte dyx 1)
-            (weld (trip (tod:po q.p.lot)) rep)
-          ?:  =(2 dyx)
-            ;:  weld
-              (trip (tos:po (end 3 1 q.p.lot)))
-              (trip (tod:po (rsh 3 1 q.p.lot)))
-              rep
-            ==
-          =+  [dyz=(met 5 q.p.lot) fin=| dub=&]
+            (weld (trip (tod:po sxz)) rep)
+          =+  dyy=(met 4 sxz)
+          =+  imp=*@
           |-  ^-  tape
-          ?:  =(0 dyz)
+          ?:  =(imp dyy)
             rep
-          %=    $
-              fin      &
-              dub      !dub
-              dyz      (dec dyz)
-              q.p.lot  (rsh 5 1 q.p.lot)
-              rep
-            =+  syb=(wren:un (end 5 1 q.p.lot))
-            =+  cog=~(zig mu [(rsh 4 1 syb) (end 4 1 syb)])
-            ;:  weld
-              (trip (tos:po (end 3 1 p.cog)))
-              (trip (tod:po (rsh 3 1 p.cog)))
-              `tape`['-' ~]
-              (trip (tos:po (end 3 1 q.cog)))
-              (trip (tod:po (rsh 3 1 q.cog)))
-              `tape`?.(fin ~ ['-' ?.(dub ~ ['-' ~])])
-              rep
-            ==
+          %=  $
+            sxz  (rsh 4 1 sxz)
+            imp      +(imp)
+            rep
+              =+  log=(end 4 1 sxz)
+              ;:  weld
+                (trip (tos:po (rsh 3 1 log)))
+                (trip (tod:po (end 3 1 log)))
+                ?:(=((mod imp 4) 0) ?:(=(imp 0) "" "--") "-")
+                rep
+             ==
           ==
         ::
             $r
@@ -4510,8 +4536,7 @@
     |=  nor/@                                           ::  black and rogaway
     ^-  @                                               ::  "ciphers with
     =+  ^=  sel                                         ::   arbitrary finite
-    %+  rynd  3                                         ::   domains", 2002
-    %+  rynd  2
+    %+  rynd  2                                         ::   domains", 2002
     %+  rynd  1
     %+  rynd  0
     [(mod nor 65.535) (div nor 65.535)]
@@ -4524,7 +4549,6 @@
     %+  rund  0
     %+  rund  1
     %+  rund  2
-    %+  rund  3
     [(mod vip 65.535) (div vip 65.535)]
     (add (mul 65.535 -.sel) +.sel)
   ::
@@ -4533,23 +4557,25 @@
     ^-  {@ @}
     :-  r
     ?~  (mod n 2)
-      (~(sum fo 65.535) l (muk (snag n raku) r))
-    (~(sum fo 65.536) l (muk (snag n raku) r))
+      (~(sum fo 65.535) l (en:aesc (snag n raku) r))
+    (~(sum fo 65.536) l (en:aesc (snag n raku) r))
   ::
   ++  rund                                              ::  reverse round
     |=  {n/@ l/@ r/@}
     ^-  {@ @}
     :-  r
     ?~  (mod n 2)
-      (~(dif fo 65.535) l (muk (snag n raku) r))
-    (~(dif fo 65.536) l (muk (snag n raku) r))
+      (~(dif fo 65.535) l (en:aesc (snag n raku) r))
+    (~(dif fo 65.536) l (en:aesc (snag n raku) r))
   ::
   ++  raku
     ^-  (list @ux)
-    :~  0xb76d.5eed
-        0xee28.1300
-        0x85bc.ae01
-        0x4b38.7af7
+    :~  0x15f6.25e3.083a.eb3e.7a55.d4db.fb99.32a3.
+          43af.2750.219e.8a24.e5f8.fac3.6c36.f968
+        0xf2ff.24fe.54d0.1abd.4b2a.d8aa.4402.8e88.
+          e82f.19ec.948d.b1bb.ed2e.f791.83a3.8133
+        0xa3d8.6a7b.400e.9e91.187d.91a7.6942.f34a.
+          6f5f.ab8e.88b9.c089.b2dc.95a6.aed5.e3a4
     ==
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
