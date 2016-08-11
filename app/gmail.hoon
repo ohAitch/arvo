@@ -79,18 +79,19 @@
   ==
 ::
 ++  poke-email
-  |=  {adr/@ta mez/tape}  ^-  (quip move +>)
+  |=  {adr/@ta tyl/tape mez/wall}  ^-  (quip move +>)
+  ?>  =(our.hid src.hid)
   %-  poke-gmail-req  :*
     %post
     /messages/send
     ~['uploadType'^%simple]
-    [(crip "urbit+{<our.hid>}") 'urbit.org']
+    ['urbit' 'urbit.org'] :: [(crip "urbit+{<our.hid>}") 'urbit.org']
   ::
     =-  (rash adr -)
     [;~((glue pat) . .)]:(cook crip (plus ;~(less pat next)))  :: /[^@]+@[^@]+/
   ::
-    ?:  (lth (lent mez) 57)  [(crip mez) '']
-    [(crip "{(scag 54 mez)}...") (crip mez)]
+    (crip tyl)
+    (role (turn mez crip))
   ==
 ::
 ++  poke-gmail-req
@@ -126,7 +127,7 @@
   :: ~&  wir+wir
   ?.  ?=({care @ @ @ *} wir)
     ::  pokes don't return anything
-    ~&  poke+res
+    ~&  sigh-poke+p.res
     [~ +>.$]
   =+  arg=(path (cue (slav %uv i.t.t.wir)))
   :: ~&  ittwir+i.t.t.wir
@@ -222,7 +223,7 @@
     $(arg t.arg, u.jon ?~(new-jon ~ u.new-jon))
   ==
 ::
-++  sigh-tang  |=(a/tang (mean a))
+++  sigh-tang  |=({a/wire b/tang} (mean >gmail+a< b))
 ++  sigh
   |=  a/*
   ~&  a+a

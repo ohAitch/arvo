@@ -1039,7 +1039,6 @@
     ++  ap-purr                                         ::  unwrap take
       |=  {wha/term pax/path cag/cage}
       ^+  +>
-      =.  q.cag  (spec q.cag)
       =+  cug=(ap-find [wha p.cag pax])
       ?~  cug
         (ap-lame wha (ap-suck "{(trip wha)}: no {<`path`[p.cag pax]>}"))

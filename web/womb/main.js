@@ -11,6 +11,25 @@ module.exports = {
       setPasscode: pass
     });
   },
+  recycleTicket: function(arg, pass) {
+    var mail, ship, tick;
+    ship = arg.ship, tick = arg.tick, mail = arg.mail;
+    return Persistence.put("womb-recycle", {
+      who: mail,
+      him: "~" + ship,
+      tik: "~" + tick
+    }, (function(_this) {
+      return function(err, arg1) {
+        var status;
+        status = arg1.status;
+        if (status !== 200) {
+          throw new Error("Server error: " + (JSON.stringify(data)));
+        }
+        _this.getData("/ticket/~" + ship + "/~" + tick, true);
+        return _this.setPasscode(pass);
+      };
+    })(this));
+  },
   claimShip: function(pass, ship) {
     Dispatcher.dispatch({
       putClaim: {
@@ -37,7 +56,7 @@ module.exports = {
           gotClaim: gotClaim
         });
         _this.getData("/stats", true);
-        return _this.getData("/balance/~" + pass, true);
+        return _this.getData("/balance/" + pass, true);
       };
     })(this));
   },
@@ -174,8 +193,8 @@ WombStore.dispatchToken = WombDispatcher.register(function(action) {
 module.exports = WombStore;
 
 
-},{"./Dispatcher.coffee":2,"./util.coffee":14,"events":16}],5:[function(require,module,exports){
-var Actions, Balance, FromStore, History, Label, Mail, Planets, Scry, ShipInput, Shop, Stars, b, clas, code, div, h6, name, p, recl, ref, rele, span;
+},{"./Dispatcher.coffee":2,"./util.coffee":15,"events":17}],5:[function(require,module,exports){
+var Actions, Balance, FromStore, History, Label, Mail, PassInput, Planets, SHOP, Scry, Shop, Stars, b, clas, code, div, h3, h6, name, p, recl, ref, rele, span;
 
 clas = require('classnames');
 
@@ -183,11 +202,11 @@ Actions = require('../Actions.coffee');
 
 FromStore = (Scry = require('./Scry.coffee')).FromStore;
 
-Shop = require('./Shop.coffee');
-
 Label = require('./Label.coffee');
 
-ShipInput = require('./ShipInput.coffee');
+Shop = require('./Shop.coffee');
+
+PassInput = require('./PassInput.coffee');
 
 recl = React.createClass;
 
@@ -199,7 +218,18 @@ name = function(displayName, component) {
   });
 };
 
-ref = React.DOM, div = ref.div, b = ref.b, h6 = ref.h6, p = ref.p, span = ref.span, code = ref.code;
+ref = React.DOM, div = ref.div, b = ref.b, h3 = ref.h3, h6 = ref.h6, p = ref.p, span = ref.span, code = ref.code;
+
+SHOP = false;
+
+if (!SHOP) {
+  Shop = function(type, length) {
+    return function(arg) {
+      arg;
+      return h6({}, "Distribution of ", type, " not yet live.");
+    };
+  };
+}
 
 Mail = function(email) {
   return code({
@@ -230,30 +260,34 @@ Stars = Shop("stars", 7);
 
 Planets = Shop("planets", 14);
 
-Balance = Scry("/balance/~:pass", function(arg) {
+Balance = Scry("/balance/:pass", function(arg) {
   var balance, history, owner, planets, stars;
   balance = arg.balance;
   if (balance.fail) {
-    return div({}, Label("Invalid passcode", "warning"));
+    return div({
+      style: {
+        marginTop: '1rem'
+      }
+    }, Label("Invalid passcode", "warning"));
   }
   planets = balance.planets, stars = balance.stars, owner = balance.owner, history = balance.history;
-  return div({}, h6({}, "Balance"), p({}, "Hello ", Mail(owner)), p({}, "This balance was ", History(history), "It contains ", b({}, planets || "no"), " Planets ", "and ", b({}, stars || "no"), " Stars."), stars ? rele(Stars) : void 0, planets ? rele(Planets) : void 0);
+  return div({}, h3({}, "Balance"), p({}, "Hello ", Mail(owner), ", "), p({}, "This balance was ", History(history)), p({}, "You currently hold ", b({}, planets || "no"), " Planets ", "and ", b({}, stars || "no"), " Stars."), stars ? rele(Stars) : void 0, planets ? rele(Planets) : void 0);
 });
 
 module.exports = name("Claim", FromStore("pass", function(arg) {
   var pass;
   pass = arg.pass;
-  return div({}, p({}, "Input a passcode to claim ships: "), ShipInput({
-    length: 57,
+  return div({}, p({}, "To view your ships, input your passcode."), PassInput({
+    minLength: 32,
     defaultValue: pass,
-    onInputShip: Actions.setPasscode
+    onInputPass: Actions.setPasscode
   }), pass ? rele(Balance, {
     pass: pass
   }) : void 0);
 }));
 
 
-},{"../Actions.coffee":1,"./Label.coffee":7,"./Scry.coffee":9,"./ShipInput.coffee":10,"./Shop.coffee":12,"classnames":15}],6:[function(require,module,exports){
+},{"../Actions.coffee":1,"./Label.coffee":7,"./PassInput.coffee":9,"./Scry.coffee":10,"./Shop.coffee":13,"classnames":16}],6:[function(require,module,exports){
 var Actions, ClaimButton, FromStore, Label, ShipInput, _ClaimButton, button, name, recl, rele;
 
 Actions = require('../Actions.coffee');
@@ -314,7 +348,7 @@ _ClaimButton = FromStore("claim/:ship", function(arg) {
 module.exports = name("ClaimButton", ClaimButton);
 
 
-},{"../Actions.coffee":1,"./Label.coffee":7,"./Scry.coffee":9,"./ShipInput.coffee":10}],7:[function(require,module,exports){
+},{"../Actions.coffee":1,"./Label.coffee":7,"./Scry.coffee":10,"./ShipInput.coffee":11}],7:[function(require,module,exports){
 var span;
 
 span = React.DOM.span;
@@ -330,7 +364,7 @@ module.exports = function(s, type) {
 
 
 },{}],8:[function(require,module,exports){
-var Claim, Ships, div, h4, ref, rele;
+var Claim, NET, Ships, div, h3, ref, rele;
 
 Claim = require('./Claim.coffee');
 
@@ -338,14 +372,56 @@ Ships = require('./Ships.coffee');
 
 rele = React.createElement;
 
-ref = React.DOM, div = ref.div, h4 = ref.h4;
+NET = false;
+
+ref = React.DOM, div = ref.div, h3 = ref.h3;
 
 module.exports = function() {
-  return div({}, h4({}, "Claims"), rele(Claim, {}), h4({}, "Network"), rele(Ships, {}));
+  return div({}, h3({
+    className: 'first',
+    style: {
+      lineHeight: '1.5rem'
+    }
+  }, "Check your balance"), rele(Claim, {}), NET ? div({}, h4({}, "Network"), rele(Ships, {})) : void 0);
 };
 
 
-},{"./Claim.coffee":5,"./Ships.coffee":11}],9:[function(require,module,exports){
+},{"./Claim.coffee":5,"./Ships.coffee":12}],9:[function(require,module,exports){
+var input, name, recl, uvShape;
+
+uvShape = require('../util.coffee').uvShape;
+
+input = React.DOM.input;
+
+recl = React.createClass;
+
+name = function(displayName, component) {
+  return _.extend(component, {
+    displayName: displayName
+  });
+};
+
+module.exports = name("PassInput", function(arg) {
+  var defaultValue, minLength, onInputPass;
+  onInputPass = arg.onInputPass, minLength = arg.minLength, defaultValue = arg.defaultValue;
+  return input({
+    defaultValue: defaultValue,
+    className: 'mono',
+    style: {
+      width: '100%'
+    },
+    placeholder: "0v0.00000.00000.00000.00000.00000",
+    onChange: function(arg1) {
+      var pass, target;
+      target = arg1.target;
+      pass = target.value.trim();
+      return onInputPass(((uvShape(pass)) && pass.length >= minLength ? pass : void 0));
+    }
+  });
+});
+
+
+},{"../util.coffee":15}],10:[function(require,module,exports){
 var Actions, FromStore, Scry, Store, div, i, recl, ref, rele;
 
 Actions = require('../Actions.coffee');
@@ -442,7 +518,7 @@ module.exports = Scry;
 module.exports.FromStore = FromStore;
 
 
-},{"../Actions.coffee":1,"../Store.coffee":4}],10:[function(require,module,exports){
+},{"../Actions.coffee":1,"../Store.coffee":4}],11:[function(require,module,exports){
 var input, name, recl, shipShape;
 
 shipShape = require('../util.coffee').shipShape;
@@ -475,7 +551,7 @@ module.exports = name("ShipInput", function(arg) {
 });
 
 
-},{"../util.coffee":14}],11:[function(require,module,exports){
+},{"../util.coffee":15}],12:[function(require,module,exports){
 var Label, Scry, Stat, clas, code, div, labels, li, name, p, pre, recl, ref, rele, span, ul;
 
 clas = require('classnames');
@@ -544,7 +620,7 @@ Stat = name("Stat", function(arg) {
 module.exports = Scry("/stats", Stat);
 
 
-},{"./Label.coffee":7,"./Scry.coffee":9,"classnames":15}],12:[function(require,module,exports){
+},{"./Label.coffee":7,"./Scry.coffee":10,"classnames":16}],13:[function(require,module,exports){
 var ClaimButton, Scry, ShipInput, Shop, ShopShips, button, div, h6, li, recl, ref, rele, span, ul;
 
 Scry = require('./Scry.coffee');
@@ -621,7 +697,7 @@ Shop = function(type, length) {
 module.exports = Shop;
 
 
-},{"./ClaimButton.coffee":6,"./Scry.coffee":9,"./ShipInput.coffee":10}],13:[function(require,module,exports){
+},{"./ClaimButton.coffee":6,"./Scry.coffee":10,"./ShipInput.coffee":11}],14:[function(require,module,exports){
 var MainComponent, TreeActions;
 
 MainComponent = require('./components/Main.coffee');
@@ -631,7 +707,7 @@ TreeActions = window.tree.actions;
 TreeActions.registerComponent("womb", MainComponent);
 
 
-},{"./components/Main.coffee":8}],14:[function(require,module,exports){
+},{"./components/Main.coffee":8}],15:[function(require,module,exports){
 var PO, SHIPSHAPE,
   slice = [].slice;
 
@@ -648,15 +724,22 @@ module.exports = {
     }
     return [key, a[key]];
   },
+  uvShape: function(a) {
+    return (a.slice(0, 2) === "0v") && /^[0-9a-v]{1,5}(\.[0-9a-v]{5})*$/.test(a.slice(2));
+  },
   shipShape: function(a) {
     return (SHIPSHAPE.test(a)) && _.all(a.match(/[a-z]{3}/g), function(b) {
       return -1 !== PO.indexOf(b);
     });
+  },
+  mailShape: function(a) {
+    var valid;
+    return valid = a.indexOf('@') !== -1 && a.indexOf('.') !== -1 && a.length > 7 && a.split(".")[1].length > 1 && a.split("@")[0].length > 0 && a.split("@")[1].length > 4;
   }
 };
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -706,7 +789,7 @@ module.exports = {
 	}
 }());
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1006,4 +1089,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},[13]);
+},{}]},{},[14]);
