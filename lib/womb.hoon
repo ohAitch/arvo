@@ -595,7 +595,7 @@
   (emit %poke /log [our %hood] %drum-put /womb-events/(scot %da now)/hoon (crip <eny a>))
 ::
 ++  poke-replay-log                                   ::  rerun transactions
-  |=  a/(list {eny/@uvI pok/transaction})
+  |=  a/(list {eny/@uvJ pok/transaction})
   ?~  a  abet
   ~&  womb-replay+-.pok.i.a
   =.  eny  eny.i.a
@@ -683,8 +683,8 @@
   |=  $~
   =<  abet
   ?>  |(=(our src) =([~ src] boss))                   ::  privileged
-  ::  (emit /rekey %next sec:ex:(brew 128 (shas %next eny)))
-  ~&(rekey-stub+sec:ex:(brew 128 (shas %next eny)) .)
+  ::  (emit /rekey %next sec:ex:(pit:nu:crub 128 (shas %next eny)))
+  ~&(rekey-stub+sec:ex:(pit:nu:crub 128 (shas %next eny)) .)
 ::
 ++  poke-report                                       ::  report will
   |=  {her/@p wyl/will}                               ::

@@ -7,8 +7,8 @@
 ::::
   !:
 :-  %say
-|=  $:  {now/@da eny/@uvI bec/beak}
-        {{pas/@uvH who/@t $~} $~}
+|=  $:  {now/@da eny/@uvJ bec/beak}
+        {{pas/@uvJ who/@t $~} $~}
     ==
 :-  %womb-reinvite
 =+  [him=(scot %p p.bec) cas=(scot %da now) key=(scot %p pas)]
