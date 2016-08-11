@@ -11,7 +11,7 @@
 |%                                                      ::  ::
 ++  drum-part  {$drum $1 drum-pith-1}                   ::
 ++  drum-part-old  {$drum $0 drum-pith-0}               ::
-++  drum-pith-0  _+:*drum-pith-1                        ::  no sys
+++  drum-pith-0  _!!                                    ::  forgotten
 ++  drum-pith-1                                         ::
   $:  sys/(unit bone)                                   ::  local console
       eel/(set gill)                                    ::  connect to 
@@ -119,12 +119,9 @@
   ==                                                    ::
 ++  drum-port
   |=  old/?(drum-part drum-part-old)  ^-  drum-part
-  ?:  ?=($1 &2.old)  old
-  ~&  [%drum-porting &2.old]
-  =;  sys  [%drum %1 [sys |2.old]]
-  ?-  bin.old
-    {^ $~ $~}  (some `bone`p.n.bin.old)
-    *  ~&(drum-port-sys-fail+(~(run by bin.old) $~) sys=~)
+  ?-  &2.old
+    $1  old
+    $0  !!  :: XX unreachable
   ==
 ::
 ++  drum-path                                           ::  encode path

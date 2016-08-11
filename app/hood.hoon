@@ -9,8 +9,8 @@
   !:                                                    ::  ::
 =>  |%                                                  ::  module boilerplate
     ++  hood-old                                        :: 
-      {?($0 $1) lac/(map @tas hood-part)}               ::  
-    ++  hood-0                                          :: 
+      {?($0 $1) lac/(map @tas hood-part-old)}           ::  
+    ++  hood-1                                          :: 
       {$1 lac/(map @tas hood-part)}                     ::
     ++  hood-good                                       ::
       |*  hed/hood-head                                 ::
@@ -32,7 +32,7 @@
         $womb  *part:womb                               ::
         $write  *part:write                             ::
       ==                                                ::
-    ++  hood-part-old  ?(hood-part drum-part-old)       ::
+    ++  hood-part-old  ?(hood-part)  :: drum-part-old   ::
     ++  hood-port                                       ::
       |=  paw/hood-part-old  ^-  hood-part              ::
       ?+  -.paw  paw                                    ::
@@ -51,7 +51,7 @@
 ::::                                                    ::  ::
   ::                                                    ::  ::
 |_  $:  hid/bowl                                        ::  system state
-        hood-0                                          ::  server state
+        hood-1                                          ::  server state
     ==                                                  ::
 ++  able                                                ::  find+make part
   |*  hed/hood-head
