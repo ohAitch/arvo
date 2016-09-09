@@ -11,6 +11,7 @@
 /=    meta    /&json&front&/|(/front/ /~[~])
 /=    plan    /^  json  /|(/plan-json/ /~[~])
 /=    comt    /&json&/tree-comments/
+/=    down    /|(/md/ /~[''])
 /=    bump    /;  |=(a/(list {p/time *}) =.(a (flop a) ?~(a '' (scot %da p.i.a))))
               /tree-comments/
 !:
@@ -25,4 +26,5 @@
     comt
     plan
     bump
+    down
 ==

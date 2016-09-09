@@ -23,6 +23,7 @@
   ::
       {$bump $t}
       {$beak $t}
+      {$down $t}
       {$comt $j}
       {$plan $j}
       {$head $r}
@@ -65,6 +66,7 @@
     $snip  (from-type +.a snip.dat)
     $sect  (from-type +.a sect.dat)
     $meta  (from-type +.a meta.dat)
+    $down  (from-type +.a down.dat)
     $mime  (from-type +.a mime.dat)
     $body  (from-type +.a body.dat)
     $kids  ?<  (~(has by (malt p.a)) %kids)  ::  XX recursion? 
