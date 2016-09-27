@@ -1,6 +1,7 @@
 |%
-++  project  {id/term zones/(map term managed-zone)}
-++  managed-zone  {id/@u dns-name/name records/(jug name {ttl record})}
+++  project  {id/term zones/(map term zone-contents)}
+++  zone-contents  {id/@u dns-name/name records/(jug name {ttl record})}
+++  managed-zone  {name/term dns-name/name description/@t}
 ++  record
   $%  {$a p/(list @if)}
       {$aaaa p/(list @tis)} :: XX @is
@@ -15,7 +16,20 @@
   $%  {$record-set record-set}
       {$project p/term}  :: XX useful?
       {$change change}
-      {$managed-zone id/@u name/term dns-name/name description/@t}
+      {$managed-zone managed-zone}
+  ==
+++  request
+    $:  project/term
+    $%  {$changes-create zone/@t change/change}   :: Atomically update the ResourceRecordSet collection
+        {$changes-get zone/@t id/@t}              :: Fetch the representation of an existing Change.
+        {$changes-list zone/@t}                   :: Enumerate Changes to a ResourceRecordSet collection.
+        {$zone-create managed-zone/managed-zone}  :: Create a new ManagedZone.
+        {$zone-delete zone/@t}                    :: Delete a previously created ManagedZone.
+        {$zone-get zone/@t}                       :: Fetch the representation of an existing ManagedZone.
+        {$zone-list $~}                           :: Enumerate ManagedZones that have been created but not yet deleted.
+        {$records-list zone/@t}                   :: Enumerate ResourceRecordSets that have been created but not yet deleted.
+        {$project-get $~}                         :: Fetch the representation of an existing Project.
+    ==
   ==
 --
 |%  
@@ -36,7 +50,7 @@
      ==
   ==
 ::
-++  encode
+++  enc-resource
   |=  a/resource  ^-  json
   ?-    -.a
       $project  ~|(%read-only !!)
@@ -57,7 +71,7 @@
     ==
   ==
 ::
-++  request
+++  make-req
   |=  {mef/meth pax/path bod/(unit json)}  ^-  hiss
   =/  url  (need (epur 'https://www.googleapis.com/dns/v1/projects'))
   =.  q.q.url  (welp q.q.url pax)
@@ -66,32 +80,24 @@
   :-  (my content-type+['application/json']~ ~)
   `(tact (pojo u.bod))
 ::
-++  proj
+++  encode
   =>  |%
-      ++  get   |=(a/path (request %get a ~))
-      ++  delt  |=(a/path (request %delt a ~))
-      ++  post  |=(a/path |=(b/resource (request %post a `(encode b))))
+      ++  get   |=(a/path (make-req %get a ~))
+      ++  delt  |=(a/path (make-req %delt a ~))
+      ++  post  |=({a/path b/resource} (make-req %post a `(enc-resource b)))
       --
-  |_  {project/@t zone/@t}
-  :: Atomically update the ResourceRecordSet collection.
-  ++  changes-create        (post /[project]/'managedZones'/[zone]/changes)
-  :: Fetch the representation of an existing Change.
-  ++  changes-get  |=(id/@t (get /[project]/'managedZones'/[zone]/changes/[id]))
-  :: Enumerate Changes to a ResourceRecordSet collection.
-  ++  changes-list          (get /[project]/'managedZones'/[zone]/changes)
-  :: Create a new ManagedZone.
-  ++  zone-create           (post /[project]/'managedZones')
-  :: Delete a previously created ManagedZone.
-  ++  zone-delete           (delt /[project]/'managedZones'/[zone])
-  :: Fetch the representation of an existing ManagedZone.
-  ++  zone-get              (get /[project]/'managedZones'/[zone])
-  :: Enumerate ResourceRecordSets that have been created but not yet deleted.
-  ++  records-list          (get /[project]/'managedZones'/[zone]/rrsets)
-  :: Enumerate ManagedZones that have been created but not yet deleted.
-  ++  zone-list             (get /[project]/'managedZones')  :: ignores zone
-  :: Fetch the representation of an existing Project.
-  ++  project-get           (get /[project])                 :: ignores zone
-  --
+  |=  request  ^-  hiss
+  ?-  &2.+<
+    $changes-create  (post /[project]/'managedZones'/[zone]/changes change+change)
+    $changes-get     (get /[project]/'managedZones'/[zone]/changes/[id])
+    $changes-list    (get /[project]/'managedZones'/[zone]/changes)
+    $zone-create     (post /[project]/'managedZones' managed-zone+managed-zone)
+    $zone-delete     (delt /[project]/'managedZones'/[zone])
+    $zone-get        (get /[project]/'managedZones'/[zone])
+    $records-list    (get /[project]/'managedZones'/[zone]/rrsets)
+    $zone-list       (get /[project]/'managedZones')
+    $project-get     (get /[project])
+  ==
 --
 |%
 ++  kind
