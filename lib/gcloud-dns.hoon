@@ -26,10 +26,19 @@
         {$zone-create managed-zone/managed-zone}  :: Create a new ManagedZone.
         {$zone-delete zone/@t}                    :: Delete a previously created ManagedZone.
         {$zone-get zone/@t}                       :: Fetch the representation of an existing ManagedZone.
-        {$zone-list $~}                           :: Enumerate ManagedZones that have been created but not yet deleted.
+        {$zones-list $~}                           :: Enumerate ManagedZones that have been created but not yet deleted.
         {$records-list zone/@t}                   :: Enumerate ResourceRecordSets that have been created but not yet deleted.
         {$project-get $~}                         :: Fetch the representation of an existing Project.
     ==
+  ==
+++  result
+  $%  {$gcloud-dns-change change}
+      {$gcloud-dns-changes-list (list change)}
+      {$gcloud-dns-zone managed-zone}
+      {$gcloud-dns-zones-list (list managed-zone)}
+      {$gcloud-dns-ack $~}
+      {$gcloud-dns-records-list (list record-set)}
+      {$gcloud-dns-project cord}
   ==
 --
 |%  
@@ -95,12 +104,12 @@
     $zone-delete     (delt /[project]/'managedZones'/[zone])
     $zone-get        (get /[project]/'managedZones'/[zone])
     $records-list    (get /[project]/'managedZones'/[zone]/rrsets)
-    $zone-list       (get /[project]/'managedZones')
+    $zones-list       (get /[project]/'managedZones')
     $project-get     (get /[project])
   ==
 ::
 ++  response-mark
-  |=  a/_&2:*request
+  |=  a/_&2:*request  ^+  -:*result
   ?-  a  :: XX namespacing
     $changes-create  %gcloud-dns-change
     $changes-get     %gcloud-dns-change
@@ -109,7 +118,7 @@
     $zone-delete     %gcloud-dns-ack
     $zone-get        %gcloud-dns-zone
     $records-list    %gcloud-dns-records-list
-    $zone-list       %gcloud-dns-zone-list
+    $zones-list       %gcloud-dns-zones-list
     $project-get     %gcloud-dns-project
   ==
 --
@@ -132,10 +141,18 @@
     %+  kind  'dns#resourceRecordSetsListResponse'
     (ot rrsets+(ar record-set) ~)
   ::
+  ++  zones-list
+    %+  kind  'dns#managedZonesListResponse'
+    (ot 'managedZones'^(ar managed-zone) ~)
+  ::
   ::
   ++  project
     %+  kind  'dns#project'
     (ot id+so ~)
+  ::
+  ++  managed-zone
+    %+  kind  'dns#managedZone'
+    (ot name+so 'dnsName'^so description+so ~)
   ::
   ++  change
     %+  kind  'dns#change'
