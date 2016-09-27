@@ -13,5 +13,6 @@
 ++  grow
   |%
   ++  tank  >[own]<
+  ++  tang  ~[tank]
   --
 --

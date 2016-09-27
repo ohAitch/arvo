@@ -98,6 +98,20 @@
     $zone-list       (get /[project]/'managedZones')
     $project-get     (get /[project])
   ==
+::
+++  response-mark
+  |=  a/_&2:*request
+  ?-  a  :: XX namespacing
+    $changes-create  %gcloud-dns-change
+    $changes-get     %gcloud-dns-change
+    $changes-list    %gcloud-dns-changes-list
+    $zone-create     %gcloud-dns-zone
+    $zone-delete     %gcloud-dns-ack
+    $zone-get        %gcloud-dns-zone
+    $records-list    %gcloud-dns-records-list
+    $zone-list       %gcloud-dns-zone-list
+    $project-get     %gcloud-dns-project
+  ==
 --
 |%
 ++  kind
