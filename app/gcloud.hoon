@@ -1,4 +1,4 @@
-/+  gcloud-dns
+/+  gcloud-dns, ames-grab
 |%
 ++  goog-req  _!!
 ++  move  {bone card}
@@ -65,6 +65,11 @@
   |=  a/(map ship host)  =<  abet
   =.  sav  a
   (emit-req /update project %records-list zone)
+::
+++  poke-gcloud-dns-me
+  |=  $~  =<  abet
+  ~&  dns-me+[src ;;((unit lane) (ames-grab %lun src +<-.abet))]
+  .
 ::
 ++  sigh-gcloud-dns-records-list-update
   |=  {wire a/(list record-set):gcloud-dns}  =<  abet
