@@ -61,10 +61,9 @@
   =.  emit-req  (emit-req / project %changes-list zone)
   .
 ::
-++  poke-gcloud-ships
-  |=  a/(map ship host)  =<  abet
-  =.  sav  a
-  (emit-req /update project %records-list zone)
+++  poke-gcloud-dns-me-not
+  |=  $~  =<  abet
+  update-records(sav (~(del by sav) src))
 ::
 ++  poke-gcloud-dns-me
   |=  $~  =<  abet
