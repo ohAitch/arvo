@@ -68,8 +68,8 @@
 ++  poke-gcloud-dns-me
   |=  $~  =<  abet
   =/  lun  ;;((unit lane) (ames-grab %lun src +<-.abet))
-  ?~  lun  .
-  ?.  ?=($if -.u.lun)  .
+  ?~  lun  ~|(%no-lane !!)
+  ?.  ?=($if -.u.lun)  ~|(bad-lane+u.lun !!)
   =.  sav  (~(put by sav) src %| r.u.lun)
   =.  +>.$  update-records
   .
