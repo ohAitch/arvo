@@ -34,8 +34,15 @@
 ++  sigh-gcloud-dns-changes-list
   |=  {wire a/(list change:gcloud-dns)}  =<  abet
   ~&  a
-  
   .
-:: ++  peer-scry-y-changes
-  
+::
+++  sigh-gcloud-dns-records-list-peer
+  |=  {wire a/(list record-set):gcloud-dns}  =<  abet
+  (emit %diff gcloud-dns-records-list+a)
+::
+++  peek  _~
+++  peer-scry-x-records
+  |=  a/path  =<  abet
+  ?^  a  !!
+  (emit-req /peer project %records-list zone)
 --

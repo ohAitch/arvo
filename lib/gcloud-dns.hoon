@@ -118,7 +118,7 @@
     $zone-delete     %gcloud-dns-ack
     $zone-get        %gcloud-dns-zone
     $records-list    %gcloud-dns-records-list
-    $zones-list       %gcloud-dns-zones-list
+    $zones-list      %gcloud-dns-zones-list
     $project-get     %gcloud-dns-project
   ==
 --
