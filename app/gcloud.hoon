@@ -68,9 +68,19 @@
 ::
 ++  poke-gcloud-dns-me
   |=  $~  =<  abet
-  ~&  dns-me+[src ;;((unit lane) (ames-grab %lun src +<-.abet))]
+  =/  lun  ;;((unit lane) (ames-grab %lun src +<-.abet))
+  ?~  lun  .
+  ?.  ?=($if -.u.lun)  .
+  =.  sav  (~(put by sav) src %| r.u.lun)
+  =.  +>.$  update-records
   .
 ::
+++  poke-gcloud-ships
+  |=  a/(map ship host)  =<  abet
+  =.  sav  a
+  update-records
+::
+++  update-records  (emit-req /update project %records-list zone)
 ++  sigh-gcloud-dns-records-list-update
   |=  {wire a/(list record-set):gcloud-dns}  =<  abet
   =/  got/(map ship host)
