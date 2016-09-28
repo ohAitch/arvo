@@ -119,4 +119,9 @@
   |=  a/path  =<  abet
   ?^  a  !!
   (emit-req /peer project %records-list zone)
+::
+++  peek-x-config
+  |=  a/path
+  ?^  a  [~ ~]
+  [~ ~ [%gcloud-ships sav]]
 --
