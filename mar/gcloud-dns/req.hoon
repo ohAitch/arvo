@@ -10,6 +10,6 @@
   --
 ++  grow
   |%
-  ++  hiss  (encode:gcloud-dns req)
+  ++  hiss  (request:encode:gcloud-dns req)
   --
 --

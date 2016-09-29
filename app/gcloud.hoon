@@ -58,7 +58,18 @@
 ::
 ++  poke-noun
   |=  *  =<  abet
-  =.  emit-req  (emit-req / project %changes-list zone)
+  =/  zon  [(cat 3 zone '-2') (print-hostname zone-host) 'Test']
+  =.  emit-req  (emit-req / project %zone-create zon)
+  .
+::
+++  sigh-gcloud-dns-zone
+  |=  {wire a/managed-zone:gcloud-dns}  =<  abet
+  ~&  created+a
+  (emit-req / project %zone-delete (cat 3 zone '-2'))
+::
+++  sigh-gcloud-dns-ack
+  |=  {wire $~}  =<  abet
+  ~&  deleted+`term`(cat 3 zone '-2')
   .
 ::
 ++  poke-gcloud-dns-me-not
