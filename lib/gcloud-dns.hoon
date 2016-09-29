@@ -6,6 +6,7 @@
 ::                                                      ::::
 ::::                                                    ::  base types
   ::                                                    ::::
+  ::  ~fyr
 |%
 ++  record                                              ::  type and data
   $%  {$a p/(list @if)}                                 ::  IPv4 addresses
