@@ -140,6 +140,7 @@
 ++  poke-helm-serve           (wrap poke-serve):from-helm
 ++  poke-helm-send-hi         (wrap poke-send-hi):from-helm
 ++  poke-helm-send-ask        (wrap poke-send-ask):from-helm
+++  poke-helm-send-dns        (wrap poke-send-dns):from-helm
 ++  poke-helm-verb            (wrap poke-verb):from-helm
 ++  poke-helm-begin           (wrap poke-begin):from-helm
 ++  poke-hood-sync            (wrap poke-sync):from-kiln

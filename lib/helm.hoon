@@ -63,6 +63,8 @@
           {$talk-command command:talk}                ::
           {$ask-mail cord}                            ::
           {$helm-hi cord}                             ::
+          {$gcloud-dns-me $~}                         ::
+          {$gcloud-dns-me-not $~}                     ::
       ==                                              ::
     --
 |_  moz/(list move)
@@ -90,6 +92,12 @@
 ++  poke-mass
   |=  $~  =<  abet
   (emit %flog /heft %crud %hax-heft ~)
+::
+++  poke-send-dns
+  |=  {her/ship dns/?}  =<  abet
+  %^  emit  %poke  /helm/dns/(scot %p her)
+  :-  [her %gcloud]                   :: XX abstract service?
+  ?:(dns [%gcloud-dns-me ~] [%gcloud-dns-me-not ~])
 ::
 ++  poke-send-hi  
   |=  {her/ship mes/(unit tape)}  =<  abet
