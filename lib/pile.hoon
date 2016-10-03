@@ -68,7 +68,16 @@
   ::
   ++  div
     |=  b/@u  ^-  (unit {pile pile})
-    !!
+    ?~  b  (some [~ a])
+    ?~  a  ~
+    =/  top  +((sub q.i.a p.i.a))
+    ?:  =(b top)
+      `[[i.a]~ t.a]
+    ?:  (lth b top)
+      :+  ~  [p.i.a (add p.i.a (dec b))]~
+      a(p.i (add p.i.a b))
+    %+  bind  $(a t.a, b (sub b top))
+    |=({c/pile d/pile} [[i.a c] d])
   ::  
   ++  dif
     |=  b/pile  ^-  (pair pile pile)
