@@ -58,7 +58,6 @@
 ++  py  |=(a/(list @) (gas:pi a))
 ++  pi                                                  ::  sparse ship set
   |_  a/pile
-  ::
   ++  uni                                               ::  merge two piles
     |=  b/pile  ^-  pile
     ?~  b  a
@@ -86,15 +85,27 @@
     |=  b/pile  ^-  pile
     ?~  a  a
     ?~  b  a
-    ?:  (lth +(q.i.b) p.i.a)  $(b t.b)
-    ?:  (lth +(q.i.a) p.i.b)  [i.a $(a t.a)]
+    ?:  (lth q.i.b p.i.a)  $(b t.b)
+    ?:  (lth q.i.a p.i.b)  [i.a $(a t.a)]
     %+  welp
       ?.  (lth p.i.a p.i.b)  ~
       [p.i.a (dec p.i.b)]~
-    ~&  [i.a i.b (gth +(q.i.b) q.i.a)]
     ?:  (gth +(q.i.b) q.i.a)
       $(a t.a)
     $(b t.b, p.i.a +(q.i.b))
+  ::
+  ++  int                                               ::  intersection
+    |=  b/pile  ^-  pile
+    ?~  a  ~
+    ?~  b  ~
+    ?:  (lth q.i.b p.i.a)  $(b t.b)
+    ?:  (lth q.i.a p.i.b)  $(a t.a)
+    =/  c  [p=(max p.i.a p.i.b) q=(min q.i.a q.i.b)]
+    :-  c
+    %_  $
+      a  ?.((lth q.c q.i.a) t.a a(p.i q.c))
+      b  ?.((lth q.c q.i.b) t.b b(p.i q.c))
+    ==
   ::
   ::
   ++  put
