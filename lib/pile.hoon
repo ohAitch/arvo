@@ -52,9 +52,11 @@
 
 ::
 |%
+++  ship  char  :: XX dread hacks: debugability
 ++  pile  (list (pair ship ship))
 ::
-++  py                                                  ::  sparse ship set
+++  py  |=(a/(list @) (gas:pi a))
+++  pi                                                  ::  sparse ship set
   |_  a/pile
   ::
   ++  uni                                               ::  merge two piles
@@ -80,13 +82,20 @@
     |=({c/pile d/pile} [[i.a c] d])
   ::  
   ++  dif
-    |=  b/pile  ^-  (pair pile pile)
-    !!
+::     =;  dif1  |=(b/pile `(pair pile pile)`[(dif1(a b) a) (dif1 b)])
+    |=  b/pile  ^-  pile
+    ?~  a  a
+    ?~  b  a
+    ?:  (lth +(q.i.b) p.i.a)  $(b t.b)
+    ?:  (lth +(q.i.a) p.i.b)  [i.a $(a t.a)]
+    %+  welp
+      ?.  (lth p.i.a p.i.b)  ~
+      [p.i.a (dec p.i.b)]~
+    ~&  [i.a i.b (gth +(q.i.b) q.i.a)]
+    ?:  (gth +(q.i.b) q.i.a)
+      $(a t.a)
+    $(b t.b, p.i.a +(q.i.b))
   ::
-  ::
-  ++  has
-    |=  b/ship  ^-  ?
-    !!
   ::
   ++  put
     |=  b/ship  ^-  pile
