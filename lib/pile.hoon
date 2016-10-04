@@ -1,3 +1,5 @@
+/+  pile-list
+::
 |%
 ++  ship  char  :: XX dread hacks: debugability
 ++  pile  (tree (pair ship ship))
@@ -90,6 +92,12 @@
     |=  b/(list ship)  ^-  pile
     ?~  b  a
     $(b t.b, a (put i.b))
+  ::
+  ++  tap
+    =|  out/(list (pair ship ship))
+    |-  ^+  out
+    ?~  a  out
+    $(a l.a, out [n.a $(a r.a)])
   ::
   ::
   ++  top  ?~(a ~ (some (fall top(a r.a) q.n.a)))
