@@ -8,24 +8,25 @@
   ==
 ++  test
   |=  {a/@uvI b/@u}
-  %+  bind  (shrink (generate a b) evals-match)
+  %+  bind  (shrink (generate a b) do-match)
   results
 ::
 ++  results
   |=  a/cmd
   :+  a
-    (eval-cmd-list a)
-  ~(tap pi:pile (eval-cmd-tree a))
+    (do-list a)
+  ~(tap pi:pile (do-tree a))
 ::
-++  evals-match
+++  do-match
   |=  a/cmd  ^-  ?
-  .=  (eval-cmd-list a)
-  ~(tap pi:pile (eval-cmd-tree a))
+  .=  (do-list a)
+  ~(tap pi:pile (do-tree a))
 ::
 ++  shrink
+  =|  dep/@
   |=  {a/cmd b/$-(cmd ?)}  ^-  (unit cmd)
   ?:  (b a)  ~
-  ~&  a
+  ~&  [`@t`(fil 3 dep ' ') a]
   ?-    -.a
       $~
     ?:  (gth 2 (lent p.a))  `a
@@ -37,9 +38,13 @@
     `a
   ::
       ?($dif $int $uni)
+    =.  dep  +(dep)
     =+  $(a p.a)
     ?^  -  -
     =+  $(a q.a)
+    ?^  -  -
+    =+  ?.  (do-match a)  ~
+        $(a [~ ~(tap pi:pile-list (do-list a))])
     ?^  -  -
     =.  p.a  
       =-  (fall - p.a)
@@ -71,7 +76,7 @@
     $(all t.all, b (rsh 3 1 b))
   [i.all $(all t.all, b (rsh 3 1 b))]
 ::
-++  eval-cmd-list
+++  do-list
   =*  pi  pi:pile-list
   |=  a/cmd  ~+
   ?-  -.a
@@ -81,7 +86,7 @@
     $uni  (~(uni pi $(a p.a)) $(a q.a))
   ==
 ::
-++  eval-cmd-tree
+++  do-tree
   =*  pi  pi:pile
   |=  a/cmd  ~+
   ?-  -.a

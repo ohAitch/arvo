@@ -58,6 +58,14 @@
     ==
   ::
   ::
+  ++  tap
+    ^-  (list ship)
+    ?~  a  ~
+    :-  p.i.a
+    ?:  =(p.i.a q.i.a)
+      tap(a t.a)
+    tap(p.i.a +(p.i.a))
+  ::
   ++  put
     |=  b/ship  ^-  pile
     (uni [b b] ~)
