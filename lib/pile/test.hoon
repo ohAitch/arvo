@@ -8,28 +8,31 @@
   ==
 ++  test
   |=  {a/@uvI b/@u}
-  %+  bind  (min-test (gen-test a b) run-test)
+  %+  bind  (shrink (generate a b) evals-match)
+  results
+::
+++  results
   |=  a/cmd
   :+  a
     (eval-cmd-list a)
   ~(tap pi:pile (eval-cmd-tree a))
 ::
-++  run-test
-  =/  vis  |
+++  evals-match
   |=  a/cmd  ^-  ?
   .=  (eval-cmd-list a)
   ~(tap pi:pile (eval-cmd-tree a))
 ::
-++  min-test
+++  shrink
   |=  {a/cmd b/$-(cmd ?)}  ^-  (unit cmd)
   ?:  (b a)  ~
   ~&  a
   ?-    -.a
       $~
     ?:  (gth 2 (lent p.a))  `a
-    =+  $(p.a (scag (div (lent p.a) 2) p.a))
+    =/  haf  (div (lent p.a) 2)
+    =+  $(p.a (scag haf p.a))
     ?^  -  -
-    =+  $(p.a (slag (div (lent p.a) 2) p.a))
+    =+  $(p.a (slag haf p.a))
     ?^  -  -
     `a
   ::
@@ -47,7 +50,7 @@
     `a
   ==
 ::
-++  gen-test
+++  generate
   |=  {eny/@uvI dyv/@u}  ^-  cmd
   ?~  dyv
     [~ (gen-tape (shas %test eny))]
