@@ -1,116 +1,90 @@
-:: |%
-:: ++  pile  (tree (pair ship ship))
-::   |_  pyl/pile
-::   ::
-::   ++  uni                                               ::  merge two piles
-::     |=  lyp/pile
-::     ^-  pile
-::     !!
-::   ::
-::   ++  div
-::     |=  a/@u  ^-  (unit {pile pile})
-::     !!
-::   ::  
-::   ++  dif
-::     |=  pile
-::     ^-  (pair pile pile)
-::     !!
-::   ::
-::   ::
-::   ++  has
-::     |=  ship  ^-  ?
-::     !!
-::   ::  
-::   ++  put
-::     |=  a/ship  ^-  pile
-::     ?~  pyl  [a a]~    
-::   ::
-::   ++  del
-::     |=  a/ship  ^-  pile
-::     ?~  pyl  ~
-::   ::
-::   ++  gas
-::     |=  a/(list ship)
-::     ?~  a  pyl
-::     $(a t.a, pyl (put i.a))
-::   ::
-::   ::
-::   ++  min
-::     ?~  pyl  ~
-::     (some p.i.pyl)
-::   ::
-::   ++  max
-::     ?~  pyl  ~
-::     %-  some
-::     |-  ^-  ship
-::     ?~  t.pyl  q.i.pyl
-::     $(pyl t.pyl)
-::   ::
-::   ++  gud
-::     ?~  a  &    
-::   --
-
-::
 |%
 ++  ship  char  :: XX dread hacks: debugability
-++  pile  (list (pair ship ship))
+++  pile  (tree (pair ship ship))
 ::
 ++  py  |=(a/(list @) (gas:pi a))
 ++  pi                                                  ::  sparse ship set
   |_  a/pile
+  ::
   ++  uni                                               ::  merge two piles
     |=  b/pile  ^-  pile
     ?~  b  a
     ?~  a  b
-    ?:  (lth +(q.i.b) p.i.a)  [i.b $(b t.b)]
-    ?:  (lth +(q.i.a) p.i.b)  [i.a $(a t.a)]
-    =.  i.a  [(min p.i.a p.i.b) (max q.i.a q.i.b)]
-    [i.a $(a t.a, b t.b)]
+    ?.  (vor p.n.a p.n.b)  $(a b, b a)
+    ?:  (lth +(q.n.b) p.n.a)
+      $(b r.b, l.a $(a l.a, r.b ~))
+    ?:  (lth +(q.n.a) p.n.b)
+      $(b l.b, r.a $(a r.a, l.b ~))
+    ?:  (lte p.n.a p.n.b)
+      =.  q.n.a  (max q.n.a q.n.b)
+      [n.a $(a l.a, b l.b) $(a r.a, b r.b)]
+    =.  q.n.b  (max q.n.a q.n.b)
+    $(a l.a, b $(a r.a))  :: implicitly rebalance if (vor p.n.{l,r}.a p.n.b)
   ::
   ++  div
-    |=  b/@u  ^-  (unit {pile pile})
-    ?~  b  (some [~ a])
-    ?~  a  ~
-    =/  top  +((sub q.i.a p.i.a))
-    ?:  =(b top)
-      `[[i.a]~ t.a]
-    ?:  (lth b top)
-      :+  ~  [p.i.a (add p.i.a (dec b))]~
-      a(p.i (add p.i.a b))
-    %+  bind  $(a t.a, b (sub b top))
-    |=({c/pile d/pile} [[i.a c] d])
+    |=  b/@u  ^-  (unit (pair pile pile))
+    =<  ?-(- $& [~ p], $| ~)
+    |-  ^-  (each (pair pile pile) @u)
+    ?~  b  [%& ~ a]
+    ?~  a  [%| 0]
+    =/  al  $(a l.a)
+    ?-    -.al
+        $&  [%& p.p.al a(l q.p.al)]
+        $|
+      =.  b  (sub b p.al)    
+      =/  top  +((sub q.n.a p.n.a))
+      ?:  =(b top)
+        [%& a(r ~) r.a]
+      ?:  (lth b top)
+        :+  %&  a(r ~, q.n (add p.n.a (dec b)))
+        =.  p.n.a  (add p.n.a b)
+        (uni(a r.a) [n.a ~ ~])
+      =/  ar  $(a r.a, b (sub b top))
+      ?-    -.ar
+          $&  [%& a(r p.p.ar) q.p.ar]
+          $|  [%| :(add top p.al p.ar)]
+      ==
+    ==
   ::  
   ++  dif
-::     =;  dif1  |=(b/pile `(pair pile pile)`[(dif1(a b) a) (dif1 b)])
     |=  b/pile  ^-  pile
     ?~  a  a
     ?~  b  a
-    ?:  (lth q.i.b p.i.a)  $(b t.b)
-    ?:  (lth q.i.a p.i.b)  [i.a $(a t.a)]
-    %+  welp
-      ?.  (lth p.i.a p.i.b)  ~
-      [p.i.a (dec p.i.b)]~
-    ?:  (gth +(q.i.b) q.i.a)
-      $(a t.a)
-    $(b t.b, p.i.a +(q.i.b))
+    ?:  (lth q.n.b p.n.a)
+      $(b r.b, l.a $(a l.a, r.b ~))
+    ?:  (lth q.n.a p.n.b)
+      $(b l.b, r.a $(a r.a, l.b ~))
+    ?:  (lth p.n.a p.n.b)
+      ?:  (lte q.n.a q.n.b)  $(q.n.a (dec p.n.b))
+      $(a (uni(q.n.a (dec p.n.b)) [[+(q.n.b) q.n.a] ~ ~]))
+    %-  uni(a $(a l.a, b l.b))
+    ?:  (lte q.n.a q.n.b)  $(a r.a, b r.b)
+    $(b r.b, a (uni(a r.a) [[+(q.n.b) q.n.a] ~ ~]))
   ::
   ++  int                                               ::  intersection
     |=  b/pile  ^-  pile
     ?~  a  ~
     ?~  b  ~
-    ?:  (lth q.i.b p.i.a)  $(b t.b)
-    ?:  (lth q.i.a p.i.b)  $(a t.a)
-    =/  c  [p=(max p.i.a p.i.b) q=(min q.i.a q.i.b)]
-    :-  c
-    %_  $
-      a  ?.((lth q.c q.i.a) t.a a(p.i q.c))
-      b  ?.((lth q.c q.i.b) t.b b(p.i q.c))
-    ==
+    ?.  (vor p.n.a p.n.b)  $(a b, b a)
+    ?:  (gth p.n.a q.n.b)  
+      (uni(a $(b r.b)) $(a l.a, r.b ~))
+    ?:  (lth q.n.a p.n.b)  
+      (uni(a $(b l.b)) $(a r.a, l.b ~))
+    ?:  (gte p.n.a p.n.b)
+      ?:  (lte q.n.a q.n.b)
+        [n.a $(a l.a, r.b ~) $(a r.a, l.b ~)]
+      [n.a(q q.n.b) $(a l.a, r.b ~) $(l.a ~, b r.b)]
+    %-  uni(a $(r.a ~, b r.b))
+    ?:  (lte q.n.a q.n.b)
+      %-  uni(a $(l.b ~, a r.a))
+      [n.b(q q.n.a) ~ ~]
+    %-  uni(a $(l.a ~, b r.b))
+    [n.b ~ ~]
   ::
   ::
   ++  put
     |=  b/ship  ^-  pile
-    (uni [b b] ~)
+    (uni [b b] ~ ~)
   ::
   ++  gas
     |=  b/(list ship)  ^-  pile
@@ -118,11 +92,19 @@
     $(b t.b, a (put i.b))
   ::
   ::
-  ++  gud
+  ++  top  ?~(a ~ (some (fall top(a r.a) q.n.a)))
+  ++  bot  ?~(a ~ (some (fall bot(a l.a) p.n.a)))
+  ++  gud  ::  XX repeated min/max fetching
     ?~  a  &
-    ?.  (lte p.i.a q.i.a)  |
-    ?~  t.a  &
-    &((lth +(q.i.a) p.i.t.a) gud(a t.a))
+    ?.  (lte p.n.a q.n.a)  |
+    ?&  =+(top(a l.a) ?~(- & (lth +(u) p.n.a)))
+        ?~(l.a & (vor p.n.a p.n.l.a))
+        gud(a l.a)
+    ::
+        =+(bot(a r.a) ?~(- & (gth u +(q.n.a))))
+        ?~(l.a & (vor p.n.a p.n.l.a))
+        gud(a r.a)
+    ==
   --
 --
 ::
