@@ -53,18 +53,22 @@
   ::  
   ++  dif
     |=  b/pile  ^-  pile
-    ?~  a  a
     ?~  b  a
-    ?:  (lth q.n.b p.n.a)
+    ?~  a  a
+    ?:  (gth p.n.a q.n.b)
       $(b r.b, l.a $(a l.a, r.b ~))
     ?:  (lth q.n.a p.n.b)
       $(b l.b, r.a $(a r.a, l.b ~))
-    ?:  (lth p.n.a p.n.b)
-      ?:  (lte q.n.a q.n.b)  $(q.n.a (dec p.n.b))
-      $(a (uni(q.n.a (dec p.n.b)) [[+(q.n.b) q.n.a] ~ ~]))
-    %-  uni(a $(a l.a, b l.b))
-    ?:  (lte q.n.a q.n.b)  $(a r.a, l.b ~)
-    $(b r.b, a (uni(a r.a) [[+(q.n.b) q.n.a] ~ ~]))
+    %-  uni(a $(a l.a, r.b ~))
+    %-  uni(a $(a r.a, l.b ~))
+    ?:  (gte p.n.a p.n.b)
+      ?:  (lte q.n.a q.n.b)
+        ~
+      $(b r.b, a [[+(q.n.b) q.n.a] ~ ~])
+    ?:  (lte q.n.a q.n.b)
+      $(b l.b, a [[n.a(q (min q.n.a (dec p.n.b)))] ~ ~])
+    %-  uni(a $(b r.b, a [[+(q.n.b) q.n.a] ~ ~]))
+    $(b l.b, a [[n.a(q (min q.n.a (dec p.n.b)))] ~ ~])
   ::
   ++  int                                               ::  intersection
     |=  b/pile  ^-  pile
@@ -79,7 +83,7 @@
       ?:  (lte q.n.a q.n.b)
         [n.a $(a l.a, r.b ~) $(a r.a, l.b ~)]
       [n.a(q q.n.b) $(a l.a, r.b ~) $(l.a ~, b r.b)]
-    %-  uni(a $(r.a ~, b r.b))
+    %-  uni(a $(r.a ~, b l.b))
     ?:  (lte q.n.a q.n.b)
       %-  uni(a $(l.b ~, a r.a))
       [n.b(q q.n.a) ~ ~]
