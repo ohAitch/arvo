@@ -12,10 +12,9 @@
     ?:  (lth +(q.i.b) p.i.a)  [i.b $(b t.b)]
     ?:  (lth +(q.i.a) p.i.b)  [i.a $(a t.a)]
     =.  p.i.a  (min p.i.a p.i.b)
-    ?:  (gth q.i.b q.i.a)
-      =.  q.i.a  q.i.b
-      $(t.a t.b, b t.a)
-    $(b t.b)
+    ?:  (gte q.i.a q.i.b)
+      $(b t.b)
+    $(a t.a, b [[p.i.a q.i.b] t.b])
   ::
   ++  div
     |=  b/@u  ^-  (unit {pile pile})

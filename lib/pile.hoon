@@ -17,11 +17,14 @@
       $(b r.b, l.a $(a l.a, r.b ~))
     ?:  (lth +(q.n.a) p.n.b)
       $(b l.b, r.a $(a r.a, l.b ~))
-    ?:  (lte p.n.a p.n.b)
-      =.  q.n.a  (max q.n.a q.n.b)
-      [n.a $(a l.a, b l.b) $(a r.a, b r.b)]
-    =.  q.n.b  (max q.n.a q.n.b)
-    $(a l.a, b $(a r.a))  :: implicitly rebalance if (vor p.n.{l,r}.a p.n.b)
+    ?:  =(n.a n.b)  [n.a $(a l.a, b l.b) $(a r.a, b r.b)]
+    ?:  (lth p.n.a p.n.b)
+      ?:  (gth q.n.a q.n.b)
+        $(b l.b, a $(b r.b))
+      $(b l.b, a $(b r.b, a $(b r.a, r.a ~, q.n.a q.n.b)))
+    ?:  (gth q.n.a q.n.b)
+      $(a l.a, b $(a r.a, b $(a r.b, r.b ~, q.n.b q.n.a)))
+    $(a l.a, b $(a r.a))
   ::
   ++  div
     |=  b/@u  ^-  (unit (pair pile pile))
@@ -60,7 +63,7 @@
       ?:  (lte q.n.a q.n.b)  $(q.n.a (dec p.n.b))
       $(a (uni(q.n.a (dec p.n.b)) [[+(q.n.b) q.n.a] ~ ~]))
     %-  uni(a $(a l.a, b l.b))
-    ?:  (lte q.n.a q.n.b)  $(a r.a, b r.b)
+    ?:  (lte q.n.a q.n.b)  $(a r.a, l.b ~)
     $(b r.b, a (uni(a r.a) [[+(q.n.b) q.n.a] ~ ~]))
   ::
   ++  int                                               ::  intersection
