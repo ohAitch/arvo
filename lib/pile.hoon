@@ -1,5 +1,3 @@
-/+  pile-list
-::
 |%
 ++  ship  char  :: XX dread hacks: debugability
 ++  pile  (tree (pair ship ship))
@@ -77,7 +75,7 @@
     ?.  (vor p.n.a p.n.b)  $(a b, b a)
     ?:  (gth p.n.a q.n.b)  
       (uni(a $(b r.b)) $(a l.a, r.b ~))
-    ?:  (lth q.n.a p.n.b)  
+    ?:  (lth q.n.a p.n.b)
       (uni(a $(b l.b)) $(a r.a, l.b ~))
     ?:  (gte p.n.a p.n.b)
       ?:  (lte q.n.a q.n.b)
@@ -107,18 +105,19 @@
     $(a l.a, out [n.a $(a r.a)])
   ::
   ::
-  ++  top  ?~(a ~ (some (fall top(a r.a) q.n.a)))
-  ++  bot  ?~(a ~ (some (fall bot(a l.a) p.n.a)))
   ++  gud  ::  XX repeated min/max fetching
+    =|  {bot/(unit ship) top/(unit ship)}
+    |-  ^-  ?
     ?~  a  &
-    ?.  (lte p.n.a q.n.a)  |
-    ?&  =+(top(a l.a) ?~(- & (lth +(u) p.n.a)))
-        ?~(l.a & (vor p.n.a p.n.l.a))
-        gud(a l.a)
+    ?&  (lte p.n.a q.n.a)
+        ?~(top & (lth +(q.n.a) u.top))
+        ?~(bot & (gth p.n.a +(u.bot)))
     ::
-        =+(bot(a r.a) ?~(- & (gth u +(q.n.a))))
         ?~(l.a & (vor p.n.a p.n.l.a))
-        gud(a r.a)
+        $(a l.a, top `p.n.a)
+    ::
+        ?~(l.a & (vor p.n.a p.n.l.a))
+        $(a r.a, bot `q.n.a)
     ==
   --
 --
