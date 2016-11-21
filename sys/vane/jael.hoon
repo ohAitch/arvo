@@ -1683,7 +1683,8 @@
       ::  key: generated key
       ::  bul: initial bull
       ::
-      =/  key  (ypt:scr (mix rex %jael-make) gen)  
+      =/  key  (shas (mix rex %jael-make) gen)  
+      :: XX =/  key  (ypt:scr (mix rex %jael-make) gen)  
       =*  doc  `bull`[(sein rex) & nym]
       ?:  (lth rex 256)
         ::
@@ -1716,10 +1717,10 @@
       ::  wyl: initial will
       ::  hec: initial will as farm
       ::
-      =/  loy  (pit:nu:crub 512 eny)
-      =*  rig  sec:ex:loy
+      :: =/  loy  (pit:nu:crub 512 eny)
+      =*  rig  *@ ::sec:ex:loy
       =*  ryt  `rite`[%jewel [1 rig] ~ ~]
-      =*  pub  pub:ex:loy
+      =*  pub  *@ ::pub:ex:loy
       =*  cet  `cert`[[doc pub] ~]
       =*  wyl  `will`[[1 cet] ~ ~]
       =*  hec  `farm`[[rex wyl] ~ ~]
