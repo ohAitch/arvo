@@ -1510,7 +1510,7 @@
       ::  it is the best reference for the semantics of
       ::  the urbit pki.
       ::
-  =*  our  !!
+::   =*  our  !!
       ::
       ::  it is absolutely verboten to use [our] in ++ur.
       ::
@@ -1578,6 +1578,7 @@
     =|  $:  shy/(map ship safe)
             rug/will
         ==
+    ~&  do-ex+[our pug]
     =|  ::  rex: server ship
         ::
         rex/ship
@@ -1627,6 +1628,7 @@
       ::  par: promises by rex, to rex
       ::  jel: %jewel rights
       ::
+      ~|  pug
       =/  lyf  `life`(need ~(current we (~(got by pug) rex)))
       =*  lab  (~(got by pry) rex)
       =*  par  (~(got by lab) rex)
@@ -2025,6 +2027,7 @@
                 !=(~ pre)
                 ~|  [%czar (shaf %zeno pub.dat.new) (zeno rex)]
                 =((shaf %zeno pub.dat.new) (zeno rex))
+                [fake=&] :: XX get from vere
             ==
         ::
         ::  check the parent has signed, if necessary
