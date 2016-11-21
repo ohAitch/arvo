@@ -69,6 +69,7 @@
       {$c note-clay}                                    ::
       {$d note-dill}                                    ::
       {$g note-gall}                                    ::
+      {$j $init ship}
   ==  ==                                                ::
 ++  sign-ames                                           ::
   $%  {$nice $~}                                        ::
@@ -468,10 +469,10 @@
   ?:  ?=($boot -.q.hic)
     :_(..^$ [hen %pass ~ (note %a p.q.hic)]~)
   ?:  ?=($flog -.q.hic)
-    ::  ~&  [%dill-flog +.q.hic]
+::      ~&  [%dill-flog +.q.hic]
     ?:  ?=({$crud $hax-init {$leaf *} $~} p.q.hic)
       =+  him=(slav %p (crip p.i.q.p.q.hic))
-      :_(..^$ ?~(hey.all ~ [u.hey.all %give %init him]~))
+      :_(..^$ [hen %slip %j %init him]~)
     ?:  ?=({$crud $hax-heft $~} p.q.hic)
       :_(..^$ ?~(hey.all ~ [u.hey.all %slip %d %heft ~]~))
     :_(..^$ ?~(hey.all ~ [u.hey.all %slip %d p.q.hic]~))
