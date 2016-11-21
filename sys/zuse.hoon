@@ -1566,7 +1566,7 @@
       --
     ::                                                  ::  ++ecba:aes:crypto
     ++  ecba                                            ::  AES-128 ECB
-      ~%  %ecba  +>  ~
+        ~%  %ecba  ..ecba  ~
       |_  key/@H
       ::                                                ::  ++en:ecba:aes:crypto
       ++  en                                            ::  encrypt
@@ -2571,7 +2571,7 @@
     (shan (swp 3 (cat 3 inn (mix op kex))))
   ::                                                    ::  ++scr:crypto
   ++  scr                                               ::  scrypt
-    ~%  %scr  +>  ~
+      ~%  %scr  ..is  ~
     |%
     ::                                                  ::  ++sal:scr:crypto
     ++  sal                                             ::  salsa20 hash
