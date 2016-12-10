@@ -12,8 +12,7 @@
   |%
   ++  noun  {cord invite}:womb                ::  clam from %noun
   ++  json
-    %+  corl  need
-    =>  jo
+    =>  dejs:format
     =+  ^=  mail
         ;~  simu
           ;~(pfix (plus ;~(less pat next)) pat)
