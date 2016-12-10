@@ -1551,7 +1551,7 @@
             cod/farm
         ==
     ^+  +>
-    =+  lec=(~(tap by cod))
+    =+  lec=(~(tap by cod))  !.
     |-  ^+  ..meet
     ?~  lec  ..meet
     %=  $
@@ -1612,14 +1612,11 @@
       ^-  (pair life (map life ring))
       ::
       ::  lyf: latest life of 
-      ::  lab: promises by rex
       ::  par: promises by rex, to rex
       ::  jel: %jewel rights
       ::
-      ~|  pug
-      =/  lyf  `life`(need ~(current we (~(got by pug) rex)))
-      =*  lab  (~(got by pry) rex)
-      =*  par  (~(got by lab) rex)
+      =/  lyf  `life`?~(rug 1 (need ~(current we rug)))
+      =*  par  (~(got by shy) rex)
       =/  jel  `rite`(need (~(expose up par) %jewel))
       ?>  ?=($jewel -.jel)
       [lyf p.jel]
@@ -1712,10 +1709,8 @@
       =*  pub  pub:ex:loy
       =*  cet  `cert`[[doc pub] ~]
       =*  wyl  `will`[[1 cet] ~ ~]
-      =*  hec  `farm`[[rex wyl] ~ ~]
       =.  +>.$  (deal rex [[ryt ~ ~] ~])
-      =.  ..ex  (meet [~ ~] hec)
-      +>.$
+      (grow ``rex *farm wyl)
     ::
     ++  as-hotel                    :: XX moveme        
       |=  a/ship  ^-  (map {ship bloq} pile)
@@ -2057,8 +2052,11 @@
         ::  pev: life and ring of parent
         ::  val: new signature
         ::
-        =/  pev  (leak dad)
-        =*  val  (sign:as:(nol:nu:crub q.pev) *@ ash)
+        ?.  =(rex dad)
+          ~|(%unimplemented !!)
+        =/  pev  lean
+        =/  key  (~(got by q.pev) p.pev)
+        =*  val  (sign:as:(nol:nu:crub key) *@ ash)
         new(syg (~(put by syg.new) dad [p.pev val]))
   --  --
 --  --  
