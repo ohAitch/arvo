@@ -9,46 +9,7 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-:: |%
-:: ++  foil                                                ::  ship allocation map
-::   |*  mold                                              ::  entry mold
-::   $:  min/@u                                            ::  minimum entry
-::       ctr/@u                                            ::  next allocated
-::       und/(set @u)                                      ::  free under counter
-::       ove/(set @u)                                      ::  alloc over counter
-::       max/@u                                            ::  maximum entry
-::       box/(map @u +<)                                   ::  entries
-::   ==                                                    ::
-:: --                                                      ::
-::                                                      ::
-::::                                                    ::
-  ::                                                    ::
 |%                                                      ::
-:: ++  managed                                             ::  managed plot
-::   |*  mold                                              ::
-::   %-  unit                                              ::  unsplit
-::   %+  each  +<                                          ::  subdivided
-::   mail                                                  ::  delivered
-:: ::                                                      ::
-:: ++  divided                                             ::  get division state
-::   |*  (managed)                                         ::
-::   ?-  +<                                                ::
-::     $~      ~                                           ::  unsplit
-::     {$~ $| *}  ~                                        ::  delivered
-::     {$~ $& *}  (some p.u.+<)                            ::  subdivided
-::   ==                                                    ::
-:: ::                                                      ::
-:: ++  moon  (managed _!!)                                 ::  undivided moon
-:: ::
-:: ++  planet                                              ::  subdivided planet
-::   (managed (lone (foil moon)))                          ::
-:: ::                                                      ::
-:: ++  star                                                ::  subdivided star
-::   (managed (pair (foil moon) (foil planet)))            ::
-:: ::                                                      ::
-:: ++  galaxy                                              ::  subdivided galaxy
-::   (managed (trel (foil moon) (foil planet) (foil star)))::
-:: ::                                                      ::
 ++  ticket  @G                                          ::  old 64-bit ticket
 ++  passcode  @uvH                                      ::  128-bit passcode
 ++  passhash  @uwH                                      ::  passocde hash
@@ -59,11 +20,6 @@
       owner/mail                                        ::  owner's email
       history/(list mail)                               ::  transfer history
   ==                                                    ::
-:: ++  property                                            ::  subdivided plots
-::   $:  galaxies/(map @p galaxy)                          ::  galaxy
-::       planets/(map @p planet)                           ::  star
-::       stars/(map @p star)                               ::  planet
-::   ==                                                    ::
 ++  invite                                              ::
   $:  who/mail                                          ::  who to send to
       pla/@ud                                           ::  planets to send
@@ -95,8 +51,6 @@
 ++  part  {$womb $1 pith}                               ::  womb state
 ++  pith                                                ::  womb content
   $:  boss/(unit ship)                                  ::  outside master
-::       bureau/(map passhash balance)                     ::  active invitations
-::       office/property                                   ::  properties managed
       recycling/(map ship @)                            ::  old ticket keys
   ==                                                    ::
 --                                                      ::
