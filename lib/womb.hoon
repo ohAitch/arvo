@@ -305,7 +305,7 @@
 ::   ?^  (scry-womb-invite (shaf %pass pas))
 ::     ~|(already-recycled+[him-t tik-t] !!)
   =/  inv/{pla/@ud sta/@ud}
-    ?+((clan him) !! $duke [0 1], $king [1 0])
+    ?+((clan him) !! $duke [1 0], $king [0 1])
   (emit %jaelwomb / %invite pas who inv)
 ::
 ::
