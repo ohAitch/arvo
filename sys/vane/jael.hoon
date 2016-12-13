@@ -923,6 +923,9 @@
   ::                                                    ::  ++scry:of
   ++  scry                                              ::  read
     |=  {syd/@tas pax/path}  ^-  (unit gilt)
+    =^  mar  pax  =/(a (flop pax) [-.a (flop t.+.a)])
+    ?>  ?=(_-:*gilt mar)
+    =-  (biff - (flit |=(a/gilt =(-.a mar))))
     ?+    syd  ~
         $womb  (biff (read-womb pax) scry-womb:(burb our))
     ==
