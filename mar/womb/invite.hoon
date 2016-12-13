@@ -2,7 +2,7 @@
 ::::  /hoon/stat-all/womb/mar
   ::
 /?    310
-/+    womb
+/-    womb
 ::
 ::::  ~fyr
   ::

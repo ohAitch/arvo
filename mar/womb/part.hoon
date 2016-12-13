@@ -2,7 +2,7 @@
 ::::  /hoon/part/womb/mar
   ::
 /?    310
-/+    womb
+/-    womb
 |_  all/part:womb
 ++  grad  %jam
 ++  grow  |%  ++  jam  (^jam all)

@@ -2,7 +2,8 @@
 ::::  /hoon/ask/app
   ::
 /?    310
-/+    sole, womb, prey
+/-    womb
+/+    sole, prey
 [. sole]
 |%
   ++  card

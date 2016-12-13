@@ -2,48 +2,12 @@
 ::::  /hoon/womb/lib                                    ::  ::
   ::                                                    ::  ::
 /?    310                                               ::  version
-/+    talk, old-phon
+/-    womb
+/+    talk, old-phon, ames-last-seen
 =,  wired
 =,  title
-=,  womb:^jael
-::                                                      ::  ::
-::::                                                    ::  ::
-  ::                                                    ::  ::
-|%                                                      ::
-++  ticket  @G                                          ::  old 64-bit ticket
-++  passcode  @uvH                                      ::  128-bit passcode
-++  passhash  @uwH                                      ::  passocde hash
-++  mail  @t                                            ::  email address
-++  balance                                             ::  invitation balance
-  $:  planets/@ud                                       ::  planet count
-      stars/@ud                                         ::  star count
-      owner/mail                                        ::  owner's email
-      history/(list mail)                               ::  transfer history
-  ==                                                    ::
-++  invite                                              ::
-  $:  who/mail                                          ::  who to send to
-      pla/@ud                                           ::  planets to send
-      sta/@ud                                           ::  stars to send
-      wel/welcome                                       ::  welcome message
-  ==                                                    ::
-++  welcome                                             ::  welcome message
-  $:  intro/tape                                        ::  in invite email
-      hello/tape                                        ::  as talk message
-  ==                                                    ::
-++  stat  (pair live dist)                              ::  external info
-++  live  ?($cold $seen $live)                          ::  online status
-++  dist                                                ::  allocation
-  $%  {$free $~}                                        ::  unallocated
-      {$owned p/mail}                                   ::  granted, status
-      {$split p/(map ship stat)}                        ::  all given ships
-  ==                                                    ::
-::                                                      ::
-++  ames-tell                                           ::  .^ a+/=tell= type
-  |^  {p/(list elem) q/(list elem)}                     ::
-  ++  elem  $^  {p/elem q/elem}                         ::
-            {term p/*}                                  ::  underspecified
-  --                                                    ::
---                                                      ::
+=,  ^womb
+=*  jaelwomb  womb:^jael
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -57,6 +21,7 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
+~!  womb
 |%                                                      ::  arvo structures
 ++  invite-j  {who/mail pla/@ud sta/@ud}                ::  invite data
 ++  balance-j  {who/mail pla/@ud sta/@ud}               ::  balance data
@@ -75,7 +40,7 @@
       {$next wire p/ring}                               ::  update private key
       {$tick wire p/@pG q/@p}                           ::  save ticket
       {$knew wire p/ship q/wyll:^ames}                        ::  learn will (old pki)
-      {$jaelwomb wire task:womb}                        ::  manage rights
+      {$jaelwomb wire task:jaelwomb}                    ::  manage rights
   ==                                                    ::
 ++  pear                                                ::
   $%  {$email mail tape wall}                           ::  send email
@@ -102,30 +67,6 @@
       {$reinvite aut/passcode inv/invite}
   ==
 --
-|%
-++  ames-grab                                           :: XX better ames scry
-  |=  {a/term b/ames-tell}  ^-  *
-  =;  all  (~(got by all) a)
-  %-  ~(gas by *(map term *))
-  %-  zing
-  %+  turn  (weld p.b q.b)
-  |=  b/elem:ames-tell  ^-  (list {term *})
-  ?@  -.b  [b]~
-  (weld $(b p.b) $(b q.b))
-::
-++  murn-by
-  |*  {a/(map) b/$-(* (unit))}
-  ^-  ?~(a !! (map _p.n.a _(need (b q.n.a))))
-  %-  malt
-  %+  murn  (~(tap by a))
-  ?~  a  $~
-  |=  _c=n.a  ^-  (unit _[p.n.a (need (b q.n.a))])
-  =+  d=(b q.c)
-  ?~(d ~ (some [p.c u.d]))
-::
-++  neis  |=(a/ship ^-(@u (rsh (dec (xeb (dec (xeb a)))) 1 a)))  ::  postfix
-::
---
 ::                                                    ::  ::
 ::::                                                  ::  ::
   ::                                                  ::  ::
@@ -146,14 +87,6 @@
   |=  (list card)
   ^+  +>
   ?~(+< +> $(+< t.+<, +> (emit i.+<)))
-::
-++  ames-last-seen                                    ::  last succesful ping
-  |=  a/ship  ~+  ^-  (unit time)
-  ?:  =(a our)  (some now)
-  %-  (hard (unit time))
-  ~|  ames-look+/(scot %p our)/tell/(scot %da now)/(scot %p a)
-  %+  ames-grab  %rue
-  .^(ames-tell %a /(scot %p our)/tell/(scot %da now)/(scot %p a))
 ::
 ++  jael-scry
   |*  {typ/mold pax/path}  ^-  typ
@@ -177,7 +110,7 @@
 ::
 ++  get-live                                          ::  last-heard time ++live
   |=  a/ship  ^-  live
-  =+  rue=(ames-last-seen a)
+  =+  rue=(ames-last-seen now a)
   ?~  rue  %cold
   ?:((gth (sub now u.rue) ~m5) %seen %live)
 ::

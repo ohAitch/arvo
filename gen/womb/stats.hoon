@@ -2,7 +2,7 @@
 ::::  /hoon/stats/womb/gen
   ::
 /?    310
-/+    womb
+/-    womb
 :-  %say
 |=  $:  {now/@da eny/@uvJ bec/beak}
         $~
