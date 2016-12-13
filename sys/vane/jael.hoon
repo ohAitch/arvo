@@ -1713,10 +1713,10 @@
     ::
     ++  as-hotel                    :: XX moveme        
       |=  a/ship  ^-  (map {ship bloq} pile)
-      =/  b  (xeb (xeb a))
+      =/  b  (dec (xeb (xeb a)))
       =-  (my - ~)
       :-  [(sein a) b]
-      (put:py (rsh (dec b) 1 a))
+      (put:py (rsh b 1 a))
     ::
     ++  add-rite                                        ::  new promise
       |=({pal/ship ryt/rite} (deal pal [ryt ~ ~] ~))
@@ -1822,8 +1822,8 @@
           ?>  ?=($fungi -.-)
           p.-
         :+  who=who
-          pla=(fall (~(get by fun) %earl) 0)
-        sta=(fall (~(get by fun) %king) 0)
+          pla=(fall (~(get by fun) %usr) 0)
+        sta=(fall (~(get by fun) %upl) 0)
       ::
       ::  available ships
       ::    {$shop typ/?($star $planet) nth/@u}
