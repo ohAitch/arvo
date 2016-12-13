@@ -740,8 +740,6 @@
     ?~  pig
       [ryt ~ ~]
     ?:  =(-.ryt -.n.pig)
-      ?:  =(+.ryt +.n.pig)
-        pig
       [~(uni ry ryt n.pig) l.pig r.pig]
     ?:  (gor -.ryt -.n.pig)
       =.  l.pig  $(pig l.pig)
