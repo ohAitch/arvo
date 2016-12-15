@@ -46,8 +46,9 @@
       {$sith p/@p q/@uw r/?}                            ::
   ==                                                    ::
 ++  note-clay                                           ::
-  $%  {$merg p/@p q/@tas r/@p s/@tas t/case u/germ:^clay}::  merge desks
-      {$warp p/sock q/riff:^clay}                       ::  wait for clay hack
+  =,  ^clay                                             ::
+  $%  {$merg p/@p q/@tas r/@p s/@tas t/case u/germ}     ::  merge desks
+      {$warp p/sock q/riff}                             ::  wait for clay hack
   ==                                                    ::
 ++  note-dill                                           ::  note to self, odd
   $%  {$crud p/@tas q/(list tank)}                      ::
@@ -60,8 +61,13 @@
       {$verb $~}                                        ::  verbose mode
   ==                                                    ::
 ++  note-gall                                           ::
+  =,  ^gall                                             ::
   $%  {$conf dock $load ship desk}                      ::
-      {$deal p/sock q/cush:^gall}                       ::
+      {$deal p/sock q/cush}                             ::
+  ==                                                    ::
+++  note-jael                                           ::
+  =,  ^jael                                             ::
+  $%  {$init @pG arms:pki}                              ::
   ==                                                    ::
 ++  note                                                ::  out request $->
   $?  {?($a $b $c $e $f $g) $wegh $~}                   ::
@@ -69,7 +75,7 @@
       {$c note-clay}                                    ::
       {$d note-dill}                                    ::
       {$g note-gall}                                    ::
-      {$j $init ship}
+      {$j note-jael}                                    ::
   ==  ==                                                ::
 ++  sign-ames                                           ::
   $%  {$nice $~}                                        ::
@@ -84,8 +90,9 @@
   $%  {$blit p/(list blit)}                             ::
   ==                                                    ::
 ++  sign-gall                                           ::
-  $%  {$onto p/(each suss:^gall tang)}                  ::
-      {$unto p/cuft:^gall}                              ::
+  =,  ^gall                                             ::
+  $%  {$onto p/(each suss tang)}                        ::
+      {$unto p/cuft}                                    ::
   ==                                                    ::
 ++  sign                                                ::  in result $<-
   $?  {?($a $b $c $e $f $g) $mass p/mass}               ::
@@ -472,7 +479,8 @@
 ::      ~&  [%dill-flog +.q.hic]
     ?:  ?=({$crud $hax-init {$leaf *} $~} p.q.hic)
       =+  him=(slav %p (crip p.i.q.p.q.hic))
-      :_(..^$ [hen %slip %j %init him]~)
+      ?>  =(him our)
+      :_(..^$ [hen %slip %j %init ~sipnym-sipnym-sipnym-sipnym ~]~)
     ?:  ?=({$crud $hax-heft $~} p.q.hic)
       :_(..^$ ?~(hey.all ~ [u.hey.all %slip %d %heft ~]~))
     :_(..^$ ?~(hey.all ~ [u.hey.all %slip %d p.q.hic]~))

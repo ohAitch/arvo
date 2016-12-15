@@ -882,7 +882,7 @@
           pub/will                                      ::  their public keys
        ==                                               ::
     ++  gift                                            ::  out result <-$
-      $?  {$veil p/channel}                             ::  secure channel
+      $%  {$veil p/channel}                             ::  secure channel
           {$vest p/tally}                               ::  balance update
           {$vein p/life q/(map life ring)}              ::  private keys
           {$vine p/(list change)}                       ::  all raw changes
@@ -910,8 +910,7 @@
     ++  task                                             ::  in request ->$
       $%  {$burn p/ship q/safe}                          ::  destroy rights
           {$hail p/ship q/remote}                        ::  remote update
-          {$init p/@p}
-::         {$init p/@pG q/arms}                            ::  initialize urbit
+          {$init p/@pG q/arms}                           ::  initialize urbit
           {$meet p/(unit (unit ship)) q/farm}            ::  integrate pki from
           {$mint p/ship q/safe}                          ::  create rights
           {$move p/ship q/ship r/safe}                   ::  transfer from/to
@@ -4524,6 +4523,7 @@
       gift:able:^eyre
       gift:able:^ford
       gift:able:^gall
+      gift:able:^jael
   ==
 ++  task-arvo                                           ::  in request ->$
   $?  task:able:^ames
@@ -4533,6 +4533,7 @@
       task:able:^eyre
       task:able:^ford
       task:able:^gall
+      task:able:^jael
   ==
 ++  note-arvo                                           ::  out request $->
   $?  {@tas $meta vase}
@@ -4543,7 +4544,7 @@
       {$e task:able:^eyre}
       {$f task:able:^ford}
       {$g task:able:^gall}
-      {$j $init ship} :: XX actual jael tasks
+      {$j task:able:^jael} :: XX actual jael tasks
   ==  ==
 ++  sign-arvo                                           ::  in result $<-
   $%  {$a gift:able:^ames}

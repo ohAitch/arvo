@@ -952,9 +952,7 @@
     ::    {$init p/code q/arms}
     ::
         $init
-      =.  our  p.tac
-      (cure abet:abet:(make:(burb our) now.sys eny.sys (shaf %genr eny.sys) *arms))
-::       (cure abet:abet:(make:(burb our) now.sys eny.sys p.tac q.tac))
+      (cure abet:abet:(make:(burb our) now.sys eny.sys p.tac q.tac))
     ::
     ::  create promises
     ::    {$mint p/ship q/safe}
@@ -1126,7 +1124,7 @@
       =/  ruc  (~(get by car) who)
       =/  rec  
         ?~  ruc 
-           [`yen/(set duct)`[hen ~ ~] det=(veil:form who)]
+           [yen=`(set duct)`[hen ~ ~] det=(veil:form who)]
          u.ruc(yen (~(put in yen.u.ruc) hen))
       %_  ..feed
         moz  [[hen %give %veil det.rec] moz]
@@ -2082,9 +2080,10 @@
           ::  hic: event data
           ::
           hen/duct
-          hic/(hypo (hobo task))
+          hic/(hypo (hobo ?(task {$init @p})))
       ==
   =>  .(q.hic ?.(?=($soft -.q.hic) q.hic ((hard task) p.q.hic)))
+  ?<  ?=({$init @p} q.hic) :: XX conflict with ames
   ^-  {p/(list move) q/_..^$}
   =^  did  lex  abet:(~(call of [now eny] lex) hen q.hic)
   [did ..^$]
