@@ -939,9 +939,9 @@
           pla/@ud                                        ::  planets to send
           sta/@ud                                        ::  stars to send
       ==                                                 ::
-    ::                                                    ::
+    ::                                                   ::
     ++  reinvite  {tid/passcode inv/invite}              ::  new from old
-    ++  task                                         ::  manage ship %fungi
+    ++  task                                             ::  manage ship %fungi
       $%  {$claim aut/passcode her/@p tik/ticket}        ::  convert to %final
           {$bonus tid/passcode pla/@ud sta/@ud}          ::  supplement passcode
           {$invite tid/passcode inv/invite}              ::  alloc to passcode
@@ -1051,8 +1051,8 @@
     ++  rite                                            ::  urbit commitment
       $%  {$apple p/(map site @)}                       ::  web api key
           {$block $~}                                   ::  banned
-          {$email p/(set @t)}                            ::  email addresses
-          {$final p/@pG}                                 ::  recognize by ticket
+          {$email p/(set @t)}                           ::  email addresses
+          {$final p/@pG}                                ::  recognize by ticket
           {$fungi p/(map term @ud)}                     ::  fungibles
           {$guest $~}                                   ::  refugee visa
           {$hotel p/(map dorm pile)}                    ::  reserved block
