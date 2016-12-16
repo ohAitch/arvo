@@ -1873,14 +1873,13 @@
           ::  lub: merged deed
           ::
           =+  [hub lub]=[p q]:(grow-mate p.i.wap q.i.wap pre)
+          =:  pre  `dat.lub
+              rug  (~(put by rug) p.i.wap lub)
+              hab  (weld (flop hub) hab)
+            ==
           ?~  t.wap  ..grow
           ?>  =(p.i.t.wap +(p.i.wap))
-          %=  $
-            wap  t.wap
-            pre  `dat.lub
-            rug  (~(put by rug) p.i.wap lub)
-            hab  (weld (flop hub) hab)
-          ==
+          $(wap t.wap)
       ::                                                ::  grow-lick/ex:ur
       ++  grow-lick                                     ::  check signature
         |=  {pub/pass ash/@ val/@}
