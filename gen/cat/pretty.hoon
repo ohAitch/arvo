@@ -4,6 +4,7 @@
   ::
 /?    310
 ::
+=,    format
 |%
 ++  pretty-noun
   |=  pri/*  ^-  tank
@@ -24,7 +25,7 @@
 ++  pretty-file
   =+  wain-to-tang=|=(a/wain (turn a |=(b/cord leaf+(trip b))))
   |=  fyl/*  ^-  tang
-  =+  `(unit wain)`?@(fyl `(lore fyl) ((soft wain) fyl))
+  =+  `(unit wain)`?@(fyl `(to-wain fyl) ((soft wain) fyl))
   ?^  -  (wain-to-tang u)
   [(pretty-noun fyl)]~
 --
