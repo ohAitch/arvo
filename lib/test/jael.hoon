@@ -10,21 +10,25 @@
 ::::
   ::
 !.
-|_  {mow/(list move) err/tang}
+|_  {mow/(list move) err/(list tang)}
 ++  do-task
   |=  a/task:able:^jael.zuse
-  =/  may-call  
+  =/  try
     (mule |.(~|(task+a (call [/test-jael]~ %noun %soft a))))
-  ?.  ?=($& -.may-call)
-    +>.$(err (welp p.may-call leaf+"" err))
-  =^  mow-new  $.call  p.may-call
+  ?.  ?=($& -.try)
+    +>.$(err [p.try err])
+  =^  mow-new  $.call  p.try
   +>.$(mow (welp mow mow-new))
 ::
 ++  errs
   %-  flop  ^-  wall
   %-  zing  ^-  (list wall)
   %+  turn  err
-  |=(a/tank (wash 0^160 a))
+  |=  a/tang
+  %-  zing  ^-  (list wall)
+  :-  ~[""]
+  %+  turn  a
+  |=(b/tank (wash 0^160 b))
 ++  pass  |=(next/_. ?>(=(err err.next) next))
 ++  fail  |=(next/_. ?<(=(err err.next) next))
 ::
@@ -40,6 +44,24 @@
   ::
 ~&  >>  %init
 (pass (do-task %init ~sipnum (my giv+['pittyp' 'Pittyp'] ~)))
+~&  >>  %subscribe
+(pass (do-task %veil our))
+?>  ?=({{* $pass ^} {* $give $veil ^} $~} mow)
+=/  vel/channel  p.p.q.i.t.mow
+=/  cer/cert  q:(need ~(instant we `will`pub.vel))
+?>  =((my giv+['pittyp' 'Pittyp'] ~) nym.doc.dat.cer)
+..pass(mow ~)
+::
+(pass (do-task %vest ~))
+:: ?>  ?=({{* $give $vest ^} $~} mow)
+:: =/  ves/tally  p.q.i.mow
+:: ?>  ?=({$& $~ *} ves)
+:: =/  cer/cert  (need ~(current we (~(got by pub.q.p.ves) our))) 
+:: ?>  =((my giv+['pittyp' 'Pittyp'] ~) nym.cer)
+:: ..pass(mow ~)
+::
+(pass (do-task %vein ~))
+(pass (do-task %vine ~))
 ~&  >>  %fungi
 ?>  =((check-fungi our ~binzod) ~)
 (pass (do-task %mint ~binzod (my fungi+(my a+1 ~) ~)))
@@ -59,4 +81,4 @@
 ::
 ::::
   ::
-[lex mow=mow err=(lent errs)]
+[lex mow=mow err=(lent err)]
