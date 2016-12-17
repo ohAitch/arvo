@@ -9,6 +9,7 @@
 ::
 ::::
   ::
+!.
 |_  {mow/(list move) err/tang}
 ++  do-task
   |=  a/task:able:^jael.zuse
@@ -28,6 +29,11 @@
 ++  fail  |=(next/_. ?<(=(err err.next) next))
 ::
 ++  burb  ~(burb of [now eny] lex)
+++  check-fungi
+  |=  {src/ship dst/ship}  ^-  (map term @ud)
+  =+  %.(%fungi ~(expose up (lawn:(burb src) dst)))
+  ?~  -  ~
+  ?>(?=($fungi -.u) p.u)
 --
 ::
 ::::
@@ -35,18 +41,22 @@
 ~&  >>  %init
 (pass (do-task %init ~sipnum (my giv+['pittyp' 'Pittyp'] ~)))
 ~&  >>  %fungi
-?>  =(~ %.(our ~(del by shy:(burb our))))
+?>  =((check-fungi our ~binzod) ~)
 (pass (do-task %mint ~binzod (my fungi+(my a+1 ~) ~)))
-?>  =((my fungi+(my a+1 ~) ~) %.(~binzod ~(get ju shy:(burb our))))
+?>  =((check-fungi our ~binzod) (my a+1 ~))
 (fail (do-task %burn ~binzod (my fungi+(my a+2 ~) ~)))
 (fail (do-task %burn ~binzod (my fungi+(my b+1 ~) ~)))
 ::
 (pass (do-task %move ~binzod ~marzod (my fungi+(my a+1 ~) ~)))
 (fail (do-task %move ~binzod ~marzod (my fungi+(my a+1 ~) ~)))
-?>  =(~ %.(~binzod ~(get ju shy:(burb our))))
-?>  =((my fungi+(my a+1 ~) ~) %.(~marzod ~(get ju shy:(burb our))))
+?>  =((check-fungi our ~binzod) ~)
+?>  =((check-fungi our ~marzod) (my a+1 ~))
+(pass (do-task %mint ~marzod (my fungi+(my a+2 ~) ~)))
+?>  =((check-fungi our ~marzod) (my a+3 ~))
+(pass (do-task %burn ~marzod (my fungi+(my a+3 ~) ~)))
+?>  =((check-fungi our ~marzod) ~)
 ~&  >>  %done
 ::
 ::::
   ::
-[lex mow=mow err=errs]
+[lex mow=mow err=(lent errs)]
