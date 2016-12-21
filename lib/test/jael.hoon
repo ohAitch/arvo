@@ -47,6 +47,13 @@
 ++  check-gift  |=(a/mold (check-move {$give a}))
 ::
 ++  mo  |*({a/* b/*} (my [a b] ~))
+::
+++  test-cert
+  |=  who/@p  ^-  cert
+  =*  sign  sign:as:(nol:nu:crub `@`%test-key)
+  =|  new/cert
+  =/  lyf  1
+  new(syg (mo who [lyf (sign *@ (sham %urbit who lyf dat.new))]))
 --
 ::
 ::::
@@ -87,6 +94,15 @@
 (pass (do-task %burn ~marzod (mo %fungi (mo %a 3))))
 (check-gift {$vest $| ^})
 ?>  =((check-fungi our ~marzod) ~)
+?>  ?=($~ mow)
+::
+~&  >>  %meet
+(pass (do-task %meet ~ `farm`~))
+(pass (do-task %meet ~ (mo ~nec `will`~)))
+(fail (do-task %meet ~ (mo ~nec (mo 1 *cert))))
+(fail (do-task %meet ~ (mo ~nec (mo 2 (test-cert ~nec)))))
+(pass (do-task %meet ~ (mo ~nec (mo 1 (test-cert ~nec)))))
+?>  ?=($~ mow)
 ~&  >>  %done
 ::
 ::::
