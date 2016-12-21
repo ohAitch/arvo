@@ -9,7 +9,6 @@
 ::
 ::::
   ::
-!.
 |_  {mow/(list move) err/(list tang)}
 ++  do-task
   |=  a/task:able:^jael.zuse
@@ -29,8 +28,8 @@
   :-  ~[""]
   %+  turn  a
   |=(b/tank (wash 0^160 b))
-++  pass  |=(next/_. ?>(=(err err.next) next))
-++  fail  |=(next/_. ?<(=(err err.next) next))
+++  pass  !.  |=(next/_. ~|(errs:next(+.err ~) ?>(=(err err.next) next)))
+++  fail  !.  |=(next/_. ?<(=(err err.next) next))
 ::
 ++  burb  ~(burb of [now eny] lex)
 ++  check-fungi
