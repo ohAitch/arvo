@@ -432,6 +432,7 @@
               ?:  ?=($velo -.q.i.ova)
                 (fall (velo now t.ova ({@ @} +.q.i.ova)) [~ +>.^$])
               ?:  ?=(?($init $veal) -.q.i.ova)
+                ~&  boot+[-.q.i.ova (@p +.q.i.ova)]
                 =+  avo=$(ova t.ova, +>+.^$ (boot (@ +.q.i.ova)))
                 [[i.ova -.avo] +.avo]
               ?:  ?=($mass -.q.i.ova)
@@ -622,10 +623,12 @@
   =-  ?:(?=($| -.res) ((slog p.res) +>.$) p.res)
   ^=  res  %-  mule  |.
   ?:  =(%$ lal.fav)
-    ~&  [%tang pax.fav `@p`(mug txt.fav)]
+    ~&  [%tang urb=urb pax.fav `@p`(mug txt.fav)]
     =+  gen=(rain pax.fav txt.fav)
     =+  vax=(slap pit gen)
-    =+  orb=`@p`?~(urb 0xffff.ffff.ffff.ffff.ffff.ffff.ffff.ffff u.urb)
+    =/  orb/@p
+      ?^  urb  u.urb
+      ~&(%our-sentinel `@p`0xffff.eeee.ffff.ffff.ffff.ffff.ffff.ffff)
     +>.^$(bod `[[%cell [%face %our [%atom %p ~]] p.vax] [orb q.vax]])
   %_    +>.^$
       q.niz

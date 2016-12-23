@@ -1,4 +1,4 @@
-!:                                                      ::  /van/jael
+:: !:                                                      ::  /van/jael
 ::                                                      ::  %reference/0
 !?  150
 ::
@@ -527,6 +527,7 @@
       ::                                                ::  ++sub:ry
       ++  sub                                           ::  l - r
         ^-  (unit rite)
+        =-  ~&([%sub lef ryt -] -)
         =/  vid  dif
         ~|  vid
         ?>(?=($~ q.vid) p.vid)
@@ -613,6 +614,7 @@
   ::                                                    ::  ++sum:ry
   ++  sum                                               ::  lef new, ryt old
     ^-  rite
+    =-  ~&([%add lef ryt -] -)
     |^  ?-  -.lef
           $apple  ?>(?=($apple -.ryt) [%apple (table p.lef p.ryt)])
           $block  ?>(?=($block -.ryt) [%block ~])
@@ -643,8 +645,10 @@
     ++  noble                                           ::  union map of @ud
       |=  {new/(map term @ud) old/(map term @ud)}
       ^+  new
+      ~&  noble+[new old]
       %-  (~(uno by old) new)
       |=  (trel term @ud @ud)
+      ~&  +<
       (add q r)
     ::                                                  ::  ++ruble:uni:ry
     ++  ruble                                           ::  union map of maps
@@ -737,6 +741,7 @@
   ++  insert                                            ::  insert item
     |=  ryt/rite
     ^-  safe
+::     ~&  insert+[pig ryt]
     ?~  pig
       [ryt ~ ~]
     ?:  =(-.ryt -.n.pig)
@@ -810,6 +815,7 @@
   ++  splice                                            ::  pig plus gob
     |=  gob/safe
     ^-  safe
+    ~&  [%splice pig gob]
     =/  buv  (~(tap by gob))
     |-  ?~  buv  pig
         $(buv t.buv, pig (insert i.buv))
@@ -896,10 +902,13 @@
     |=  who/ship
     ~(able ~(ex ur urb) who)
   ::
-  ++  read-womb
+  ::                                                    ::  ++read-womb:of
+  ++  read-womb                                         ::  decode womb path
+    ~&  '++read-womb:of'
     =,  wired  :: XX ":eyre"
     =,  womb
     |=  pax/path  ^-  (unit scry:womb)
+    =-  ~&  read-womb+[pax -]  -
     ?~  pax  ~
     ?+    i.pax  ~
         $balance
@@ -933,6 +942,7 @@
             hen/duct
             tac/task
         ==
+    ~&  jael-call+our
     ^+  +>
     ?-    -.tac
     ::
@@ -1509,15 +1519,18 @@
   |%
   ::                                                    ::  ++abet:ur
   ++  abet                                              ::  resolve
+    ~&  '++abet:ur'
     [(flop hab) `state-absolute`urb]
   ::                                                    ::  ++boss:ur
   ++  boss                                              ::  parent
+    ~&  '++boss:ur'
     |=  who/ship                        
     ^-  ship
     -:(dads who)
   ::
   ++  dads                                              ::  ++dads:ur
     |=  who/ship                                        ::  lineage
+      ~&  '++dads:ur'
     ^-  (list ship)
     =/  ryg  (~(get by pug) who)
     ?~  ryg  (saxo who)
@@ -1526,21 +1539,25 @@
   ::
   ++  lawn                                              ::  ++lawn:ur
     |=  {rex/ship pal/ship}                             ::  debts, rex to pal
+      ~&  '++lawn:ur'
     ^-  safe
     (lawn:~(able ex rex) pal)
   ::                                                    ::  ++leak:ur
   ++  leak                                              ::  private key
+    ~&  '++leak:ur'
     |=  rex/ship
     ^-  (pair life ring)
     =/  lyn  lean:~(able ex rex)
     [p.lyn (~(got by q.lyn) p.lyn)]
   ::                                                    ::  ++lean:ur
   ++  lean                                              ::  private keys
+    ~&  '++lean:ur'
     |=  rex/ship
     ^-  (pair life (map life ring))
     lean:~(able ex rex)
   ::                                                    ::  ++meet:ur
   ++  meet                                              ::  calculate merge
+    ~&  '++meet:ur'
     |=  $:  ::  vie: authenticated source
             ::  cod: transmitted certificates
             ::
@@ -1557,34 +1574,41 @@
     ==
   ::                                                    ::  ++ex:ur
   ++  ex                                                ::  server engine
+::     ~&  '++ex:ur'
     ::  shy: private state
     ::  rug: domestic will
     ::
     =|  $:  shy/(map ship safe)
             rug/will
         ==
-    ~&  do-ex+[our pug]
+    ~&  do-ex+[our shy rug]
     =|  ::  rex: server ship
         ::
         rex/ship
     |%
     ::                                                  ::  ++abet:ex:ur
     ++  abet                                            ::  resolve
+      ~&  '++abet:ex:ur'
       %_  ..ex
         pry  (~(put by pry) rex shy)
         pug  (~(put by pug) rex rug)
       ==
     ::                                                  ::  ++able:ex:ur
     ++  able                                            ::  initialize
+::       ~&  '++able:ex:ur'
       %_  .
         shy  (fall (~(get by pry) rex) *(map ship safe))
         rug  (fall (~(get by pug) rex) *will)
       ==
     ::                                                  ::  ++deal:ex:ur
     ++  deal                                            ::  alter rights
+::       ~&  '++deal:ex:ur'
       |=  {pal/ship del/bump}
+      ~&  deal+[+<]
+::       =-  ~&(> '++deal:ex:ur' -)
       ^+  +>
       =/  gob  (fall (~(get by shy) pal) *safe)
+      ~|  [pal gob]
       =*  hep  (~(update up gob) del)
       %_  +>.$
         shy  (~(put by shy) pal hep)
@@ -1592,7 +1616,9 @@
       ==
     ::
     ++  hail                                            ::  ++hail:ex:ur
+      ~&  '++hail:ex:ur'
       |=  {pal/ship rem/remote}                         ::  report rights
+      =-  ~&(> '++hail:ex:ur' -)
       ^+  +>
       =/  gob  (fall (~(get by shy) pal) *safe)
       =/  yer  ^-  (pair bump safe)
@@ -1606,6 +1632,7 @@
       ==
     ::                                                  ::  ++lean:ex:ur
     ++  lean                                            ::  private keys
+      ~&  '++lean:ex:ur'
       ^-  (pair life (map life ring))
       ::
       ::  lyf: latest life of 
@@ -1619,11 +1646,13 @@
       [lyf p.jel]
     ::                                                  ::  ++lawn:ex:ur
     ++  lawn                                            ::  liabilities to pal
+      ~&  '++lawn:ex:ur'
       |=  pal/ship
       ^-  safe
       =-(?~(- ~ u.-) (~(get by shy) pal))
     ::                                                  ::  ++make:ex:ur
     ++  make                                            ::  initialize urbit
+      ~&  '++make:ex:ur'
       |=  $:  ::  now: date
               ::  eny: entropy
               ::  gen: bootstrap ticket
@@ -1634,6 +1663,8 @@
               gen/@pG
               nym/arms
           ==
+      ~&  '++make:ex:ur'
+      =-  ~&  >  '++make:ex:ur'  -
       ^+  +>
       ::
       ::  register generator as login secret
@@ -1690,8 +1721,11 @@
       (next (mix eny key) doc)      
     ::                                                  ::  ++next:ex:ur
     ++  next                                            ::  advance private key
+      ~&  '++next:ex:ur'
       |=  {eny/@e doc/bull}
+      =-  ~&  '++next:ex:ur'  -
       ^+  +>
+      ::  lyf: latest life of
       ::  loy: live keypair
       ::  rig: private key
       ::  ryt: private key as right
@@ -1738,7 +1772,7 @@
     ++  jaelwomb                                        ::  manage ship %fungi
       |=  taz/task:womb
       ^+  +>
-      ~&  [taz shy]
+      ~&  [rex taz shy]
       ?-    -.taz
       ::
       ::  create passcode balance
@@ -1796,6 +1830,7 @@
       (fall (~(div py a) b) [a *pile])
     ::                                                  ::  scry-womb:ex:ur
     ++  scry-womb                                       ::  read data
+      ~&  '++scry-womb:ex:ur'
       |=  req/scry:womb  ^-  (unit gilt:womb)
       ?-    -.req
       ::
@@ -1851,6 +1886,7 @@
       ==
     ::                                                  ::  grow:ex:ur
     ++  grow                                            ::  merge wills
+      ~&  '++grow:ex:ur'
       |=  $:  ::  vie: data source
               ::  cod: merge context
               ::  gur: input will
@@ -1859,6 +1895,8 @@
               cod/farm
               gur/will
           ==
+      ~&  grow+[gur rug]
+      =<  ~&  grown+rug  .
       ?:  |(=(~ gur) =(gur rug))  ..grow
       |^  ^+  ..grow
           ::
@@ -1889,6 +1927,7 @@
           $(wap t.wap)
       ::                                                ::  grow-lick/ex:ur
       ++  grow-lick                                     ::  check signature
+        ~&  '++grow-lick/ex:ur'
         |=  {pub/pass ash/@ val/@}
         ^-  ?
         =+  ver=(sure:as:(com:nu:crub pub) *code:^ames val)
@@ -1897,6 +1936,7 @@
         =(ash u.ver)
       ::                                                ::  grow-like/ex:ur
       ++  grow-like                                     ::  verify signature
+        ~&  '++grow-like/ex:ur'
         |=  {myn/mind ash/@ val/@}
         ^-  ?
         =:  ..able  able(rex who.myn)
@@ -1905,6 +1945,7 @@
         (grow-lick (grow-look lyf.myn) ash val)
       ::                                                ::  grow-look/ex:ur
       ++  grow-look                                     ::  load public key
+        ~&  '++grow-look/ex:ur'
         |=  lyf/life 
         ^-  @
         ::
@@ -1914,6 +1955,7 @@
             grow-look-find(rug gur)
         ::                                              ::  grow-look-find:ex:ur
         ++  grow-look-find                              ::  
+          ~&  '++grow-look-find:ex:ur'
           ^-  (unit @)
           ::
           ::  crash if this life is revoked
@@ -1924,6 +1966,7 @@
         --
       ::                                                ::  grow-mate/ex:ur
       ++  grow-mate                                     ::  merge lives
+        ~&  '++grow-mate/ex:ur'
         |=  $:  ::  num: life we're merging
                 ::  new: new deed
                 ::  pre: previous deed 
@@ -2084,6 +2127,7 @@
 |%
 ::                                                      ::  ++call
 ++  call                                                ::  request
+  ~&  '++call'
   |=  $:  ::  hen: cause of this event
           ::  hic: event data
           ::
@@ -2097,6 +2141,7 @@
   [did ..^$]
 ::                                                      ::  ++doze
 ++  doze                                                ::  await
+  ~&  '++doze'
   |=  $:  ::  now: current time
           ::  hen: cause (XX why we need this?)
           ::
@@ -2107,6 +2152,7 @@
   ~
 ::                                                      ::  ++load
 ++  load                                                ::  upgrade
+  ~&  '++load'
   |=  $:  ::  old: previous state
           ::
           old/state
@@ -2115,6 +2161,7 @@
   ..^$(lex old)
 ::                                                      ::  ++scry
 ++  scry                                                ::  inspect
+  ~&  '++scry'
   |=  $:  ::  fur: event security
           ::  ren: access mode
           ::  why: owner
@@ -2138,9 +2185,11 @@
   |=(a/gilt [-.a (slot 3 (spec !>(a)))])
 ::                                                      ::  ++stay
 ++  stay                                                ::  preserve
+  ~&  '++stay'
   lex
 ::                                                      ::  ++take
 ++  take                                                ::  accept
+  ~&  '++take'
   |=  $:  ::  tea: order
           ::  hen: cause
           ::  hin: result

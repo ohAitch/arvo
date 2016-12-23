@@ -153,8 +153,10 @@
 ::
 ++  check-old-ticket
   |=  {a/ship b/@pG}  ^-  (unit ?)
+  ~&  get-tik+[recycling (sein a)]
   %+  bind   (~(get by recycling) (sein a))
   |=  key/@  ^-  ?
+  ~&  [a=a b=b key=key]
   =(b `@p`(end 6 1 (shaf %tick (mix a (shax key)))))
 ::
 ::
@@ -162,6 +164,7 @@
   |=  tyl/path
   ^-  (unit (unit {$womb-ticket-info passcode ?($fail $good $used)}))
   ?.  ?=({@ @ $~} tyl)  ~|(bad-path+tyl !!)
+  ~&  peek-tik+tyl
   =+  [him tik]=(parse-ticket i.tyl i.t.tyl)
   %+  bind  (check-old-ticket him tik)
   |=  gud/?
