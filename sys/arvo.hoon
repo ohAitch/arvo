@@ -1,6 +1,6 @@
 ::                                                      ::
 ::::  6: layer six
-  !:
+  ::
 ~>  %slog.[0 leaf+"arvo-boot"]
 =<  |=  {now/@da ovo/*}
     ^-  *
@@ -280,7 +280,7 @@
       mev=(pal '*{$meta $vase}')
   ==
 ::
-++  is                                                  ::  operate in time
+++  is  !.                                              ::  operate in time
   |=  {vil/vile eny/@ bud/vase niz/(pair worm (list {p/@tas q/vase}))}
   |_  now/@da
   ++  beck
@@ -475,6 +475,7 @@
   =:  eny  yen
       q.niz  nyf
     ==
+  =.  urb  `~zod  :: XXX hack
   |-  ^+  [ova +>.^$]
   ?~  ova
     [~ +>.^$]
