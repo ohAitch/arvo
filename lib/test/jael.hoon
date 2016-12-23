@@ -74,6 +74,7 @@
 (pass (do-task %vine ~))
 ?>  ?=($~ mow)
 ::
+:: (pass (do-task %meet ~ (mo ~binzod (mo 1 (test-cert ~binzod)))))
 ~&  >>  %next
 (pass (do-task %next ~zod & (mo %giv ['pittyp' 'Pittyp'])))
 ~|  [lex mow=mow err=(lent err)]
@@ -110,9 +111,18 @@
 (fail (do-task %meet ~ (mo ~nec (mo 1 *cert))))
 (fail (do-task %meet ~ (mo ~nec (mo 2 (test-cert ~nec)))))
 (pass (do-task %meet ~ (mo ~nec (mo 1 (test-cert ~nec)))))
+(pass (do-task %meet ~ (mo ~nec (mo 1 (test-cert ~nec)))))
+(fail (do-task %meet ~ (mo ~nec (mo 1 (test-cert ~bud)))))
+?>  ?=($~ mow)
+::
+~&  >>  %nuke
+(pass (do-task %nuke ~))
+(pass (do-task %mint ~wanzod (mo %fungi (mo %a 2))))
+(pass (do-task %meet ~ (mo ~bud (mo 1 (test-cert ~bud)))))
 ?>  ?=($~ mow)
 ~&  >>  %done
 ::
 ::::
   ::
 [lex mow=mow err=(lent err)]
+
