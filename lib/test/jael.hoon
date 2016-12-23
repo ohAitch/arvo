@@ -38,7 +38,7 @@
   ?~  -  ~
   ?>(?=($fungi -.u) p.u)
 ::
-++  check-move
+++  check-move  !.
   |=  a/mold
   ?~  mow  ~|(%no-move !!)
   =/  b  ~|(bad-move+i.mow ((hard a) q.i.mow))
@@ -51,9 +51,9 @@
 ++  test-cert
   |=  who/@p  ^-  cert
   =*  sign  sign:as:(nol:nu:crub `@`%test-key)
-  =|  new/cert
+  =/  new  %*(. *cert dad.doc.dat (sein who))
   =/  lyf  1
-  new(syg (mo who [lyf (sign *@ (sham %urbit who lyf dat.new))]))
+  new(syg (mo (sein who) [lyf (sign *@ (sham %urbit who lyf dat.new))]))
 --
 ::
 ::::
@@ -73,6 +73,14 @@
 (check-gift {$vest $& $~ ^})
 (pass (do-task %vine ~))
 ?>  ?=($~ mow)
+::
+~&  >>  %next
+(pass (do-task %next ~zod & (mo %giv ['pittyp' 'Pittyp'])))
+~|  [lex mow=mow err=(lent err)]
+?>  ?=({{* $give $veil ^} $~} mow)
+=/  vel/channel  p.p.q.i.mow
+?>  =(2 p:(need ~(instant we `will`pub.vel)))
+..pass(mow ~)
 ::
 ~&  >>  %fungi
 ?>  =((check-fungi our ~binzod) ~)

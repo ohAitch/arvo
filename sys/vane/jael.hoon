@@ -1612,7 +1612,7 @@
       ::  par: promises by rex, to rex
       ::  jel: %jewel rights
       ::
-      =/  lyf  `life`?~(rug 1 (need ~(current we rug)))
+      =/  lyf  `life`(fall ~(current we rug) 1)
       =*  par  (~(got by shy) rex)
       =/  jel  `rite`(need (~(expose up par) %jewel))
       ?>  ?=($jewel -.jel)
@@ -1885,6 +1885,7 @@
         |=  {pub/pass ash/@ val/@}
         ^-  ?
         =+  ver=(sure:as:(com:nu:crub pub) *code:^ames val)
+        ?:  [stub=&]  &
         ?~  ver  |
         =(ash u.ver)
       ::                                                ::  grow-like/ex:ur
@@ -1994,6 +1995,7 @@
         ::  non-initial deeds must be signed by previous
         ::
         ?>  ?|  ?=($~ pre)
+            ::
                 =+  laz=(~(got by syg.new) rex)
                 ?>  =(p.laz (dec num))
                 (grow-lick pub.u.pre ash q.laz)
