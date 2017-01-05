@@ -1044,10 +1044,6 @@
           =*  cay  p.q.sih
           ?~  p.q.tee  [cay ..ya]
           (add-auth p.q.tee cay)  :: XX block on session save?
-        ?:  ?=($red-quri p.cay)
-          =+  url=(apex:earn ((hard quri) q.q.cay))
-          (give-thou 307 [location+(crip url)]~ ~)
-          :: (give-html:abet 200 ~ (redir:xml url))
         ?.  ?=($mime p.cay)
           =+  bek=(norm-beak -:(need (de-beam (need (puck p.tee)))))
           (exec-live ac+q.tee bek [%flag [p.sih `~] %cast %mime [%$ cay]])
@@ -1287,9 +1283,7 @@
       |=  {ses/(unit hole) dom/(unit @t) men/mend mar/mark arg/coin bem/beam}
       =+  wir=[%at (pack [- +]:(en-beam -.bem ~)) (fall ses %$) men ?~(dom ~ [u.dom]~)]
       =.  -.bem  (norm-beak -.bem)
-      =+  req=[%bake mar arg bem]
-      =+  red=[%bake %red-quri arg bem]
-      (exec-live wir -.bem `silk:^ford`[%alts ~[req red]])
+      (exec-live wir -.bem `silk:^ford`[%bake mar arg bem])
     ::
     ::
     ++  is-anon  =([~ ''] (~(get by (molt quy)) 'anon'))
