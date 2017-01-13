@@ -42,8 +42,8 @@
     ;script(type "text/javascript", src "{(cdnjs "jquery/2.1.3/jquery")}");
     ;script(type "text/javascript", src "{(maxcdn "bootstrap/3.3.6/js/bootstrap")}");
     ;script(type "text/javascript", src "{(cdnjs "lodash.js/2.4.1/lodash")}");
-    ;script(type "text/javascript", src "{(cdnjs "react/0.14.6/react")}");
-    ;script(type "text/javascript", src "{(cdnjs "react/0.14.6/react-dom")}");
+    ;script(type "text/javascript", src "https://unpkg.com/react@15/dist/react.js");
+    ;script(type "text/javascript", src "https://unpkg.com/react-dom@15/dist/react-dom.js");
     ;script(type "text/javascript", src "{(cdnjs "flux/2.1.1/Flux")}");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/".
