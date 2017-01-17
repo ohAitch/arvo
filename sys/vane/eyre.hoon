@@ -484,7 +484,7 @@
       urb.redirTo(location)
     }
     if(urb.foreign && urb.auth.indexOf(urb.ship) !== -1){
-      req("/~/auth.json?PUT",
+      req("/~/auth?PUT",
           {ship:urb.ship,code:null},
           function(){urb.redir()})
     }
@@ -495,13 +495,13 @@
       if(!urb.is_me(ship))
         return urb.redir(ship)
       req(
-        "/~/auth.json?PUT",
+        "/~/auth?PUT",
         {ship:ship, code:pass},
         function(){
           document.location.reload()
       })
     }
-    urb.away = function(){req("/~/auth.json?DELETE", {},
+    urb.away = function(){req("/~/auth?DELETE", {},
       function(){document.body.innerHTML = "" }
     )}
     '''
@@ -1460,9 +1460,9 @@
           :-  %auth
           |-  ^-  perk-auth
           ?+    p.pok  !!
-              $~         $(p.pok [~ %json])
+              {$~ $json}  $(p.pok ~)
               {$~ $js}    [%js ~]
-              {$~ $json}
+              $~
             ?+    mef  ~|(bad-meth+mef !!)
                 $get   [%json ~]
                 $put
