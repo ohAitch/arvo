@@ -273,7 +273,7 @@
 ::
 ++  add-links                                           :: x-urbit:// urls
   |=  a/wall  ^-  marl
-  ?.  [x-urbit-links=&]  [;/((of-wall a))]~             :: default disable
+  ?.  [x-urbit-links=|]  [;/((of-wall a))]~             :: default disable
   |-  ^-  marl
   ?~  a  ~
   =^  pax  i.a  ::  parse path if any
@@ -501,8 +501,12 @@
           document.location.reload()
       })
     }
-    urb.away = function(){req("/~/auth?DELETE", {},
-      function(){document.body.innerHTML = "" }
+    urb.logout = function(){req("/~/auth?DELETE", {},
+      function(){
+        document.querySelector('.col-md-10').innerHTML = "Logged out!"
+        var redirect = (new URL(document.location).searchParams).get("redirect")
+        if(redirect) document.location = redirect
+      }
     )}
     '''
   --
@@ -511,7 +515,7 @@
   ++  exit
     ;html
       ;head:title:"Accepted"
-      ;body:"You may now close this window."
+      ;body: You may now close this window.
     ==
   ::
   ++  redir
@@ -580,7 +584,7 @@
           ;div.row
             ;div.col-md-10
               ;h1.sign: Bye!
-              ;button#act(onclick "urb.away()"): Log out
+              ;button#act(onclick "urb.logout()"): Log out
               ;pre:code#err;
               ;script@"/~/at/~/auth.js";
             ==
@@ -1387,7 +1391,7 @@
         =+  but=t.t.q.pok                 ::  XX  =*
         ?+    pef  ~|(pfix-lost+`path`/~/[pef] !!)
             $debug  ((hard perk) [%bugs but])
-            $away  [%away ~]
+            $logout  [%away ~]
             $ac
           ?~  but  ~|(no-host+`path`/~/[pef] !!)
           =+  `dom/host`~|(bad-host+i.but (rash i.but thos:urlp))
@@ -1467,13 +1471,15 @@
                 $get   [%json ~]
                 $put
               ~|  parsing+bod
+              ~|  grab-json
               :-  %try
               %.(grab-json =>(dejs (ot ship+(su fed:ag) code+(mu so) ~)))
             ::
                 $delt
               ~|  parsing+bod
+              ~|  grab-json
               :-  %del
-              %.(grab-json =>(dejs-soft (ot ship+(su fed:ag))))
+              %.(grab-json $~) :: =>(dejs-soft (ot ship+(su fed:ag))))
         ==  ==
         ==
       --
