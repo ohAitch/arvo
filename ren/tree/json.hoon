@@ -8,6 +8,7 @@
 /=    dat    /^    tree-include    /tree-include/
 /=    kid    /^    (map knot tree-include)
              /_    /tree-include/
+=,  ^eyre
 =,  format
 =,  js:eyre
 =,  bytes:eyre
@@ -20,22 +21,30 @@
 ++  dict    |*(a/_* $^({a (dict a)} a))
 ++  plist   (list {term $@(mark plist)})
 ++  query
-  $%  {$kids p/(list query)}
-      {$name $t}
-      {$path $t}
-      {$spur $t}
+  $?  {$kids p/(list query)}
+      $name
+      $path
+      $spur
   ::
-      {$bump $t}
-      {$beak $t}
-      {$comt $j}
-      {$plan $j}
-      {$head $r}
-      {$sect $j}
-      {$snip $r}
-      {$body $r}
-      {$meta $j}
-      {$mime $m}
+      $bump
+      $beak
+      $comt
+      $plan
+      $head
+      $sect
+      $snip
+      $body
+      $meta
+      $mime
   ==
+::
+++  read-quay
+  |=  {a/@t b/@t}
+  ?.  ((sane %tas) a)  ~
+  %-  some
+  ?~  b  a
+  [a (rash b (more ace sym))]
+::
 ++  schema-to-plist                   :: pad improper list
   |=  a/schema  ^-  plist
   ?@(-.a [(to-item a) ~] [(to-item -.a) $(a +.a)])
@@ -56,25 +65,26 @@
   |=  {bem/beam quy/(list query)}
   =<  (jobe (turn quy .))
   |=  a/query
-  :-  -.a
-  ?-  -.a
-    $name  (from-type +.a ?^(s.bem i.s.bem q.bem))
-    $beak  (from-type +.a (crip (spud (en-beam bem(s /)))))
-    $path  (from-type +.a (crip (spud (flop s.bem))))
-    $spur  (from-type +.a (crip (spud s.bem)))
-    $bump  (from-type +.a bump.dat)
-    $plan  (from-type +.a plan.dat)
-    $comt  (from-type +.a comt.dat)
-    $head  (from-type +.a head.dat)
-    $snip  (from-type +.a snip.dat)
-    $sect  (from-type +.a sect.dat)
-    $meta  (from-type +.a meta.dat)
-    $mime  (from-type +.a mime.dat)
-    $body  (from-type +.a body.dat)
-    $kids  ?<  (~(has by (malt p.a)) %kids)  ::  XX recursion?
-           =<  o+(~(urn by kid) .)
-           |=  {dir/knot dak/tree-include}  ^-  json
-           ^^$(quy p.a, s.bem [dir s.bem], dat dak, kid ~)
+  :-  ?@(a a -.a)
+  ?-  a
+    $name  (from-type %t ?^(s.bem i.s.bem q.bem))
+    $beak  (from-type %t (crip (spud (en-beam bem(s /)))))
+    $path  (from-type %t (crip (spud (flop s.bem))))
+    $spur  (from-type %t (crip (spud s.bem)))
+    $bump  (from-type %t bump.dat)
+    $plan  (from-type %j plan.dat)
+    $comt  (from-type %j comt.dat)
+    $head  (from-type %r head.dat)
+    $snip  (from-type %r snip.dat)
+    $sect  (from-type %j sect.dat)
+    $meta  (from-type %j meta.dat)
+    $mime  (from-type %m mime.dat)
+    $body  (from-type %r body.dat)
+    {$kids *}
+      ?<  (lien p.a |=(query ?=({$kids *} +<)))  ::  XX recursion?
+      =<  o+(~(urn by kid) .)
+      |=  {dir/knot dak/tree-include}  ^-  json
+      ^^$(quy p.a, s.bem [dir s.bem], dat dak, kid ~)
   ==
 --
 ::
@@ -82,10 +92,9 @@
   ::
 =,  tree
 ^-  json
-=+  default='spur.t_body.r_comt.j_plan.j_beak.t_meta.j_kids_meta.j_head.r_bump.t'
-=+  ^=  schem
-    =+  seh=(fall (~(get by qix.gas) 'q') default)
-    ~|(bad-noun+seh ;;(schema (rash seh read-schem)))
 %+  from-queries  bem.gas
-~|  invalid-query+schem
-;;((list query) (schema-to-plist schem))
+=+  default=(quay ~[/spur /body /comt /plan /beak /meta kids+'meta head bump'])
+=/  seh/|-((list $@(term {term $})))
+  ~|(bad-quay+qix.gas (murn (~(tap by qix.gas)) read-quay))
+=.  seh  ?^(seh seh (murn default read-quay))
+~|(bad-noun+seh ;;((list query) seh))

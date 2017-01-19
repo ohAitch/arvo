@@ -2636,7 +2636,7 @@ module.exports = {
     if (query == null) {
       query = "no-query";
     }
-    url = (util.basepath(path)) + ".tree-json?q=" + (this.encode(query));
+    url = (util.basepath(path)) + ".tree-json?" + (this.encode(query));
     if (dedup[url]) {
       return;
     }
@@ -2675,38 +2675,46 @@ module.exports = {
       return urb.waspElem(a);
     }
   },
-  encode: function(obj) {
-    var _encode, delim;
-    delim = function(n) {
-      return Array(n + 1).join('_') || '.';
-    };
-    _encode = function(obj) {
-      var _dep, dep, k, res, sub, v;
-      if (typeof obj !== 'object') {
-        return [0, obj];
+  encode: function(list) {
+    var k, k2, v, v2;
+    list = (function() {
+      var obj, results;
+      results = [];
+      for (k in list) {
+        v = list[k];
+        if (_.isString(v)) {
+          results.push(k);
+        } else {
+          results.push((
+            obj = {},
+            obj["" + k] = (function() {
+              var results1;
+              results1 = [];
+              for (k2 in v) {
+                v2 = v[k2];
+                results1.push(k2);
+              }
+              return results1;
+            })(),
+            obj
+          ));
+        }
       }
-      dep = 0;
-      sub = (function() {
-        var ref, results;
-        results = [];
-        for (k in obj) {
-          v = obj[k];
-          ref = _encode(v), _dep = ref[0], res = ref[1];
-          if (_dep > dep) {
-            dep = _dep;
-          }
-          if (res != null) {
-            results.push(k + (delim(_dep)) + res);
-          } else {
-            results.push(void 0);
+      return results;
+    })();
+    return list.map((function(_this) {
+      return function(elem) {
+        var key;
+        if (_.isString(elem)) {
+          return elem;
+        } else {
+          for (key in elem) {
+            v = elem[key];
+            return key + "=" + elem[key].join('+');
           }
         }
-        return results;
-      })();
-      dep++;
-      return [dep, sub.join(delim(dep))];
-    };
-    return (_encode(obj))[1];
+      };
+    })(this)).join('&');
   }
 };
 
