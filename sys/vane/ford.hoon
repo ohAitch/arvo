@@ -1098,7 +1098,7 @@
       =+  (slap vax [%limb %garb])
       (fall ((soft (list mark)) q) ~)
     ::
-    ++  lima                                            ::  load at depth
+    ++  lima                                            ::  load beam
       ~/  %lima
       |=  {cof/cafe for/mark bem/beam}
       %+  (clef %bake)  (flag bem (fine cof for bem))
@@ -1116,16 +1116,6 @@
         (lace cof i.wuy bem)
       |=  {cof/cafe hoc/vase}
       (cope (lope cof i.wuy t.wuy hoc) (flux some))
-    ::
-    ++  lime                                            ::  load beam
-      |=  {cof/cafe for/mark arg/coin bem/beam}
-      ^-  (bolt vase)
-      %+  coop  (leap cof arg [-.bem /[for]/ren] bem)
-      |=  cof/cafe  ^-  (bolt vase)
-      %+  cope  (lima cof for bem)
-      |=  {cof/cafe vux/(unit vase)}
-      ?^  vux  (fine cof u.vux)
-      (flaw cof leaf+"ford: no {<for>} at {<(en-beam bem)>}" ~)
     ::
     ++  link                                            ::  translate
       ~/  %link
@@ -1272,10 +1262,21 @@
           $bake
         ^-  (bolt gage)
         %+  cool
-          |.(leaf+"ford: bake {<p.kas>} {<(en-beam r.kas)>} {~(rend co q.kas)}")
+          |.(leaf+"ford: bake {<p.kas>} {<(en-beam q.kas)>}")
+        %+  cope  (lamp cof q.kas)
+        |=  {cof/cafe bem/beam}
+        %+  cope  (lima cof p.kas bem)
+        |=  {cof/cafe vax/(unit vase)}
+        ?^  vax  (fine cof `gage`[%& p.kas u.vax])
+        (flaw cof leaf+"ford: no {<p.kas>} at {<(en-beam bem)>}" ~)
+      ::
+          $boil
+        ^-  (bolt gage)
+        %+  cool
+          |.(leaf+"ford: boil {<p.kas>} {<(en-beam r.kas)>} {~(rend co q.kas)}")
         %+  cope  (lamp cof r.kas)
         |=  {cof/cafe bem/beam}
-        %+  cope  (lime cof p.kas q.kas bem)
+        %+  cope  (leap cof q.kas [-.bem /[p.kas]/ren] bem)
         |=  {cof/cafe vax/vase}
         (fine cof `gage`[%& p.kas vax])
       ::
@@ -1653,7 +1654,8 @@
             $toy
           ?:  p.hon
             =?  arg  lit  many+~
-            (cope (make cof %bake q.hon arg how) furl)
+            =-  (cope - furl)
+            (make cof %alts [%boil q.hon arg how] [%bake q.hon how] ~)
           %+  cool  |.(leaf+"ford: hook {<q.hon>} {<(en-beam how)>}")
           %+  cope  (fade cof how)
           |=  {cof/cafe hyd/hood}

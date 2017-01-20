@@ -1287,7 +1287,8 @@
       |=  {ses/(unit hole) dom/(unit @t) men/mend mar/mark arg/coin bem/beam}
       =+  wir=[%at (pack [- +]:(en-beam -.bem ~)) (fall ses %$) men ?~(dom ~ [u.dom]~)]
       =.  -.bem  (norm-beak -.bem)
-      (exec-live wir -.bem `silk:^ford`[%bake mar arg bem])
+      %^  exec-live  wir  -.bem
+      `silk:^ford`[%alts [%boil mar arg bem] [%bake mar bem] ~]
     ::
     ::
     ++  is-anon  =([~ ''] (~(get by (molt quy)) 'anon'))
