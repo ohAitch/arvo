@@ -13,12 +13,14 @@
   |%
   ++  json
     |=  jon/^json  ^-  sole-action
-    %-  need  %.  jon
-    =>  [jo ..sole-action]
+    %.  jon
+    =>  [dejs:format ..sole-action:sole]
     |^  (fo %ret (of det+change ~))
     ++  fo
       |*  {a/term b/fist}
-      |=(c/json ?.(=([%s a] c) (b c) (some [a ~])))
+      |=  c/json
+      ?:  =([%s a] c)  [a ~]
+      (b c)
     ::
     ++  ra
       |*  {a/{term fist} b/fist}

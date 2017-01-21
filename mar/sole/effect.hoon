@@ -2,11 +2,14 @@
 ::::  /hoon/effect/sole/mar
   ::
 /?    310
-/-    sole
+/-    *sole
 ::
 ::::
   ::
-=,  sole
+=,  format
+=,  js:eyre
+=,  base64:eyre
+=,  ^dill
 |%
 ++  mar-sole-change                       ::  XX  dependency
   |_  cha/sole-change
@@ -48,7 +51,7 @@
   ++  lens-json                       :: json for cli client
     ^-  ?($~ ^json)                   :: null = ignore
     ?+    -.sef  ~
-        $tan  s+(role (turn (flop p.sef) |=(a/tank (crip ~(ram re a)))))
+        $tan  s+(of-wain (turn (flop p.sef) |=(a/tank (crip ~(ram re a)))))
         $txt  s+(crip p.sef)
         $sav
       (jobe file+s+(crip <`path`p.sef>) data+s+(crip (sifo q.sef)) ~)
