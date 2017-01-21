@@ -97,7 +97,7 @@
       {$ire p/hole q/ixor $~}
       {$liv p/hole q/ixor $~}
   ==
-++  whir-ac  {p/?($$ hole) q/mend r/$@($~ {p/@t $~})}   ::  auth? filter cookie?
+++  whir-ac  {p/mend q/?($$ hole) r/$@($~ {p/@t $~})}   ::  auth? filter cookie?
 ++  whir-of  {p/knot:ship q/term s/wire}                ::  path in dock
 ++  whir-se  ?($core vi-arm)                            ::  build/call
 ++  vi-arm
@@ -166,11 +166,11 @@
       {$away $~}
       {$oath p/knot q/(list @t)}
       {$bugs p/?($as $to) $~}
-      {$beam p/beam}
+      {$read p/mark q/$^(beam spur)}
+      {$rend p/mark q/$^(beam spur)}
       {$deps p/?($put $delt) q/@uvH}
       {$mess p/{dock mark wire s/json}}
       {$poll p/{i/@uvH t/(list @uvH)}}
-      {$spur p/spur}
       {$subs p/?($put $delt) q/{dock $json wire path}}
       {$view p/ixor q/{$~ u/@ud}}
   ==
@@ -188,7 +188,8 @@
   $@  $~
   $%  {$$ p/httr}                                       ::  direct response
       {$red $~}                                         ::  parent redirect
-      {$bake p/mend q/mark r/coin s/beam}               ::  ford request
+      {$bake p/mend q/mark r/beam}                      ::  ford request
+      {$boil p/mend q/mark r/coin s/beam}               ::  ford ren request
       {$js p/@t}                                        ::  script
       {$json p/json}                                    ::  data
       {$html p/manx}                                    ::  successful page
@@ -1046,8 +1047,8 @@
           (fail 404 p.sih p.q.sih)
         =^  cay  ..ya  ::  inject stat-json
           =*  cay  p.q.sih
-          ?~  p.q.tee  [cay ..ya]
-          (add-auth p.q.tee cay)  :: XX block on session save?
+          ?~  q.q.tee  [cay ..ya]
+          (add-auth q.q.tee cay)  :: XX block on session save?
         ?.  ?=($mime p.cay)
           =+  bek=(norm-beak -:(need (de-beam (need (puck p.tee)))))
           (exec-live ac+q.tee bek [%flag [p.sih `~] %cast %mime [%$ cay]])
@@ -1064,7 +1065,7 @@
     ==
   ::
   ++  give-mime
-    |=  {{ses/?($~ hole) men/mend dom/?($~ {p/@t $~})} dep/@uvH cay/cage}
+    |=  {{men/mend ses/?($~ hole) dom/?($~ {p/@t $~})} dep/@uvH cay/cage}
     ^+  +>.$
     ?>  ?=($mime -.cay)
     ~|  q.q.cay
@@ -1271,7 +1272,8 @@
           $json  (give-json 200 cug p.pez)
           $html  (give-html 200 cug p.pez)
           $htme  (give-html 401 cug p.pez)
-          $bake  (resolve-bake ~ ~ +.pez)
+          $bake  (resolve-bake /'' +.pez)
+          $boil  (resolve-boil /'' +.pez)
       ::
           $red
         =+  url=(earn hat pok(p [~ %html]) quy)
@@ -1284,11 +1286,17 @@
       ==
     ::
     ++  resolve-bake
-      |=  {ses/(unit hole) dom/(unit @t) men/mend mar/mark arg/coin bem/beam}
-      =+  wir=[%at (pack [- +]:(en-beam -.bem ~)) (fall ses %$) men ?~(dom ~ [u.dom]~)]
+      |=  {wir/_+:*whir-ac men/mend mar/mark bem/beam}
+      =+  wir=[%at (pack [- +]:(en-beam -.bem ~)) men wir]
       =.  -.bem  (norm-beak -.bem)
       %^  exec-live  wir  -.bem
-      `silk:^ford`[%alts [%boil mar arg bem] [%bake mar bem] ~]
+      `silk:^ford`[%alts [%boil mar *coin bem] [%bake mar bem] ~]
+    ::
+    ++  resolve-boil
+      |=  {wir/_+:*whir-ac men/mend mar/mark arg/coin bem/beam}
+      =+  wir=[%at (pack [- +]:(en-beam -.bem ~)) men wir]
+      =.  -.bem  (norm-beak -.bem)
+      (exec-live wir -.bem `silk:^ford`[%boil mar arg bem])
     ::
     ::
     ++  is-anon  =([~ ''] (~(get by (molt quy)) 'anon'))
@@ -1338,11 +1346,11 @@
             ?.  check-oryx
               ~|(%bad-oryx ~|([grab-oryx ses:for-client] !!))
             [%& u.hem]
-          =+  bem=as-beam
-          ?^  bem  [%& %beam u.bem]
-          ?:  is-spur
-            [%& %spur (flop q.pok)]
-          ~|(strange-path+q.pok !!)
+          ?^  p.pok  [%& %read u.p.pok as-path]
+          ?~  q.pok  [%& %rend %urb as-path]
+          =/  ren  (rush i.q.pok ;~(pfix cab sym))
+          ?~  ren  [%& %rend %urb as-path]
+          [%& %rend u.ren as-path(q.pok t.q.pok)]
       ::
       ++  as-magic-filename
         ^-  (unit httr)
@@ -1362,6 +1370,13 @@
         ==
       ::
       ++  is-spur  |(?~(q.pok & ((sane %ta) i.q.pok)))
+      ++  as-path
+        ^-  $^(beam spur)
+        =+  bem=as-beam
+        ?^  bem  u.bem
+        ?:  is-spur  (flop q.pok)
+        ~|(strange-path+q.pok !!)
+      ::
       ++  as-beam                                       :: /~sipnym/desk/3/...
         ^-  (unit beam)
         =+  =<  tyk=(drop-list (turn q.pok .))          :: a path whose elements
@@ -1507,15 +1522,17 @@
       ?-    -.hem
           $auth  (process-auth p.hem)
           $away  [%& %html logout-page:xml]
-          ?($beam $spur)
+          ?($read $rend)
         =^  payload  mef  process-payload
-        =+  ext=(fall p.pok %urb)
-        =+  bem=?-(-.hem $beam p.hem, $spur [-.top (weld p.hem s.top)])
+        =+  bem=?-(q.hem {^ *} q.hem, * [-.top (weld q.hem s.top)])
         ~|  bad-beam+q.bem
         ?<  =([~ 0] (sky [151 %noun] %cw (en-beam bem(+ ~, r [%da now]))))
         =+  men=?+(mef !! $get mef, $head mef)  :: redact result
         =+  arg=(fcgi payload fcgi-cred)
-        =+  [%bake men ext arg bem]
+        =+  ?-  -.hem
+              $read  [%bake men p.hem bem]  :: XX error on arg?
+              $rend  [%boil men p.hem arg bem]
+            ==
         ?.(aut [%& `pest`-] [%| `_done`(resolve ~ -)])
       ::
           $bugs
@@ -1585,7 +1602,11 @@
             $red  pez
             $bake
           =.  ya  abet.yac
-          [%| (resolve-bake `ses.yac dom.yac +.p.pez)]
+          [%| (resolve-bake [ses.yac (drop dom.yac)] +.p.pez)]
+        ::
+            $boil
+          =.  ya  abet.yac
+          [%| (resolve-boil [ses.yac (drop dom.yac)] +.p.pez)]
         ::
             $js
           =/  cug  (set-cookie -):yac

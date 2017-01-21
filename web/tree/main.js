@@ -2636,7 +2636,7 @@ module.exports = {
     if (query == null) {
       query = "no-query";
     }
-    url = (util.basepath(path)) + ".tree-json?" + (this.encode(query));
+    url = "/_tree-json" + (util.basepath(path)) + "?" + (this.encode(query));
     if (dedup[url]) {
       return;
     }
