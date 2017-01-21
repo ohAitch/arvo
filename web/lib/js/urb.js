@@ -127,7 +127,7 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
   if(!params.mark) throw new Error("You must specify a mark for urb.send.")
   if(!params.appl) throw new Error("You must specify an appl for urb.send.")
 
-  url = ["to",params.appl,params.mark]
+  url = ["send",params.appl,params.mark]
   url = "/~/"+url.join("/")
 
   // $send.seqn++
@@ -165,7 +165,7 @@ window.urb.poll = function(params) {
   seqn = this.poll.seqn
   if(params.seqn) seqn = params.seqn()
 
-  url = "/~/of/"+this.ixor+"?poll="+seqn
+  url = "/~/events/"+this.ixor+"?step="+seqn
 
   this.puls = true
 
@@ -236,7 +236,7 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
 
   if(params.mark !== "json")
     throw new Error("Non-json subscriptions unimplemented.")  //  XX
-  url = "/~/is/"+this.gsig(params)+"."+params.mark
+  url = "/~/subscriptions/"+this.gsig(params)+"."+params.mark
 
   params.path = params.wire
   this.cabs[this.gsig(params)] = cb

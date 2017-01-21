@@ -595,8 +595,8 @@
   ::
   ++  poke-test
     %+  titl  'Poke'
-    ;=  ;button(onclick "urb.testPoke('/~/to/hood/helm-hi.json')"): Hi anonymous
-        ;button(onclick "urb.testPoke('/~/as/own/~/to/hood/helm-hi.json')"): Hi
+    ;=  ;button(onclick "urb.testPoke('/~/send/hood/helm-hi.json')"): Hi anonymous
+        ;button(onclick "urb.testPoke('/~/as/own/~/send/hood/helm-hi.json')"): Hi
         ;pre:code#err;
         ;script@"/~/at/~/auth.js";
         ;script:'''
@@ -1439,12 +1439,12 @@
           =<  ?~(. !! .)
           (turn dep |=({a/@tas $~} (slav %uv a)))
         ::
-            $of
+            $events
           :+  %view  ?>(?=({@ $~} but) i.but)
-          ?>  ?=({{$poll @} $~} quy)     ::  XX eventsource
+          ?>  ?=({{$step @} $~} quy)     ::  XX eventsource
           [~ (rash q.i.quy dem)]
         ::
-            $to
+            $send
           =+  ^-  dir/{p/ship q/term r/mark}
               ~|  bad-mess+but
               ?+  but  !!
@@ -1462,7 +1462,7 @@
           ?>  &(?=(?($delt $put) mef) ?=($@($~ {$~ $json}) p.pok))
           [%deps mef (raid but %uv ~)]
         ::
-            $is
+            $subscriptions
           ?~  but
             ~|(no-app+but=but !!)
           |-  ^-  perk
