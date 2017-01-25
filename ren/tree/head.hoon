@@ -16,7 +16,6 @@
       |=  gas/epic:^eyre  ^-  {? ?}                     :: check if the query
       :-  (~(has by qix.gas) 'dbg.nopack')              :: dictates separate files
       (~(has by qix.gas) 'dbg.nomin')                   :: and/or unminified assets
-::
 |%
 ++  cdnjs
   |=(a/tape "//cdnjs.cloudflare.com/ajax/libs/{a}{?:(nomin.dbg "" ".min")}.js")
@@ -43,8 +42,8 @@
     ;script(type "text/javascript", src "{(cdnjs "jquery/2.1.3/jquery")}");
     ;script(type "text/javascript", src "{(maxcdn "bootstrap/3.3.6/js/bootstrap")}");
     ;script(type "text/javascript", src "{(cdnjs "lodash.js/2.4.1/lodash")}");
-    ;script(type "text/javascript", src "{(cdnjs "react/0.14.6/react")}");
-    ;script(type "text/javascript", src "{(cdnjs "react/0.14.6/react-dom")}");
+    ;script(type "text/javascript", src "https://unpkg.com/react@15/dist/react.js");
+    ;script(type "text/javascript", src "https://unpkg.com/react-dom@15/dist/react-dom.js");
     ;script(type "text/javascript", src "{(cdnjs "flux/2.1.1/Flux")}");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/".
@@ -56,7 +55,7 @@
 ::                                             "/_js/===/web/pack/js/tree-hoon-urb");
         ;=
 ::           ;script(type "text/javascript", src "/===/web/lib/js/hoon.js");
-          ;script(type "text/javascript", src "/===/web/tree/main.js");
+          ;script(type "text/javascript", src "/===/web/tree/bundle.js");
           ;script(type "text/javascript", src "{?.(aut "" "/~~/~/at")}".
                                               "/===/web/lib/js/urb.js");
         ==
