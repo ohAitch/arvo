@@ -293,8 +293,10 @@
       ;link(rel "stylesheet", href "/lib/base.css");
       ;title: server error
     ==
-    ;body:div#c.err:pre:code:"*{(add-links (wush 80 tan))}"
-    ;script@"/~/on/{<dep>}.js";
+    ;body
+      ;div: Server error
+      ;div#c.err:pre:code:"*{(add-links (wush 80 tan))}"
+    ==
   ==
 ::
 ++  favi                                                ::  XX favicon
