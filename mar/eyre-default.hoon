@@ -2,7 +2,7 @@
 ::::  /hoon/urb/mar
   ::
 /?    310
-/=  urb-wasp-data-js    /:    /%/wasp-data    /js/
+/=    dependency-poll-js    /:    /%/dependency-poll    /js/
 =,  js:eyre
 =,  xml:eyre
 =,  bytes:eyre
@@ -23,7 +23,7 @@
         ;*  bod
         ;*  ?~  dep  ~
             :~  ;script(urb_injected "")
-                  ;-  (trip urb-wasp-data-js)
+                  ;-  (trip dependency-poll-js)
                   ;  urb.addDependency("{<dep>}")
                   ;  urb.addDependency("{<dep-bod>}", 'data')
                   ;  setTimeout(urb.initDependencies, 2000)
