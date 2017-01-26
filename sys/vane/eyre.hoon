@@ -421,7 +421,7 @@
     var req = function(url,dat,cb){
       var xhr = new XMLHttpRequest()
       xhr.open('POST', url, true)
-      dat.oryx = urb.oryx
+      dat.token = urb.token
       xhr.send(JSON.stringify(dat))
       xhr.addEventListener('load', function(ev){
         if(this.status !== 200)
@@ -560,7 +560,7 @@
         ;script:'''
                 show = function(t){err.innerText = ":) " + Date.now() + "\n" + t}
                 urb.testPoke = function(url){
-                  req(url,{wire:"/",xyro:'test'}, show)
+                  req(url,{responseKey:"/",body:'test'}, show)
                 }
                 '''
     ==
@@ -1290,9 +1290,9 @@
     ::
     ++  grab-oryx
       ^-  (unit oryx)
-      =+  oxe=(biff grab-json-soft =>(dejs-soft (ot oryx+so ~)))
+      =+  oxe=(biff grab-json-soft =>(dejs-soft (ot 'token'^so ~)))
       ?^  oxe  oxe
-      (~(get by (molt quy)) %oryx)
+      (~(get by (molt quy)) %token)
     ::
     ::
     ++  parse
@@ -1411,9 +1411,9 @@
               ==
           =;  x/{wir/wire mez/json}
             [%mess [p q]:dir r.dir wir.x mez.x]
-          =+  wir=(~(get by (molt quy)) 'wire')
+          =+  wir=(~(get by (molt quy)) 'responseKey')
           ?^  wir  [(stab u.wir) grab-json]          ::  XX distinguish
-          %.(grab-json =>(dejs (ot wire+(cu stab so) xyro+same ~)))
+          %.(grab-json =>(dejs (ot 'responseKey'^(cu stab so) body+same ~)))
         ::
             $in
           ~|  expect+[%post 'application+json' /'@uv' '?PUT/DELETE']
@@ -1431,7 +1431,7 @@
             $(but [(scot %p our) but])
           ?>  ?=(?($delt $put) mef)
           =+  :-  hap=[(slav %p i.but) (slav %tas -.t.but)]
-              wir=%.(grab-json =>(dejs (ot wire+(cu stab so) ~)))
+              wir=%.(grab-json =>(dejs (ot 'responseKey'^(cu stab so) ~)))
           [%subs mef hap u.p.pok wir +.t.but]
         ::
             $auth
@@ -1672,8 +1672,8 @@
       =^  orx  ..ya  new-view
       :_  ..ya
       %-  jobe  :~
-        oryx+s+orx
-        ixor+s+(oryx-to-ixor orx)
+        token+s+orx
+        'eventStream'^s+(oryx-to-ixor orx)
         sein+(jape +:<(sein:title our)>)
         ship+(jape +:<our>)
         user+(jape +:<(fall get-user anon)>) :: XX crash on unsaved session?
@@ -1807,8 +1807,8 @@
     ++  subs-to-json
       |=  {a/dock b/path}
       %-  jobe  :~
+        app+[%s q.a]
         ship+[%s (rsh 3 1 (scot %p p.a))]
-        appl+[%s q.a]
         path+(jape (spud b))
       ==
     ::

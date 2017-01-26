@@ -1,5 +1,5 @@
 window.urb = window.urb || {}
-window.urb.appl = window.urb.appl || null
+window.urb.app = window.urb.app || null
 
 window.urb.init = function(onload){ // XX proper class?
   onload = onload || function(){}
@@ -16,7 +16,7 @@ window.urb.init = function(onload){ // XX proper class?
   }
   document.body.appendChild(s)
 }
-window.urb.init.loaded = window.urb.oryx
+window.urb.init.loaded = !!window.urb.token
 
 window.urb.req = function(method,url,params,json,cb) {
   var xhr = new XMLHttpRequest()
@@ -30,14 +30,10 @@ window.urb.req = function(method,url,params,json,cb) {
 
   xhr.timeout = 60000
 
-  if(!window.urb.oryx) throw "No CSRF token" // XX fetch auth.json
-  _data = {oryx: window.urb.oryx}
-  if(params.xyro) { _data.xyro = params.xyro; }
-  if(params.ship) { _data.ship = params.ship; }
-  if(params.path) { _data.path = params.path; }
-  if(params.appl) { _data.appl = params.appl; }
-  if(params.mark) { _data.mark = params.mark; }
-  if(params.wire) { _data.wire = params.wire; }
+  if(!window.urb.token) throw "No CSRF token" // XX fetch auth.json
+  _data = {token: window.urb.token}
+  if(params.body) { _data.body = params.body; }
+  if(params.responseKey) { _data.responseKey = params.responseKey; }
   if(cb) {
     xhr.onload = function() {
       var err,res
@@ -117,17 +113,17 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
 
   params.data = data
   params.ship = params.ship || this.ship
-  params.appl = params.appl || this.appl
+  params.app = params.app || this.app
   params.mark = params.mark || $send.mark
   // params.seqn = params.seqn || $send.seqn
-  params.wire = params.wire || "/"
-  params.xyro = (typeof(params.data) === 'undefined') ? null : params.data
+  params.responseKey = params.responseKey || "/"
+  params.body = (typeof(params.data) === 'undefined') ? null : params.data
 
 
   if(!params.mark) throw new Error("You must specify a mark for urb.send.")
-  if(!params.appl) throw new Error("You must specify an appl for urb.send.")
+  if(!params.app) throw new Error("You must specify an app for urb.send.")
 
-  url = ["send",params.appl,params.mark]
+  url = ["send",params.app,params.mark]
   url = "/~/"+url.join("/")
 
   // $send.seqn++
@@ -136,7 +132,7 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
     /* if(err) { $send.seqn--; }
     else */ if(data && data.data.fail && urb.wall !== false && params.wall !== false) {
       document.location = "#ERROR"
-      document.write("<pre>"+JSON.stringify(params.xyro)+"\n"
+      document.write("<pre>"+JSON.stringify(params.body)+"\n"
                             +data.data.mess+"</pre>") // XX
     }
     if(cb) { cb.apply(this,arguments); }
@@ -151,7 +147,7 @@ window.urb.gsig = function(params) {
   if(!path) path = ""
   if(path[0] !== "/") path = "/"+path
   return  "~"+params.ship+"/"+
-          params.appl+
+          params.app+
           path.replace(/[^\x00-\x7F]/g, "")
 }
 
@@ -165,7 +161,7 @@ window.urb.poll = function(params) {
   seqn = this.poll.seqn
   if(params.seqn) seqn = params.seqn()
 
-  url = "/~/events/"+this.ixor+"?step="+seqn
+  url = "/~/events/"+this.eventStream+"?step="+seqn
 
   this.puls = true
 
@@ -223,13 +219,13 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
   params.path = path
   if(params.path[0] !== "/") params.path = "/"+params.path
   params.ship = params.ship || this.ship
-  params.appl = params.appl || this.appl
+  params.app = params.app || this.app
   params.mark = params.mark || this.bind.mark
-  params.wire = params.wire || params.path
+  params.responseKey = params.responseKey || params.path
 
   if(typeof path != "string")
     throw new Error("You must specify a string path for urb.bind.")
-  if(!params.appl) throw new Error("You must specify an appl for urb.bind.")
+  if(!params.app) throw new Error("You must specify an app for urb.bind.")
   if(!cb) throw new Error("You must supply a callback to urb.bind.")
 
   var method, perm, url, $this
@@ -238,7 +234,7 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
     throw new Error("Non-json subscriptions unimplemented.")  //  XX
   url = "/~/subscriptions/"+this.gsig(params)+"."+params.mark
 
-  params.path = params.wire
+  params.path = params.responseKey
   this.cabs[this.gsig(params)] = cb
 
   $this = this
@@ -258,12 +254,12 @@ window.urb.drop = function(path, params, cb){  // or drop(path,cb)
   params.path = path
   if(params.path[0] !== "/") params.path = "/"+params.path
   params.ship = params.ship || this.ship
-  params.appl = params.appl || this.appl
-  params.wire = params.wire || params.path
+  params.app = params.app || this.app
+  params.responseKey = params.responseKey || params.path
 
   if(typeof path != "string")
     throw new Error("You must specify a string path for urb.drop.")
-  if(!params.appl) throw new Error("You must specify an appl for urb.drop.")
+  if(!params.app) throw new Error("You must specify an app for urb.drop.")
 
   url = "/~/is/"+this.gsig(params)+".json"
   method = "delete"

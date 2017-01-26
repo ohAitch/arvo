@@ -338,7 +338,7 @@ module.exports = recl({
   _handleAudi: function(e) {
     var audi;
     audi = _.map($(e.target).closest('.path').find('div'), function(div) {
-      return "~" + $(div).text();
+      return $(div).text();
     });
     return this.props._handleAudi(audi);
   },
@@ -690,7 +690,7 @@ module.exports = recl({
     return StationActions.setAudience(audi);
   },
   render: function() {
-    var _messageGroups, _messages, audience, body, canvas, context, fetching, height, i, index, lastIndex, lastSaid, len, lineNums, marginTop, message, messageHeights, messages, mez, nowSaid, ref, sameAs, speech, speechArr, speechLength, station;
+    var _messageGroups, _messages, audience, body, canvas, computedHeights, context, fetching, height, i, index, lastIndex, lastSaid, len, lineNums, marginTop, message, messageHeights, messages, mez, nowSaid, ref, sameAs, speech, speechArr, speechLength, station;
     station = this.state.station;
     messages = this.sortedMessages(this.state.messages);
     this.last = messages[messages.length - 1];
@@ -712,6 +712,7 @@ module.exports = recl({
     context = canvas.getContext('2d');
     speechLength = $('.grams').width() - (FONT_SIZE * 1.875);
     _messageGroups = [[]];
+    computedHeights = [];
     for (index = i = 0, len = messages.length; i < len; index = ++i) {
       message = messages[index];
       nowSaid = [message.ship, _.keys(message.thought.audience)];
@@ -769,7 +770,7 @@ module.exports = recl({
         glyph: this.state.glyph[audience] || this.props['default-glyph'],
         unseen: lastIndex && lastIndex === index
       }));
-      mez.computedHeight = height + marginTop;
+      computedHeights.push(height + marginTop);
       if (sameAs) {
         _messageGroups[0].push(mez);
       } else {
@@ -784,7 +785,7 @@ module.exports = recl({
       body = rele(Infinite, {
         useWindowAsScrollContainer: true,
         containerHeight: window.innerHeight,
-        elementHeight: _.map(_messages, 'computedHeight'),
+        elementHeight: computedHeights,
         key: "messages-infinite"
       }, _messages);
     } else {
@@ -1462,7 +1463,7 @@ module.exports = _.extend(new Flux.Dispatcher(), {
 
 
 },{}],10:[function(require,module,exports){
-var MessageListComponent, StationActions, StationComponent, TreeActions, WritingComponent, div, link, ref, util;
+var MessageListComponent, StationActions, StationComponent, Store, Talk, TreeActions, WritingComponent, div, link, ref, util;
 
 util = require('./util.coffee');
 
@@ -1475,7 +1476,9 @@ _.merge(window, {
 
 StationActions = require('./actions/StationActions.coffee');
 
-TreeActions = window.tree.actions;
+Store = window.tree.util.store;
+
+TreeActions = window.tree.util.actions;
 
 setInterval((function() {
   window.talk.online = window.urb.poll.dely < 500;
@@ -1494,7 +1497,7 @@ WritingComponent = React.createFactory(require('./components/WritingComponent.co
 
 ref = React.DOM, div = ref.div, link = ref.link;
 
-TreeActions.registerComponent("talk", React.createClass({
+Talk = React.createClass({
   displayName: "talk",
   getStation: function() {
     return this.props.station || util.defaultStation();
@@ -1531,9 +1534,11 @@ TreeActions.registerComponent("talk", React.createClass({
       key: "talk-container"
     }, children);
   }
-}));
+});
 
-TreeActions.registerComponent("talk-station", StationComponent);
+Store.dispatch(TreeActions.registerComponent("talk", Talk));
+
+Store.dispatch(TreeActions.registerComponent("talk-station", StationComponent));
 
 
 },{"./actions/StationActions.coffee":2,"./components/MessageListComponent.coffee":6,"./components/StationComponent.coffee":7,"./components/WritingComponent.coffee":8,"./util.coffee":15}],11:[function(require,module,exports){
@@ -1541,7 +1546,7 @@ var send, util;
 
 util = require('../util.coffee');
 
-window.urb.appl = "talk";
+window.urb.app = "talk";
 
 send = function(data, cb) {
   return window.urb.send(data, {
@@ -1630,7 +1635,7 @@ var design, send, subscribed, util;
 
 util = require('../util.coffee');
 
-window.urb.appl = "talk";
+window.urb.app = "talk";
 
 send = function(data, cb) {
   return window.urb.send(data, {

@@ -3555,14 +3555,14 @@ exports.default = {
       }return null;
     });
   },
-  put: function put(data, mark, appl, cb) {
-    if (appl == null) {
-      appl = /[a-z]*/.exec(mark)[0];
+  put: function put(data, mark, app, cb) {
+    if (app == null) {
+      app = /[a-z]*/.exec(mark)[0];
     }
     return urb.init(function () {
       return urb.send(data, {
         mark: mark,
-        appl: appl
+        app: app
       }, cb);
     });
   },
@@ -5765,16 +5765,17 @@ exports.default = Email;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var recl = React.createClass;
 var name = function name(displayName, component) {
   return _.extend(component, { displayName: displayName });
 };
-var div = React.DOM.div;
-exports.default = name("ImagePanel", function (_ref) {
+
+exports.default = name('ImagePanel', function (_ref) {
   var src = _ref.src;
-  return div({
+
+  var style = "backgroundImage:url('" + src + "')";
+  return React.createElement("div", {
     className: "image-container",
-    style: { backgroundImage: "url('" + src + "')" }
+    style: style
   });
 });
 
@@ -5789,6 +5790,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _classnames = __webpack_require__(2);
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -5797,63 +5800,81 @@ var _util = __webpack_require__(1);
 
 var _util2 = _interopRequireDefault(_util);
 
+var _TreeContainer = __webpack_require__(6);
+
+var _TreeContainer2 = _interopRequireDefault(_TreeContainer);
+
+var _TreeContainerPropTypes = __webpack_require__(12);
+
+var _TreeContainerPropTypes2 = _interopRequireDefault(_TreeContainerPropTypes);
+
 var _Reactify = __webpack_require__(4);
 
 var _Reactify2 = _interopRequireDefault(_Reactify);
 
-var _Async = __webpack_require__(11);
-
-var _Async2 = _interopRequireDefault(_Async);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var recl = React.createClass;
-var _React$DOM = React.DOM,
-    div = _React$DOM.div,
-    a = _React$DOM.a,
-    ul = _React$DOM.ul,
-    li = _React$DOM.li,
-    hr = _React$DOM.hr;
-exports.default = (0, _Async2.default)({ kids: { name: 't', bump: 't', body: 'r', meta: 'j', path: 't' } }, recl({
-  displayName: "Kids",
-  render: function render() {
-    var kids = _util2.default.sortKids(this.props.kids, this.props.sortBy);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    var kidsClas = (0, _classnames2.default)({ kids: true }, this.props.className);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    var kidClas = (0, _classnames2.default)({
-      "col-md-4": this.props.grid === 'true' });
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    var _kids = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+var Kids = function (_React$Component) {
+  _inherits(Kids, _React$Component);
 
-    try {
-      for (var _iterator = Array.from(kids)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var elem = _step.value;
+  function Kids(props) {
+    _classCallCheck(this, Kids);
 
-        var body = (0, _Reactify2.default)(elem.body, null, { basePath: elem.path });
-        _kids.push([div({ key: elem.name, id: elem.name, className: kidClas }, body), hr({})]);
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
+    var _this = _possibleConstructorReturn(this, (Kids.__proto__ || Object.getPrototypeOf(Kids)).call(this, props));
 
-    return div({ className: kidsClas, key: "kids" }, _kids);
+    _this.displayName = 'Kids';
+    return _this;
   }
-}));
+
+  _createClass(Kids, [{
+    key: 'render',
+    value: function render() {
+      var kids = _util2.default.sortKids(this.props.kids, this.props.sortBy);
+
+      var kidsClas = (0, _classnames2.default)({ kids: true }, this.props.className);
+
+      var kidClas = (0, _classnames2.default)({
+        'col-md-4': this.props.grid === 'true'
+      });
+
+      var _kids = [];
+      Array.from(kids).forEach(function (elem) {
+        var body = (0, _Reactify2.default)(elem.body, null, { basePath: elem.path });
+        _kids.push(React.createElement(
+          'div',
+          { key: elem.name, id: elem.name, className: kidClas },
+          body
+        ));
+        _kids.push(React.createElement('hr', null));
+      });
+
+      return React.createElement(
+        'div',
+        { className: kidsClas, key: 'kids' },
+        _kids
+      );
+    }
+  }]);
+
+  return Kids;
+}(React.Component);
+
+Kids.propTypes = _TreeContainerPropTypes2.default;
+
+exports.default = (0, _TreeContainer2.default)({
+  kids: {
+    name: 't',
+    bump: 't',
+    body: 'r',
+    meta: 'j',
+    path: 't'
+  } }, Kids);
 
 /***/ }),
 /* 59 */
@@ -5866,27 +5887,38 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _classnames = __webpack_require__(2);
 
 var _classnames2 = _interopRequireDefault(_classnames);
-
-var _Reactify = __webpack_require__(4);
-
-var _Reactify2 = _interopRequireDefault(_Reactify);
-
-var _TreeContainer = __webpack_require__(6);
-
-var _TreeContainer2 = _interopRequireDefault(_TreeContainer);
 
 var _util = __webpack_require__(1);
 
 var _util2 = _interopRequireDefault(_util);
 
+var _TreeContainer = __webpack_require__(6);
+
+var _TreeContainer2 = _interopRequireDefault(_TreeContainer);
+
+var _TreeContainerPropTypes = __webpack_require__(12);
+
+var _TreeContainerPropTypes2 = _interopRequireDefault(_TreeContainerPropTypes);
+
+var _Reactify = __webpack_require__(4);
+
+var _Reactify2 = _interopRequireDefault(_Reactify);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var recl = React.createClass;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var _React$DOM = React.DOM,
     div = _React$DOM.div,
     pre = _React$DOM.pre,
@@ -5895,6 +5927,210 @@ var _React$DOM = React.DOM,
     ul = _React$DOM.ul,
     li = _React$DOM.li,
     h1 = _React$DOM.h1;
+
+var List = function (_React$Component) {
+  _inherits(List, _React$Component);
+
+  function List(props) {
+    _classCallCheck(this, List);
+
+    var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
+
+    _this.displayName = 'List';
+    return _this;
+  }
+
+  _createClass(List, [{
+    key: 'renderList',
+    value: function renderList(elems) {
+      var _this2 = this;
+
+      var result = [];
+      Array.from(elems).forEach(function (elem) {
+        var preview = void 0;
+        var linked = void 0;
+        var item = elem.name;
+        var meta = elem.meta != null ? elem.meta : {};
+        var path = _this2.props.path + '/' + item;
+        if (meta.hide != null) {
+          return;
+        }
+        var href = _util2.default.basepath(path);
+        if (_this2.props.linkToFragments != null) {
+          href = '#' + item;
+        }
+        if (_this2.props.childIsFragment != null) {
+          href = _util2.default.basepath(_this2.props.path) + '#' + item;
+        }
+        if (meta.link) {
+          href = meta.link;
+        }
+        var parts = [];
+        var title = null;
+
+        if (meta.title) {
+          if (_this2.props.dataType === 'post') {
+            title = {
+              gn: 'a',
+              ga: { href: href },
+              c: [{
+                gn: 'h1',
+                ga: { className: 'title' },
+                c: [meta.title]
+              }]
+            };
+          } else {
+            title = {
+              gn: 'h1',
+              ga: { className: 'title' },
+              c: [meta.title]
+            };
+          }
+        }
+        if (!title && elem.head.c.length > 0) {
+          title = elem.head;
+        }
+        if (!title) {
+          title = {
+            gn: 'h1',
+            ga: { className: 'title' },
+            c: [item]
+          };
+        }
+
+        if (!_this2.props.titlesOnly) {
+          // date
+          var _date = meta.date;
+          if (!_date || _date.length === 0) {
+            _date = '';
+          }
+          var date = {
+            gn: 'div',
+            ga: { className: 'date' },
+            c: [_date]
+          };
+          parts.push(date);
+        }
+
+        parts.push(title);
+
+        if (!_this2.props.titlesOnly) {
+          // metadata
+          if (_this2.props.dataType === 'post') {
+            if (meta.image) {
+              // image
+              var image = {
+                gn: 'a',
+                ga: { href: href },
+                c: [{
+                  gn: 'img',
+                  ga: { src: meta.image }
+                }]
+              };
+              parts.push(image);
+            }
+          }
+          if (_this2.props.dataPreview) {
+            // preview
+            if (!meta.preview) {
+              parts.push.apply(parts, _toConsumableArray(elem.snip.c.slice(0, 2)));
+            } else {
+              if (meta.preview) {
+                preview = {
+                  gn: 'p',
+                  ga: { className: 'preview' },
+                  c: [meta.preview]
+                };
+              } else {
+                preview = elem.snip;
+              }
+              parts.push(preview);
+            }
+          }
+          if (_this2.props.dataType === 'post') {
+            if (meta.author) {
+              // author
+              var author = {
+                gn: 'h3',
+                ga: { className: 'author' },
+                c: [meta.author]
+              };
+              parts.push(author);
+            }
+            var cont = {
+              gn: 'a',
+              ga: { className: 'continue', href: href },
+              c: ['Read more']
+            };
+            parts.push(cont);
+            linked = true;
+          }
+        }
+
+        var node = (0, _Reactify2.default)({ gn: 'div', c: parts });
+        if (linked == null) {
+          var _clas = (0, _classnames2.default)({ preview: _this2.props.dataPreview != null });
+          node = React.createElement(
+            'a',
+            { href: href, className: _clas },
+            node
+          );
+        }
+
+        result.push(React.createElement(
+          'li',
+          { key: item },
+          node
+        ));
+      });
+
+      return result;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var k = (0, _classnames2.default)({ list: true }, this.props.dataType, { default: this.props['data-source'] === 'default' }, this.props.className);
+
+      var kids = this.renderList(_util2.default.sortKids(this.props.kids, this.props.sortBy));
+      if (kids.length !== 0 || this.props.is404 == null) {
+        return React.createElement(
+          'ul',
+          { className: k },
+          kids
+        );
+      }
+
+      return React.createElement(
+        'div',
+        { className: k },
+        React.createElement(
+          'h1',
+          { className: 'red inverse block error' },
+          'Error: Empty path'
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'pre',
+            null,
+            this.props.path
+          ),
+          React.createElement(
+            'span',
+            null,
+            'is either empty or does not exist.'
+          )
+        )
+      );
+    }
+  }]);
+
+  return List;
+}(React.Component);
+
+List.propTypes = _TreeContainerPropTypes2.default;
+
 exports.default = (0, _TreeContainer2.default)({
   path: 't',
   kids: {
@@ -5904,181 +6140,7 @@ exports.default = (0, _TreeContainer2.default)({
     bump: 't',
     name: 't'
   }
-}, recl({
-  displayName: "List",
-
-  render: function render() {
-    var k = (0, _classnames2.default)({ list: true }, this.props.dataType, { default: this.props['data-source'] === 'default' }, this.props.className);
-    var kids = this.renderList(_util2.default.sortKids(this.props.kids, this.props.sortBy));
-    if (kids.length !== 0 || this.props.is404 == null) {
-      return ul({ className: k }, kids);
-    }
-
-    return div({ className: k }, h1({ className: 'red inverse block error' }, 'Error: Empty path'), div({}, pre({}, this.props.path), span({}, 'is either empty or does not exist.')));
-  },
-  renderList: function renderList(elems) {
-    var _this = this;
-
-    return function () {
-      var result = [];
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = Array.from(elems)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var elem = _step.value;
-
-          var linked, preview;
-          var item = elem.name;
-          var meta = elem.meta != null ? elem.meta : {};
-          var path = _this.props.path + "/" + item;
-          if (meta.hide != null) {
-            continue;
-          }
-          var href = _util2.default.basepath(path);
-          if (_this.props.linkToFragments != null) {
-            href = '#' + item;
-          }
-          if (_this.props.childIsFragment != null) {
-            href = _util2.default.basepath(_this.props.path) + "#" + item;
-          }
-          if (meta.link) {
-            href = meta.link;
-          }
-          var parts = [];
-          var title = null;
-
-          if (meta.title) {
-            if (_this.props.dataType === 'post') {
-              title = {
-                gn: 'a',
-                ga: { href: href },
-                c: [{
-                  gn: 'h1',
-                  ga: { className: 'title' },
-                  c: [meta.title]
-                }]
-              };
-            } else {
-              title = {
-                gn: 'h1',
-                ga: { className: 'title' },
-                c: [meta.title]
-              };
-            }
-          }
-          if (!title && elem.head.c.length > 0) {
-            title = elem.head;
-          }
-          if (!title) {
-            title = {
-              gn: 'h1',
-              ga: { className: 'title' },
-              c: [item]
-            };
-          }
-
-          if (!_this.props.titlesOnly) {
-            // date
-            var _date = meta.date;
-            if (!_date || _date.length === 0) {
-              _date = "";
-            }
-            var date = {
-              gn: 'div',
-              ga: { className: 'date' },
-              c: [_date]
-            };
-            parts.push(date);
-          }
-
-          parts.push(title);
-
-          if (!_this.props.titlesOnly) {
-            // metadata
-            if (_this.props.dataType === 'post') {
-              if (meta.image) {
-                // image
-                var image = {
-                  gn: 'a',
-                  ga: { href: href },
-                  c: [{
-                    gn: 'img',
-                    ga: {
-                      src: meta.image
-                    }
-                  }]
-                };
-                parts.push(image);
-              }
-            }
-            if (_this.props.dataPreview) {
-              // preview
-              if (!meta.preview) {
-                parts.push.apply(parts, _toConsumableArray(elem.snip.c.slice(0, 2)));
-              } else {
-                if (meta.preview) {
-                  preview = {
-                    gn: 'p',
-                    ga: { className: 'preview' },
-                    c: [meta.preview]
-                  };
-                } else {
-                  preview = elem.snip;
-                }
-                parts.push(preview);
-              }
-            }
-            if (_this.props.dataType === 'post') {
-              if (meta.author) {
-                // author
-                var author = {
-                  gn: 'h3',
-                  ga: { className: 'author' },
-                  c: [meta.author]
-                };
-                parts.push(author);
-              }
-              var cont = {
-                gn: 'a',
-                ga: { className: 'continue', href: href },
-                c: ['Read more']
-              };
-              parts.push(cont);
-              linked = true;
-            }
-          }
-
-          var node = (0, _Reactify2.default)({ gn: 'div', c: parts });
-          if (linked == null) {
-            node = a({
-              href: href,
-              className: (0, _classnames2.default)({ preview: _this.props.dataPreview != null })
-            }, node);
-          }
-
-          result.push(li({ key: item }, node));
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return result;
-    }();
-  }
-}));
+}, List);
 
 /***/ }),
 /* 60 */
@@ -11578,7 +11640,7 @@ $(function () {
   store.dispatch((0, _TreeActions.addComponents)(_Components2.default));
   window.urb.dependencyHandlers["data"] = function () {
     // XX in persistence?
-    for (dat in window.urb.dependencies) {
+    for (var dat in window.urb.dependencies) {
       var type = window.urb.dependencies[dat];
       if (type == "data") {
         window.urb.delDependency(dat);
