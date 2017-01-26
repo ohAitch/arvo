@@ -1481,7 +1481,7 @@ Store = window.tree.util.store;
 TreeActions = window.tree.util.actions;
 
 setInterval((function() {
-  window.talk.online = window.urb.poll.dely < 500;
+  window.talk.online = window.urb.poll.delay < 500;
   if (window.talk.online) {
     return $('body').removeClass('offline');
   } else {

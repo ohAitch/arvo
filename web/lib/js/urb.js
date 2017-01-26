@@ -84,23 +84,23 @@ window.urb.req = function(method,url,params,json,cb) {
 //   xhr.send(data === null ? null : JSON.stringify(data))
 // }
 
-window.urb.reqq = []
-window.urb.qreq = function(method,url,params,json,cb) {
+window.urb.requestQueue = []
+window.urb.queueReq = function(method,url,params,json,cb) {
   walk = function() {
     qobj = {}
-    qobj.oargs = window.urb.reqq[0]
+    qobj.oargs = window.urb.requestQueue[0]
     qobj.nargs = [].slice.call(qobj.oargs,0,4)
     qobj.nargs.push(function(){
       if(this.oargs[4])
         this.oargs[4].apply(window.urb,arguments)
-      window.urb.reqq.shift()
-      if(window.urb.reqq.length > 0)
+      window.urb.requestQueue.shift()
+      if(window.urb.requestQueue.length > 0)
         walk()
     }.bind(qobj))
     window.urb.req.apply(this,qobj.nargs)
   }
-  l = window.urb.reqq.length
-  window.urb.reqq.push(arguments);
+  l = window.urb.requestQueue.length
+  window.urb.requestQueue.push(arguments);
   if(l == 0) { walk() }
 }
 
@@ -115,7 +115,6 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
   params.ship = params.ship || this.ship
   params.app = params.app || this.app
   params.mark = params.mark || $send.mark
-  // params.seqn = params.seqn || $send.seqn
   params.responseKey = params.responseKey || "/"
   params.body = (typeof(params.data) === 'undefined') ? null : params.data
 
@@ -126,11 +125,8 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
   url = ["send",params.app,params.mark]
   url = "/~/"+url.join("/")
 
-  // $send.seqn++
-
-  this.qreq('post',url,params,true,function(err,data) {
-    /* if(err) { $send.seqn--; }
-    else */ if(data && data.data.fail && urb.wall !== false && params.wall !== false) {
+  this.queueReq('post',url,params,true,function(err,data) {
+     if(data && data.data.fail && urb.wall !== false && params.wall !== false) {
       document.location = "#ERROR"
       document.write("<pre>"+JSON.stringify(params.body)+"\n"
                             +data.data.mess+"</pre>") // XX
@@ -138,11 +134,11 @@ window.urb.send = function(data,params,cb) { // or send(data, cb)
     if(cb) { cb.apply(this,arguments); }
   })
 }
-// window.urb.send.seqn = 0
+
 window.urb.send.mark = "json"
 
 
-window.urb.gsig = function(params) {
+window.urb.subscriptionPath = function(params) {
   var path = params.path
   if(!path) path = ""
   if(path[0] !== "/") path = "/"+path
@@ -151,26 +147,26 @@ window.urb.gsig = function(params) {
           path.replace(/[^\x00-\x7F]/g, "")
 }
 
-window.urb.puls = false
-window.urb.cabs = {}
+window.urb.pollStarted = false
+window.urb.callbacks = {}
 window.urb.poll = function(params) {
   if(!params) throw new Error("You must supply params to urb.poll.")
 
   var url, $this
 
-  seqn = this.poll.seqn
-  if(params.seqn) seqn = params.seqn()
+  sequenceNumber = this.poll.sequenceNumber
+  if(params.sequenceNumber) sequenceNumber = params.sequenceNumber()
 
-  url = "/~/events/"+this.eventStream+"?step="+seqn
+  url = "/~/events/"+this.eventStream+"?step="+sequenceNumber
 
-  this.puls = true
+  this.pollStarted = true
 
   $this = this
   this.req("get",url,params,true,function(err,res) {
-    $this.poll.dely = params.dely || $this.poll.dely
+    $this.poll.delay = params.delay || $this.poll.delay
     if(res){
       if(res.data.beat) {
-        $this.poll.dely = params.dely || 250
+        $this.poll.delay = params.delay || 250
         return $this.poll(params)
       }
       switch(res.data.type){
@@ -181,9 +177,9 @@ window.urb.poll = function(params) {
         var err2 = err
         if(res.data.type == "mean")
           err2 = res.data.data
-        var fn = $this.gsig(res.data.from)
-        if($this.cabs[fn])
-          $this.cabs[fn].call(this,err2,
+        var responseKey = $this.subscriptionPath(res.data.from)
+        if($this.callbacks[responseKey])
+          $this.callbacks[responseKey].call(this,err2,
             {status: res.status, data: res.data.data.json}) // XX non-json
         break;
           case "quit":
@@ -195,22 +191,22 @@ window.urb.poll = function(params) {
       if(params.incs)
         params.incs()
       else
-        $this.poll.seqn++
-      $this.poll.dely = 250
+        $this.poll.sequenceNumber++
+      $this.poll.delay = 250
       return $this.poll(params)
     }
 
     else if(err){
       setTimeout(function() {
         $this.poll(params)
-      }, $this.poll.dely)
-      $this.poll.dely += Math.ceil($this.poll.dely*.2)
+      }, $this.poll.delay)
+      $this.poll.delay += Math.ceil($this.poll.delay*.2)
     }
     else throw "Neither error nor result on poll"
   })
 }
-window.urb.poll.seqn = 1
-window.urb.poll.dely = 250
+window.urb.poll.sequenceNumber = 1
+window.urb.poll.delay = 250
 
 window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
   if(!params || typeof params === "function")
@@ -232,17 +228,17 @@ window.urb.bind = function(path, params, cb, nicecb){ // or bind(path, cb)
 
   if(params.mark !== "json")
     throw new Error("Non-json subscriptions unimplemented.")  //  XX
-  url = "/~/subscriptions/"+this.gsig(params)+"."+params.mark
+  url = "/~/subscriptions/"+this.subscriptionPath(params)+"."+params.mark
 
   params.path = params.responseKey
-  this.cabs[this.gsig(params)] = cb
+  this.callbacks[this.subscriptionPath(params)] = cb
 
   $this = this
-  this.qreq("put",url,params,true,function(err,res) {
+  this.queueReq("put",url,params,true,function(err,res) {
     if(nicecb) { nicecb.apply(this,[err,{status: res.status, data: res.data}])}
     //  XX give raw data
     //
-    if(!err && !$this.puls) $this.poll(params)
+    if(!err && !$this.pollStarted) $this.poll(params)
   })
 }
 urb.bind.mark = "json"
@@ -261,7 +257,7 @@ window.urb.drop = function(path, params, cb){  // or drop(path,cb)
     throw new Error("You must specify a string path for urb.drop.")
   if(!params.app) throw new Error("You must specify an app for urb.drop.")
 
-  url = "/~/is/"+this.gsig(params)+".json"
+  url = "/~/is/"+this.subscriptionPath(params)+".json"
   method = "delete"
   this.req("delete",url,params,true,function(err,res) {
     if(cb) cb(err,res)
