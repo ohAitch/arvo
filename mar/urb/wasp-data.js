@@ -1,57 +1,85 @@
 window.urb = window.urb || {}
 
-urb.waspWait = []
-urb.wasp = urb.wasp || [].push.bind(urb.waspWait)
+/// dependency long-poll
 
-// debugging
-urb.verb = false
-urb.sources = {}
-urb.waspDeps = function(){
-  urb.deps.map(function(a){urb.sources[a] = "dep"})
+urb.dependencies = {}
+urb.tries = 0
+urb.pollDependencies = function() {
+  var deps = []
+  for(dep in urb.dependencies){
+    deps.push(dep)
+  }
+  urb.dependencyPoll = new XMLHttpRequest()
+  urb.dependencyPoll.open('GET', "/~/dependency.json?"+deps.join('&'), true)
+  urb.dependencyPoll.addEventListener('load', function() {
+    // if(~~(this.status / 100) == 4)
+    //   return document.write(this.responseText)
+    if(this.status === 200) {
+      var dep = JSON.parse(this.responseText)
+      var type = urb.dependencies[dep]
+      urb.dependencyHandlers[type](dep)
+      urb.delDependency(dep)
+    }
+    urb.retryDependencyPoll()
+  })
+  urb.dependencyPoll.addEventListener('error', urb.retryDependencyPoll)
+  urb.dependencyPoll.addEventListener('abort', urb.retryDependencyPoll)
+  urb.dependencyPoll.send()
+}
+urb.retryDependencyPoll = function() {
+  setTimeout(urb.pollDependencies,1000*urb.tries)
+  urb.tries++
 }
 
-urb.waspElem = function(ele){
+urb.dependencyHandlers = {
+  "code": function(){document.location.reload()},
+  "data": function(){document.location.reload()}
+}
+
+urb.addDependency = function(deh,type){
+  type = type || "code"
+  if (deh && urb.dependencies[deh] != type){
+    urb.dependencies[deh] = type
+    if(urb.dependencyPoll)  urb.dependencyPoll.abort(); // trigger keep
+  }
+}
+urb.delDependency = function(deh){
+  if(urb.dependencies[deh]){
+    delete urb.dependencies[deh]
+    if(urb.dependencyPoll)  urb.dependencyPoll.abort(); // trigger keep
+  }
+}
+    
+/// helpers
+
+urb.addDependencyElem = function(ele){
   url = ele.src || ele.href
   if(!url || (new URL(url)).host != document.location.host)
     return;
-  urb.waspUrl(url)
+  urb.addDependencyUrl(url)
 }
-urb.waspUrl = function(url){
+urb.addDependencyUrl = function(url){
   var xhr = new XMLHttpRequest()
   xhr.open("HEAD", url)
   xhr.send()
-  xhr.onload = urb.waspLoadedXHR
-  xhr.channel = url
+  xhr.onload = function(){
+    urb.addDependency(urb.readDependencyHeader(this))
+  }
 }
-urb.waspLoadedXHR = function(){
-  urb.sources[urb.getXHRWasp(this)] = this.channel
-  urb.wasp(urb.getXHRWasp(this))
-}
-urb.getXHRWasp = function(xhr){
+urb.readDependencyHeader = function(xhr){
   var dep = xhr.getResponseHeader("etag")
   if(dep) return JSON.parse(dep.substr(2))
 }
 
-urb.datadeps = {}
-urb.waspData = function(dep){
-  urb.datadeps[dep] = true
-  urb.wasp(dep)
-}
 
-urb.onLoadUrbJS = function(){
-  urb.ondataupdate = urb.ondataupdate || urb.onupdate  // overridable
+// Entry point
 
-  var _onupdate = urb.onupdate
-  urb.onupdate = function(dep){
-    if(urb.verb)
-      console.log("update", urb.datadeps[dep] ? "data" : "full", dep, urb.sources[dep])
-    if(urb.datadeps[dep]) urb.ondataupdate(dep)
-    else _onupdate(dep)
+urb.initDependencies = function(){
+
+  urb.addDependencyAllOf = function(sel){
+    [].map.call(document.querySelectorAll(sel), urb.addDependencyElem)
   }
-  urb.waspDeps()
+  urb.addDependencyAllOf('script'); urb.addDependencyAllOf('link')
 
-  urb.waspAll = function(sel){
-    [].map.call(document.querySelectorAll(sel), urb.waspElem)
-  }
-  urb.waspAll('script'); urb.waspAll('link')
+  urb.pollDependencies()
 }

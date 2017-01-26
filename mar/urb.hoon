@@ -22,16 +22,11 @@
       ;body
         ;*  bod
         ;*  ?~  dep  ~
-            :~  ;script@"/~/on/{<dep>}.js"(urb_injected "", async "", onload "setTimeout(urb.onDep,2000)");
-                ;script(urb_injected "")
+            :~  ;script(urb_injected "")
                   ;-  (trip urb-wasp-data-js)
-                  ;  urb.waspWait = []
-                  ;  urb.wasp = urb.wasp || [].push.bind(urb.waspWait)
-                  ;  urb.onDep = function()\{
-                  ;    urb.waspWait.map(urb.wasp)
-                  ;    urb.onLoadUrbJS()
-                  ;    urb.waspData({(pojo %s (scot %uv dep-bod))})
-                  ;  }
+                  ;  urb.addDependency("{<dep>}")
+                  ;  urb.addDependency("{<dep-bod>}", 'data')
+                  ;  setTimeout(urb.initDependencies, 2000)
                 ==
             ==
       ==

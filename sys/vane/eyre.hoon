@@ -413,48 +413,6 @@
   001kU.001gE.02000.g0082.00000.C0005.a00w0.04001.0g008.00g00
 ++  js                                                  ::  static javascript
   |%
-  ++  poll                                              :: dependency long-poll
-    '''
-    urb.tries = 0
-    urb.call = function() {
-      urb.wreq = new XMLHttpRequest()
-      urb.wreq.open('GET', "/~/on.json?"+urb.deps.join('&'), true)
-      urb.wreq.addEventListener('load', function() {
-        // if(~~(this.status / 100) == 4)
-        //   return document.write(this.responseText)
-        if(this.status === 200) {
-          var dep = JSON.parse(this.responseText)
-          urb.onupdate(dep)
-          urb.dewasp(dep)
-        }
-        urb.keep()
-      })
-      urb.wreq.addEventListener('error', urb.keep)
-      urb.wreq.addEventListener('abort', urb.keep)
-      urb.wreq.send()
-    }
-    urb.keep = function() {
-      setTimeout(urb.call,1000*urb.tries)
-      urb.tries++
-    }
-    urb.onupdate = function(){document.location.reload()}
-    urb.call()
-    urb.wasp = function(deh){
-      if (!deh) return;
-      if (urb.deps.indexOf(deh) !== -1) return;
-      urb.deps.push(deh)
-      urb.wreq.abort() // trigger keep
-    }
-    urb.dewasp = function(deh){
-      var index = urb.deps.indexOf(deh)
-      if (-1 !== index) {
-        urb.deps.splice(index,1)
-        urb.wreq.abort() // trigger keep
-      }
-    }
-
-    '''
-  ::
   ++  auth-redir
     'document.location.pathname = "/~~"+document.location.pathname'
   ::
@@ -1432,7 +1390,7 @@
             $own   (fall (ship-from-cookies maf) our)
           ==
         ::
-            $on
+            $dependency
           :-  %poll
           ?^  but  [(raid but %uv ~)]~
           =+  dep=((hard (list {@ $~})) quy)
@@ -1564,9 +1522,6 @@
         [%| %.(quy (teba get-quay:(dom-vi [p q]:hem)))]
       ::
           $poll
-        ?:  ?=({$~ $js} p.pok)  ::  XX treat non-json cases?
-          =+  deps=[%a (turn `(list @uvH)`p.hem |=(a/@ s+(scot %uv a)))]
-          [%& %js (add-json (joba %deps deps) poll:js)]
         =.  lyv  (~(put by lyv) hen %wasp p.hem)
         |-
           =.  done  (new-deps i.p.hem %& hen)
