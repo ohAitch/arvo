@@ -38,10 +38,10 @@ urb.dependencyHandlers = {
 
 urb.addDependency = function(deh,type){
   type = type || "code"
-  if (deh && urb.dependencies[deh] != type){
-    urb.dependencies[deh] = type
+  if (deh && !urb.dependencies[deh]){
     if(urb.dependencyPoll)  urb.dependencyPoll.abort(); // trigger keep
   }
+  urb.dependencies[deh] = type
 }
 urb.delDependency = function(deh){
   if(urb.dependencies[deh]){
