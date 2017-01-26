@@ -7,6 +7,6 @@
       /,      /web/pages
           /;  urb-split  /#  /!hymn/
               /
-          /urb-tree/
+          /eyre-default-tree/
       ==
 -.-

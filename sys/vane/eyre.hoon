@@ -1305,9 +1305,9 @@
               ~|(%bad-oryx ~|([grab-oryx ses:for-client] !!))
             [%& u.hem]
           ?^  p.pok  [%& %read u.p.pok as-path]
-          ?~  q.pok  [%& %rend %urb as-path]
+          ?~  q.pok  [%& %rend %eyre-default as-path]
           =/  ren  (rush i.q.pok ;~(pfix cab sym))
-          ?~  ren  [%& %rend %urb as-path]
+          ?~  ren  [%& %rend %eyre-default as-path]
           [%& %rend u.ren as-path(q.pok t.q.pok)]
       ::
       ++  as-magic-filename
