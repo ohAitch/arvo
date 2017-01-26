@@ -7,6 +7,9 @@
 ::
 =,  talk
 =,  bytes:eyre
+=,  js:eyre
+=,  html
+=,  lines:clay
 |_  rep/report
 ::
 ++  grab                                                ::  convert from
@@ -87,7 +90,7 @@
       %+  joba  -.a
       ?+  -.a  ~|(stub+-.a !!)
         $lin  (jobe txt+[%s q.a] say+[%b p.a] ~)
-        $url  (joba txt+[%s (crip (earf p.a))])
+        $url  (joba txt+[%s (crip (apix:en-purl p.a))])
         $exp  (joba txt+[%s p.a])
         $app  (jobe txt+[%s q.a] src+[%s p.a] ~)
         $fat  (jobe tor+(tors p.a) taf+$(a q.a) ~)
@@ -96,10 +99,10 @@
           %-  jobe  :~
             service+s+service.a
             id+s+id.a
-            id-url+s+(crip (earf id-url.a))
+            id-url+s+(crip (apix:en-purl id-url.a))
             summary+s+summary.a
             body+s+body.a
-            url+s+(crip (earf url.a))
+            url+s+(crip (apix:en-purl url.a))
             meta+meta.a
           ==
         ::  %inv  (jobe ship+(jope p.a) party+[%s q.a] ~)

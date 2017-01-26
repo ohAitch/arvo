@@ -11,9 +11,9 @@
   |%
   ++  noun  command                                     ::  clam from %noun
   ++  json
-    =>  [jo ..command]
+    =>  [dejs:format ..command:talk]
     |=  a/json  ^-  command
-    =-  (need ((of -) a))
+    =-  ((of -) a)
     =<  :~  publish+(ar thot)
             review+(ar thot)
             design+(ot party+so config+(mu conf) ~)
@@ -23,23 +23,21 @@
       |*  {fel/rule wit/fist}
       %+  cu  malt
       %+  ci
-        |=  a/(map cord _(need *wit))
-        ^-  (unit (list _[(wonk *fel) (need *wit)]))
-        (zl (turn (~(tap by a)) (head-rush fel)))
+        |=  a/(map cord _*wit)
+        ^-  (unit (list _[(wonk *fel) *wit]))
+        =,  unity
+        (drop-list (turn (~(tap by a)) (head-rush fel)))
       (om wit)
     ::
     ++  ke                                              ::  callbacks
       |*  {gar/* sef/_|.(fist)}
-      |=  jon/json
-      ^-  (unit _gar)
-      =-  ~!  gar  ~!  (need -)  -
+      |=  jon/json  ^-  _gar
       ((sef) jon)
     ::
     ++  as                                              ::  array as set
       |*  a/fist
-      (cu ~(gas in *(set _(need *a))) (ar a))
+      (cu ~(gas in *(set _*a)) (ar a))
     ::
-    ++  lake  |*(a/_* $-(json (unit a)))
     ++  peach
       |*  a/{rule rule}
       |=  tub/nail
@@ -56,7 +54,7 @@
     ::
     ::
     ++  thot
-      ^-  $-(json (unit thought))
+      ^-  $-(json thought)
       %-  ot  :~
         serial+ceri
         audience+audi
@@ -64,11 +62,11 @@
       ==
     ::
     ++  ceri
-      ^-  $-(json (unit serial))
+      ^-  $-(json serial)
       (ci (slat %uv) so)
     ::
     ++  audi
-      ^-  $-(json (unit audience))
+      ^-  $-(json audience)
       (op parn memb)
     ::
     ++  auri  (op parn (ci (soft presence) so))
@@ -97,7 +95,7 @@
       ==
     ::
     ++  stam
-      ^-  $-(json (unit statement))
+      ^-  $-(json statement)
       %+  cu  eval
       (ot date+di bouquet+(as (ar so)) speech+spec ~)
     ::
@@ -105,7 +103,7 @@
       %+  ke  *speech-or-eval  |.
       %-  of
       :~  lin+(ot say+bo txt+so ~)
-          url+(su aurf:urlp)
+          url+(su aurf:de-purl:html)
           eval+so
           mor+(ar spec)
           ::  exp+(cu |=(a=cord [a ~]) so)
@@ -113,7 +111,7 @@
       ==
     ::
     ++  conf
-      ^-  $-(json (unit config))
+      ^-  $-(json config)
       %-  ot  :~
         sources+(as (su parn))
         caption+so
