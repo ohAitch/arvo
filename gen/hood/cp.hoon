@@ -3,6 +3,7 @@
 ::::  /hoon/cp/hood/gen
   ::
 /?    310
+=,  space:userlib
 :-  %say
 |=  {^ {input/path output/path $~} $~}
 :-  %kiln-info
