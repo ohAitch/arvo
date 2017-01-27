@@ -60,18 +60,24 @@
     $(src (urb-codemirror src))
   ?:  (~(has by atr) [%urb %exec])           ::  runnable code attribute tag
     $(src (urb-exec src))
-  %-  jobe  :~
-    c+a+(turn c.src ..$)
-    gn+s+(mane-to-cord n.g.src)
-    =<  ga+(jobe (turn a.g.src .))
-    |=  {a/mane b/tape}  ^-  {cord json}
-    :_  (jape b)
-    ?^  a  (mane-to-cord a)
-    (fall (~(get by react-attrs) a) a)
-  ==
+  %+  joba  (mane-to-cord n.g.src)
+  :+  %a
+    (jobe (mart-to-pairs a.g.src))
+  (turn c.src ..$)
 ::
 ++  mane-to-cord                                        ::  namespaced xml names
   |=(a/mane `cord`?@(a a (rap 3 -.a ':' +.a ~)))
+::
+++  mart-to-pairs                                       ::  namespaced xml attrs
+  |=  a/mart  ^-  (list {cord json})
+  %+  turn  a
+  |=  {b/mane c/tape}  ^-  {cord json}
+  [(attr-to-cord b) (jape c)]
+::
+++  attr-to-cord
+  |=  a/mane  ^-  cord
+  ?^  a  (mane-to-cord a)
+  (fall (~(get by react-attrs) a) a)
 --
 ::
 ::::

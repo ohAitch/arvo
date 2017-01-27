@@ -599,6 +599,8 @@ var _LoadComponent2 = _interopRequireDefault(_LoadComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
 var rele = React.createElement;
 var load = React.createFactory(_LoadComponent2.default);
 
@@ -613,7 +615,7 @@ var name = function name(displayName, component) {
 };
 
 var walk = function walk(root, _nil, _str, _comp) {
-  // manx: {fork: ["string", {gn:"string" ga:{dict:"string"} c:{list:"manx"}}]}
+  // manx: fork: ["string", {"$node":[{"$attrs"}, "...children"]}]
   var step = function step(elem, key) {
     var left = void 0;
     switch (false) {
@@ -621,21 +623,23 @@ var walk = function walk(root, _nil, _str, _comp) {
         return _nil();
       case typeof elem !== 'string':
         return _str(elem);
-      case elem.gn == null:
+      case _.keys(elem).length != 1:
         {
-          var gn = elem.gn,
-              ga = elem.ga;
-          var c = elem.c;
+          var gn = _.keys(elem)[0];
 
-          c = (left = __guard__(c, function (x) {
-            return x.map(step);
-          })) != null ? left : [];
+          var _elem$gn = _toArray(elem[gn]),
+              ga = _elem$gn[0],
+              c = _elem$gn.slice(1);
+
+          c = c.map(step);
           return _comp.call(elem, {
             gn: gn,
             ga: ga,
             c: c
           }, key);
         }
+      case !React.isValidElement(elem):
+        return elem;
       default:
         throw new Error('Bad react-json ' + JSON.stringify(elem));
     }
@@ -656,8 +660,8 @@ var Virtual = name('Virtual', function (_ref) {
     var gn = _ref2.gn,
         ga = _ref2.ga,
         c = _ref2.c;
-
-    var props = { key: key };
+    //    ([node,attrs,children...], key) => {
+    var props = { key: key }; //      const props = _.extend({ key }, attrs);
     if (__guard__(ga, function (x) {
       return x.style;
     })) {
@@ -5443,9 +5447,7 @@ var Comments = function (_React$Component) {
         value: '',
         loading: {
           loading: true,
-          body: {
-            gn: 'p',
-            c: [this.state.value] },
+          body: { 'p': [{}, this.state.value] },
           time: Date.now()
         }
       });
@@ -5970,32 +5972,32 @@ var List = function (_React$Component) {
 
         if (meta.title) {
           if (_this2.props.dataType === 'post') {
-            title = {
-              gn: 'a',
-              ga: { href: href },
-              c: [{
-                gn: 'h1',
-                ga: { className: 'title' },
-                c: [meta.title]
-              }]
-            };
+            title = React.createElement(
+              'a',
+              { href: href },
+              React.createElement(
+                'h1',
+                { className: 'title' },
+                meta.title
+              )
+            );
           } else {
-            title = {
-              gn: 'h1',
-              ga: { className: 'title' },
-              c: [meta.title]
-            };
+            title = React.createElement(
+              'h1',
+              { className: 'title' },
+              'meta.title'
+            );
           }
         }
         if (!title && elem.head.c.length > 0) {
           title = elem.head;
         }
         if (!title) {
-          title = {
-            gn: 'h1',
-            ga: { className: 'title' },
-            c: [item]
-          };
+          title = React.createElement(
+            'h1',
+            { className: 'title' },
+            'item'
+          );
         }
 
         if (!_this2.props.titlesOnly) {
@@ -6004,11 +6006,11 @@ var List = function (_React$Component) {
           if (!_date || _date.length === 0) {
             _date = '';
           }
-          var date = {
-            gn: 'div',
-            ga: { className: 'date' },
-            c: [_date]
-          };
+          var date = React.createElement(
+            'div',
+            { className: 'date' },
+            _date
+          );
           parts.push(date);
         }
 
@@ -6019,14 +6021,11 @@ var List = function (_React$Component) {
           if (_this2.props.dataType === 'post') {
             if (meta.image) {
               // image
-              var image = {
-                gn: 'a',
-                ga: { href: href },
-                c: [{
-                  gn: 'img',
-                  ga: { src: meta.image }
-                }]
-              };
+              var image = React.createElement(
+                'a',
+                { href: href },
+                React.createElement('img', { src: meta.image })
+              );
               parts.push(image);
             }
           }
@@ -6036,11 +6035,11 @@ var List = function (_React$Component) {
               parts.push.apply(parts, _toConsumableArray(elem.snip.c.slice(0, 2)));
             } else {
               if (meta.preview) {
-                preview = {
-                  gn: 'p',
-                  ga: { className: 'preview' },
-                  c: [meta.preview]
-                };
+                preview = React.createElement(
+                  'p',
+                  { className: 'preview' },
+                  meta.preview
+                );
               } else {
                 preview = elem.snip;
               }
@@ -6050,24 +6049,24 @@ var List = function (_React$Component) {
           if (_this2.props.dataType === 'post') {
             if (meta.author) {
               // author
-              var author = {
-                gn: 'h3',
-                ga: { className: 'author' },
-                c: [meta.author]
-              };
+              var author = React.createElement(
+                'h3',
+                { className: 'author' },
+                meta.author
+              );
               parts.push(author);
             }
-            var cont = {
-              gn: 'a',
-              ga: { className: 'continue', href: href },
-              c: ['Read more']
-            };
+            var cont = React.createElement(
+              'a',
+              { href: href, className: 'continue' },
+              '\'Read more\''
+            );
             parts.push(cont);
             linked = true;
           }
         }
 
-        var node = (0, _Reactify2.default)({ gn: 'div', c: parts });
+        var node = (0, _Reactify2.default)({ 'div': [{}].concat(parts) });
         if (linked == null) {
           var _clas = (0, _classnames2.default)({ preview: _this2.props.dataPreview != null });
           node = React.createElement(
@@ -6667,14 +6666,11 @@ var Nav = function (_React$Component) {
       var kids = [];
 
       if (this.props.nav.subnav) {
-        kids.push((0, _Reactify2.default)({
-          gn: this.props.nav.subnav,
-          ga: {
-            open: this.props.nav.open,
-            toggle: this.toggleNav
-          },
-          c: []
-        }, 'subnav'));
+        kids.push(React.createElement(this.props.nav.subnav, {
+          open: this.props.nav.open,
+          toggle: this.toggleNav,
+          key: 'subnav'
+        }));
       }
 
       var _props$nav = this.props.nav,
@@ -6824,9 +6820,9 @@ exports.default = recl({
   },
   render: function render() {
     if (urb.user == null || urb.user !== urb.ship) {
-      return nav({ className: "navbar panel" }, [ul({ className: "nav navbar-nav" }, [li({ className: 'nav-item pull-right' }, a({ href: "/~~" }, "Log in"))])]);
+      return nav({ className: "navbar panel" }, ul({ className: "nav navbar-nav" }, li({ className: 'nav-item pull-right' }, a({ href: "/~~" }, "Log in"))));
     } else {
-      return nav({ className: "navbar panel" }, [ul({ className: "nav navbar-nav" }, [li({ className: "nav-item" }, a({ href: "/~~/talk" }, "Talk")), li({ className: "nav-item" }, a({ href: "/~~/dojo" }, "Dojo")), li({ className: "nav-item" }, a({ href: "/~~/static" }, "Static")), li({ className: 'nav-item pull-right' }, a({ href: "/~/away" }, "Log out"))])]);
+      return nav({ className: "navbar panel" }, ul({ className: "nav navbar-nav" }, li({ className: "nav-item" }, a({ href: "/~~/talk" }, "Talk")), li({ className: "nav-item" }, a({ href: "/~~/dojo" }, "Dojo")), li({ className: "nav-item" }, a({ href: "/~~/static" }, "Static")), li({ className: 'nav-item pull-right' }, a({ href: "/~/away" }, "Log out"))));
     }
   }
 });
@@ -7240,7 +7236,11 @@ var _Reactify2 = _interopRequireDefault(_Reactify);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 var recl = React.createClass;
 var _React$DOM = React.DOM,
@@ -7258,29 +7258,23 @@ exports.default = (0, _Async2.default)({ name: 't', kids: { sect: 'j' }
     return this.setState({ search: e.target.value });
   },
   wrap: function wrap(elem, dir, path) {
-    var c = void 0,
-        ga = void 0,
-        gn = void 0;
     if (path.slice(-1) === "/") {
       path = path.slice(0, -1);
     }
     var href = this.props.name + "/" + dir + path;
-    if (__guard__(__guard__(elem, function (x1) {
-      return x1.ga;
-    }), function (x) {
-      return x.id;
-    })) {
-      var _elem = elem;
-      gn = _elem.gn;
-      ga = _elem.ga;
-      c = _elem.c;
+    var node = _.keys(elem)[0];
 
-      ga = _.clone(ga);
-      href += '#' + ga.id;
-      delete ga.id;
-      elem = { gn: gn, ga: ga, c: c };
+    var _elem$node = _toArray(elem[node]),
+        attrs = _elem$node[0],
+        kids = _elem$node.slice(1);
+
+    if (attrs.id) {
+      attrs = _.clone(attrs);
+      href += "#" + attrs.id;
+      delete attrs.id;
+      elem = _defineProperty({}, node, [attrs].concat(_toConsumableArray(kids)));
     }
-    return { gn: 'div', c: [{ gn: 'a', ga: { href: href }, c: [elem] }] };
+    return { 'div': [{}, { 'a': [{ href: href }, elem] }] };
   },
   render: function render() {
     var _this = this;
@@ -7313,9 +7307,7 @@ exports.default = (0, _Async2.default)({ name: 't', kids: { sect: 'j' }
       if (m[1] == null) {
         return [s];
       }
-      var lit = { gn: 'span', c: [_this2.state.search], ga: { style: { background: '#ff6'
-          }
-        } };
+      var lit = { 'span': [{ style: { background: '#ff6' } }, _this2.state.search] };
       got = true;
       return [m[0]].concat(_toConsumableArray(_.flatten(function () {
         var result = [];
@@ -7346,10 +7338,10 @@ exports.default = (0, _Async2.default)({ name: 't', kids: { sect: 'j' }
         return result;
       }())));
     }, function (_ref2) {
-      var gn = _ref2.gn,
-          ga = _ref2.ga,
-          c = _ref2.c;
-      return { gn: gn, ga: ga, c: _.flatten(c) };
+      var node = _ref2.node,
+          attrs = _ref2.attrs,
+          children = _ref2.children;
+      return _defineProperty({}, node, [attrs, _.flatten(children)]);
     });
     if (got) {
       return res;
@@ -7412,8 +7404,8 @@ exports.default = (0, _Async2.default)({
     }, function (s) {
       return s;
     }, function (_ref) {
-      var c = _ref.c;
-      return (c != null ? c : []).join('');
+      var children = _ref.children;
+      return (children != null ? children : []).join('');
     });
   },
   render: function render() {
@@ -7484,7 +7476,11 @@ var _Reactify2 = _interopRequireDefault(_Reactify);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 var recl = React.createClass;
 var div = React.DOM.div;
@@ -7620,46 +7616,40 @@ exports.default = (0, _Async2.default)({ body: 'r' }, recl({
   componentWillUnmount: function componentWillUnmount() {
     return clearInterval(this.int);
   },
-  collectHeader: function collectHeader(_ref) {
-    var gn = _ref.gn,
-        ga = _ref.ga,
-        c = _ref.c;
+  collectHeader: function collectHeader(elem) {
+    var name = _.keys(elem)[0];
+    if (this.props.match && name === this.props.match || name[0] === 'h' && parseInt(name[1]) !== NaN) {
+      var _elem$name = _toArray(elem[name]),
+          attrs = _elem$name[0],
+          kids = _elem$name.slice(1);
 
-    var comp = void 0;
-    if (this.props.match) {
-      comp = gn === this.props.match;
-    } else {
-      comp = gn && gn[0] === 'h' && parseInt(gn[1]) !== NaN;
-    }
-    if (comp) {
-      ga = _.clone(ga);
-      ga.onClick = this._click(ga.id);
-      delete ga.id;
-      return { gn: gn, ga: ga, c: c };
+      attrs = _.clone(attrs);
+      attrs.onClick = this._click(attrs.id);
+      delete attrs.id;
+      return _defineProperty({}, name, [attrs].concat(_toConsumableArray(kids)));
     }
   },
   parseHeaders: function parseHeaders() {
-    if (this.props.body.c) {
+    if (this.props.body['div']) {
       var _iteratorNormalCompletion3 = true;
       var _didIteratorError3 = false;
       var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator3 = Array.from(this.props.body.c)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        for (var _iterator3 = Array.from(this.props.body['div'].slice(1))[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var v = _step3.value;
 
-          if (v.gn === 'div' && __guard__(v.ga, function (x) {
-            return x.id;
-          }) === "toc") {
-            var contents = [{ gn: "h1", ga: { className: "t" }, c: ["Table of contents"] }].concat(_toConsumableArray(_.filter(v.c.map(this.collectHeader))));
-            if (this.props.noHeader) {
-              contents.shift();
-            }
+          if (v['div']) var _v$div = _toArray(v['div']),
+                attrs = _v$div[0],
+                children = _v$div.slice(1);
+          if (attrs.id === "toc") {
+            var contents = _.filter(children.map(this.collectHeader));
             return {
-              gn: "div",
-              ga: { className: "toc" },
-              c: contents
-            };
+              "div": [{ className: "toc" }, this.props.noHeader ? "" : React.createElement(
+                'h1',
+                { className: 't' },
+                'Table of contents'
+              )].concat(_toConsumableArray(contents)) };
           }
         }
       } catch (err) {
