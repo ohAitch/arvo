@@ -288,7 +288,7 @@
       ::
       ++  nick  (cook crip (stun [1 14] low))           ::  nickname
       ++  text  (cook crip (plus (shim ' ' '~')))       ::  bullets separating
-      ++  glyph  (mask "/\\\{(<!?{(zing glyphs)}")      ::  station postfix
+      ++  glyph  (mask "{(zing glyphs)}/\\\{(<!?")      ::  station postfix
       ++  setting
         %-  perk  :~
           %noob
@@ -364,6 +364,7 @@
     ++  sh-fact                                         ::  send console effect
       |=  fec/sole-effect
       ^+  +>
+::       ~&  sh-fact+[ost.hid sup.hid]
       +>(moves :_(moves [ost.hid %diff %sole-effect fec]))
     ::
     ++  sh-peep                                         ::  peer to path

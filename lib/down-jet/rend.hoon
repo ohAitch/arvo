@@ -135,7 +135,8 @@
         [[hed id+(sanitize kid) ~] kid]
     ::
       $hrul  ;hr;
-      $meta  ?:  =(~ p.a)  ;/(~)
+      $meta  ?:  [meta-emit-disabled=&]  ;/(~)
+             ?:  =(~ p.a)  ;/(~)
              =+  jon=`json`o+(~(run by p.a) |=(cord s++<))
              ;meta(value "{(pojo jon)}", name "frontmatter", urb_front "");
   ::     %html

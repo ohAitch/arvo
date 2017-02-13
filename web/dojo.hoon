@@ -23,5 +23,5 @@
   ;div#err;
   ;div#term:""
   ;script@"/lib/js/sole.js";
-  ;sole(appl "dojo");
+  ;sole(data-app "drumming");
 ==

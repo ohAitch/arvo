@@ -31,7 +31,7 @@
 ++  wush
   |=  {wid/@u tan/tang}
   ^-  tape
-  (of-wall (turn (flop tan) |=(a/tank (of-wall (wash 0^wid a)))))
+  (zing (turn (flop tan) |=(a/tank (of-wall (wash 0^wid a)))))
 ::
 ++  purge                                               ::  discard ++styx style
   |=  a/styx  ^-  tape

@@ -1583,6 +1583,7 @@
         |-
         ~|  aute+ham
         ?:  |(=(anon him.ham) =(get-user.yac `him.ham))
+::           ~&  ham
           =+  pez=process(pok rem.ham, aut &)
           ?:  ?=($| -.pez)  pez
           [%| (resolve ~ p.pez)]

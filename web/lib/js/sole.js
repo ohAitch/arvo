@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Matr, Prompt, Share, TreeActions, buffer, div, pre, recl, ref, ref1, rele, span, str, u,
+var Matr, Prompt, Share, TreeStore, buffer, div, noPad, pre, recl, ref, ref1, registerComponent, rele, span, str, u,
   slice = [].slice,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -7,7 +7,9 @@ ref = [React.createClass, React.createElement], recl = ref[0], rele = ref[1];
 
 ref1 = React.DOM, div = ref1.div, u = ref1.u, pre = ref1.pre, span = ref1.span;
 
-TreeActions = window.tree.actions;
+TreeStore = window.tree.util.store;
+
+registerComponent = window.tree.util.actions.registerComponent;
 
 str = JSON.stringify;
 
@@ -17,14 +19,20 @@ buffer = {
   "": new Share("")
 };
 
+noPad = {
+  padding: 0
+};
+
 Prompt = recl({
   displayName: "Prompt",
   render: function() {
     var buf, cur, pro, ref2, ref3;
-    pro = (ref2 = this.props.prompt[this.props.appl]) != null ? ref2 : "X";
-    cur = this.props.cursor;
+    pro = (ref2 = this.props.prompt[this.props.app]) != null ? ref2 : "X";
+    cur = this.props.cursor - pro.length;
     buf = this.props.input + " ";
-    return pre({}, this.props.appl + pro, span({
+    return pre({
+      style: noPad
+    }, pro, span({
       style: {
         background: 'lightgray'
       }
@@ -38,12 +46,13 @@ Matr = recl({
     var lines;
     lines = this.props.rows.map(function(lin, key) {
       return pre({
-        key: key
+        key: key,
+        style: noPad
       }, lin, " ");
     });
     lines.push(rele(Prompt, {
       key: "prompt",
-      appl: this.props.appl,
+      app: this.props.app,
       prompt: this.props.prompt,
       input: this.props.input,
       cursor: this.props.cursor
@@ -52,12 +61,12 @@ Matr = recl({
   }
 });
 
-TreeActions.registerComponent("sole", recl({
+TreeStore.dispatch(registerComponent("sole", recl({
   displayName: "Sole",
   getInitialState: function() {
     return {
       rows: [],
-      appl: this.props.appl,
+      app: this.props["data-app"],
       prompt: {
         "": "# "
       },
@@ -88,15 +97,15 @@ TreeActions.registerComponent("sole", recl({
   bell: function() {
     return this.flash($('body'), 'black');
   },
-  choose: function(appl) {
-    if (buffer[appl] == null) {
-      buffer[appl] = new Share("");
+  choose: function(app) {
+    if (buffer[app] == null) {
+      buffer[app] = new Share("");
     }
     this.updPrompt('', null);
     return this.setState({
-      appl: appl,
+      app: app,
       cursor: 0,
-      input: buffer[appl].buf
+      input: buffer[app].buf
     });
   },
   print: function(txt) {
@@ -107,9 +116,9 @@ TreeActions.registerComponent("sole", recl({
   sync: function(ted, app) {
     var b;
     if (app == null) {
-      app = this.state.appl;
+      app = this.state.app;
     }
-    if (app === this.state.appl) {
+    if (app === this.state.app) {
       b = buffer[app];
       return this.setState({
         input: b.buf,
@@ -132,7 +141,7 @@ TreeActions.registerComponent("sole", recl({
   sysStatus: function() {
     var app, k, pro, ref2, v;
     return this.updPrompt('', ((ref2 = [
-      this.state.appl, (function() {
+      this.state.app, (function() {
         var ref2, results;
         ref2 = this.state.prompt;
         results = [];
@@ -146,10 +155,23 @@ TreeActions.registerComponent("sole", recl({
       }).call(this)
     ], app = ref2[0], pro = ref2[1], ref2), app === '' ? (pro.join(', ')) + '# ' : null));
   },
+  exec: function(action) {
+    var type;
+    if (action.map) {
+      return action.map((function(_this) {
+        return function(act) {
+          return _this.exec(act);
+        };
+      })(this));
+    } else {
+      type = Object.keys(action)[0];
+      return this[type](action[type]);
+    }
+  },
   peer: function(ruh, app) {
     var mapr, v;
     if (app == null) {
-      app = this.state.appl;
+      app = this.state.app;
     }
     if (ruh.map) {
       return ruh.map((function(_this) {
@@ -160,17 +182,24 @@ TreeActions.registerComponent("sole", recl({
     }
     mapr = this.state;
     switch (Object.keys(ruh)[0]) {
+      case 'out':
+        return this.print(ruh.out);
       case 'txt':
         return this.print(ruh.txt);
       case 'tan':
-        return ruh.tan.split("\n").map(this.print);
+        return ruh.tan.trim().split("\n").map(this.print);
       case 'pro':
         return this.updPrompt(app, ruh.pro.cad);
+      case 'pom':
+        return this.updPrompt(app, _.map(ruh.pom, function(arg) {
+          var text;
+          text = arg.text;
+          return text;
+        }));
       case 'hop':
-        this.setState({
+        return this.setState({
           cursor: ruh.hop
         });
-        return this.bell();
       case 'blk':
         return console.log("Stub " + (str(ruh)));
       case 'det':
@@ -203,9 +232,9 @@ TreeActions.registerComponent("sole", recl({
       return this.print('# already-joined: ' + app);
     }
     this.choose(app);
-    return urb.bind("/sole", {
-      appl: this.state.appl,
-      wire: "/"
+    return urb.bind("/drum", {
+      app: this.state.app,
+      responseKey: "/"
     }, (function(_this) {
       return function(err, d) {
         if (err) {
@@ -222,22 +251,22 @@ TreeActions.registerComponent("sole", recl({
     if (apps.length < 2) {
       return;
     }
-    return this.choose((ref2 = apps[1 + apps.indexOf(this.state.appl)]) != null ? ref2 : apps[0]);
+    return this.choose((ref2 = apps[1 + apps.indexOf(this.state.app)]) != null ? ref2 : apps[0]);
   },
-  part: function(appl) {
+  part: function(app) {
     var mapr;
     mapr = this.state;
-    if (mapr.prompt[appl] == null) {
-      return this.print('# not-joined: ' + appl);
+    if (mapr.prompt[app] == null) {
+      return this.print('# not-joined: ' + app);
     }
-    urb.drop("/sole", {
-      appl: appl,
-      wire: "/"
+    urb.drop("/drum", {
+      app: app,
+      responseKey: "/"
     });
-    if (appl === mapr.appl) {
+    if (app === mapr.app) {
       this.cycle();
     }
-    this.updPrompt(appl, null);
+    this.updPrompt(app, null);
     return this.sysStatus();
   },
   componentWillUnmount: function() {
@@ -245,14 +274,14 @@ TreeActions.registerComponent("sole", recl({
   },
   componentDidMount: function() {
     this.mousetrapInit();
-    return this.join(this.state.appl);
+    return this.join(this.state.app);
   },
   sendAction: function(data) {
-    var app, appl;
-    appl = this.state.appl;
-    if (appl) {
+    var app;
+    app = this.state.app;
+    if (app) {
       return urb.send(data, {
-        appl: appl,
+        app: app,
         mark: 'sole-action'
       }, (function(_this) {
         return function(e, res) {
@@ -287,14 +316,25 @@ TreeActions.registerComponent("sole", recl({
   },
   doEdit: function(ted) {
     var det;
-    det = buffer[this.state.appl].transmit(ted);
+    det = buffer[this.state.app].transmit(ted);
     this.sync(ted);
     return this.sendAction({
       det: det
     });
   },
+  sendKyev: function(mod, key) {
+    var app;
+    app = this.state.app;
+    return urb.send({
+      mod: mod,
+      key: key
+    }, {
+      app: app,
+      mark: 'dill-belt'
+    });
+  },
   eatKyev: function(mod, key) {
-    var _, appl, cha, cursor, history, input, mapr, n, offset, prev, ref2, ref3, rest;
+    var history, input, mapr, offset, ref2, ref3;
     mapr = this.state;
     switch (mod.sort().join('-')) {
       case '':
@@ -312,7 +352,7 @@ TreeActions.registerComponent("sole", recl({
         }
         switch (key.act) {
           case 'entr':
-            return this.sendAction('ret');
+            return this.sendKyev(mod, key);
           case 'up':
             history = mapr.history.slice();
             offset = mapr.offset;
@@ -367,158 +407,10 @@ TreeActions.registerComponent("sole", recl({
             }
         }
         break;
-      case 'ctrl':
-        switch (key.str || key.act) {
-          case 'a':
-          case 'left':
-            return this.setState({
-              cursor: 0
-            });
-          case 'e':
-          case 'right':
-            return this.setState({
-              cursor: mapr.input.length
-            });
-          case 'l':
-            return this.setState({
-              rows: []
-            });
-          case 'entr':
-            return this.bell();
-          case 'w':
-            return this.eatKyev(['alt'], {
-              act: 'baxp'
-            });
-          case 'p':
-            return this.eatKyev([], {
-              act: 'up'
-            });
-          case 'n':
-            return this.eatKyev([], {
-              act: 'down'
-            });
-          case 'b':
-            return this.eatKyev([], {
-              act: 'left'
-            });
-          case 'f':
-            return this.eatKyev([], {
-              act: 'right'
-            });
-          case 'g':
-            return this.bell();
-          case 'x':
-            return this.cycle();
-          case 'v':
-            appl = mapr.appl !== '' ? '' : this.state.appl;
-            this.setState({
-              appl: appl,
-              cursor: 0,
-              input: buffer[appl].buf
-            });
-            return this.sysStatus();
-          case 't':
-            if (mapr.cursor === 0 || mapr.input.length < 2) {
-              return this.bell();
-            }
-            cursor = mapr.cursor;
-            if (cursor < mapr.input.length) {
-              cursor++;
-            }
-            this.doEdit([
-              {
-                del: cursor - 1
-              }, {
-                ins: {
-                  at: cursor - 2,
-                  cha: mapr.input[cursor - 1]
-                }
-              }
-            ]);
-            return this.setState({
-              cursor: cursor
-            });
-          case 'u':
-            this.yank = mapr.input.slice(0, mapr.cursor);
-            return this.doEdit((function() {
-              var i, ref4, results;
-              results = [];
-              for (n = i = 1, ref4 = mapr.cursor; 1 <= ref4 ? i <= ref4 : i >= ref4; n = 1 <= ref4 ? ++i : --i) {
-                results.push({
-                  del: mapr.cursor - n
-                });
-              }
-              return results;
-            })());
-          case 'k':
-            this.yank = mapr.input.slice(mapr.cursor);
-            return this.doEdit((function() {
-              var i, ref4, ref5, results;
-              results = [];
-              for (_ = i = ref4 = mapr.cursor, ref5 = mapr.input.length; ref4 <= ref5 ? i < ref5 : i > ref5; _ = ref4 <= ref5 ? ++i : --i) {
-                results.push({
-                  del: mapr.cursor
-                });
-              }
-              return results;
-            })());
-          case 'y':
-            return this.doEdit((function() {
-              var i, len, ref4, ref5, results;
-              ref5 = (ref4 = this.yank) != null ? ref4 : '';
-              results = [];
-              for (n = i = 0, len = ref5.length; i < len; n = ++i) {
-                cha = ref5[n];
-                results.push({
-                  ins: {
-                    cha: cha,
-                    at: mapr.cursor + n
-                  }
-                });
-              }
-              return results;
-            }).call(this));
-          default:
-            return console.log(mod, str(key));
-        }
-        break;
-      case 'alt':
-        switch (key.str || key.act) {
-          case 'f':
-          case 'right':
-            rest = mapr.input.slice(mapr.cursor);
-            rest = rest.match(/\W*\w*/)[0];
-            return this.setState({
-              cursor: mapr.cursor + rest.length
-            });
-          case 'b':
-          case 'left':
-            prev = mapr.input.slice(0, mapr.cursor);
-            prev = prev.split('').reverse().join('');
-            prev = prev.match(/\W*\w*/)[0];
-            return this.setState({
-              cursor: mapr.cursor - prev.length
-            });
-          case 'baxp':
-            prev = mapr.input.slice(0, mapr.cursor);
-            prev = prev.split('').reverse().join('');
-            prev = prev.match(/\W*\w*/)[0];
-            this.yank = prev;
-            return this.doEdit((function() {
-              var i, len, results;
-              results = [];
-              for (n = i = 0, len = prev.length; i < len; n = ++i) {
-                _ = prev[n];
-                results.push({
-                  del: mapr.cursor - 1 - n
-                });
-              }
-              return results;
-            })());
-        }
-        break;
+      case 'meta':
+        return console.log(mod, key);
       default:
-        return console.log(mod, str(key));
+        return this.sendKyev(mod, key);
     }
   },
   mousetrapStop: function() {
@@ -574,7 +466,7 @@ TreeActions.registerComponent("sole", recl({
       };
     })(this);
   }
-}));
+})));
 
 
 },{"./share.coffee":2}],2:[function(require,module,exports){

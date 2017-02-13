@@ -61,7 +61,7 @@
     [pax %ins plan+!>(ins)]~
   =+  ole=.^({{@t @t} (map knot plan-acct)} %cx paf)
   =+  neu=(pact-plan ole dif)
-  ?:  =(ole neu)  ~
+::   ?:  =(ole neu)  ~
   [pax %dif plan-diff+!>(dif)]~
 ::
 ++  pact-plan                         :: XX clay should handle fused insert+diff
