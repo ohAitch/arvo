@@ -186,8 +186,11 @@
 ++  poke-sole-action                                    ::  terminal transpose
   |=  act/sole-action
   =<  se-abet  =<  se-view
-  ?>  ?=($det -.act)
-  (se-chay +.act)
+  ?:  ?=($det -.act)  (se-chay +.act)
+  =+  gul=se-agon
+  ?:  |(?=($~ gul) (se-aint u.gul))
+    (se-blit %bel ~)
+  ta-abet:(ta-act:(se-tame u.gul) act)
 ::
 ++  poke-start                                        ::  start app
   |=  wel/well:^gall

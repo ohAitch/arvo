@@ -44,6 +44,9 @@
     ;script(type "text/javascript", src "{(cdnjs "lodash.js/2.4.1/lodash")}");
     ;script(type "text/javascript", src "https://unpkg.com/react@15/dist/react.js");
     ;script(type "text/javascript", src "https://unpkg.com/react-dom@15/dist/react-dom.js");
+    ;script(type "text/javascript", src "https://unpkg.com/redux@3.6.0/dist/redux.min.js");
+    ;script(type "text/javascript", src "https://unpkg.com/react-redux@5.0.3/dist/react-redux.min.js");
+    ;script(type "text/javascript", src "https://unpkg.com/redux-thunk@2.2.0/dist/redux-thunk.min.js");
     ;script(type "text/javascript", src "{(cdnjs "flux/2.1.1/Flux")}");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js");
 ::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/".
