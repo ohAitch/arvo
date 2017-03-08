@@ -1,87 +1,57 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Matr, Prompt, Share, TreeStore, buffer, div, noPad, pre, recl, ref, ref1, registerComponent, rele, span, str, u,
-  slice = [].slice,
-  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-ref = [React.createClass, React.createElement], recl = ref[0], rele = ref[1];
-
-ref1 = React.DOM, div = ref1.div, u = ref1.u, pre = ref1.pre, span = ref1.span;
-
-TreeStore = window.tree.util.store;
-
-registerComponent = window.tree.util.actions.registerComponent;
+var Persistence, str;
 
 str = JSON.stringify;
 
-Share = require("./share.coffee");
-
-buffer = {
-  "": new Share("")
-};
-
-noPad = {
-  padding: 0
-};
-
-Prompt = recl({
-  displayName: "Prompt",
-  render: function() {
-    var buf, cur, pro, ref2, ref3;
-    pro = (ref2 = this.props.prompt[this.props.app]) != null ? ref2 : "X";
-    cur = this.props.cursor - pro.length;
-    buf = this.props.input + " ";
-    return pre({
-      style: noPad
-    }, pro, span({
-      style: {
-        background: 'lightgray'
-      }
-    }, buf.slice(0, cur), u({}, (ref3 = buf[cur]) != null ? ref3 : " "), buf.slice(cur + 1)));
-  }
-});
-
-Matr = recl({
-  displayName: "Matr",
-  render: function() {
-    var lines;
-    lines = this.props.rows.map(function(lin, key) {
-      return pre({
-        key: key,
-        style: noPad
-      }, lin, " ");
+Persistence = {
+  listen: function(app, cb) {
+    return urb.bind("/sole/" + app, {
+      app: "drumming",
+      responseKey: "/" + app
+    }, (function(_this) {
+      return function(err, d) {
+        if (err) {
+          return console.log(err);
+        } else if (d.data) {
+          return cb(d.data);
+        }
+      };
+    })(this));
+  },
+  drop: function(app) {
+    return urb.drop("/sole/" + app, {
+      app: "drumming",
+      responseKey: "/" + app
     });
-    lines.push(rele(Prompt, {
-      key: "prompt",
-      app: this.props.app,
-      prompt: this.props.prompt,
-      input: this.props.input,
-      cursor: this.props.cursor
-    }));
-    return div({}, lines);
+  },
+  sendAct: function(app, data, _, cbErr) {
+    return urb.send(data, {
+      app: "drumming",
+      mark: 'sole-action',
+      responseKey: "/" + app
+    }, (function(_this) {
+      return function(e, res) {
+        if (res.status !== 200) {
+          return cbErr(res.data);
+        }
+      };
+    })(this));
+  },
+  sendKey: function(app, arg) {
+    var key, mod;
+    mod = arg.mod, key = arg.key;
+    return urb.send({
+      mod: mod,
+      key: key
+    }, {
+      app: "drumming",
+      mark: 'dill-belt',
+      responseKey: "/" + app
+    });
   }
-});
+};
 
-TreeStore.dispatch(registerComponent("sole", recl({
-  displayName: "Sole",
-  getInitialState: function() {
-    return {
-      rows: [],
-      app: this.props["data-app"],
-      prompt: {
-        "": "# "
-      },
-      input: "",
-      cursor: 0,
-      history: [],
-      offset: 0,
-      error: ""
-    };
-  },
-  render: function() {
-    return div({}, div({
-      id: "err"
-    }, this.state.error), rele(Matr, this.state));
-  },
+module.exports = {
   flash: function($el, background) {
     $el.css({
       background: background
@@ -97,82 +67,78 @@ TreeStore.dispatch(registerComponent("sole", recl({
   bell: function() {
     return this.flash($('body'), 'black');
   },
-  choose: function(app) {
-    if (buffer[app] == null) {
-      buffer[app] = new Share("");
-    }
-    this.updPrompt('', null);
-    return this.setState({
-      app: app,
-      cursor: 0,
-      input: buffer[app].buf
-    });
-  },
-  print: function(txt) {
-    return this.setState({
-      rows: slice.call(this.state.rows).concat([txt])
-    });
-  },
-  sync: function(ted, app) {
-    var b;
-    if (app == null) {
-      app = this.state.app;
-    }
-    if (app === this.state.app) {
-      b = buffer[app];
-      return this.setState({
-        input: b.buf,
-        cursor: b.transpose(ted, this.state.cursor)
-      });
-    }
-  },
-  updPrompt: function(app, pro) {
-    var prompt;
-    prompt = $.extend({}, this.state.prompt);
-    if (pro != null) {
-      prompt[app] = pro;
-    } else {
-      delete prompt[app];
-    }
-    return this.setState({
-      prompt: prompt
-    });
-  },
-  sysStatus: function() {
-    var app, k, pro, ref2, v;
-    return this.updPrompt('', ((ref2 = [
-      this.state.app, (function() {
-        var ref2, results;
-        ref2 = this.state.prompt;
-        results = [];
-        for (k in ref2) {
-          v = ref2[k];
-          if (k !== '') {
-            results.push(k);
-          }
+  getState: function(app) {
+    var apps, cursor, drum, error, history, input, k, nextApp, ref, ref1, ref2, ref3, rows, share, state, yank;
+    ref = this._getState(), drum = ref.drum, yank = ref.yank, rows = ref.rows, state = ref.state;
+    ref1 = state[app], (ref2 = ref1.buffer, share = ref2.share, cursor = ref2.cursor), history = ref1.history, error = ref1.error;
+    input = history.offset >= 0 ? history.log[history.offset] : share.buf;
+    apps = (function() {
+      var results;
+      results = [];
+      for (k in state) {
+        if (k !== "") {
+          results.push(k);
         }
-        return results;
-      }).call(this)
-    ], app = ref2[0], pro = ref2[1], ref2), app === '' ? (pro.join(', ')) + '# ' : null));
+      }
+      return results;
+    })();
+    nextApp = (ref3 = apps[1 + apps.indexOf(app)]) != null ? ref3 : apps[0];
+    return {
+      yank: yank,
+      rows: rows,
+      app: app,
+      nextApp: nextApp,
+      state: state,
+      prompt: prompt,
+      share: share,
+      cursor: cursor,
+      input: input,
+      error: error
+    };
   },
-  exec: function(action) {
-    var type;
-    if (action.map) {
-      return action.map((function(_this) {
-        return function(act) {
-          return _this.exec(act);
-        };
-      })(this));
-    } else {
-      type = Object.keys(action)[0];
-      return this[type](action[type]);
-    }
+  dispatch: function(action) {
+    var k, type;
+    type = ((function() {
+      var results;
+      results = [];
+      for (k in action) {
+        results.push(k);
+      }
+      return results;
+    })()).join(" ");
+    return this._dispatch({
+      type: type,
+      payload: action[type]
+    });
+  },
+  dispatchTo: function(app, action) {
+    var k, type;
+    type = ((function() {
+      var results;
+      results = [];
+      for (k in action) {
+        results.push(k);
+      }
+      return results;
+    })()).join(" ");
+    return this._dispatch({
+      type: type,
+      app: app,
+      payload: action[type]
+    });
+  },
+  choose: function(app) {
+    return this.dispatchTo(app, {
+      "choose": "choose"
+    });
+  },
+  print: function(row) {
+    return this.dispatch({
+      row: row
+    });
   },
   peer: function(ruh, app) {
-    var mapr, v;
-    if (app == null) {
-      app = this.state.app;
-    }
+    var input, v;
     if (ruh.map) {
       return ruh.map((function(_this) {
         return function(rul) {
@@ -180,46 +146,54 @@ TreeStore.dispatch(registerComponent("sole", recl({
         };
       })(this));
     }
-    mapr = this.state;
     switch (Object.keys(ruh)[0]) {
       case 'out':
         return this.print(ruh.out);
       case 'txt':
         return this.print(ruh.txt);
       case 'tan':
-        return ruh.tan.trim().split("\n").map(this.print);
+        return ruh.tan.trim().split("\n").map((function(_this) {
+          return function(s) {
+            return _this.print(s);
+          };
+        })(this));
       case 'pro':
-        return this.updPrompt(app, ruh.pro.cad);
-      case 'pom':
-        return this.updPrompt(app, _.map(ruh.pom, function(arg) {
-          var text;
-          text = arg.text;
-          return text;
-        }));
-      case 'hop':
-        return this.setState({
-          cursor: ruh.hop
+        return this.dispatchTo(app, {
+          prompt: ruh.pro.cad
         });
+      case 'pom':
+        if (ruh.pom.length) {
+          return this.dispatchTo(app, {
+            prompt: ruh.pom[0].text
+          });
+        }
+        break;
+      case 'hop':
+        break;
       case 'blk':
         return console.log("Stub " + (str(ruh)));
       case 'det':
-        buffer[app].receive(ruh.det);
-        return this.sync(ruh.det.ted, app);
+        return this.dispatchTo(app, {
+          receive: ruh.det
+        });
       case 'act':
         switch (ruh.act) {
           case 'clr':
-            return this.setState({
-              rows: []
+            return this.dispatch({
+              'clear': 'clear'
             });
           case 'bel':
             return this.bell();
           case 'nex':
-            return this.setState({
-              input: "",
-              cursor: 0,
-              history: !mapr.input ? mapr.history : [mapr.input].concat(slice.call(mapr.history)),
-              offset: 0
+            this.dispatch({
+              'line': 'line'
             });
+            input = this.getState(app).input;
+            if (input) {
+              return this.dispatchTo(app, {
+                historyAdd: input
+              });
+            }
         }
         break;
       default:
@@ -227,84 +201,55 @@ TreeStore.dispatch(registerComponent("sole", recl({
         return console.log(v, ruh[v[0]]);
     }
   },
-  join: function(app) {
-    if (this.state.prompt[app] != null) {
-      return this.print('# already-joined: ' + app);
-    }
+  join: function(app, state) {
+    return (function(_this) {
+      return function(_dispatch) {
+        _this._dispatch = _dispatch;
+        return _this._join(app, state);
+      };
+    })(this);
+  },
+  _join: function(app, state) {
     this.choose(app);
-    return urb.bind("/drum", {
-      app: this.state.app,
-      responseKey: "/"
-    }, (function(_this) {
-      return function(err, d) {
-        if (err) {
-          return console.log(err);
-        } else if (d.data) {
-          return _this.peer(d.data, app);
-        }
+    return Persistence.listen(app, (function(_this) {
+      return function(data) {
+        return _this.peer(data, app);
       };
     })(this));
   },
-  cycle: function() {
-    var apps, ref2;
-    apps = Object.keys(this.state.prompt);
-    if (apps.length < 2) {
-      return;
-    }
-    return this.choose((ref2 = apps[1 + apps.indexOf(this.state.app)]) != null ? ref2 : apps[0]);
-  },
-  part: function(app) {
-    var mapr;
-    mapr = this.state;
-    if (mapr.prompt[app] == null) {
-      return this.print('# not-joined: ' + app);
-    }
-    urb.drop("/drum", {
-      app: app,
-      responseKey: "/"
+  part: function(app, state) {
+    Persistence.drop(app);
+    this.cycle(app, state);
+    return this.dispatchTo(app, {
+      "part": "part"
     });
-    if (app === mapr.app) {
-      this.cycle();
-    }
-    this.updPrompt(app, null);
-    return this.sysStatus();
   },
-  componentWillUnmount: function() {
-    return this.mousetrapStop();
-  },
-  componentDidMount: function() {
-    this.mousetrapInit();
-    return this.join(this.state.app);
-  },
-  sendAction: function(data) {
-    var app;
-    app = this.state.app;
+  sendAction: function(app, share, data) {
     if (app) {
-      return urb.send(data, {
-        app: app,
-        mark: 'sole-action'
-      }, (function(_this) {
-        return function(e, res) {
-          if (res.status !== 200) {
-            return _this.setState({
-              error: res.data.mess
-            });
-          }
+      return Persistence.sendAct(app, data, null, (function(_this) {
+        return function(err) {
+          return _this.dispatch({
+            error: err.mess
+          });
         };
       })(this));
     } else if (data === 'ret') {
-      app = /^[a-z-]+$/.exec(buffer[""].buf.slice(1));
+      app = /^[a-z-]+$/.exec(share.buf.slice(1));
       if (!((app != null) && (app[0] != null))) {
         return this.bell();
       } else {
-        switch (buffer[""].buf[0]) {
+        switch (share.buf[0]) {
           case '+':
-            this.doEdit({
+            this.doEdit('', {
+              share: share
+            }, {
               set: ""
             });
-            return this.join(app[0]);
+            return this._join(app[0]);
           case '-':
-            this.doEdit({
+            this.doEdit('', {
+              share: share
+            }, {
               set: ""
             });
             return this.part(app[0]);
@@ -314,162 +259,653 @@ TreeStore.dispatch(registerComponent("sole", recl({
       }
     }
   },
-  doEdit: function(ted) {
-    var det;
-    det = buffer[this.state.app].transmit(ted);
-    this.sync(ted);
-    return this.sendAction({
+  doEdit: function(app, arg, ted) {
+    var cursor, det, share;
+    share = arg.share, cursor = arg.cursor;
+    det = share.transmit(ted);
+    cursor = share.transpose(ted, cursor);
+    this.dispatchTo(app, {
+      edit: {
+        share: share,
+        cursor: cursor
+      }
+    });
+    return this.sendAction(app, share, {
       det: det
     });
   },
-  sendKyev: function(mod, key) {
-    var app;
-    app = this.state.app;
-    return urb.send({
-      mod: mod,
-      key: key
-    }, {
-      app: app,
-      mark: 'dill-belt'
-    });
-  },
   eatKyev: function(mod, key) {
-    var history, input, mapr, offset, ref2, ref3;
-    mapr = this.state;
-    switch (mod.sort().join('-')) {
-      case '':
-      case 'shift':
-        if (key.str) {
-          this.doEdit({
-            ins: {
-              cha: key.str,
-              at: mapr.cursor
-            }
-          });
-          this.setState({
-            cursor: mapr.cursor + 1
-          });
+    return (function(_this) {
+      return function(_dispatch, _getState) {
+        var _, app, buffer, cha, cursor, drum, input, n, nextApp, prev, ref, ref1, rest, rows, share, state, yank;
+        _this._dispatch = _dispatch;
+        _this._getState = _getState;
+        ref = _this._getState(), drum = ref.drum, app = ref.app;
+        if (drum) {
+          app = "";
         }
-        switch (key.act) {
-          case 'entr':
-            return this.sendKyev(mod, key);
-          case 'up':
-            history = mapr.history.slice();
-            offset = mapr.offset;
-            if (history[offset] === void 0) {
-              return;
-            }
-            ref2 = [history[offset], mapr.input], input = ref2[0], history[offset] = ref2[1];
-            offset++;
-            this.doEdit({
-              set: input
-            });
-            return this.setState({
-              offset: offset,
-              history: history,
-              cursor: input.length
-            });
-          case 'down':
-            history = mapr.history.slice();
-            offset = mapr.offset;
-            offset--;
-            if (history[offset] === void 0) {
-              return;
-            }
-            ref3 = [history[offset], mapr.input], input = ref3[0], history[offset] = ref3[1];
-            this.doEdit({
-              set: input
-            });
-            return this.setState({
-              offset: offset,
-              history: history,
-              cursor: input.length
-            });
-          case 'left':
-            if (mapr.cursor > 0) {
-              return this.setState({
-                cursor: mapr.cursor - 1
-              });
-            }
-            break;
-          case 'right':
-            if (mapr.cursor < mapr.input.length) {
-              return this.setState({
-                cursor: mapr.cursor + 1
-              });
-            }
-            break;
-          case 'baxp':
-            if (mapr.cursor > 0) {
-              return this.doEdit({
-                del: mapr.cursor - 1
-              });
-            }
-        }
-        break;
-      case 'meta':
-        return console.log(mod, key);
-      default:
-        return this.sendKyev(mod, key);
-    }
-  },
-  mousetrapStop: function() {
-    return Mousetrap.handleKey = this._defaultHandleKey;
-  },
-  mousetrapInit: function() {
-    this._defaultHandleKey = Mousetrap.handleKey;
-    return Mousetrap.handleKey = (function(_this) {
-      return function(char, mod, e) {
-        var chac, key, norm, ref2;
-        norm = {
-          capslock: 'caps',
-          pageup: 'pgup',
-          pagedown: 'pgdn',
-          backspace: 'baxp',
-          enter: 'entr'
+        ref1 = _this.getState(app), yank = ref1.yank, rows = ref1.rows, app = ref1.app, nextApp = ref1.nextApp, state = ref1.state, share = ref1.share, cursor = ref1.cursor, input = ref1.input;
+        buffer = {
+          share: share,
+          cursor: cursor
         };
-        key = (function() {
-          var ref2;
-          switch (false) {
-            case char.length !== 1:
-              if (e.type === 'keypress') {
-                chac = char.charCodeAt(0);
-                if (chac < 32) {
-                  char = String.fromCharCode(chac | 96);
+        switch (mod.sort().join('-')) {
+          case '':
+          case 'shift':
+            if (key.str) {
+              _this.doEdit(app, buffer, {
+                ins: {
+                  cha: key.str,
+                  at: cursor
                 }
-                return {
-                  str: char
-                };
-              }
-              break;
-            case e.type !== 'keydown':
-              if (char !== 'space') {
-                return {
-                  act: (ref2 = norm[char]) != null ? ref2 : char
-                };
-              }
-              break;
-            case !(e.type === 'keyup' && norm[key] === 'caps'):
-              return {
-                act: 'uncap'
-              };
-          }
-        })();
-        if (!key) {
-          return;
+              });
+              _this.dispatchTo(app, {
+                cursor: cursor + 1
+              });
+            }
+            switch (key.act) {
+              case 'entr':
+                return _this.sendAction(app, share, 'ret');
+              case 'up':
+                return _this.dispatchTo(app, {
+                  'historyPrevious': 'historyPrevious'
+                });
+              case 'down':
+                return _this.dispatchTo(app, {
+                  'historyNext': 'historyNext'
+                });
+              case 'left':
+                if (cursor > 0) {
+                  return _this.dispatchTo(app, {
+                    cursor: cursor - 1
+                  });
+                }
+                break;
+              case 'right':
+                if (cursor < input.length) {
+                  return _this.dispatchTo(app, {
+                    cursor: cursor + 1
+                  });
+                }
+                break;
+              case 'baxp':
+                if (cursor > 0) {
+                  return _this.doEdit(app, buffer, {
+                    del: cursor - 1
+                  });
+                }
+            }
+            break;
+          case 'ctrl':
+            switch (key.str || key.act) {
+              case 'a':
+              case 'left':
+                return _this.dispatchTo(app, {
+                  cursor: 0
+                });
+              case 'e':
+              case 'right':
+                return _this.dispatchTo(app, {
+                  cursor: input.length
+                });
+              case 'l':
+                return _this.dispatch({
+                  'clear': 'clear'
+                });
+              case 'entr':
+                return _this.bell();
+              case 'w':
+                return _this.eatKyev(['alt'], {
+                  act: 'baxp'
+                });
+              case 'p':
+                return _this.eatKyev([], {
+                  act: 'up'
+                });
+              case 'n':
+                return _this.eatKyev([], {
+                  act: 'down'
+                });
+              case 'b':
+                return _this.eatKyev([], {
+                  act: 'left'
+                });
+              case 'f':
+                return _this.eatKyev([], {
+                  act: 'right'
+                });
+              case 'g':
+                return _this.bell();
+              case 'x':
+                return Persistence.sendKey(app, {
+                  mod: mod,
+                  key: key
+                });
+              case 'v':
+                return _this.dispatch({
+                  "toggleDrum": "toggleDrum"
+                });
+              case 't':
+                if (cursor === 0 || input.length < 2) {
+                  return _this.bell();
+                }
+                if (cursor < input.length) {
+                  cursor++;
+                }
+                _this.doEdit(app, buffer, [
+                  {
+                    del: cursor - 1
+                  }, {
+                    ins: {
+                      at: cursor - 2,
+                      cha: input[cursor - 1]
+                    }
+                  }
+                ]);
+                return _this.dispatchTo(app, {
+                  cursor: cursor
+                });
+              case 'u':
+                _this.dispatch({
+                  yank: input.slice(0, cursor)
+                });
+                return _this.doEdit(app, buffer, (function() {
+                  var i, ref2, results;
+                  results = [];
+                  for (n = i = 1, ref2 = cursor; 1 <= ref2 ? i <= ref2 : i >= ref2; n = 1 <= ref2 ? ++i : --i) {
+                    results.push({
+                      del: cursor - n
+                    });
+                  }
+                  return results;
+                })());
+              case 'k':
+                _this.dispatch({
+                  yank: input.slice(cursor)
+                });
+                return _this.doEdit(app, buffer, (function() {
+                  var i, ref2, ref3, results;
+                  results = [];
+                  for (_ = i = ref2 = cursor, ref3 = input.length; ref2 <= ref3 ? i < ref3 : i > ref3; _ = ref2 <= ref3 ? ++i : --i) {
+                    results.push({
+                      del: cursor
+                    });
+                  }
+                  return results;
+                })());
+              case 'y':
+                return _this.doEdit(app, buffer, (function() {
+                  var i, len, ref2, results;
+                  ref2 = yank != null ? yank : '';
+                  results = [];
+                  for (n = i = 0, len = ref2.length; i < len; n = ++i) {
+                    cha = ref2[n];
+                    results.push({
+                      ins: {
+                        cha: cha,
+                        at: cursor + n
+                      }
+                    });
+                  }
+                  return results;
+                })());
+              default:
+                return console.log(mod, str(key));
+            }
+            break;
+          case 'alt':
+            switch (key.str || key.act) {
+              case 'f':
+              case 'right':
+                rest = input.slice(cursor);
+                rest = rest.match(/\W*\w*/)[0];
+                return _this.dispatchTo(app, {
+                  cursor: cursor + rest.length
+                });
+              case 'b':
+              case 'left':
+                prev = input.slice(0, cursor);
+                prev = prev.split('').reverse().join('');
+                prev = prev.match(/\W*\w*/)[0];
+                return _this.dispatchTo(app, {
+                  cursor: cursor - prev.length
+                });
+              case 'baxp':
+                prev = input.slice(0, cursor);
+                prev = prev.split('').reverse().join('');
+                prev = prev.match(/\W*\w*/)[0];
+                _this.dispatch({
+                  yank: prev
+                });
+                return _this.doEdit(app, buffer, (function() {
+                  var i, len, results;
+                  results = [];
+                  for (n = i = 0, len = prev.length; i < len; n = ++i) {
+                    _ = prev[n];
+                    results.push({
+                      del: cursor - 1 - n
+                    });
+                  }
+                  return results;
+                })());
+            }
+            break;
+          default:
+            return console.log(mod, str(key));
         }
-        if (key.act && (ref2 = key.act, indexOf.call(mod, ref2) >= 0)) {
-          return;
-        }
-        e.preventDefault();
-        return _this.eatKyev(mod, key);
       };
     })(this);
   }
-})));
+};
 
 
-},{"./share.coffee":2}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
+var Actions, IO, Matr, Prompt, Provider, Reducer, Sole, TreeStore, applyMiddleware, connect, createStore, div, noPad, pre, recl, ref, ref1, registerComponent, rele, span, stateToProps, thunk, toKyev, u,
+  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+ref = [React.createClass, React.createElement], recl = ref[0], rele = ref[1];
+
+ref1 = React.DOM, div = ref1.div, u = ref1.u, pre = ref1.pre, span = ref1.span;
+
+TreeStore = window.tree.util.store;
+
+registerComponent = window.tree.util.actions.registerComponent;
+
+createStore = Redux.createStore, applyMiddleware = Redux.applyMiddleware;
+
+Provider = ReactRedux.Provider, connect = ReactRedux.connect;
+
+thunk = ReduxThunk["default"];
+
+Reducer = require("./reducer.coffee");
+
+Actions = require("./actions.coffee");
+
+noPad = {
+  padding: 0
+};
+
+stateToProps = function(arg) {
+  var app, cursor, drum, history, input, k, prompt, ref2, ref3, ref4, ref5, share, state, v;
+  drum = arg.drum, app = arg.app, state = arg.state;
+  if (drum) {
+    ref2 = state[""], prompt = ref2.prompt, (ref3 = ref2.buffer, share = ref3.share, cursor = ref3.cursor), history = ref2.history;
+    prompt = ((function() {
+      var results;
+      results = [];
+      for (k in state) {
+        v = state[k];
+        if (k !== '') {
+          results.push(k);
+        }
+      }
+      return results;
+    })()).join(', ') + '# ';
+  } else {
+    ref4 = state[app], prompt = ref4.prompt, (ref5 = ref4.buffer, share = ref5.share, cursor = ref5.cursor), history = ref4.history;
+  }
+  input = history.offset >= 0 ? history.log[history.offset] : share.buf;
+  return {
+    prompt: prompt,
+    cursor: cursor,
+    offset: history.offset,
+    input: input
+  };
+};
+
+Prompt = connect(stateToProps)(function(arg) {
+  var buf, cur, cursor, input, offset, prompt, ref2;
+  prompt = arg.prompt, cursor = arg.cursor, offset = arg.offset, input = arg.input;
+  cur = cursor;
+  buf = input + " ";
+  return pre({
+    style: noPad
+  }, prompt, span({
+    style: {
+      background: 'lightgray'
+    }
+  }, buf.slice(0, cur), u({}, (ref2 = buf[cur]) != null ? ref2 : " "), buf.slice(cur + 1)), offset >= 0 ? " ⧖" + offset : void 0);
+});
+
+Matr = connect(function(s) {
+  return s;
+})(function(arg) {
+  var key, lin, rows;
+  rows = arg.rows;
+  return div({}, (function() {
+    var i, len, results;
+    results = [];
+    for (key = i = 0, len = rows.length; i < len; key = ++i) {
+      lin = rows[key];
+      results.push(pre({
+        key: key,
+        style: noPad
+      }, lin, " "));
+    }
+    return results;
+  })(), rele(Prompt));
+});
+
+Sole = connect(function(s) {
+  return s;
+})(function(arg) {
+  var error;
+  error = arg.error;
+  return div({}, div({
+    id: "err"
+  }, error), rele(Matr));
+});
+
+IO = connect()(recl({
+  render: function() {
+    return div({});
+  },
+  componentWillUnmount: function() {
+    return Mousetrap.handleKey = this._defaultHandleKey;
+  },
+  componentDidMount: function() {
+    this._defaultHandleKey = Mousetrap.handleKey;
+    return Mousetrap.handleKey = (function(_this) {
+      return function(char, mod, e) {
+        var key, ref2;
+        ref2 = toKyev({
+          char: char,
+          mod: mod,
+          type: e.type
+        }), mod = ref2.mod, key = ref2.key;
+        if (key) {
+          e.preventDefault();
+          return _this.props.dispatch(Actions.eatKyev(mod, key));
+        }
+      };
+    })(this);
+  }
+}));
+
+setTimeout(function() {
+  return TreeStore.dispatch(registerComponent("sole", recl({
+    getInitialState: function() {
+      var store;
+      store = createStore(Reducer, (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || function(s) {
+        return s;
+      })(applyMiddleware(thunk)));
+      store.dispatch(Actions.join(this.props["data-app"]));
+      return {
+        store: store
+      };
+    },
+    render: function() {
+      return rele(Provider, {
+        store: this.state.store
+      }, div({}, rele(IO), rele(Sole, this.props)));
+    }
+  })));
+});
+
+toKyev = function(arg) {
+  var chac, char, key, mod, norm, ref2, type;
+  char = arg.char, mod = arg.mod, type = arg.type;
+  norm = {
+    capslock: 'caps',
+    pageup: 'pgup',
+    pagedown: 'pgdn',
+    backspace: 'baxp',
+    enter: 'entr'
+  };
+  key = (function() {
+    var ref2;
+    switch (false) {
+      case char.length !== 1:
+        if (type === 'keypress') {
+          chac = char.charCodeAt(0);
+          if (chac < 32) {
+            char = String.fromCharCode(chac | 96);
+          }
+          return {
+            str: char
+          };
+        }
+        break;
+      case type !== 'keydown':
+        if (char !== 'space') {
+          return {
+            act: (ref2 = norm[char]) != null ? ref2 : char
+          };
+        }
+        break;
+      case !(type === 'keyup' && norm[key] === 'caps'):
+        return {
+          act: 'uncap'
+        };
+    }
+  })();
+  if ((ref2 = key != null ? key.act : void 0, indexOf.call(mod, ref2) >= 0)) {
+    return {};
+  } else {
+    return {
+      mod: mod,
+      key: key
+    };
+  }
+};
+
+
+},{"./actions.coffee":1,"./reducer.coffee":3}],3:[function(require,module,exports){
+var Share, app, buffer, byApp, combineReducers, drum, error, history, prompt, rows, yank,
+  slice = [].slice;
+
+combineReducers = Redux.combineReducers;
+
+Share = require("./share.coffee");
+
+rows = function(state, arg) {
+  var payload, type;
+  if (state == null) {
+    state = [];
+  }
+  type = arg.type, payload = arg.payload;
+  switch (type) {
+    case "row":
+      return slice.call(state).concat([payload]);
+    case "clear":
+      return [];
+    default:
+      return state;
+  }
+};
+
+yank = function(state, arg) {
+  var payload, type;
+  if (state == null) {
+    state = '';
+  }
+  type = arg.type, payload = arg.payload;
+  switch (type) {
+    case "yank":
+      return payload;
+    default:
+      return state;
+  }
+};
+
+app = function(state, arg) {
+  var app, payload, type;
+  if (state == null) {
+    state = '';
+  }
+  type = arg.type, app = arg.app, payload = arg.payload;
+  switch (type) {
+    case "choose":
+      return app;
+    default:
+      return state;
+  }
+};
+
+byApp = function(reducer) {
+  return function(state, action) {
+    if (state == null) {
+      state = {
+        "": reducer(void 0, {})
+      };
+    }
+    if (action.app != null) {
+      state = $.extend({}, state);
+      state[action.app] = reducer(state[action.app], action);
+    }
+    return state;
+  };
+};
+
+buffer = function(state, arg) {
+  var cursor, payload, share, type;
+  if (state == null) {
+    state = {
+      cursor: 0,
+      share: new Share("")
+    };
+  }
+  type = arg.type, payload = arg.payload;
+  cursor = state.cursor, share = state.share;
+  switch (type) {
+    case "edit":
+      return payload;
+    case "receive":
+      share.receive(payload);
+      cursor = share.transpose(payload.ted, cursor);
+      return {
+        cursor: cursor,
+        share: share
+      };
+    case "choose":
+      return state;
+    case "cursor":
+      return {
+        cursor: payload,
+        share: share
+      };
+    case "line":
+      return {
+        cursor: 0,
+        share: share
+      };
+    default:
+      return state;
+  }
+};
+
+prompt = function(state, arg) {
+  var payload, type;
+  if (state == null) {
+    state = "X";
+  }
+  type = arg.type, payload = arg.payload;
+  switch (type) {
+    case "prompt":
+      return payload;
+    default:
+      return state;
+  }
+};
+
+history = function(state, arg) {
+  var active, log, offset, payload, type;
+  if (state == null) {
+    state = {
+      offset: -1,
+      log: []
+    };
+  }
+  type = arg.type, payload = arg.payload;
+  offset = state.offset, active = state.active, log = state.log;
+  switch (type) {
+    case "historyAdd":
+      log = [payload].concat(slice.call(log));
+      return {
+        offset: -1,
+        log: log
+      };
+    case "edit":
+      return {
+        offset: -1,
+        log: log
+      };
+    case "line":
+      return {
+        offset: -1,
+        log: log
+      };
+    case "historyPrevious":
+      if (offset < log.length - 1) {
+        offset++;
+      }
+      return {
+        offset: offset,
+        log: log
+      };
+    case "historyNext":
+      if (offset < 0) {
+        return {
+          offset: offset,
+          log: log
+        };
+      } else {
+        offset--;
+        return {
+          offset: offset,
+          log: log
+        };
+      }
+      break;
+    default:
+      return state;
+  }
+};
+
+error = function(state, arg) {
+  var payload, type;
+  if (state == null) {
+    state = "";
+  }
+  type = arg.type, payload = arg.payload;
+  switch (type) {
+    case "error":
+      return payload;
+    default:
+      return state;
+  }
+};
+
+drum = function(state, arg) {
+  var payload, type;
+  if (state == null) {
+    state = false;
+  }
+  type = arg.type, payload = arg.payload;
+  switch (type) {
+    case "toggleDrum":
+      return !state;
+    default:
+      return state;
+  }
+};
+
+module.exports = combineReducers({
+  error: error,
+  rows: rows,
+  yank: yank,
+  drum: drum,
+  app: app,
+  state: byApp(combineReducers({
+    prompt: prompt,
+    buffer: buffer,
+    history: history,
+    error: error
+  }))
+});
+
+
+},{"./share.coffee":4}],4:[function(require,module,exports){
 var clog, str;
 
 str = JSON.stringify;
@@ -676,4 +1112,4 @@ module.exports = (function() {
 })();
 
 
-},{}]},{},[1]);
+},{}]},{},[2]);

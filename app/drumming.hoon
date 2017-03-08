@@ -166,17 +166,17 @@
 ++  diff-sole-effect-phat                             ::  app event
   |=  {way/wire fec/sole-effect}
   =/  gyl  (decode-wire way)
-  se-abet:se-view:(su-diff-sole-effect-phat gyl fec)
+  se-abet:se-view:(~(diff-sole-effect-phat su gyl) fec)
 ::
 ++  peer-sole                                         ::  someone is listening
   |=  pax/path  ^+  se-abet
   ~|  [%drum-unauthorized our+our.hid src+src.hid]    ::  ourself
   ?>  (team:title our.hid src.hid)               ::  or our own moon
-  se-abet:se-view:(su-peer-sole)
+  se-abet:se-view:(se-text "[{<src.hid>}, driving {<our.hid>}]")
 ::
 ++  poke-dill-belt                                    ::  terminal event
   |=  bet/dill-belt:^dill
-  se-abet:se-view:(su-poke-dill-belt bet)
+  se-abet:se-view:(se-belt bet)
 ::
 ++  poke-sole-action                                    ::  terminal transpose
   |=  act/sole-action
@@ -184,92 +184,36 @@
 ::
 ++  poke-start                                        ::  start app
   |=  wel/well:^gall
-  se-abet:se-view:(su-poke-start wel)
+  se-abet:se-view:(se-born wel)
 ::
 ++  poke-link                                         ::  connect app
   |=  gyl/gill:^gall
-  se-abet:se-view:(su-poke-link gyl)
+  se-abet:se-view:~(poke-link su gyl)
 ::
 ++  poke-unlink                                       ::  disconnect app
   |=  gyl/gill:^gall
-  se-abet:se-view:(su-poke-unlink gyl)
-::
-++  poke-exit                                         ::  shutdown
-  |=  $~
-  se-abet:su-poke-exit
-::
-++  poke-put                                          ::  write file
-  |=  {pax/path txt/@}
-  se-abet:(su-poke-put pax txt)
+  se-abet:se-view:~(poke-unlink su gyl)
 ::
 ++  reap-phat                                         ::  ack connect
   |=  {way/wire saw/(unit tang)}
   =/  gyl  (decode-wire way)
-  se-abet:se-view:(su-reap-phat gyl saw)
+  se-abet:se-view:(~(reap-phat su gyl) saw)
 ::
 ++  take-coup-phat                                    ::  ack poke
   |=  {way/wire saw/(unit tang)}
   =/  gyl  (decode-wire way)
-  se-abet:se-view:(su-take-coup-phat gyl saw)
+  se-abet:se-view:(~(take-coup-phat su gyl) saw)
+::
+++  quit-phat                                         ::
+  |=  way/wire
+  =/  gyl  (decode-wire way)
+  se-abet:se-view:~(quit-phat su gyl)
 ::
 ++  take-onto                                         ::  ack start
   |=  {way/wire saw/(each suss:^gall tang)}  
   ?>  ?=({@ @ $~} way)
   =/  wel/well:^gall  [i.way i.t.way]
-  se-abet:se-view:(su-take-onto wel saw)
-::
-++  quit-phat                                         ::
-  |=  way/wire
-  =/  gyl  (decode-wire way)
-  se-abet:se-view:(su-quit-phat gyl)
-::                                                    ::  ::
-::::                                                  ::  ::
-  ::                                                  ::  ::
-++  su-diff-sole-effect-phat                             ::  app event
-  |=  {gyl/gill:^gall fec/sole-effect}  ^+  +>
-  ?:  (dropped-app gyl)  +>.$
-  (se-diff gyl fec)
-::
-++  su-peer-sole                                         ::  someone is listening
-  ^+  .
-  ::  implicitly create source for subscription
-  (se-text "[{<src.hid>}, driving {<our.hid>}]")
-::
-++  su-poke-dill-belt  se-belt                             ::  terminal event
-++  su-poke-sole-action                                    ::  terminal transpose
-  |=  act/sole-action  ^+  +>
-  ?:  ?=($det -.act)  (se-chay +.act)
-  =+  gul=current-gill
-  ?:  |(?=($~ gul) (dropped-app u.gul))
-    (se-blit %bel ~)
-  ta-abet:(ta-act:(se-tame u.gul) act)
-::
-++  su-poke-start  se-born                               ::  start app
-++  su-poke-link  se-link                                ::  connect app
-++  su-poke-unlink  se-klin                              ::  disconnect app
-++  su-poke-exit                                         ::  shutdown
-  (se-blit-sys `dill-blit:^dill`[%qit ~])
-::
-++  su-poke-put                                          ::  write file
-  |=  {pax/path txt/@}
-  (se-blit-sys [%sav pax txt])                           ::
-::
-++  su-reap-phat                                         ::  ack connect
-  |=  {gyl/gill:^gall saw/(unit tang)}  ^+  +>
-  ?~  saw
-    (se-join gyl)
-  (se-dump:(se-drop & gyl) u.saw)
-::
-++  su-take-coup-phat                                    ::  ack poke
-  |=  {gyl/gill:^gall saw/(unit tang)}  ^+  +>
-  ?~  saw  +>
-  ?:  (dropped-app gyl)  +>.$
-  %-  se-dump:(se-drop & gyl)
-  :_  u.saw
-  >[%drum-coup-fail src.hid ost.hid gyl]<
-::
-++  su-take-onto                                         ::  ack start
-  |=  {wel/well:^gall saw/(each suss:^gall tang)}  ^+  +>
+  =<  se-abet  =<  se-view  :: XX se view necessary?
   ?>  (~(has by fur) q.wel)
   ?-  saw
     {$| *}  (se-dump p.saw)
@@ -278,10 +222,57 @@
             +>.$(fur (~(put by fur) q.wel `[p.wel %da r.p.saw]))
   ==
 ::
-++  su-quit-phat                                         ::
-  |=  gyl/gill:^gall  ^+  +>
-  ~&  [%drum-quit src.hid ost.hid gyl]
-  (se-drop %| gyl)
+::
+++  poke-exit                                         ::  shutdown
+  |=  $~
+  se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
+::
+++  poke-put                                          ::  write file
+  |=  {pax/path txt/@}
+  se-abet:(se-blit-sys [%sav pax txt])
+::
+::::                                                  ::  ::
+  ::                                                  ::  ::
+++  su-poke-sole-action
+  |=  act/sole-action
+  =/  gul   current-gill
+  ?~  gul  (se-blit %bel ~)
+  (~(poke-sole-action su u.gul) act)
+::
+++  su
+  |_  gyl/gill:^gall  :: XX smeeeeell
+  ++  diff-sole-effect-phat                             ::  app event
+    |=  fec/sole-effect  ^+  ..su
+    ?:  (dropped-app gyl)  ..su
+    (se-diff gyl fec)
+  ::
+  ++  poke-sole-action                                    ::  terminal transpose
+    |=  act/sole-action  ^+  ..su
+    ?:  ?=($det -.act)  (se-chay +.act)
+    ?:  (dropped-app gyl)
+      (se-blit %bel ~)
+    ta-abet:(ta-act:(se-tame gyl) act)
+  ::
+  ++  poke-link    (se-link gyl)                        ::  connect app
+  ++  poke-unlink  (se-klin gyl)                        ::  disconnect app
+  ++  reap-phat                                         ::  ack connect
+    |=  saw/(unit tang)  ^+  ..su
+    ?~  saw
+      (se-join gyl)
+    (se-dump:(se-drop & gyl) u.saw)
+  ::
+  ++  take-coup-phat                                    ::  ack poke
+    |=  saw/(unit tang)  ^+  ..su
+    ?~  saw  ..su
+    ?:  (dropped-app gyl)  ..su
+    %-  se-dump:(se-drop & gyl)
+    :_  u.saw
+    >[%drum-coup-fail src.hid ost.hid gyl]<
+  ::
+  ++  quit-phat                                         ::
+    ~&  [%drum-quit src.hid ost.hid gyl]
+    (se-drop %| gyl)
+  --
 ::                                                    ::  ::
 ::::                                                  ::  ::
   ::                                                  ::  ::
