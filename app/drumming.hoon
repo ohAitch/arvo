@@ -10,16 +10,16 @@
   ::                                                    ::  ::
 |%                                                      ::  ::
 ++  drum-part      {$drum $2 drum-pith-2}               ::  current drum state
-++  drum-part-old  {$drum $1 drum-pith-1}               ::  old drum state
-::                                                      ::
-++  drum-pith-1                                         ::  pre-style
-  %+  cork  drum-pith-2                                 ::
-  |=(drum-pith-2 +<(bin *(map bone source-1)))          ::
-::                                                      ::
-++  source-1                                            ::
-  %+  cork  source                                      ::
-  |=(source +<(mir *(pair @ud (list @c))))              ::  style-less mir
-::                                                      ::
+:: ++  drum-part-old  {$drum $1 drum-pith-1}               ::  old drum state
+:: ::                                                      ::
+:: ++  drum-pith-1                                         ::  pre-style
+::   %+  cork  drum-pith-2                                 ::
+::   |=(drum-pith-2 +<(bin *(map bone source-1)))          ::
+:: ::                                                      ::
+:: ++  source-1                                            ::
+::   %+  cork  source                                      ::
+::   |=(source +<(mir *(pair @ud (list @c))))              ::  style-less mir
+:: ::                                                      ::
 ++  drum-pith-2                                         ::
   $:  sys/(unit bone)                                   ::  local console
       eel/(set gill:^gall)                              ::  connect to
@@ -42,11 +42,11 @@
   ==                                                    ::
 ++  source                                              ::  input device
   $:  edg/_80                                           ::  terminal columns
-      off/@ud                                           ::  window offset
-      kil/kill                                          ::  kill buffer
+::       off/@ud                                           ::  window offset
+::       kil/kill                                          ::  kill buffer
       inx/@ud                                           ::  ring index
       fug/(map gill:^gall (unit target))                ::  connections
-      mir/(pair @ud stub:^dill)                         ::  mirrored terminal
+::       mir/(pair @ud stub:^dill)                         ::  mirrored terminal
   ==                                                    ::
 ++  history                                             ::  past input
   $:  pos/@ud                                           ::  input position
@@ -59,12 +59,13 @@
       str/(list @c)                                     ::  search string
   ==                                                    ::
 ++  target                                              ::  application target
-  $:  $=  blt                                           ::  curr & prev belts
-        %+  pair
-          (unit dill-belt:^dill)
-        (unit dill-belt:^dill)
-      ris/(unit search)                                 ::  reverse-i-search
-      hit/history                                       ::  all past input
+  $:
+::       $=  blt                                           ::  curr & prev belts
+::         %+  pair
+::           (unit dill-belt:^dill)
+::         (unit dill-belt:^dill)
+::       ris/(unit search)                                 ::  reverse-i-search
+::       hit/history                                       ::  all past input
       pom/sole-prompt                                   ::  static prompt
       inp/sole-command                                  ::  input state
   ==                                                    ::
@@ -137,10 +138,11 @@
       =^  mow  +<+.wrap  (handle arg)
       [mow ..wrap]
     ++  prep
-      |=  a/(unit drum-part)  ^+  [~ +>]
-      ?~  a  `+>(+<+ (drum-make our.hid))
-      ?:  =(u.a *drum-part)  `+>(+<+ (drum-make our.hid))
-      `+>(+<+ u.a)
+      _`.
+::       |=  a/(unit drum-part)  ^+  [~ +>]
+::       ?~  a  `+>(+<+ (drum-make our.hid))
+::       ?:  =(u.a *drum-part)  `+>(+<+ (drum-make our.hid))
+::       `+>(+<+ u.a)
     --
 |=  {hid/bowl:^gall drum-part}                          ::  main drum work
 =+  (fall (~(get by bin) ost.hid) *source)
@@ -375,7 +377,8 @@
   ?:  ?=({?($cru $hey $rez $yow) *} bet)              ::  target-agnostic
     ?-  bet
       {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-      {$hey *}  +>(mir [0 ~])                         ::  refresh
+::       {$hey *}  +>(mir [0 ~])                         ::  refresh
+      {$hey *}  +>
       {$rez *}  +>(edg (dec p.bet))                   ::  resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
     ==
@@ -463,16 +466,20 @@
 ++  se-show                                           ::  show buffer, raw
   |=  lin/(pair @ud stub:^dill)
   ^+  +>
-  ?:  =(mir lin)  +>
-  =.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
-  =.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
-  +>(mir lin)
+::   ?:  =(mir lin)  +>
+::   =.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
+::   =.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
+::   +>(mir lin)
+  =.  +>  (se-blit %hop (add p.lin (lent-stye:klr q.lin)))
+  =.  +>  (se-blit %pom q.lin)
+  +>
 ::
 ++  se-just                                           ::  adjusted buffer
   |=  lin/(pair @ud stub:^dill)
   ^+  +>
-  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
-  (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
+::   =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
+::   (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
+  (se-show p.lin q.lin)
 ::
 ++  se-view                                           ::  flush buffer
   ^+  .
@@ -540,29 +547,32 @@
   ++  ta-aro                                          ::  hear arrow
     |=  key/?($d $l $r $u)
     ^+  +>
-    =.  ris  ~
+::     =.  ris  ~
     ?-  key
-      $d  ?.  =(num.hit pos.hit)
-            (ta-mov +(pos.hit))
-          ?:  =(0 (lent buf.say.inp))
-            ta-bel
-          (ta-hom:ta-nex %set ~)
+      $d  +>
+::       $d  ?.  =(num.hit pos.hit)
+::             (ta-mov +(pos.hit))
+::           ?:  =(0 (lent buf.say.inp))
+::             ta-bel
+::           (ta-hom:ta-nex %set ~)
       $l  ?:  =(0 pos.inp)  ta-bel
           +>(pos.inp (dec pos.inp))
       $r  ?:  =((lent buf.say.inp) pos.inp)
             ta-bel
           +>(pos.inp +(pos.inp))
-      $u  ?:(=(0 pos.hit) ta-bel (ta-mov (dec pos.hit)))
+      $u  +>
+::       $u  ?:(=(0 pos.hit) ta-bel (ta-mov (dec pos.hit)))
     ==
   ::
   ++  ta-bel                                          ::  beep
-    .(..ta (se-blit %bel ~), q.blt ~)                 ::  forget belt
+::     .(..ta (se-blit %bel ~), q.blt ~)                 ::  forget belt
+    .(..ta (se-blit %bel ~))
   ::
   ++  ta-belt                                         ::  handle input
     |=  bet/dill-belt:^dill
     ^+  +>
     ?<  ?=({?($cru $hey $rez $yow) *} bet)            ::  target-specific
-    =.  blt  [q.blt `bet]                             ::  remember belt
+::     =.  blt  [q.blt `bet]                             ::  remember belt
     ?-  bet
       {$aro *}  (ta-aro p.bet)
       {$bac *}  ta-bac
@@ -580,10 +590,10 @@
   ::
   ++  ta-bac                                          ::  hear backspace
     ^+  .
-    ?^  ris
-      ?:  =(~ str.u.ris)
-        ta-bel
-      .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
+::     ?^  ris
+::       ?:  =(~ str.u.ris)
+::         ta-bel
+::       .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
     ?:  =(0 pos.inp)
       ?~  buf.say.inp
         (ta-act %clr ~)
@@ -593,7 +603,7 @@
   ++  ta-ctl                                          ::  hear control
     |=  key/@ud
     ^+  +>
-    =.  ris  ?.(?=(?($g $r) key) ~ ris)
+::     =.  ris  ?.(?=(?($g $r) key) ~ ris)
     ?+    key    ta-bel
         $b  (ta-aro %l)
         $f  (ta-aro %r)
@@ -613,33 +623,33 @@
         $v  ta-bel
         $x  +>(..ta se-anon)
     ::
-        $k  =+  len=(lent buf.say.inp)
-            ?:  =(pos.inp len)
-              ta-bel
-            (ta-kil %r [pos.inp (sub len pos.inp)])
-        $t  =+  len=(lent buf.say.inp)
-            ?:  |(=(0 pos.inp) (lth len 2))
-              ta-bel
-            =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
-            (ta-hom (rep:edit [sop 2] (flop (swag [sop 2] buf.say.inp))))
-        $u  ?:  =(0 pos.inp)
-              ta-bel
-            (ta-kil %l [0 pos.inp])
-        $w  ?:  =(0 pos.inp)
-              ta-bel
-            =+  sop=(ta-off %l %ace pos.inp)
-            (ta-kil %l [(sub pos.inp sop) sop])
-        $y  ?:  =(0 num.kil)
-              ta-bel
-            (ta-hom (cat:edit pos.inp ta-yan))
+::         $k  =+  len=(lent buf.say.inp)
+::             ?:  =(pos.inp len)
+::               ta-bel
+::             (ta-kil %r [pos.inp (sub len pos.inp)])
+::         $t  =+  len=(lent buf.say.inp)
+::             ?:  |(=(0 pos.inp) (lth len 2))
+::               ta-bel
+::             =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
+::             (ta-hom (rep:edit [sop 2] (flop (swag [sop 2] buf.say.inp))))
+::         $u  ?:  =(0 pos.inp)
+::               ta-bel
+::             (ta-kil %l [0 pos.inp])
+::         $w  ?:  =(0 pos.inp)
+::               ta-bel
+::             =+  sop=(ta-off %l %ace pos.inp)
+::             (ta-kil %l [(sub pos.inp sop) sop])
+::         $y  ?:  =(0 num.kil)
+::               ta-bel
+::             (ta-hom (cat:edit pos.inp ta-yan))
     ::
-        $g  ?~  ris  ta-bel
-            (ta-hom(pos.hit num.hit, ris ~) [%set ~])
-        $r  ?~  ris
-              +>(ris `[pos.hit ~])
-            ?:  =(0 pos.u.ris)
-              ta-bel
-            (ta-ser ~)
+::         $g  ?~  ris  ta-bel
+::             (ta-hom(pos.hit num.hit, ris ~) [%set ~])
+::         $r  ?~  ris
+::               +>(ris `[pos.hit ~])
+::             ?:  =(0 pos.u.ris)
+::               ta-bel
+::             (ta-ser ~)
     ==
   ::
   ++  ta-del                                          ::  hear delete
@@ -670,7 +680,8 @@
       {$mor *}  |-  ^+  +>.^$
                 ?~  p.fec  +>.^$
                 $(p.fec t.p.fec, +>.^$ ^$(fec i.p.fec))
-      {$nex *}  ta-nex
+      {$nex *}  +>
+::       {$nex *}  ta-nex
       {$pro *}  (ta-pro +.fec)
       {$tan *}  +>(..ta (se-dump p.fec))
       {$sag *}  +>(..ta (se-blit fec))
@@ -714,48 +725,48 @@
     %-  ?:(?=($l dir) sub add)
     [pos (ta-off dir til pos)]
   ::
-  ++  ta-kil                                          ::  kill selection
-    |=  {dir/?($l $r) sel/{@ @}}
-    ^+  +>
-    =+  buf=(swag sel buf.say.inp)
-    %.  (cut:edit sel)
-    %=  ta-hom
-        kil
-      ?.  ?&  ?=(^ old.kil)
-              ?=(^ p.blt)
-              ?|  ?=({$ctl ?($k $u $w)} u.p.blt)
-                  ?=({$met ?($d $bac)} u.p.blt)
-          ==  ==
-        %=  kil                                       ::  prepend
-          num  +(num.kil)
-          pos  +(num.kil)
-          old  (scag max.kil `(list (list @c))`[buf old.kil])
-        ==
-      %=  kil                                         ::  cumulative yanks
-        pos  num.kil
-        old  :_  t.old.kil
-             ?-  dir
-               $l  (welp buf i.old.kil)
-               $r  (welp i.old.kil buf)
-      ==     ==
-    ==
+::   ++  ta-kil                                          ::  kill selection
+::     |=  {dir/?($l $r) sel/{@ @}}
+::     ^+  +>
+::     =+  buf=(swag sel buf.say.inp)
+::     %.  (cut:edit sel)
+::     %=  ta-hom
+::         kil
+::       ?.  ?&  ?=(^ old.kil)
+::               ?=(^ p.blt)
+::               ?|  ?=({$ctl ?($k $u $w)} u.p.blt)
+::                   ?=({$met ?($d $bac)} u.p.blt)
+::           ==  ==
+::         %=  kil                                       ::  prepend
+::           num  +(num.kil)
+::           pos  +(num.kil)
+::           old  (scag max.kil `(list (list @c))`[buf old.kil])
+::         ==
+::       %=  kil                                         ::  cumulative yanks
+::         pos  num.kil
+::         old  :_  t.old.kil
+::              ?-  dir
+::                $l  (welp buf i.old.kil)
+::                $r  (welp i.old.kil buf)
+::       ==     ==
+::     ==
   ::
   ++  ta-met                                          ::  meta key
     |=  key/@ud
     ^+  +>
-    =.  ris  ~
+::     =.  ris  ~
     ?+    key    ta-bel
-      $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))      ::  last "arg" from hist
-              ta-bel
-            =+  old=`(list @c)`i.old.hit
-            =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
-            (ta-hom (cat:edit pos.inp (slag sop old)))
+::       $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))      ::  last "arg" from hist
+::               ta-bel
+::             =+  old=`(list @c)`i.old.hit
+::             =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
+::             (ta-hom (cat:edit pos.inp (slag sop old)))
             ::
-      $bac  ?:  =(0 pos.inp)                          ::  kill left-word
-              ta-bel
-            =+  sop=(ta-off %l %edg pos.inp)
-            (ta-kil %l [(sub pos.inp sop) sop])
-            ::
+::       $bac  ?:  =(0 pos.inp)                          ::  kill left-word
+::               ta-bel
+::             =+  sop=(ta-off %l %edg pos.inp)
+::             (ta-kil %l [(sub pos.inp sop) sop])
+::             ::
       $b    ?:  =(0 pos.inp)                          ::  jump left-word
               ta-bel
             +>(pos.inp (ta-jump %l %edg pos.inp))
@@ -768,18 +779,18 @@
             ^-  (list @c)  ^-  (list @)               :: XX unicode
             (cuss `tape``(list @)`(swag [sop 1] buf.say.inp))
             ::
-      $d    ?:  =(pos.inp (lent buf.say.inp))         ::  kill right-word
-              ta-bel
-            (ta-kil %r [pos.inp (ta-off %r %edg pos.inp)])
-            ::
+::       $d    ?:  =(pos.inp (lent buf.say.inp))         ::  kill right-word
+::               ta-bel
+::             (ta-kil %r [pos.inp (ta-off %r %edg pos.inp)])
+::             ::
       $f    ?:  =(pos.inp (lent buf.say.inp))         ::  jump right-word
               ta-bel
             +>(pos.inp (ta-jump %r %edg pos.inp))
             ::
-      $r    %-  ta-hom(lay.hit (~(put by lay.hit) pos.hit ~))
-            :-  %set                                  ::  revert hist edit
-            ?:  =(pos.hit num.hit)  ~
-            (snag (sub num.hit +(pos.hit)) old.hit)
+::       $r    %-  ta-hom(lay.hit (~(put by lay.hit) pos.hit ~))
+::             :-  %set                                  ::  revert hist edit
+::             ?:  =(pos.hit num.hit)  ~
+::             (snag (sub num.hit +(pos.hit)) old.hit)
             ::
       $t    =+  a=(ta-jump %r %edg pos.inp)           ::  transpose words
             =+  b=(ta-jump %l %edg a)
@@ -805,42 +816,42 @@
             ^-  (list @c)  ^-  (list @)               :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
             ::
-      $y    ?.  ?&  ?=(^ old.kil)                     ::  rotate & yank
-                    ?=(^ p.blt)
-                    ?|  ?=({$ctl $y} u.p.blt)
-                        ?=({$met $y} u.p.blt)
-                ==  ==
-              ta-bel
-            =+  las=(lent ta-yan)
-            =.  pos.kil  ?:(=(1 pos.kil) num.kil (dec pos.kil))
-            (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
+::       $y    ?.  ?&  ?=(^ old.kil)                     ::  rotate & yank
+::                     ?=(^ p.blt)
+::                     ?|  ?=({$ctl $y} u.p.blt)
+::                         ?=({$met $y} u.p.blt)
+::                 ==  ==
+::               ta-bel
+::             =+  las=(lent ta-yan)
+::             =.  pos.kil  ?:(=(1 pos.kil) num.kil (dec pos.kil))
+::             (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
     ==
   ::
-  ++  ta-mov                                          ::  move in history
-    |=  sop/@ud
-    ^+  +>
-    ?:  =(sop pos.hit)  +>
-    %-  %=  ta-hom
-          pos.hit  sop
-          lay.hit  (~(put by lay.hit) pos.hit buf.say.inp)
-        ==
-    :-  %set
-    %.  (~(get by lay.hit) sop)
-    (bond |.((snag (sub num.hit +(sop)) old.hit)))
+::   ++  ta-mov                                          ::  move in history
+::     |=  sop/@ud
+::     ^+  +>
+::     ?:  =(sop pos.hit)  +>
+::     %-  %=  ta-hom
+::           pos.hit  sop
+::           lay.hit  (~(put by lay.hit) pos.hit buf.say.inp)
+::         ==
+::     :-  %set
+::     %.  (~(get by lay.hit) sop)
+::     (bond |.((snag (sub num.hit +(sop)) old.hit)))
   ::
-  ++  ta-nex                                          ::  advance history
-    ^+  .
-    =.  ris  ~
-    =.  lay.hit  ~
-    ?:  ?|  ?=($~ buf.say.inp)
-            &(?=(^ old.hit) =(buf.say.inp i.old.hit))
-        ==
-      .(pos.hit num.hit)
-    %_  .
-      num.hit  +(num.hit)
-      pos.hit  +(num.hit)
-      old.hit  [buf.say.inp old.hit]
-    ==
+::   ++  ta-nex                                          ::  advance history
+::     ^+  .
+::     =.  ris  ~
+::     =.  lay.hit  ~
+::     ?:  ?|  ?=($~ buf.say.inp)
+::             &(?=(^ old.hit) =(buf.say.inp i.old.hit))
+::         ==
+::       .(pos.hit num.hit)
+::     %_  .
+::       num.hit  +(num.hit)
+::       pos.hit  +(num.hit)
+::       old.hit  [buf.say.inp old.hit]
+::     ==
   ::
   ++  ta-off                                          ::  buffer pos offset
     |=  {dir/?($l $r) til/?($ace $edg $wrd) pos/@ud}
@@ -874,28 +885,28 @@
   ++  ta-ret                                          ::  hear return
     (ta-act %ret ~)
   ::
-  ++  ta-ser                                          ::  reverse search
-    |=  ext/(list @c)
-    ^+  +>
-    ?:  |(?=($~ ris) =(0 pos.u.ris))
-      ta-bel
-    =+  sop=?~(ext (dec pos.u.ris) pos.u.ris)
-    =+  tot=(weld str.u.ris ext)
-    =+  dol=(slag (sub num.hit sop) old.hit)
-    =/  sup
-        |-  ^-  (unit @ud)
-        ?~  dol  ~
-        ?^  (find tot i.dol)
-          `sop
-        $(sop (dec sop), dol t.dol)
-    ?~  sup  ta-bel
-    (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
-  ::
+::   ++  ta-ser                                          ::  reverse search
+::     |=  ext/(list @c)
+::     ^+  +>
+::     ?:  |(?=($~ ris) =(0 pos.u.ris))
+::       ta-bel
+::     =+  sop=?~(ext (dec pos.u.ris) pos.u.ris)
+::     =+  tot=(weld str.u.ris ext)
+::     =+  dol=(slag (sub num.hit sop) old.hit)
+::     =/  sup
+::         |-  ^-  (unit @ud)
+::         ?~  dol  ~
+::         ?^  (find tot i.dol)
+::           `sop
+::         $(sop (dec sop), dol t.dol)
+::     ?~  sup  ta-bel
+::     (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
+::   ::
   ++  ta-txt                                          ::  hear text
     |=  txt/(list @c)
     ^+  +>
-    ?^  ris
-      (ta-ser txt)
+::     ?^  ris
+::       (ta-ser txt)
     (ta-hom (cat:edit pos.inp txt))
   ::
   ++  ta-vew                                          ::  computed prompt
@@ -906,17 +917,17 @@
       (add pos.inp (lent-char:klr lin))
     ?:  vis.pom
       :-  buf.say.inp                                 ::  default prompt
-      ?~  ris
+::       ?~  ris
         cad.pom
-      :(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
+::       :(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
     :-  (reap (lent buf.say.inp) `@c`'*')             ::  hidden input
     %+  welp
       cad.pom
     ?~  buf.say.inp  ~
     :(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
   ::
-  ++  ta-yan                                          ::  yank
-    (snag (sub num.kil pos.kil) old.kil)
+::   ++  ta-yan                                          ::  yank
+::     (snag (sub num.kil pos.kil) old.kil)
   --
 ++  edit                                              ::  produce sole-edits
   |%
