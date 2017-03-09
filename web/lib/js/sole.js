@@ -71,7 +71,7 @@ module.exports = {
     var apps, cursor, drum, error, history, input, k, nextApp, ref, ref1, ref2, ref3, rows, share, state, yank;
     ref = this._getState(), drum = ref.drum, yank = ref.yank, rows = ref.rows, state = ref.state;
     ref1 = state[app], (ref2 = ref1.buffer, share = ref2.share, cursor = ref2.cursor), history = ref1.history, error = ref1.error;
-    input = history.offset >= 0 ? history.log[history.offset] : share.buf;
+    input = share.buf;
     apps = (function() {
       var results;
       results = [];
@@ -138,7 +138,7 @@ module.exports = {
     });
   },
   peer: function(ruh, app) {
-    var input, v;
+    var v;
     if (ruh.map) {
       return ruh.map((function(_this) {
         return function(rul) {
@@ -185,15 +185,9 @@ module.exports = {
           case 'bel':
             return this.bell();
           case 'nex':
-            this.dispatch({
+            return this.dispatch({
               'line': 'line'
             });
-            input = this.getState(app).input;
-            if (input) {
-              return this.dispatchTo(app, {
-                historyAdd: input
-              });
-            }
         }
         break;
       default:
@@ -277,13 +271,10 @@ module.exports = {
   eatKyev: function(mod, key) {
     return (function(_this) {
       return function(_dispatch, _getState) {
-        var _, app, buffer, cha, cursor, drum, input, n, nextApp, prev, ref, ref1, rest, rows, share, state, yank;
+        var _, app, buffer, cursor, drum, input, n, nextApp, prev, ref, ref1, rest, rows, share, state, yank;
         _this._dispatch = _dispatch;
         _this._getState = _getState;
         ref = _this._getState(), drum = ref.drum, app = ref.app;
-        if (drum) {
-          app = "";
-        }
         ref1 = _this.getState(app), yank = ref1.yank, rows = ref1.rows, app = ref1.app, nextApp = ref1.nextApp, state = ref1.state, share = ref1.share, cursor = ref1.cursor, input = ref1.input;
         buffer = {
           share: share,
@@ -306,14 +297,6 @@ module.exports = {
             switch (key.act) {
               case 'entr':
                 return _this.sendAction(app, share, 'ret');
-              case 'up':
-                return _this.dispatchTo(app, {
-                  'historyPrevious': 'historyPrevious'
-                });
-              case 'down':
-                return _this.dispatchTo(app, {
-                  'historyNext': 'historyNext'
-                });
               case 'left':
                 if (cursor > 0) {
                   return _this.dispatchTo(app, {
@@ -358,14 +341,6 @@ module.exports = {
                 return _this.eatKyev(['alt'], {
                   act: 'baxp'
                 });
-              case 'p':
-                return _this.eatKyev([], {
-                  act: 'up'
-                });
-              case 'n':
-                return _this.eatKyev([], {
-                  act: 'down'
-                });
               case 'b':
                 return _this.eatKyev([], {
                   act: 'left'
@@ -380,10 +355,6 @@ module.exports = {
                 return Persistence.sendKey(app, {
                   mod: mod,
                   key: key
-                });
-              case 'v':
-                return _this.dispatch({
-                  "toggleDrum": "toggleDrum"
                 });
               case 't':
                 if (cursor === 0 || input.length < 2) {
@@ -406,9 +377,6 @@ module.exports = {
                   cursor: cursor
                 });
               case 'u':
-                _this.dispatch({
-                  yank: input.slice(0, cursor)
-                });
                 return _this.doEdit(app, buffer, (function() {
                   var i, ref2, results;
                   results = [];
@@ -420,31 +388,12 @@ module.exports = {
                   return results;
                 })());
               case 'k':
-                _this.dispatch({
-                  yank: input.slice(cursor)
-                });
                 return _this.doEdit(app, buffer, (function() {
                   var i, ref2, ref3, results;
                   results = [];
                   for (_ = i = ref2 = cursor, ref3 = input.length; ref2 <= ref3 ? i < ref3 : i > ref3; _ = ref2 <= ref3 ? ++i : --i) {
                     results.push({
                       del: cursor
-                    });
-                  }
-                  return results;
-                })());
-              case 'y':
-                return _this.doEdit(app, buffer, (function() {
-                  var i, len, ref2, results;
-                  ref2 = yank != null ? yank : '';
-                  results = [];
-                  for (n = i = 0, len = ref2.length; i < len; n = ++i) {
-                    cha = ref2[n];
-                    results.push({
-                      ins: {
-                        cha: cha,
-                        at: cursor + n
-                      }
                     });
                   }
                   return results;
@@ -474,9 +423,6 @@ module.exports = {
                 prev = input.slice(0, cursor);
                 prev = prev.split('').reverse().join('');
                 prev = prev.match(/\W*\w*/)[0];
-                _this.dispatch({
-                  yank: prev
-                });
                 return _this.doEdit(app, buffer, (function() {
                   var i, len, results;
                   results = [];
@@ -526,29 +472,17 @@ noPad = {
 };
 
 stateToProps = function(arg) {
-  var app, cursor, drum, history, input, k, prompt, ref2, ref3, ref4, ref5, share, state, v;
+  var app, cursor, drum, history, input, prompt, ref2, ref3, share, state;
   drum = arg.drum, app = arg.app, state = arg.state;
-  if (drum) {
-    ref2 = state[""], prompt = ref2.prompt, (ref3 = ref2.buffer, share = ref3.share, cursor = ref3.cursor), history = ref2.history;
-    prompt = ((function() {
-      var results;
-      results = [];
-      for (k in state) {
-        v = state[k];
-        if (k !== '') {
-          results.push(k);
-        }
-      }
-      return results;
-    })()).join(', ') + '# ';
+  if (0) {
+
   } else {
-    ref4 = state[app], prompt = ref4.prompt, (ref5 = ref4.buffer, share = ref5.share, cursor = ref5.cursor), history = ref4.history;
+    ref2 = state[app], prompt = ref2.prompt, (ref3 = ref2.buffer, share = ref3.share, cursor = ref3.cursor), history = ref2.history;
   }
-  input = history.offset >= 0 ? history.log[history.offset] : share.buf;
+  input = share.buf;
   return {
     prompt: prompt,
     cursor: cursor,
-    offset: history.offset,
     input: input
   };
 };
@@ -564,7 +498,7 @@ Prompt = connect(stateToProps)(function(arg) {
     style: {
       background: 'lightgray'
     }
-  }, buf.slice(0, cur), u({}, (ref2 = buf[cur]) != null ? ref2 : " "), buf.slice(cur + 1)), offset >= 0 ? " ⧖" + offset : void 0);
+  }, buf.slice(0, cur), u({}, (ref2 = buf[cur]) != null ? ref2 : " "), buf.slice(cur + 1)));
 });
 
 Matr = connect(function(s) {
@@ -691,7 +625,7 @@ toKyev = function(arg) {
 
 
 },{"./actions.coffee":1,"./reducer.coffee":3}],3:[function(require,module,exports){
-var Share, app, buffer, byApp, combineReducers, drum, error, history, prompt, rows, yank,
+var Share, app, buffer, byApp, combineReducers, error, prompt, rows,
   slice = [].slice;
 
 combineReducers = Redux.combineReducers;
@@ -709,20 +643,6 @@ rows = function(state, arg) {
       return slice.call(state).concat([payload]);
     case "clear":
       return [];
-    default:
-      return state;
-  }
-};
-
-yank = function(state, arg) {
-  var payload, type;
-  if (state == null) {
-    state = '';
-  }
-  type = arg.type, payload = arg.payload;
-  switch (type) {
-    case "yank":
-      return payload;
     default:
       return state;
   }
@@ -808,60 +728,6 @@ prompt = function(state, arg) {
   }
 };
 
-history = function(state, arg) {
-  var active, log, offset, payload, type;
-  if (state == null) {
-    state = {
-      offset: -1,
-      log: []
-    };
-  }
-  type = arg.type, payload = arg.payload;
-  offset = state.offset, active = state.active, log = state.log;
-  switch (type) {
-    case "historyAdd":
-      log = [payload].concat(slice.call(log));
-      return {
-        offset: -1,
-        log: log
-      };
-    case "edit":
-      return {
-        offset: -1,
-        log: log
-      };
-    case "line":
-      return {
-        offset: -1,
-        log: log
-      };
-    case "historyPrevious":
-      if (offset < log.length - 1) {
-        offset++;
-      }
-      return {
-        offset: offset,
-        log: log
-      };
-    case "historyNext":
-      if (offset < 0) {
-        return {
-          offset: offset,
-          log: log
-        };
-      } else {
-        offset--;
-        return {
-          offset: offset,
-          log: log
-        };
-      }
-      break;
-    default:
-      return state;
-  }
-};
-
 error = function(state, arg) {
   var payload, type;
   if (state == null) {
@@ -876,31 +742,13 @@ error = function(state, arg) {
   }
 };
 
-drum = function(state, arg) {
-  var payload, type;
-  if (state == null) {
-    state = false;
-  }
-  type = arg.type, payload = arg.payload;
-  switch (type) {
-    case "toggleDrum":
-      return !state;
-    default:
-      return state;
-  }
-};
-
 module.exports = combineReducers({
   error: error,
   rows: rows,
-  yank: yank,
-  drum: drum,
   app: app,
   state: byApp(combineReducers({
     prompt: prompt,
-    buffer: buffer,
-    history: history,
-    error: error
+    buffer: buffer
   }))
 });
 

@@ -138,11 +138,10 @@
       =^  mow  +<+.wrap  (handle arg)
       [mow ..wrap]
     ++  prep
-      _`.
-::       |=  a/(unit drum-part)  ^+  [~ +>]
-::       ?~  a  `+>(+<+ (drum-make our.hid))
-::       ?:  =(u.a *drum-part)  `+>(+<+ (drum-make our.hid))
-::       `+>(+<+ u.a)
+      |=  a/(unit drum-part)  ^+  [~ +>]
+      ?~  a  `+>(+<+ (drum-make our.hid))
+      ?:  =(u.a *drum-part)  `+>(+<+ (drum-make our.hid))
+      `+>(+<+ u.a)
     --
 |=  {hid/bowl:^gall drum-part}                          ::  main drum work
 =+  (fall (~(get by bin) ost.hid) *source)
