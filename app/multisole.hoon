@@ -47,7 +47,7 @@
 =,  wired:userlib                                       ::  wire decoding
 =,  pubsub:userlib                                      ::  subs extraction
 =|  mow/(list move)                                     ::  outgoing effects
-|_  {connections/(set an-app) bowl}                     ::  state
+|_  {bowl connections/(set an-app)}                     ::  state
 ::
 ++  peer                                                ::  new subscription
   |=  pax/path
@@ -77,7 +77,7 @@
 ::
 ++  coup-fail  !!                                       ::  task failed
 ++  coup-good                                           ::  task success
-  ::  can't actually do anything useful with ack
+  ::  FIXME can't actually do anything useful with ack
   |=($~ abet:this)
 ::
 :: REVIEW highly questionable non-oneliners
@@ -136,7 +136,7 @@
 ::  REVIEW too complicated? seems like either the moves should be generated as a
 ::  function of connections in state, or as a function of subscriptions, but not
 ::  both.
-++  actual-subscriptions                                ::  retrieve state from gall
+++  actual-subscriptions                                ::  retrieve from gall
   ^-  (set an-app)
   %-  silt
   %+  turn  (~(tap by wex))  :: REVIEW check that wex is actually populated
