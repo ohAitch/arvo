@@ -1,5 +1,11 @@
 ::  server
+|%
+++  session  @uv
+--
+::
 =,  ^gall
+=,  wired ::userlib
+=,  pubsub:userlib
 |%
 ++  move
   $:  bone
@@ -8,20 +14,33 @@
 --
 ::
 =|  mow/(list move)
-|_  {bowl dat/(map bone @u)}
-++  this  .
+|_  {bowl dat/(map session @u)}
+:: ++  prep  _~&(%wiped abet)
 ++  abet  [(flop mow) .(mow ~)]
-++  emit  |=(a/move this(mow [a mow]))
-::
-++  peer  |=(path abet:update)
-++  update  (emit ost %diff %atom get-num)
-++  get-num  (fall (~(get by dat) ost) 0)
+++  peer
+  |=  a/path  ^+  abet
+  =/  ses  (raid a /[%uv])
+  peer:(se ses)
 ++  poke-noun
-  |=  *
-  =<  abet
-  ~&  [%poke ost num=get-num]
-  =.  dat  (~(put by dat) ost +(get-num))
-  ?:  (~(has by sup) ost)
-    update
-  this
+  |=  {ses/session *}  ^+  abet
+  poke:(se ses)
+::
+++  se
+  |=  ses/session
+  =/  num  (fall (~(get by dat) ses) 0)
+  |%
+  ++  this  .
+  ++  abet  ^abet(dat (~(put by dat) ses num))
+  ++  emit  |=(a/move this(mow [a mow]))
+  ::
+  ++  peer  abet:update
+  ++  update  (emit ost %diff %atom num)
+  ++  poke
+    =<  abet
+    ~&  [%poke ost ses num=num]
+    =.  num  +(num)
+    %+  roll  (prey (dray /[%uv] ses) +<-.se)
+    |:  [[ost=*bone *^] this]
+    update(ost ost)
+  --
 --
