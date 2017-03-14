@@ -3,6 +3,7 @@
   ::                                                    ::    ::
 /?  309                                                 ::  arvo kelvin
 /-  sole, lens                                          ::  console structures
+:: /-  gene  :: XX kind of - this is all handled with axis math rn
 /+  sole                                                ::  console library
 [. sole]
 =,  space:userlib
