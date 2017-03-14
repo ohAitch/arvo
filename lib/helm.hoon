@@ -16,7 +16,7 @@
   ==                                                    ::
 ++  helm-session                                        ::
   $:  say/sole-share                                    ::  console state
-      mud/(unit (sole-dialog @ud))                      ::  console dialog
+::       mud/(unit (sole-dialog @ud))                      ::  console dialog
   ==                                                    ::
 ::                                                      ::  ::
 ::::                                                    ::  ::
