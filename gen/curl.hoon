@@ -3,10 +3,10 @@
 ::::  /hoon/curl/gen
   ::
 /?    310
-/-  sole
-=,  sole
+/-  gene
+=>  [gene g=dsl:gene]
 :-  %get  |=  {^ {a/tape $~} $~}
-^-  (sole-request (cask httr))
-%+  sole-at  (scan a auri:urlp)
+^-  (request (cask httr))
+%+  at.g  (scan a auri:urlp)
 |=  hit/httr
-(sole-so %httr hit)
+(so.g %httr hit)

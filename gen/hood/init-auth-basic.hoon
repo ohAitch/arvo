@@ -3,32 +3,29 @@
 ::::  /hoon/init-auth-basic/hood/gen
   ::
 /?  314
-/-  sole
+/-  gene
 ::
 ::::
   ::
-=,  sole
+=>  [gene g=dsl:gene]
 :-  %ask
 |=  $:  {now/@da eny/@uvJ bec/beak}
         {arg/$@($~ {dom/path $~})}
         $~
     ==
-^-  (sole-result {$write-sec-atom p/host q/@})
+^-  (result {$write-sec-atom p/host q/@})
 =-  ?~  arg  -
     (fun.q.q [%& dom.arg])
-%+  sole-lo
-  [%& %oauth-hostname "api hostname: https://"]
-%+  sole-go  thos:urlp
+%+  lo.g  [%& %oauth-hostname "api hostname: https://"]
+%+  go.g  thos:urlp
 |=  hot/host
 ?:  ?=($| -.hot)
   ~|(%ips-unsupported !!)
-%+  sole-lo
-  [%& %auth-user "username: "]
-%+  sole-go  (boss 256 (star ;~(less col prn)))
+%+  lo.g  [%& %auth-user "username: "]
+%+  go.g  (boss 256 (star ;~(less col prn)))
 |=  usr/@t
-%+  sole-lo
-  [%| %auth-passwd "password: "]
-%+  sole-go  (boss 256 (star prn))
+%+  lo.g  [%| %auth-passwd "password: "]
+%+  go.g  (boss 256 (star prn))
 |=  pas/@t
-%+  sole-so  %write-sec-atom    :: XX typed pair
+%+  so.g  %write-sec-atom    :: XX typed pair
 [hot (crip (sifo (rap 3 usr ':' pas ~)))]
