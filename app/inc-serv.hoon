@@ -1,6 +1,6 @@
 ::  server
 |%
-++  session  @uv
+++  session  {@u dock}
 --
 ::
 =,  ^gall
@@ -15,11 +15,11 @@
 ::
 =|  mow/(list move)
 |_  {bowl dat/(map session @u)}
-:: ++  prep  _~&(%wiped abet)
+++  prep  _~&(%wiped abet)
 ++  abet  [(flop mow) .(mow ~)]
 ++  peer
   |=  a/path  ^+  abet
-  =/  ses  (raid a /[%uv])
+  =/  ses  (raid a /[%ud]/[%p]/[%tas])
   peer:(se ses)
 ++  poke-noun
   |=  {ses/session *}  ^+  abet
@@ -39,7 +39,7 @@
     =<  abet
     ~&  [%poke ost ses num=num]
     =.  num  +(num)
-    %+  roll  (prey (dray /[%uv] ses) +<-.se)
+    %+  roll  (prey (dray /[%ud]/[%p]/[%tas] ses) +<-.se)
     |:  [[ost=*bone *^] this]
     update(ost ost)
   --
