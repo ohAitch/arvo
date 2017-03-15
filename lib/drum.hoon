@@ -2,7 +2,7 @@
 ::::  /hoon/drum/lib                                    ::  ::
   ::                                                    ::  ::
 /?    310                                               ::  version
-/-    sole
+/-    sole, client-id
 /+    sole, styxes
 [. ^sole]
 ::                                                      ::  ::
@@ -440,10 +440,14 @@
   |=  {gyl/gill:^gall par/pear}
   (se-emit [ost.hid %poke (drum-path gyl) gyl par])
 ::
+++  client  |=(a/@u (encode:client-id a [our dap]:hid))
+::
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
   %-  se-emit(fug (~(put by fug) gyl ~))
-  [ost.hid %peer (drum-path gyl) gyl /sole]
+  :: XX sole protocol transition
+  =/  pax  ?.(=(%talk2 q.gyl) /sole /(client 0)/sole)
+  [ost.hid %peer (drum-path gyl) gyl pax]
 ::
 ++  se-pull                                           ::  cancel subscription
   |=  gyl/gill:^gall
