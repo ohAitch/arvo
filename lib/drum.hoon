@@ -122,7 +122,8 @@
 =>  |%                                                ::  arvo structures
     ++  pear                                          ::  request
       $%  {$sole-action p/sole-action}                ::
-          {$talk-command command:talk}                ::
+          {$sole2-action client-id sole-action}       ::
+::           {$talk-command command:talk}                ::
       ==                                              ::
     ++  lime                                          ::  update
       $%  {$dill-blit dill-blit:^dill}                ::
@@ -440,13 +441,14 @@
   |=  {gyl/gill:^gall par/pear}
   (se-emit [ost.hid %poke (drum-path gyl) gyl par])
 ::
-++  client  |=(a/@u (encode:client-id a [our dap]:hid))
+++  en-client  |=(a/@u (encode:client-id (client a)))
+++  client  |=(a/@u [a [our dap]:hid])
 ::
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
   %-  se-emit(fug (~(put by fug) gyl ~))
   :: XX sole protocol transition
-  =/  pax  ?.(=(%talk2 q.gyl) /sole /(client 0)/sole)
+  =/  pax  ?.(=(%talk2 q.gyl) /sole /(en-client 0)/sole)
   [ost.hid %peer (drum-path gyl) gyl pax]
 ::
 ++  se-pull                                           ::  cancel subscription
@@ -474,6 +476,8 @@
   ++  ta-act                                          ::  send action
     |=  act/sole-action
     ^+  +>
+    ?:  =(%talk2 q.gyl)
+      (ta-poke %sole2-action (client 0) act)
     (ta-poke %sole-action act)
   ::
   ++  ta-aro                                          ::  hear arrow
