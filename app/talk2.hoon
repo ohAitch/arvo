@@ -1298,19 +1298,17 @@
   ++  ra-axel                                           ::  rebound reports
     ^+  .
     ?~  moves  .
-    ?.  ?&  (~(has by shells) `bone`p.i.moves)
-            ?=({$diff $talk-report *} q.i.moves)
-        ==
+    ?.  ?=({$diff $talk-report *} q.i.moves)
       [+(moves [- moves])]:[i.moves ra-axel(moves t.moves)]
-    =/  bak  (ra-back(ost.hid p.i.moves) +>.q.i.moves)
-    ra-axel:bak(ost.hid ost.hid)
+    =/  sus  (~(get by sup.hid) `bone`p.i.moves)
+    ?.  ?=({$~ @ @ $sole *} sus)
+      [+(moves [- moves])]:[i.moves ra-axel(moves t.moves)]
+    ra-axel:(ra-back(moves t.moves) (decode:client-id i.q.u.sus) +>.q.i.moves)
   ::
   ++  ra-back
-    |=  rad/report
+    |=  {cid/client-id rad/report}
     ^+  +>
-    :: XX this looks important
-    :: sh-abet:(~(sh-repo sh ~ (~(got by shells) ost.hid)) rad)
-    +>
+    sh-abet:(~(sh-repo sh ~ cid (~(got by shells) cid)) rad)
   ::
   ++  ra-sole
     |=  {cid/client-id act/sole-action}
@@ -2313,8 +2311,10 @@
   |=  pax/path
   ^+  [*(list move) +>]
   ::  ~&  [%talk-pull src.hid ost.hid pax]
-  =^  moz  +>.$  ra-abet:(ra-cancel:ra src.hid pax)
-  [moz +>.$(shells (~(del by shells) ost.hid))]
+  ?:  ?=({@ $sole *} pax)
+    =/  cid  (decode:client-id i.pax)
+    [~ +>.$(shells (~(del by shells) cid))]
+  ra-abet:(ra-cancel:ra src.hid pax)
 ::
 ++  log-all-to-file
   ^-  (quip move .)
