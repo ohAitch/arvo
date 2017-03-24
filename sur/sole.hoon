@@ -39,7 +39,7 @@
       {$txt p/tape}                                     ::  text line
       {$url p/@t}                                       ::  activate url
   ==                                                    ::
-++  sole-command                                        ::  command state
+++  sole-cursor-share                                   ::  command state
   $:  pos/@ud                                           ::  cursor position
       say/sole-share                                    ::  cursor
   ==                                                    ::

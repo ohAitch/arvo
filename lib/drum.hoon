@@ -66,7 +66,7 @@
       ris/(unit search)                                 ::  reverse-i-search
       hit/history                                       ::  all past input
       pom/sole-prompt                                   ::  static prompt
-      inp/sole-command                                  ::  input state
+      inp/sole-cursor-share                             ::  input state
   ==                                                    ::
 --
 ::                                                      ::  ::
