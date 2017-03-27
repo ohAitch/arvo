@@ -340,6 +340,23 @@
           (stag %number (cook lent (star sem)))
         ==
       --
+    ++  sh-new
+      |=  {her/ship pax/path}
+      ^+  +>
+      =/  man/knot  ?~(pax (main her) ?>(?=($~ t.pax) i.pax))
+      %_  +>.$
+        her.she  her
+        man.she  man
+        passive.she  (sy [%& our.hid man]~)
+      ==
+    ::
+    ++  sh-old
+      %_  .
+        she  ~|  :+  %ra-console-broken  ost.hid
+                 ?:((~(has by sup.hid) ost.hid) %lost %unknown)
+             (~(got by shells) ost.hid)
+      ==
+    ::
     ++  sh-abet
       ^+  +>
       =+  zoc=(flop coz)
@@ -1316,17 +1333,12 @@
   ++  ra-back
     |=  rad/report
     ^+  +>
-    sh-abet:(~(sh-repo sh ~ (~(got by shells) ost.hid)) rad)
+    sh-abet:(sh-repo:sh-old:sh rad)
   ::
   ++  ra-sole
     |=  act/sole-action
     ^+  +>
-    =+  shu=(~(get by shells) ost.hid)
-    ?~  shu
-      ~|  :+  %ra-console-broken  ost.hid
-          ?:((~(has by sup.hid) ost.hid) %lost %unknown)
-      !!
-    sh-abet:(~(sh-sole sh ~ u.shu) act)
+    sh-abet:(sh-sole:sh-old:sh act)
   ::
   ++  ra-emil                                           ::  ra-emit move list
     |=  mol/(list move)
@@ -1541,11 +1553,7 @@
   ::
   ++  ra-console                                        ::  console subscribe
     |=  {her/ship pax/path}
-    ^+  +>
-    =+  man=`knot`?~(pax (main her) ?>(?=($~ t.pax) i.pax))
-    =+  ^=  she  ^-  shell
-        [her man 0 *sole-share ~ [[%& our.hid man] ~ ~] [~ ~] ~ *cabal ~]
-    sh-abet:~(sh-peer sh ~ she)
+    sh-abet:sh-peer:(sh-new:sh her pax)
   ::
   ++  ra-subscribe                                      ::  listen to
     |=  {her/ship pax/path}
