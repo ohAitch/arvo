@@ -595,10 +595,10 @@
     ++  dy-edit                                         ::  handle edit
       |=  cal/sole-change
       ^+  +>+>
-      =^  dat  say  (~(transceive sole say) cal)
+      =^  dat  say  (~(transceive shared:sole say) cal)
       ?:  |(?=(^ per) ?=(^ pux) ?=($~ pro))
         ~&  %dy-edit-busy
-        =^  lic  say  (~(transmit sole say) dat)
+        =^  lic  say  (~(transmit shared:sole say) dat)
         (dy-diff %mor [%det lic] [%bel ~] ~)
       (dy-slam(per `dat) /edit u.pro !>((tufa buf.say)))
     ::
@@ -868,12 +868,12 @@
   ++  he-errd                                           ::  reject update
     |=  {rev/(unit sole-edit) err/@u}  ^+  +>
     =+  red=(fall rev [%nop ~])       ::  required for error location sync
-    =^  lic  say  (~(transmit sole say) red)
+    =^  lic  say  (~(transmit shared:sole say) red)
     (he-diff %mor [%det lic] [%err err] ~)
   ::
   ++  he-pone                                           ::  clear prompt
     ^+  .
-    =^  cal  say  (~(transmit sole say) [%set ~])
+    =^  cal  say  (~(transmit shared:sole say) [%set ~])
     (he-diff %mor [%det cal] ~)
   ::
   ++  he-prow                                           ::  where we are
@@ -946,7 +946,7 @@
     ^+  +>
     ::  ~&  [%his-clock ler.cal]
     ::  ~&  [%our-clock ven.say]
-    =^  dat  say  (~(transceive sole say) cal)
+    =^  dat  say  (~(transceive shared:sole say) cal)
     ?.  ?&  ?=($del -.dat)
             =(+(p.dat) (lent buf.say))
         ==
@@ -980,7 +980,7 @@
       ?~  p.doy
         (he-errd ~ (lent txt))
       =+  old=(weld ?~(buf "> " "  ") (tufa buf.say))
-      =^  cal  say  (~(transmit sole say) [%set ~])
+      =^  cal  say  (~(transmit shared:sole say) [%set ~])
       =.  +>.$   (he-diff %mor txt+old nex+~ det+cal ~)
       ?-  -.u.p.doy
         $&  (he-plan(buf ~) p.u.p.doy)

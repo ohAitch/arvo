@@ -582,7 +582,7 @@
   ::
   ++  ta-err                                          ::  hear remote error
     |=  pos/@ud
-    (ta-erl (~(transpose sole say.inp) pos))
+    (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
   ++  ta-fec                                          ::  apply effect
     |=  fec/sole-effect

@@ -951,13 +951,13 @@
       ^+  +>
       ?~  lit  +>
       =^  lic  say.she
-          (~(transmit sole say.she) `sole-edit`?~(t.lit i.lit [%mor lit]))
+        (~(transmit shared:sole say.she) `sole-edit`?~(t.lit i.lit [%mor lit]))
       (sh-fact [%mor [%det lic] ?~(err ~ [%err u.err]~)])
     ::
     ++  sh-stir                                         ::  apply edit
       |=  cal/sole-change
       ^+  +>
-      =^  inv  say.she  (~(transceive sole say.she) cal)
+      =^  inv  say.she  (~(transceive shared:sole say.she) cal)
       =+  fix=(sh-sane inv buf.say.she)
       ?~  lit.fix
         +>.$
@@ -1248,7 +1248,7 @@
       %.  u.jub
       =<  sh-work
       =+  buf=buf.say.she
-      =^  cal  say.she  (~(transmit sole say.she) [%set ~])
+      =^  cal  say.she  (~(transmit shared:sole say.she) [%set ~])
       %-  sh-fact
       :*  %mor
           [%nex ~]

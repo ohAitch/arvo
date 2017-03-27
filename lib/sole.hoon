@@ -7,7 +7,6 @@
 ::
 ::::
   ::
-=<  shared
 |%
 ++  cursored
   |_  sole-cursor-share
