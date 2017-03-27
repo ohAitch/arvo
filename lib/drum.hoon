@@ -606,34 +606,15 @@
       {$url *}  +>(..ta (se-blit fec))
     ==
   ::
-  ++  ta-dog                                          ::  change cursor
-    |=  ted/sole-edit
-    %_    +>
-        pos.inp
-      =+  len=(lent buf.say.inp)
-      %+  min  len
-      |-  ^-  @ud
-      ?-  ted
-        {$del *}  ?:((gth pos.inp p.ted) (dec pos.inp) pos.inp)
-        {$ins *}  ?:((gte pos.inp p.ted) +(pos.inp) pos.inp)
-        {$mor *}  |-  ^-  @ud
-                  ?~  p.ted  pos.inp
-                  $(p.ted t.p.ted, pos.inp ^$(ted i.p.ted))
-        {$nop *}  pos.inp
-        {$set *}  len
-      ==
-    ==
-  ::
   ++  ta-got                                          ::  apply change
     |=  cal/sole-change
-    =^  ted  say.inp  (~(receive sole say.inp) cal)
-    (ta-dog ted)
+    +>(inp +:(~(receive cursored:sole inp) cal))
   ::
   ++  ta-hom                                          ::  local edit
     |=  ted/sole-edit
     ^+  +>
     =.  +>  (ta-det ted)
-    (ta-dog(say.inp (~(commit sole say.inp) ted)) ted)
+    +>(inp (~(commit cursored:sole inp) ted))
   ::
   ++  ta-jump                                         ::  buffer pos
     |=  {dir/?($l $r) til/?($ace $edg $wrd) pos/@ud}

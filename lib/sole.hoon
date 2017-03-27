@@ -9,6 +9,47 @@
   ::
 =<  shared
 |%
+++  cursored
+  |_  sole-cursor-share
+  ::
+  ::::
+  ::  ++commit: local change
+  ::
+  ++  commit
+    |=  ted/sole-edit  ^-  sole-cursor-share
+    =.  say  (~(commit shared say) ted)
+    (transpose ted)
+  ::
+  ::::
+  ::  ++receive: record remote change
+  ::
+  ++  receive
+    |=  cal/sole-change  ^-  {sole-edit sole-cursor-share}
+    =^  ted  say  (~(receive shared say) cal)
+    [ted (transpose ted)]
+  ::
+  ::::
+  ::  ++transpose: change cursor
+  ::
+  :: REVIEW different from transpose:shared?
+  ++  transpose
+    |=  ted/sole-edit  ^-  sole-cursor-share
+    %_    +<.transpose
+        pos
+      =+  len=(lent buf.say)
+      %+  min  len
+      |-  ^-  @ud
+      ?-  ted
+        {$del *}  ?:((gth pos p.ted) (dec pos) pos)
+        {$ins *}  ?:((gte pos p.ted) +(pos) pos)
+        {$mor *}  |-  ^-  @ud
+                  ?~  p.ted  pos
+                  $(p.ted t.p.ted, pos ^$(ted i.p.ted))
+        {$nop *}  pos
+        {$set *}  len
+      ==
+    ==
+  --
 ++  shared
   |_  sole-share                                        ::  shared-state engine
   ++  abet  +<
