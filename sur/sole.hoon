@@ -2,6 +2,7 @@
 ::::  /hoon/sole/sur
   ::
 |%
+++  sole-id-action  (pair sole-id $@($new sole-action)) ::  sole to app
 ++  sole-action                                         ::  sole to app
   $%  ::  {$abo ~}                                      ::  reset interaction
       {$det sole-change}                                ::  command line edit
@@ -39,9 +40,10 @@
       {$txt p/tape}                                     ::  text line
       {$url p/@t}                                       ::  activate url
   ==                                                    ::
+++  sole-id  {@u dock}                                  ::  client source
 ++  sole-cursor-share                                   ::  command state
   $:  pos/@ud                                           ::  cursor position
-      say/sole-share                                    ::  cursor
+      say/sole-share                                    ::  cursor in
   ==                                                    ::
 ++  sole-prompt                                         ::  prompt definition
   $:  vis/?                                             ::  command visible
