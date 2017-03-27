@@ -14,12 +14,28 @@
 --
 ::
 =,  ^gall
+=|  mow/(list {bone card})
+=|  sef/(list sole-effect)
 |_  $:  bow/bowl
         adr/(map email {time invited})
         sos/(map bone sole-share)
         wom/(unit ship)
         admins/(set ship)
     ==
+++  abet
+  ^-  (quip {bone card} .)
+  =.  .  ?:(=(~ sef) . (emit (effect %mor sef)))
+  [(flop mow) .(mow ~, sef ~)]
+::
+++  emit  |=(a/card +>(mow [[ost.bow a] mow]))
+++  emit-all
+  |=  a/card
+  =/  mos
+    (turn (prey /sole bow) |=({ost/bone ^} [ost a]))
+  +>.$(mow (welp mos mow))
+::
+++  give-effect  |=(a/sole-effect +>(sef [a sef]))
+::
 ++  prompt
   ^-  sole-prompt
   ?~  wom  [& %ask-ship ":womb-ship? ~"]
@@ -29,11 +45,13 @@
 ::
 ++  peer-sole
   |=  path
-  ^-  (quip {bone card} +>)
+  =<  abet  ^+  +>
   ~|  [%not-in-whitelist src.bow]
   ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
-  :_  +>.$(sos (~(put by sos) ost.bow *sole-share))
-  =-  [(effect %mor pro+prompt -)]~
+  =.  sos  (~(put by sos) ost.bow *sole-share)
+  %-  emit
+  %^  effect  %mor
+    pro+prompt
   =+  all=adrs
   [(render all) (turn all put-mail)]
 ::
@@ -49,13 +67,17 @@
 ::
 ++  new-adrs  (skim adrs |=({@ @ inv/invited} =(%new inv)))
 ++  ignored-adrs  (skim adrs |=({@ @ inv/invited} =(%ignored inv)))
-++  effect  |=(fec/sole-effect [ost.bow %diff %sole-effect fec])
+++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
 ++  message
   |=  {now/time ask/@t inv/invited}  ^-  tank
   =.  now  (sub now (mod now ~s1))
   leaf+"ask: {<inv>} {<now>} {(trip ask)}"
 ::
-++  put-mail   |=({@ ask/@t inv/invited} =+(pax=(rash ask unix-path) [%sav pax `@t`inv]))
+++  put-mail
+  |=  {@ ask/@t inv/invited}
+  =/  pax  (rash ask unix-path)
+  [%sav pax `@t`inv]
+::
 ++  unix-path  ::  split into path of "name" and "extension"
   ;~  (glue dot)
     (cook crip (star ;~(less dot next)))
@@ -65,70 +87,86 @@
 ++  poke-ask-admins
   |=  a/(set ship)
   ?>  =(our.bow src.bow)
-  `+>.$(admins a)
+  abet(admins a)
 ::
 ++  poke-ask-mail
   |=  ask/@t
-  ^-  (quip {bone card} +>)
+  =<  abet  ^+  +>
   ~|  have-mail+ask
   ?<  (~(has by adr) ask)
   =.  adr  (~(put by adr) ask now.bow %new) :: XX electroplating
-  :_  +>.$
+  %-  emit-all
   =/  new  [now.bow ask %new]
-  =+  [mez=[(message new)]~ pro=prompt sav=(put-mail new)]
-  %+  turn  (prey /sole bow)
-  |=({ost/bone ^} (effect(ost.bow ost) %mor tan+mez pro+prompt sav ~))
+  (effect %mor tan+[(message new)]~ pro+prompt (put-mail new) ~)
+::
+++  poke-sole-action--no-womb-ship
+  |=  act/sole-action  ^+  +>
+  =/  som  (~(got by sos) ost.bow)
+  ?-    -.act
+      $clr  +>.$
+      $ret
+    ?:  =(~ buf.som)
+      (give-effect txt+"Please enter womb ship")
+    =/  try  (rose (tufa buf.som) fed:ag)
+    ?.  ?=({$& ^} try)
+      (give-effect bel+~)
+    =.  wom  p.try
+    =>  (transmit set+~)
+    (give-effect pro+prompt)   :: XX handle multiple links?
+  ::
+      $det
+    =^  lic  som
+      %+  ~(remit shared:sole som)  +.act
+      |=  buf/(list @c)
+      ?=({$& *} (rose (tufa buf) fed:ag))
+    ?~  lic  +>.$(sos (~(put by sos) ost.bow som))
+    =.  sos  (~(put by sos) ost.bow som)
+    =>  (give-effect det+u.lic)
+    (give-effect bel+~)
+  ==
 ::
 ++  poke-sole-action
   |=  act/sole-action
-  ^-  (quip {bone card} +>)
+  =<  abet  ^+  +>
+  ?:  =(~ wom)
+    (poke-sole-action--no-womb-ship act)
   =/  som  (~(got by sos) ost.bow)
   ?-    -.act
-      $clr  `+>.$
-      $ret
-    ?^  wom  [[(effect mor+help)]~ +>.$]    :: show help
-    ?:  =(~ buf.som)  [[(effect txt+"Please enter womb ship")]~ +>.$]
-    =/  try  (rose (tufa buf.som) fed:ag)
-    ?.  ?=({$& ^} try)
-      [[(effect bel+~)]~ +>.$]
-    =>  .(wom p.try)  :: XX TMI
-    (transmit set+~ pro+prompt ~)   :: XX handle multiple links?
-  ::
+      $clr  +>.$
+      $ret  (give-effect mor+help)
       $det                              :: reject all input
-    =^  inv  som  (~(transceive shared:sole som) +.act)
+    =^  bac  som  (~(transceive shared:sole som) +.act)
     =.  sos  (~(put by sos) ost.bow som)
-    ?~  wom
-      =/  try  (rose (tufa buf.som) fed:ag)
-      ?:  -.try  `+>.$
-      (transmit inv bel+~ ~)
-    ?:  =(`*`"?" buf.som)  (transmit inv help)
-    ?:  =(`*`"a" buf.som)  (transmit inv (render adrs) ~)
-    ?:  =(`*`"l" buf.som)  (transmit inv (render new-adrs) ~)
-    ?:  =(`*`"i" buf.som)  (transmit inv (render ignored-adrs) ~)
-    ?:  =(`*`"n" buf.som)
+    =/  buf  (tufa buf.som)
+    =.  +>.$  (transmit bac)
+    ::
+    ?:  =("?" buf)  (give-effect mor+help)
+    ?:  =("a" buf)  (give-effect (render adrs))
+    ?:  =("l" buf)  (give-effect (render new-adrs))
+    ?:  =("i" buf)  (give-effect (render ignored-adrs))
+    ?:  =("w" buf)  =.(wom ~ (give-effect pro+prompt))
+    ?:  =("n" buf)
       =/  new  new-adrs
-      ?~  new  (transmit inv bel+~ ~)
+      ?~  new  (give-effect bel+~)
       =.  inv.i.new  %ignored
       =.  adr  (~(put by adr) ask.i.new [tym inv]:i.new)
-      (transmit inv tan+[(message i.new)]~ pro+prompt ~)
-    ?:  =(`*`"y" buf.som)
+      (give-effect %mor tan+[(message i.new)]~ pro+prompt ~)
+    ?:  =("y" buf)
       =/  new  new-adrs
-      ?~  new  (transmit inv bel+~ ~)
+      ?~  new  (give-effect bel+~)
       =.  inv.i.new  %sent  :: XX pending
-      =-  [[(invite ask.i.new) -<] ->]
+      =.  emit  (emit (invite ask.i.new))
       =.  adr  (~(put by adr) ask.i.new [tym inv]:i.new)
-      (transmit inv tan+[(message i.new)]~ pro+prompt ~)
-    ?:  =(`*`"w" buf.som)
-      =>  .(wom ~)  :: XX TMI
-      (transmit inv pro+prompt ~)
-    (transmit inv bel+~ ~)
+      (give-effect %mor tan+[(message i.new)]~ pro+prompt ~)
+    (give-effect bel+~)
   ==
+::
 ++  transmit
-  |=  {inv/sole-edit mor/(list sole-effect)}
+  |=  edi/sole-edit  ^+  +>
   =/  som  (~(got by sos) ost.bow)
-  =^  det  som  (~(transmit shared:sole som) inv)
+  =^  det  som  (~(transmit shared:sole som) edi)
   =.  sos  (~(put by sos) ost.bow som)
-  [[(effect mor+[det+det mor])]~ +>.$]
+  (give-effect det+det)
 ::
 ++  help
   ^-  (list sole-effect)
@@ -150,7 +188,6 @@
 ::
 ++  invite
   |=  ask/email
-  :-  ost.bow
   ^-  card
   :^  %poke  /invite/(scot %t ask)  [(need wom) %hood]
   :-  %womb-invite
