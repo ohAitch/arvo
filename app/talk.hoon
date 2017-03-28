@@ -30,7 +30,7 @@
           general/(set bone)                            ::  meta-subscribe
           outbox/(pair @ud (map @ud thought))           ::  urbit outbox
           folks/(map ship human)                        ::  human identities
-          shells/(map bone shell)                       ::  interaction state
+          shells/(map sole-id shell)                    ::  interaction state
           log/(map knot @ud)                            ::  logged to clay
           nik/(map (set partner) char)                  ::  bound station glyphs
           nak/(jug char (set partner))                  ::  station glyph lookup
@@ -187,6 +187,7 @@
   |_  moves/(list move)
   ++  sh                                                ::  per console
     |_  $:  coz/(list command)                          ::  talk actions
+            sid/sole-id
             she/shell
         ==
     ++  sh-scad                                         ::  command parser
@@ -341,27 +342,30 @@
         ==
       --
     ++  sh-new
-      |=  {her/ship pax/path}
+      |=  {sid/sole-id her/ship pax/path}
       ^+  +>
       =/  man/knot  ?~(pax (main her) ?>(?=($~ t.pax) i.pax))
       %_  +>.$
+        sid  sid
         her.she  her
         man.she  man
         passive.she  (sy [%& our.hid man]~)
       ==
     ::
     ++  sh-old
-      %_  .
+      |=  sid/sole-id  ^+  +>
+      %_  +>
+        sid  sid
         she  ~|  :+  %ra-console-broken  ost.hid
                  ?:((~(has by sup.hid) ost.hid) %lost %unknown)
-             (~(got by shells) ost.hid)
+             (~(got by shells) sid)
       ==
     ::
     ++  sh-abet
       ^+  +>
       =+  zoc=(flop coz)
       |-  ^+  +>+>
-      ?~  zoc  +>+>.$(shells (~(put by shells) ost.hid she))
+      ?~  zoc  +>+>.$(shells (~(put by shells) sid she))
       $(zoc t.zoc, +>.$ (sh-deal i.zoc))
     ::
     ++  sh-deal                                         ::  apply from shell
@@ -1313,32 +1317,33 @@
   ++  ra-axel                                           ::  rebound reports
     ^+  .
     =+  ^=  rey
-        |-  ^-  (pair (list move) (list (pair bone report)))
+        |-  ^-  (pair (list move) (list (pair sole-id report)))
         ?~  moves
           [~ ~]
         =+  mor=$(moves t.moves)
-        ?.  ?&  (~(has by shells) `bone`p.i.moves)
+        =/  sid/sole-id  [p.i.moves [our dap]:hid]  ::  XX get from path in sup
+        ?.  ?&  (~(has by shells) sid)
                 ?=({$diff $talk-report *} q.i.moves)
             ==
           [[i.moves p.mor] q.mor]
-        [p.mor [[p.i.moves +>.q.i.moves] q.mor]]
+        [p.mor [[sid +>.q.i.moves] q.mor]]
     =.  moves  p.rey
     =.  q.rey  (flop q.rey)
     ?:  =(q.rey ~)  +
     |-  ^+  +>
     ?~  q.rey  ra-axel
-    =+  bak=(ra-back(ost.hid p.i.q.rey) q.i.q.rey)
-    $(q.rey t.q.rey, +> bak(ost.hid ost.hid))
+    =+  bak=(ra-back i.q.rey)
+    $(q.rey t.q.rey, +> bak)
   ::
   ++  ra-back
-    |=  rad/report
+    |=  {sid/sole-id rad/report}
     ^+  +>
-    sh-abet:(sh-repo:sh-old:sh rad)
+    sh-abet:(sh-repo:(sh-old:sh sid) rad)
   ::
   ++  ra-sole
-    |=  act/sole-action
+    |=  {sid/sole-id act/sole-action}
     ^+  +>
-    sh-abet:(sh-sole:sh-old:sh act)
+    sh-abet:(sh-sole:(sh-old:sh sid) act)
   ::
   ++  ra-emil                                           ::  ra-emit move list
     |=  mol/(list move)
@@ -1552,8 +1557,8 @@
     [who +>.$]
   ::
   ++  ra-console                                        ::  console subscribe
-    |=  {her/ship pax/path}
-    sh-abet:sh-peer:(sh-new:sh her pax)
+    |=  {sid/sole-id her/ship pax/path}
+    sh-abet:sh-peer:(sh-new:sh sid her pax)
   ::
   ++  ra-subscribe                                      ::  listen to
     |=  {her/ship pax/path}
@@ -2252,8 +2257,9 @@
   :: ~&   [%talk-peer src.hid ost.hid pax]
   ?:  ?=({$sole *} pax)
     ?>  (team:title our.hid src.hid)
-    ~?  (~(has by shells) ost.hid)  [%talk-peer-replaced ost.hid pax]
-    ra-abet:(ra-console:ra src.hid t.pax)
+    =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
+    ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
+    ra-abet:(ra-console:ra sid src.hid t.pax)
   ::  ~&  [%talk-peer-data ost.hid src.hid pax]
   ra-abet:(ra-subscribe:ra src.hid pax)
 ::
@@ -2268,7 +2274,8 @@
 ::
 ++  poke-sole-action                                    ::  accept console
   |=  act/sole-action
-  ra-abet:(ra-sole:ra act)
+  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from poke
+  ra-abet:(ra-sole:ra sid act)
 ::
 ++  diff-talk-report                                    ::
   |=  {way/wire rad/report}
@@ -2326,7 +2333,10 @@
   ^+  [*(list move) +>]
   ::  ~&  [%talk-pull src.hid ost.hid pax]
   =^  moz  +>.$  ra-abet:(ra-cancel:ra src.hid pax)
-  [moz +>.$(shells (~(del by shells) ost.hid))]
+  ?:  ?=({$sole *} pax)
+    =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
+    [moz +>.$(shells (~(del by shells) sid))]
+  [moz +>.$]
 ::
 ++  log-all-to-file
   ^-  (quip move .)

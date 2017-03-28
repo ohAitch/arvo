@@ -18,7 +18,7 @@
 =|  sef/(list sole-effect)
 |_  $:  bow/bowl
         adr/(map email {time invited})
-        sos/(map bone sole-share)
+        sos/(map sole-id sole-share)
         wom/(unit ship)
         admins/(set ship)
     ==
@@ -46,9 +46,10 @@
 ++  peer-sole
   |=  path
   =<  abet  ^+  +>
+  =/  sid/sole-id  [ost our dap]:bow  ::  XX get from path
   ~|  [%not-in-whitelist src.bow]
   ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
-  =.  sos  (~(put by sos) ost.bow *sole-share)
+  =.  di  (new-di sid)                ::  XX explicit %new act
   %-  emit
   %^  effect  %mor
     pro+prompt
@@ -100,45 +101,40 @@
   (effect %mor tan+[(message new)]~ pro+prompt (put-mail new) ~)
 ::
 ++  poke-sole-action--no-womb-ship
-  |=  act/sole-action  ^+  +>
-  =/  som  (~(got by sos) ost.bow)
+  |=  {sid/sole-id act/sole-action}  ^+  +>
+  =/  buf   buf.som:(di sid)
   ?-    -.act
       $clr  +>.$
       $ret
-    ?:  =(~ buf.som)
+    ?:  =(~ buf)
       (give-effect txt+"Please enter womb ship")
-    =/  try  (rose (tufa buf.som) fed:ag)
+    =/  try  (rose (tufa buf) fed:ag)
     ?.  ?=({$& ^} try)
       (give-effect bel+~)
     =.  wom  p.try
-    =>  (transmit set+~)
+    =>  (transmit:(di sid) set+~)
     (give-effect pro+prompt)   :: XX handle multiple links?
   ::
       $det
-    =^  lic  som
-      %+  ~(remit shared:sole som)  +.act
+    =^  gud  di
+      %+  remit:(di sid)  +.act
       |=  buf/(list @c)
       ?=({$& *} (rose (tufa buf) fed:ag))
-    ?~  lic  +>.$(sos (~(put by sos) ost.bow som))
-    =.  sos  (~(put by sos) ost.bow som)
-    =>  (give-effect det+u.lic)
+    ?:  gud  +>.$
     (give-effect bel+~)
   ==
 ::
 ++  poke-sole-action
   |=  act/sole-action
   =<  abet  ^+  +>
+  =/  sid/sole-id  [ost our dap]:bow  ::  XX get from poke
   ?:  =(~ wom)
-    (poke-sole-action--no-womb-ship act)
-  =/  som  (~(got by sos) ost.bow)
+    (poke-sole-action--no-womb-ship sid act)
   ?-    -.act
       $clr  +>.$
       $ret  (give-effect mor+help)
       $det                              :: reject all input
-    =^  bac  som  (~(transceive shared:sole som) +.act)
-    =.  sos  (~(put by sos) ost.bow som)
-    =/  buf  (tufa buf.som)
-    =.  +>.$  (transmit bac)
+    =^  buf  di  (read-reject:(di sid) +.act)
     ::
     ?:  =("?" buf)  (give-effect mor+help)
     ?:  =("a" buf)  (give-effect (render adrs))
@@ -161,12 +157,31 @@
     (give-effect bel+~)
   ==
 ::
-++  transmit
-  |=  edi/sole-edit  ^+  +>
-  =/  som  (~(got by sos) ost.bow)
-  =^  det  som  (~(transmit shared:sole som) edi)
-  =.  sos  (~(put by sos) ost.bow som)
-  (give-effect det+det)
+++  new-di  |=(sid/sole-id +>(sos (~(put by sos) sid *sole-share)))
+++  di
+  |=  sid/sole-id
+  =/  som  (~(got by sos) sid)
+  |%
+  ++  abet  ..di(sos (~(put by sos) sid som))
+  ++  transmit
+    |=  dit/sole-edit  ^+  ..di
+    =^  det  som  (~(transmit shared:sole som) dit)
+    abet(di (give-effect det+det))
+  ::
+  ++  remit
+    |=  {cal/sole-change ask/$-((list @c) ?)}
+    ^+  [*? ..di]
+    =^  lic  som
+      (~(remit shared:sole som) cal ask)
+    ?~  lic  [& abet]
+    [| abet(di (give-effect det+u.lic))]
+  ::
+  ++  read-reject
+    |=  cal/sole-change  ^+  ["" ..di]
+    =^  inv  som  (~(transceive shared:sole som) cal)
+    :-  (tufa buf.som)
+    (transmit inv)
+  --
 ::
 ++  help
   ^-  (list sole-effect)

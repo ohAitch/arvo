@@ -13,9 +13,9 @@
   ::                                                    ::    ::
 =>  |%                                                  ::  external structures
     ++  house                                           ::  all state
-      $:  $5
+      $:  $6
           egg/@u                                        ::  command count
-          hoc/(map bone session)                        ::  conversations
+          hoc/(map sole-id session)                     ::  conversations
       ==                                                ::
     ++  session                                         ::  per conversation
       $:  say/sole-share                                ::  command-line state
@@ -118,7 +118,7 @@
         house                                           ::  program state
     ==                                                  ::
 ++  he                                                  ::  per session
-  |_  {moz/(list move) session}                         ::
+  |_  {moz/(list move) sid/sole-id session}             ::
   ++  dp                                                ::  dojo parser
     |%
     ++  dp-default-app  %hood
@@ -826,11 +826,11 @@
     ==       ==
   ::
   ++  he-abet                                           ::  resolve
-    [(flop moz) %_(+> hoc (~(put by hoc) ost.hid +<+))]
+    [(flop moz) %_(+> hoc (~(put by hoc) sid +<+>))]
   ::
   ++  he-abut                                           ::  discard
     =>  he-stop
-    [(flop moz) %_(+> hoc (~(del by hoc) ost.hid))]
+    [(flop moz) %_(+> hoc (~(del by hoc) sid))]
   ::
   ++  he-beak  -:he-beam
   ++  he-beam                                           ::  logical beam
@@ -1104,19 +1104,27 @@
           {$2 p/(map bone session-1)}
           {$3 p/(map bone session-4)}
           {$4 p/@ q/(map bone session-4)}
+          {$5 p/@ q/(map bone session)}
       ==
   |=  old/(unit ?(house hoze))  ^+  [~ ..prep]
   ?~  old  `..prep
   ?+  -.u.old  !!
     $4  $(-.u.old %5, q.u.old (~(run by q.u.old) |=(session-4 +<(sur ~, lib ~))))
-    $5  `..prep(+<+ u.old)
+    $5  =;  q-new  $(-.u.old %6, q.u.old q-new)
+        =<  (malt (turn (~(tap by q.u.old)) .))
+        |=({p/bone q/session} [[p [our dap]:hid] q])
+  ::
+    $6  `..prep(+<+ u.old)
   ==
 ::
 ::  pattern:  ++  foo  |=(data he-abet:(~(he-foo he (~(got by hoc) ost)) data))
-++  arm  (arm-session ~ (~(got by hoc) ost.hid))
+++  arm
+  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path/poke
+  (arm-session ~ sid (~(got by hoc) sid))
+::
 ++  arm-session
-  |=  {moz/(list move) ses/session}
-  =>  ~(. he moz ses)
+  |=  {moz/(list move) sid/sole-id ses/session}
+  =>  ~(. he moz sid ses)
   =-  [wrap=- +]
   |*  he-arm/_he-span
   |=  _+<.he-arm
@@ -1124,14 +1132,15 @@
   he-abet:(he-arm +<)
 ::
 ++  peer-sole
+  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
   ~?  !=(our.hid src.hid)  [%dojo-peer-stranger ost.hid src.hid]
   ?>  (team:title our.hid src.hid)
-  =^  moz  .
-    ?.  (~(has by hoc) ost.hid)  [~ .]
-    ~&  [%dojo-peer-replaced ost.hid]
-    ~(he-abut he ~ (~(got by hoc) ost.hid))
+  =^  moz  ..he
+    ?.  (~(has by hoc) sid)  [~ ..he] 
+    ~&  [%dojo-peer-replaced sid]
+    ~(he-abut he ~ sid (~(got by hoc) sid))
   =+  ses=%*(. *session -.dir [our.hid %home ud+0])
-  (wrap he-peer):(arm-session moz ses)
+  (wrap he-peer):(arm-session moz sid ses)
 ::
 ++  poke-sole-action
   |=  act/sole-action  ~|  poke+act  %.  act
@@ -1155,6 +1164,6 @@
 ++  pull
   |=  {pax/path}
   ^-  (quip move +>)
-  =^  moz  +>  ~(he-abut he ~ (~(got by hoc) ost.hid))
-  [moz +>.$(hoc (~(del by hoc) ost.hid))]
+  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
+  ~(he-abut he ~ sid (~(got by hoc) sid))
 --
