@@ -44,9 +44,12 @@
   [& %$ ": approve {<ask.i.new>}? ({<(lent new)>}) [y,n,l,a,i,w,?]"]
 ::
 ++  peer-sole
-  |=  path
+  |=  pax/path
   =<  abet  ^+  +>
-  =/  sid/sole-id  [ost our dap]:bow  ::  XX get from path
+  =^  sid/sole-id  pax
+    ?~  pax  [[ost our dap]:bow pax]  ::  DEPRECATED
+    [(decode-id:sole i.pax) t.pax]
+  ?^  pax  ~|(%bad-path !!)
   ~|  [%not-in-whitelist src.bow]
   ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
   =.  di  (new-di sid)                ::  XX explicit %new act

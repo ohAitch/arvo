@@ -1121,11 +1121,7 @@
 ++  arm-bone  (arm [ost our dap]:hid)  ::  XX get from path/poke
 ++  arm
   |=  sid/sole-id
-  (arm-session ~ sid (~(got by hoc) sid))
-::
-++  arm-session
-  |=  {moz/(list move) sid/sole-id ses/session}
-  =>  ~(. he moz sid ses)
+  =>  ~(. he ~ sid (~(got by hoc) sid))
   =-  [wrap=- +]
   |*  he-arm/_he-span
   |=  _+<.he-arm
@@ -1133,15 +1129,19 @@
   he-abet:(he-arm +<)
 ::
 ++  peer-sole
-  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
   ~?  !=(our.hid src.hid)  [%dojo-peer-stranger ost.hid src.hid]
   ?>  (team:title our.hid src.hid)
+  ::
+  |=  pax/path
+  =^  sid/sole-id  pax
+    ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
+    [(decode-id:sole i.pax) t.pax]
   =^  moz  ..he
     ?.  (~(has by hoc) sid)  [~ ..he]
     ~&  [%dojo-peer-replaced sid]
     ~(he-abut he ~ sid (~(got by hoc) sid))
   =+  ses=%*(. *session -.dir [our.hid %home ud+0])
-  (wrap he-peer):(arm-session moz sid ses)
+  he-abet:(~(he-peer he moz sid ses) pax)
 ::
 ++  poke-sole-action  :: DEPRECATED
   |=  act/sole-action  ^-  (quip move +>)

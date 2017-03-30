@@ -2257,7 +2257,9 @@
   :: ~&   [%talk-peer src.hid ost.hid pax]
   ?:  ?=({$sole *} pax)
     ?>  (team:title our.hid src.hid)
-    =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
+    =^  sid/sole-id  t.pax
+      ?~  t.pax  [[ost our dap]:hid t.pax]  ::  DEPRECATED
+      [(decode-id:sole i.t.pax) t.t.pax]
     ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
     ra-abet:(ra-console:ra sid src.hid t.pax)
   ::  ~&  [%talk-peer-data ost.hid src.hid pax]
