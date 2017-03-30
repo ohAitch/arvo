@@ -1118,8 +1118,9 @@
   ==
 ::
 ::  pattern:  ++  foo  |=(data he-abet:(~(he-foo he (~(got by hoc) ost)) data))
+++  arm-bone  (arm [ost our dap]:hid)  ::  XX get from path/poke
 ++  arm
-  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path/poke
+  |=  sid/sole-id
   (arm-session ~ sid (~(got by hoc) sid))
 ::
 ++  arm-session
@@ -1136,19 +1137,26 @@
   ~?  !=(our.hid src.hid)  [%dojo-peer-stranger ost.hid src.hid]
   ?>  (team:title our.hid src.hid)
   =^  moz  ..he
-    ?.  (~(has by hoc) sid)  [~ ..he] 
+    ?.  (~(has by hoc) sid)  [~ ..he]
     ~&  [%dojo-peer-replaced sid]
     ~(he-abut he ~ sid (~(got by hoc) sid))
   =+  ses=%*(. *session -.dir [our.hid %home ud+0])
   (wrap he-peer):(arm-session moz sid ses)
 ::
-++  poke-sole-action
-  |=  act/sole-action  ~|  poke+act  %.  act
-  (wrap he-span):arm
+++  poke-sole-action  :: DEPRECATED
+  |=  act/sole-action  ^-  (quip move +>)
+  =/  sid/sole-id  [ost our dap]:hid
+  (poke-sole-id-action sid act)
+::
+++  poke-sole-id-action
+  |=  act/sole-id-action  ^-  (quip move +>)
+  ~|  poke+act
+  ?:  ?=($new q.act)  ~&(%new-stub `+>.$)
+  %.(q.act (wrap he-span):(arm p.act))
 ::
 ++  poke-lens-command
   |=  com/command:lens  ~|  poke-lens+com  %.  com
-  (wrap he-lens):arm
+  (wrap he-lens):arm-bone
 ::
 ++  poke-json
   |=  jon/json
@@ -1156,11 +1164,11 @@
   ~&  jon=jon
   [~ +>.$]
 ::
-++  made       (wrap he-made):arm
-++  sigh-httr  (wrap he-sigh):arm
+++  made       (wrap he-made):arm-bone
+++  sigh-httr  (wrap he-sigh):arm-bone
 ++  sigh-tang  |=({a/wire b/tang} ~|(`term`(cat 3 'sigh-' -.a) (mean b)))
-++  lame       (wrap he-lame):arm
-++  unto       (wrap he-unto):arm
+++  lame       (wrap he-lame):arm-bone
+++  unto       (wrap he-unto):arm-bone
 ++  pull
   |=  {pax/path}
   ^-  (quip move +>)

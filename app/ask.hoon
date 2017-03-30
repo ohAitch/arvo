@@ -124,10 +124,15 @@
     (give-effect bel+~)
   ==
 ::
-++  poke-sole-action
+++  poke-sole-action  :: DEPRECATED
   |=  act/sole-action
+  =/  sid/sole-id  [ost our dap]:bow
+  (poke-sole-id-action sid act)
+::
+++  poke-sole-id-action
+  |=  {sid/sole-id act/?($new sole-action)}
   =<  abet  ^+  +>
-  =/  sid/sole-id  [ost our dap]:bow  ::  XX get from poke
+  ?:  ?=($new act)  ~&(%new-stub +>.$)
   ?:  =(~ wom)
     (poke-sole-action--no-womb-ship sid act)
   ?-    -.act

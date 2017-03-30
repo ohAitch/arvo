@@ -2272,10 +2272,15 @@
   =^  mow  +>.$  log-all-to-file
   [(welp mos mow) +>.$]
 ::
-++  poke-sole-action                                    ::  accept console
+++  poke-sole-action                                    ::  DEPRECATED
   |=  act/sole-action
-  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from poke
-  ra-abet:(ra-sole:ra sid act)
+  =/  sid/sole-id  [ost our dap]:hid
+  (poke-sole-id-action sid act)
+::
+++  poke-sole-id-action                                 ::  accept console
+  |=  act/sole-id-action
+  ?:  ?=($new q.act)  ~&(%new-stub `+>.$)
+  ra-abet:(ra-sole:ra act)
 ::
 ++  diff-talk-report                                    ::
   |=  {way/wire rad/report}
