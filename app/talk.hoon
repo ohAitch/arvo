@@ -1321,11 +1321,15 @@
         ?~  moves
           [~ ~]
         =+  mor=$(moves t.moves)
-        =/  sid/sole-id  [p.i.moves [our dap]:hid]  ::  XX get from path in sup
-        ?.  ?&  (~(has by shells) sid)
+        =/  sop  (~(get by sup.hid) ost.hid)
+        ?.  ?&  ?=({$~ @ $sole *} sop)
                 ?=({$diff $talk-report *} q.i.moves)
             ==
           [[i.moves p.mor] q.mor]
+        =/  pax  t.q.u.sop
+        =^  sid/sole-id  pax
+          ?~  pax  [[p.i.moves [our dap]:hid] pax]  ::  DEPRECATED
+          [(decode-id:sole i.pax) t.pax]
         [p.mor [[sid +>.q.i.moves] q.mor]]
     =.  moves  p.rey
     =.  q.rey  (flop q.rey)
