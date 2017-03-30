@@ -122,6 +122,7 @@
 =>  |%                                                ::  arvo structures
     ++  pear                                          ::  request
       $%  {$sole-action p/sole-action}                ::
+          {$sole-id-action p/sole-id-action}          ::
           {$talk-command command:talk}                ::
       ==                                              ::
     ++  lime                                          ::  update
@@ -440,8 +441,9 @@
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
   %-  se-emit(fug (~(put by fug) gyl ~))
-  [ost.hid %peer (drum-path gyl) gyl /sole]
+  [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
 ::
+++  se-sole-id  `sole-id`[0 our dap]:hid              :: XX multiple?
 ++  se-pull                                           ::  cancel subscription
   |=  gyl/gill:^gall
   (se-emit [ost.hid %pull (drum-path gyl) gyl ~])
@@ -467,7 +469,7 @@
   ++  ta-act                                          ::  send action
     |=  act/sole-action
     ^+  +>
-    (ta-poke %sole-action act)
+    (ta-poke %sole-id-action se-sole-id act)
   ::
   ++  ta-aro                                          ::  hear arrow
     |=  key/?($d $l $r $u)
