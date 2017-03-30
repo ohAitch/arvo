@@ -1118,7 +1118,15 @@
   ==
 ::
 ::  pattern:  ++  foo  |=(data he-abet:(~(he-foo he (~(got by hoc) ost)) data))
-++  arm-bone  (arm [ost our dap]:hid)  ::  XX get from path/poke
+++  arm-bone
+  =;  sid/sole-id  (arm sid)
+  :: XX store unsubsciptions so we still know what id they're for?
+  =/  sop  (~(got by sup.hid) ost.hid)
+  ?>  ?=({@ $sole *} sop)
+  =/  pax  t.q.sop
+  ?~  pax  [ost our dap]:hid  ::  DEPRECATED
+  (decode-id:sole i.pax)
+::
 ++  arm
   |=  sid/sole-id
   =>  ~(. he ~ sid (~(got by hoc) sid))
