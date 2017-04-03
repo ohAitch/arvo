@@ -135,7 +135,11 @@
 ++  poke-sole-id-action
   |=  {sid/sole-id act/?($new sole-action)}
   =<  abet  ^+  +>
-  ?:  ?=($new act)  ~&(%new-stub +>.$)
+  ~|  [%not-in-whitelist src.bow]
+  ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
+  ?:  ?=($new act)
+    +>(di (new-di sid))
+  ::
   ?:  =(~ wom)
     (poke-sole-action--no-womb-ship sid act)
   ?-    -.act

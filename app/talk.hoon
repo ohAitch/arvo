@@ -2285,7 +2285,10 @@
 ::
 ++  poke-sole-id-action                                 ::  accept console
   |=  act/sole-id-action
-  ?:  ?=($new q.act)  ~&(%new-stub `+>.$)
+  ?:  ?=($new q.act)
+    :: XX this is treated as a subscription, ideally an uninitialized session
+    ::    could exist without being subscribed to a particular story.
+    ra-abet:(ra-console:ra p.act src.hid /)
   ra-abet:(ra-sole:ra act)
 ::
 ++  diff-talk-report                                    ::

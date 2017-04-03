@@ -1159,7 +1159,10 @@
 ++  poke-sole-id-action
   |=  act/sole-id-action  ^-  (quip move +>)
   ~|  poke+act
-  ?:  ?=($new q.act)  ~&(%new-stub `+>.$)
+  ?:  ?=($new q.act)
+    ?<  (~(has by hoc) p.act)  :: REVIEW nop instead of crashing?
+    =/  ses  %*(. *session -.dir [our.hid %home ud+0])
+    ~(he-abet he ~ p.act ses)
   %.(q.act (wrap he-span):(arm p.act))
 ::
 ++  poke-lens-command
