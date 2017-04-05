@@ -15,7 +15,6 @@
 ::
 =,  ^gall
 =|  mow/(list {bone card})
-=|  sef/(list sole-effect)
 |_  $:  bow/bowl
         adr/(map email {time invited})
         sos/(map sole-id {sole-share (list sole-effect)})
@@ -24,18 +23,14 @@
     ==
 ++  abet
   ^-  (quip {bone card} .)
-  =.  .  ?:(=(~ sef) . (emit (effect %mor sef)))
-  [(flop mow) .(mow ~, sef ~)]
+  [(flop mow) .(mow ~)]
 ::
 ++  emit  |=(a/card +>(mow [[ost.bow a] mow]))
-++  emit-all
-  |=  a/card
-  =/  mos
-    (turn (prey /sole bow) |=({ost/bone ^} [ost a]))
-  +>.$(mow (welp mos mow))
-::
-++  give-effect  |=(a/sole-effect +>(sef [a sef]))
-++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
+++  spam-effect
+  |=  a/sole-effect  ^+  +>
+  %+  roll  (~(tap by sos))
+  |:  [*{sid/sole-id ^} +>.$]
+  abet:(give-effect:(di sid) a)
 ::
 ::
 ++  poke-ask-admins
@@ -45,12 +40,13 @@
 ::
 ++  poke-ask-mail
   |=  ask/@t
+  =<  abet  ^+  +>
   ~|  have-mail+ask
   ?<  (~(has by adr) ask)
   =.  adr  (~(put by adr) ask now.bow %new) :: XX electroplating
-  %-  emit-all
+  %-  spam-effect
   =/  new  [now.bow ask %new]
-  (effect %mor tan+[(message new)]~ pro+prompt (put-mail new) ~)
+  [%mor tan+[(message new)]~ pro+prompt (put-mail new) ~]
 ::
 ++  poke-sole-action  :: DEPRECATED
   |=  act/sole-action
@@ -80,12 +76,23 @@
 ++  new-di  |=(sid/sole-id =.(sos (~(put by sos) sid *sole-share ~) (di sid)))
 ++  di
   |=  sid/sole-id
+  =|  sef/(list sole-effect)
   =+  [som fec]=(~(got by sos) sid)
   |%
   ++  this  .
-  ++  abet  ..di(sos (~(put by sos) sid som fec))
+  ++  abet
+    ^+  ..di
+    =/  mos/(list {bone card})
+      ?~  sef  ~
+      =/  cad  (effect %mor (flop sef))
+      %+  turn  (prey /sole/(encode-id:sole sid) bow)
+      |=({ost/bone ^} [ost cad])
+    ..di(mow (welp mos mow), sos (~(put by sos) sid som fec))
+  ::
   ++  emit  |=(a/card +>(..di (^emit a)))
-  ++  give-effect  |=(a/sole-effect +>(..di (^give-effect a)))
+  ++  give-effect  |=(a/sole-effect +>(sef [a sef]))
+  ++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
+  ::
   ::
   ++  transmit
     |=  dit/sole-edit  ^+  +>
