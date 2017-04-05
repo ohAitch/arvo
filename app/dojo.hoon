@@ -19,6 +19,7 @@
       ==                                                ::
     ++  session                                         ::  per conversation
       $:  say/sole-share                                ::  command-line state
+          log/(list sole-effect)                        ::  saved console output
           dir/beam                                      ::  active path
           poy/(unit dojo-project)                       ::  working
           {lib/(list hoof:^ford) sur/(list hoof:^ford)}             ::  lib+sur
@@ -1094,10 +1095,10 @@
   --
 ::
 ++  prep
+::   =-  _`..prep
   =+  session-4==+(*session _-(lib *(list), sur *(list)))
   =+  session-1==+(*session-4 _-(poy *(unit)))
   =+  session-0==+(*session-1 _[_say syd=desk * _|2.-])
-  :: ,_`..prep
   =+  ^=  hoze
       $%  {$0 p/(map bone session-0)}
           {$1 p/(map bone session-1)}

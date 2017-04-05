@@ -18,7 +18,7 @@
 =|  sef/(list sole-effect)
 |_  $:  bow/bowl
         adr/(map email {time invited})
-        sos/(map sole-id sole-share)
+        sos/(map sole-id {sole-share (list sole-effect)})
         wom/(unit ship)
         admins/(set ship)
     ==
@@ -169,12 +169,12 @@
     (give-effect bel+~)
   ==
 ::
-++  new-di  |=(sid/sole-id +>(sos (~(put by sos) sid *sole-share)))
+++  new-di  |=(sid/sole-id +>(sos (~(put by sos) sid *sole-share ~)))
 ++  di
   |=  sid/sole-id
-  =/  som  (~(got by sos) sid)
+  =+  [som fec]=(~(got by sos) sid)
   |%
-  ++  abet  ..di(sos (~(put by sos) sid som))
+  ++  abet  ..di(sos (~(put by sos) sid som fec))
   ++  transmit
     |=  dit/sole-edit  ^+  ..di
     =^  det  som  (~(transmit shared:sole som) dit)

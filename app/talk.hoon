@@ -55,14 +55,15 @@
           man/knot                                      ::  mailbox
           count/@ud                                     ::  messages shown
           say/sole-share                                ::  console state
+          log/(list sole-effect)                        ::  past lines
           active/(unit (set partner))                   ::  active targets
           passive/(set partner)                         ::  passive targets
           owners/register                               ::  presence mirror
           harbor/(map knot (pair posture cord))         ::  stations mirror
           system/cabal                                  ::  config mirror
           settings/(set knot)                           ::  frontend settings
-      ==                                                ::
-    ++  shell-4  (cork shell |=(shell +<(|8 &9.+<)))    ::  missing settings
+      ==                                                :: 
+    ++  shell-4  (cork shell |=(shell +<(|9 &10.+<)))   ::  missing settings
     ++  river  (pair point point)                       ::  stream definition
     ++  point                                           ::  stream endpoint
       $%  {$ud p/@ud}                                   ::  by number
@@ -2415,6 +2416,7 @@
   +>.$(log (~(del by log) man))
 ::
 ++  prep
+  =-  _`..prep
   |=  old/(unit house-any)
   ^-  (quip move ..prep)
   ?~  old
