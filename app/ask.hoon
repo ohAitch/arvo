@@ -170,8 +170,7 @@
   ::
   ++  peer
     |=  path  ^+  this
-    %-  emit
-    %^  effect  %mor
+    %^  give-effect  %mor
       pro+prompt
     =+  all=adrs
     [(render all) (turn all put-mail)]
