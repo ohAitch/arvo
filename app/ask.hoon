@@ -56,8 +56,8 @@
 ++  poke-sole-id-action
   |=  {sid/sole-id act/?($new sole-action)}
   =<  abet:abet  ^+  *di
-  ~|  [%not-in-whitelist src.bow]
-  ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
+  ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
+    ~|([%not-in-whitelist src.bow] !!)
   ?:  ?=($new act)
     (new-di sid)
   (poke-action:(di sid) act)
