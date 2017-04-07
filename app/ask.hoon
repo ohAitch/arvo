@@ -77,7 +77,7 @@
 ++  di
   |=  sid/sole-id
   =|  sef/(list sole-effect)
-  =+  [som fec]=(~(got by sos) sid)
+  =+  [som log]=(~(got by sos) sid)
   |%
   ++  this  .
   ++  abet
@@ -87,10 +87,10 @@
       =/  cad  (effect %mor (flop sef))
       %+  turn  (prey /sole/(encode-id:sole sid) bow)
       |=({ost/bone ^} [ost cad])
-    ..di(mow (welp mos mow), sos (~(put by sos) sid som fec))
+    ..di(mow (welp mos mow), sos (~(put by sos) sid som log))
   ::
   ++  emit  |=(a/card +>(..di (^emit a)))
-  ++  give-effect  |=(a/sole-effect +>(sef [a sef]))
+  ++  give-effect  |=(a/sole-effect +>(sef [a sef], log [a log]))
   ++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
   ::
   ::
