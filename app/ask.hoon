@@ -71,7 +71,9 @@
   ?^  pax  ~|(%bad-path !!)
   ~|  [%not-in-whitelist src.bow]
   ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
-  (peer:(new-di sid) pax)                ::  XX explicit %new act
+  ?.  (~(has by sos) sid)
+    (peer:(new-di sid) pax)                ::  XX explicit %new act
+  (peer-old:(di sid) pax)
 ::
 ++  new-di  |=(sid/sole-id =.(sos (~(put by sos) sid *sole-share ~) (di sid)))
 ++  di
@@ -174,6 +176,13 @@
       pro+prompt
     =+  all=adrs
     [(render all) (turn all put-mail)]
+  ++  peer-old
+    |=  path  ^+  this
+    ~&  %ask-replaced
+    ~&  ole+(lent log)
+    =.  log  (skip log |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
+    =.  som  *sole-share                                :: XX sync sole-share properly
+    (emit (effect %mor (flop log)))
   --
 ::
 ++  prompt
