@@ -87,7 +87,7 @@
   ::
   ++  diff-atom
     |=  {wir/wire @u}
-    ~&  clin+[%diff ses +<.$ hav=(~(get by saw) ses)]
+    ~&  clin+[%diff ses +<.$ hav=num]
     =.  num  +(num)
     abet
   --
