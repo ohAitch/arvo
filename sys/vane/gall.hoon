@@ -121,7 +121,10 @@
   ::
   ++  mo-conf                                           ::  configure
     |=  {dap/dude lum/culm}
-    (mo-boot dap ?:((~(has by bum) dap) %old %new) p.p.lum q.p.lum da+now)
+    ?-    -.lum
+        $load
+      (mo-boot dap ?:((~(has by bum) dap) %old %new) p.p.lum q.p.lum da+now)
+    ==
   ::
   ++  mo-pass                                           ::  standard pass
     |=  {pax/path noh/note-arvo}
