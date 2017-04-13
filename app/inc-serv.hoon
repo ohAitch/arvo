@@ -25,22 +25,25 @@
 |%
 ++  move
   $:  bone
-  $%  {$diff $atom @u}
+  $%  {$diff $%({$atom @u} {$backlog-atoms (list @u)})}
+      {$quit $~}
   ==  ==
 --
 ::
 =|  mow/(list move)
 |_  {bowl dat/(map session {num/@u log/(list @u)})}
-++  prep  _~&(%wiped abet)
+:: ++  prep  _~&(%wiped abet)
 ++  abet  [(flop mow) .(mow ~)]
+++  pull  |=(path ~&(serv+pull+[+<] abet))
 ++  peer
   |=  a/path  ^+  abet
   =^  ses  a  ?~(a !! [(decode-id i.a) t.a])
   =/  num  (raid a /[%ud])
   ~&  serv+peer+a
-  peer:(se ses)
-++  poke-noun
-  |=  {ses/session *}  ^+  abet
+  (peer:(se ses) num)
+::
+++  poke-inc-cmd
+  |=  {ses/session ?($bump $drop)}  ^+  abet
   poke:(se ses)
 ::
 ++  se
@@ -51,15 +54,23 @@
   ++  abet  ^abet(dat (~(put by dat) ses num log))
   ++  emit  |=(a/move this(mow [a mow]))
   ::
-  ++  peer  abet:update
   ++  update  (emit(log [num log]) ost %diff %atom num)
+  ++  peer
+    |=  num/@u  ^+  abet
+    =/  new  (slag num (flop log))
+    ?~  num  abet
+    abet:(emit ost %diff %backlog-atoms new)
+  ::
   ++  poke
     =<  abet
     ~&  serv+[%poke ses num=num log=log]
     =.  num  +(num)
+    ~&  broadcasting+(prey /(encode-id ses) +<-.se)
     %+  roll  (prey /(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
     update(ost ost)
+::     =>  update(ost ost)
+::     (emit ost %quit ~)
   --
 --
 
@@ -75,5 +86,3 @@
 ::   |=  a/$bump
 ::   =.  log  [a log]
 ::   (give %bump)
-
-
