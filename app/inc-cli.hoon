@@ -29,10 +29,14 @@
       {$pull wire dock $~}
       {$poke wire dock {$inc-cmd session ?($bump $drop)}}
   ==  ==
+++  ses-data
+  $:  sus/(unit @u)                   :: seqn of current outbound subscription
+      rec/@u                          :: counter of recieved bumps
+  ==
 --
 ::
 =|  mow/(list move)
-|_  {bowl saw/(map session @u)}
+|_  {bowl dat/(map session ses-data)}
 ++  this  .
 ++  abet  [(flop mow) .(mow ~)]
 ++  emit  |=(a/move this(mow [a mow]))
@@ -49,48 +53,62 @@
   ==
 ::
 ++  diff-backlog-atoms
-  |=  {wir/wire log/(list @u)}
+  |=  {wir/wire dif/(list @u)}
   =^  ses  wir  [(decode-id -.wir) +.wir]
-  (diff-backlog-atoms:(se ses) wir log)
+  (diff-backlog-atoms:(se ses) wir dif)
 ::
 ++  diff-atom
-  |=  {wir/wire res/@u}
+  |=  {wir/wire dif/@u}
   =^  ses  wir  [(decode-id -.wir) +.wir]
-  (diff-atom:(se ses) wir res)
+  (diff-atom:(se ses) wir dif)
 ::
 ++  our-se  |=(a/@ud (se a [our dap]))
 ++  se
   |=  ses/session
   ?>  =(+.ses [our dap])  ::  necessary?
-  =/  num  (fall (~(get by saw) ses) 0)
+  =+  `ses-data`(fall (~(get by dat) ses) *ses-data)
   |%
   ++  this  .
-  ++  abet  ^abet(saw (~(put by saw) ses num))
+  ++  abet  ^abet(dat (~(put by dat) ses +<.this))
   ++  emit  |=(a/move this(mow [a mow]))
   ::
   ++  server  [our %inc-serv]
+  ++  ses-t  (encode-id ses)
   ::
   ++  do-peer
-    =/  pax  /(encode-id ses)/(scot %ud num)
-    abet:(emit 0 %peer pax server pax)
+    =~  ?~  sus  this
+        (emit 0 %pull /[ses-t]/(scot %ud u.sus) server ~)
+    ::
+        =/  pax  /[ses-t]/(scot %ud rec)
+        =.  sus  `rec
+        (emit 0 %peer pax server pax)
+    ::
+        abet
+    ==
   ::
   ++  do-pull
-    =/  pax  /(encode-id ses)/(scot %ud num)
-    abet:(emit 0 %pull pax server ~)
+    =<  abet
+    ?~  sus  ~&(%no-pull this)
+    (emit 0 %pull /[ses-t]/(scot %ud u.sus) server ~)
   ::
   ++  do-bump  abet:(emit 0 %poke / server %inc-cmd ses %bump)
   ++  diff-backlog-atoms
     |=  {wir/wire log/(list @u)}
-    ~&  clin+[%diff ses +<.$ hav=num]
-    =.  num  (add num (lent log))
+    ~|  bad-subscription+[sus wir]
+    ?>  =(wir /(scot %ud (need sus)))
+    ~&  clin+[%diff ses +<.$ rec=rec]
+    =.  rec  (add rec (lent log))
     abet
   ::
   ++  diff-atom
     |=  {wir/wire @u}
-    ~&  clin+[%diff ses +<.$ hav=num]
-    =.  num  +(num)
+    ~|  bad-subscription+[sus wir]
+    ?>  =(wir /(scot %ud (need sus)))
+    ~&  clin+[%diff ses +<.$ rec=rec]
+    =.  rec  +(rec)
     abet
   --
+:: ++  prep  _abet
 :: ++  prep
 ::   $_
 ::   :_  .
