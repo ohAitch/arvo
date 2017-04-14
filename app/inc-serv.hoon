@@ -58,20 +58,20 @@
   ++  abet  ^abet(dat (~(put by dat) ses num log))
   ++  emit  |=(a/move this(mow [a mow]))
   ::
-  ++  update  (emit(log [num log]) ost %diff %atom num)
   ++  peer
     |=  num/@u  ^+  abet
     =/  new  (slag num (flop log))
-    ?~  num  abet
+    ?~  new  abet
     abet:(emit ost %diff %backlog-atoms new)
   ::
   ++  poke
     =<  abet
     ~&  serv+[%poke ses num=num log=log]
     =.  num  +(num)
+    =.  log  [num log]
     ~&  broadcasting+(prey /(encode-id ses) +<-.se)
     %+  roll  (prey /(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
-    update(ost ost)
+    (emit ost %diff %atom num)
   --
 --
