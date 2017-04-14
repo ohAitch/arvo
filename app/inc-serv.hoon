@@ -69,20 +69,5 @@
     %+  roll  (prey /(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
     update(ost ost)
-::     =>  update(ost ost)
-::     (emit ost %quit ~)
   --
 --
-
-
-
-::   log/(list $bump)
-:: ++  peer-bumps
-::   |=  a/path
-::   =^  id  a  ?~(a !! [(parse-id -.a) +.a])
-::   =^  num  a  ?~(a [0 a] [(slav %ud i.a) t.a])
-::   (give %log (slag num (flop log)))  :: log := multiple events
-:: ++  bump
-::   |=  a/$bump
-::   =.  log  [a log]
-::   (give %bump)
