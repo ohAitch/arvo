@@ -96,16 +96,16 @@
     |=  {wir/wire log/(list @u)}
     ~|  bad-subscription+[sus wir]
     ?>  =(wir /(scot %ud (need sus)))
-    ~&  clin+[%diff ses +<.$ rec=rec]
     =.  rec  (add rec (lent log))
+    ~&  clin+[%diff-log ses +<.$ rec=rec]
     abet
   ::
   ++  diff-atom
     |=  {wir/wire @u}
     ~|  bad-subscription+[sus wir]
     ?>  =(wir /(scot %ud (need sus)))
-    ~&  clin+[%diff ses +<.$ rec=rec]
     =.  rec  +(rec)
+    ~&  clin+[%diff ses +<.$ rec=rec]
     abet
   --
 :: ++  prep  _abet
