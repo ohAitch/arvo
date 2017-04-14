@@ -123,6 +123,7 @@
     ++  pear                                          ::  request
       $%  {$sole-id-action p/sole-id-action}          ::
           {$talk-command command:talk}                ::
+          {$dill-belt dill-belt:^dill}                ::
       ==                                              ::
     ++  lime                                          ::  update
       $%  {$dill-blit dill-blit:^dill}                ::
@@ -150,6 +151,12 @@
   ?>  (team:title our.hid src.hid)               ::  or our own moon
   =<  se-abet  =<  se-view
   (se-text "[{<src.hid>}, driving {<our.hid>}]")
+::
+++  diff-dill-blit-phat                             ::  app event
+  =,  ^dill
+  |=  {way/wire bil/dill-blit}
+  =<  se-abet  =<  se-view
+  (se-blit bil)  
 ::
 ++  poke-dill-belt                                    ::  terminal event
   |=  bet/dill-belt:^dill
@@ -495,6 +502,8 @@
     |=  bet/dill-belt:^dill
     ^+  +>
     ?<  ?=({?($cru $hey $rez $yow) *} bet)            ::  target-specific
+    ?:  &(=(%drumming q.gyl) !=([%ctl %x] bet))
+      (ta-poke %dill-belt bet)
     =.  blt  [q.blt `bet]                             ::  remember belt
     ?-  bet
       {$aro *}  (ta-aro p.bet)
@@ -565,7 +574,10 @@
               ta-bel
             =+  sop=(ta-off %l %ace pos.inp)
             (ta-kil %l [(sub pos.inp sop) sop])
-        $x  +>(..ta se-anon)
+        $x  =.  ..ta  se-anon
+            =/  gil  (fall se-agon gyl)
+            ?.  =(%drumming q.gil)  ..ta-ctl
+            ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
         $y  ?:  =(0 num.kil)
               ta-bel
             (ta-hom (cat:edit pos.inp ta-yan))
