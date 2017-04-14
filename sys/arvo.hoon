@@ -345,6 +345,7 @@
     ?:  &(?=(^ pux) ?=($~ hen))
       [[[[lal u.pux] (curd +>.hil)]~ ~] niz]
     =+  naf=q.niz
+    !.
     |-  ^-  {{p/(list ovum) q/(list muse)} _niz}
     ?~  naf  [[~ ~] [p.niz ~]]
     ?.  =(lal p.i.naf)
