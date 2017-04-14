@@ -156,6 +156,12 @@
   =,  ^dill
   |=  {way/wire bil/dill-blit}
   =<  se-abet  =<  se-view
+  =.  bil  %.  bil
+    |=  bil/dill-blit
+    ?+  -.bil  bil
+      $mor  bil(p (turn p.bil .))
+      $pom  bil(p ?~(p.bil ~ p.bil(q.q.p.i %g)))  :: green prompt
+    ==
   (se-blit bil)  
 ::
 ++  poke-dill-belt                                    ::  terminal event
