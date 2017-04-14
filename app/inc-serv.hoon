@@ -23,9 +23,13 @@
 --
 ::
 |%
+++  a-diff
+  $%  {$atom @u}
+      {$backlog-atoms (list @u)}
+  ==
 ++  move
   $:  bone
-  $%  {$diff $%({$atom @u} {$backlog-atoms (list @u)})}
+  $%  {$diff a-diff}
       {$quit $~}
   ==  ==
 --
