@@ -508,7 +508,7 @@
     |=  bet/dill-belt:^dill
     ^+  +>
     ?<  ?=({?($cru $hey $rez $yow) *} bet)            ::  target-specific
-    ?:  &(=(%drumming q.gyl) !=([%ctl %x] bet))
+    ?:  &(=(%drumming q.gyl) !=([%met %x] bet))
       (ta-poke %dill-belt bet)
     =.  blt  [q.blt `bet]                             ::  remember belt
     ?-  bet
@@ -580,10 +580,7 @@
               ta-bel
             =+  sop=(ta-off %l %ace pos.inp)
             (ta-kil %l [(sub pos.inp sop) sop])
-        $x  =.  ..ta  se-anon
-            =/  gil  (fall se-agon gyl)
-            ?.  =(%drumming q.gil)  ..ta-ctl
-            ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
+        $x  +>(..ta se-anon)
         $y  ?:  =(0 num.kil)
               ta-bel
             (ta-hom (cat:edit pos.inp ta-yan))
@@ -732,6 +729,11 @@
             %+  rep:edit  sel
             ^-  (list @c)  ^-  (list @)               :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
+            ::
+      $x    =.  ..ta  se-anon
+            =/  gil  (fall se-agon gyl)
+            ?.  =(%drumming q.gil)  ..ta-ctl
+            ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
             ::
       $y    ?.  ?&  ?=(^ old.kil)                     ::  rotate & yank
                     ?=(^ p.blt)
