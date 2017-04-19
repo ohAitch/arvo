@@ -47,8 +47,11 @@
   (peer:(se ses) num)
 ::
 ++  poke-inc-cmd
-  |=  {ses/session ?($bump $drop)}  ^+  abet
-  poke:(se ses)
+  |=  {ses/session cmd/?($bump $drop)}  ^+  abet
+  ?-  cmd
+    $bump  bump:(se ses)
+    $drop  drop:(se ses)
+  ==
 ::
 ++  se
   |=  ses/session
@@ -64,14 +67,22 @@
     ?~  new  abet
     abet:(emit ost %diff %backlog-atoms new)
   ::
-  ++  poke
+  ++  bump
     =<  abet
-    ~&  serv+[%poke ses num=num log=log]
+    ~&  serv+[%bump ses num=num log=log]
     =.  num  +(num)
     =.  log  [num log]
     ~&  broadcasting+(prey /(encode-id ses) +<-.se)
     %+  roll  (prey /(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
     (emit ost %diff %atom num)
+  ::
+  ++  drop
+    =<  abet
+    ~&  serv+[%drop ses num=num log=log]
+    ~&  dropping+(prey /(encode-id ses) +<-.se)
+    %+  roll  (prey /(encode-id ses) +<-.se)
+    |:  [[ost=*bone *^] this]
+    (emit ost %quit ~)
   --
 --
