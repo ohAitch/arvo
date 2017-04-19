@@ -68,6 +68,7 @@
       pom/sole-prompt                                   ::  static prompt
       inp/sole-cursor-share                             ::  input state
   ==                                                    ::
+++  session  {@u dock}                                  :: always [0 our dap]
 --
 ::                                                      ::  ::
 ::::                                                    ::  ::
@@ -124,6 +125,7 @@
       $%  {$sole-id-action p/sole-id-action}          ::
           {$talk-command command:talk}                ::
           {$dill-belt dill-belt:^dill}                ::
+          {$inc-cmd session ?($bump $drop)}
       ==                                              ::
     ++  lime                                          ::  update
       $%  {$dill-blit dill-blit:^dill}                ::
@@ -481,6 +483,12 @@
   ++  ta-act                                          ::  send action
     |=  act/sole-action
     ^+  +>
+    ?:  =(%inc-serv q.gyl)
+      ?-  -.act
+        $det  +>
+        $ret  (ta-poke %inc-cmd se-sole-id %bump)
+        $clr  (ta-poke %inc-cmd se-sole-id %drop)
+      ==
     (ta-poke %sole-id-action se-sole-id act)
   ::
   ++  ta-aro                                          ::  hear arrow
