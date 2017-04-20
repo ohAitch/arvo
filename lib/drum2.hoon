@@ -147,6 +147,20 @@
   ?:  (se-aint gyl)  +>.$
   (se-diff gyl fec)
 ::
+++  diff-atom-phat                             ::  app event
+  |=  {way/wire dif/@}
+  =<  se-abet  =<  se-view
+  =+  gyl=(drum-phat way)
+  ?:  (se-aint gyl)  +>.$
+  ta-abet:(diff-atom:(se-tame gyl) dif)
+::
+++  diff-backlog-atoms-phat                             ::  app event
+  |=  {way/wire dif/(list @)}
+  =<  se-abet  =<  se-view
+  =+  gyl=(drum-phat way)
+  ?:  (se-aint gyl)  +>.$
+  ta-abet:(diff-atoms:(se-tame gyl) dif)
+::
 ++  peer                                              ::
   |=  pax/path
   ~|  [%drum-unauthorized our+our.hid src+src.hid]    ::  ourself
@@ -455,6 +469,10 @@
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
   %-  se-emit(fug (~(put by fug) gyl ~))
+  ?:  =(%inc-serv q.gyl)  
+    =/  num  0
+    =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
+    [ost.hid %peer (drum-path gyl) gyl pax]
   [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
 ::
 ++  se-sole-id  `sole-id`[1 our dap]:hid              :: XX multiple?
@@ -479,6 +497,15 @@
     ..ta(fug (~(put by fug) gyl ``target`+<+))
   ::
   ++  ta-poke  |=(a/pear +>(..ta (se-poke gyl a)))    ::  poke gyl
+  ::
+  ::  
+  ++  diff-atom
+    |=  a/@
+    +>(ta (se-text "{<q.gyl>} bumped: {<a>}"))
+  ::  
+  ++  diff-atoms
+    |=  a/(list @)
+    +>(ta (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}"))
   ::
   ++  ta-act                                          ::  send action
     |=  act/sole-action

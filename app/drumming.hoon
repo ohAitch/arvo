@@ -8,6 +8,9 @@
 =,  drum2
 |_  {hid/bowl:^gall drum-part}                          ::  main drum work
 ++  diff-sole-effect-drum-phat  (. diff-sole-effect-phat):wrap  ::  app event
+::
+++  diff-backlog-atoms-drum-phat  (. diff-backlog-atoms-phat):wrap  ::  app event
+++  diff-atom-drum-phat  (. diff-atom-phat):wrap  ::  app event
 ++  peer                   (. peer):wrap                   ::
 ++  poke-dill-belt         (. poke-dill-belt):wrap         ::  terminal event
 :: ++  poke-sole-action       (. poke-sole-action):wrap         ::  terminal event
