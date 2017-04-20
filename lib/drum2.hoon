@@ -505,7 +505,9 @@
   ::  
   ++  diff-atoms
     |=  a/(list @)
-    +>(ta (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}"))
+    =.  ta
+      (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}")
+    (ta-pro & %bump "<bumping> ")
   ::
   ++  ta-act                                          ::  send action
     |=  act/sole-action
