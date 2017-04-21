@@ -287,7 +287,7 @@
   =.  +>.$  con
   ?:  (~(has by fug) gil)
     +>.$
-  (se-peer gil)
+  ta-abet:ta-peer:(new-ta gil)
 ::
 ++  se-subze                                          ::  downdate connections
   =<  .(dev (~(got by bin) ost.hid))
@@ -466,15 +466,6 @@
   |=  {gyl/gill:^gall par/pear}
   (se-emit [ost.hid %poke (drum-path gyl) gyl par])
 ::
-++  se-peer                                           ::  send a peer
-  |=  gyl/gill:^gall
-  %-  se-emit:ta-abet:(new-ta gyl)
-  ?:  =(%inc-serv q.gyl)  
-    =/  num  0
-    =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
-    [ost.hid %peer (drum-path gyl) gyl pax]
-  [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
-::
 ++  se-sole-id  `sole-id`[1 our dap]:hid              :: XX multiple?
 ++  se-pull                                           ::  cancel subscription
   |=  gyl/gill:^gall
@@ -506,6 +497,15 @@
     ?>  new
     =.  new  |
     .(..ta (se-text "[linked to {<gyl>}]"))
+  ::
+  ++  ta-peer                                          ::  send a peer
+    ^+  .
+    =;  mow  +(..ta (se-emit mow))
+    ?:  =(%inc-serv q.gyl)  
+      =/  num  0
+      =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
+      [ost.hid %peer (drum-path gyl) gyl pax]
+    [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
   ::
   ++  diff-atom
     |=  a/@
