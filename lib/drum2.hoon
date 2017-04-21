@@ -496,7 +496,8 @@
   ++  ta-join
     ?>  new
     =.  new  |
-    .(..ta (se-text "[linked to {<gyl>}]"))
+    =.  ta  (se-text "[linked to {<gyl>}]")
+    (ta-pro & %$ "<awaiting prompt> ")
   ::
   ++  ta-peer                                          ::  send a peer
     ^+  .
@@ -515,7 +516,7 @@
     |=  a/(list @)
     =.  ta
       (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}")
-    (ta-pro & %bump "<bumping> ")
+    (ta-pro & %bump "[bumping] ")
   ::
   ++  ta-act                                          ::  send action
     |=  act/sole-action
