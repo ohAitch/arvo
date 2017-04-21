@@ -67,9 +67,14 @@
       hit/history                                       ::  all past input
       pom/sole-prompt                                   ::  static prompt
       inp/sole-cursor-share                             ::  input state
+      ses/ses-data
       new/?                                             :: target not yet connected
   ==                                                    ::
 ++  session  {@u dock}                                  :: always [0 our dap]
+++  ses-data
+  $:  sus/@u                          :: seqn of current outbound subscription
+      rec/@u                          :: counter of recieved bumps
+  ==
 --
 ::                                                      ::  ::
 ::::                                                    ::  ::
@@ -153,14 +158,14 @@
   =<  se-abet  =<  se-view
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
-  ta-abet:(diff-atom:(ta gyl) dif)
+  ta-abet:(ta-diff-atom:(ta gyl) dif)
 ::
 ++  diff-backlog-atoms-phat                             ::  app event
   |=  {way/wire dif/(list @)}
   =<  se-abet  =<  se-view
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
-  ta-abet:(diff-backlog:(ta gyl) dif)
+  ta-abet:(ta-diff-backlog:(ta gyl) dif)
 ::
 ++  peer                                              ::
   |=  pax/path
@@ -287,7 +292,7 @@
   =.  +>.$  con
   ?:  (~(has by fug) gil)
     +>.$
-  ta-abet:ta-peer:(new-ta gil)
+  ta-abet:ta-adze:(new-ta gil)
 ::
 ++  se-subze                                          ::  downdate connections
   =<  .(dev (~(got by bin) ost.hid))
@@ -486,11 +491,17 @@
   |=  gyl/gill:^gall
   =+  `target`(~(got by fug) gyl)                     ::  app and state
   |%
+  ++  ta-this  .
+  ++  ta-abut  ..ta(fug (~(del by fug) gyl))          ::  retreat
   ++  ta-abet                                         ::  resolve
     ^+  ..ta
     ..ta(fug (~(put by fug) gyl `target`+<))
   ::
   ++  ta-poke  |=(a/pear +>(..ta (se-poke gyl a)))    ::  poke gyl
+  ++  ta-pull  .(..ta (se-pull gyl))                  ::  pull gyl
+  ++  ta-peer                                         ::  peer gyl
+    |=  a/path
+    +>(..ta (se-emit ost.hid %peer (drum-path gyl) gyl a))
   ::
   ::
   ++  ta-join
@@ -499,23 +510,23 @@
     =.  ta  (se-text "[linked to {<gyl>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
-  ++  ta-peer                                          ::  send a peer
-    ^+  .
-    =;  mow  +(..ta (se-emit mow))
-    ?:  =(%inc-serv q.gyl)  
-      =/  num  0
-      =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
-      [ost.hid %peer (drum-path gyl) gyl pax]
-    [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
+  ++  ta-adze                                          ::  send a peer
+    ?.  =(%inc-serv q.gyl)
+      (ta-peer /sole/(encode-id:sole se-sole-id))
+    =.  .  ?:(new ta-this ta-pull)
+    =.  sus.ses  rec.ses
+    (ta-peer /(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
   ::
-  ++  diff-atom
+  ++  ta-diff-atom
     |=  a/@
+    =.  rec.ses  a
     +>(..ta (se-text "{<q.gyl>} bumped: {<a>}"))
   ::  
-  ++  diff-backlog
-    |=  a/(list @)
+  ++  ta-diff-backlog
+    |=  log/(list @)
+    =.  rec.ses  (add rec.ses (lent log))
     =.  ta
-      (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}")
+      (se-text "{<q.gyl>} backlog: {(zing (turn log |=(a/@ "{<a>} ")))}")
     (ta-pro & %bump "[bumping] ")
   ::
   ++  ta-act                                          ::  send action
