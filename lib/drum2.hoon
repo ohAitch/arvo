@@ -153,14 +153,14 @@
   =<  se-abet  =<  se-view
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
-  ta-abet:(diff-atom:(se-tame gyl) dif)
+  ta-abet:(diff-atom:(ta gyl) dif)
 ::
 ++  diff-backlog-atoms-phat                             ::  app event
   |=  {way/wire dif/(list @)}
   =<  se-abet  =<  se-view
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
-  ta-abet:(diff-atoms:(se-tame gyl) dif)
+  ta-abet:(diff-backlog:(ta gyl) dif)
 ::
 ++  peer                                              ::
   |=  pax/path
@@ -223,6 +223,7 @@
   ?~  saw  +>
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
+  =+  (mean >[%drum-coup-fail src.hid ost.hid gyl]< u.saw)
   %-  se-dump:(se-nuke gyl)
   :_  u.saw
   >[%drum-coup-fail src.hid ost.hid gyl]<
@@ -353,7 +354,7 @@
   =+  gul=se-agon
   ?:  |(?=($~ gul) (se-aint u.gul))
     (se-blit %bel ~)
-  ta-abet:(ta-belt:(se-tame u.gul) bet)
+  ta-abet:(ta-belt:(ta u.gul) bet)
 ::
 ++  se-born                                           ::  new server
   |=  wel/well:^gall
@@ -395,7 +396,7 @@
 ++  se-join                                           ::  confirm connection
   |=  gyl/gill:^gall
   ^+  +>
-  ta-abet:ta-join:(se-tame gyl)
+  ta-abet:ta-join:(ta gyl)
 ::
 ++  se-nuke                                           ::  teardown connection
   |=  gyl/gill:^gall
@@ -438,7 +439,7 @@
   ^+  .
   =+  gul=se-agon
   ?:  |(?=($~ gul) (se-aint u.gul))  +
-  (se-just ta-vew:(se-tame u.gul))
+  (se-just ta-vew:(ta u.gul))
 ::
 ++  se-emit                                           ::  emit move
   |=  mov/move
@@ -479,21 +480,18 @@
   |=  gyl/gill:^gall
   (se-emit [ost.hid %pull (drum-path gyl) gyl ~])
 ::
-++  se-tame                                           ::  switch connection
-  |=  gyl/gill:^gall
-  ^+  ta
-  ~(. ta gyl (~(got by fug) gyl))
-::
 ++  se-diff                                           ::  receive results
   |=  {gyl/gill:^gall fec/sole-effect}
   ^+  +>
-  ta-abet:(ta-fec:(se-tame gyl) fec)
+  ta-abet:(ta-fec:(ta gyl) fec)
 ::
 ++  ta                                                ::  per target
-  |_  {gyl/gill:^gall target}                         ::  app and state
+  |=  gyl/gill:^gall
+  =+  `target`(~(got by fug) gyl)                     ::  app and state
+  |%
   ++  ta-abet                                         ::  resolve
     ^+  ..ta
-    ..ta(fug (~(put by fug) gyl `target`+<+))
+    ..ta(fug (~(put by fug) gyl `target`+<))
   ::
   ++  ta-poke  |=(a/pear +>(..ta (se-poke gyl a)))    ::  poke gyl
   ::
@@ -505,9 +503,9 @@
   ::
   ++  diff-atom
     |=  a/@
-    +>(ta (se-text "{<q.gyl>} bumped: {<a>}"))
+    +>(..ta (se-text "{<q.gyl>} bumped: {<a>}"))
   ::  
-  ++  diff-atoms
+  ++  diff-backlog
     |=  a/(list @)
     =.  ta
       (se-text "{<q.gyl>} backlog: {(zing (turn a |=(b/@ "{<b>} ")))}")
