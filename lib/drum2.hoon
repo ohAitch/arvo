@@ -468,7 +468,7 @@
 ::
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
-  %-  se-emit(fug (~(put by fug) gyl *target))
+  %-  se-emit:ta-abet:(new-ta gyl)
   ?:  =(%inc-serv q.gyl)  
     =/  num  0
     =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
@@ -484,6 +484,12 @@
   |=  {gyl/gill:^gall fec/sole-effect}
   ^+  +>
   ta-abet:(ta-fec:(ta gyl) fec)
+::
+++  new-ta
+  |=  gyl/gill:^gall  ^+  (ta)
+  ?<  (~(has by fug) gyl)
+  =.  fug  (~(put by fug) gyl *target)
+  (ta gyl)
 ::
 ++  ta                                                ::  per target
   |=  gyl/gill:^gall
