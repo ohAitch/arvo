@@ -45,7 +45,7 @@
       off/@ud                                           ::  window offset
       kil/kill                                          ::  kill buffer
       inx/@ud                                           ::  ring index
-      fug/(map gill:^gall (unit target))                ::  connections
+      fug/(map gill:^gall target)                ::  connections
       mir/(pair @ud stub:^dill)                         ::  mirrored terminal
   ==                                                    ::
 ++  history                                             ::  past input
@@ -67,6 +67,7 @@
       hit/history                                       ::  all past input
       pom/sole-prompt                                   ::  static prompt
       inp/sole-cursor-share                             ::  input state
+      new/?                                             :: target not yet connected
   ==                                                    ::
 ++  session  {@u dock}                                  :: always [0 our dap]
 --
@@ -312,7 +313,7 @@
   ^-  ?
   ?.  (~(has by bin) ost.hid)  &
   =+  gyr=(~(get by fug) gyl)
-  |(?=($~ gyr) ?=($~ u.gyr))
+  |(?=($~ gyr) new.u.gyr)
 ::
 ++  se-alas                                           ::  recalculate index
   |=  gyl/gill:^gall
@@ -325,7 +326,7 @@
 ++  se-amor                                           ::  live targets
   ^-  (list gill:^gall)
   %+  skim  (~(tap in eel))
-  |=(a/gill:^gall ?=({$~ $~ *} (~(get by fug) a)))
+  |=(a/gill:^gall =((some |) (bind (~(get by fug) a) |=(target new))))
 ::
 ++  se-anon                                           ::  rotate index
   =+  wag=se-amor
@@ -394,9 +395,7 @@
 ++  se-join                                           ::  confirm connection
   |=  gyl/gill:^gall
   ^+  +>
-  =.  +>  (se-text "[linked to {<gyl>}]")
-  ?>  ?=($~ (~(got by fug) gyl))
-  (se-alas(fug (~(put by fug) gyl `*target)) gyl)
+  ta-abet:ta-join:(se-tame gyl)
 ::
 ++  se-nuke                                           ::  teardown connection
   |=  gyl/gill:^gall
@@ -468,7 +467,7 @@
 ::
 ++  se-peer                                           ::  send a peer
   |=  gyl/gill:^gall
-  %-  se-emit(fug (~(put by fug) gyl ~))
+  %-  se-emit(fug (~(put by fug) gyl *target))
   ?:  =(%inc-serv q.gyl)  
     =/  num  0
     =/  pax  /(encode-id:sole `session`se-sole-id)/(scot %ud num)
@@ -483,7 +482,7 @@
 ++  se-tame                                           ::  switch connection
   |=  gyl/gill:^gall
   ^+  ta
-  ~(. ta gyl (need (~(got by fug) gyl)))
+  ~(. ta gyl (~(got by fug) gyl))
 ::
 ++  se-diff                                           ::  receive results
   |=  {gyl/gill:^gall fec/sole-effect}
@@ -494,11 +493,16 @@
   |_  {gyl/gill:^gall target}                         ::  app and state
   ++  ta-abet                                         ::  resolve
     ^+  ..ta
-    ..ta(fug (~(put by fug) gyl ``target`+<+))
+    ..ta(fug (~(put by fug) gyl `target`+<+))
   ::
   ++  ta-poke  |=(a/pear +>(..ta (se-poke gyl a)))    ::  poke gyl
   ::
-  ::  
+  ::
+  ++  ta-join
+    ?>  new
+    =.  new  |
+    .(..ta (se-text "[linked to {<gyl>}]"))
+  ::
   ++  diff-atom
     |=  a/@
     +>(ta (se-text "{<q.gyl>} bumped: {<a>}"))
