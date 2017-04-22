@@ -833,9 +833,11 @@
   ++  ta-off                                          ::  buffer pos offset
     |=  {dir/?($l $r) til/?($ace $edg $wrd) pos/@ud}
     ^-  @ud
-    %-  ?-  til  $ace  ace:offset
-                 $edg  edg:offset
-                 $wrd  wrd:offset
+    =*  not  |*(a/rule ;~(less a next))               ::  helper
+    %+  offset
+        ?-  til  $ace  ;~(plug (star ace) (star (not ace)))
+                 $edg  ;~(plug (star aln) (star (not aln)))
+                 $wrd  (star (not aln))
         ==
     ?-  dir  $l  (flop (scag pos buf.say.inp))
              $r  (slag pos buf.say.inp)
@@ -933,20 +935,8 @@
     ==
   --
 ++  offset                                            ::  calculate offsets
-  |%
-  ++  not  |*(a/rule ;~(less a next))
-  ++  ace                                             ::  next whitespace
-    |=  a/(list @)  ^-  @ud
-    q.p:(;~(plug (star ^ace) (star (not ^ace))) [0 0] a)
-  ::
-  ++  edg                                             ::  next word beginning
-    |=  a/(list @)  ^-  @ud
-    q.p:(;~(plug (star aln) (star (not aln))) [0 0] a)
-  ::
-  ++  wrd                                             ::  next or current word
-    |=  a/(list @)  ^-  @ud
-    q.p:((star (not aln)) [0 0] a)
-  --
+  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
+  q.p:(fel [0 0] inp)
 ::
 ++  klr                                               ::  styx/stub engine
   =,  ^dill
