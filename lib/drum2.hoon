@@ -934,39 +934,18 @@
   --
 ++  offset                                            ::  calculate offsets
   |%
-  ++  alnm                                            ::  alpha-numeric
-    |=  a/@  ^-  ?
-    ?|  &((gte a '0') (lte a '9'))
-        &((gte a 'A') (lte a 'Z'))
-        &((gte a 'a') (lte a 'z'))
-    ==
-  ::
+  ++  not  |*(a/rule ;~(less a next))
   ++  ace                                             ::  next whitespace
-    |=  a/(list @)
-    =|  {b/_| i/@ud}
-    |-  ^-  @ud
-    ?~  a  i
-    =/  c  !=(32 i.a)
-    =.  b  |(b c)
-    ?:  &(b !|(=(0 i) c))  i
-    $(i +(i), a t.a)
+    |=  a/(list @)  ^-  @ud
+    q.p:(;~(plug (star ^ace) (star (not ^ace))) [0 0] a)
   ::
-  ++  edg                                             ::  next word boundary
-    |=  a/(list @)
-    =|  {b/_| i/@ud}
-    |-  ^-  @ud
-    ?~  a  i
-    =/  c  (alnm i.a)
-    =.  b  |(b c)
-    ?:  &(b !|(=(0 i) c))  i
-    $(i +(i), a t.a)
+  ++  edg                                             ::  next word beginning
+    |=  a/(list @)  ^-  @ud
+    q.p:(;~(plug (star aln) (star (not aln))) [0 0] a)
   ::
   ++  wrd                                             ::  next or current word
-    |=  a/(list @)
-    =|  i/@ud
-    |-  ^-  @ud
-    ?:  |(?=($~ a) (alnm i.a))  i
-    $(i +(i), a t.a)
+    |=  a/(list @)  ^-  @ud
+    q.p:((star (not aln)) [0 0] a)
   --
 ::
 ++  klr                                               ::  styx/stub engine
