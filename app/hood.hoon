@@ -38,7 +38,7 @@
       paw                                               ::
     ::                                                  ::
     ++  hood-part                                       ::
-      $%  {$drum $2 drum-pith-2}                        ::
+      $%  {$drum $2 drum-pith}                          ::
           {$helm $0 helm-pith}                          ::
           {$kiln $0 kiln-pith}                          ::
           {$womb $1 pith:womb}                          ::
