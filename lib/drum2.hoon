@@ -165,6 +165,25 @@
   ::> rec: counter of recieved bumps
   ::
   {sus/@u rec/@u}
+::
+::
+++  control-belt                                      ::> control drum itself
+  $%  {$cru p/@tas q/(list tank)}                     ::< echo error
+      {$hey $~}                                       ::< refresh
+      {$rez p/@ud q/@ud}                              ::< resize, cols, rows
+      {$yow p/dock}                                   ::< connect to app
+  ==                                                  ::
+++  app-specific-belt                                 ::> belt for current app
+  $%  {$aro p/?($d $l $r $u)}                         ::< arrow key
+      {$bac $~}                                       ::< true backspace
+      {$ctl p/@}                                      ::< control-key
+      {$del $~}                                       ::< true delete
+      {$met p/@}                                      ::< meta-key
+      {$ret $~}                                       ::< return
+      {$txt p/(list @c)}                              ::< utf32 text
+  ==                                                  ::
+++  typecheck                                         ::> -belt type completeness
+  `dill-belt:^dill`*?(control-belt app-specific-belt)
 --
 ::                                                      ::  ::
 ::::                                                    ::  ::
@@ -934,14 +953,9 @@
   ++  ta-belt                                           ::< handle input
     ::> bet: input keystroke
     ::
-    |=  bet/dill-belt:^dill
+    |=  bet/app-specific-belt
     ^+  +>
     ::
-    ::> some dill belts control the terminal itself,
-    ::> and should not get to this target app specific
-    ::> input handler
-    ::
-    ?<  ?=({?($cru $hey $rez $yow) *} bet)
     ::
     ?:  &(=(%drumming q.dok) !=([%met %x] bet))
       ::TEMP this is transitional to support multiple active
