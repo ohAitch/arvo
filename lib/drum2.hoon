@@ -196,7 +196,7 @@
     [[%home %dojo] ~]
   [[%home %talk] [%home %dojo] ~]
 ::
-++  deft-fish                                           ::  default connects
+++  deft-fish                                           ::< default connects
   ::TODO stick in |^ under drum-make, with a clearer name
   ::
   ::> apps to connect to by default: talk, dojo
@@ -361,7 +361,7 @@
   =<  se-abet  =<  se-view
   (se-text "[{<src.hid>}, driving {<our.hid>}]")
 ::
-++  diff-dill-blit-phat                                  ::< raw dill output
+++  diff-dill-blit-phat                                 ::< raw dill output
   ::> proxy raw %dill- output from %drumming
   ::>
   ::> bil: the console update
@@ -382,7 +382,7 @@
     ==
   (se-blit bil)
 ::
-++  poke-dill-belt                                    ::< terminal event
+++  poke-dill-belt                                      ::< terminal event
   ::> process keystroke
   ::>
   ::> bet: the character, key, or modified-key
@@ -391,41 +391,41 @@
   =<  se-abet  =<  se-view
   (se-belt bet)
 ::
-++  poke-start                                        ::< |start %app
+++  poke-start                                          ::< |start %app
   ::> init an app using gall, and link to its console
   ::
   |=  wel/well:^gall
   =<  se-abet  =<  se-view
   (se-born wel)
 ::
-++  poke-link                                         ::< |link %app, connect
+++  poke-link                                           ::< |link %app, connect
   ::> connnect to an app's console
   ::
   |=  gyl/gill:^gall
   =<  se-abet  =<  se-view
   (se-link gyl)
 ::
-++  poke-unlink                                       ::< |unlink %app, close
+++  poke-unlink                                         ::< |unlink %app, close
   ::> disconnnect from an app's console
   ::
   |=  gyl/gill:^gall
   =<  se-abet  =<  se-view
   (se-klin gyl)
 ::
-++  poke-exit                                         ::< |exit, shutdown urbit
+++  poke-exit                                           ::< |exit, shutdown urbit
   ::> shutdown running urbit instance
   ::
   |=  $~
   se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
 ::
-++  poke-put                                          ::< write file
+++  poke-put                                            ::< write file
   ::> write a text file to the pier's `.urb/put`
   ::> directory
   ::
   |=  {pax/path txt/@}
   se-abet:(se-blit-sys [%sav pax txt])
 ::
-++  reap-phat                                         ::< get ack for connection
+++  reap-phat                                           ::< get ack for connection
   ::> recieve acknowledgment on an app connection
   ::>
   ::> way: identifies the app being connected to,
@@ -439,7 +439,7 @@
     (se-join gyl)
   (se-dump:(se-nuke gyl) u.saw)
 ::
-++  take-coup-phat                                    ::< get ack for poke
+++  take-coup-phat                                      ::< get ack for poke
   ::> recieve acknowledgment on an app command
   ::>
   ::> way: identifies the app being commanded,
@@ -456,7 +456,7 @@
   :_  u.saw
   >[%drum-coup-fail src.hid ost.hid gyl]<
 ::
-++  take-onto                                         ::< get ack for start
+++  take-onto                                           ::< get ack for start
   ::> recieve acknowledgment on an app being started
   ::>
   ::> way: identifies the app being started,
@@ -475,7 +475,7 @@
             +>.$(fur (~(put by fur) q.wel `[p.wel %da r.p.saw]))
   ==
 ::
-++  quit-phat                                         ::< get link termination
+++  quit-phat                                           ::< get link termination
   ::> called when an open console link disconnects
   ::>
   ::> way: identifies the app that disconnected,
@@ -492,7 +492,7 @@
 ::> ||
 ::>   abet (end a transaction), and its helper arms
 ::+|
-++  se-abet                                           ::< resolve
+++  se-abet                                             ::< resolve
   ::>  marshal {eel}, {bin}, {biz}, and {mow} into a
   ::>  consolidated set of external requests
   ::
@@ -510,9 +510,9 @@
   :_  moz
   [ost.hid %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
 ::
-++  se-ably  (~(has by sup.hid) ost.hid)            ::< caused by console
+++  se-ably  (~(has by sup.hid) ost.hid)                ::< caused by console
 ::
-++  se-adit                                         ::< update servers
+++  se-adit                                             ::< update servers
   ::> start every server that wants to be up
   ::> that is not already up
   ::>
@@ -529,7 +529,7 @@
   %-  se-emit(fur (~(put by fur) q.wel ~))
   [ost.hid %conf [%drum p.wel q.wel ~] [our.hid q.wel] %load our.hid p.wel]
 ::
-++  se-adze                                           ::< add new connections
+++  se-adze                                             ::< add new connections
   ::> connect any desired-link that is not connected
   ::>
   ::> (apps in {eel} not in {fug})
@@ -543,7 +543,7 @@
     +>.$
   ta-abet:ta-adze:(new-ta gil)
 ::
-++  se-subze                                          ::< del old connections
+++  se-subze                                            ::< del old connections
   ::> disconnect no longer desired connections
   ::
   =<  .(dev (~(got by bin) ost.hid))
@@ -557,7 +557,7 @@
   =+  xeno=se-subze-local:%_(con ost.hid ost, dev dev)
   xeno(ost.hid ost.hid.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
 ::
-++  se-subze-local                                    ::< nuke ost.hid apps
+++  se-subze-local                                      ::< nuke ost.hid apps
   ::> disconnect anything not in {eel}
   ^+  .
   %-  ~(rep by fug)
@@ -573,7 +573,7 @@
 ::> ||
 ::>   retrieve derived state
 ::+|
-++  se-aint                                           ::< is app ignorable
+++  se-aint                                             ::< is app ignorable
   ::> if an app has not been connected yet, or the
   ::> connection has been cancelled, ignore
   ::> input/output from it
@@ -585,7 +585,7 @@
   =+  gyr=(~(get by fug) gyl)
   |(?=($~ gyr) new.u.gyr)
 ::
-++  se-amor                                           ::< live targets
+++  se-amor                                             ::< live targets
   ::> list apps which are succesfully connected
   ::
   ^-  (list gill:^gall)
@@ -597,7 +597,7 @@
 ::> ||
 ::>   operations on {inx}, the app selection
 ::+|
-++  se-alas                                           ::  recalculate index
+++  se-alas                                             ::< recalculate index
   ::RENAMEME recalculate-index
   ::> select particular app, if connected
   ::
@@ -609,7 +609,7 @@
   ?:  =(i.wag gyl)  +>.^$(inx xin)
   $(wag t.wag, xin +(xin))
 ::
-++  se-anon                                           ::  rotate index
+++  se-anon                                             ::< rotate index
   ::RENAMEME rotate-apps
   ::> select next connected app in ring
   ::
@@ -618,7 +618,7 @@
   ::  ~&  [%se-anon inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
   +(inx (mod +(inx) (lent wag)))
 ::
-++  se-agon                                           ::  current gill
+++  se-agon                                             ::< current gill
   ::RENAMEME current-app
   ::> app selected by ^X ring, if any
   ::
@@ -641,18 +641,18 @@
 ::>            abet:(se-foo (drum-phat a) b)
 ::> TODO split the rest into smaller sections
 ::+|
-++  se-belt                                           ::  handle input
+++  se-belt                                             ::< handle input
   ::> process keystroke
   ::>
   ::> bet: the character, key, or modified-key
   ::
   |=  bet/dill-belt:^dill
   ^+  +>
-  ?:  ?=({?($cru $hey $rez $yow) *} bet)              ::  target-agnostic
+  ?:  ?=({?($cru $hey $rez $yow) *} bet)                ::< target-agnostic
     ?-  bet
       {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-      {$hey *}  +>(mir [0 ~])                         ::  refresh
-      {$rez *}  +>(edg (dec p.bet))                   ::  resize window
+      {$hey *}  +>(mir [0 ~])                           ::< refresh
+      {$rez *}  +>(edg (dec p.bet))                     ::< resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
     ==
   =+  gul=se-agon
@@ -660,7 +660,7 @@
     (se-blit %bel ~)
   ta-abet:(ta-belt:(ta u.gul) bet)
 ::
-++  se-born                                           ::  new server
+++  se-born                                             ::< new server
   ::> init an app using gall, and link to its console
   ::
   |=  wel/well:^gall
@@ -672,7 +672,7 @@
     eel  (~(put in eel) [our.hid q.wel])
   ==
 ::
-++  se-drop                                           ::  disconnect
+++  se-drop                                             ::< disconnect
   ::> gyl: app to unlink
   ::>
   ::> in the case of the local :dojo, reconnect
@@ -688,17 +688,17 @@
               +>.$(inx 0)
             (se-alas u.lag)
   =.  +>.$  (se-text "[unlinked from {<gyl>}]")
-  ?:  =(gyl [our.hid %dojo])                          ::  undead dojo
+  ?:  =(gyl [our.hid %dojo])                            ::< undead dojo
     (se-link gyl)
   +>.$
 ::
-++  se-join                                           ::  confirm connection
+++  se-join                                             ::< confirm connection
   ::FIXME inline
   |=  gyl/gill:^gall
   ^+  +>
   ta-abet:ta-join:(ta gyl)
 ::
-++  se-nuke                                           ::  teardown connection
+++  se-nuke                                             ::< teardown connection
   ::> forceful drop, pull immediately
   ::
   ::REVIEW shouldn't things call se-klin instead,
@@ -709,20 +709,20 @@
   =.  eel  (~(del in eel) gyl)
   (se-drop:(se-pull gyl) gyl)
 ::
-++  se-klin                                           ::  disconnect app
+++  se-klin                                             ::< disconnect app
   ::> gyl: app to drop from list of desired-connections
   ::
   ::RENAMEME se-nuke?
   |=  gyl/gill:^gall
   +>(eel (~(del in eel) gyl))
 ::
-++  se-link                                           ::  connect to app
+++  se-link                                             ::< connect to app
   ::> gyl: app to add to list of desired-connections
   ::
   |=  gyl/gill:^gall
   +>(eel (~(put in eel) gyl))
 ::
-++  se-diff                                           ::  receive results
+++  se-diff                                             ::< receive results
   ::FIXME inline
   |=  {gyl/gill:^gall fec/sole-effect}
   ^+  +>
@@ -733,14 +733,14 @@
 ::> ||
 ::>   emit pokes and dill outputs
 ::
-++  se-blit                                           ::  give output
+++  se-blit                                             ::< give output
   ::> bil: blit to queue; later consolidated into a
   ::>      single %dill-blit diff
   ::
   |=  bil/dill-blit:^dill
   +>(biz [bil biz])
 ::
-++  se-blit-sys                                       ::  output to system
+++  se-blit-sys                                         ::< output to system
   ::> the initial connection from %dill is saved as
   ::> {sys}, used for administartive tasks like
   ::> shutting down urbit or logging to the
@@ -750,7 +750,7 @@
   ?~  sys  ~&(%se-blit-no-sys +>)
   (se-emit [u.sys %diff %dill-blit bil])
 ::
-++  se-dump                                           ::  print tanks
+++  se-dump                                             ::< print tanks
   ::> tac: pretty-print objects to output as %out lines
   ::
   |=  tac/(list tank)
@@ -765,7 +765,7 @@
     $(wol t.wol)
   $(wol t.wol, +>.^$ (se-blit %out (tuba i.wol)))
 ::
-++  se-show                                           ::  show buffer, raw
+++  se-show                                             ::< show buffer, raw
   ::> send updates for cursor position and/or buffer
   ::> contents
   ::
@@ -776,7 +776,7 @@
   =.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
   +>(mir lin)
 ::
-++  se-just                                           ::  show adjusted buffer
+++  se-just                                             ::< show adjusted buffer
   ::> lin: buffer to display. {q.lin} is cropped to
   ::> the terminal width {edg}, keeping the
   ::> cursor {p.lin} visible
@@ -786,7 +786,7 @@
   =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
   (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
 ::
-++  se-view                                           ::  flush buffer
+++  se-view                                             ::< flush buffer
   ::> if an app is selected, sync out its input buffer
   ::
   ^+  .
@@ -794,13 +794,13 @@
   ?:  |(?=($~ gul) (se-aint u.gul))  +
   (se-just ta-vew:(ta u.gul))
 ::
-++  se-emit                                           ::  emit move
+++  se-emit                                             ::< emit move
   ::> mov: side-effect to queue for sending
   ::
   |=  mov/move
   %_(+> moz [mov moz])
 ::
-++  se-talk
+++  se-talk                                             ::< show in talk
   ::> display stack trace using talk if not cause by console
   ::
   ::REVIEW maybe at least use {se-blit-sys}?
@@ -809,9 +809,10 @@
   :: XX talk should be usable for stack traces, see urbit#584 which this change
   :: closed for the problems there
   ((slog (flop tac)) +>)
-  ::(se-emit 0 %poke /drum/talk [our.hid %talk] (said:talk our.hid %drum now.hid eny.hid tac))
+  ::=-  (se-emit 0 %poke /drum/talk [our.hid %talk] -)
+  ::(said:talk our.hid %drum now.hid eny.hid tac)
 ::
-++  se-text                                           ::  return text
+++  se-text                                             ::< return text
   ::> print message to screen, whatever that means
   ::>
   ::> usually this means sending a %out effect, but
@@ -828,26 +829,26 @@
   ?.  se-ably  (se-talk [%leaf txt]~)
   (se-blit %out (tuba txt))
 ::
-++  se-poke                                           ::  send a poke
+++  se-poke                                             ::< send a poke
   ::> gyl: target app
   ::> par: request data
   ::
   |=  {gyl/gill:^gall par/pear}
   (se-emit [ost.hid %poke (drum-path gyl) gyl par])
 ::
-++  se-pull                                           ::  cancel subscription
+++  se-pull                                             ::< cancel subscription
   ::> gyl: target app
   ::
   |=  gyl/gill:^gall
   (se-emit [ost.hid %pull (drum-path gyl) gyl ~])
 ::
-++  se-sole-id  `sole-id`[1 our dap]:hid              :: XX multiple?
+++  se-sole-id  `sole-id`[1 our dap]:hid                ::< XX multiple?
 ::RENAMEME
 ::> ||
 ::> ||  %ta-core
 ::> ||
 ::>
-++  new-ta                                            ::< initialize new app
+++  new-ta                                              ::< initialize new app
   ::> bunt config, and use it to create a {ta} core
   ::>
   ::> gyl: newly linked app
@@ -857,27 +858,42 @@
   =.  fug  (~(put by fug) gyl *target)
   (ta gyl)
 ::
-++  ta                                                ::  per target
-  ::> this core is used to preform operations specific
+++  ta                                                  ::< per target
+  ::> this core is used to perform operations specific
   ::> to a {target} app
   ::>
   ::> gyl: what app
   ::>
   |=  gyl/gill:^gall
-  =+  `target`(~(got by fug) gyl)                     ::  app and state
+    =+  `target`(~(got by fug) gyl)                     ::< app and state
   |%
-  ++  ta-this  .
-  ++  ta-abut  ..ta(fug (~(del by fug) gyl))          ::  retreat
-  ++  ta-abet                                         ::  resolve
+  ::>  ||
+  ::>  ||  %convenience
+  ::>  ||
+  ::>    minor incantations
+  ::+|
+  ++  ta-this    .                                      ::< self
+  ++  ta-abut                                           ::< retreat
+    ::>  exit {ta}, deleting connection to {gyl}
+    ::
+    ..ta(fug (~(del by fug) gyl))
+  ::
+  ++  ta-abet                                           ::< resolve
+    ::>  exit {ta}, saving changed connection to {gyl}
+    ::
     ^+  ..ta
     ..ta(fug (~(put by fug) gyl `target`+<))
   ::
-  ++  ta-poke  |=(a/pear +>(..ta (se-poke gyl a)))    ::  poke gyl
-  ++  ta-pull  .(..ta (se-pull gyl))                  ::  pull gyl
-  ++  ta-peer                                         ::  peer gyl
+  ++  ta-poke    |=(a/pear +>(..ta (se-poke gyl a)))    ::< poke gyl
+  ++  ta-pull    .(..ta (se-pull gyl))                  ::< pull gyl
+  ++  ta-peer                                           ::< peer gyl
     |=  a/path
     +>(..ta (se-emit ost.hid %peer (drum-path gyl) gyl a))
   ::
+  ::>  ||
+  ::>  ||  %interfaces
+  ::>  ||
+  ::+|
   ::
   ++  ta-join
     ::> on succesful {new} session connection,
@@ -888,26 +904,39 @@
     =.  ta  (se-text "[linked to {<gyl>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
-  ++  ta-adze                                          ::  send a peer
+  ++  ta-adze                                            ::< send a peer
+    ::> this currently resolves between the %inc- and
+    ::> %sole- protocols by hardcoded app name, sending
+    ::> a subscription to the appropriate path
+    ::
+    ::WIP merge the sole- and inc- protocols
     ?.  =(%inc-serv q.gyl)
       (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  .  ?:(new ta-this ta-pull)
     =.  sus.ses  rec.ses
     (ta-peer /(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
   ::
-  ++  ta-diff-atom
+  ++  ta-diff-atom                                      ::<inc- update
+    ::> record sequence number of received bump
+    ::
     |=  a/@
     =.  rec.ses  a
     +>(..ta (se-text "{<q.gyl>} bumped: {<a>}"))
   ::
-  ++  ta-diff-backlog
+  ++  ta-diff-backlog                                   ::<inc- init
+    ::> update sequence number with inc- reconnection
+    ::> diff
+    ::
     |=  log/(list @)
     =.  rec.ses  (add rec.ses (lent log))
     =.  ta
       (se-text "{<q.gyl>} backlog: {(zing (turn log |=(a/@ "{<a>} ")))}")
     (ta-pro & %bump "[bumping] ")
   ::
-  ++  ta-act                                          ::  send action
+  ++  ta-act                                            ::< send action
+    ::> act: action to send to {gyl}
+    ::
+    ::WIP inc- shim should not exist long-term
     |=  act/sole-action
     ^+  +>
     ?:  =(%inc-serv q.gyl)
@@ -918,36 +947,55 @@
       ==
     (ta-poke %sole-id-action se-sole-id act)
   ::
-  ++  ta-aro                                          ::  hear arrow
+  ++  ta-aro                                            ::< process arrow
+    ::> key: arrow direction
+    ::
     |=  key/?($d $l $r $u)
     ^+  +>
     =.  ris  ~
     ?-  key
-      $d  ?.  =(num.hit pos.hit)
-            (ta-mov +(pos.hit))
-          ?:  =(0 (lent buf.say.inp))
-            ta-bel
-          (ta-hom:ta-nex %set ~)
       $l  ?:  =(0 pos.inp)  ta-bel
           +>(pos.inp (dec pos.inp))
       $r  ?:  =((lent buf.say.inp) pos.inp)
             ta-bel
           +>(pos.inp +(pos.inp))
+    ::
       $u  ?:(=(0 pos.hit) ta-bel (ta-mov (dec pos.hit)))
+      $d  ?.  =(num.hit pos.hit)
+            (ta-mov +(pos.hit))
+          ?:  =(0 (lent buf.say.inp))
+            ta-bel
+          (ta-hom:ta-nex %set ~)
     ==
   ::
-  ++  ta-bel                                          ::  beep
-    .(..ta (se-blit %bel ~), q.blt ~)                 ::  forget belt
+  ++  ta-bel                                            ::< beep
+    ::> send "bell" signal to terminal
+    ::
+    :: producing a bell interupts a deletion sequence
+    .(..ta (se-blit %bel ~), q.blt ~)
   ::
-  ++  ta-belt                                         ::  handle input
+  ++  ta-belt                                           ::< handle input
+    ::> bet: input keystroke
+    ::
     |=  bet/dill-belt:^dill
     ^+  +>
-    ?<  ?=({?($cru $hey $rez $yow) *} bet)            ::  target-specific
+    ::
+    ::> some dill belts control the terminal itself,
+    ::> and should not get to this target app specific
+    ::> input handler
+    ::
+    ?<  ?=({?($cru $hey $rez $yow) *} bet)
+    ::
     ?:  &(=(%drumming q.gyl) !=([%met %x] bet))
       ::TEMP this is transitional to support multiple active
       ::     /+drum instances
       (ta-poke %dill-belt bet)
-    =.  blt  [q.blt `bet]                             ::  remember belt
+    ::
+    ::> save last two belts to recognize ctrl-w ctrl-w
+    ::> and similar sequences
+    ::
+    =.  blt  [q.blt `bet]
+    ::
     ?-  bet
       {$aro *}  (ta-aro p.bet)
       {$bac *}  ta-bac
@@ -958,12 +1006,20 @@
       {$txt *}  (ta-txt p.bet)
     ==
   ::
-  ++  ta-det                                          ::  send edit
+  ++  ta-det                                            ::< send edit
+    ::RENAMEME ta-send-edit
+    ::> capture context for sole edit, and send it to
+    ::> {gyl} 
+    ::
     |=  ted/sole-edit
     ^+  +>
     (ta-act %det [[his.ven.say.inp own.ven.say.inp] (sham buf.say.inp) ted])
   ::
-  ++  ta-bac                                          ::  hear backspace
+  ++  ta-bac                                            ::< hear backspace
+    ::> delete character under cursor from
+    ::> reverse-i-search or buffer, sending a [%clr ~]
+    ::> if the buffer is empty.
+    ::
     ^+  .
     ?^  ris
       ?:  =(~ str.u.ris)
@@ -975,7 +1031,9 @@
       ta-bel
     (ta-hom %del (dec pos.inp))
   ::
-  ++  ta-ctl                                          ::  hear control
+  ++  ta-ctl                                            ::< hear control
+    ::> handle ctrl key
+    ::
     |=  key/@ud
     ^+  +>
     =.  ris  ?.(?=(?($g $r) key) ~ ris)
@@ -986,8 +1044,8 @@
         $d  ?^  buf.say.inp
               ta-del
             ?:  (~(has in (deft-fish our.hid)) gyl)
-              +>(..ta (se-blit qit+~))                ::  quit pier
-            +>(..ta (se-klin gyl))                    ::  unlink app
+              +>(..ta (se-blit qit+~))                  ::< quit pier
+            +>(..ta (se-klin gyl))                      ::< unlink app
         $e  +>(pos.inp (lent buf.say.inp))
         $f  (ta-aro %r)
         $g  ?~  ris  ta-bel
@@ -1023,22 +1081,31 @@
             (ta-hom (cat:edit pos.inp ta-yan))
     ==
   ::
-  ++  ta-del                                          ::  hear delete
+  ++  ta-del                                            ::< hear delete
+    ::> delete character after cursor if any
+    ::
     ^+  .
     ?:  =((lent buf.say.inp) pos.inp)
       ta-bel
     (ta-hom %del pos.inp)
   ::
-  ++  ta-erl                                          ::  hear local error
+  ++  ta-erl                                            ::< hear local error
+    ::> move cursor to error position, but not past
+    ::> the end of the buffer
+    ::
     |=  pos/@ud
     ta-bel(pos.inp (min pos (lent buf.say.inp)))
   ::
-  ++  ta-err                                          ::  hear remote error
+  ++  ta-err                                            ::< hear remote error
+    ::> correct error position for pending edits
+    ::
     |=  pos/@ud
     (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ++  ta-fec                                          ::  apply effect
+  ++  ta-fec                                            ::< apply effect
     ::RENAMEME ta-diff-effect
+    ::> translate sole- output to raw dill-
+    ::
     |=  fec/sole-effect
     ^+  +>
     ?-  fec
@@ -1061,23 +1128,39 @@
       {$say *}  +>(say.inp [[own=his his=own]:ven leg=~ buf]:p.fec)
     ==
   ::
-  ++  ta-got                                          ::  apply change
+  ++  ta-got                                            ::< apply change
+    ::FIXME inline
     |=  cal/sole-change
     +>(inp +:(~(receive cursored:sole inp) cal))
   ::
-  ++  ta-hom                                          ::  local edit
+  ++  ta-hom                                            ::< local edit
+    ::> ted: local change to apply
+    ::
     |=  ted/sole-edit
     ^+  +>
     =.  +>  (ta-det ted)
     +>(inp (~(commit cursored:sole inp) ted))
   ::
-  ++  ta-jump                                         ::  buffer pos
+  ++  ta-jump                                           ::< buffer pos
+    ::> get cursor location after moving
+    ::>
+    ::> dir: either {%l}eft or {%r}ight, to the next
+    ::> til: space, word boundary, or word
+    ::> pos: from a given cursor position
+    ::
     |=  {dir/?($l $r) til/?($ace $edg $wrd) pos/@ud}
     ^-  @ud
     %-  ?:(?=($l dir) sub add)
     [pos (ta-off dir til pos)]
   ::
-  ++  ta-kil                                          ::  kill selection
+  ++  ta-kil                                            ::< kill selection
+    ::> remove section into kill ring
+    ::> adding a new entry or appending to old one
+    ::> depending on previous key event in {blt}
+    ::>
+    ::> dir: going {%l}eft or {%r}ight,
+    ::> sel: portion of the buffer to delete
+    ::
     |=  {dir/?($l $r) sel/{@ @}}
     ^+  +>
     =+  buf=(swag sel buf.say.inp)
@@ -1089,12 +1172,12 @@
               ?|  ?=({$ctl ?($k $u $w)} u.p.blt)
                   ?=({$met ?($d $bac)} u.p.blt)
           ==  ==
-        %=  kil                                       ::  prepend
+        %=  kil                                         ::< prepend
           num  +(num.kil)
           pos  +(num.kil)
           old  (scag max.kil `(list (list @c))`[buf old.kil])
         ==
-      %=  kil                                         ::  cumulative yanks
+      %=  kil                                           ::< cumulative yanks
         pos  num.kil
         old  :_  t.old.kil
              ?-  dir
@@ -1103,49 +1186,51 @@
       ==     ==
     ==
   ::
-  ++  ta-met                                          ::  meta key
+  ++  ta-met                                            ::< meta key
+    ::>  handle meta key
+    ::
     |=  key/@ud
     ^+  +>
     =.  ris  ~
     ?+    key    ta-bel
       $v  +>(..ta (se-klin our %dojo))
-      $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))      ::  last "arg" from hist
+      $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
               ta-bel
             =+  old=`(list @c)`i.old.hit
             =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
             (ta-hom (cat:edit pos.inp (slag sop old)))
             ::
-      $bac  ?:  =(0 pos.inp)                          ::  kill left-word
+      $bac  ?:  =(0 pos.inp)                            ::< kill left-word
               ta-bel
             =+  sop=(ta-off %l %edg pos.inp)
             (ta-kil %l [(sub pos.inp sop) sop])
             ::
-      $b    ?:  =(0 pos.inp)                          ::  jump left-word
+      $b    ?:  =(0 pos.inp)                            ::< jump left-word
               ta-bel
             +>(pos.inp (ta-jump %l %edg pos.inp))
             ::
-      $c    ?:  =(pos.inp (lent buf.say.inp))         ::  capitalize
+      $c    ?:  =(pos.inp (lent buf.say.inp))           ::< capitalize
               ta-bel
             =+  sop=(ta-jump %r %wrd pos.inp)
             %-  ta-hom(pos.inp (ta-jump %r %edg sop))
             %+  rep:edit  [sop 1]
-            ^-  (list @c)  ^-  (list @)               :: XX unicode
+            ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (cuss `tape``(list @)`(swag [sop 1] buf.say.inp))
             ::
-      $d    ?:  =(pos.inp (lent buf.say.inp))         ::  kill right-word
+      $d    ?:  =(pos.inp (lent buf.say.inp))           ::< kill right-word
               ta-bel
             (ta-kil %r [pos.inp (ta-off %r %edg pos.inp)])
             ::
-      $f    ?:  =(pos.inp (lent buf.say.inp))         ::  jump right-word
+      $f    ?:  =(pos.inp (lent buf.say.inp))           ::< jump right-word
               ta-bel
             +>(pos.inp (ta-jump %r %edg pos.inp))
             ::
       $r    %-  ta-hom(lay.hit (~(put by lay.hit) pos.hit ~))
-            :-  %set                                  ::  revert hist edit
+            :-  %set                                    ::< revert hist edit
             ?:  =(pos.hit num.hit)  ~
             (snag (sub num.hit +(pos.hit)) old.hit)
             ::
-      $t    =+  a=(ta-jump %r %edg pos.inp)           ::  transpose words
+      $t    =+  a=(ta-jump %r %edg pos.inp)             ::< transpose words
             =+  b=(ta-jump %l %edg a)
             =+  c=(ta-jump %l %edg b)
             ?:  =(b c)
@@ -1158,7 +1243,7 @@
                 (rep:edit prev (swag next buf.say.inp))
             ==
             ::
-      ?($u $l)                                        ::  upper/lower case
+      ?($u $l)                                          ::< upper/lower case
             ?:  =(pos.inp (lent buf.say.inp))
               ta-bel
             =+  case=?:(?=($u key) cuss cass)
@@ -1166,7 +1251,7 @@
             =+  sel=[sop (ta-off %r %edg sop)]
             %-  ta-hom
             %+  rep:edit  sel
-            ^-  (list @c)  ^-  (list @)               :: XX unicode
+            ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
             ::
       $x    =.  ..ta  se-anon
@@ -1174,7 +1259,7 @@
             ?.  =(%drumming q.gil)  ..ta-ctl
             ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
             ::
-      $y    ?.  ?&  ?=(^ old.kil)                     ::  rotate & yank
+      $y    ?.  ?&  ?=(^ old.kil)                       ::< rotate & yank
                     ?=(^ p.blt)
                     ?|  ?=({$ctl $y} u.p.blt)
                         ?=({$met $y} u.p.blt)
@@ -1185,7 +1270,9 @@
             (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
     ==
   ::
-  ++  ta-mov                                          ::  move in history
+  ++  ta-mov                                            ::< move in history
+    ::> sop: position in history to switch to
+    ::
     |=  sop/@ud
     ^+  +>
     ?:  =(sop pos.hit)  +>
@@ -1197,7 +1284,10 @@
     %.  (~(get by lay.hit) sop)
     (bond |.((snag (sub num.hit +(sop)) old.hit)))
   ::
-  ++  ta-nex                                          ::  advance history
+  ++  ta-nex                                            ::< add line to history
+    ::> when a history entry is accepted, clear search
+    ::> and edit overlay, save current buffer to {old.hit}
+    ::
     ^+  .
     =.  ris  ~
     =.  lay.hit  ~
@@ -1211,7 +1301,13 @@
       old.hit  [buf.say.inp old.hit]
     ==
   ::
-  ++  ta-off                                          ::  buffer pos offset
+  ++  ta-off                                            ::< buffer pos offset
+    ::> get distance to boundary
+    ::>
+    ::> dir: either {%l}eft or {%r}ight, to the next
+    ::> til: space, word boundary, or word, from
+    ::> pos: a cursor position
+    ::
     |=  {dir/?($l $r) til/?($ace $edg $wrd) pos/@ud}
     ^-  @ud
     =*  not  |*(a/rule ;~(less a next))               ::  helper
@@ -1224,7 +1320,9 @@
              $r  (slag pos buf.say.inp)
     ==
   ::
-  ++  ta-pro                                          ::  set prompt
+  ++  ta-pro                                            ::< set prompt
+    ::> recieve prompt, inserting ship and app title
+    ::
     |=  pom/sole-prompt
     %_    +>
         pom
@@ -1242,10 +1340,15 @@
       ==
     ==
   ::
-  ++  ta-ret                                          ::  hear return
+  ++  ta-ret                                            ::< hear return
+    ::FIXME inline
     (ta-act %ret ~)
   ::
-  ++  ta-ser                                          ::  reverse search
+  ++  ta-ser                                            ::< reverse search
+    ::> add to incremental search buffer
+    ::>
+    ::> ext: text to append, usually single character
+    ::
     |=  ext/(list @c)
     ^+  +>
     ?:  |(?=($~ ris) =(0 pos.u.ris))
@@ -1262,31 +1365,48 @@
     ?~  sup  ta-bel
     (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
   ::
-  ++  ta-txt                                          ::  hear text
+  ++  ta-txt                                            ::< hear text
+    ::> hear regular text, into main buffer or
+    ::> reverse-i-search if active
+    ::>
+    ::> ext: text to append, usually single character
+    ::
     |=  txt/(list @c)
     ^+  +>
     ?^  ris
       (ta-ser txt)
     (ta-hom (cat:edit pos.inp txt))
   ::
-  ++  ta-vew                                          ::  computed prompt
+  ++  ta-vew                                            ::< computed prompt
+    ::> active i-search or app prompt, followed by
+    ::> input text if visible or hash if typing in a 
+    ::> password etc
+    ::
     ^-  (pair @ud stub:^dill)
     =;  vew/(pair (list @c) styx:^dill)
       =+  lin=(make:klr q.vew)
       :_  (welp lin [*stye:^dill p.vew]~)
       (add pos.inp (lent-char:klr lin))
     ?:  vis.pom
-      :-  buf.say.inp                                 ::  default prompt
+      ::
+      ::> default prompt
+      ::
+      :-  buf.say.inp
       ?~  ris
         cad.pom
       :(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
-    :-  (reap (lent buf.say.inp) `@c`'*')             ::  hidden input
+    ::
+    ::> hidden input
+    ::
+    :-  (reap (lent buf.say.inp) `@c`'*')
     %+  welp
       cad.pom
     ?~  buf.say.inp  ~
     :(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
   ::
-  ++  ta-yan                                          ::  yank
+  ++  ta-yan                                            ::< yank
+    ::> current ctrl-y text from kill ring
+    ::
     (snag (sub num.kil pos.kil) old.kil)
   --
 ::
@@ -1297,9 +1417,12 @@
 ::+|
 ::
 ::MOVEME to lib/sole
-++  edit                                              ::  produce sole-edits
+++  edit                                                ::< produce sole-edits
   |%
-  ++  cat                                             ::  mass insert
+  ++  cat                                               ::< mass insert
+    ::>  pos: first position
+    ::>  txt: text to insert
+    ::
     |=  {pos/@ud txt/(list @c)}
     ^-  sole-edit
     :-  %mor
@@ -1307,7 +1430,10 @@
     ?~  txt  ~
     [[%ins pos i.txt] $(pos +(pos), txt t.txt)]
   ::
-  ++  cut                                             ::  mass delete
+  ++  cut                                               ::< mass delete
+    ::>  pos: first position
+    ::>  num: characters to delete
+    ::
     |=  {pos/@ud num/@ud}
     ^-  sole-edit
     :-  %mor
@@ -1315,7 +1441,13 @@
     ?:  =(0 num)  ~
     [[%del pos] $(num (dec num))]
   ::
-  ++  rep                                             ::  mass replace
+  ++  rep                                               ::< mass replace
+    ::>  combined cut and cat
+    ::>
+    ::>  pos: position
+    ::>  num: characters to delete
+    ::>  txt: characters to replace them with
+    ::
     |=  {{pos/@ud num/@ud} txt/(list @c)}
     ^-  sole-edit
     :~  %mor
@@ -1328,15 +1460,20 @@
 ::       to tiny library similar to {/+time-to-id},
 ::       maybe just move to a "helpers" core outside
 ::       the app proper
-++  offset                                            ::<  calculate offsets
+++  offset                                              ::< calculate offsets
+  ::>  fel: parsing {rule} that is matching characters
+  ::>  inp: input whose match-length is being determined
+  ::
   |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
   q.p:(fel [0 0] inp)
 ::
 ::MOVEME i want to be a library
-++  klr                                               ::<  styx/stub engine
+++  klr                                                 ::< styx/stub engine
   =,  ^dill
   |%
-  ++  make                                            ::  stub from styx
+  ++  make                                              ::< styx to stub
+    ::> a: styx to flatten into a stub
+    ::
     |=  a/styx  ^-  stub
     =|  b/stye
     %+  reel
@@ -1351,23 +1488,26 @@
     ?.  =(p.a p.i.b)  [a b]
     [[p.a (weld q.a q.i.b)] t.b]
   ::
-  ++  styd                                            ::  stye from styl
-    |=  {a/styl b/stye}  ^+  b                        ::  with inheritance
+  ++  styd                                              ::< add stye to styl
+    ::> a: new styling
+    ::> b: existing set of styles
+    ::
+    |=  {a/styl b/stye}  ^+  b                          ::< with inheritance
     :+  ?~  p.a  p.b
         ?~  u.p.a  ~
         (~(put in p.b) u.p.a)
-     (fall p.q.a p.q.b)
-     (fall q.q.a q.q.b)
+      (fall p.q.a p.q.b)
+    (fall q.q.a q.q.b)
   ::
-  ++  lent-stye
-    |=  a/stub  ^-  @
-    (roll (lnts-stye a) add)
-  ::
-  ++  lent-char
-    |=  a/stub  ^-  @
-    (roll (lnts-char a) add)
-  ::
-  ++  lnts-stye                                       ::  stub pair head lengths
+  ++  lent-stye  |=(a/stub `@`(roll (lnts-stye a) add)) ::< measure
+  ++  lent-char  |=(a/stub `@`(roll (lnts-char a) add)) ::< measure
+  ++  lnts-stye                                         ::< # control chars
+    ::> approximate unix byte length of styling escape
+    ::> code characters
+    ::
+    ::REVIEW this seriously looks like it should be
+    ::       part of dill %hop handling
+    ::
     |=  a/stub  ^-  (list @)
     %+  turn  a
     |=  a/(pair stye (list @c))
@@ -1378,14 +1518,28 @@
         ?:(=(0 b) 0 (mul 4 +(b)))
     ==
   ::
-  ++  lnts-char                                       ::  stub pair tail lengths
+  ++  lnts-char                                         ::< # regular chars
+    ::> measure number of printing characters
+    ::>
+    ::> a: snippet of colored text
+    ::
     |=  a/stub  ^-  (list @)
     %+  turn  a
     |=  a/(pair stye (list @c))
     (lent q.a)
   ::
-  ++  brek                                            ::  index + incl-len of
-    |=  {a/@ b/(list @)}                              ::  stub pair w/ idx a
+  ++  brek                                              ::<  index and subindex
+    ::> consume lnts-char output to determine what
+    ::> section of a {stub} the {a}th character lies in,
+    ::> and what index inside that section the character
+    ::> is at
+    ::> 
+    ::> a: index being searched for
+    ::> b: postprocessed stub
+    ::> 
+    ::
+    ::REVIEW can this operate on a stub directly?
+    |=  {a/@ b/(list @)}
     =|  {c/@ i/@}
     |-  ^-  (unit (pair @ @))
     ?~  b  ~
@@ -1394,7 +1548,14 @@
       `[i c]
     $(i +(i), b t.b)
   ::
-  ++  slag                                            ::  slag stub, keep stye
+  ++  slag                                              ::<  slag stub, keep stye
+    ::> extract suffix, keeping all styles
+    ::>
+    ::>  a: number of characters to drop
+    ::>  b: colored buffer
+    ::
+    ::REVIEW is computing char lengths ahead of time
+    ::       necessary? 
     |=  {a/@ b/stub}
     ^-  stub
     =+  c=(lnts-char b)
@@ -1407,7 +1568,14 @@
     :_  r  :-  p.n
     (^slag (sub (snag p.u.i c) (sub q.u.i a)) q.n)
   ::
-  ++  scag                                            ::  scag stub, keep stye
+  ++  scag                                              ::<  scag stub, keep stye
+    ::> extract prefix, keeping all styles
+    ::>
+    ::> a: number of characters to keep
+    ::> b: colored buffer
+    ::
+    ::REVIEW is computing char lengths ahead of time
+    ::       necessary? 
     |=  {a/@ b/stub}
     ^-  stub
     =+  c=(lnts-char b)
