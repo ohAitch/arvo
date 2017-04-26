@@ -84,12 +84,15 @@
   ++  this  .
   ++  abet
     ^+  ..di
-    =/  mos/(list {bone card})
-      ?~  sef  ~
-      =/  cad  (effect %mor (flop sef))
-      %+  turn  (prey /sole/(encode-id:sole sid) bow)
-      |=({ost/bone ^} [ost cad])
+    =/  mos/(list {bone card})  sef-moves
     ..di(mow (welp mos mow), sos (~(put by sos) sid som log))
+  ::
+  ++  sef-moves
+    ?~  sef  ~
+    =/  cad  (effect %mor (flop sef))
+    %+  turn  (prey /sole/(encode-id:sole sid) bow)
+    |=({ost/bone ^} [ost cad])
+  ::
   ::
   ++  emit  |=(a/card +>(..di (^emit a)))
   ++  give-effect  |=(a/sole-effect +>(sef [a sef], log [a log]))
