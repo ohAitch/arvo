@@ -493,7 +493,14 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ~&  [%drum-quit src.bow ost.bow dok]
-  (se-drop dok)
+  ::
+  =+  lag=se-current-app
+  ?.  (~(has by fug) dok)  +>.$
+  =.  +>.$  (se-text "[dropped {<dok>}, relinking]")
+  =.  +>.$  ta-abet:ta-readze:(ta dok)
+  ?.  &(?=(^ lag) !=(dok u.lag))
+    +>.$(inx 0)
+  (se-select-app u.lag)
 ::
 ::> ||
 ::> ||  %resolution
@@ -844,6 +851,7 @@
     =.  ta  (se-text "[linked to {<dok>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
+  ++  ta-readze  ta-adze(con %ded)                      ::< repeer on drop
   ++  ta-adze                                           ::< send a peer
     ::> this currently resolves between the %inc- and
     ::> %sole- protocols by hardcoded app name, sending
