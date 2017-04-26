@@ -20,9 +20,10 @@
   %+  cork  source                                      ::
   |=(source +<(mir *(pair @ud (list @c))))              ::  style-less mir
 ::                                                      ::
+++  drum-pith  drum-pith-2                                         ::
 ++  drum-pith-2                                         ::
   $:  sys/(unit bone)                                   ::  local console
-      eel/(set gill:^gall)                              ::  connect to
+      eel/(set dock)                              ::  connect to
       ray/(set well:^gall)                              ::
       fur/(map dude:^gall (unit server))                ::  servers
       bin/(map bone source)                             ::  terminals
@@ -45,7 +46,7 @@
       off/@ud                                           ::  window offset
       kil/kill                                          ::  kill buffer
       inx/@ud                                           ::  ring index
-      fug/(map gill:^gall (unit target))                ::  connections
+      fug/(map dock (unit target))                ::  connections
       mir/(pair @ud stub:^dill)                         ::  mirrored terminal
   ==                                                    ::
 ++  history                                             ::  past input
@@ -86,8 +87,8 @@
 ::
 ++  deft-fish                                           ::  default connects
   |=  our/ship
-  %-  ~(gas in *(set gill:^gall))
-  ^-  (list gill:^gall)
+  %-  ~(gas in *(set dock))
+  ^-  (list dock)
   ?:  ?=($earl (clan:title our))
     [[(sein:title our) %talk] [our %dojo] ~]
   [[our %talk] [our %dojo] ~]
@@ -105,12 +106,12 @@
   ==                                                    ::
 ::
 ++  drum-path                                           ::  encode path
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^-  wire
   [%drum %phat (scot %p p.gyl) q.gyl ~]
 ::
 ++  drum-phat                                           ::  decode path
-  |=  way/wire  ^-  gill:^gall
+  |=  way/wire  ^-  dock
   ?>(?=({@ @ $~} way) [(slav %p i.way) i.t.way])
 --
 ::
@@ -175,12 +176,12 @@
   (se-born wel)
 ::
 ++  poke-link                                         ::  connect app
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   =<  se-abet  =<  se-view
   (se-link gyl)
 ::
 ++  poke-unlink                                       ::  disconnect app
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   =<  se-abet  =<  se-view
   (se-klin gyl)
 ::
@@ -266,7 +267,7 @@
   ^+  .
   %+  roll  (~(tap in eel))
   =<  .(con +>)
-  |=  {gil/gill:^gall con/_.}  ^+  con
+  |=  {gil/dock con/_.}  ^+  con
   =.  +>.$  con
   ?:  (~(has by fug) gil)
     +>.$
@@ -286,21 +287,21 @@
   ^+  .
   %-  ~(rep by fug)
   =<  .(con +>)
-  |=  {{gil/gill:^gall *} con/_.}  ^+  con
+  |=  {{gil/dock *} con/_.}  ^+  con
   =.  +>.$  con
   ?:  (~(has in eel) gil)
     +>.$
   (se-nuke gil)
 ::
 ++  se-aint                                           ::  ignore result
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^-  ?
   ?.  (~(has by bin) ost.hid)  &
   =+  gyr=(~(get by fug) gyl)
   |(?=($~ gyr) ?=($~ u.gyr))
 ::
 ++  se-alas                                           ::  recalculate index
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   =+  [xin=0 wag=se-amor]
   |-  ^+  +>.^$
   ?~  wag  +>.^$(inx 0)
@@ -308,9 +309,9 @@
   $(wag t.wag, xin +(xin))
 ::
 ++  se-amor                                           ::  live targets
-  ^-  (list gill:^gall)
+  ^-  (list dock)
   %+  skim  (~(tap in eel))
-  |=(a/gill:^gall ?=({$~ $~ *} (~(get by fug) a)))
+  |=(a/dock ?=({$~ $~ *} (~(get by fug) a)))
 ::
 ++  se-anon                                           ::  rotate index
   =+  wag=se-amor
@@ -319,10 +320,10 @@
   +(inx (mod +(inx) (lent wag)))
 ::
 ++  se-agon                                           ::  current gill
-  ^-  (unit gill:^gall)
+  ^-  (unit dock)
   =+  wag=se-amor
   ?~  wag  ~
-  `(snag inx `(list gill:^gall)`wag)
+  `(snag inx `(list dock)`wag)
 ::
 ++  se-belt                                           ::  handle input
   |=  bet/dill-belt:^dill
@@ -350,7 +351,7 @@
   ==
 ::
 ++  se-drop                                           ::  disconnect
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^+  +>
   =+  lag=se-agon
   ?.  (~(has by fug) gyl)  +>.$
@@ -377,24 +378,24 @@
   $(wol t.wol, +>.^$ (se-blit %out (tuba i.wol)))
 ::
 ++  se-join                                           ::  confirm connection
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^+  +>
   =.  +>  (se-text "[linked to {<gyl>}]")
   ?>  ?=($~ (~(got by fug) gyl))
   (se-alas(fug (~(put by fug) gyl `*target)) gyl)
 ::
 ++  se-nuke                                           ::  teardown connection
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^+  +>
   =.  eel  (~(del in eel) gyl)
   (se-drop:(se-pull gyl) gyl)
 ::
 ++  se-klin                                           ::  disconnect app
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   +>(eel (~(del in eel) gyl))
 ::
 ++  se-link                                           ::  connect to app
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   +>(eel (~(put in eel) gyl))
 ::
 ++  se-blit                                           ::  give output
@@ -448,31 +449,31 @@
   (se-blit %out (tuba txt))
 ::
 ++  se-poke                                           ::  send a poke
-  |=  {gyl/gill:^gall par/pear}
+  |=  {gyl/dock par/pear}
   (se-emit [ost.hid %poke (drum-path gyl) gyl par])
 ::
 ++  se-peer                                           ::  send a peer
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   %-  se-emit(fug (~(put by fug) gyl ~))
   [ost.hid %peer (drum-path gyl) gyl /sole/(encode-id:sole se-sole-id)]
 ::
 ++  se-sole-id  `sole-id`[0 our dap]:hid              :: XX multiple?
 ++  se-pull                                           ::  cancel subscription
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   (se-emit [ost.hid %pull (drum-path gyl) gyl ~])
 ::
 ++  se-tame                                           ::  switch connection
-  |=  gyl/gill:^gall
+  |=  gyl/dock
   ^+  ta
   ~(. ta gyl (need (~(got by fug) gyl)))
 ::
 ++  se-diff                                           ::  receive results
-  |=  {gyl/gill:^gall fec/sole-effect}
+  |=  {gyl/dock fec/sole-effect}
   ^+  +>
   ta-abet:(ta-fec:(se-tame gyl) fec)
 ::
 ++  ta                                                ::  per target
-  |_  {gyl/gill:^gall target}                         ::  app and state
+  |_  {gyl/dock target}                         ::  app and state
   ++  ta-abet                                         ::  resolve
     ^+  ..ta
     ..ta(fug (~(put by fug) gyl ``target`+<+))

@@ -3,9 +3,6 @@
 ::
 |=  pit/vase
 =,  ^dill
-=>  |%                                                  ::  interface tiles
-++  gill  (pair ship term)                              ::  general contact
---                                                      ::
 =>  |%                                                  ::  console protocol
 ++  all-axle  ?(old-axle axle)                          ::
 ++  old-axle                                            ::  all dill state
@@ -287,9 +284,9 @@
         $(myt t.myt, +>+ (send i.myt))
       ::
       ++  into                                          ::  preinitialize
-        |=  gyl/(list gill)
+        |=  gyl/(list dock)
         %_    +>
-            tem  `(turn gyl |=(a/gill [%yow a]))
+            tem  `(turn gyl |=(a/dock [%yow a]))
             moz
           :_  moz
           :*  hen

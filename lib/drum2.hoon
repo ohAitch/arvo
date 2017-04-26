@@ -45,7 +45,7 @@
   ::>       TODO move a lot of this out into fur
   ::
   $:  sys/(unit bone)                                   ::< local console
-      eel/(set gill:^gall)                              ::< connect to
+      eel/(set dock)                                    ::< connect to
       ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
       bin/(map bone source)                             ::< terminals
@@ -101,7 +101,7 @@
   $:  edg/_80                                           ::< terminal columns
       off/@ud                                           ::< window offset
       kil/kill                                          ::< kill buffer
-      {inx/@ud fug/(map gill:^gall target)}             ::< connections
+      {inx/@ud fug/(map dock target)}                   ::< connections
       mir/(pair @ud stub:^dill)                         ::< mirrored terminal
   ==                                                    ::
 ++  history                                             ::> past commands
@@ -203,8 +203,8 @@
   ::>
   ::> our: if on a moon, use parent's talk instead of own
   |=  our/ship
-  %-  ~(gas in *(set gill:^gall))
-  ^-  (list gill:^gall)
+  %-  ~(gas in *(set dock))
+  ^-  (list dock)
   ?:  ?=($earl (clan:title our))
     [[(sein:title our) %talk] [our %dojo] ~]
   [[our %talk] [our %dojo] ~]
@@ -244,13 +244,13 @@
 ::+|
 ::
 ++  drum-path                                           ::< encode wire
-  ::>  `wire`[%drum %phat (dray `gill`gyl /[%p]/[%tas])]
-  |=  gyl/gill:^gall  ^-  wire
-  [%drum %phat (scot %p p.gyl) q.gyl ~]
+  ::>  `wire`[%drum %phat (dray `dock`dok /[%p]/[%tas])]
+  |=  dok/dock  ^-  wire
+  [%drum %phat (scot %p p.dok) q.dok ~]
 ::
 ++  drum-phat                                           ::< decode wire
-  ::>  `gill`(raid `wire`way /[%p]/[%tas])
-  |=  way/wire  ^-  gill:^gall
+  ::>  `dock`(raid `wire`way /[%p]/[%tas])
+  |=  way/wire  ^-  dock
   ?>(?=({@ @ $~} way) [(slav %p i.way) i.t.way])
 --
 ::
@@ -316,9 +316,9 @@
   ::
   |=  {way/wire fec/sole-effect}
   =<  se-abet  =<  se-view
-  =+  gyl=(drum-phat way)
-  ?:  (se-aint gyl)  +>.$
-  (se-diff gyl fec)
+  =+  dok=(drum-phat way)
+  ?:  (se-aint dok)  +>.$
+  (se-diff dok fec)
 ::
 ++  diff-atom-phat                                      ::< WIP sequence number
   ::> process incoming %inc atom
@@ -329,9 +329,9 @@
   ::
   |=  {way/wire dif/@}
   =<  se-abet  =<  se-view
-  =+  gyl=(drum-phat way)
-  ?:  (se-aint gyl)  +>.$
-  ta-abet:(ta-diff-atom:(ta gyl) dif)
+  =+  dok=(drum-phat way)
+  ?:  (se-aint dok)  +>.$
+  ta-abet:(ta-diff-atom:(ta dok) dif)
 ::
 ++  diff-backlog-atoms-phat                             ::< WIP initial sync
   ::> WIP process incoming %inc backlog
@@ -342,9 +342,9 @@
   ::
   |=  {way/wire dif/(list @)}
   =<  se-abet  =<  se-view
-  =+  gyl=(drum-phat way)
-  ?:  (se-aint gyl)  +>.$
-  ta-abet:(ta-diff-backlog:(ta gyl) dif)
+  =+  dok=(drum-phat way)
+  ?:  (se-aint dok)  +>.$
+  ta-abet:(ta-diff-backlog:(ta dok) dif)
 ::
 ++  peer                                                ::< new connection
   ::>  incoming subscription
@@ -401,16 +401,16 @@
 ++  poke-link                                           ::< |link %app, connect
   ::> connnect to an app's console
   ::
-  |=  gyl/gill:^gall
+  |=  dok/dock
   =<  se-abet  =<  se-view
-  (se-link gyl)
+  (se-link dok)
 ::
 ++  poke-unlink                                         ::< |unlink %app, close
   ::> disconnnect from an app's console
   ::
-  |=  gyl/gill:^gall
+  |=  dok/dock
   =<  se-abet  =<  se-view
-  (se-klin gyl)
+  (se-klin dok)
 ::
 ++  poke-exit                                           ::< |exit, shutdown urbit
   ::> shutdown running urbit instance
@@ -434,10 +434,10 @@
   ::
   |=  {way/wire saw/(unit tang)}
   =<  se-abet  =<  se-view
-  =+  gyl=(drum-phat way)
+  =+  dok=(drum-phat way)
   ?~  saw
-    (se-join gyl)
-  (se-dump:(se-nuke gyl) u.saw)
+    (se-join dok)
+  (se-dump:(se-nuke dok) u.saw)
 ::
 ++  take-coup-phat                                      ::< get ack for poke
   ::> recieve acknowledgment on an app command
@@ -449,12 +449,12 @@
   |=  {way/wire saw/(unit tang)}
   =<  se-abet  =<  se-view
   ?~  saw  +>
-  =+  gyl=(drum-phat way)
-  ?:  (se-aint gyl)  +>.$
-  =+  (mean >[%drum-coup-fail src.hid ost.hid gyl]< u.saw)
-  %-  se-dump:(se-nuke gyl)
+  =+  dok=(drum-phat way)
+  ?:  (se-aint dok)  +>.$
+  =+  (mean >[%drum-coup-fail src.hid ost.hid dok]< u.saw)
+  %-  se-dump:(se-nuke dok)
   :_  u.saw
-  >[%drum-coup-fail src.hid ost.hid gyl]<
+  >[%drum-coup-fail src.hid ost.hid dok]<
 ::
 ++  take-onto                                           ::< get ack for start
   ::> recieve acknowledgment on an app being started
@@ -483,9 +483,9 @@
   ::
   |=  way/wire
   =<  se-abet  =<  se-view
-  =+  gyl=(drum-phat way)
-  ~&  [%drum-quit src.hid ost.hid gyl]
-  (se-drop gyl)
+  =+  dok=(drum-phat way)
+  ~&  [%drum-quit src.hid ost.hid dok]
+  (se-drop dok)
 ::
 ::> ||
 ::> ||  %resolution
@@ -537,7 +537,7 @@
   ^+  .
   %+  roll  (~(tap in eel))
   =<  .(con +>)
-  |=  {gil/gill:^gall con/_.}  ^+  con
+  |=  {gil/dock con/_.}  ^+  con
   =.  +>.$  con
   ?:  (~(has by fug) gil)
     +>.$
@@ -562,7 +562,7 @@
   ^+  .
   %-  ~(rep by fug)
   =<  .(con +>)
-  |=  {{gil/gill:^gall *} con/_.}  ^+  con
+  |=  {{gil/dock *} con/_.}  ^+  con
   =.  +>.$  con
   ?:  (~(has in eel) gil)
     +>.$
@@ -580,17 +580,17 @@
   ::
   ::TODO with new disconnection semantics, this might
   ::     effectively be always &
-  |=  gyl/gill:^gall  ^-  ?
+  |=  dok/dock  ^-  ?
   ?.  (~(has by bin) ost.hid)  &
-  =+  gyr=(~(get by fug) gyl)
+  =+  gyr=(~(get by fug) dok)
   |(?=($~ gyr) new.u.gyr)
 ::
 ++  se-amor                                             ::< live targets
   ::> list apps which are succesfully connected
   ::
-  ^-  (list gill:^gall)
+  ^-  (list dock)
   %+  skim  (~(tap in eel))
-  |=(a/gill:^gall =((some |) (bind (~(get by fug) a) |=(target new))))
+  |=(a/dock =((some |) (bind (~(get by fug) a) |=(target new))))
 ::
 ::> ||
 ::> ||  %indexing
@@ -602,11 +602,11 @@
   ::> select particular app, if connected
   ::
   ::REVIEW mutating inx in place is probably cleaner
-  |=  gyl/gill:^gall
+  |=  dok/dock
   =+  [xin=0 wag=se-amor]
   |-  ^+  +>.^$
   ?~  wag  +>.^$(inx 0)
-  ?:  =(i.wag gyl)  +>.^$(inx xin)
+  ?:  =(i.wag dok)  +>.^$(inx xin)
   $(wag t.wag, xin +(xin))
 ::
 ++  se-anon                                             ::< rotate index
@@ -618,14 +618,14 @@
   ::  ~&  [%se-anon inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
   +(inx (mod +(inx) (lent wag)))
 ::
-++  se-agon                                             ::< current gill
+++  se-agon                                             ::< current dock
   ::RENAMEME current-app
   ::> app selected by ^X ring, if any
   ::
-  ^-  (unit gill:^gall)
+  ^-  (unit dock)
   =+  wag=se-amor
   ?~  wag  ~
-  `(snag inx `(list gill:^gall)`wag)
+  `(snag inx `(list dock)`wag)
 ::
 ::RENAMEME
 ::> ||
@@ -673,30 +673,30 @@
   ==
 ::
 ++  se-drop                                             ::< disconnect
-  ::> gyl: app to unlink
+  ::> dok: app to unlink
   ::>
   ::> in the case of the local :dojo, reconnect
   ::> immediately, so that there is always a repl
   ::> available to manage /+drum
   ::
-  |=  gyl/gill:^gall
+  |=  dok/dock
   ^+  +>
   =+  lag=se-agon
-  ?.  (~(has by fug) gyl)  +>.$
-  =.  fug  (~(del by fug) gyl)
-  =.  +>.$  ?.  &(?=(^ lag) !=(gyl u.lag))
+  ?.  (~(has by fug) dok)  +>.$
+  =.  fug  (~(del by fug) dok)
+  =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
               +>.$(inx 0)
             (se-alas u.lag)
-  =.  +>.$  (se-text "[unlinked from {<gyl>}]")
-  ?:  =(gyl [our.hid %dojo])                            ::< undead dojo
-    (se-link gyl)
+  =.  +>.$  (se-text "[unlinked from {<dok>}]")
+  ?:  =(dok [our.hid %dojo])                            ::< undead dojo
+    (se-link dok)
   +>.$
 ::
 ++  se-join                                             ::< confirm connection
   ::FIXME inline
-  |=  gyl/gill:^gall
+  |=  dok/dock
   ^+  +>
-  ta-abet:ta-join:(ta gyl)
+  ta-abet:ta-join:(ta dok)
 ::
 ++  se-nuke                                             ::< teardown connection
   ::> forceful drop, pull immediately
@@ -704,29 +704,29 @@
   ::REVIEW shouldn't things call se-klin instead,
   ::       deleting from eel to implicitly cause the
   ::       connection to be cleaned up in subze?
-  |=  gyl/gill:^gall
+  |=  dok/dock
   ^+  +>
-  =.  eel  (~(del in eel) gyl)
-  (se-drop:(se-pull gyl) gyl)
+  =.  eel  (~(del in eel) dok)
+  (se-drop:(se-pull dok) dok)
 ::
 ++  se-klin                                             ::< disconnect app
-  ::> gyl: app to drop from list of desired-connections
+  ::> dok: app to drop from list of desired-connections
   ::
   ::RENAMEME se-nuke?
-  |=  gyl/gill:^gall
-  +>(eel (~(del in eel) gyl))
+  |=  dok/dock
+  +>(eel (~(del in eel) dok))
 ::
 ++  se-link                                             ::< connect to app
-  ::> gyl: app to add to list of desired-connections
+  ::> dok: app to add to list of desired-connections
   ::
-  |=  gyl/gill:^gall
-  +>(eel (~(put in eel) gyl))
+  |=  dok/dock
+  +>(eel (~(put in eel) dok))
 ::
 ++  se-diff                                             ::< receive results
   ::FIXME inline
-  |=  {gyl/gill:^gall fec/sole-effect}
+  |=  {dok/dock fec/sole-effect}
   ^+  +>
-  ta-abet:(ta-fec:(ta gyl) fec)
+  ta-abet:(ta-fec:(ta dok) fec)
 ::
 ::> ||
 ::> ||  %effect
@@ -830,17 +830,17 @@
   (se-blit %out (tuba txt))
 ::
 ++  se-poke                                             ::< send a poke
-  ::> gyl: target app
+  ::> dok: target app
   ::> par: request data
   ::
-  |=  {gyl/gill:^gall par/pear}
-  (se-emit [ost.hid %poke (drum-path gyl) gyl par])
+  |=  {dok/dock par/pear}
+  (se-emit [ost.hid %poke (drum-path dok) dok par])
 ::
 ++  se-pull                                             ::< cancel subscription
-  ::> gyl: target app
+  ::> dok: target app
   ::
-  |=  gyl/gill:^gall
-  (se-emit [ost.hid %pull (drum-path gyl) gyl ~])
+  |=  dok/dock
+  (se-emit [ost.hid %pull (drum-path dok) dok ~])
 ::
 ++  se-sole-id  `sole-id`[1 our dap]:hid                ::< XX multiple?
 ::RENAMEME
@@ -851,21 +851,21 @@
 ++  new-ta                                              ::< initialize new app
   ::> bunt config, and use it to create a {ta} core
   ::>
-  ::> gyl: newly linked app
+  ::> dok: newly linked app
   ::
-  |=  gyl/gill:^gall  ^+  (ta)
-  ?<  (~(has by fug) gyl)
-  =.  fug  (~(put by fug) gyl *target)
-  (ta gyl)
+  |=  dok/dock  ^+  (ta)
+  ?<  (~(has by fug) dok)
+  =.  fug  (~(put by fug) dok *target)
+  (ta dok)
 ::
 ++  ta                                                  ::< per target
   ::> this core is used to perform operations specific
   ::> to a {target} app
   ::>
-  ::> gyl: what app
+  ::> dok: what app
   ::>
-  |=  gyl/gill:^gall
-    =+  `target`(~(got by fug) gyl)                     ::< app and state
+  |=  dok/dock
+    =+  `target`(~(got by fug) dok)                     ::< app and state
   |%
   ::>  ||
   ::>  ||  %convenience
@@ -874,21 +874,21 @@
   ::+|
   ++  ta-this    .                                      ::< self
   ++  ta-abut                                           ::< retreat
-    ::>  exit {ta}, deleting connection to {gyl}
+    ::>  exit {ta}, deleting connection to {dok}
     ::
-    ..ta(fug (~(del by fug) gyl))
+    ..ta(fug (~(del by fug) dok))
   ::
   ++  ta-abet                                           ::< resolve
-    ::>  exit {ta}, saving changed connection to {gyl}
+    ::>  exit {ta}, saving changed connection to {dok}
     ::
     ^+  ..ta
-    ..ta(fug (~(put by fug) gyl `target`+<))
+    ..ta(fug (~(put by fug) dok `target`+<))
   ::
-  ++  ta-poke    |=(a/pear +>(..ta (se-poke gyl a)))    ::< poke gyl
-  ++  ta-pull    .(..ta (se-pull gyl))                  ::< pull gyl
-  ++  ta-peer                                           ::< peer gyl
+  ++  ta-poke    |=(a/pear +>(..ta (se-poke dok a)))    ::< poke dok
+  ++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
+  ++  ta-peer                                           ::< peer dok
     |=  a/path
-    +>(..ta (se-emit ost.hid %peer (drum-path gyl) gyl a))
+    +>(..ta (se-emit ost.hid %peer (drum-path dok) dok a))
   ::
   ::>  ||
   ::>  ||  %interfaces
@@ -901,7 +901,7 @@
     ::
     ?>  new
     =.  new  |
-    =.  ta  (se-text "[linked to {<gyl>}]")
+    =.  ta  (se-text "[linked to {<dok>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
   ++  ta-adze                                            ::< send a peer
@@ -910,7 +910,7 @@
     ::> a subscription to the appropriate path
     ::
     ::WIP merge the sole- and inc- protocols
-    ?.  =(%inc-serv q.gyl)
+    ?.  =(%inc-serv q.dok)
       (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  .  ?:(new ta-this ta-pull)
     =.  sus.ses  rec.ses
@@ -921,7 +921,7 @@
     ::
     |=  a/@
     =.  rec.ses  a
-    +>(..ta (se-text "{<q.gyl>} bumped: {<a>}"))
+    +>(..ta (se-text "{<q.dok>} bumped: {<a>}"))
   ::
   ++  ta-diff-backlog                                   ::<inc- init
     ::> update sequence number with inc- reconnection
@@ -930,16 +930,16 @@
     |=  log/(list @)
     =.  rec.ses  (add rec.ses (lent log))
     =.  ta
-      (se-text "{<q.gyl>} backlog: {(zing (turn log |=(a/@ "{<a>} ")))}")
+      (se-text "{<q.dok>} backlog: {(zing (turn log |=(a/@ "{<a>} ")))}")
     (ta-pro & %bump "[bumping] ")
   ::
   ++  ta-act                                            ::< send action
-    ::> act: action to send to {gyl}
+    ::> act: action to send to {dok}
     ::
     ::WIP inc- shim should not exist long-term
     |=  act/sole-action
     ^+  +>
-    ?:  =(%inc-serv q.gyl)
+    ?:  =(%inc-serv q.dok)
       ?-  -.act
         $det  +>
         $ret  (ta-poke %inc-cmd se-sole-id %bump)
@@ -986,7 +986,7 @@
     ::
     ?<  ?=({?($cru $hey $rez $yow) *} bet)
     ::
-    ?:  &(=(%drumming q.gyl) !=([%met %x] bet))
+    ?:  &(=(%drumming q.dok) !=([%met %x] bet))
       ::TEMP this is transitional to support multiple active
       ::     /+drum instances
       (ta-poke %dill-belt bet)
@@ -1009,7 +1009,7 @@
   ++  ta-det                                            ::< send edit
     ::RENAMEME ta-send-edit
     ::> capture context for sole edit, and send it to
-    ::> {gyl} 
+    ::> {dok} 
     ::
     |=  ted/sole-edit
     ^+  +>
@@ -1043,9 +1043,9 @@
         $c  ta-bel
         $d  ?^  buf.say.inp
               ta-del
-            ?:  (~(has in (deft-fish our.hid)) gyl)
+            ?:  (~(has in (deft-fish our.hid)) dok)
               +>(..ta (se-blit qit+~))                  ::< quit pier
-            +>(..ta (se-klin gyl))                      ::< unlink app
+            +>(..ta (se-klin dok))                      ::< unlink app
         $e  +>(pos.inp (lent buf.say.inp))
         $f  (ta-aro %r)
         $g  ?~  ris  ta-bel
@@ -1255,7 +1255,7 @@
             (case `tape``(list @)`(swag sel buf.say.inp))
             ::
       $x    =.  ..ta  se-anon
-            =/  gil  (fall se-agon gyl)
+            =/  gil  (fall se-agon dok)
             ?.  =(%drumming q.gil)  ..ta-ctl
             ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
             ::
@@ -1329,12 +1329,12 @@
       %_    pom
           cad
         ;:  welp
-          ?.  ?=($earl (clan:title p.gyl))
-            (cite:title p.gyl)
-          (scow %p p.gyl)
+          ?.  ?=($earl (clan:title p.dok))
+            (cite:title p.dok)
+          (scow %p p.dok)
         ::
           ":"
-          (trip q.gyl)
+          (trip q.dok)
           cad.pom
         ==
       ==

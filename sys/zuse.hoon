@@ -444,7 +444,7 @@
           {$boot p/*}                                   ::  weird %dill boot
           {$crud p/@tas q/(list tank)}                  ::  error with trace
           {$flog p/flog}                                ::  wrapped error
-          {$flow p/@tas q/(list gill:gall)}             ::  terminal config
+          {$flow p/@tas q/(list dock)}                  ::  terminal config
           {$hail $~}                                    ::  terminal refresh
           {$heft $~}                                    ::  memory report
           {$hook $~}                                    ::  this term hung up
@@ -495,7 +495,7 @@
         {$ret $~}                                       ::  return
         {$rez p/@ud q/@ud}                              ::  resize, cols, rows
         {$txt p/(list @c)}                              ::  utf32 text
-        {$yow p/gill:gall}                              ::  connect to app
+        {$yow p/dock}                                   ::  connect to app
     ==                                                  ::
   ++  dill-blit                                         ::  new blit
     $%  {$bel $~}                                       ::  make a noise

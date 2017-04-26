@@ -906,7 +906,7 @@
               (gte 1 (met 7 q.q.vax))
               ((sane %tas) r.q.vax)
           ==
-        :_(+>.$ [%| (ap-suck "send: improper ask.[%send wire gill club]")])
+        :_(+>.$ [%| (ap-suck "send: improper ask.[%send wire dock club]")])
       =+  pux=((soft path) p.q.vax)
       ?.  &(?=(^ pux) (levy u.pux (sane %ta)))
         :_(+>.$ [%| (ap-suck "send: malformed path")])
