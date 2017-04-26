@@ -494,6 +494,8 @@
   =+  dok=(drum-phat way)
   ~&  [%drum-quit src.bow ost.bow dok]
   ::
+  ::REVIEW this selects a different non-dropped app,
+  ::       which is not ideal
   =+  lag=se-current-app
   ?.  (~(has by fug) dok)  +>.$
   =.  +>.$  (se-text "[dropped {<dok>}, relinking]")
