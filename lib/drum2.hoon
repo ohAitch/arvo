@@ -309,7 +309,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-fec:(ta dok) fec)
+  ta-abet:(ta-diff-effect:(ta dok) fec)
 ::
 ++  diff-atom-phat                                      ::< WIP sequence number
   ::> process incoming %inc atom
@@ -380,28 +380,45 @@
   ::
   |=  bet/dill-belt:^dill
   =<  se-abet  =<  se-view
-  (se-belt bet)
+  ?.  ?=(?($cru $hey $rez $yow) -.bet)
+    =+  gul=se-current-app
+    ?:  |(?=($~ gul) (se-aint u.gul))
+      (se-blit %bel ~)
+    ta-abet:(ta-belt:(ta u.gul) bet)
+  ::
+  =.  bet  `control-belt`bet
+  ?-  bet
+    {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
+    {$hey *}  +>(mir [0 ~])                             ::< refresh
+    {$rez *}  +>(edg (dec p.bet))                       ::< resize window
+    {$yow *}  ~&([%no-yow -.bet] +>)
+  ==
 ::
 ++  poke-start                                          ::< |start %app
   ::> init an app using gall, and link to its console
   ::
   |=  wel/well:^gall
   =<  se-abet  =<  se-view
-  (se-born wel)
+  ?:  (~(has in ray) wel)
+    (se-text "[already running {<p.wel>}/{<q.wel>}]")
+  %=  +>
+    ray  (~(put in ray) wel)
+    eel  (~(put in eel) [our.bow q.wel])
+  ==
 ::
 ++  poke-link                                           ::< |link %app, connect
   ::> connnect to an app's console
   ::
   |=  dok/dock
   =<  se-abet  =<  se-view
-  (se-link dok)
+  +>(eel (~(put in eel) dok))
 ::
 ++  poke-unlink                                         ::< |unlink %app, close
   ::> disconnnect from an app's console
   ::
   |=  dok/dock
   =<  se-abet  =<  se-view
-  (se-klin dok)
+  +>(eel (~(del in eel) dok))
 ::
 ++  poke-exit                                           ::< |exit, shutdown urbit
   ::> shutdown running urbit instance
@@ -615,51 +632,11 @@
   ?~  wag  ~
   `(snag inx `(list dock)`wag)
 ::
-::RENAMEME
 ::> ||
-::> ||  %interface-arms-2
+::> ||  %disconnection
 ::> ||
-::>
-::> TODO inline a bunch of these into %interface-arms,
-::>      those seem to be mostly composed of
-::>          ++  foo  |=(bar abet:(se-foo +<))
-::>      with occasional
-::>          ++  foo-phat
-::>            |=  {a/wire b/bar}
-::>            abet:(se-foo (drum-phat a) b)
-::> TODO split the rest into smaller sections
+::>   unlink helpers
 ::+|
-++  se-belt                                             ::< handle input
-  ::> process keystroke
-  ::>
-  ::> bet: the character, key, or modified-key
-  ::
-  |=  bet/dill-belt:^dill
-  ^+  +>
-  ?:  ?=({?($cru $hey $rez $yow) *} bet)                ::< target-agnostic
-    ?-  bet
-      {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-      {$hey *}  +>(mir [0 ~])                           ::< refresh
-      {$rez *}  +>(edg (dec p.bet))                     ::< resize window
-      {$yow *}  ~&([%no-yow -.bet] +>)
-    ==
-  =+  gul=se-current-app
-  ?:  |(?=($~ gul) (se-aint u.gul))
-    (se-blit %bel ~)
-  ta-abet:(ta-belt:(ta u.gul) bet)
-::
-++  se-born                                             ::< new server
-  ::> init an app using gall, and link to its console
-  ::
-  |=  wel/well:^gall
-  ^+  +>
-  ?:  (~(has in ray) wel)
-    (se-text "[already running {<p.wel>}/{<q.wel>}]")
-  %=  +>
-    ray  (~(put in ray) wel)
-    eel  (~(put in eel) [our.bow q.wel])
-  ==
-::
 ++  se-drop                                             ::< disconnect
   ::> dok: app to unlink
   ::>
@@ -677,32 +654,19 @@
             (se-select-app u.lag)
   =.  +>.$  (se-text "[unlinked from {<dok>}]")
   ?:  =(dok [our.bow %dojo])                            ::< undead dojo
-    (se-link dok)
+    +>.$(eel (~(put in eel) dok))
   +>.$
 ::
 ++  se-nuke                                             ::< teardown connection
   ::> forceful drop, pull immediately
   ::
-  ::REVIEW shouldn't things call se-klin instead,
-  ::       deleting from eel to implicitly cause the
-  ::       connection to be cleaned up in subze?
+  ::REVIEW shouldn't deleting from eel alone implicitly
+  ::       cause the connection to be cleaned up in
+  ::       subze?
   |=  dok/dock
   ^+  +>
   =.  eel  (~(del in eel) dok)
   (se-drop:(se-pull dok) dok)
-::
-++  se-klin                                             ::< disconnect app
-  ::> dok: app to drop from list of desired-connections
-  ::
-  ::RENAMEME se-nuke?
-  |=  dok/dock
-  +>(eel (~(del in eel) dok))
-::
-++  se-link                                             ::< connect to app
-  ::> dok: app to add to list of desired-connections
-  ::
-  |=  dok/dock
-  +>(eel (~(put in eel) dok))
 ::
 ::> ||
 ::> ||  %effect
@@ -880,7 +844,7 @@
     =.  ta  (se-text "[linked to {<dok>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
-  ++  ta-adze                                            ::< send a peer
+  ++  ta-adze                                           ::< send a peer
     ::> this currently resolves between the %inc- and
     ::> %sole- protocols by hardcoded app name, sending
     ::> a subscription to the appropriate path
@@ -973,12 +937,11 @@
       {$ctl *}  (ta-ctl p.bet)
       {$del *}  ta-del
       {$met *}  (ta-met p.bet)
-      {$ret *}  ta-ret
+      {$ret *}  (ta-act %ret ~)
       {$txt *}  (ta-txt p.bet)
     ==
   ::
-  ++  ta-det                                            ::< send edit
-    ::RENAMEME ta-send-edit
+  ++  ta-send-edit                                      ::< send edit
     ::> capture context for sole edit, and send it to
     ::> {dok} 
     ::
@@ -1019,7 +982,7 @@
             ::
             ?:  (~(has in eel:(drum-make our.bow)) dok)
               +>(..ta (se-blit qit+~))                  ::< quit pier
-            +>(..ta (se-klin dok))                      ::< unlink app
+            +>(eel (~(del in eel) dok))                 ::< unlink app
         $e  +>(pos.inp (lent buf.say.inp))
         $f  (ta-aro %r)
         $g  ?~  ris  ta-bel
@@ -1076,8 +1039,7 @@
     |=  pos/@ud
     (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ++  ta-fec                                            ::< apply effect
-    ::RENAMEME ta-diff-effect
+  ++  ta-diff-effect                                    ::< apply effect
     ::> translate sole- output to raw dill-
     ::
     |=  fec/sole-effect
@@ -1086,7 +1048,7 @@
       {$bel *}  ta-bel
       {$blk *}  +>
       {$clr *}  +>(..ta (se-blit fec))
-      {$det *}  (ta-got +.fec)
+      {$det *}  +>(inp +:(~(receive cursored:sole inp) +.fec))
       {$err *}  (ta-err p.fec)
       {$klr *}  +>(..ta (se-blit %klr (make:klr p.fec)))
       {$mor *}  |-  ^+  +>.^$
@@ -1102,17 +1064,12 @@
       {$say *}  +>(say.inp [[own=his his=own]:ven leg=~ buf]:p.fec)
     ==
   ::
-  ++  ta-got                                            ::< apply change
-    ::FIXME inline
-    |=  cal/sole-change
-    +>(inp +:(~(receive cursored:sole inp) cal))
-  ::
   ++  ta-hom                                            ::< local edit
     ::> ted: local change to apply
     ::
     |=  ted/sole-edit
     ^+  +>
-    =.  +>  (ta-det ted)
+    =.  +>  (ta-send-edit ted)
     +>(inp (~(commit cursored:sole inp) ted))
   ::
   ++  ta-jump                                           ::< buffer pos
@@ -1167,7 +1124,7 @@
     ^+  +>
     =.  ris  ~
     ?+    key    ta-bel
-      $v  +>(..ta (se-klin our %dojo))
+      $v    +>(eel (~(del in eel) our %dojo))
       $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
               ta-bel
             =+  old=`(list @c)`i.old.hit
@@ -1313,10 +1270,6 @@
         ==
       ==
     ==
-  ::
-  ++  ta-ret                                            ::< hear return
-    ::FIXME inline
-    (ta-act %ret ~)
   ::
   ++  ta-ser                                            ::< reverse search
     ::> add to incremental search buffer
