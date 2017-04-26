@@ -30,7 +30,7 @@
   =^  mow  +<+.wrap  (handle arg)
   [mow ..wrap]
 ++  prep
-::   =<  _`..prep
+::   =<  _`..prep(+<+ (drum-make our.hid))
   |=  a/(unit drum-part)  ^+  [~ +>]
   ?~  a  `+>(+<+ (drum-make our.hid))
   ?:  =(u.a *drum-part)  `+>(+<+ (drum-make our.hid))
