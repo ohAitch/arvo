@@ -39,8 +39,9 @@
 :: ++  prep  _~&(%wiped abet)
 ++  abet  [(flop mow) .(mow ~)]
 ++  pull  |=(path ~&(serv+pull+[+<] abet))
-++  peer
+++  peer-inc
   |=  a/path  ^+  abet
+  ~|  pax=a
   =^  ses  a  ?~(a !! [(decode-id i.a) t.a])
   =/  num  (raid a /[%ud])
   ~&  serv+peer+a
@@ -72,16 +73,16 @@
     ~&  serv+[%bump ses num=num log=log]
     =.  num  +(num)
     =.  log  [num log]
-    ~&  broadcasting+(prey /(encode-id ses) +<-.se)
-    %+  roll  (prey /(encode-id ses) +<-.se)
+    ~&  broadcasting+(prey /inc/(encode-id ses) +<-.se)
+    %+  roll  (prey /inc/(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
     (emit ost %diff %atom num)
   ::
   ++  drop
     =<  abet
     ~&  serv+[%drop ses num=num log=log]
-    ~&  dropping+(prey /(encode-id ses) +<-.se)
-    %+  roll  (prey /(encode-id ses) +<-.se)
+    ~&  dropping+(prey /inc/(encode-id ses) +<-.se)
+    %+  roll  (prey /inc/(encode-id ses) +<-.se)
     |:  [[ost=*bone *^] this]
     (emit ost %quit ~)
   --

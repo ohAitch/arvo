@@ -444,7 +444,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?~  saw
-    ta-abet:ta-peer-succesful:(ta dok)
+    ta-abet:ta-peered:(ta dok)
   (se-dump:(se-nuke dok) u.saw)
 ::
 ++  take-coup-phat                                      ::< get ack for poke
@@ -805,7 +805,7 @@
   ::> dok: what app
   ::>
   |=  dok/dock
-    =+  `target`(~(got by fug) dok)                     ::< app and state
+  =+  `target`(~(got by fug) dok)                       ::< app and state
   |%
   ::>  ||
   ::>  ||  %convenience
@@ -835,7 +835,7 @@
   ::>  ||
   ::+|
   ::
-  ++  ta-peer-succesful                                 ::< subscription ack
+  ++  ta-peered                                         ::< subscription ack
     ::> on succesful {new} session connection,
     ::> display "[linked]" message
     ::
@@ -854,7 +854,7 @@
       (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  .  ?:(new ta-this ta-pull)
     =.  sus.ses  rec.ses
-    (ta-peer /(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
+    (ta-peer /inc/(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
   ::
   ++  ta-diff-atom                                      ::<inc- update
     ::> record sequence number of received bump

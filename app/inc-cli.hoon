@@ -52,12 +52,12 @@
     $write-2  do-bump:(our-se 2)
   ==
 ::
-++  diff-backlog-atoms
+++  diff-backlog-atoms-inc
   |=  {wir/wire dif/(list @u)}
   =^  ses  wir  [(decode-id -.wir) +.wir]
   (diff-backlog-atoms:(se ses) wir dif)
 ::
-++  diff-atom
+++  diff-atom-inc
   |=  {wir/wire dif/@u}
   =^  ses  wir  [(decode-id -.wir) +.wir]
   (diff-atom:(se ses) wir dif)
@@ -77,9 +77,9 @@
   ::
   ++  do-peer
     =~  ?~  sus  this
-        (emit 0 %pull /[ses-t]/(scot %ud u.sus) server ~)
+        (emit 0 %pull /inc/[ses-t]/(scot %ud u.sus) server ~)
     ::
-        =/  pax  /[ses-t]/(scot %ud rec)
+        =/  pax  /inc/[ses-t]/(scot %ud rec)
         =.  sus  `rec
         (emit 0 %peer pax server pax)
     ::
