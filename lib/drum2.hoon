@@ -155,7 +155,7 @@
       pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
       ses/ses-data                                      ::< WIP %inc- client
-      con/?($new $liv $ded)                             ::< subscription state
+      con/?($liv $ded $new)                             ::< subscription state
   ==                                                    ::
 ::
 ::TODO unify with sole-id
