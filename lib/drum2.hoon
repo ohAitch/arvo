@@ -271,7 +271,7 @@
       $%  {$sole-id-action p/sole-id-action}            ::< buffer update
           ::{$talk-command command:talk}                ::< render stack trace
           {$dill-belt dill-belt:^dill}                  ::< proxied keystroke
-          {$inc-cmd session ?($bump $drop)}             ::< DOCUMENT
+          {$inc-cmd session ?($bump $drop $make)}       ::< DOCUMENT
       ==                                                ::
     ++  lime                                            ::> typed diff
       $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
@@ -852,7 +852,7 @@
     ::WIP merge the sole- and inc- protocols
     ?.  =(%inc-serv q.dok)
       (ta-peer /sole/(encode-id:sole se-sole-id))
-    =.  .  ?:(new ta-this ta-pull)
+    =.  .  ?.(new ta-pull (ta-poke %inc-cmd se-sole-id %make))
     =.  sus.ses  rec.ses
     (ta-peer /inc/(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
   ::

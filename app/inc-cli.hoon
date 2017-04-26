@@ -27,7 +27,7 @@
   $:  bone
   $%  {$peer wire dock path}
       {$pull wire dock $~}
-      {$poke wire dock {$inc-cmd session ?($bump $drop)}}
+      {$poke wire dock {$inc-cmd session ?($bump $drop $make)}}
   ==  ==
 ++  ses-data
   $:  sus/(unit @u)                   :: seqn of current outbound subscription
@@ -41,10 +41,18 @@
 ++  abet  [(flop mow) .(mow ~)]
 ++  emit  |=(a/move this(mow [a mow]))
 ::
+++  coup
+  |=  {wire saw/(unit tang)}  ^+  abet
+  ?~  saw  abet
+  ~|  %inc-cli-err
+  (mean u.saw)
+::
 ++  poke-noun
   |=  a/*
   ?+  a  ~&(clin+%unknown-command abet)
     $wipe  abet(dat ~)
+    $make-1  do-make:(our-se 1)
+    $make-2  do-make:(our-se 2)
     $read-1  do-peer:(our-se 1)
     $read-2  do-peer:(our-se 2)
     $pull-1  do-pull:(our-se 1)
@@ -93,6 +101,7 @@
     (emit 0 %pull /[ses-t]/(scot %ud u.sus) server ~)
   ::
   ++  do-bump  abet:(emit 0 %poke / server %inc-cmd ses %bump)
+  ++  do-make  abet:(emit 0 %poke / server %inc-cmd ses %make)
   ++  diff-backlog-atoms
     |=  {wir/wire log/(list @u)}
     ~|  bad-subscription+[sus wir]

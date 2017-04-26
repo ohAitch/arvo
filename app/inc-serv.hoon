@@ -49,15 +49,16 @@
 ::
 ++  poke-noun  |=(a/* ?+(a !! $wipe abet(dat ~)))
 ++  poke-inc-cmd
-  |=  {ses/session cmd/?($bump $drop)}  ^+  abet
+  |=  {ses/session cmd/?($bump $drop $make)}  ^+  abet
   ?-  cmd
+    $make  ?<((~(has by dat) ses) abet(dat (~(put by dat) ses [0 ~])))
     $bump  bump:(se ses)
     $drop  drop:(se ses)
   ==
 ::
 ++  se
   |=  ses/session
-  =+  `{num/@ log/(list @u)}`(fall (~(get by dat) ses) [0 ~])
+  =+  `{num/@ log/(list @u)}`(~(got by dat) ses)
   |%
   ++  this  .
   ++  abet  ^abet(dat (~(put by dat) ses num log))
