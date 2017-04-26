@@ -850,7 +850,7 @@
     ::> a subscription to the appropriate path
     ::
     ::WIP merge the sole- and inc- protocols
-    ?.  =(%inc-serv q.dok)
+    ?.  (~(has in (sy /ask/inc-serv)) q.dok)
       (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  .  ?.(new ta-pull (ta-poke %inc-cmd se-sole-id %make))
     =.  sus.ses  rec.ses
@@ -879,7 +879,7 @@
     ::WIP inc- shim should not exist long-term
     |=  act/sole-action
     ^+  +>
-    ?:  =(%inc-serv q.dok)
+    ?:  (~(has in (sy /ask/inc-serv)) q.dok)
       ?-  -.act
         $det  +>
         $ret  (ta-poke %inc-cmd se-sole-id %bump)
