@@ -648,7 +648,7 @@
   ^+  +>
   =+  lag=se-current-app
   ?.  (~(has by fug) dok)  +>.$
-  =.  fug  (~(del by fug) dok)
+  =.  ta  ta-abut:(ta dok)
   =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
               +>.$(inx 0)
             (se-select-app u.lag)
