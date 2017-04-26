@@ -87,7 +87,6 @@
   ::> all state for connected terminal
   ::>
   ::> edg: width
-  ::> off: FIXME this looks like just a local variable?
   ::> kil: kill ring
   ::> inx: currently selected app: cycle through with ^X
   ::> fug: per-terminal per-app state
@@ -99,7 +98,6 @@
   ::>           storing it permanently
   ::>
   $:  edg/_80                                           ::< terminal columns
-      off/@ud                                           ::< window offset
       kil/kill                                          ::< kill buffer
       {inx/@ud fug/(map dock target)}                   ::< connections
       mir/(pair @ud stub:^dill)                         ::< mirrored terminal
@@ -171,71 +169,50 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-::
-::> ||
-::> ||  %defaults
-::> ||
-::>   create initial drum state
-::
 |%
-++  deft-apes                                           ::< default servers
-  ::TODO stick in |^ under drum-make, with a clearer name
-  ::
-  ::> apps to start by default: talk, dojo
-  ::>
-  ::> our: if on a comet, use %base instead of %home;
-  ::>      if on a moon, don't start local %talk
-  ::>
-  |=  our/ship
-  %-  ~(gas in *(set well:^gall))
-  ^-  (list well:^gall)
-  =+  myr=(clan:title our)
-  ?:  ?=($pawn myr)
-    [[%base %talk] [%base %dojo] ~]
-  ?:  ?=($earl myr)
-    [[%home %dojo] ~]
-  [[%home %talk] [%home %dojo] ~]
-::
-++  deft-fish                                           ::< default connects
-  ::TODO stick in |^ under drum-make, with a clearer name
-  ::
-  ::> apps to connect to by default: talk, dojo
-  ::>
-  ::> our: if on a moon, use parent's talk instead of own
-  |=  our/ship
-  %-  ~(gas in *(set dock))
-  ^-  (list dock)
-  ?:  ?=($earl (clan:title our))
-    [[(sein:title our) %talk] [our %dojo] ~]
-  [[our %talk] [our %dojo] ~]
-::
 ++  drum-make                                           ::< initial part
   ::REVIEW move config to file system? It seems maybe
   ::       useful to be able to force dojo reconnect
   ::       from unix, for one thing
   ::
-  ::> make initial {drum-part}, by adding some default
-  ::> apps to the bunt
+  ::> make initial {drum-part} state, by adding some
+  ::> default apps to the bunt
   ::>
   ::> our: comets run off %base, moons use parent's talk
   ::>
-  ::REPLACE with:
-  ::    |=  our/ship
-  ::    ^-  drum-part
-  ::    %*  .  *drum-part
-  ::      eel  (deft-fish our)
-  ::      ray  (deft-apps our)
-  ::    ==
   |=  our/ship
-  ^-  drum-part
-  :*  %drum
-      %2
-      ~                                                 ::  sys
-      (deft-fish our)                                   ::  eel
-      (deft-apes our)                                   ::  ray
-      ~                                                 ::  fur
-      ~                                                 ::  bin
-  ==                                                    ::
+  |^  ^-  drum-part
+      %*  .  *drum-part
+        eel  deft-fish
+        ray  deft-apps
+      ==
+  ::
+  ++  deft-fish                                           ::< default connects
+    ::> apps to connect to by default: talk, dojo
+    ::>
+    ::> if on a moon, use parent's talk instead of own
+    ::
+    %-  ~(gas in *(set dock))
+    ^-  (list dock)
+    ?:  ?=($earl (clan:title our))
+      [[(sein:title our) %talk] [our %dojo] ~]
+    [[our %talk] [our %dojo] ~]
+  ::
+  ++  deft-apps                                           ::< default servers
+    ::> apps to start by default: talk, dojo
+    ::>
+    ::> if on a comet, use %base instead of %home;
+    ::> if on a moon, don't start local %talk
+    ::
+    %-  ~(gas in *(set well:^gall))
+    ^-  (list well:^gall)
+    =+  myr=(clan:title our)
+    ?:  ?=($pawn myr)
+      [[%base %talk] [%base %dojo] ~]
+    ?:  ?=($earl myr)
+      [[%home %dojo] ~]
+    [[%home %talk] [%home %dojo] ~]
+  --
 ::
 ::>  ||
 ::>  || %wire-serdes
@@ -261,14 +238,9 @@
 ::> ||
 ::>   event + state -> reactions + state
 ::>
-::RENAMEME hid -> bow
-|=  {hid/bowl:^gall drum-part}                          ::  main drum work
+|=  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
-::REPLACE
-::    =/  dev/source
-::      (fall (~(get by bin) ost.hid) *source)
-::    =,  dev
-=+  (fall (~(get by bin) ost.hid) *source)
+=+  (fall (~(get by bin) ost.bow) *source)
 =*  dev  -
 =>  ::REVIEW move up outside of |=?
     ::>  ||
@@ -318,7 +290,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  (se-diff dok fec)
+  ta-abet:(ta-fec:(ta dok) fec)
 ::
 ++  diff-atom-phat                                      ::< WIP sequence number
   ::> process incoming %inc atom
@@ -355,11 +327,11 @@
   ::
   ::> only allow connections from self or moons
   ::
-  ~|  [%drum-unauthorized our+our.hid src+src.hid]
-  ?>  (team:title our.hid src.hid)
+  ~|  [%drum-unauthorized our+our.bow src+src.bow]
+  ?>  (team:title our.bow src.bow)
   ::
   =<  se-abet  =<  se-view
-  (se-text "[{<src.hid>}, driving {<our.hid>}]")
+  (se-text "[{<src.bow>}, driving {<our.bow>}]")
 ::
 ++  diff-dill-blit-phat                                 ::< raw dill output
   ::> proxy raw %dill- output from %drumming
@@ -436,7 +408,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?~  saw
-    (se-join dok)
+    ta-abet:ta-join:(ta dok)
   (se-dump:(se-nuke dok) u.saw)
 ::
 ++  take-coup-phat                                      ::< get ack for poke
@@ -451,10 +423,10 @@
   ?~  saw  +>
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  =+  (mean >[%drum-coup-fail src.hid ost.hid dok]< u.saw)
+  =+  (mean >[%drum-coup-fail src.bow ost.bow dok]< u.saw)
   %-  se-dump:(se-nuke dok)
   :_  u.saw
-  >[%drum-coup-fail src.hid ost.hid dok]<
+  >[%drum-coup-fail src.bow ost.bow dok]<
 ::
 ++  take-onto                                           ::< get ack for start
   ::> recieve acknowledgment on an app being started
@@ -484,7 +456,7 @@
   |=  way/wire
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
-  ~&  [%drum-quit src.hid ost.hid dok]
+  ~&  [%drum-quit src.bow ost.bow dok]
   (se-drop dok)
 ::
 ::> ||
@@ -501,16 +473,16 @@
   ?.  se-ably
     =.  .  se-adit
     [(flop moz) pith]
-  =.  sys  ?^(sys sys `ost.hid)
+  =.  sys  ?^(sys sys `ost.bow)
   =.  .  se-subze:se-adze:se-adit
-  :_  pith(bin (~(put by bin) ost.hid dev))
+  :_  pith(bin (~(put by bin) ost.bow dev))
   %-  flop
   ^-  (list move)
   ?~  biz  moz
   :_  moz
-  [ost.hid %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
+  [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
 ::
-++  se-ably  (~(has by sup.hid) ost.hid)                ::< caused by console
+++  se-ably  (~(has by sup.bow) ost.bow)                ::< caused by console
 ::
 ++  se-adit                                             ::< update servers
   ::> start every server that wants to be up
@@ -527,7 +499,7 @@
   ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  +>.$
   =.  +>.$  (se-text "activated app {(trip p.wel)}/{(trip q.wel)}")
   %-  se-emit(fur (~(put by fur) q.wel ~))
-  [ost.hid %conf [%drum p.wel q.wel ~] [our.hid q.wel] %load our.hid p.wel]
+  [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
 ::
 ++  se-adze                                             ::< add new connections
   ::> connect any desired-link that is not connected
@@ -546,18 +518,18 @@
 ++  se-subze                                            ::< del old connections
   ::> disconnect no longer desired connections
   ::
-  =<  .(dev (~(got by bin) ost.hid))
-  =.  bin  (~(put by bin) ost.hid dev)
+  =<  .(dev (~(got by bin) ost.bow))
+  =.  bin  (~(put by bin) ost.bow dev)
   ^+  .
   %-  ~(rep by bin)
   =<  .(con +>)
   |=  {{ost/bone dev/source} con/_.}  ^+  con
   ::REVIEW this seems like it should just pass {ost}
   ::       down to se-nuke
-  =+  xeno=se-subze-local:%_(con ost.hid ost, dev dev)
-  xeno(ost.hid ost.hid.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
+  =+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
+  xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
 ::
-++  se-subze-local                                      ::< nuke ost.hid apps
+++  se-subze-local                                      ::< nuke ost.bow apps
   ::> disconnect anything not in {eel}
   ^+  .
   %-  ~(rep by fug)
@@ -581,7 +553,7 @@
   ::TODO with new disconnection semantics, this might
   ::     effectively be always &
   |=  dok/dock  ^-  ?
-  ?.  (~(has by bin) ost.hid)  &
+  ?.  (~(has by bin) ost.bow)  &
   =+  gyr=(~(get by fug) dok)
   |(?=($~ gyr) new.u.gyr)
 ::
@@ -597,8 +569,7 @@
 ::> ||
 ::>   operations on {inx}, the app selection
 ::+|
-++  se-alas                                             ::< recalculate index
-  ::RENAMEME recalculate-index
+++  se-select-app                                       ::< recalculate index
   ::> select particular app, if connected
   ::
   ::REVIEW mutating inx in place is probably cleaner
@@ -609,17 +580,15 @@
   ?:  =(i.wag dok)  +>.^$(inx xin)
   $(wag t.wag, xin +(xin))
 ::
-++  se-anon                                             ::< rotate index
-  ::RENAMEME rotate-apps
+++  se-next-app                                         ::< rotate index
   ::> select next connected app in ring
   ::
   =+  wag=se-amor
   ?~  wag  +
-  ::  ~&  [%se-anon inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
+  ::  ~&  [%se-next-app inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
   +(inx (mod +(inx) (lent wag)))
 ::
-++  se-agon                                             ::< current dock
-  ::RENAMEME current-app
+++  se-current-app                                      ::< current dock
   ::> app selected by ^X ring, if any
   ::
   ^-  (unit dock)
@@ -655,7 +624,7 @@
       {$rez *}  +>(edg (dec p.bet))                     ::< resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
     ==
-  =+  gul=se-agon
+  =+  gul=se-current-app
   ?:  |(?=($~ gul) (se-aint u.gul))
     (se-blit %bel ~)
   ta-abet:(ta-belt:(ta u.gul) bet)
@@ -669,7 +638,7 @@
     (se-text "[already running {<p.wel>}/{<q.wel>}]")
   %=  +>
     ray  (~(put in ray) wel)
-    eel  (~(put in eel) [our.hid q.wel])
+    eel  (~(put in eel) [our.bow q.wel])
   ==
 ::
 ++  se-drop                                             ::< disconnect
@@ -681,22 +650,16 @@
   ::
   |=  dok/dock
   ^+  +>
-  =+  lag=se-agon
+  =+  lag=se-current-app
   ?.  (~(has by fug) dok)  +>.$
   =.  fug  (~(del by fug) dok)
   =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
               +>.$(inx 0)
-            (se-alas u.lag)
+            (se-select-app u.lag)
   =.  +>.$  (se-text "[unlinked from {<dok>}]")
-  ?:  =(dok [our.hid %dojo])                            ::< undead dojo
+  ?:  =(dok [our.bow %dojo])                            ::< undead dojo
     (se-link dok)
   +>.$
-::
-++  se-join                                             ::< confirm connection
-  ::FIXME inline
-  |=  dok/dock
-  ^+  +>
-  ta-abet:ta-join:(ta dok)
 ::
 ++  se-nuke                                             ::< teardown connection
   ::> forceful drop, pull immediately
@@ -721,12 +684,6 @@
   ::
   |=  dok/dock
   +>(eel (~(put in eel) dok))
-::
-++  se-diff                                             ::< receive results
-  ::FIXME inline
-  |=  {dok/dock fec/sole-effect}
-  ^+  +>
-  ta-abet:(ta-fec:(ta dok) fec)
 ::
 ::> ||
 ::> ||  %effect
@@ -783,14 +740,14 @@
   ::
   |=  lin/(pair @ud stub:^dill)
   ^+  +>
-  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
+  =/  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
   (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
 ::
 ++  se-view                                             ::< flush buffer
   ::> if an app is selected, sync out its input buffer
   ::
   ^+  .
-  =+  gul=se-agon
+  =+  gul=se-current-app
   ?:  |(?=($~ gul) (se-aint u.gul))  +
   (se-just ta-vew:(ta u.gul))
 ::
@@ -809,8 +766,8 @@
   :: XX talk should be usable for stack traces, see urbit#584 which this change
   :: closed for the problems there
   ((slog (flop tac)) +>)
-  ::=-  (se-emit 0 %poke /drum/talk [our.hid %talk] -)
-  ::(said:talk our.hid %drum now.hid eny.hid tac)
+  ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
+  ::(said:talk our.bow %drum now.bow eny.bow tac)
 ::
 ++  se-text                                             ::< return text
   ::> print message to screen, whatever that means
@@ -834,15 +791,15 @@
   ::> par: request data
   ::
   |=  {dok/dock par/pear}
-  (se-emit [ost.hid %poke (drum-path dok) dok par])
+  (se-emit [ost.bow %poke (drum-path dok) dok par])
 ::
 ++  se-pull                                             ::< cancel subscription
   ::> dok: target app
   ::
   |=  dok/dock
-  (se-emit [ost.hid %pull (drum-path dok) dok ~])
+  (se-emit [ost.bow %pull (drum-path dok) dok ~])
 ::
-++  se-sole-id  `sole-id`[1 our dap]:hid                ::< XX multiple?
+++  se-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
 ::RENAMEME
 ::> ||
 ::> ||  %ta-core
@@ -888,7 +845,7 @@
   ++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
   ++  ta-peer                                           ::< peer dok
     |=  a/path
-    +>(..ta (se-emit ost.hid %peer (drum-path dok) dok a))
+    +>(..ta (se-emit ost.bow %peer (drum-path dok) dok a))
   ::
   ::>  ||
   ::>  ||  %interfaces
@@ -1043,7 +1000,10 @@
         $c  ta-bel
         $d  ?^  buf.say.inp
               ta-del
-            ?:  (~(has in (deft-fish our.hid)) dok)
+            ::> talk and dojo close console on ^d
+            ::> instead of actually disconnecting
+            ::
+            ?:  (~(has in eel:(drum-make our.bow)) dok)
               +>(..ta (se-blit qit+~))                  ::< quit pier
             +>(..ta (se-klin dok))                      ::< unlink app
         $e  +>(pos.inp (lent buf.say.inp))
@@ -1075,7 +1035,7 @@
               ta-bel
             =+  sop=(ta-off %l %ace pos.inp)
             (ta-kil %l [(sub pos.inp sop) sop])
-        $x  +>(..ta se-anon)
+        $x  +>(..ta se-next-app)
         $y  ?:  =(0 num.kil)
               ta-bel
             (ta-hom (cat:edit pos.inp ta-yan))
@@ -1254,8 +1214,8 @@
             ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
             ::
-      $x    =.  ..ta  se-anon
-            =/  gil  (fall se-agon dok)
+      $x    =.  ..ta  se-next-app
+            =/  gil  (fall se-current-app dok)
             ?.  =(%drumming q.gil)  ..ta-ctl
             ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
             ::
