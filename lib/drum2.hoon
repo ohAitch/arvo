@@ -144,7 +144,7 @@
   ::> inp: shared buffer state, user enters text and
   ::>      connected app corrects/rejects syntax errors
   ::> ses: WIP %inc- persistent connection state
-  ::> new: | once a subscription has been established
+  ::> con: link is %new, then {%liv}e, occasionally %ded
   ::
   $:  $=  blt                                           ::< curr & prev belts
         %+  pair
@@ -155,7 +155,7 @@
       pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
       ses/ses-data                                      ::< WIP %inc- client
-      new/?                                             ::< not yet connected
+      con/?($new $liv $ded)                             ::< subscription state
   ==                                                    ::
 ::
 ::TODO unify with sole-id
@@ -591,14 +591,14 @@
   |=  dok/dock  ^-  ?
   ?.  (~(has by bin) ost.bow)  &
   =+  gyr=(~(get by fug) dok)
-  |(?=($~ gyr) new.u.gyr)
+  |(?=($~ gyr) !=(%liv con.u.gyr))
 ::
 ++  se-amor                                             ::< live targets
   ::> list apps which are succesfully connected
   ::
   ^-  (list dock)
   %+  skim  (~(tap in eel))
-  |=(a/dock =((some |) (bind (~(get by fug) a) |=(target new))))
+  |=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
 ::
 ::> ||
 ::> ||  %indexing
@@ -836,11 +836,11 @@
   ::+|
   ::
   ++  ta-peered                                         ::< subscription ack
-    ::> on succesful {new} session connection,
+    ::> on succesful session {con}nection,
     ::> display "[linked]" message
     ::
-    ?>  new
-    =.  new  |
+    ?<  =(%liv con)
+    =.  con  %liv
     =.  ta  (se-text "[linked to {<dok>}]")
     (ta-pro & %$ "<awaiting prompt> ")
   ::
@@ -852,7 +852,12 @@
     ::WIP merge the sole- and inc- protocols
     ?.  (~(has in (sy /ask/inc-serv)) q.dok)
       (ta-peer /sole/(encode-id:sole se-sole-id))
-    =.  .  ?.(new ta-pull (ta-poke %inc-cmd se-sole-id %make))
+    =.  .
+      ?-  con
+        $ded  ta-this
+        $liv  ta-pull
+        $new  (ta-poke %inc-cmd se-sole-id %make)
+      ==
     =.  sus.ses  rec.ses
     (ta-peer /inc/(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
   ::
