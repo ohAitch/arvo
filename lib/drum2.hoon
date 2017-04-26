@@ -444,7 +444,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?~  saw
-    ta-abet:ta-join:(ta dok)
+    ta-abet:ta-peer-succesful:(ta dok)
   (se-dump:(se-nuke dok) u.saw)
 ::
 ++  take-coup-phat                                      ::< get ack for poke
@@ -835,9 +835,9 @@
   ::>  ||
   ::+|
   ::
-  ++  ta-join
+  ++  ta-peer-succesful                                 ::< subscription ack
     ::> on succesful {new} session connection,
-    ::> display [linked] message
+    ::> display "[linked]" message
     ::
     ?>  new
     =.  new  |
