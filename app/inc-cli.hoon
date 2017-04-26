@@ -44,6 +44,7 @@
 ++  poke-noun
   |=  a/*
   ?+  a  ~&(clin+%unknown-command abet)
+    $wipe  abet(dat ~)
     $read-1  do-peer:(our-se 1)
     $read-2  do-peer:(our-se 2)
     $pull-1  do-pull:(our-se 1)

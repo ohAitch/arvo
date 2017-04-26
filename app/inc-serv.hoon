@@ -47,6 +47,7 @@
   ~&  serv+peer+a
   (peer:(se ses) num)
 ::
+++  poke-noun  |=(a/* ?+(a !! $wipe abet(dat ~)))
 ++  poke-inc-cmd
   |=  {ses/session cmd/?($bump $drop)}  ^+  abet
   ?-  cmd
