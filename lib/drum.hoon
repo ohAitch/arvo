@@ -206,6 +206,7 @@
   ?~  saw  +>
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
+  =+  (mean >[%drum-coup-fail src.hid ost.hid gyl]< u.saw)
   %-  se-dump:(se-nuke gyl)
   :_  u.saw
   >[%drum-coup-fail src.hid ost.hid gyl]<
