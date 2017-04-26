@@ -2,9 +2,7 @@
 ::::  /hoon/helm/lib                                    ::  ::
   ::                                                    ::  ::
 /?    310                                               ::  version
-/-    sole
 /+    talk
-[. sole]
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -12,11 +10,6 @@
 ++  helm-part  {$helm $0 helm-pith}                     ::  helm state
 ++  helm-pith                                           ::  helm content
   $:  bur/(unit (pair ship mace:^ames))                 ::  requesting ticket
-      hoc/(map bone helm-session)                       ::  consoles
-  ==                                                    ::
-++  helm-session                                        ::
-  $:  say/sole-share                                    ::  console state
-::       mud/(unit (sole-dialog @ud))                      ::  console dialog
   ==                                                    ::
 ::                                                      ::  ::
 ::::                                                    ::  ::
@@ -41,7 +34,6 @@
 ::::                                                    ::  ::
   ::                                                    ::  ::
 |=  {bowl:^gall helm-part}                              ::  main helm work
-=+  sez=(fall (~(get by hoc) ost) *helm-session)
 =>  |%                                                  ::  arvo structures
     ++  card                                            ::
       $%  {$cash wire p/@p q/buck:^ames}                ::
@@ -62,7 +54,7 @@
     --
 |_  moz/(list move)
 ++  abet                                              ::  resolve
-  [(flop moz) %_(+>+>+<+ hoc (~(put by hoc) ost sez))]
+  [(flop moz) +>+>->]
 ::
 ++  emit  |=(card %_(+> moz [[ost +<] moz]))          ::  return card
 ++  emil                                              ::  return cards
