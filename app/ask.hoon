@@ -81,32 +81,25 @@
   =/  new  [now.bow ask %new]
   [%mor tan+[(message new)]~ pro+prompt (put-mail new) ~]
 ::
-++  poke-sole-action  :: DEPRECATED
-  |=  act/sole-action
-  =/  sid/sole-id  [ost our dap]:bow
-  (poke-sole-id-action sid act)
-::
 ++  poke-sole-id-action
   |=  {sid/sole-id act/?($new sole-action)}
   =<  abet:abet  ^+  *di
   ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
     ~|([%not-in-whitelist src.bow] !!)
   ?:  ?=($new act)
-    (new-di sid)
+    initial-output:(new-di sid)
   (poke-action:(di sid) act)
 ::
 ++  peer-sole
   |=  pax/path
   =<  abet:abet  ^+  *di
   =^  sid/sole-id  pax
-    ?~  pax  [[ost our dap]:bow pax]  ::  DEPRECATED
-    [(decode-id:sole i.pax) t.pax]
+    ?~(pax !! [(decode-id:sole i.pax) t.pax])
+::   =/  num  (raid pax /[%ud])
   ?^  pax  ~|(%bad-path !!)
-  ~|  [%not-in-whitelist src.bow]
-  ?>  |((~(has in admins) src.bow) =(our.bow src.bow))
-  ?.  (~(has by sos) sid)
-    (peer:(new-di sid) pax)                ::  XX explicit %new act
-  (peer-old:(di sid) pax)
+  ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
+    ~|([%not-in-whitelist src.bow] !!)
+  (peer:(di sid) pax)
 ::
 ++  new-di  |=(sid/sole-id =.(sos (~(put by sos) sid *sole-share ~) (di sid)))
 ++  verbose  |
@@ -235,15 +228,15 @@
       (give-effect bel+~)
     ==
   ::
-  ++  peer
-    |=  path  ^+  this
+  ++  initial-output
+    ^+  this
     %^  give-effect  %mor
       pro+prompt
     =+  all=adrs
     [(render all) (turn all put-mail)]
-  ++  peer-old
+  ::
+  ++  peer
     |=  path  ^+  this
-    ~&  %ask-replaced
     ~&  ole+(lent log)
     =.  log  (skip log |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
     =.  som  *sole-share                                :: XX sync sole-share properly
