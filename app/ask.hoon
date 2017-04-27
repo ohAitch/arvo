@@ -137,7 +137,7 @@
     |=  num/@u  ^+  this
     =/  num-log  (flop (gulf 1 (lent log)))
     =/  new  (slag num (flop num-log))
-    ?~  new  this
+::     ?~  new  this
     (emit ost.bow %diff %backlog-atoms new)
   ::
   ++  inc-bump
