@@ -23,6 +23,7 @@
       {$nop $~}                                         ::  no-op
       {$set p/sole-buffer}                              ::  discontinuity
   ==                                                    ::
+++  sole-backlog  {inx/@u new/(list sole-effect)}       ::
 ++  sole-effect                                         ::  app to sole
   $%  {$bel $~}                                         ::  beep
       {$blk p/@ud q/@c}                                 ::  blink+match char at

@@ -297,6 +297,20 @@
 ::>  ||
 ::>    accept external events
 ::+|
+++  diff-sole-backlog-phat                               ::< chunk of output
+  ::> updates to virtual console on re/connect
+  ::>
+  ::> way: identifies the app sending the update,
+  ::>      encoded as /[%p]/[%tas]
+  ::> tot: total number of updates, including skipped %det
+  ::> fec: list of backlog effects
+  ::
+  |=  {way/wire tot/@u fec/(list sole-effect)}
+  =<  se-abet  =<  se-view
+  =+  dok=(drum-phat way)
+  ?:  (se-aint dok)  +>.$
+  ta-abet:(ta-diff-backlog:(ta dok) tot fec)
+::
 ++  diff-sole-effect-phat                               ::< console output
   ::> receive update to virual console
   ::>
@@ -335,7 +349,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-diff-backlog:(ta dok) dif)
+  ta-abet:(ta-diff-backlog-atoms:(ta dok) dif)
 ::
 ++  peer                                                ::< new connection
   ::>  incoming subscription
@@ -860,16 +874,15 @@
     ::> a subscription to the appropriate path
     ::
     ::WIP merge the sole- and inc- protocols
-    ?.  (~(has in (sy /ask/inc-serv)) q.dok)
-      (ta-peer /sole/(encode-id:sole se-sole-id))
-    =.  .
-      ?-  con
-        $ded  ta-this
-        $liv  ta-pull
-        $new  (ta-poke %sole-id-action se-sole-id %new)
-      ==
+    ?.  =(%ask q.dok)  (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  sus.ses  rec.ses
-    (ta-peer /inc/(encode-id:sole `session`se-sole-id)/(scot %ud sus.ses))
+    =<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
+    ^+  .
+    ?-  con
+      $ded  .
+      $liv  ta-pull
+      $new  (ta-poke %sole-id-action se-sole-id %new)
+    ==
   ::
   ++  ta-diff-atom                                      ::<inc- update
     ::> record sequence number of received bump
@@ -878,7 +891,7 @@
     =.  rec.ses  a
     +>(..ta (se-text "{<q.dok>} bumped: {<a>}"))
   ::
-  ++  ta-diff-backlog                                   ::<inc- init
+  ++  ta-diff-backlog-atoms                             ::<inc- init
     ::> update sequence number with inc- reconnection
     ::> diff
     ::
@@ -894,12 +907,6 @@
     ::WIP inc- shim should not exist long-term
     |=  act/sole-action
     ^+  +>
-    ?:  (~(has in (sy /ask/inc-serv)) q.dok)
-      ?-  -.act
-        $det  +>
-        $ret  (ta-poke %inc-cmd se-sole-id %bump)
-        $clr  (ta-poke %inc-cmd se-sole-id %drop)
-      ==
     (ta-poke %sole-id-action se-sole-id act)
   ::
   ++  ta-aro                                            ::< process arrow
@@ -1054,7 +1061,26 @@
     |=  pos/@ud
     (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ++  ta-diff-effect                                    ::< apply effect
+  ++  ta-diff-backlog                                   ::< apply backlog
+    ::> tot: total number of emitted updates, including
+    ::>      skipped %det
+    ::> fes: list of backlog effects
+    |=  {tot/@u fes/(list sole-effect)}
+    ::REVIEW clarity
+    =.  inp  *sole-cursor-share  :: XX proper sole share sync
+    =;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
+    |-  ^+  ta-this
+    ?~  fes  ta-this
+    $(fes t.fes, ta-this (ta-diff-effect i.fes))
+  ::
+  ++  ta-diff-effect                                    ::< record and apply
+    ::> register output, and apply it
+    ::
+    |=  fec/sole-effect
+    =.  rec.ses  +(rec.ses)
+    (ta-apply-effect fec)
+  ::
+  ++  ta-apply-effect                                   ::< apply effect
     ::> translate sole- output to raw dill-
     ::
     |=  fec/sole-effect

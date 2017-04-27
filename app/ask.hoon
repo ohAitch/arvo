@@ -7,6 +7,7 @@
 |%
   ++  a-diff
     $%  {$sole-effect sole-effect}
+        {$sole-backlog sole-backlog}
         :: inc- protocol
         {$atom @u}
         {$backlog-atoms (list @u)}
@@ -95,11 +96,10 @@
   =<  abet:abet  ^+  *di
   =^  sid/sole-id  pax
     ?~(pax !! [(decode-id:sole i.pax) t.pax])
-::   =/  num  (raid pax /[%ud])
-  ?^  pax  ~|(%bad-path !!)
+  =/  num  (raid pax /[%ud])
   ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
     ~|([%not-in-whitelist src.bow] !!)
-  (peer:(di sid) pax)
+  (peer:(di sid) num)
 ::
 ++  new-di  |=(sid/sole-id =.(sos (~(put by sos) sid *sole-share ~) (di sid)))
 ++  verbose  |
@@ -236,11 +236,12 @@
     [(render all) (turn all put-mail)]
   ::
   ++  peer
-    |=  path  ^+  this
-    ~&  ole+(lent log)
-    =.  log  (skip log |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
+    |=  num/@u  ^+  this
+    ~&  ask+peer+ole+(lent log)
+    =/  lom  (slag num (flop log))
+    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
     =.  som  *sole-share                                :: XX sync sole-share properly
-    (emit ost.bow (effect %mor (flop log)))
+    (emit ost.bow [%diff %sole-backlog (lent log) lom])
   --
 ::
 ++  prompt
