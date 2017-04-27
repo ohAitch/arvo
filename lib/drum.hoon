@@ -76,7 +76,7 @@
   ::> num: (lent old)
   ::>      REVIEW would this really be prohibitive to
   ::>             recalculate as necessary?
-  ::> max: kill ring limit REVIEW why is this limited?
+  ::> max: kill ring limit, as per emacs defaults
   ::
   $:  old/(list (list @c))                              ::< entries proper
       pos/@ud                                           ::< ring position
@@ -97,6 +97,8 @@
   ::>           long enough that {se-abet} can determine
   ::>           whether it has changed, instead of
   ::>           storing it permanently
+  ::>     JB: see also the $hey dill-belt, which refreshes
+  ::>     the prompt by clearing {mir}
   ::>
   $:  edg/_80                                           ::< terminal columns
       off/@ud                                           ::< window offset
@@ -138,8 +140,8 @@
   ::
   ::> state maintained per application connection
   ::>
-  ::> blt: recognize sequences of deletions to group them in
-  ::>      kill ring
+  ::> blt: store events to recognize path-dependant commands
+  ::>      (ex: repeat kills accumulate, repeat yanks rotate)
   ::> ris: reverse-incremental-search if active
   ::> hit: past command lines
   ::> pom: line prefix identifying target app
@@ -148,10 +150,10 @@
   ::> ses: WIP %inc- persistent connection state
   ::> con: link is %new, then {%liv}e, occasionally %ded
   ::
-  $:  $=  blt                                           ::< curr & prev belts
-        %+  pair
-          (unit dill-belt:^dill)
-        (unit dill-belt:^dill)
+  $:  $=  blt                                           ::< command sequence
+        %+  pair                                        ::
+          (unit dill-belt:^dill)                        ::< previous event
+        (unit dill-belt:^dill)                          ::< current event
       ris/(unit search)                                 ::< reverse-i-search
       hit/history                                       ::< all past input
       pom/sole-prompt                                   ::< static prompt
@@ -868,7 +870,7 @@
   ++  ta-bel                                            ::< beep
     ::> send "bell" signal to terminal
     ::
-    :: producing a bell interupts a deletion sequence
+    :: producing a bell interupts a command sequence
     .(..ta (se-blit %bel ~), q.blt ~)
   ::
   ++  ta-belt                                           ::< handle input

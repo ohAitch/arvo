@@ -44,6 +44,9 @@
   ::
   ::REVIEW this seriously looks like it should be
   ::       part of dill %hop handling
+  ::  JB: it should absolutely be in %dill ++ansi
+  ::      (only here due to uncertainty re: styled buffers)
+  ::      #360/#362 may impact as well
   ::
   |=  a/stub  ^-  (list @)
   %+  turn  a
