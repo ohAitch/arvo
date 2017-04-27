@@ -37,6 +37,16 @@
   abet:(give-effect:(di sid) a)
 ::
 ::
+++  poke-noun
+  |=(a/* ?+(a !! $wipe abet(sos ~), $drop drop-all))  ::  clear sessions
+::
+++  drop-all
+  %_    abet
+      mow
+    %+  turn  (prey / bow)
+    |=({ost/bone ^} [ost %quit ~])
+  ==
+::
 ++  pull  _abet  ::  we don't care
 ++  peer-inc
   |=  a/path  ^+  abet
