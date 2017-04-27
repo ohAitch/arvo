@@ -1,11 +1,11 @@
 ::                                                      ::  ::
 ::::  /hoon/drumming/app                                ::  ::
   ::                                                    ::  ::
-/+    drum2,   talk, sole
+/+    drum,   talk, sole
 ::
 ::::
   ::
-=,  drum2
+=,  drum
 |_  {hid/bowl:^gall drum-part}                          ::  main drum work
 ++  diff-sole-effect-drum-phat  (. diff-sole-effect-phat):wrap  ::  app event
 ++  diff-sole-backlog-drum-phat  (. diff-sole-backlog-phat):wrap  ::  app event
@@ -19,11 +19,11 @@
 ++  poke-drum-exit         (. poke-exit):wrap              ::  shutdown
 ++  poke-drum-put          (. poke-put):wrap               ::  write file
 ++  reap-drum-phat         (. reap-phat):wrap              ::  ack connect
-++  take-coup-drum-phat    (. take-coup-phat):wrap         ::  ack poke
-++  take-onto              (. take-onto):wrap              ::  ack start
+++  coup-drum-phat         (. take-coup-phat):wrap         ::  ack poke
+++  onto-drum              (. take-onto):wrap              ::  ack start
 ++  quit-drum-phat         (. quit-phat):wrap              ::
 ++  wrap
-  =<  [^?(.) (drum2 +<):..wrap]
+  =<  [^?(.) (drum +<):..wrap]
   |*  handle/_|=(* *(quip (cask) *drum-part))
   |=  arg/_+<.handle
   =^  mow  +<+.wrap  (handle arg)
