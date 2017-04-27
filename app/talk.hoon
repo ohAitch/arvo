@@ -2416,7 +2416,6 @@
   +>.$(log (~(del by log) man))
 ::
 ++  prep
-  =-  _`..prep
   |=  old/(unit house-any)
   ^-  (quip move ..prep)
   ?~  old
