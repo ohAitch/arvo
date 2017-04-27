@@ -95,7 +95,6 @@
 ++  coup-drum-phat  (wrap take-coup-phat):from-drum
 ++  coup-helm-hi    (wrap coup-hi):from-helm
 ++  coup-helm-ask   (wrap coup-ask):from-helm
-++  diff-dill-blit-drum-phat  (wrap diff-dill-blit-phat):from-drum
 ++  diff-sole-effect-drum-phat  (wrap diff-sole-effect-phat):from-drum
 ++  from-lib
   |*  _[%helm ..$ _abet]:(helm)

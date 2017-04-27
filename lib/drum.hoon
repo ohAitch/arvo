@@ -270,7 +270,6 @@
     ++  pear                                            ::> request (poke)
       $%  {$sole-id-action p/sole-id-action}            ::< buffer update
           ::{$talk-command command:talk}                ::< render stack trace
-          {$dill-belt dill-belt:^dill}                  ::< proxied keystroke
       ==                                                ::
     ++  lime                                            ::> typed diff
       $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
@@ -338,27 +337,6 @@
   ::
   =<  se-abet  =<  se-view
   (se-text "[{<src.bow>}, driving {<our.bow>}]")
-::
-++  diff-dill-blit-phat                                 ::< raw dill output
-  ::> proxy raw %dill- output from %drumming
-  ::>
-  ::> bil: the console update
-  ::
-  ::TEMP this is transitional to support multiple active
-  ::     /+drum instances
-  ::
-  =,  ^dill
-  |=  {wire bil/dill-blit}
-  =<  se-abet  =<  se-view
-  =.  bil  %.  bil
-    |=  bil/dill-blit
-    ?+  -.bil  bil
-      $mor  bil(p (turn p.bil .))
-    ::
-      ::> turn prompt green to distinguish "inner" drum
-      $pom  bil(p ?~(p.bil ~ p.bil(q.q.p.i %g)))
-    ==
-  (se-blit bil)
 ::
 ++  poke-dill-belt                                      ::< terminal event
   ::> process keystroke
@@ -898,11 +876,6 @@
     ^+  +>
     ::
     ::
-    ?:  &(=(%drumming q.dok) !=([%met %x] bet))
-      ::TEMP this is transitional to support multiple active
-      ::     /+drum instances
-      (ta-poke %dill-belt bet)
-    ::
     ::> save last two belts to recognize ctrl-w ctrl-w
     ::> and similar sequences
     ::
@@ -1179,11 +1152,6 @@
             %+  rep:edit  sel
             ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
-            ::
-      $x    =.  ..ta  se-next-app
-            =/  gil  (fall se-current-app dok)
-            ?.  =(%drumming q.gil)  ..ta-ctl
-            ..ta-ctl(..se-poke (se-poke gil `pear`[%dill-belt %hey ~]))
             ::
       $y    ?.  ?&  ?=(^ old.kil)                       ::< rotate & yank
                     ?=(^ p.blt)
