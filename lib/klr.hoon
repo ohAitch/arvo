@@ -65,22 +65,19 @@
   |=  a/(pair stye (list @c))
   (lent q.a)
 ::
-++  brek                                                ::<  index and subindex
-  ::> consume lnts-char output to determine what
-  ::> section of a {stub} the {a}th character lies in,
-  ::> and what index inside that section the character
-  ::> is at
-  ::> 
+++  brek                                              ::<  index and subindex
+  ::> determine what section of a {stub} the
+  ::> {a}th character lies in, and what index
+  ::> inside that section the character is at
+  ::>
   ::> a: index being searched for
-  ::> b: postprocessed stub
-  ::> 
+  ::> b: stub
   ::
-  ::REVIEW can this operate on a stub directly?
-  |=  {a/@ b/(list @)}
+  |=  {a/@ b/stub}
   =|  {c/@ i/@}
   |-  ^-  (unit (pair @ @))
   ?~  b  ~
-  =.  c  (add c i.b)
+  =.  c  (add c (lent q.i.b))
   ?:  (gte c a)
     `[i c]
   $(i +(i), b t.b)
@@ -91,19 +88,16 @@
   ::>  a: number of characters to drop
   ::>  b: colored buffer
   ::
-  ::REVIEW is computing char lengths ahead of time
-  ::       necessary? 
   |=  {a/@ b/stub}
   ^-  stub
-  =+  c=(lnts-char b)
-  =+  i=(brek a c)
+  =+  i=(brek a b)
   ?~  i  b
   =+  r=(^slag +(p.u.i) b)
   ?:  =(a q.u.i)
     r
   =+  n=(snag p.u.i b)
   :_  r  :-  p.n
-  (^slag (sub (snag p.u.i c) (sub q.u.i a)) q.n)
+  (^slag (sub (lent q.n) (sub q.u.i a)) q.n)
 ::
 ++  scag                                                ::<  scag stub, keep stye
   ::> extract prefix, keeping all styles
@@ -111,12 +105,9 @@
   ::> a: number of characters to keep
   ::> b: colored buffer
   ::
-  ::REVIEW is computing char lengths ahead of time
-  ::       necessary? 
   |=  {a/@ b/stub}
   ^-  stub
-  =+  c=(lnts-char b)
-  =+  i=(brek a c)
+  =+  i=(brek a b)
   ?~  i  b
   ?:  =(a q.u.i)
     (^scag +(p.u.i) b)
@@ -124,5 +115,5 @@
     (^scag p.u.i b)
   =+  n=(snag p.u.i b)
   :_  ~  :-  p.n
-  (^scag (sub (snag p.u.i c) (sub q.u.i a)) q.n)
+  (^scag (sub (lent q.n) (sub q.u.i a)) q.n)
 --
