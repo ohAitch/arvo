@@ -48,10 +48,9 @@
   (peer-inc:(di ses) num)
 ::
 ++  poke-inc-cmd
-  |=  {ses/sole-id cmd/?($make $bump $drop)}  ^+  abet
+  |=  {ses/sole-id cmd/?($bump $drop)}  ^+  abet
   =<  abet:abet  ^+  *di
   ?-  cmd
-    $make  (new-di ses)
     $bump  inc-bump:(di ses)
     $drop  inc-drop:(di ses)
   ==
