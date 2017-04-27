@@ -271,7 +271,6 @@
       $%  {$sole-id-action p/sole-id-action}            ::< buffer update
           ::{$talk-command command:talk}                ::< render stack trace
           {$dill-belt dill-belt:^dill}                  ::< proxied keystroke
-          {$inc-cmd session ?($bump $drop)}             ::< DOCUMENT
       ==                                                ::
     ++  lime                                            ::> typed diff
       $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
@@ -324,32 +323,6 @@
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
   ta-abet:(ta-diff-effect:(ta dok) fec)
-::
-++  diff-atom-phat                                      ::< WIP sequence number
-  ::> process incoming %inc atom
-  ::>
-  ::> way: identifies the app sending the update,
-  ::>      encoded as /[%p]/[%tas]
-  ::> dif: the update. just a sequence number
-  ::
-  |=  {way/wire dif/@}
-  =<  se-abet  =<  se-view
-  =+  dok=(drum-phat way)
-  ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-diff-atom:(ta dok) dif)
-::
-++  diff-backlog-atoms-phat                             ::< WIP initial sync
-  ::> WIP process incoming %inc backlog
-  ::>
-  ::> way: identifies the app sending the update,
-  ::>      encoded as /[%p]/[%tas]
-  ::> dif: the update. initial list of lines
-  ::
-  |=  {way/wire dif/(list @)}
-  =<  se-abet  =<  se-view
-  =+  dok=(drum-phat way)
-  ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-diff-backlog-atoms:(ta dok) dif)
 ::
 ++  peer                                                ::< new connection
   ::>  incoming subscription
@@ -884,27 +857,9 @@
       $new  (ta-poke %sole-id-action se-sole-id %new)
     ==
   ::
-  ++  ta-diff-atom                                      ::<inc- update
-    ::> record sequence number of received bump
-    ::
-    |=  a/@
-    =.  rec.ses  a
-    +>(..ta (se-text "{<q.dok>} bumped: {<a>}"))
-  ::
-  ++  ta-diff-backlog-atoms                             ::<inc- init
-    ::> update sequence number with inc- reconnection
-    ::> diff
-    ::
-    |=  log/(list @)
-    =.  rec.ses  (add rec.ses (lent log))
-    =.  ta
-      (se-text "{<q.dok>} backlog: {(zing (turn log |=(a/@ "{<a>} ")))}")
-    (ta-pro & %bump "[bumping] ")
-  ::
   ++  ta-act                                            ::< send action
     ::> act: action to send to {dok}
     ::
-    ::WIP inc- shim should not exist long-term
     |=  act/sole-action
     ^+  +>
     (ta-poke %sole-id-action se-sole-id act)

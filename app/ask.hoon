@@ -8,9 +8,6 @@
   ++  a-diff
     $%  {$sole-effect sole-effect}
         {$sole-backlog sole-backlog}
-        :: inc- protocol
-        {$atom @u}
-        {$backlog-atoms (list @u)}
     ==
   ++  card
     $%  {$diff a-diff}
@@ -49,23 +46,6 @@
   ==
 ::
 ++  pull  _abet  ::  we don't care
-++  peer-inc
-  |=  a/path  ^+  abet
-  =<  abet:abet  ^+  *di
-  ~|  pax=a
-  =^  ses  a  ?~(a !! [(decode-id i.a) t.a])
-  =/  num  (raid a /[%ud])
-  ~?  verbose  ask+serv+peer+a
-  (peer-inc:(di ses) num)
-::
-++  poke-inc-cmd
-  |=  {ses/sole-id cmd/?($bump $drop)}  ^+  abet
-  =<  abet:abet  ^+  *di
-  ?-  cmd
-    $bump  inc-bump:(di ses)
-    $drop  inc-drop:(di ses)
-  ==
-::
 ::
 ++  poke-ask-admins
   |=  a/(set ship)
@@ -124,34 +104,6 @@
   ++  emit  |=(a/{bone card} +>(..di (^emit a)))
   ++  give-effect  |=(a/sole-effect +>(sef [a sef], log [a log]))
   ++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
-  ::
-  ::
-  ++  peer-inc
-    |=  num/@u  ^+  this
-    =/  num-log  (flop (gulf 1 (lent log)))
-    =/  new  (slag num (flop num-log))
-::     ?~  new  this
-    (emit ost.bow %diff %backlog-atoms new)
-  ::
-  ++  inc-bump
-    ^+  this
-    =/  num  (lent log)
-    ~?  verbose  ask+serv+[%bump sid num=num log=log]
-    =.  num  +(num)
-    =.  log  [txt+"bump: {<num>}" log]
-    ~?  verbose  ask+broadcasting+(prey /inc/(encode-id sid) +<-.di)
-    %+  roll  (prey /inc/(encode-id sid) +<-.di)
-    |:  [[ost=*bone *^] this]
-    (emit ost %diff %atom num)
-  ::
-  ++  inc-drop
-    ^+  this
-    =/  num  (lent log)
-    ~?  verbose  ask+serv+[%drop sid num=num log=log]
-    ~?  verbose  ask+dropping+(prey /inc/(encode-id sid) +<-.di)
-    %+  roll  (prey /inc/(encode-id sid) +<-.di)
-    |:  [[ost=*bone *^] this]
-    (emit ost %quit ~)
   ::
   ::
   ++  transmit
