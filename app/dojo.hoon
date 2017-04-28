@@ -1188,9 +1188,4 @@
 ++  sigh-tang  |=({a/wire b/tang} ~|(`term`(cat 3 'sigh-' -.a) (mean b)))
 ++  lame       (wrap he-lame):arm-bone
 ++  unto       (wrap he-unto):arm-bone
-++  pull
-  |=  {pax/path}
-  ^-  (quip move +>)
-  =/  sid/sole-id  [ost our dap]:hid  ::  XX get from path
-  ~(he-abut he ~ sid (~(got by hoc) sid))
 --
