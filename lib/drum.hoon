@@ -87,6 +87,7 @@
   ::> all state for connected terminal
   ::>
   ::> edg: width
+  ::> off: for future sticky prompt 
   ::> kil: kill ring
   ::> inx: currently selected app: cycle through with ^X
   ::> fug: per-terminal per-app state
@@ -98,6 +99,7 @@
   ::>           storing it permanently
   ::>
   $:  edg/_80                                           ::< terminal columns
+      off/@ud                                           ::< window offset
       kil/kill                                          ::< kill buffer
       {inx/@ud fug/(map dock target)}                   ::< connections
       mir/(pair @ud stub:^dill)                         ::< mirrored terminal
@@ -697,7 +699,7 @@
   ::
   |=  lin/(pair @ud stub:^dill)
   ^+  +>
-  =/  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
+  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
   (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
 ::
 ++  se-view                                             ::< flush buffer
