@@ -1098,9 +1098,9 @@
     =.  ris  ~
     ?+    key    ta-bel
       $v    %_  +>
-              eel  ?:  (~(has in eel) our %dojo)
-                     (~(del in eel) our %dojo)
-                   (~(put in eel) our %dojo)
+              eel  ?:  (~(has in eel) our.bow %dojo)
+                     (~(del in eel) our.bow %dojo)
+                   (~(put in eel) our.bow %dojo)
             ==
       $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
               ta-bel
