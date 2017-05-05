@@ -820,6 +820,7 @@
     ?<  =(%liv con)
     =.  con  %liv
     =.  ta  (se-text "[linked to {<dok>}]")
+    ?.  =(%new con)  .
     (ta-pro & %$ "<awaiting prompt> ")
   ::
   ++  ta-readze  ta-adze(con %ded)                      ::< repeer on drop
