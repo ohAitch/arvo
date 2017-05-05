@@ -854,7 +854,6 @@
     |=  fec/sole-effect
     ^+  +>
     =.  log  [fec log]
-    =;  neu/_+>.$  ?>(=(neu(moz ~) +>.$(moz ~)) neu)
     =/  cad/card  [%diff %sole-effect fec]
     =/  mos
       %+  turn  (prey /sole/(encode-id:sole sid) hid)
