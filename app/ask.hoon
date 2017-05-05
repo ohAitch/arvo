@@ -96,14 +96,13 @@
   ::
   ++  sef-moves
     ?~  sef  ~
-    =/  cad  (effect %mor (flop sef))
+    =/  cad  [%diff %sole-effect %mor (flop sef)]
     %+  turn  (prey /sole/(encode-id:sole sid) bow)
     |=({ost/bone ^} [ost cad])
   ::
   ::
   ++  emit  |=(a/{bone card} +>(..di (^emit a)))
   ++  give-effect  |=(a/sole-effect +>(sef [a sef], log [a log]))
-  ++  effect  |=(fec/sole-effect [%diff %sole-effect fec])
   ::
   ::
   ++  transmit
