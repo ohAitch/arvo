@@ -68,6 +68,7 @@
   ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
     ~|([%not-in-whitelist src.bow] !!)
   ?:  ?=($new act)
+    ?<  (~(has by sos) sid)  :: REVIEW nop instead of crashing?
     initial-output:(new-di sid)
   (poke-action:(di sid) act)
 ::
