@@ -96,6 +96,7 @@
 ++  coup-helm-hi    (wrap coup-hi):from-helm
 ++  coup-helm-ask   (wrap coup-ask):from-helm
 ++  diff-sole-effect-drum-phat  (wrap diff-sole-effect-phat):from-drum
+++  diff-sole-backlog-drum-phat  (wrap diff-sole-backlog-phat):from-drum
 ++  from-lib
   |*  _[%helm ..$ _abet]:(helm)
   =>  .(+< [identity start finish]=+<)
