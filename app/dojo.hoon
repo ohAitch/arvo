@@ -93,8 +93,12 @@
           {$poke p/cage}                                ::  apply
           {$pull $~}                                    ::  unsubscribe
       ==                                                ::
+    ++  a-diff                                          ::
+      $%  {$sole-effect sole-effect}                    ::
+          {$sole-backlog sole-backlog}                  ::
+      ==                                                ::
     ++  card                                            ::  general card
-      $%  {$diff $sole-effect sole-effect}              ::
+      $%  {$diff a-diff}                                ::
           {$send wire {ship term} clap}                 ::
           $:  $hiss
               wire
@@ -865,7 +869,15 @@
     ?~(poy . ~(dy-stop dy u.poy))
   ::
   ++  he-peer                                           ::  subscribe to
-    |=(pax/path ?>(=(~ pax) he-prom))
+    |=  pax/path
+::     he-pine
+    =/  seq/@ud  (raid pax /[%ud])
+    ~&  dojo+peer+ole+(lent log)
+    =/  lom  (slag seq (flop log))
+    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
+    =.  say  *sole-share                                :: XX sync sole-share properly
+    =/  bak  [%diff %sole-backlog (lent log) lom]
+    +>.$(moz :_(moz [ost.hid bak]))
   ::
   ++  he-pine                                           ::  restore prompt
     ^+  .

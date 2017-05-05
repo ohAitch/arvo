@@ -830,7 +830,8 @@
     ::> a subscription to the appropriate path
     ::
     ::WIP merge the sole- and inc- protocols
-    ?.  =(%ask q.dok)  (ta-peer /sole/(encode-id:sole se-sole-id))
+    ?.  (~(has in (sy /ask/dojo)) q.dok)
+      (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  sus.ses  rec.ses
     =<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
     ^+  .
