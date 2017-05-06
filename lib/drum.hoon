@@ -468,7 +468,7 @@
   =+  lag=se-current-app
   ?.  (~(has by fug) dok)  +>.$
   =.  +>.$  (se-text "[dropped {<dok>}, relinking]")
-  =.  +>.$  ta-abet:ta-readze:(ta dok)
+  =.  +>.$  ta-abet:ta-adze:ta-drop:(ta dok)
   ?.  &(?=(^ lag) !=(dok u.lag))
     +>.$(inx 0)
   (se-select-app u.lag)
@@ -823,7 +823,7 @@
     ?.  =(%new con)  .
     (ta-pro & %$ "<awaiting prompt> ")
   ::
-  ++  ta-readze  ta-adze(con %ded)                      ::< repeer on drop
+  ++  ta-drop  .(con %ded)                              ::< disconnect
   ++  ta-adze                                           ::< send a peer
     ::> this currently resolves between the %inc- and
     ::> %sole- protocols by hardcoded app name, sending
