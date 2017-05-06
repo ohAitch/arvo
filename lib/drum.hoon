@@ -526,7 +526,9 @@
   |=  {gil/dock con/_.}  ^+  con
   =.  +>.$  con
   ?:  (~(has by fug) gil)
-    +>.$
+    ?:  =(%liv con:(~(got by fug) gil))
+      +>.$
+    ta-abet:ta-adze:(ta gil)
   ta-abet:ta-adze:(new-ta gil)
 ::
 ++  se-subze                                            ::< del old connections
@@ -626,13 +628,15 @@
   ^+  +>
   =+  lag=se-current-app
   ?.  (~(has by fug) dok)  +>.$
-  =.  ta  ta-abut:(ta dok)
+  ?:  =(%ded con:(ta dok))  +>.$
+  =.  ta  ta-abet:ta-drop:(ta dok)
   =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
               +>.$(inx 0)
             (se-select-app u.lag)
   =.  +>.$  (se-text "[unlinked from {<dok>}]")
-  ?:  =(dok [our.bow %dojo])                            ::< undead dojo
-    +>.$(eel (~(put in eel) dok))
+  ::  temporarily disabled, use met-v
+  :: ?:  =(dok [our.bow %dojo])                            ::< undead dojo
+  ::   +>.$(eel (~(put in eel) dok))                    
   +>.$
 ::
 ++  se-nuke                                             ::< teardown connection
@@ -791,10 +795,6 @@
   ::>    minor incantations
   ::+|
   ++  ta-this    .                                      ::< self
-  ++  ta-abut                                           ::< retreat
-    ::>  exit {ta}, deleting connection to {dok}
-    ::
-    ..ta(fug (~(del by fug) dok))
   ::
   ++  ta-abet                                           ::< resolve
     ::>  exit {ta}, saving changed connection to {dok}

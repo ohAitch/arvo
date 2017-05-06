@@ -1163,12 +1163,12 @@
   =^  sid/sole-id  pax
     ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
     [(decode-id:sole i.pax) t.pax]
-  =^  moz  ..he
-    ?.  (~(has by hoc) sid)  [~ ..he]
-    ~&  [%dojo-peer-replaced sid]
-    ~(he-abut he ~ sid (~(got by hoc) sid))
-  =+  ses=%*(. *session -.dir [our.hid %home ud+0])
-  he-abet:(~(he-peer he moz sid ses) pax)
+  ~?  (~(has by hoc) sid)  [%dojo-peer-replaced sid]
+  =/  ses
+    %+  fall
+      (~(get by hoc) sid)
+    %*(. *session -.dir [our.hid %home ud+0])
+  he-abet:(~(he-peer he ~ sid ses) pax)
 ::
 ++  poke-sole-action  :: DEPRECATED
   |=  act/sole-action  ^-  (quip move +>)
