@@ -870,7 +870,6 @@
   ::
   ++  he-peer                                           ::  subscribe to
     |=  pax/path
-::     he-pine
     =/  seq/@ud  (raid pax /[%ud])
     ~&  dojo+peer+ole+(lent log)
     =/  lom  (slag seq (flop log))
@@ -1165,10 +1164,13 @@
     [(decode-id:sole i.pax) t.pax]
   ~?  (~(has by hoc) sid)  [%dojo-peer-replaced sid]
   =/  ses
-    %+  fall
-      (~(get by hoc) sid)
-    %*(. *session -.dir [our.hid %home ud+0])
-  he-abet:(~(he-peer he ~ sid ses) pax)
+    (~(get by hoc) sid)
+  ?~  ses
+    ::
+    ::> peer on a nonexistent session blocks until session exists
+    ::
+    [~ +>.$]
+  he-abet:(~(he-peer he ~ sid u.ses) pax)
 ::
 ++  poke-sole-action  :: DEPRECATED
   |=  act/sole-action  ^-  (quip move +>)
@@ -1181,7 +1183,7 @@
   ?:  ?=($new q.act)
     ?<  (~(has by hoc) p.act)  :: REVIEW nop instead of crashing?
     =/  ses  %*(. *session -.dir [our.hid %home ud+0])
-    ~(he-abet he ~ p.act ses)
+    he-abet:~(he-pine he ~ p.act ses)
   %.(q.act (wrap he-span):(arm p.act))
 ::
 ++  poke-lens-command

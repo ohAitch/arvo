@@ -87,7 +87,7 @@
   ::> all state for connected terminal
   ::>
   ::> edg: width
-  ::> off: for future sticky prompt 
+  ::> off: for future sticky prompt
   ::> kil: kill ring
   ::> inx: currently selected app: cycle through with ^X
   ::> fug: per-terminal per-app state
@@ -159,7 +159,7 @@
       pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
       ses/ses-data                                      ::< WIP %inc- client
-      con/?($liv $ded $new)                             ::< subscription state
+      con/_`?($new $liv $ded)`%new                      ::< subscription state
   ==                                                    ::
 ::
 ::TODO unify with sole-id
@@ -523,13 +523,13 @@
   ^+  .
   %+  roll  (~(tap in eel))
   =<  .(con +>)
-  |=  {gil/dock con/_.}  ^+  con
+  |=  {dok/dock con/_.}  ^+  con
   =.  +>.$  con
-  ?:  (~(has by fug) gil)
-    ?:  =(%liv con:(~(got by fug) gil))
+  ?:  (~(has by fug) dok)
+    ?.  =(%ded con:(~(got by fug) dok))
       +>.$
-    ta-abet:ta-adze:(ta gil)
-  ta-abet:ta-adze:(new-ta gil)
+    ta-abet:ta-adze:(ta dok)
+  ta-abet:ta-adze:(new-ta dok)
 ::
 ++  se-subze                                            ::< del old connections
   ::> disconnect no longer desired connections
@@ -550,11 +550,11 @@
   ^+  .
   %-  ~(rep by fug)
   =<  .(con +>)
-  |=  {{gil/dock *} con/_.}  ^+  con
+  |=  {{dok/dock *} con/_.}  ^+  con
   =.  +>.$  con
-  ?:  (~(has in eel) gil)
+  ?:  (~(has in eel) dok)
     +>.$
-  (se-nuke gil)
+  (se-nuke dok)
 ::
 ::> ||
 ::> ||  %accessors
@@ -636,7 +636,7 @@
   =.  +>.$  (se-text "[unlinked from {<dok>}]")
   ::  temporarily disabled, use met-v
   :: ?:  =(dok [our.bow %dojo])                            ::< undead dojo
-  ::   +>.$(eel (~(put in eel) dok))                    
+  ::   +>.$(eel (~(put in eel) dok))
   +>.$
 ::
 ++  se-nuke                                             ::< teardown connection
@@ -817,20 +817,24 @@
     ::> on successful session {con}nection,
     ::> display "[linked]" message
     ::
-    ?<  =(%liv con)
+    ~&  ta-peered+dok
+    ~?  =(%liv con)
+      [%ta %connection-succeeded-again con]
     =.  con  %liv
     =.  ta  (se-text "[linked to {<dok>}]")
     ?.  =(%new con)  .
     (ta-pro & %$ "<awaiting prompt> ")
   ::
   ++  ta-drop  .(con %ded)                              ::< disconnect
+  ++  uses-old-sole  (~(gas in *(set term)) ~[%talk])
   ++  ta-adze                                           ::< send a peer
     ::> this currently resolves between the %inc- and
     ::> %sole- protocols by hardcoded app name, sending
     ::> a subscription to the appropriate path
     ::
     ::WIP merge the sole- and inc- protocols
-    ?.  (~(has in (sy /ask/dojo)) q.dok)
+    ~&  [%ta-adze dok con]
+    ?:  (~(has in uses-old-sole) q.dok)
       (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  sus.ses  rec.ses
     =<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
