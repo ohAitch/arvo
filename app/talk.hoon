@@ -62,7 +62,7 @@
           harbor/(map knot (pair posture cord))         ::  stations mirror
           system/cabal                                  ::  config mirror
           settings/(set knot)                           ::  frontend settings
-      ==                                                :: 
+      ==                                                ::
     ++  shell-4  (cork shell |=(shell +<(|9 &10.+<)))   ::  missing settings
     ++  river  (pair point point)                       ::  stream definition
     ++  point                                           ::  stream endpoint
@@ -126,7 +126,7 @@
         ?.  (lth lez len)  nez
         (runt [(sub len lez) '-'] nez)
       :(welp pre (scag (dec len) nez) "+")
-    ++  glyphs  `wall`~[">=+-" "}),." "\"'`^" "$%&@"]     :: station char pool
+    ++  glyphs  `wall`~[">=+-" "}),." "\"'`^" "$%&@"]   :: station char pool
     ++  peer-type                                       ::  stream requests
       =<  apex
       |%
@@ -2255,18 +2255,23 @@
     ==
   --
 ::
+++  peer-sole                                                ::  accept subscription
+  |=  pax/path
+  ^+  [*(list move) +>]
+  ~?  !=(src.hid our.hid)  [%peer-talk-stranger src.hid]
+  :: ~&   [%talk-peer src.hid ost.hid pax]
+  ?>  (team:title our.hid src.hid)
+  =^  sid/sole-id  pax
+    ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
+    [(decode-id:sole i.pax) t.pax]
+  ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
+  ra-abet:(ra-console:ra sid src.hid pax)
+::
 ++  peer                                                ::  accept subscription
   |=  pax/path
   ^+  [*(list move) +>]
   ~?  !=(src.hid our.hid)  [%peer-talk-stranger src.hid]
   :: ~&   [%talk-peer src.hid ost.hid pax]
-  ?:  ?=({$sole *} pax)
-    ?>  (team:title our.hid src.hid)
-    =^  sid/sole-id  t.pax
-      ?~  t.pax  [[ost our dap]:hid t.pax]  ::  DEPRECATED
-      [(decode-id:sole i.t.pax) t.t.pax]
-    ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
-    ra-abet:(ra-console:ra sid src.hid t.pax)
   ::  ~&  [%talk-peer-data ost.hid src.hid pax]
   ra-abet:(ra-subscribe:ra src.hid pax)
 ::
