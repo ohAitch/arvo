@@ -826,7 +826,6 @@
     (ta-pro & %$ "<awaiting prompt> ")
   ::
   ++  ta-drop  .(con %ded)                              ::< disconnect
-  ++  uses-old-sole  (~(gas in *(set term)) ~[%talk])
   ++  ta-adze                                           ::< send a peer
     ::> this currently resolves between the %inc- and
     ::> %sole- protocols by hardcoded app name, sending
@@ -834,8 +833,6 @@
     ::
     ::WIP merge the sole- and inc- protocols
     ~&  [%ta-adze dok con]
-    ?:  (~(has in uses-old-sole) q.dok)
-      (ta-peer /sole/(encode-id:sole se-sole-id))
     =.  sus.ses  rec.ses
     =<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
     ^+  .

@@ -73,6 +73,7 @@
     ++  lime                                            ::  diff fruit
       $%  {$talk-report report}                         ::
           {$sole-effect sole-effect}                    ::
+          {$sole-backlog sole-backlog}                  ::
       ==                                                ::
     ++  pear                                            ::  poke fruit
       $%  {$talk-command command}                       ::
@@ -386,12 +387,24 @@
     ++  sh-fact                                         ::  send console effect
       |=  fec/sole-effect
       ^+  +>
+      =.  log.she  [fec log.she]
       +>(moves :_(moves [ost.hid %diff %sole-effect fec]))
     ::
     ++  sh-peep                                         ::  peer to path
       |=  pax/path
       ^+  +>
       +>(+> (ra-subscribe her.she pax))
+    ::
+    ++  sh-got-peer                                     ::  re/connected console
+      |=  pax/path
+      =/  seq/@ud  (raid pax /[%ud])
+      ~&  dojo+peer+ole+(lent log.she)
+      =/  lom  (slag seq (flop log.she))
+      ::REVIEW buffer itself is reset to correct value by client
+      =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))
+      =.  say.she  *sole-share
+      =/  bak  [%diff %sole-backlog (lent log.she) lom]
+      +>.$(moves :_(moves [ost.hid bak]))
     ::
     ++  sh-peer                                         ::  subscribe shell
       =<  sh-prod
@@ -1296,21 +1309,24 @@
   ++  ra-abed                                           ::  resolve core
     ^+  [*(list move) +>]
     :_  +>
-    =+  ^=  yop
-        |-  ^-  (pair (list move) (list sole-effect))
-        ?~  moves  [~ ~]
-        =+  mor=$(moves t.moves)
-        ?:  ?&  =(ost.hid p.i.moves)
-                ?=({$diff $sole-effect *} q.i.moves)
-            ==
-          [p.mor [+>.q.i.moves q.mor]]
-        [[i.moves p.mor] q.mor]
-    =+  :*  moz=(flop p.yop)
-            ^=  foc  ^-  (unit sole-effect)
-            ?~  q.yop  ~
-            ?~(t.q.yop `i.q.yop `[%mor (flop `(list sole-effect)`q.yop)])
-        ==
-    ?~(foc moz [[ost.hid %diff %sole-effect u.foc] moz])
+    (flop moves)
+    ::REVIEW consolidating sole-effects breaks sole-id
+    ::       sequence number consistency pretty hard
+    ::=+  ^=  yop
+    ::    |-  ^-  (pair (list move) (list sole-effect))
+    ::    ?~  moves  [~ ~]
+    ::    =+  mor=$(moves t.moves)
+    ::    ?:  ?&  =(ost.hid p.i.moves)
+    ::            ?=({$diff $sole-effect *} q.i.moves)
+    ::        ==
+    ::      [p.mor [+>.q.i.moves q.mor]]
+    ::    [[i.moves p.mor] q.mor]
+    ::=+  :*  moz=(flop p.yop)
+    ::        ^=  foc  ^-  (unit sole-effect)
+    ::        ?~  q.yop  ~
+    ::        ?~(t.q.yop `i.q.yop `[%mor (flop `(list sole-effect)`q.yop)])
+    ::    ==
+    ::?~(foc moz [[ost.hid %diff %sole-effect u.foc] moz])
   ::
   ++  ra-abet                                           ::  complete core
     ra-abed:ra-axel
@@ -1561,9 +1577,15 @@
         [who (~(put by folks) her who)]
     [who +>.$]
   ::
-  ++  ra-console                                        ::  console subscribe
-    |=  {sid/sole-id her/ship pax/path}
-    sh-abet:sh-peer:(sh-new:sh sid her pax)
+  ++  ra-console-peer                                       ::  console subscribe
+    |=  {sid/sole-id pax/path}
+    ?.  (~(has by shells) sid)  +>.$
+    =/  ses  (sh-old:sh sid)
+    sh-abet:(sh-got-peer.ses pax)
+  ::
+  ++  ra-console-new
+    |=  {sid/sole-id pax/path}
+    sh-abet:sh-peer:(sh-new:sh sid src.hid pax)
   ::
   ++  ra-subscribe                                      ::  listen to
     |=  {her/ship pax/path}
@@ -2265,7 +2287,7 @@
     ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
     [(decode-id:sole i.pax) t.pax]
   ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
-  ra-abet:(ra-console:ra sid src.hid pax)
+  ra-abet:(ra-console-peer:ra sid pax)
 ::
 ++  peer                                                ::  accept subscription
   |=  pax/path
@@ -2294,7 +2316,7 @@
   ?:  ?=($new q.act)
     :: XX this is treated as a subscription, ideally an uninitialized session
     ::    could exist without being subscribed to a particular story.
-    ra-abet:(ra-console:ra p.act src.hid /)
+    ra-abet:(ra-console-new:ra p.act /)
   ra-abet:(ra-sole:ra act)
 ::
 ++  diff-talk-report                                    ::
@@ -2348,6 +2370,7 @@
   %+  etch-friend  [%friend way]  |=  {man/knot cuz/station}
   ra-abet:(ra-retry:ra man cuz)
 ::
+++  pull-sole  |=(path `+>)                             ::
 ++  pull                                                ::
   |=  pax/path
   ^+  [*(list move) +>]
