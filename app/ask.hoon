@@ -74,13 +74,15 @@
 ::
 ++  peer-sole
   |=  pax/path
-  =<  abet:abet  ^+  *di
+  =<  abet  ^+  +>
   =^  sid/sole-id  pax
     ?~(pax !! [(decode-id:sole i.pax) t.pax])
   =/  num  (raid pax /[%ud])
   ?.  |((~(has in admins) src.bow) =(our.bow src.bow))
     ~|([%not-in-whitelist src.bow] !!)
-  (peer:(di sid) num)
+  ?.  (~(has by sos) sid)
+    +>.$
+  abet:(peer:(di sid) num)
 ::
 ++  new-di  |=(sid/sole-id =.(sos (~(put by sos) sid *sole-share ~) (di sid)))
 ++  verbose  |
