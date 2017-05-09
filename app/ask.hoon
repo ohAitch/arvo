@@ -191,8 +191,9 @@
     |=  num/@u  ^+  this
     ~&  ask+peer+ole+(lent log)
     =/  lom  (slag num (flop log))
-    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
-    =.  som  *sole-share                                :: XX sync sole-share properly
+    ::REVIEW buffer itself is reset to correct value by client
+    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))
+    =.  som  *sole-share
     (emit ost.bow [%diff %sole-backlog (lent log) lom])
   --
 ::

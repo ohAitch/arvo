@@ -1005,7 +1005,9 @@
     ::> fes: list of backlog effects
     |=  {tot/@u fes/(list sole-effect)}
     ::REVIEW clarity
-    =.  inp  *sole-cursor-share  :: XX proper sole share sync
+    =/  buf  buf.say.inp
+    =.  inp  *sole-cursor-share
+    =.  ta-hom  (ta-hom %set buf)   :: XX cleaner sole share sync?
     =;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
     |-  ^+  ta-this
     ?~  fes  ta-this

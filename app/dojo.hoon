@@ -873,8 +873,9 @@
     =/  seq/@ud  (raid pax /[%ud])
     ~&  dojo+peer+ole+(lent log)
     =/  lom  (slag seq (flop log))
-    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))  :: XX sync sole-share properly
-    =.  say  *sole-share                                :: XX sync sole-share properly
+    ::REVIEW buffer itself is reset to correct value by client
+    =.  lom  (skip lom |=(a/sole-effect ?=($det -.a)))
+    =.  say  *sole-share
     =/  bak  [%diff %sole-backlog (lent log) lom]
     +>.$(moz :_(moz [ost.hid bak]))
   ::
