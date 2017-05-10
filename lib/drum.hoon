@@ -107,22 +107,22 @@
 ::      {inx/@ud fug/(map dock target)}                   ::< connections
 ::      mir/(pair @ud stub:^dill)                         ::< mirrored terminal
 ::  ==                                                    ::
-++  history                                             ::> past commands
-  ::> old inputs, used for arrow up/down
-  ::>
-  ::> old: text lines
-  ::> pos: selected history entry
-  ::> num: (lent old)
-  ::>      REVIEW would this really be prohibitive to
-  ::>             recalculate as necessary?
-  ::> lay: past entries that have been revised. elements
-  ::>      are moved from {lay} to {old} once used
-  ::>
-  $:  old/(list (list @c))                              ::< entries proper
-      pos/@ud                                           ::< input position
-      num/@ud                                           ::< number of entries
-      lay/(map @ud (list @c))                           ::< editing overlay
-  ==                                                    ::
+::++  history                                             ::> past commands
+::  ::> old inputs, used for arrow up/down
+::  ::>
+::  ::> old: text lines
+::  ::> pos: selected history entry
+::  ::> num: (lent old)
+::  ::>      REVIEW would this really be prohibitive to
+::  ::>             recalculate as necessary?
+::  ::> lay: past entries that have been revised. elements
+::  ::>      are moved from {lay} to {old} once used
+::  ::>
+::  $:  old/(list (list @c))                              ::< entries proper
+::      pos/@ud                                           ::< input position
+::      num/@ud                                           ::< number of entries
+::      lay/(map @ud (list @c))                           ::< editing overlay
+::  ==                                                    ::
 ::++  search                                              ::> reverse-i-search
 ::  ::> reverse incremental search over {history}
 ::  ::> enter with ctrl-r, exist with ctrl-g
@@ -156,7 +156,7 @@
       ::     (unit dill-belt:^dill)                        ::< previous event
       ^ :: (unit dill-belt:^dill)                          ::< current event
       * ::ris/(unit search)                                 ::< reverse-i-search
-      hit/history                                       ::< all past input
+      * ::hit/history                                       ::< all past input
       pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
       ses/ses-data                                      ::< WIP %inc- client
@@ -882,19 +882,19 @@
     |=  key/?($d $l $r $u)
     ^+  +>
     ::=.  ris  ~
-    ?-  key
+    ?+  key  ta-bel
       $l  ?:  =(0 pos.inp)  ta-bel
           +>(pos.inp (dec pos.inp))
       $r  ?:  =((lent buf.say.inp) pos.inp)
             ta-bel
           +>(pos.inp +(pos.inp))
     ::
-      $u  ?:(=(0 pos.hit) ta-bel (ta-mov (dec pos.hit)))
-      $d  ?.  =(num.hit pos.hit)
-            (ta-mov +(pos.hit))
-          ?:  =(0 (lent buf.say.inp))
-            ta-bel
-          (ta-hom:ta-nex %set ~)
+      ::$u  ?:(=(0 pos.hit) ta-bel (ta-mov (dec pos.hit)))
+      ::$d  ?.  =(num.hit pos.hit)
+      ::      (ta-mov +(pos.hit))
+      ::    ?:  =(0 (lent buf.say.inp))
+      ::      ta-bel
+      ::    (ta-hom:ta-nex %set ~)
     ==
   ::
   ++  ta-bel                                            ::< beep
@@ -1061,7 +1061,8 @@
       {$mor *}  |-  ^+  +>.^$
                 ?~  p.fec  +>.^$
                 $(p.fec t.p.fec, +>.^$ ^$(fec i.p.fec))
-      {$nex *}  ta-nex
+      ::{$nex *}  ta-nex
+      {$nex *}  +>
       {$pro *}  (ta-pro +.fec)
       {$tan *}  +>(..ta (se-dump p.fec))
       {$sag *}  +>(..ta (se-blit fec))
@@ -1136,11 +1137,11 @@
       ::               (~(del in eel) our.bow %dojo)
       ::             (~(put in eel) our.bow %dojo)
       ::      ==
-      $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
-              ta-bel
-            =+  old=`(list @c)`i.old.hit
-            =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
-            (ta-hom (cat:edit pos.inp (slag sop old)))
+      ::$dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
+      ::        ta-bel
+      ::      =+  old=`(list @c)`i.old.hit
+      ::      =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
+      ::      (ta-hom (cat:edit pos.inp (slag sop old)))
             ::
       ::$bac  ?:  =(0 pos.inp)                            ::< kill left-word
       ::        ta-bel
@@ -1167,10 +1168,10 @@
               ta-bel
             +>(pos.inp (ta-jump %r %edg pos.inp))
             ::
-      $r    %-  ta-hom(lay.hit (~(put by lay.hit) pos.hit ~))
-            :-  %set                                    ::< revert hist edit
-            ?:  =(pos.hit num.hit)  ~
-            (snag (sub num.hit +(pos.hit)) old.hit)
+      ::$r    %-  ta-hom(lay.hit (~(put by lay.hit) pos.hit ~))
+      ::      :-  %set                                    ::< revert hist edit
+      ::      ?:  =(pos.hit num.hit)  ~
+      ::      (snag (sub num.hit +(pos.hit)) old.hit)
             ::
       $t    =+  a=(ta-jump %r %edg pos.inp)             ::< transpose words
             =+  b=(ta-jump %l %edg a)
@@ -1207,36 +1208,36 @@
       ::      (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
     ==
   ::
-  ++  ta-mov                                            ::< move in history
-    ::> sop: position in history to switch to
-    ::
-    |=  sop/@ud
-    ^+  +>
-    ?:  =(sop pos.hit)  +>
-    %-  %=  ta-hom
-          pos.hit  sop
-          lay.hit  (~(put by lay.hit) pos.hit buf.say.inp)
-        ==
-    :-  %set
-    %.  (~(get by lay.hit) sop)
-    (bond |.((snag (sub num.hit +(sop)) old.hit)))
+  ::++  ta-mov                                            ::< move in history
+  ::  ::> sop: position in history to switch to
+  ::  ::
+  ::  |=  sop/@ud
+  ::  ^+  +>
+  ::  ?:  =(sop pos.hit)  +>
+  ::  %-  %=  ta-hom
+  ::        pos.hit  sop
+  ::        lay.hit  (~(put by lay.hit) pos.hit buf.say.inp)
+  ::      ==
+  ::  :-  %set
+  ::  %.  (~(get by lay.hit) sop)
+  ::  (bond |.((snag (sub num.hit +(sop)) old.hit)))
   ::
-  ++  ta-nex                                            ::< add line to history
-    ::> when a history entry is accepted, clear search
-    ::> and edit overlay, save current buffer to {old.hit}
-    ::
-    ^+  .
-    ::=.  ris  ~
-    =.  lay.hit  ~
-    ?:  ?|  ?=($~ buf.say.inp)
-            &(?=(^ old.hit) =(buf.say.inp i.old.hit))
-        ==
-      .(pos.hit num.hit)
-    %_  .
-      num.hit  +(num.hit)
-      pos.hit  +(num.hit)
-      old.hit  [buf.say.inp old.hit]
-    ==
+  ::++  ta-nex                                            ::< add line to history
+  ::  ::> when a history entry is accepted, clear search
+  ::  ::> and edit overlay, save current buffer to {old.hit}
+  ::  ::
+  ::  ^+  .
+  ::  ::=.  ris  ~
+  ::  =.  lay.hit  ~
+  ::  ?:  ?|  ?=($~ buf.say.inp)
+  ::          &(?=(^ old.hit) =(buf.say.inp i.old.hit))
+  ::      ==
+  ::    .(pos.hit num.hit)
+  ::  %_  .
+  ::    num.hit  +(num.hit)
+  ::    pos.hit  +(num.hit)
+  ::    old.hit  [buf.say.inp old.hit]
+  ::  ==
   ::
   ++  ta-off                                            ::< buffer pos offset
     ::> get distance to boundary
