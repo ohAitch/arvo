@@ -66,23 +66,23 @@
   ::>
   {syd/desk cas/case}
 ::
-++  kill                                                ::> kill ring
-  ::> a list of lines deleted by ctrl-u ctrl-w etc,
-  ::> available for retrieval with ctrl-y
-  ::>
-  ::> old: killed text snippets
-  ::> pos: currrent position in {old}: cycle through
-  ::>      ring with meta-y
-  ::> num: (lent old)
-  ::>      REVIEW would this really be prohibitive to
-  ::>             recalculate as necessary?
-  ::> max: kill ring limit, as per emacs defaults
-  ::
-  $:  old/(list (list @c))                              ::< entries proper
-      pos/@ud                                           ::< ring position
-      num/@ud                                           ::< number of entries
-      max/_60                                           ::< max entries
-  ==                                                    ::
+::++  kill                                                ::> kill ring
+::  ::> a list of lines deleted by ctrl-u ctrl-w etc,
+::  ::> available for retrieval with ctrl-y
+::  ::>
+::  ::> old: killed text snippets
+::  ::> pos: currrent position in {old}: cycle through
+::  ::>      ring with meta-y
+::  ::> num: (lent old)
+::  ::>      REVIEW would this really be prohibitive to
+::  ::>             recalculate as necessary?
+::  ::> max: kill ring limit, as per emacs defaults
+::  ::
+::  $:  old/(list (list @c))                              ::< entries proper
+::      pos/@ud                                           ::< ring position
+::      num/@ud                                           ::< number of entries
+::      max/_60                                           ::< max entries
+::  ==                                                    ::
 ++  source                                              ::> input device
   ::> all state for connected terminal
   ::>
@@ -102,7 +102,7 @@
   ::>
   $:  @ ::edg/_80                                           ::< terminal columns
       @ :: off/@ud                                           ::< window offset
-      kil/kill                                          ::< kill buffer
+      * ::kil/kill                                          ::< kill buffer
       {inx/@ud fug/(map dock target)}                   ::< connections
       mir/(pair @ud stub:^dill)                         ::< mirrored terminal
   ==                                                    ::
@@ -150,10 +150,10 @@
   ::> ses: WIP %inc- persistent connection state
   ::> con: link is %new, then {%liv}e, occasionally %ded
   ::
-  $:  $=  blt                                           ::< command sequence
-        %+  pair                                        ::
-          (unit dill-belt:^dill)                        ::< previous event
-        (unit dill-belt:^dill)                          ::< current event
+  $:  :: $=  blt                                           ::< command sequence
+      ::   %+  pair                                        ::
+      ::     (unit dill-belt:^dill)                        ::< previous event
+      ^ :: (unit dill-belt:^dill)                          ::< current event
       ris/(unit search)                                 ::< reverse-i-search
       hit/history                                       ::< all past input
       pom/sole-prompt                                   ::< static prompt
@@ -889,7 +889,8 @@
     ::> send "bell" signal to terminal
     ::
     :: producing a bell interupts a command sequence
-    .(..ta (se-blit %bel ~), q.blt ~)
+    ::.(..ta (se-blit %bel ~), q.blt ~)
+    .(..ta (se-blit %bel ~))
   ::
   ++  ta-belt                                           ::< handle input
     ::> bet: input keystroke
@@ -901,7 +902,7 @@
     ::> save last two belts to recognize ctrl-w ctrl-w
     ::> and similar sequences
     ::
-    =.  blt  [q.blt `bet]
+    ::=.  blt  [q.blt `bet]
     ::
     ?-  bet
       {$aro *}  (ta-aro p.bet)
@@ -960,10 +961,10 @@
         $f  (ta-aro %r)
         $g  ?~  ris  ta-bel
             (ta-hom(pos.hit num.hit, ris ~) [%set ~])
-        $k  =+  len=(lent buf.say.inp)
-            ?:  =(pos.inp len)
-              ta-bel
-            (ta-kil %r [pos.inp (sub len pos.inp)])
+        ::$k  =+  len=(lent buf.say.inp)
+        ::    ?:  =(pos.inp len)
+        ::      ta-bel
+        ::    (ta-kil %r [pos.inp (sub len pos.inp)])
         $l  +>(..ta (se-blit %clr ~))
         $n  (ta-aro %d)
         $p  (ta-aro %u)
@@ -977,18 +978,18 @@
               ta-bel
             =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
             (ta-hom (rep:edit [sop 2] (flop (swag [sop 2] buf.say.inp))))
-        $u  ?:  =(0 pos.inp)
-              ta-bel
-            (ta-kil %l [0 pos.inp])
+        ::$u  ?:  =(0 pos.inp)
+        ::      ta-bel
+        ::    (ta-kil %l [0 pos.inp])
         $v  ta-bel
-        $w  ?:  =(0 pos.inp)
-              ta-bel
-            =+  sop=(ta-off %l %ace pos.inp)
-            (ta-kil %l [(sub pos.inp sop) sop])
+        ::$w  ?:  =(0 pos.inp)
+        ::      ta-bel
+        ::    =+  sop=(ta-off %l %ace pos.inp)
+        ::    (ta-kil %l [(sub pos.inp sop) sop])
         $x  +>(..ta se-next-app)
-        $y  ?:  =(0 num.kil)
-              ta-bel
-            (ta-hom (cat:edit pos.inp ta-yan))
+        ::$y  ?:  =(0 num.kil)
+        ::      ta-bel
+        ::    (ta-hom (cat:edit pos.inp ta-yan))
     ==
   ::
   ++  ta-del                                            ::< hear delete
@@ -1078,38 +1079,38 @@
     %-  ?:(?=($l dir) sub add)
     [pos (ta-off dir til pos)]
   ::
-  ++  ta-kil                                            ::< kill selection
-    ::> remove section into kill ring
-    ::> adding a new entry or appending to old one
-    ::> depending on previous key event in {blt}
-    ::>
-    ::> dir: going {%l}eft or {%r}ight,
-    ::> sel: portion of the buffer to delete
-    ::
-    |=  {dir/?($l $r) sel/{@ @}}
-    ^+  +>
-    =+  buf=(swag sel buf.say.inp)
-    %.  (cut:edit sel)
-    %=  ta-hom
-        kil
-      ?.  ?&  ?=(^ old.kil)
-              ?=(^ p.blt)
-              ?|  ?=({$ctl ?($k $u $w)} u.p.blt)
-                  ?=({$met ?($d $bac)} u.p.blt)
-          ==  ==
-        %=  kil                                         ::< prepend
-          num  +(num.kil)
-          pos  +(num.kil)
-          old  (scag max.kil `(list (list @c))`[buf old.kil])
-        ==
-      %=  kil                                           ::< cumulative yanks
-        pos  num.kil
-        old  :_  t.old.kil
-             ?-  dir
-               $l  (welp buf i.old.kil)
-               $r  (welp i.old.kil buf)
-      ==     ==
-    ==
+  ::++  ta-kil                                            ::< kill selection
+  ::  ::> remove section into kill ring
+  ::  ::> adding a new entry or appending to old one
+  ::  ::> depending on previous key event in {blt}
+  ::  ::>
+  ::  ::> dir: going {%l}eft or {%r}ight,
+  ::  ::> sel: portion of the buffer to delete
+  ::  ::
+  ::  |=  {dir/?($l $r) sel/{@ @}}
+  ::  ^+  +>
+  ::  =+  buf=(swag sel buf.say.inp)
+  ::  %.  (cut:edit sel)
+  ::  %=  ta-hom
+  ::      kil
+  ::    ?.  ?&  ?=(^ old.kil)
+  ::            ?=(^ p.blt)
+  ::            ?|  ?=({$ctl ?($k $u $w)} u.p.blt)
+  ::                ?=({$met ?($d $bac)} u.p.blt)
+  ::        ==  ==
+  ::      %=  kil                                         ::< prepend
+  ::        num  +(num.kil)
+  ::        pos  +(num.kil)
+  ::        old  (scag max.kil `(list (list @c))`[buf old.kil])
+  ::      ==
+  ::    %=  kil                                           ::< cumulative yanks
+  ::      pos  num.kil
+  ::      old  :_  t.old.kil
+  ::           ?-  dir
+  ::             $l  (welp buf i.old.kil)
+  ::             $r  (welp i.old.kil buf)
+  ::    ==     ==
+  ::  ==
   ::
   ++  ta-met                                            ::< meta key
     ::>  handle meta key
@@ -1129,11 +1130,11 @@
             =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
             (ta-hom (cat:edit pos.inp (slag sop old)))
             ::
-      $bac  ?:  =(0 pos.inp)                            ::< kill left-word
-              ta-bel
-            =+  sop=(ta-off %l %edg pos.inp)
-            (ta-kil %l [(sub pos.inp sop) sop])
-            ::
+      ::$bac  ?:  =(0 pos.inp)                            ::< kill left-word
+      ::        ta-bel
+      ::      =+  sop=(ta-off %l %edg pos.inp)
+      ::      (ta-kil %l [(sub pos.inp sop) sop])
+      ::      ::
       $b    ?:  =(0 pos.inp)                            ::< jump left-word
               ta-bel
             +>(pos.inp (ta-jump %l %edg pos.inp))
@@ -1146,10 +1147,10 @@
             ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (cuss `tape``(list @)`(swag [sop 1] buf.say.inp))
             ::
-      $d    ?:  =(pos.inp (lent buf.say.inp))           ::< kill right-word
-              ta-bel
-            (ta-kil %r [pos.inp (ta-off %r %edg pos.inp)])
-            ::
+      ::$d    ?:  =(pos.inp (lent buf.say.inp))           ::< kill right-word
+      ::        ta-bel
+      ::      (ta-kil %r [pos.inp (ta-off %r %edg pos.inp)])
+      ::      ::
       $f    ?:  =(pos.inp (lent buf.say.inp))           ::< jump right-word
               ta-bel
             +>(pos.inp (ta-jump %r %edg pos.inp))
@@ -1183,15 +1184,15 @@
             ^-  (list @c)  ^-  (list @)                 :: XX unicode
             (case `tape``(list @)`(swag sel buf.say.inp))
             ::
-      $y    ?.  ?&  ?=(^ old.kil)                       ::< rotate & yank
-                    ?=(^ p.blt)
-                    ?|  ?=({$ctl $y} u.p.blt)
-                        ?=({$met $y} u.p.blt)
-                ==  ==
-              ta-bel
-            =+  las=(lent ta-yan)
-            =.  pos.kil  ?:(=(1 pos.kil) num.kil (dec pos.kil))
-            (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
+      ::$y    ?.  ?&  ?=(^ old.kil)                       ::< rotate & yank
+      ::              ?=(^ p.blt)
+      ::              ?|  ?=({$ctl $y} u.p.blt)
+      ::                  ?=({$met $y} u.p.blt)
+      ::          ==  ==
+      ::        ta-bel
+      ::      =+  las=(lent ta-yan)
+      ::      =.  pos.kil  ?:(=(1 pos.kil) num.kil (dec pos.kil))
+      ::      (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
     ==
   ::
   ++  ta-mov                                            ::< move in history
@@ -1324,10 +1325,10 @@
     ?~  buf.say.inp  ~
     :(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
   ::
-  ++  ta-yan                                            ::< yank
-    ::> current ctrl-y text from kill ring
-    ::
-    (snag (sub num.kil pos.kil) old.kil)
+  ::++  ta-yan                                            ::< yank
+  ::  ::> current ctrl-y text from kill ring
+  ::  ::
+  ::  (snag (sub num.kil pos.kil) old.kil)
   --
 ::
 ::> ||
