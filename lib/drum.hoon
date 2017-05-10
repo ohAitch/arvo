@@ -44,7 +44,7 @@
   ::>  bin: (most of the state is here) per-terminal state
   ::>       TODO move a lot of this out into fur
   ::
-  $:  sys/(unit bone)                                   ::< local console
+  $:  * ::sys/(unit bone)                                   ::< local console
       eel/(set dock)                                    ::< connect to
       ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
@@ -393,14 +393,16 @@
   ::> shutdown running urbit instance
   ::
   |=  $~
-  se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
+  ^+  se-abet  !!
+  ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
 ::
 ++  poke-put                                            ::< write file
   ::> write a text file to the pier's `.urb/put`
   ::> directory
   ::
   |=  {pax/path txt/@}
-  se-abet:(se-blit-sys [%sav pax txt])
+  ^+  se-abet  !!
+  ::se-abet:(se-blit-sys [%sav pax txt])
 ::
 ++  reap-phat                                           ::< get ack for connection
   ::> receive acknowledgment on an app connection
@@ -487,7 +489,7 @@
   ?.  se-ably
     =.  .  se-adit
     [(flop moz) pith]
-  =.  sys  ?^(sys sys `ost.bow)
+  ::=.  sys  ?^(sys sys `ost.bow)
   =.  .  se-subze:se-adze:se-adit
   :_  pith(bin (~(put by bin) ost.bow dev))
   %-  flop
@@ -662,15 +664,15 @@
   |=  bil/dill-blit:^dill
   +>(biz [bil biz])
 ::
-++  se-blit-sys                                         ::< output to system
-  ::> the initial connection from %dill is saved as
-  ::> {sys}, used for administartive tasks like
-  ::> shutting down urbit or logging to the
-  ::> pier's `.urb/put/` directory
-  ::
-  |=  bil/dill-blit:^dill  ^+  +>
-  ?~  sys  ~&(%se-blit-no-sys +>)
-  (se-emit [u.sys %diff %dill-blit bil])
+::++  se-blit-sys                                         ::< output to system
+::  ::> the initial connection from %dill is saved as
+::  ::> {sys}, used for administartive tasks like
+::  ::> shutting down urbit or logging to the
+::  ::> pier's `.urb/put/` directory
+::  ::
+::  |=  bil/dill-blit:^dill  ^+  +>
+::  ?~  sys  ~&(%se-blit-no-sys +>)
+::  (se-emit [u.sys %diff %dill-blit bil])
 ::
 ++  se-dump                                             ::< print tanks
   ::> tac: pretty-print objects to output as %out lines
