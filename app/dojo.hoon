@@ -1143,7 +1143,7 @@
   =/  sop  (~(got by sup.hid) ost.hid)
   ?>  ?=({@ $sole *} sop)
   =/  pax  t.q.sop
-  ?~  pax  [ost our dap]:hid  ::  DEPRECATED
+  ?~  pax  !!
   (decode-id:sole i.pax)
 ::
 ++  arm
@@ -1161,7 +1161,7 @@
   ::
   |=  pax/path
   =^  sid/sole-id  pax
-    ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
+    ?~  pax  !!
     [(decode-id:sole i.pax) t.pax]
   ~?  (~(has by hoc) sid)  [%dojo-peer-replaced sid]
   =/  ses
@@ -1172,11 +1172,6 @@
     ::
     [~ +>.$]
   he-abet:(~(he-peer he ~ sid u.ses) pax)
-::
-++  poke-sole-action  :: DEPRECATED
-  |=  act/sole-action  ^-  (quip move +>)
-  =/  sid/sole-id  [ost our dap]:hid
-  (poke-sole-id-action sid act)
 ::
 ++  poke-sole-id-action
   |=  act/sole-id-action  ^-  (quip move +>)

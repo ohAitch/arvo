@@ -1349,7 +1349,7 @@
           [[i.moves p.mor] q.mor]
         =/  pax  t.q.u.sop
         =^  sid/sole-id  pax
-          ?~  pax  [[p.i.moves [our dap]:hid] pax]  ::  DEPRECATED
+          ?~  pax  !!
           [(decode-id:sole i.pax) t.pax]
         [p.mor [[sid +>.q.i.moves] q.mor]]
     =.  moves  p.rey
@@ -2288,7 +2288,7 @@
   :: ~&   [%talk-peer src.hid ost.hid pax]
   ?>  (team:title our.hid src.hid)
   =^  sid/sole-id  pax
-    ?~  pax  [[ost our dap]:hid pax]  ::  DEPRECATED
+    ?~  pax  !!
     [(decode-id:sole i.pax) t.pax]
   ~?  (~(has by shells) sid)  [%talk-peer-replaced ost.hid pax]
   ra-abet:(ra-console-peer:ra sid pax)
@@ -2309,11 +2309,6 @@
       ra-abet:(ra-apply:ra src.hid cod)
   =^  mow  +>.$  log-all-to-file
   [(welp mos mow) +>.$]
-::
-++  poke-sole-action                                    ::  DEPRECATED
-  |=  act/sole-action
-  =/  sid/sole-id  [ost our dap]:hid
-  (poke-sole-id-action sid act)
 ::
 ++  poke-sole-id-action                                 ::  accept console
   |=  act/sole-id-action
