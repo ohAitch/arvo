@@ -47,8 +47,8 @@
   $:  * ::sys/(unit bone)                                   ::< local console
       * ::eel/(set dock)                                    ::< connect to
       * ::ray/(set well:^gall)                              ::< app desks
-      :: bin/(map bone source)
       fur/(map dude:^gall (unit server))                ::< servers
+      :: bin/(map bone source)
       bin/target                             ::< terminals
   ==                                                    ::
 ::
@@ -123,18 +123,18 @@
       num/@ud                                           ::< number of entries
       lay/(map @ud (list @c))                           ::< editing overlay
   ==                                                    ::
-++  search                                              ::> reverse-i-search
-  ::> reverse incremental search over {history}
-  ::> enter with ctrl-r, exist with ctrl-g
-  ::>
-  ::> pos: how many history entries have been skipped
-  ::>      REVIEW this seems to be chronological,
-  ::>             motivation unknown
-  ::> str: incrementally typed query
-  ::>
-  $:  pos/@ud                                           ::< search position
-      str/(list @c)                                     ::< search string
-  ==                                                    ::
+::++  search                                              ::> reverse-i-search
+::  ::> reverse incremental search over {history}
+::  ::> enter with ctrl-r, exist with ctrl-g
+::  ::>
+::  ::> pos: how many history entries have been skipped
+::  ::>      REVIEW this seems to be chronological,
+::  ::>             motivation unknown
+::  ::> str: incrementally typed query
+::  ::>
+::  $:  pos/@ud                                           ::< search position
+::      str/(list @c)                                     ::< search string
+::  ==                                                    ::
 ++  target                                              ::> application target
   ::REVIEW a lot of this should be shared between
   ::       terminal connections
@@ -155,7 +155,7 @@
       ::   %+  pair                                        ::
       ::     (unit dill-belt:^dill)                        ::< previous event
       ^ :: (unit dill-belt:^dill)                          ::< current event
-      ris/(unit search)                                 ::< reverse-i-search
+      * ::ris/(unit search)                                 ::< reverse-i-search
       hit/history                                       ::< all past input
       pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
@@ -881,7 +881,7 @@
     ::
     |=  key/?($d $l $r $u)
     ^+  +>
-    =.  ris  ~
+    ::=.  ris  ~
     ?-  key
       $l  ?:  =(0 pos.inp)  ta-bel
           +>(pos.inp (dec pos.inp))
@@ -940,10 +940,10 @@
     ::> if the buffer is empty.
     ::
     ^+  .
-    ?^  ris
-      ?:  =(~ str.u.ris)
-        ta-bel
-      .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
+    ::?^  ris
+    ::  ?:  =(~ str.u.ris)
+    ::    ta-bel
+    ::  .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
     ?:  =(0 pos.inp)
       ?~  buf.say.inp
         (ta-act %clr ~)
@@ -955,7 +955,7 @@
     ::
     |=  key/@ud
     ^+  +>
-    =.  ris  ?.(?=(?($g $r) key) ~ ris)
+    ::=.  ris  ?.(?=(?($g $r) key) ~ ris)
     ?+    key    ta-bel
         $a  +>(pos.inp 0)
         $b  (ta-aro %l)
@@ -971,8 +971,8 @@
             +>(..ta (se-blit qit+~))                  ::< quit pier
         $e  +>(pos.inp (lent buf.say.inp))
         $f  (ta-aro %r)
-        $g  ?~  ris  ta-bel
-            (ta-hom(pos.hit num.hit, ris ~) [%set ~])
+        ::$g  ?~  ris  ta-bel
+        ::    (ta-hom(pos.hit num.hit, ris ~) [%set ~])
         ::$k  =+  len=(lent buf.say.inp)
         ::    ?:  =(pos.inp len)
         ::      ta-bel
@@ -980,11 +980,11 @@
         $l  +>(..ta (se-blit %clr ~))
         $n  (ta-aro %d)
         $p  (ta-aro %u)
-        $r  ?~  ris
-              +>(ris `[pos.hit ~])
-            ?:  =(0 pos.u.ris)
-              ta-bel
-            (ta-ser ~)
+        ::$r  ?~  ris
+        ::      +>(ris `[pos.hit ~])
+        ::    ?:  =(0 pos.u.ris)
+        ::      ta-bel
+        ::    (ta-ser ~)
         $t  =+  len=(lent buf.say.inp)
             ?:  |(=(0 pos.inp) (lth len 2))
               ta-bel
@@ -1129,7 +1129,7 @@
     ::
     |=  key/@ud
     ^+  +>
-    =.  ris  ~
+    ::=.  ris  ~
     ?+    key    ta-bel
       ::$v    %_  +>
       ::        eel  ?:  (~(has in eel) our.bow %dojo)
@@ -1226,7 +1226,7 @@
     ::> and edit overlay, save current buffer to {old.hit}
     ::
     ^+  .
-    =.  ris  ~
+    ::=.  ris  ~
     =.  lay.hit  ~
     ?:  ?|  ?=($~ buf.say.inp)
             &(?=(^ old.hit) =(buf.say.inp i.old.hit))
@@ -1277,26 +1277,26 @@
       ==
     ==
   ::
-  ++  ta-ser                                            ::< reverse search
-    ::> add to incremental search buffer
-    ::>
-    ::> ext: text to append, usually single character
-    ::
-    |=  ext/(list @c)
-    ^+  +>
-    ?:  |(?=($~ ris) =(0 pos.u.ris))
-      ta-bel
-    =+  sop=?~(ext (dec pos.u.ris) pos.u.ris)
-    =+  tot=(weld str.u.ris ext)
-    =+  dol=(slag (sub num.hit sop) old.hit)
-    =/  sup
-        |-  ^-  (unit @ud)
-        ?~  dol  ~
-        ?^  (find tot i.dol)
-          `sop
-        $(sop (dec sop), dol t.dol)
-    ?~  sup  ta-bel
-    (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
+  ::++  ta-ser                                            ::< reverse search
+  ::  ::> add to incremental search buffer
+  ::  ::>
+  ::  ::> ext: text to append, usually single character
+  ::  ::
+  ::  |=  ext/(list @c)
+  ::  ^+  +>
+  ::  ?:  |(?=($~ ris) =(0 pos.u.ris))
+  ::    ta-bel
+  ::  =+  sop=?~(ext (dec pos.u.ris) pos.u.ris)
+  ::  =+  tot=(weld str.u.ris ext)
+  ::  =+  dol=(slag (sub num.hit sop) old.hit)
+  ::  =/  sup
+  ::      |-  ^-  (unit @ud)
+  ::      ?~  dol  ~
+  ::      ?^  (find tot i.dol)
+  ::        `sop
+  ::      $(sop (dec sop), dol t.dol)
+  ::  ?~  sup  ta-bel
+  ::  (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
   ::
   ++  ta-txt                                            ::< hear text
     ::> hear regular text, into main buffer or
@@ -1306,8 +1306,8 @@
     ::
     |=  txt/(list @c)
     ^+  +>
-    ?^  ris
-      (ta-ser txt)
+    ::?^  ris
+    ::  (ta-ser txt)
     (ta-hom (cat:edit pos.inp txt))
   ::
   ++  ta-vew                                            ::< computed prompt
@@ -1325,9 +1325,10 @@
       ::> default prompt
       ::
       :-  buf.say.inp
-      ?~  ris
-        cad.pom
-      :(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
+      ::?~  ris
+      ::  cad.pom
+      :::(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
+      cad.pom
     ::
     ::> hidden input
     ::
