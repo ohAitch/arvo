@@ -46,7 +46,7 @@
   ::
   $:  * ::sys/(unit bone)                                   ::< local console
       * ::eel/(set dock)                                    ::< connect to
-      ray/(set well:^gall)                              ::< app desks
+      * ::ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
       bin/(map bone source)                             ::< terminals
   ==                                                    ::
@@ -204,38 +204,39 @@
   ::> our: comets run off %base, moons use parent's talk
   ::>
   |=  our/ship
-  |^  ^-  drum-part
-      %*  .  *drum-part
-        ::eel  deft-fish
-        ray  deft-apps
-      ==
-  ::
-  ::++  deft-fish                                           ::< default connects
-  ::  ::> apps to connect to by default: talk, dojo
+  *drum-part
+  ::|^  ^-  drum-part
+  ::    %*  .  *drum-part
+  ::      eel  deft-fish
+  ::      ray  deft-apps
+  ::    ==
+  ::::
+  ::::++  deft-fish                                           ::< default connects
+  ::::  ::> apps to connect to by default: talk, dojo
+  ::::  ::>
+  ::::  ::> if on a moon, use parent's talk instead of own
+  ::::  ::
+  ::::  %-  ~(gas in *(set dock))
+  ::::  ^-  (list dock)
+  ::::  ?:  ?=($earl (clan:title our))
+  ::::    [[(sein:title our) %talk] [our %dojo] ~]
+  ::::  [[our %talk] [our %dojo] ~]
+  ::::
+  ::++  deft-apps                                           ::< default servers
+  ::  ::> apps to start by default: talk, dojo
   ::  ::>
-  ::  ::> if on a moon, use parent's talk instead of own
+  ::  ::> if on a comet, use %base instead of %home;
+  ::  ::> if on a moon, don't start local %talk
   ::  ::
-  ::  %-  ~(gas in *(set dock))
-  ::  ^-  (list dock)
-  ::  ?:  ?=($earl (clan:title our))
-  ::    [[(sein:title our) %talk] [our %dojo] ~]
-  ::  [[our %talk] [our %dojo] ~]
-  ::
-  ++  deft-apps                                           ::< default servers
-    ::> apps to start by default: talk, dojo
-    ::>
-    ::> if on a comet, use %base instead of %home;
-    ::> if on a moon, don't start local %talk
-    ::
-    %-  ~(gas in *(set well:^gall))
-    ^-  (list well:^gall)
-    =+  myr=(clan:title our)
-    ?:  ?=($pawn myr)
-      [[%base %talk] [%base %dojo] ~]
-    ?:  ?=($earl myr)
-      [[%home %dojo] ~]
-    [[%home %talk] [%home %dojo] ~]
-  --
+  ::  %-  ~(gas in *(set well:^gall))
+  ::  ^-  (list well:^gall)
+  ::  =+  myr=(clan:title our)
+  ::  ?:  ?=($pawn myr)
+  ::    [[%base %talk] [%base %dojo] ~]
+  ::  ?:  ?=($earl myr)
+  ::    [[%home %dojo] ~]
+  ::  [[%home %talk] [%home %dojo] ~]
+  ::--
 ::
 ::>  ||
 ::>  || %wire-serdes
@@ -367,13 +368,14 @@
   ::> init an app using gall, and link to its console
   ::
   |=  wel/well:^gall
-  =<  se-abet  =<  se-view
-  ?:  (~(has in ray) wel)
-    (se-text "[already running {<p.wel>}/{<q.wel>}]")
-  %=  +>
-    ray  (~(put in ray) wel)
-    ::eel  (~(put in eel) [our.bow q.wel])
-  ==
+  =<  se-abet  =<  se-view  ^+  +>
+  !!
+  ::?:  (~(has in ray) wel)
+  ::  (se-text "[already running {<p.wel>}/{<q.wel>}]")
+  ::%=  +>
+  ::  ray  (~(put in ray) wel)
+  ::  eel  (~(put in eel) [our.bow q.wel])
+  ::==
 ::
 ++  poke-link                                           ::< |link %app, connect
   ::> connnect to an app's console
@@ -510,13 +512,14 @@
   ::> (apps in {ray} and not in {fur})
   ::
   ^+  .
-  %+  roll  (~(tap in ray))
-  =<  .(con +>)
-  |=  {wel/well:^gall con/_..se-adit}  ^+  con
-  =.  +>.$  con
+  ::%+  roll  (~(tap in ray))
+  ::=<  .(con +>)
+  ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
+  ::=.  +>.$  con
+  =/  wel/well:^gall  [%home %dojo]
   =+  hig=(~(get by fur) q.wel)
-  ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  +>.$
-  =.  +>.$  (se-text "activated app {(trip p.wel)}/{(trip q.wel)}")
+  ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  ..se-adit
+  =.  ..se-adit  (se-text "activated app {(trip p.wel)}/{(trip q.wel)}")
   %-  se-emit(fur (~(put by fur) q.wel ~))
   [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
 ::
