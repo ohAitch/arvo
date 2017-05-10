@@ -35,6 +35,7 @@
           log/(map knot @ud)                            ::  logged to clay
           nik/(map (set partner) char)                  ::  bound station glyphs
           nak/(jug char (set partner))                  ::  station glyph lookup
+          sole-sources/(map bone sole-id)          ::  REMOVEME: talk agent
       ==                                                ::
     ++  story-3  (cork story |=(story +<(|10 &11.+<)))  ::  missing glyphers
     ++  story                                           ::  wire content
@@ -1335,30 +1336,36 @@
   ++  ra-abet                                           ::  complete core
     ra-abed:ra-axel
   ::
+  ::DELETEME on talk-agent split
   ++  ra-axel                                           ::  rebound reports
+    ::> while talk contains a console driver, some
+    ::> talk-reports neeed to be translated into textual
+    ::> sole-effects. {sole-sources} is used to store
+    ::> the subscriber ids, including for defunct
+    ::> connections: some bones have left {sup.hid},
+    ::> but still need rebounding.
+    ::>
+    ::> see ++ra-console-peer
+    ::>
+    ::> bax: reports to run through ++ra-back
+    ::
     ^+  .
-    =+  ^=  rey
-        |-  ^-  (pair (list move) (list (pair sole-id report)))
-        ?~  moves
-          [~ ~]
-        =+  mor=$(moves t.moves)
-        =/  sop  (~(get by sup.hid) p.i.moves)
-        ?.  ?&  ?=({$~ @p $sole *} sop)
-                ?=({$diff $talk-report *} q.i.moves)
-            ==
-          [[i.moves p.mor] q.mor]
-        =/  pax  t.q.u.sop
-        =^  sid/sole-id  pax
-          ?~  pax  !!
-          [(decode-id:sole i.pax) t.pax]
-        [p.mor [[sid +>.q.i.moves] q.mor]]
-    =.  moves  p.rey
-    =.  q.rey  (flop q.rey)
-    ?:  =(q.rey ~)  +
+    =^  bax/(list {sole-id report})  moves
+      |-  ^-  {(list {sole-id report}) _moves}
+      ?~  moves  [~ moves]
+      =^  bax  t.moves  $(moves t.moves)
+      ?.  ?&  ?=({$diff $talk-report *} q.i.moves)
+              (~(has by sole-sources) p.i.moves)
+          ==
+        [bax moves]
+      =/  sid  (~(got by sole-sources) p.i.moves)
+      [[[sid +>.q.i.moves] bax] t.moves]
+    ::
+    =.  bax  (flop bax)
+    ?:  =(bax ~)  +
     |-  ^+  +>
-    ?~  q.rey  ra-axel
-    =+  bak=(ra-back i.q.rey)
-    $(q.rey t.q.rey, +> bak)
+    ?~  bax  ra-axel
+    $(+> (ra-back i.bax), bax t.bax)
   ::
   ++  ra-back
     |=  {sid/sole-id rad/report}
@@ -1583,6 +1590,10 @@
   ::
   ++  ra-console-peer                                       ::  console subscribe
     |=  {sid/sole-id pax/path}
+    ::> remember that the source of the subcscription
+    ::> is a console, and which one. see ++ra-axel.
+    =.  sole-sources
+      (~(put by sole-sources) ost.hid sid)
     ?.  (~(has by shells) sid)  +>.$
     =/  ses  (sh-old:sh sid)
     sh-abet:(sh-got-peer.ses pax)
