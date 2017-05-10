@@ -157,7 +157,7 @@
       ^ :: (unit dill-belt:^dill)                          ::< current event
       * ::ris/(unit search)                                 ::< reverse-i-search
       * ::hit/history                                       ::< all past input
-      pom/sole-prompt                                   ::< static prompt
+      * ::pom/sole-prompt                                   ::< static prompt
       inp/sole-cursor-share                             ::< input state
       ses/ses-data                                      ::< WIP %inc- client
       con/_`?($new $liv $ded)`%new                      ::< subscription state
@@ -849,7 +849,8 @@
     =.  con  %liv
     =.  ta  (se-text "[linked to {<dok>}]")
     ?.  =(%new con)  .
-    (ta-pro & %$ "<awaiting prompt> ")
+    ::(ta-pro & %$ "<awaiting prompt> ")
+    .
   ::
   ++  ta-drop  .(con %ded)                              ::< disconnect
   ++  ta-adze                                           ::< send a peer
@@ -1063,7 +1064,8 @@
                 $(p.fec t.p.fec, +>.^$ ^$(fec i.p.fec))
       ::{$nex *}  ta-nex
       {$nex *}  +>
-      {$pro *}  (ta-pro +.fec)
+      ::{$pro *}  (ta-pro +.fec)
+      {$pro *}  +>
       {$tan *}  +>(..ta (se-dump p.fec))
       {$sag *}  +>(..ta (se-blit fec))
       {$sav *}  +>(..ta (se-blit fec))
@@ -1258,25 +1260,25 @@
              $r  (slag pos buf.say.inp)
     ==
   ::
-  ++  ta-pro                                            ::< set prompt
-    ::> receive prompt, inserting ship and app title
-    ::
-    |=  pom/sole-prompt
-    %_    +>
-        pom
-      %_    pom
-          cad
-        ;:  welp
-          ?.  ?=($earl (clan:title p.dok))
-            (cite:title p.dok)
-          (scow %p p.dok)
-        ::
-          ":"
-          (trip q.dok)
-          cad.pom
-        ==
-      ==
-    ==
+  ::++  ta-pro                                            ::< set prompt
+  ::  ::> receive prompt, inserting ship and app title
+  ::  ::
+  ::  |=  pom/sole-prompt
+  ::  %_    +>
+  ::      pom
+  ::    %_    pom
+  ::        cad
+  ::      ;:  welp
+  ::        ?.  ?=($earl (clan:title p.dok))
+  ::          (cite:title p.dok)
+  ::        (scow %p p.dok)
+  ::      ::
+  ::        ":"
+  ::        (trip q.dok)
+  ::        cad.pom
+  ::      ==
+  ::    ==
+  ::  ==
   ::
   ::++  ta-ser                                            ::< reverse search
   ::  ::> add to incremental search buffer
@@ -1317,27 +1319,30 @@
     ::> password etc
     ::
     ^-  (pair @ud stub:^dill)
-    =;  vew/(pair (list @c) styx:^dill)
-      =+  lin=(make:klr q.vew)
-      :_  (welp lin [*stye:^dill p.vew]~)
-      (add pos.inp (lent-char:klr lin))
-    ?:  vis.pom
-      ::
-      ::> default prompt
-      ::
-      :-  buf.say.inp
-      ::?~  ris
-      ::  cad.pom
-      :::(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
-      cad.pom
-    ::
-    ::> hidden input
-    ::
-    :-  (reap (lent buf.say.inp) `@c`'*')
-    %+  welp
-      cad.pom
-    ?~  buf.say.inp  ~
-    :(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
+    =/  lin/stub:^dill  [[~ ~ %b] (tuba "> ")]~
+    :_  (welp lin [*stye:^dill buf.say.inp]~)
+    (add pos.inp (lent-char:klr lin))
+    ::=;  vew/(pair (list @c) styx:^dill)
+    ::  =+  lin=(make:klr q.vew)
+    ::  :_  (welp lin [*stye:^dill p.vew]~)
+    ::  (add pos.inp (lent-char:klr lin))
+    ::?:  vis.pom
+    ::  ::
+    ::  ::> default prompt
+    ::  ::
+    ::  :-  buf.say.inp
+    ::  ::?~  ris
+    ::  ::  cad.pom
+    ::  :::(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
+    ::  cad.pom
+    ::::
+    ::::> hidden input
+    ::::
+    :::-  (reap (lent buf.say.inp) `@c`'*')
+    ::%+  welp
+    ::  cad.pom
+    ::?~  buf.say.inp  ~
+    :::(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
   ::
   ::++  ta-yan                                            ::< yank
   ::  ::> current ctrl-y text from kill ring
