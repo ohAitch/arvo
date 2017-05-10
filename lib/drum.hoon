@@ -48,7 +48,7 @@
       * ::eel/(set dock)                                    ::< connect to
       * ::ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
-      bin/(map bone source)                             ::< terminals
+      bin/source                             ::< terminals
   ==                                                    ::
 ::
 ::> ||
@@ -264,7 +264,8 @@
 ::>
 |=  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
-=+  (fall (~(get by bin) ost.bow) *source)
+::=+  (fall (~(get by bin) ost.bow) *source)
+=+  bin
 =*  dev  -
 =>  ::REVIEW move up outside of |=?
     ::>  ||
@@ -496,7 +497,8 @@
     [(flop moz) pith]
   ::=.  sys  ?^(sys sys `ost.bow)
   =.  .  se-subze:se-adze:se-adit
-  :_  pith(bin (~(put by bin) ost.bow dev))
+  :::_  pith(bin (~(put by bin) ost.bow dev))
+  :_  pith(bin dev)
   %-  flop
   ^-  (list move)
   ?~  biz  moz
@@ -579,7 +581,7 @@
   ::TODO with new disconnection semantics, this might
   ::     effectively be always &
   |=  dok/dock  ^-  ?
-  ?.  (~(has by bin) ost.bow)  &
+  ::?.  (~(has by bin) ost.bow)  &
   =+  gyr=(~(get by fug) dok)
   |(?=($~ gyr) !=(%liv con.u.gyr))
 ::
