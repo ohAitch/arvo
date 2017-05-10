@@ -1338,8 +1338,8 @@
         ?~  moves
           [~ ~]
         =+  mor=$(moves t.moves)
-        =/  sop  (~(get by sup.hid) ost.hid)
-        ?.  ?&  ?=({$~ @ $sole *} sop)
+        =/  sop  (~(get by sup.hid) p.i.moves)
+        ?.  ?&  ?=({$~ @p $sole *} sop)
                 ?=({$diff $talk-report *} q.i.moves)
             ==
           [[i.moves p.mor] q.mor]
