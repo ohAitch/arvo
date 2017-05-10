@@ -47,8 +47,9 @@
   $:  * ::sys/(unit bone)                                   ::< local console
       * ::eel/(set dock)                                    ::< connect to
       * ::ray/(set well:^gall)                              ::< app desks
+      :: bin/(map bone source)
       fur/(map dude:^gall (unit server))                ::< servers
-      bin/source                             ::< terminals
+      bin/target                             ::< terminals
   ==                                                    ::
 ::
 ::> ||
@@ -83,29 +84,29 @@
 ::      num/@ud                                           ::< number of entries
 ::      max/_60                                           ::< max entries
 ::  ==                                                    ::
-++  source                                              ::> input device
-  ::> all state for connected terminal
-  ::>
-  ::> edg: width
-  ::> off: for future sticky prompt
-  ::> kil: kill ring
-  ::> inx: currently selected app: cycle through with ^X
-  ::> fug: per-terminal per-app state
-  ::> mir: cursor position and buffer last sent to %dill
-  ::>      TODO this is sort-of derived state, and
-  ::>           should probably be in scope only for
-  ::>           long enough that {se-abet} can determine
-  ::>           whether it has changed, instead of
-  ::>           storing it permanently
-  ::>     JB: see also the $hey dill-belt, which refreshes
-  ::>     the prompt by clearing {mir}
-  ::>
-  $:  @ ::edg/_80                                           ::< terminal columns
-      @ :: off/@ud                                           ::< window offset
-      * ::kil/kill                                          ::< kill buffer
-      {inx/@ud fug/(map dock target)}                   ::< connections
-      ^ ::mir/(pair @ud stub:^dill)                         ::< mirrored terminal
-  ==                                                    ::
+::++  source                                              ::> input device
+::  ::> all state for connected terminal
+::  ::>
+::  ::> edg: width
+::  ::> off: for future sticky prompt
+::  ::> kil: kill ring
+::  ::> inx: currently selected app: cycle through with ^X
+::  ::> fug: per-terminal per-app state
+::  ::> mir: cursor position and buffer last sent to %dill
+::  ::>      TODO this is sort-of derived state, and
+::  ::>           should probably be in scope only for
+::  ::>           long enough that {se-abet} can determine
+::  ::>           whether it has changed, instead of
+::  ::>           storing it permanently
+::  ::>     JB: see also the $hey dill-belt, which refreshes
+::  ::>     the prompt by clearing {mir}
+::  ::>
+::  $:  edg/_80                                           ::< terminal columns
+::       off/@ud                                           ::< window offset
+::      kil/kill                                          ::< kill buffer
+::      {inx/@ud fug/(map dock target)}                   ::< connections
+::      mir/(pair @ud stub:^dill)                         ::< mirrored terminal
+::  ==                                                    ::
 ++  history                                             ::> past commands
   ::> old inputs, used for arrow up/down
   ::>
@@ -473,13 +474,14 @@
   ::
   ::REVIEW this selects a different non-dropped app,
   ::       which is not ideal
-  =+  lag=se-current-app
-  ?.  (~(has by fug) dok)  +>.$
-  =.  +>.$  (se-text "[dropped {<dok>}, relinking]")
-  =.  +>.$  ta-abet:ta-adze:ta-drop:(ta dok)
-  ?.  &(?=(^ lag) !=(dok u.lag))
-    +>.$(inx 0)
-  (se-select-app u.lag)
+  ^+(+> !!)
+  ::=+  lag=se-current-app
+  ::?.  (~(has by fug) dok)  +>.$
+  ::=.  +>.$  (se-text "[dropped {<dok>}, relinking]")
+  ::=.  +>.$  ta-abet:ta-adze:ta-drop:(ta dok)
+  ::?.  &(?=(^ lag) !=(dok u.lag))
+  ::  +>.$(inx 0)
+  ::(se-select-app u.lag)
 ::
 ::> ||
 ::> ||  %resolution
@@ -536,11 +538,14 @@
   ::|=  {dok/dock con/_.}  ^+  con
   ::=.  +>.$  con
   =/  dok  [our %dojo]
-  ?:  (~(has by fug) dok)
-    ?.  =(%ded con:(~(got by fug) dok))
-      ..se-adze
-    ta-abet:ta-adze:(ta dok)
-  ta-abet:ta-adze:(new-ta dok)
+  ::?:  (~(has by fug) dok)
+  ::  ?.  =(%ded con:(~(got by fug) dok))
+  ::    ..se-adze
+  ::  ta-abet:ta-adze:(ta dok)
+  ::ta-abet:ta-adze:(new-ta dok)
+  ?:  =(%liv con.dev)
+    ..se-adze
+  ta-abet:ta-adze:(ta dok)
 ::
 ++  se-subze                                            ::< del old connections
   .
@@ -582,48 +587,51 @@
   ::     effectively be always &
   |=  dok/dock  ^-  ?
   ::?.  (~(has by bin) ost.bow)  &
-  =+  gyr=(~(get by fug) dok)
-  |(?=($~ gyr) !=(%liv con.u.gyr))
+  ::=+  gyr=(~(get by fug) dok)
+  ::|(?=($~ gyr) !=(%liv con.u.gyr))
+  !=(%liv con.dev)
 ::
 ++  se-amor                                             ::< live targets
   ::> list apps which are successfully connected
   ::
   ^-  (list dock)
-  %+  skim  (ly [our %dojo] ~)
+  ?.  =(%liv con.dev)  ~
+  [our %dojo]~
   ::%+  skim  (~(tap in eel))
-  |=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
+  ::|=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
 ::
 ::> ||
 ::> ||  %indexing
 ::> ||
 ::>   operations on {inx}, the app selection
 ::+|
-++  se-select-app                                       ::< recalculate index
-  ::> select particular app, if connected
-  ::
-  ::REVIEW mutating inx in place is probably cleaner
-  |=  dok/dock
-  =+  [xin=0 wag=se-amor]
-  |-  ^+  +>.^$
-  ?~  wag  +>.^$(inx 0)
-  ?:  =(i.wag dok)  +>.^$(inx xin)
-  $(wag t.wag, xin +(xin))
+::++  se-select-app                                       ::< recalculate index
+::  ::> select particular app, if connected
+::  ::
+::  ::REVIEW mutating inx in place is probably cleaner
+::  |=  dok/dock
+::  =+  [xin=0 wag=se-amor]
+::  |-  ^+  +>.^$
+::  ?~  wag  +>.^$(inx 0)
+::  ?:  =(i.wag dok)  +>.^$(inx xin)
+::  $(wag t.wag, xin +(xin))
 ::
-++  se-next-app                                         ::< rotate index
-  ::> select next connected app in ring
-  ::
-  =+  wag=se-amor
-  ?~  wag  +
-  ::  ~&  [%se-next-app inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
-  +(inx (mod +(inx) (lent wag)))
+::++  se-next-app                                         ::< rotate index
+::  ::> select next connected app in ring
+::  ::
+::  =+  wag=se-amor
+::  ?~  wag  +
+::  ::  ~&  [%se-next-app inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
+::  +(inx (mod +(inx) (lent wag)))
 ::
 ++  se-current-app                                      ::< current dock
   ::> app selected by ^X ring, if any
   ::
   ^-  (unit dock)
-  =+  wag=se-amor
-  ?~  wag  ~
-  `(snag inx `(list dock)`wag)
+  `[our %dojo]
+  ::=+  wag=se-amor
+  ::?~  wag  ~
+  ::`(snag inx `(list dock)`wag)
 ::
 ::> ||
 ::> ||  %disconnection
@@ -786,15 +794,15 @@
 ::> ||  %ta-core
 ::> ||
 ::>
-++  new-ta                                              ::< initialize new app
-  ::> bunt config, and use it to create a {ta} core
-  ::>
-  ::> dok: newly linked app
-  ::
-  |=  dok/dock  ^+  (ta)
-  ?<  (~(has by fug) dok)
-  =.  fug  (~(put by fug) dok *target)
-  (ta dok)
+::++  new-ta                                              ::< initialize new app
+::  ::> bunt config, and use it to create a {ta} core
+::  ::>
+::  ::> dok: newly linked app
+::  ::
+::  |=  dok/dock  ^+  (ta)
+::  ?<  (~(has by fug) dok)
+::  =.  fug  (~(put by fug) dok *target)
+::  (ta dok)
 ::
 ++  ta                                                  ::< per target
   ::> this core is used to perform operations specific
@@ -803,7 +811,8 @@
   ::> dok: what app
   ::>
   |=  dok/dock
-  =+  `target`(~(got by fug) dok)                       ::< app and state
+  ::=+  `target`(~(got by fug) dok)                       ::< app and state
+  =+  `target`dev                       ::< app and state
   |%
   ::>  ||
   ::>  ||  %convenience
@@ -816,7 +825,8 @@
     ::>  exit {ta}, saving changed connection to {dok}
     ::
     ^+  ..ta
-    ..ta(fug (~(put by fug) dok `target`+<))
+    ::..ta(fug (~(put by fug) dok `target`+<))
+    ..ta(dev `target`+<)
   ::
   ++  ta-poke    |=(a/pear +>(..ta (se-poke dok a)))    ::< poke dok
   ::++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
@@ -988,7 +998,7 @@
         ::      ta-bel
         ::    =+  sop=(ta-off %l %ace pos.inp)
         ::    (ta-kil %l [(sub pos.inp sop) sop])
-        $x  +>(..ta se-next-app)
+        ::$x  +>(..ta se-next-app)
         ::$y  ?:  =(0 num.kil)
         ::      ta-bel
         ::    (ta-hom (cat:edit pos.inp ta-yan))
