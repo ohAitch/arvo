@@ -100,8 +100,8 @@
   ::>     JB: see also the $hey dill-belt, which refreshes
   ::>     the prompt by clearing {mir}
   ::>
-  $:  edg/_80                                           ::< terminal columns
-      off/@ud                                           ::< window offset
+  $:  @ ::edg/_80                                           ::< terminal columns
+      @ :: off/@ud                                           ::< window offset
       kil/kill                                          ::< kill buffer
       {inx/@ud fug/(map dock target)}                   ::< connections
       mir/(pair @ud stub:^dill)                         ::< mirrored terminal
@@ -361,7 +361,7 @@
   ?-  bet
     {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
     {$hey *}  +>(mir [0 ~])                             ::< refresh
-    {$rez *}  +>(edg (dec p.bet))                       ::< resize window
+    {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
     {$yow *}  ~&([%no-yow -.bet] +>)
   ==
 ::
@@ -692,7 +692,7 @@
   ^+  +>
   ?.  se-ably  (se-talk tac)
   =/  wol/wall
-    (zing (turn (flop tac) |=(a/tank (~(win re a) [0 edg]))))
+    (zing (turn (flop tac) |=(a/tank (~(win re a) [0 120]))))
   |-  ^+  +>.^$
   ?~  wol  +>.^$
   ?.  ((sane %t) (crip i.wol))  :: XX upstream validation
@@ -711,15 +711,15 @@
   =.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
   +>(mir lin)
 ::
-++  se-just                                             ::< show adjusted buffer
-  ::> lin: buffer to display. {q.lin} is cropped to
-  ::> the terminal width {edg}, keeping the
-  ::> cursor {p.lin} visible
-  ::
-  |=  lin/(pair @ud stub:^dill)
-  ^+  +>
-  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
-  (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
+::++  se-just                                             ::< show adjusted buffer
+::  ::> lin: buffer to display. {q.lin} is cropped to
+::  ::> the terminal width {edg}, keeping the
+::  ::> cursor {p.lin} visible
+::  ::
+::  |=  lin/(pair @ud stub:^dill)
+::  ^+  +>
+::  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
+::  (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
 ::
 ++  se-view                                             ::< flush buffer
   ::> if an app is selected, sync out its input buffer
@@ -727,7 +727,8 @@
   ^+  .
   =+  gul=se-current-app
   ?:  |(?=($~ gul) (se-aint u.gul))  +
-  (se-just ta-vew:(ta u.gul))
+  ::(se-just ta-vew:(ta u.gul))
+  (se-show ta-vew:(ta u.gul))
 ::
 ++  se-emit                                             ::< emit move
   ::> mov: side-effect to queue for sending
