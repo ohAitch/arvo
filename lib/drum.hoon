@@ -104,7 +104,7 @@
       @ :: off/@ud                                           ::< window offset
       * ::kil/kill                                          ::< kill buffer
       {inx/@ud fug/(map dock target)}                   ::< connections
-      mir/(pair @ud stub:^dill)                         ::< mirrored terminal
+      ^ ::mir/(pair @ud stub:^dill)                         ::< mirrored terminal
   ==                                                    ::
 ++  history                                             ::> past commands
   ::> old inputs, used for arrow up/down
@@ -360,7 +360,7 @@
   =.  bet  `control-belt`bet
   ?-  bet
     {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-    {$hey *}  +>(mir [0 ~])                             ::< refresh
+    {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
     {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
     {$yow *}  ~&([%no-yow -.bet] +>)
   ==
@@ -706,10 +706,12 @@
   ::
   |=  lin/(pair @ud stub:^dill)
   ^+  +>
-  ?:  =(mir lin)  +>
-  =.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
-  =.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
-  +>(mir lin)
+  ::?:  =(mir lin)  +>
+  ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
+  ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
+  ::+>(mir lin)
+  ::
+  (se-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
 ::
 ::++  se-just                                             ::< show adjusted buffer
 ::  ::> lin: buffer to display. {q.lin} is cropped to
