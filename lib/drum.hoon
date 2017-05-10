@@ -45,7 +45,7 @@
   ::>       TODO move a lot of this out into fur
   ::
   $:  * ::sys/(unit bone)                                   ::< local console
-      eel/(set dock)                                    ::< connect to
+      * ::eel/(set dock)                                    ::< connect to
       ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
       bin/(map bone source)                             ::< terminals
@@ -206,20 +206,20 @@
   |=  our/ship
   |^  ^-  drum-part
       %*  .  *drum-part
-        eel  deft-fish
+        ::eel  deft-fish
         ray  deft-apps
       ==
   ::
-  ++  deft-fish                                           ::< default connects
-    ::> apps to connect to by default: talk, dojo
-    ::>
-    ::> if on a moon, use parent's talk instead of own
-    ::
-    %-  ~(gas in *(set dock))
-    ^-  (list dock)
-    ?:  ?=($earl (clan:title our))
-      [[(sein:title our) %talk] [our %dojo] ~]
-    [[our %talk] [our %dojo] ~]
+  ::++  deft-fish                                           ::< default connects
+  ::  ::> apps to connect to by default: talk, dojo
+  ::  ::>
+  ::  ::> if on a moon, use parent's talk instead of own
+  ::  ::
+  ::  %-  ~(gas in *(set dock))
+  ::  ^-  (list dock)
+  ::  ?:  ?=($earl (clan:title our))
+  ::    [[(sein:title our) %talk] [our %dojo] ~]
+  ::  [[our %talk] [our %dojo] ~]
   ::
   ++  deft-apps                                           ::< default servers
     ::> apps to start by default: talk, dojo
@@ -372,28 +372,30 @@
     (se-text "[already running {<p.wel>}/{<q.wel>}]")
   %=  +>
     ray  (~(put in ray) wel)
-    eel  (~(put in eel) [our.bow q.wel])
+    ::eel  (~(put in eel) [our.bow q.wel])
   ==
 ::
 ++  poke-link                                           ::< |link %app, connect
   ::> connnect to an app's console
   ::
   |=  dok/dock
-  =<  se-abet  =<  se-view
-  +>(eel (~(put in eel) dok))
+  ^+(se-abet !!)
+  ::=<  se-abet  =<  se-view
+  ::+>(eel (~(put in eel) dok))
 ::
 ++  poke-unlink                                         ::< |unlink %app, close
   ::> disconnnect from an app's console
   ::
   |=  dok/dock
-  =<  se-abet  =<  se-view
-  +>(eel (~(del in eel) dok))
+  ^+(se-abet !!)
+  ::=<  se-abet  =<  se-view
+  ::+>(eel (~(del in eel) dok))
 ::
 ++  poke-exit                                           ::< |exit, shutdown urbit
   ::> shutdown running urbit instance
   ::
   |=  $~
-  ^+  se-abet  !!
+  ^+(se-abet !!)
   ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
 ::
 ++  poke-put                                            ::< write file
@@ -401,7 +403,7 @@
   ::> directory
   ::
   |=  {pax/path txt/@}
-  ^+  se-abet  !!
+  ^+(se-abet !!)
   ::se-abet:(se-blit-sys [%sav pax txt])
 ::
 ++  reap-phat                                           ::< get ack for connection
@@ -412,11 +414,12 @@
   ::> saw: stack trace, if the connection failed
   ::
   |=  {way/wire saw/(unit tang)}
-  =<  se-abet  =<  se-view
+  =<  se-abet  =<  se-view  ^+  +>
   =+  dok=(drum-phat way)
   ?~  saw
     ta-abet:ta-peered:(ta dok)
-  (se-dump:(se-nuke dok) u.saw)
+  (mean >%drum-reap-fail< u.saw)
+  ::(se-dump:(se-nuke dok) u.saw)
 ::
 ++  take-coup-phat                                      ::< get ack for poke
   ::> receive acknowledgment on an app command
@@ -426,14 +429,14 @@
   ::> saw: stack trace, if the command failed
   ::
   |=  {way/wire saw/(unit tang)}
-  =<  se-abet  =<  se-view
+  =<  se-abet  =<  se-view  ^+  +>
   ?~  saw  +>
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  =+  (mean >[%drum-coup-fail src.bow ost.bow dok]< u.saw)
-  %-  se-dump:(se-nuke dok)
-  :_  u.saw
-  >[%drum-coup-fail src.bow ost.bow dok]<
+  (mean >[%drum-coup-fail src.bow ost.bow dok]< u.saw)
+  ::%-  se-dump:(se-nuke dok)
+  :::_  u.saw
+  ::>[%drum-coup-fail src.bow ost.bow dok]<
 ::
 ++  take-onto                                           ::< get ack for start
   ::> receive acknowledgment on an app being started
@@ -523,40 +526,42 @@
   ::> (apps in {eel} not in {fug})
   ::
   ^+  .
-  %+  roll  (~(tap in eel))
-  =<  .(con +>)
-  |=  {dok/dock con/_.}  ^+  con
-  =.  +>.$  con
+  ::%+  roll  (~(tap in eel))
+  ::=<  .(con +>)
+  ::|=  {dok/dock con/_.}  ^+  con
+  ::=.  +>.$  con
+  =/  dok  [our %dojo]
   ?:  (~(has by fug) dok)
     ?.  =(%ded con:(~(got by fug) dok))
-      +>.$
+      ..se-adze
     ta-abet:ta-adze:(ta dok)
   ta-abet:ta-adze:(new-ta dok)
 ::
 ++  se-subze                                            ::< del old connections
-  ::> disconnect no longer desired connections
-  ::
-  =<  .(dev (~(got by bin) ost.bow))
-  =.  bin  (~(put by bin) ost.bow dev)
-  ^+  .
-  %-  ~(rep by bin)
-  =<  .(con +>)
-  |=  {{ost/bone dev/source} con/_.}  ^+  con
-  ::REVIEW this seems like it should just pass {ost}
-  ::       down to se-nuke
-  =+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
-  xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
+  .
+  ::::> disconnect no longer desired connections
+  ::::
+  ::=<  .(dev (~(got by bin) ost.bow))
+  ::=.  bin  (~(put by bin) ost.bow dev)
+  ::^+  .
+  ::%-  ~(rep by bin)
+  ::=<  .(con +>)
+  ::|=  {{ost/bone dev/source} con/_.}  ^+  con
+  ::::REVIEW this seems like it should just pass {ost}
+  ::::       down to se-nuke
+  ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
+  ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
 ::
-++  se-subze-local                                      ::< nuke ost.bow apps
-  ::> disconnect anything not in {eel}
-  ^+  .
-  %-  ~(rep by fug)
-  =<  .(con +>)
-  |=  {{dok/dock *} con/_.}  ^+  con
-  =.  +>.$  con
-  ?:  (~(has in eel) dok)
-    +>.$
-  (se-nuke dok)
+::++  se-subze-local                                      ::< nuke ost.bow apps
+::  ::> disconnect anything not in {eel}
+::  ^+  .
+::  %-  ~(rep by fug)
+::  =<  .(con +>)
+::  |=  {{dok/dock *} con/_.}  ^+  con
+::  =.  +>.$  con
+::  ?:  (~(has in eel) dok)
+::    +>.$
+::  (se-nuke dok)
 ::
 ::> ||
 ::> ||  %accessors
@@ -579,7 +584,8 @@
   ::> list apps which are successfully connected
   ::
   ^-  (list dock)
-  %+  skim  (~(tap in eel))
+  %+  skim  (ly [our %dojo] ~)
+  ::%+  skim  (~(tap in eel))
   |=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
 ::
 ::> ||
@@ -619,38 +625,38 @@
 ::> ||
 ::>   unlink helpers
 ::+|
-++  se-drop                                             ::< disconnect
-  ::> dok: app to unlink
-  ::>
-  ::> in the case of the local :dojo, reconnect
-  ::> immediately, so that there is always a repl
-  ::> available to manage /+drum
-  ::
-  |=  dok/dock
-  ^+  +>
-  =+  lag=se-current-app
-  ?.  (~(has by fug) dok)  +>.$
-  ?:  =(%ded con:(ta dok))  +>.$
-  =.  ta  ta-abet:ta-drop:(ta dok)
-  =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
-              +>.$(inx 0)
-            (se-select-app u.lag)
-  =.  +>.$  (se-text "[unlinked from {<dok>}]")
-  ::  temporarily disabled, use met-v
-  :: ?:  =(dok [our.bow %dojo])                            ::< undead dojo
-  ::   +>.$(eel (~(put in eel) dok))
-  +>.$
+::++  se-drop                                             ::< disconnect
+::  ::> dok: app to unlink
+::  ::>
+::  ::> in the case of the local :dojo, reconnect
+::  ::> immediately, so that there is always a repl
+::  ::> available to manage /+drum
+::  ::
+::  |=  dok/dock
+::  ^+  +>
+::  =+  lag=se-current-app
+::  ?.  (~(has by fug) dok)  +>.$
+::  ?:  =(%ded con:(ta dok))  +>.$
+::  =.  ta  ta-abet:ta-drop:(ta dok)
+::  =.  +>.$  ?.  &(?=(^ lag) !=(dok u.lag))
+::              +>.$(inx 0)
+::            (se-select-app u.lag)
+::  =.  +>.$  (se-text "[unlinked from {<dok>}]")
+::  ::  temporarily disabled, use met-v
+::  :: ?:  =(dok [our.bow %dojo])                            ::< undead dojo
+::  ::   +>.$(eel (~(put in eel) dok))
+::  +>.$
 ::
-++  se-nuke                                             ::< teardown connection
-  ::> forceful drop, pull immediately
-  ::
-  ::REVIEW shouldn't deleting from eel alone implicitly
-  ::       cause the connection to be cleaned up in
-  ::       subze?
-  |=  dok/dock
-  ^+  +>
-  =.  eel  (~(del in eel) dok)
-  (se-drop:(se-pull dok) dok)
+::++  se-nuke                                             ::< teardown connection
+::  ::> forceful drop, pull immediately
+::  ::
+::  ::REVIEW shouldn't deleting from eel alone implicitly
+::  ::       cause the connection to be cleaned up in
+::  ::       subze?
+::  |=  dok/dock
+::  ^+  +>
+::  =.  eel  (~(del in eel) dok)
+::  (se-drop:(se-pull dok) dok)
 ::
 ::> ||
 ::> ||  %effect
@@ -760,11 +766,11 @@
   |=  {dok/dock par/pear}
   (se-emit [ost.bow %poke (drum-path dok) dok par])
 ::
-++  se-pull                                             ::< cancel subscription
-  ::> dok: target app
-  ::
-  |=  dok/dock
-  (se-emit [ost.bow %pull (drum-path dok) dok ~])
+::++  se-pull                                             ::< cancel subscription
+::  ::> dok: target app
+::  ::
+::  |=  dok/dock
+::  (se-emit [ost.bow %pull (drum-path dok) dok ~])
 ::
 ++  se-sole-id  `sole-id`[0 our dap]:bow                ::< XX multiple?
 ::RENAMEME
@@ -805,7 +811,7 @@
     ..ta(fug (~(put by fug) dok `target`+<))
   ::
   ++  ta-poke    |=(a/pear +>(..ta (se-poke dok a)))    ::< poke dok
-  ++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
+  ::++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
   ++  ta-peer                                           ::< peer dok
     |=  a/path
     +>(..ta (se-emit ost.bow %peer (drum-path dok) dok a))
@@ -840,7 +846,8 @@
     ^+  .
     ?-  con
       $ded  .
-      $liv  ta-pull
+      $liv  ~|(%ta-pull !!)
+      ::$liv  ta-pull
       $new  (ta-poke %sole-id-action se-sole-id %new)
     ==
   ::
@@ -939,9 +946,10 @@
             ::> talk and dojo close console on ^d
             ::> instead of actually disconnecting
             ::
-            ?:  (~(has in eel:(drum-make our.bow)) dok)
-              +>(..ta (se-blit qit+~))                  ::< quit pier
-            +>(eel (~(del in eel) dok))                 ::< unlink app
+            ::?:  (~(has in eel:(drum-make our.bow)) dok)
+            ::  +>(..ta (se-blit qit+~))                  ::< quit pier
+            ::+>(eel (~(del in eel) dok))                 ::< unlink app
+            +>(..ta (se-blit qit+~))                  ::< quit pier
         $e  +>(pos.inp (lent buf.say.inp))
         $f  (ta-aro %r)
         $g  ?~  ris  ta-bel
@@ -1104,11 +1112,11 @@
     ^+  +>
     =.  ris  ~
     ?+    key    ta-bel
-      $v    %_  +>
-              eel  ?:  (~(has in eel) our.bow %dojo)
-                     (~(del in eel) our.bow %dojo)
-                   (~(put in eel) our.bow %dojo)
-            ==
+      ::$v    %_  +>
+      ::        eel  ?:  (~(has in eel) our.bow %dojo)
+      ::               (~(del in eel) our.bow %dojo)
+      ::             (~(put in eel) our.bow %dojo)
+      ::      ==
       $dot  ?.  &(?=(^ old.hit) ?=(^ i.old.hit))        ::< last "arg" from hist
               ta-bel
             =+  old=`(list @c)`i.old.hit
