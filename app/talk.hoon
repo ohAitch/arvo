@@ -479,14 +479,13 @@
       |=  gam/telegram
       =+  lin=~(tr-line tr man.she settings.she gam)
       =+  nom=(scag 7 (cite:title our.hid))
-      %.  q.q.gam
-      =<  sh-pass
-      %.  [%txt lin]
+      =-  (sh-pass.- q.q.gam)
+      =-  (sh-fact.- %txt lin)
       ?:  ?&  (~(has in settings.she) %notify)
               (gth (fall (find nom lin) 0) 15)
           ==
-        sh-fact:(sh-fact %bel ~)
-      sh-fact
+        (sh-fact %bel ~)
+      ..sh-fact
     ::
     ++  sh-numb                                         ::  print msg number
       |=  num/@ud
