@@ -5,6 +5,7 @@
 /-    talk, sole
 /+    talk, sole, time-to-id, twitter
 /=    seed  /~  !>(.)
+=,  pubsub:userlib
 =,  space:userlib
 =,  format
 =,  unity
@@ -386,9 +387,13 @@
     ::
     ++  sh-fact                                         ::  send console effect
       |=  fec/sole-effect
-      ^+  +>
-      =.  log.she  [fec log.she]
-      +>(moves :_(moves [ost.hid %diff %sole-effect fec]))
+      %_    +>
+          log.she  [fec log.she]
+          moves
+        =-  (welp - moves)
+        %+  turn  (prey /sole/(encode-id:sole sid) hid)
+        |=({ost/bone ^} [ost %diff %sole-effect fec])
+      ==
     ::
     ++  sh-peep                                         ::  peer to path
       |=  pax/path
