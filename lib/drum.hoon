@@ -264,13 +264,7 @@
 ::> ||
 ::>   event + state -> reactions + state
 ::>
-|=  {bow/bowl:^gall drum-part}                          ::  main drum work
-::  new subscriptions default empty
-::=+  (fall (~(get by bin) ost.bow) *source)
-=+  bin
-=*  dev  -
-=>  ::REVIEW move up outside of |=?
-    ::>  ||
+=>  ::>  ||
     ::>  ||  %interface-types
     ::>  ||
     ::
@@ -291,6 +285,11 @@
       ==                                                ::
     ++  move  (pair bone card)                          ::< user-level move
     --
+|=  {bow/bowl:^gall drum-part}                          ::  main drum work
+::  new subscriptions default empty
+::=+  (fall (~(get by bin) ost.bow) *source)
+=+  bin
+=*  dev  -
 ::> ||
 ::> ||  %door
 ::> ||
@@ -494,7 +493,7 @@
   ::>  consolidated set of external requests
   ::
   ^-  (quip move *drum-part)
-  =*  pith  +>+>+<+
+  =*  pith  +<+.+>+
   ?.  se-ably
     =.  .  se-adit
     [(flop moz) pith]
