@@ -592,14 +592,14 @@
   ::|(?=($~ gyr) !=(%liv con.u.gyr))
   !=(%liv con.dev)
 ::
-++  se-amor                                             ::< live targets
-  ::> list apps which are successfully connected
-  ::
-  ^-  (list dock)
-  ?.  =(%liv con.dev)  ~
-  [our %dojo]~
-  ::%+  skim  (~(tap in eel))
-  ::|=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
+::++  se-amor                                             ::< live targets
+::  ::> list apps which are successfully connected
+::  ::
+::  ^-  (list dock)
+::  ?.  =(%liv con.dev)  ~
+::  [our %dojo]~
+::  ::%+  skim  (~(tap in eel))
+::  ::|=(a/dock =((some %liv) (bind (~(get by fug) a) |=(target con))))
 ::
 ::> ||
 ::> ||  %indexing
@@ -1379,41 +1379,41 @@
     |-  ^-  (list sole-edit)
     ?~  txt  ~
     [[%ins pos i.txt] $(pos +(pos), txt t.txt)]
-  ::
-  ++  cut                                               ::< mass delete
-    ::>  pos: first position
-    ::>  num: characters to delete
-    ::
-    |=  {pos/@ud num/@ud}
-    ^-  sole-edit
-    :-  %mor
-    |-  ^-  (list sole-edit)
-    ?:  =(0 num)  ~
-    [[%del pos] $(num (dec num))]
-  ::
-  ++  rep                                               ::< mass replace
-    ::>  combined cut and cat
-    ::>
-    ::>  pos: position
-    ::>  num: characters to delete
-    ::>  txt: characters to replace them with
-    ::
-    |=  {{pos/@ud num/@ud} txt/(list @c)}
-    ^-  sole-edit
-    :~  %mor
-        (cut pos num)
-        (cat pos txt)
-    ==
+::  ::
+::  ++  cut                                               ::< mass delete
+::    ::>  pos: first position
+::    ::>  num: characters to delete
+::    ::
+::    |=  {pos/@ud num/@ud}
+::    ^-  sole-edit
+::    :-  %mor
+::    |-  ^-  (list sole-edit)
+::    ?:  =(0 num)  ~
+::    [[%del pos] $(num (dec num))]
+::  ::
+::  ++  rep                                               ::< mass replace
+::    ::>  combined cut and cat
+::    ::>
+::    ::>  pos: position
+::    ::>  num: characters to delete
+::    ::>  txt: characters to replace them with
+::    ::
+::    |=  {{pos/@ud num/@ud} txt/(list @c)}
+::    ^-  sole-edit
+::    :~  %mor
+::        (cut pos num)
+::        (cat pos txt)
+::    ==
   --
-::
-::MOVEME trivial helper: maybe inline, maybe extract
-::       to tiny library similar to {/+time-to-id},
-::       maybe just move to a "helpers" core outside
-::       the app proper
-++  offset                                              ::< calculate offsets
-  ::>  fel: parsing {rule} that is matching characters
-  ::>  inp: input whose match-length is being determined
-  ::
-  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
-  q.p:(fel [0 0] inp)
+::::
+::::MOVEME trivial helper: maybe inline, maybe extract
+::::       to tiny library similar to {/+time-to-id},
+::::       maybe just move to a "helpers" core outside
+::::       the app proper
+::++  offset                                              ::< calculate offsets
+::  ::>  fel: parsing {rule} that is matching characters
+::  ::>  inp: input whose match-length is being determined
+::  ::
+::  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
+::  q.p:(fel [0 0] inp)
 --
