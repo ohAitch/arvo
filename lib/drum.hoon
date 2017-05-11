@@ -297,26 +297,91 @@
     --
 |%
 ++  agent
-  =|  {mov/(list move) out/(list agent-to-guardian)}
-  |_  agent-state
+  =|  {mov/(list move) out/(list agent-to-guardian) biz/(list dill-blit:^dill)}
+  |_  {bow/bowl:^gall agent-state}
   ++  abet
-    ^-  {(list move) (list agent-to-guardian) agent-state}
-    [mov out +<]
-  ++  etc  ; ...
-  ++  poke-belt
-    |*  a/*
-    ~!  [a *dill-belt:^dill]
-    %.  a
-    |=  dill-belt:^dill  =<  abet  ^+  +>
-    !!
+    ^-  {(list dill-blit:^dill) (list move) (list agent-to-guardian) agent-state}
+    ::=>  emit-biz
+    [biz mov out +<+]
+  ::
+  ++  emit  |=(mow/move %_(+> mov [mow mov]))
+  ++  emit-biz
+    %_    .
+        biz  ~
+        mov
+      ?~  biz  mov
+      :_  mov
+      [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
+    ==
+  ::
+  ++  do-blit                                             ::< give output
+    ::> bil: blit to queue; later consolidated into a
+    ::>      single %dill-blit diff
+    ::REVIEW still less consolidated than a drum-wide one
+    |=(bil/dill-blit:^dill +>(biz [bil biz]))
+  ::+|
+  ++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
+  ::+|
+  ++  print-tanks                                             ::< print tanks
+    ::> tac: pretty-print objects to output as %out lines
+    ::
+    |=  tac/(list tank)
+    ^+  +>
+    ?.  caused-by-console  (show-in-talk tac)
+    =/  wol/wall
+      (zing (turn (flop tac) |=(a/tank (~(win re a) [0 120]))))
+    |-  ^+  +>.^$
+    ?~  wol  +>.^$
+    ?.  ((sane %t) (crip i.wol))  :: XX upstream validation
+      ~&  bad-text+<`*`i.wol>
+      $(wol t.wol)
+    $(wol t.wol, +>.^$ (do-blit %out (tuba i.wol)))
+  ::
+  ++  print-message                                          ::< return text
+    ::> print message to screen, whatever that means
+    ::>
+    ::> usually this means sending a %out effect, but
+    ::> when the message wasn't caused by a stack trace
+    ::> it is still recorded
+    ::>
+    ::> txt: the message. sanitized if invalid @t
+    ::
+    |=  txt/tape
+    ^+  +>
+    ?.  ((sane %t) (crip txt))  :: XX upstream validation
+      ~&  bad-text+<`*`txt>
+      +>
+    ?.  caused-by-console  (show-in-talk [%leaf txt]~)
+    (do-blit %out (tuba txt))
+  ::
+  ++  show-in-talk                                          ::< show in talk
+    ::> display stack trace using talk if not cause by console
+    ::
+    ::REVIEW maybe at least use {se-blit-sys}?
+    |=  tac/(list tank)
+    ^+  +>
+    :: XX talk should be usable for stack traces, see urbit#584 which this change
+    :: closed for the problems there
+    ((slog (flop tac)) +>)
+    ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
+    ::(said:talk our.bow %drum now.bow eny.bow tac)
+  ::+|
+  ++  poke-vew
+    |=  bet/control-belt  ^+  +>
+    ?-  bet
+      {$cru *}  (print-tanks:(print-message (trip p.bet)) q.bet)
+      {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
+      {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
+      {$yow *}  ~&([%no-yow -.bet] +>)
+    ==
   --
 ::
 ::++  guardian
 ::  =|  {mov/(list move) out/(list guardian-to-agent)}
-::  |_  guardian-state
+::  |_  {bow/bowl:^gall guardian-state}
 ::  ++  abet
 ::    ^-  {(list move) (list guardian-to-agent) guardian-state}
-::    [mov out +<]
+::    [mov out +<+]
 ::  ++  etc  ; ...
 ::  ++  diff-effect
 ::    |=  {wire sole-effect}  =<  abet  ^+  +>
@@ -334,18 +399,27 @@
 ::> ||
 ::>   more convenient lexical environment within %app
 ::
-|_  {moz/(list move) biz/(list dill-blit:^dill)}
+=|  biz/(list dill-blit:^dill)  ::FIXME only agent should know about blits
+|_  moz/(list move)
 ::
 ::>  ||
 ::>  ||  %multitude
 ::>  ||
 ::>    subcore interfaces
 ::+|
-++  run-agent  `_agent`~(. agent pith)
-::++  run-guardian  ~(. guardian pith)
+++  run-agent  `_agent`~(. agent bow pith)
+::++  run-guardian  ~(. guardian bow pith)
 ++  abet-agent
-  |=  {mov/(list move) out/(list agent-to-guardian) age/agent-state}
-  =.  pith  age
+  |=  age/_agent
+  =+  ^-  $:  bil/(list dill-blit:^dill)
+              mov/(list move)
+              out/(list agent-to-guardian)
+              ges/agent-state
+          ==
+      abet:age
+  ^+  +>.$
+  =.  pith  ges
+  =.  biz  (welp bil biz)
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
@@ -354,6 +428,13 @@
   ::  out  t.out
   ::==
   !!
+::
+++  wrap-agent
+  =>  v=.
+  =+  run-agent.v
+  |*  a/$-(* _agent)
+  |=  _+<.a  ^+  v
+  (abet-agent.v (a +<))
 ::
 ::>  ||
 ::>  ||  %interface-arms
@@ -411,19 +492,13 @@
   |=  bet/dill-belt:^dill
   =<  se-abet  =<  se-view
   ?:  ?=(?($cru $hey $rez $yow) -.bet)
-    (abet-agent (poke-belt:run-agent bet))
+    (abet-agent (poke-vew:run-agent bet))
   =+  gul=se-current-app
   ?:  |(?=($~ gul) (se-aint u.gul))
     (se-blit %bel ~)
   ta-abet:(ta-belt:(ta u.gul) bet)
   ::
-  ::=.  bet  `control-belt`bet
-  ::?-  bet
-  ::  {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-  ::  {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
-  ::  {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
-  ::  {$yow *}  ~&([%no-yow -.bet] +>)
-  ::==
+
 ::
 ++  poke-start                                          ::< |start %app
   ::> init an app using gall, and link to its console
@@ -552,20 +627,19 @@
   ::>  consolidated set of external requests
   ::
   ^-  (quip move *drum-part)
-  ?.  se-ably
+  ?.  caused-by-console:run-agent
     =.  .  se-adit
     [(flop moz) pith]
   ::=.  sys  ?^(sys sys `ost.bow)
   =.  .  se-subze:se-adze:se-adit
   :::_  pith(bin (~(put by bin) ost.bow dev))
+  ::FIXME only agent should know about blits
   :_  pith(bin dev)
   %-  flop
   ^-  (list move)
   ?~  biz  moz
   :_  moz
   [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
-::
-++  se-ably  (~(has by sup.bow) ost.bow)                ::< caused by console
 ::
 ++  se-adit                                             ::< update servers
   ::> start every server that wants to be up
@@ -738,12 +812,7 @@
 ::> ||
 ::>   emit pokes and dill outputs
 ::
-++  se-blit                                             ::< give output
-  ::> bil: blit to queue; later consolidated into a
-  ::>      single %dill-blit diff
-  ::
-  |=  bil/dill-blit:^dill
-  +>(biz [bil biz])
+++  se-blit  (. do-blit):wrap-agent                       ::DEPRECATED
 ::
 ::++  se-blit-sys                                         ::< output to system
 ::  ::> the initial connection from %dill is saved as
@@ -755,21 +824,7 @@
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
-++  se-dump                                             ::< print tanks
-  ::> tac: pretty-print objects to output as %out lines
-  ::
-  |=  tac/(list tank)
-  ^+  +>
-  ?.  se-ably  (se-talk tac)
-  =/  wol/wall
-    (zing (turn (flop tac) |=(a/tank (~(win re a) [0 120]))))
-  |-  ^+  +>.^$
-  ?~  wol  +>.^$
-  ?.  ((sane %t) (crip i.wol))  :: XX upstream validation
-    ~&  bad-text+<`*`i.wol>
-    $(wol t.wol)
-  $(wol t.wol, +>.^$ (se-blit %out (tuba i.wol)))
-::
+++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
 ++  se-show                                             ::< show buffer, raw
   ::> send updates for cursor position and/or buffer
   ::> contents
@@ -808,35 +863,7 @@
   |=  mov/move
   %_(+> moz [mov moz])
 ::
-++  se-talk                                             ::< show in talk
-  ::> display stack trace using talk if not cause by console
-  ::
-  ::REVIEW maybe at least use {se-blit-sys}?
-  |=  tac/(list tank)
-  ^+  +>
-  :: XX talk should be usable for stack traces, see urbit#584 which this change
-  :: closed for the problems there
-  ((slog (flop tac)) +>)
-  ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
-  ::(said:talk our.bow %drum now.bow eny.bow tac)
-::
-++  se-text                                             ::< return text
-  ::> print message to screen, whatever that means
-  ::>
-  ::> usually this means sending a %out effect, but
-  ::> when the message wasn't caused by a stack trace
-  ::> it is still recorded
-  ::>
-  ::> txt: the message. sanitized if invalid @t
-  ::
-  |=  txt/tape
-  ^+  +>
-  ?.  ((sane %t) (crip txt))  :: XX upstream validation
-    ~&  bad-text+<`*`txt>
-    +>
-  ?.  se-ably  (se-talk [%leaf txt]~)
-  (se-blit %out (tuba txt))
-::
+++  se-text  (. print-message):wrap-agent               ::DEPRECATED
 ++  se-poke                                             ::< send a poke
   ::> dok: target app
   ::> par: request data
