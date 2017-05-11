@@ -284,10 +284,48 @@
           {$pull wire dock $~}                          ::< unsubscribe
       ==                                                ::
     ++  move  (pair bone card)                          ::< user-level move
+    ::
+    ++  agent-state  drum-part :: TODO: trim
+    ++  guardian-state  drum-part :: TODO: trim
+    ++  agent-to-guardian
+      $%  {$sole sole-id-action}
+      ==
+    ++  guardian-to-agent
+      $%  {$sole sole-effect}
+      ==
     --
+|%
+++  agent
+  =|  {mov/(list move) out/(list agent-to-guardian)}
+  |_  agent-state
+  ++  abet
+    ^-  {(list move) (list agent-to-guardian) agent-state}
+    [mov out +<]
+  ++  etc  ; ...
+  ++  poke-belt
+    |*  a/*
+    ~!  [a *dill-belt:^dill]
+    %.  a
+    |=  dill-belt:^dill  =<  abet  ^+  +>
+    !!
+  --
+::
+::++  guardian
+::  =|  {mov/(list move) out/(list guardian-to-agent)}
+::  |_  guardian-state
+::  ++  abet
+::    ^-  {(list move) (list guardian-to-agent) guardian-state}
+::    [mov out +<]
+::  ++  etc  ; ...
+::  ++  diff-effect
+::    |=  {wire sole-effect}  =<  abet  ^+  +>
+::    !!
+::  --
+--
 |=  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
+=*  pith  +<+
 =+  bin
 =*  dev  -
 ::> ||
@@ -296,6 +334,25 @@
 ::>   more convenient lexical environment within %app
 ::
 |_  {moz/(list move) biz/(list dill-blit:^dill)}
+::
+::>  ||
+::>  ||  %multitude
+::>  ||
+::>    subcore interfaces
+::+|
+++  run-agent  `_agent`~(. agent pith)
+::++  run-guardian  ~(. guardian pith)
+++  abet-agent
+  |=  {mov/(list move) out/(list agent-to-guardian) age/agent-state}
+  =.  pith  age
+  =.  moz  (welp mov moz)
+  |-  ^+  +>.^$
+  ?~  out  +>.^$
+  ::%_  $
+  ::  +>.$  (abet-guardian (from-agent:run-guardian i.out))
+  ::  out  t.out
+  ::==
+  !!
 ::
 ::>  ||
 ::>  ||  %interface-arms
@@ -352,19 +409,20 @@
   ::
   |=  bet/dill-belt:^dill
   =<  se-abet  =<  se-view
-  ?.  ?=(?($cru $hey $rez $yow) -.bet)
-    =+  gul=se-current-app
-    ?:  |(?=($~ gul) (se-aint u.gul))
-      (se-blit %bel ~)
-    ta-abet:(ta-belt:(ta u.gul) bet)
+  ?:  ?=(?($cru $hey $rez $yow) -.bet)
+    (abet-agent (poke-belt:run-agent bet))
+  =+  gul=se-current-app
+  ?:  |(?=($~ gul) (se-aint u.gul))
+    (se-blit %bel ~)
+  ta-abet:(ta-belt:(ta u.gul) bet)
   ::
-  =.  bet  `control-belt`bet
-  ?-  bet
-    {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
-    {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
-    {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
-    {$yow *}  ~&([%no-yow -.bet] +>)
-  ==
+  ::=.  bet  `control-belt`bet
+  ::?-  bet
+  ::  {$cru *}  (se-dump:(se-text (trip p.bet)) q.bet)
+  ::  {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
+  ::  {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
+  ::  {$yow *}  ~&([%no-yow -.bet] +>)
+  ::==
 ::
 ++  poke-start                                          ::< |start %app
   ::> init an app using gall, and link to its console
@@ -493,7 +551,6 @@
   ::>  consolidated set of external requests
   ::
   ^-  (quip move *drum-part)
-  =*  pith  +<+.+>+
   ?.  se-ably
     =.  .  se-adit
     [(flop moz) pith]
