@@ -1017,15 +1017,6 @@
       {$txt *}  (ta-txt p.bet)
     ==
   ::
-  ++  ta-send-edit                                      ::< send edit
-    ::> capture context for sole edit, and send it to
-    ::> {dok}
-    ::
-    |=  ted/sole-edit
-    ^+  +>
-    ::(ta-act %det [[his.ven.say.inp own.ven.say.inp] (sham buf.say.inp) ted])
-    (ta-act %det [[his.ven.say own.ven.say] (sham buf.say) ted])
-  ::
   ++  ta-bac                                            ::< hear backspace
     ::> delete character under cursor from
     ::> reverse-i-search or buffer, sending a [%clr ~]
@@ -1177,8 +1168,9 @@
     ::
     |=  ted/sole-edit
     ^+  +>
-    =.  +>  (ta-send-edit ted)
-    +>(say (~(commit shared:sole say) ted))
+    ::=^  det  say  (~(transmit cursored:sole inp) ted)
+    =^  det  say  (~(transmit shared:sole say) ted)
+    (ta-act %det det)
   ::
   ::++  ta-jump                                           ::< buffer pos
   ::  ::> get cursor location after moving
