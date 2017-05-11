@@ -160,17 +160,17 @@
       * ::pom/sole-prompt                                   ::< static prompt
       ::inp/sole-cursor-share                             ::< input state
       {@ say/sole-share}                                  ::< input state
-      ses/ses-data                                      ::< WIP %inc- client
+      ^ ::ses/ses-data                                  ::< WIP %inc- client
       con/_`?($new $liv $ded)`%new                      ::< subscription state
   ==                                                    ::
 ::
 ::TODO unify with sole-id
 ++  session  {@u dock}                                  ::< always [0 our dap]
-++  ses-data                                            ::> WIP, RENAMEME
-  ::> sus: seqn of current outbound subscription
-  ::> rec: counter of received bumps
-  ::
-  {sus/@u rec/@u}
+::++  ses-data                                            ::> WIP, RENAMEME
+::  ::> sus: seqn of current outbound subscription
+::  ::> rec: counter of received bumps
+::  ::
+::  {sus/@u rec/@u}
 ::
 ::
 ++  control-belt                                      ::> control drum itself
@@ -861,8 +861,9 @@
     ::
     ::WIP merge the sole- and inc- protocols
     ~&  [%ta-adze dok con]
-    =.  sus.ses  rec.ses
-    =<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
+    ::=.  sus.ses  rec.ses
+    ::=<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
+    =<  (ta-peer /sole/(encode-id:sole se-sole-id)/0)
     ^+  .
     ?-  con
       $ded  .
@@ -1042,7 +1043,7 @@
     ::=.  inp  *sole-cursor-share
     =.  say  *sole-share
     =.  ta-hom  (ta-hom %set buf)   :: XX cleaner sole share sync?
-    =;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
+    ::=;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
     |-  ^+  ta-this
     ?~  fes  ta-this
     $(fes t.fes, ta-this (ta-diff-effect i.fes))
@@ -1051,7 +1052,7 @@
     ::> register output, and apply it
     ::
     |=  fec/sole-effect
-    =.  rec.ses  +(rec.ses)
+    ::=.  rec.ses  +(rec.ses)
     (ta-apply-effect fec)
   ::
   ++  ta-apply-effect                                   ::< apply effect
