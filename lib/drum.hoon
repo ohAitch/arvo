@@ -289,10 +289,11 @@
     ++  agent-state  drum-part :: TODO: trim
     ++  guardian-state  drum-part :: TODO: trim
     ++  agent-to-guardian
-      $%  {$sole sole-id-action}
+      $%  {$sole p/sole-id-action}
+          {$sole-edit p/sole-edit}  ::TEMPORARY
       ==
     ++  guardian-to-agent
-      $%  {$sole sole-effect}
+      $%  {$sole p/sole-effect}
       ==
     --
 |%
@@ -376,17 +377,61 @@
     ==
   --
 ::
-::++  guardian
-::  =|  {mov/(list move) out/(list guardian-to-agent)}
-::  |_  {bow/bowl:^gall guardian-state}
-::  ++  abet
-::    ^-  {(list move) (list guardian-to-agent) guardian-state}
-::    [mov out +<+]
-::  ++  etc  ; ...
-::  ++  diff-effect
-::    |=  {wire sole-effect}  =<  abet  ^+  +>
-::    !!
-::  --
+++  guardian
+  =|  {mov/(list move) out/(list guardian-to-agent)}
+  |_  {bow/bowl:^gall guardian-state}
+  ++  abet
+    ^-  {(list move) (list guardian-to-agent) guardian-state}
+    [mov out +<+]
+  ::
+  ++  emit  |=(mow/move %_(+> mov [mow mov]))
+  ::+|
+  ::> etc
+  ++  diff-effect
+    |=  {wire sole-effect}  =<  abet  ^+  +>
+    !!
+  ++  from-agent
+    |=  agg/agent-to-guardian
+    ?-  -.agg
+      $sole  !!  ::TODO
+      $sole-edit  abet:(local-edit:(ta our %dojo) p.agg)
+    ==
+  ::+|
+  ++  our-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
+  ::+|
+  ++  ta                                                  ::< per target
+    ::> this core is used to perform operations specific
+    ::> to a {target} app
+    ::>
+    ::> dok: what app
+    ::>
+    |=  dok/dock
+    ::=+  `target`(~(got by fug) dok)                       ::< app and state
+    =+  `target`bin                       ::< app and state
+    |%
+    ++  abet  ..ta(bin +<)
+    ++  local-edit                                       ::< local edit
+      ::> ted: local change to apply
+      ::
+      |=  ted/sole-edit
+      ^+  +>
+      ::=^  det  say  (~(transmit cursored:sole inp) ted)
+      =^  det  say  (~(transmit shared:sole say) ted)
+      (send-action %det det)
+    ++  send-action                                            ::< send action
+      ::> act: action to send to {dok}
+      ::
+      |=  act/sole-action
+      ^+  +>
+      (send-poke %sole-id-action our-sole-id act)
+    ++  send-poke                                             ::< send a poke
+      ::> dok: target app
+      ::> par: request data
+      ::
+      |=  par/pear
+      +>(..ta (emit [ost.bow %poke (drum-path dok) dok par]))
+    --
+  --
 --
 |=  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
@@ -408,7 +453,7 @@
 ::>    subcore interfaces
 ::+|
 ++  run-agent  `_agent`~(. agent bow pith)
-::++  run-guardian  ~(. guardian bow pith)
+++  run-guardian  ~(. guardian bow pith)
 ++  abet-agent
   |=  age/_agent
   =+  ^-  $:  bil/(list dill-blit:^dill)
@@ -423,8 +468,22 @@
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
+  %_  $
+    +>.^$  (abet-guardian (from-agent:run-guardian i.out))
+    out  t.out
+  ==
+::
+++  abet-guardian
+  |=  ran/_guardian
+  =+  ^-  {mov/(list move) out/(list guardian-to-agent) ges/guardian-state}
+      abet:ran
+  ^+  +>.$
+  =.  pith  ges
+  =.  moz  (welp mov moz)
+  |-  ^+  +>.^$
+  ?~  out  +>.^$
   ::%_  $
-  ::  +>.$  (abet-guardian (from-agent:run-guardian i.out))
+  ::  +>.^$  (abet-agent (from-guardian:run-agent i.out))
   ::  out  t.out
   ::==
   !!
