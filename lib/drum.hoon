@@ -1084,7 +1084,7 @@
         ::    ?:  |(=(0 pos.inp) (lth len 2))
         ::      ta-bel
         ::    =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
-        ::    (ta-hom (rep:edit [sop 2] (flop (swag [sop 2] buf.say.inp))))
+        ::    (ta-hom (rep:block:sole [sop 2] (flop (swag [sop 2] buf.say.inp))))
         ::$u  ?:  =(0 pos.inp)
         ::      ta-bel
         ::    (ta-kil %l [0 pos.inp])
@@ -1096,7 +1096,7 @@
         ::$x  +>(..ta se-next-app)
         ::$y  ?:  =(0 num.kil)
         ::      ta-bel
-        ::    (ta-hom (cat:edit pos.inp ta-yan))
+        ::    (ta-hom (cat:block:sole pos.inp ta-yan))
     ==
   ::
   ::++  ta-del                                            ::< hear delete
@@ -1203,7 +1203,7 @@
   ::  |=  {dir/?($l $r) sel/{@ @}}
   ::  ^+  +>
   ::  =+  buf=(swag sel buf.say.inp)
-  ::  %.  (cut:edit sel)
+  ::  %.  (cut:block:sole sel)
   ::  %=  ta-hom
   ::      kil
   ::    ?.  ?&  ?=(^ old.kil)
@@ -1241,7 +1241,7 @@
       ::        ta-bel
       ::      =+  old=`(list @c)`i.old.hit
       ::      =+  sop=(ta-jump(buf.say.inp old) %l %ace (lent old))
-      ::      (ta-hom (cat:edit pos.inp (slag sop old)))
+      ::      (ta-hom (cat:block:sole pos.inp (slag sop old)))
             ::
       ::$bac  ?:  =(0 pos.inp)                            ::< kill left-word
       ::        ta-bel
@@ -1256,7 +1256,7 @@
       ::        ta-bel
       ::      =+  sop=(ta-jump %r %wrd pos.inp)
       ::      %-  ta-hom(pos.inp (ta-jump %r %edg sop))
-      ::      %+  rep:edit  [sop 1]
+      ::      %+  rep:block:sole  [sop 1]
       ::      ^-  (list @c)  ^-  (list @)                 :: XX unicode
       ::      (cuss `tape``(list @)`(swag [sop 1] buf.say.inp))
             ::
@@ -1282,8 +1282,8 @@
       ::      =+  prev=[c (ta-off %r %edg c)]
       ::      %-  ta-hom(pos.inp a)
       ::      :~  %mor
-      ::          (rep:edit next (swag prev buf.say.inp))
-      ::          (rep:edit prev (swag next buf.say.inp))
+      ::          (rep:block:sole next (swag prev buf.say.inp))
+      ::          (rep:block:sole prev (swag next buf.say.inp))
       ::      ==
       ::      ::
       ::?($u $l)                                          ::< upper/lower case
@@ -1293,7 +1293,7 @@
       ::      =+  sop=(ta-jump %r %wrd pos.inp)
       ::      =+  sel=[sop (ta-off %r %edg sop)]
       ::      %-  ta-hom
-      ::      %+  rep:edit  sel
+      ::      %+  rep:block:sole  sel
       ::      ^-  (list @c)  ^-  (list @)                 :: XX unicode
       ::      (case `tape``(list @)`(swag sel buf.say.inp))
             ::
@@ -1305,7 +1305,7 @@
       ::        ta-bel
       ::      =+  las=(lent ta-yan)
       ::      =.  pos.kil  ?:(=(1 pos.kil) num.kil (dec pos.kil))
-      ::      (ta-hom (rep:edit [(sub pos.inp las) las] ta-yan))
+      ::      (ta-hom (rep:block:sole [(sub pos.inp las) las] ta-yan))
     ::==
   ::
   ::++  ta-mov                                            ::< move in history
@@ -1409,8 +1409,8 @@
     ^+  +>
     ::?^  ris
     ::  (ta-ser txt)
-    ::(ta-hom (cat:edit pos.inp txt))
-    (ta-hom (cat:edit (lent buf.say) txt))
+    ::(ta-hom (cat:block:sole pos.inp txt))
+    (ta-hom (cat:block:sole (lent buf.say) txt))
   ::
   ++  ta-vew                                            ::< computed prompt
     ::> active i-search or app prompt, followed by
@@ -1455,45 +1455,6 @@
 ::>   this is helper code that belongs in its own libraries
 ::+|
 ::
-::MOVEME to lib/sole
-++  edit                                                ::< produce sole-edits
-  |%
-  ++  cat                                               ::< mass insert
-    ::>  pos: first position
-    ::>  txt: text to insert
-    ::
-    |=  {pos/@ud txt/(list @c)}
-    ^-  sole-edit
-    :-  %mor
-    |-  ^-  (list sole-edit)
-    ?~  txt  ~
-    [[%ins pos i.txt] $(pos +(pos), txt t.txt)]
-::  ::
-::  ++  cut                                               ::< mass delete
-::    ::>  pos: first position
-::    ::>  num: characters to delete
-::    ::
-::    |=  {pos/@ud num/@ud}
-::    ^-  sole-edit
-::    :-  %mor
-::    |-  ^-  (list sole-edit)
-::    ?:  =(0 num)  ~
-::    [[%del pos] $(num (dec num))]
-::  ::
-::  ++  rep                                               ::< mass replace
-::    ::>  combined cut and cat
-::    ::>
-::    ::>  pos: position
-::    ::>  num: characters to delete
-::    ::>  txt: characters to replace them with
-::    ::
-::    |=  {{pos/@ud num/@ud} txt/(list @c)}
-::    ^-  sole-edit
-::    :~  %mor
-::        (cut pos num)
-::        (cat pos txt)
-::    ==
-  --
 ::::
 ::::MOVEME trivial helper: maybe inline, maybe extract
 ::::       to tiny library similar to {/+time-to-id},

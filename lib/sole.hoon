@@ -257,4 +257,42 @@
       ==
     ==
   --
+++  block                                               ::< produce sole-edits
+  |%
+  ++  cat                                               ::< mass insert
+    ::>  pos: first position
+    ::>  txt: text to insert
+    ::
+    |=  {pos/@ud txt/(list @c)}
+    ^-  sole-edit
+    :-  %mor
+    |-  ^-  (list sole-edit)
+    ?~  txt  ~
+    [[%ins pos i.txt] $(pos +(pos), txt t.txt)]
+::  ::
+::  ++  cut                                               ::< mass delete
+::    ::>  pos: first position
+::    ::>  num: characters to delete
+::    ::
+::    |=  {pos/@ud num/@ud}
+::    ^-  sole-edit
+::    :-  %mor
+::    |-  ^-  (list sole-edit)
+::    ?:  =(0 num)  ~
+::    [[%del pos] $(num (dec num))]
+::  ::
+::  ++  rep                                               ::< mass replace
+::    ::>  combined cut and cat
+::    ::>
+::    ::>  pos: position
+::    ::>  num: characters to delete
+::    ::>  txt: characters to replace them with
+::    ::
+::    |=  {{pos/@ud num/@ud} txt/(list @c)}
+::    ^-  sole-edit
+::    :~  %mor
+::        (cut pos num)
+::        (cat pos txt)
+::    ==
+  --
 --
