@@ -391,7 +391,7 @@
     |=  {wire sole-effect}  =<  abet  ^+  +>
     !!
   ++  from-agent
-    |=  agg/agent-to-guardian
+    |=  agg/agent-to-guardian  ^+  +>
     ?-  -.agg
       $sole  !!  ::TODO
       $sole-edit  abet:(local-edit:(ta our %dojo) p.agg)
@@ -452,8 +452,8 @@
 ::>  ||
 ::>    subcore interfaces
 ::+|
-++  run-agent  `_agent`~(. agent bow pith)
-++  run-guardian  ~(. guardian bow pith)
+++  run-agent  `_agent`~(. agent bow pith(bin dev))
+++  run-guardian  ~(. guardian bow pith(bin dev))
 ++  abet-agent
   |=  age/_agent
   =+  ^-  $:  bil/(list dill-blit:^dill)
@@ -464,6 +464,7 @@
       abet:age
   ^+  +>.$
   =.  pith  ges
+  =.  dev  bin.ges
   =.  biz  (welp bil biz)
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
@@ -479,6 +480,7 @@
       abet:ran
   ^+  +>.$
   =.  pith  ges
+  =.  dev  bin.ges
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
