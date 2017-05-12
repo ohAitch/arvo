@@ -33,8 +33,11 @@
   ::
   _!!
 ::                                                      ::
-++  drum-pith                                           ::
-  ::>  all drum state
+::TODO separate agent state
+::++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
+++  drum-pith  {gas/guardian-state}     ::<  all drum state
+++  agent-state  {say/sole-share}
+++  guardian-state
   ::>
   ::>  sys: used for |exit
   ::>  eel: apps we want to connect to
@@ -286,8 +289,6 @@
       ==                                                ::
     ++  move  (pair bone card)                          ::< user-level move
     ::
-    ++  agent-state  drum-part :: TODO: trim
-    ++  guardian-state  drum-part :: TODO: trim
     ++  agent-to-guardian
       $%  {$sole p/sole-id-action}
           {$sole-edit p/sole-edit}  ::TEMPORARY
@@ -397,7 +398,7 @@
       ::    (ta-act %clr ~)
       ::  ta-bel
       ::(ta-hom %del (dec pos.inp))
-      =*  say  say.bin  ::FIXME separate agent/target buffers
+      ::=*  say  say.bin  ::FIXME separate agent/target buffers
       ?~  buf.say
         (do-action %clr ~)
       (local-edit %del (dec (lent buf.say)))
@@ -464,7 +465,7 @@
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
 =*  pith  +<+
-=+  bin
+=+  bin.gas
 =*  dev  -
 ::> ||
 ::> ||  %door
@@ -479,8 +480,9 @@
 ::>  ||
 ::>    subcore interfaces
 ::+|
-++  run-agent  `_agent`~(. agent bow pith(bin dev))
-++  run-guardian  ~(. guardian bow pith(bin dev))
+::++  run-agent  `_agent`~(. agent bow ges)) ::TODO
+++  run-agent  `_agent`~(. agent bow say.dev) ::FIXME separate agent/target buffers
+++  run-guardian  ~(. guardian bow gas(bin dev))
 ++  abet-agent
   |=  age/_agent
   =+  ^-  $:  bil/(list dill-blit:^dill)
@@ -490,8 +492,8 @@
           ==
       abet:age
   ^+  +>.$
-  =.  pith  ges
-  =.  dev  bin.ges
+  ::=.  ^ges  ges ::TODO
+  =.  say.dev  ges
   =.  biz  (welp bil biz)
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
@@ -503,11 +505,11 @@
 ::
 ++  abet-guardian
   |=  ran/_guardian
-  =+  ^-  {mov/(list move) out/(list guardian-to-agent) ges/guardian-state}
+  =+  ^-  {mov/(list move) out/(list guardian-to-agent) gas/guardian-state}
       abet:ran
   ^+  +>.$
-  =.  pith  ges
-  =.  dev  bin.ges
+  =.  ^gas  gas
+  =.  dev  bin.gas
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
@@ -676,13 +678,13 @@
   |=  {way/wire saw/(each suss:^gall tang)}
   =<  se-abet  =<  se-view
   ?>  ?=({@ @ $~} way)
-  ?>  (~(has by fur) i.t.way)
+  ?>  (~(has by fur.gas) i.t.way)
   =/  wel/well:^gall  [i.way i.t.way]
   ?-  saw
     {$| *}  (se-dump p.saw)
     {$& *}  ?>  =(q.wel p.p.saw)
             ::  =.  +>.$  (se-text "live {<p.saw>}")
-            +>.$(fur (~(put by fur) q.wel `[p.wel %da r.p.saw]))
+            +>.$(fur.gas (~(put by fur.gas) q.wel `[p.wel %da r.p.saw]))
   ==
 ::
 ++  quit-phat                                           ::< get link termination
@@ -724,7 +726,7 @@
   =.  .  se-subze:se-adze:se-adit
   :::_  pith(bin (~(put by bin) ost.bow dev))
   ::FIXME only agent should know about blits
-  :_  pith(bin dev)
+  :_  pith(bin.gas dev)
   %-  flop
   ^-  (list move)
   ?~  biz  moz
@@ -743,10 +745,10 @@
   ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
   ::=.  +>.$  con
   =/  wel/well:^gall  [%home %dojo]
-  =+  hig=(~(get by fur) q.wel)
+  =+  hig=(~(get by fur.gas) q.wel)
   ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  ..se-adit
   =.  ..se-adit  (se-text "activated app {(trip p.wel)}/{(trip q.wel)}")
-  %-  se-emit(fur (~(put by fur) q.wel ~))
+  %-  se-emit(fur.gas (~(put by fur.gas) q.wel ~))
   [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
 ::
 ++  se-adze                                             ::< add new connections
