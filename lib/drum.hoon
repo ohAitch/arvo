@@ -161,6 +161,7 @@
       ::inp/sole-cursor-share                             ::< input state
       {@ say/sole-share}                                  ::< input state
       ^ ::ses/ses-data                                  ::< WIP %inc- client
+      nil/?  ::TEMPORARY corresponds to !(~(has by fug))
       con/_`?($new $liv $ded)`%new                      ::< subscription state
   ==                                                    ::
 ::
@@ -600,9 +601,13 @@
   ::    ..se-adze
   ::  ta-abet:ta-adze:(ta dok)
   ::ta-abet:ta-adze:(new-ta dok)
-  ?:  =(%liv con.dev)
-    ..se-adze
-  ta-abet:ta-adze:(ta dok)
+  ?:  nil.dev
+    ~&  se-adze-nil+[dok]
+    =.  nil.dev  |
+    ta-abet:ta-adze:(ta dok)
+  ?:  =(%ded con.dev)
+    ta-abet:ta-adze:(ta dok)
+  ..se-adze
 ::
 ++  se-subze                                            ::< del old connections
   .
