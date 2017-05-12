@@ -321,6 +321,11 @@
     ::REVIEW still less consolidated than a drum-wide one
     |=(bil/dill-blit:^dill +>(biz [bil biz]))
   ::+|
+  ++  output  |=(a/agent-to-guardian +>(out [a out]))
+  ++  do-action  |=(a/sole-action (output %sole our-sole-id a))
+  ++  local-edit  |=(a/sole-edit (output %sole-edit a))
+  ++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
+  ::+|
   ++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
   ::+|
   ++  print-tanks                                             ::< print tanks
@@ -367,7 +372,7 @@
     ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
     ::(said:talk our.bow %drum now.bow eny.bow tac)
   ::+|
-  ++  poke-vew
+  ++  poke-window-control
     |=  bet/control-belt  ^+  +>
     ?-  bet
       {$cru *}  (print-tanks:(print-message (trip p.bet)) q.bet)
@@ -375,6 +380,28 @@
       {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
     ==
+  ++  process-input
+    |=  {$bac $~}  ^+  +>
+    |^  backspace
+    ++  backspace                                            ::< hear backspace
+      ::> delete character under cursor from
+      ::> reverse-i-search or buffer, sending a [%clr ~]
+      ::> if the buffer is empty.
+      ::
+      ::?^  ris
+      ::  ?:  =(~ str.u.ris)
+      ::    ta-bel
+      ::  .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
+      ::?:  =(0 pos.inp)
+      ::  ?~  buf.say.inp
+      ::    (ta-act %clr ~)
+      ::  ta-bel
+      ::(ta-hom %del (dec pos.inp))
+      =*  say  say.bin  ::FIXME separate agent/target buffers
+      ?~  buf.say
+        (do-action %clr ~)
+      (local-edit %del (dec (lent buf.say)))
+    --
   --
 ::
 ++  guardian
@@ -418,6 +445,7 @@
       ::=^  det  say  (~(transmit cursored:sole inp) ted)
       =^  det  say  (~(transmit shared:sole say) ted)
       (send-action %det det)
+    ::
     ++  send-action                                            ::< send action
       ::> act: action to send to {dok}
       ::
@@ -425,7 +453,6 @@
       ^+  +>
       (send-poke %sole-id-action our-sole-id act)
     ++  send-poke                                             ::< send a poke
-      ::> dok: target app
       ::> par: request data
       ::
       |=  par/pear
@@ -553,7 +580,9 @@
   |=  bet/dill-belt:^dill
   =<  se-abet  =<  se-view
   ?:  ?=(?($cru $hey $rez $yow) -.bet)
-    (abet-agent (poke-vew:run-agent bet))
+    (abet-agent (poke-window-control:run-agent bet))
+  ?:  ?=($bac -.bet)
+    (abet-agent (process-input:run-agent bet))
   =+  gul=se-current-app
   ?:  |(?=($~ gul) (se-aint u.gul))
     (se-blit %bel ~)
@@ -1070,32 +1099,12 @@
     ::
     ?+  bet  ta-bel
       ::{$aro *}  (ta-aro p.bet)
-      {$bac *}  ta-bac
       {$ctl *}  (ta-ctl p.bet)
       ::{$del *}  ta-del
       ::{$met *}  (ta-met p.bet)
       {$ret *}  (ta-act %ret ~)
       {$txt *}  (ta-txt p.bet)
     ==
-  ::
-  ++  ta-bac                                            ::< hear backspace
-    ::> delete character under cursor from
-    ::> reverse-i-search or buffer, sending a [%clr ~]
-    ::> if the buffer is empty.
-    ::
-    ^+  .
-    ::?^  ris
-    ::  ?:  =(~ str.u.ris)
-    ::    ta-bel
-    ::  .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
-    ::?:  =(0 pos.inp)
-    ::  ?~  buf.say.inp
-    ::    (ta-act %clr ~)
-    ::  ta-bel
-    ::(ta-hom %del (dec pos.inp))
-    ?~  buf.say
-      (ta-act %clr ~)
-    (ta-hom %del (dec (lent buf.say)))
   ::
   ++  ta-ctl                                            ::< hear control
     ::> handle ctrl key
