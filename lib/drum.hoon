@@ -321,6 +321,8 @@
     ::>      single %dill-blit diff
     ::REVIEW still less consolidated than a drum-wide one
     |=(bil/dill-blit:^dill +>(biz [bil biz]))
+  ::
+  ++  ring-bell  (do-blit %bel ~)
   ::+|
   ++  output  |=(a/agent-to-guardian +>(out [a out]))
   ++  do-action  |=(a/sole-action (output %sole our-sole-id a))
@@ -372,7 +374,20 @@
     ((slog (flop tac)) +>)
     ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
     ::(said:talk our.bow %drum now.bow eny.bow tac)
+  ::++  local-edit
+  ::  |=  a/sole-edit  ^+  +>
+  ::  !! ::TODO transmit
   ::+|
+  ++  poke-belt                                      ::< terminal event
+    ::> process keystroke
+    ::>
+    ::> bet: the character, key, or modified-key
+    ::
+    |=  bet/dill-belt:^dill  ^+  +>
+    ?:  ?=(?($cru $hey $rez $yow) -.bet)
+      (poke-window-control bet)
+    (process-input bet)
+  ::
   ++  poke-window-control
     |=  bet/control-belt  ^+  +>
     ?-  bet
@@ -381,14 +396,35 @@
       {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
     ==
+  ::
   ++  process-input
-    |=  {$bac $~}  ^+  +>
-    |^  backspace
+    |=  bet/app-specific-belt  ^+  +>
+    =<  ?+  -.bet  ring-bell ::TODO handle all
+          $ret  (do-action %ret ~)
+          $txt  (hear-text p.bet)
+          $bac  backspace
+          $ctl  (key-ctl p.bet)
+        ==
+    |%
+    ++  hear-text                                            ::< hear text
+      ::> hear regular text, into main buffer or
+      ::> reverse-i-search if active
+      ::>
+      ::> ext: text to append, usually single character
+      ::
+      |=  txt/(list @c)
+      ^+  +>.^$
+      ::?^  ris
+      ::  (ta-ser txt)
+      ::(local-edit (cat:block:sole pos.inp txt))
+      (local-edit (cat:block:sole (lent buf.say) txt))
+    ::
     ++  backspace                                            ::< hear backspace
       ::> delete character under cursor from
       ::> reverse-i-search or buffer, sending a [%clr ~]
       ::> if the buffer is empty.
       ::
+      ^+  ..process-input
       ::?^  ris
       ::  ?:  =(~ str.u.ris)
       ::    ta-bel
@@ -398,10 +434,62 @@
       ::    (ta-act %clr ~)
       ::  ta-bel
       ::(ta-hom %del (dec pos.inp))
-      ::=*  say  say.bin  ::FIXME separate agent/target buffers
       ?~  buf.say
         (do-action %clr ~)
       (local-edit %del (dec (lent buf.say)))
+    ++  key-ctl                                            ::< hear control
+      ::> handle ctrl key
+      ::
+      |=  key/@ud
+      ^+  ..process-input
+      ::=.  ris  ?.(?=(?($g $r) key) ~ ris)
+      ?+    key    ring-bell
+          ::$a  +>(pos.inp 0)
+          ::$b  (ta-aro %l)
+          $c  ring-bell
+          ::$d  ?^  buf.say.inp
+          ::    ta-del
+          ::    > talk and dojo close console on ^d
+          ::    > instead of actually disconnecting
+          ::
+          ::    ?:  (~(has in eel:(drum-make our.bow)) dok)
+          ::      +>(..ta (se-blit qit+~))                  ::< quit pier
+          ::    +>(eel (~(del in eel) dok))                 ::< unlink app
+          $d  (do-blit qit+~)                               ::< quit pier
+          ::$e  +>(pos.inp (lent buf.say.inp))
+          ::$f  (ta-aro %r)
+          ::$g  ?~  ris  ring-bell
+          ::    (ta-hom(pos.hit num.hit, ris ~) [%set ~])
+          ::$k  =+  len=(lent buf.say.inp)
+          ::    ?:  =(pos.inp len)
+          ::      ring-bell
+          ::    (ta-kil %r [pos.inp (sub len pos.inp)])
+          $l  (do-blit %clr ~)
+          ::$n  (ta-aro %d)
+          ::$p  (ta-aro %u)
+          ::$r  ?~  ris
+          ::      +>(ris `[pos.hit ~])
+          ::    ?:  =(0 pos.u.ris)
+          ::      ring-bell
+          ::    (ta-ser ~)
+          ::$t  =+  len=(lent buf.say.inp)
+          ::    ?:  |(=(0 pos.inp) (lth len 2))
+          ::      ring-bell
+          ::    =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
+          ::    (ta-hom (rep:block:sole [sop 2] (flop (swag [sop 2] buf.say.inp))))
+          ::$u  ?:  =(0 pos.inp)
+          ::      ring-bell
+          ::    (ta-kil %l [0 pos.inp])
+          $v  ring-bell
+          ::$w  ?:  =(0 pos.inp)
+          ::      ring-bell
+          ::    =+  sop=(ta-off %l %ace pos.inp)
+          ::    (ta-kil %l [(sub pos.inp sop) sop])
+          ::$x  +>(..ta se-next-app)
+          ::$y  ?:  =(0 num.kil)
+          ::      ring-bell
+          ::    (ta-hom (cat:block:sole pos.inp ta-yan))
+      ==
     --
   --
 ::
@@ -420,10 +508,7 @@
     !!
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
-    ?-  -.agg
-      $sole  !!  ::TODO
-      $sole-edit  abet:(local-edit:(ta our %dojo) p.agg)
-    ==
+    abet:(from-agent:(ta our %dojo) agg)
   ::+|
   ++  our-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
   ::+|
@@ -438,6 +523,14 @@
     =+  `target`bin                       ::< app and state
     |%
     ++  abet  ..ta(bin +<)
+    ::+|
+    ++  from-agent
+      |=  agg/agent-to-guardian  ^+  +>
+      ?-  -.agg
+        $sole  (agent-sole p.agg)
+        $sole-edit  (local-edit p.agg)
+      ==
+    ::
     ++  local-edit                                       ::< local edit
       ::> ted: local change to apply
       ::
@@ -447,6 +540,21 @@
       =^  det  say  (~(transmit shared:sole say) ted)
       (send-action %det det)
     ::
+    ++  agent-sole
+      |=  sol/sole-id-action
+      ::TODO use id
+      ?@  q.sol  !! ::TODO new sessions
+      ?-  -.q.sol
+        $ret  (send-action q.sol)
+        $clr  (send-action q.sol)
+        $det  (agent-change +.q.sol)
+      ==
+    ::
+    ++  agent-change
+      |=  a/sole-change
+      !!  ::TODO recieve, retransmit
+    ::
+    ::+|
     ++  send-action                                            ::< send action
       ::> act: action to send to {dok}
       ::
@@ -581,15 +689,14 @@
   ::
   |=  bet/dill-belt:^dill
   =<  se-abet  =<  se-view
-  ?:  ?=(?($cru $hey $rez $yow) -.bet)
-    (abet-agent (poke-window-control:run-agent bet))
-  ?:  ?=($bac -.bet)
-    (abet-agent (process-input:run-agent bet))
-  =+  gul=se-current-app
-  ?:  |(?=($~ gul) (se-aint u.gul))
-    (se-blit %bel ~)
-  ta-abet:(ta-belt:(ta u.gul) bet)
-  ::
+  (abet-agent (poke-belt:run-agent bet))
+  ::?:  ?=(?($cru $hey $rez $yow) -.bet)
+  ::  (abet-agent (poke-window-control:run-agent bet))
+  ::=+  gul=se-current-app
+  ::?:  |(?=($~ gul) (se-aint u.gul))
+  ::  (se-blit %bel ~)
+  ::ta-abet:(ta-belt:(ta u.gul) bet)
+  ::::
 
 ::
 ++  poke-start                                          ::< |start %app
@@ -1087,80 +1194,27 @@
     ::.(..ta (se-blit %bel ~), q.blt ~)
     .(..ta (se-blit %bel ~))
   ::
-  ++  ta-belt                                           ::< handle input
-    ::> bet: input keystroke
-    ::
-    |=  bet/app-specific-belt
-    ^+  +>
-    ::
-    ::
-    ::> save last two belts to recognize ctrl-w ctrl-w
-    ::> and similar sequences
-    ::
-    ::=.  blt  [q.blt `bet]
-    ::
-    ?+  bet  ta-bel
-      ::{$aro *}  (ta-aro p.bet)
-      {$ctl *}  (ta-ctl p.bet)
-      ::{$del *}  ta-del
-      ::{$met *}  (ta-met p.bet)
-      {$ret *}  (ta-act %ret ~)
-      {$txt *}  (ta-txt p.bet)
-    ==
+  ::++  ta-belt                                           ::< handle input
+  ::  ::> bet: input keystroke
+  ::  ::
+  ::  |=  bet/app-specific-belt
+  ::  ^+  +>
+  ::  ::
+  ::  ::
+  ::  ::> save last two belts to recognize ctrl-w ctrl-w
+  ::  ::> and similar sequences
+  ::  ::
+  ::  ::=.  blt  [q.blt `bet]
+  ::  ::
+  ::  ?+  bet  ta-bel
+  ::    ::{$aro *}  (ta-aro p.bet)
+  ::    ::{$ctl *}  (ta-ctl p.bet)
+  ::    ::{$del *}  ta-del
+  ::    ::{$met *}  (ta-met p.bet)
+  ::    ::{$ret *}  (ta-act %ret ~)
+  ::    ::{$txt *}  (ta-txt p.bet)
+  ::  ==
   ::
-  ++  ta-ctl                                            ::< hear control
-    ::> handle ctrl key
-    ::
-    |=  key/@ud
-    ^+  +>
-    ::=.  ris  ?.(?=(?($g $r) key) ~ ris)
-    ?+    key    ta-bel
-        ::$a  +>(pos.inp 0)
-        ::$b  (ta-aro %l)
-        $c  ta-bel
-        ::$d  ?^  buf.say.inp
-        ::    ta-del
-        ::    > talk and dojo close console on ^d
-        ::    > instead of actually disconnecting
-        ::
-        ::    ?:  (~(has in eel:(drum-make our.bow)) dok)
-        ::      +>(..ta (se-blit qit+~))                  ::< quit pier
-        ::    +>(eel (~(del in eel) dok))                 ::< unlink app
-        $d  +>(..ta (se-blit qit+~))                  ::< quit pier
-        ::$e  +>(pos.inp (lent buf.say.inp))
-        ::$f  (ta-aro %r)
-        ::$g  ?~  ris  ta-bel
-        ::    (ta-hom(pos.hit num.hit, ris ~) [%set ~])
-        ::$k  =+  len=(lent buf.say.inp)
-        ::    ?:  =(pos.inp len)
-        ::      ta-bel
-        ::    (ta-kil %r [pos.inp (sub len pos.inp)])
-        $l  +>(..ta (se-blit %clr ~))
-        ::$n  (ta-aro %d)
-        ::$p  (ta-aro %u)
-        ::$r  ?~  ris
-        ::      +>(ris `[pos.hit ~])
-        ::    ?:  =(0 pos.u.ris)
-        ::      ta-bel
-        ::    (ta-ser ~)
-        ::$t  =+  len=(lent buf.say.inp)
-        ::    ?:  |(=(0 pos.inp) (lth len 2))
-        ::      ta-bel
-        ::    =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
-        ::    (ta-hom (rep:block:sole [sop 2] (flop (swag [sop 2] buf.say.inp))))
-        ::$u  ?:  =(0 pos.inp)
-        ::      ta-bel
-        ::    (ta-kil %l [0 pos.inp])
-        $v  ta-bel
-        ::$w  ?:  =(0 pos.inp)
-        ::      ta-bel
-        ::    =+  sop=(ta-off %l %ace pos.inp)
-        ::    (ta-kil %l [(sub pos.inp sop) sop])
-        ::$x  +>(..ta se-next-app)
-        ::$y  ?:  =(0 num.kil)
-        ::      ta-bel
-        ::    (ta-hom (cat:block:sole pos.inp ta-yan))
-    ==
   ::
   ::++  ta-del                                            ::< hear delete
   ::  ::> delete character after cursor if any
@@ -1462,19 +1516,6 @@
   ::      $(sop (dec sop), dol t.dol)
   ::  ?~  sup  ta-bel
   ::  (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
-  ::
-  ++  ta-txt                                            ::< hear text
-    ::> hear regular text, into main buffer or
-    ::> reverse-i-search if active
-    ::>
-    ::> ext: text to append, usually single character
-    ::
-    |=  txt/(list @c)
-    ^+  +>
-    ::?^  ris
-    ::  (ta-ser txt)
-    ::(ta-hom (cat:block:sole pos.inp txt))
-    (ta-hom (cat:block:sole (lent buf.say) txt))
   ::
   ++  ta-vew                                            ::< computed prompt
     ::> active i-search or app prompt, followed by
