@@ -317,6 +317,7 @@
     ++  guardian-to-agent
       $%  {$sole-change p/sole-change}
           {$side-effect p/side-effect}
+          {$prompt-update p/(pair @ud stub:^dill)}
       ==
     --
 |%
@@ -405,7 +406,21 @@
     ?-  -.gug
       $sole-change  !! ::TODO handle
       $side-effect  (do-effect p.gug)
+      $prompt-update  (update-prompt p.gug)
     ==
+  ::
+  ++  update-prompt                                           ::< show buffer, raw
+    ::> send updates for cursor position and/or buffer
+    ::> contents
+    ::
+    |=  lin/(pair @ud stub:^dill)
+    ^+  +>
+    ::?:  =(mir lin)  +>
+    ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
+    ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
+    ::+>(mir lin)
+    ::
+    (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
   ::
   ++  do-effect
     |=  fec/side-effect  ^+  +>
@@ -550,6 +565,29 @@
   ::REVIEW pubsub? things might get more interesting with multiple agents
   ++  output  |=(a/guardian-to-agent +>(out [a out]))
   ::+|
+  ::++  show-cropped                                             ::< show adjusted buffer
+  ::  ::> lin: buffer to display. {q.lin} is cropped to
+  ::  ::> the terminal width {edg}, keeping the
+  ::  ::> cursor {p.lin} visible
+  ::  ::
+  ::  |=  lin/(pair @ud stub:^dill)
+  ::  ^+  +>
+  ::  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
+  ::  (show-raw-prompt (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
+  ::
+  ++  show-raw-prompt                                           ::< show buffer, raw
+    ::> send updates for cursor position and/or buffer
+    ::> contents
+    ::
+    |=  lin/(pair @ud stub:^dill)
+    ^+  +>
+    ::?:  =(mir lin)  +>
+    ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
+    ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
+    ::+>(mir lin)
+    ::
+    (output %prompt-update lin)
+  ::+|
   ++  diff-backlog                                   ::< apply backlog
     ::> tot: total number of emitted updates, including
     ::>      skipped %det
@@ -563,10 +601,39 @@
     |=  {dok/dock fec/sole-effect}
     abet:(diff-effect:(ta dok) fec)
   ::
+  ++  flush-buffer
+    ^+  .
+    =+  gul=current-app
+    ?:  |(?=($~ gul) (invisible-app u.gul))  +
+    ::(show-cropped computed-prompt:(ta u.gul))
+    (show-raw-prompt computed-prompt:(ta u.gul))
+  ::
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
     abet:(from-agent:(ta our %dojo) agg)
   ::+|
+  ++  invisible-app                                     ::< is app ignorable
+    ::> if an app has not been connected yet, or the
+    ::> connection has been cancelled, ignore
+    ::> input/output from it
+    ::
+    ::TODO with new disconnection semantics, this might
+    ::     effectively be always &
+    |=  dok/dock  ^-  ?
+    ::?.  (~(has by bin) ost.bow)  &
+    ::=+  gyr=(~(get by fug) dok)
+    ::|(?=($~ gyr) !=(%liv con.u.gyr))
+    !=(%liv con:(ta dok))
+  ::
+  ++  current-app                                      ::< current dock
+    ::> app selected by ^X ring, if any
+    ::
+    ^-  (unit dock)
+    `[our %dojo]
+    ::=+  wag=se-amor
+    ::?~  wag  ~
+    ::`(snag inx `(list dock)`wag)
+  ::
   ++  our-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
   ::+|
   ++  ta                                                  ::< per target
@@ -581,6 +648,39 @@
     |%
     ++  abet  ..ta(bin +<)
     ++  this  .
+    ::+|
+    ++  computed-prompt                                      ::< computed prompt
+      ::> active i-search or app prompt, followed by
+      ::> input text if visible or hash if typing in a
+      ::> password etc
+      ::
+      ^-  (pair @ud stub:^dill)
+      =/  lin/stub:^dill  [[~ ~ %b] (tuba "> ")]~
+      :_  (welp lin [*stye:^dill buf.say]~)
+      (add (lent buf.say) (lent-char:klr lin))
+      ::=;  vew/(pair (list @c) styx:^dill)
+      ::  =+  lin=(make:klr q.vew)
+      ::  :_  (welp lin [*stye:^dill p.vew]~)
+      ::  (add pos.inp (lent-char:klr lin))
+      ::?:  vis.pom
+      ::  ::
+      ::  ::> default prompt
+      ::  ::
+      ::  :-  buf.say.inp
+      ::  ::?~  ris
+      ::  ::  cad.pom
+      ::  :::(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
+      ::  cad.pom
+      ::::
+      ::::> hidden input
+      ::::
+      :::-  (reap (lent buf.say.inp) `@c`'*')
+      ::%+  welp
+      ::  cad.pom
+      ::?~  buf.say.inp  ~
+      :::(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
+    ::
+
     ::+|
     ++  diff-backlog                                   ::< apply backlog
       ::> tot: total number of emitted updates, including
@@ -1014,18 +1114,7 @@
 ::> ||
 ::>   retrieve derived state
 ::+|
-++  se-aint                                             ::< is app ignorable
-  ::> if an app has not been connected yet, or the
-  ::> connection has been cancelled, ignore
-  ::> input/output from it
-  ::
-  ::TODO with new disconnection semantics, this might
-  ::     effectively be always &
-  |=  dok/dock  ^-  ?
-  ::?.  (~(has by bin) ost.bow)  &
-  ::=+  gyr=(~(get by fug) dok)
-  ::|(?=($~ gyr) !=(%liv con.u.gyr))
-  !=(%liv con.dev)
+++  se-aint   invisible-app:run-guardian  ::DEPRECATED
 ::
 ::++  se-amor                                             ::< live targets
 ::  ::> list apps which are successfully connected
@@ -1060,14 +1149,6 @@
 ::  ::  ~&  [%se-next-app inx+inx wag+wag nex+(mod +(inx) (lent se-amor))]
 ::  +(inx (mod +(inx) (lent wag)))
 ::
-++  se-current-app                                      ::< current dock
-  ::> app selected by ^X ring, if any
-  ::
-  ^-  (unit dock)
-  `[our %dojo]
-  ::=+  wag=se-amor
-  ::?~  wag  ~
-  ::`(snag inx `(list dock)`wag)
 ::
 ::> ||
 ::> ||  %disconnection
@@ -1112,8 +1193,6 @@
 ::> ||
 ::>   emit pokes and dill outputs
 ::
-++  se-blit  (. do-blit):wrap-agent                       ::DEPRECATED
-::
 ::++  se-blit-sys                                         ::< output to system
 ::  ::> the initial connection from %dill is saved as
 ::  ::> {sys}, used for administartive tasks like
@@ -1125,37 +1204,11 @@
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
 ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
-++  se-show                                             ::< show buffer, raw
-  ::> send updates for cursor position and/or buffer
-  ::> contents
-  ::
-  |=  lin/(pair @ud stub:^dill)
-  ^+  +>
-  ::?:  =(mir lin)  +>
-  ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
-  ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
-  ::+>(mir lin)
-  ::
-  (se-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
-::
-::++  se-just                                             ::< show adjusted buffer
-::  ::> lin: buffer to display. {q.lin} is cropped to
-::  ::> the terminal width {edg}, keeping the
-::  ::> cursor {p.lin} visible
-::  ::
-::  |=  lin/(pair @ud stub:^dill)
-::  ^+  +>
-::  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
-::  (se-show (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
-::
 ++  se-view                                             ::< flush buffer
   ::> if an app is selected, sync out its input buffer
   ::
   ^+  .
-  =+  gul=se-current-app
-  ?:  |(?=($~ gul) (se-aint u.gul))  +
-  ::(se-just ta-vew:(ta u.gul))
-  (se-show ta-vew:(ta u.gul))
+  (abet-guardian flush-buffer:run-guardian)
 ::
 ++  se-emit                                             ::< emit move
   ::> mov: side-effect to queue for sending
@@ -1543,37 +1596,6 @@
   ::      $(sop (dec sop), dol t.dol)
   ::  ?~  sup  ta-bel
   ::  (ta-mov(str.u.ris tot, pos.u.ris u.sup) (dec u.sup))
-  ::
-  ++  ta-vew                                            ::< computed prompt
-    ::> active i-search or app prompt, followed by
-    ::> input text if visible or hash if typing in a
-    ::> password etc
-    ::
-    ^-  (pair @ud stub:^dill)
-    =/  lin/stub:^dill  [[~ ~ %b] (tuba "> ")]~
-    :_  (welp lin [*stye:^dill buf.say]~)
-    (add (lent buf.say) (lent-char:klr lin))
-    ::=;  vew/(pair (list @c) styx:^dill)
-    ::  =+  lin=(make:klr q.vew)
-    ::  :_  (welp lin [*stye:^dill p.vew]~)
-    ::  (add pos.inp (lent-char:klr lin))
-    ::?:  vis.pom
-    ::  ::
-    ::  ::> default prompt
-    ::  ::
-    ::  :-  buf.say.inp
-    ::  ::?~  ris
-    ::  ::  cad.pom
-    ::  :::(welp "(reverse-i-search)'" (tufa str.u.ris) "': ")
-    ::  cad.pom
-    ::::
-    ::::> hidden input
-    ::::
-    :::-  (reap (lent buf.say.inp) `@c`'*')
-    ::%+  welp
-    ::  cad.pom
-    ::?~  buf.say.inp  ~
-    :::(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
   ::
   ::++  ta-yan                                            ::< yank
   ::  ::> current ctrl-y text from kill ring
