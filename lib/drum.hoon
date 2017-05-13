@@ -194,6 +194,27 @@
   ==                                                  ::
 ++  typecheck                                         ::> -belt type completeness
   `dill-belt:^dill`*?(control-belt app-specific-belt)
+++  side-effect
+  $%  {$bel $~}                                         ::< beep
+      {$blk p/@ud q/@c}                                 ::< blink+match char at
+      {$clr $~}                                         ::< clear screen
+      {$klr p/styx:^dill}                               ::< styled text line
+      {$sag p/path q/*}                                 ::< save to jamfile
+      {$sav p/path q/@}                                 ::< save to file
+      {$tan p/(list tank)}                              ::< classic tank
+  ::  {$taq p/tanq}                                     ::< modern tank
+      {$txt p/tape}                                     ::< text line
+      {$url p/@t}                                       ::< activate url
+  ==                                                    ::
+++  mutating-effect
+  $%  {$det sole-change}                                ::< edit command
+      {$err p/@ud}                                      ::< error point
+      {$nex $~}                                         ::< save clear command
+      {$say p/sole-share}                               ::< reset buffer
+      {$pro sole-prompt}                                ::< set prompt
+  ==
+++  typecheck2
+  `sole-effect`*?(side-effect mutating-effect {$mor (list sole-effect)})
 --
 ::                                                      ::  ::
 ::::                                                    ::  ::
@@ -294,7 +315,8 @@
           {$sole-edit p/sole-edit}  ::TEMPORARY
       ==
     ++  guardian-to-agent
-      $%  {$sole p/sole-effect}
+      $%  {$sole-change p/sole-change}
+          {$side-effect p/side-effect}
       ==
     --
 |%
@@ -346,7 +368,7 @@
       $(wol t.wol)
     $(wol t.wol, +>.^$ (do-blit %out (tuba i.wol)))
   ::
-  ++  print-message                                          ::< return text
+  ++  print-text                                          ::< return text
     ::> print message to screen, whatever that means
     ::>
     ::> usually this means sending a %out effect, but
@@ -378,6 +400,29 @@
   ::  |=  a/sole-edit  ^+  +>
   ::  !! ::TODO transmit
   ::+|
+  ++  from-guardian
+    |=  gug/guardian-to-agent  ^+  +>
+    ?-  -.gug
+      $sole-change  !! ::TODO handle
+      $side-effect  (do-effect p.gug)
+    ==
+  ::
+  ++  do-effect
+    |=  fec/side-effect  ^+  +>
+    ?-  fec
+      {$bel *}  ring-bell
+      {$blk *}  +>
+    ::
+      {$sag *}  (do-blit fec)
+      {$sav *}  (do-blit fec)
+      {$url *}  (do-blit fec)
+      {$clr *}  (do-blit fec)
+    ::
+      {$klr *}  (do-blit %klr (make:klr p.fec))
+      {$tan *}  (print-tanks p.fec)
+      {$txt *}  (print-text p.fec)
+    ==
+  ::
   ++  poke-belt                                      ::< terminal event
     ::> process keystroke
     ::>
@@ -391,7 +436,7 @@
   ++  poke-window-control
     |=  bet/control-belt  ^+  +>
     ?-  bet
-      {$cru *}  (print-tanks:(print-message (trip p.bet)) q.bet)
+      {$cru *}  (print-tanks:(print-text (trip p.bet)) q.bet)
       {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
       {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
       {$yow *}  ~&([%no-yow -.bet] +>)
@@ -502,10 +547,22 @@
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ::+|
-  ::> etc
-  ++  diff-effect
-    |=  {wire sole-effect}  =<  abet  ^+  +>
-    !!
+  ::REVIEW pubsub? things might get more interesting with multiple agents
+  ++  output  |=(a/guardian-to-agent +>(out [a out]))
+  ::+|
+  ++  diff-backlog                                   ::< apply backlog
+    ::> tot: total number of emitted updates, including
+    ::>      skipped %det
+    ::> fes: list of backlog effects
+    |=  {dok/dock tot/@u fes/(list sole-effect)}
+    abet:(diff-backlog:(ta dok) tot fes)
+  ::
+  ++  diff-effect                                    ::< record and apply
+    ::> register output, and apply it
+    ::
+    |=  {dok/dock fec/sole-effect}
+    abet:(diff-effect:(ta dok) fec)
+  ::
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
     abet:(from-agent:(ta our %dojo) agg)
@@ -523,7 +580,52 @@
     =+  `target`bin                       ::< app and state
     |%
     ++  abet  ..ta(bin +<)
+    ++  this  .
     ::+|
+    ++  diff-backlog                                   ::< apply backlog
+      ::> tot: total number of emitted updates, including
+      ::>      skipped %det
+      ::> fes: list of backlog effects
+      |=  {tot/@u fes/(list sole-effect)}
+      ::REVIEW clarity
+      ::=/  buf  buf.say.inp
+      =/  buf  buf.say
+      ::=.  inp  *sole-cursor-share
+      =.  say  *sole-share
+      =.  this  (local-edit %set buf)   :: XX cleaner sole share sync?
+      ::=;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
+      |-  ^+  this
+      ?~  fes  this
+      $(fes t.fes, this (diff-effect i.fes))
+    ::
+    ++  diff-effect                                    ::< record and apply
+      ::> register output, and apply it
+      ::
+      |=  fec/sole-effect
+      ::=.  rec.ses  +(rec.ses)
+      (apply-effect fec)
+    ::
+    ++  apply-effect                                   ::< apply effect
+      ::> translate sole- output to raw dill-
+      ::
+      |=  fec/sole-effect  ^+  +>
+      ::TODO optimize: split into side and mutating effects
+      ?:  ?=($mor -.fec)
+        ?~(p.fec +> $(p.fec t.p.fec, +> $(fec i.p.fec)))
+      ?.  ?=(?($det $err $nex $say $pro) -.fec)
+        +>(..ta (output %side-effect fec))
+      ?-  fec
+        ::{$det *}  +>(inp +:(~(receive cursored:sole inp) +.fec))
+        {$det *}  +>(say +:(~(receive shared:sole say) +.fec))
+        ::{$err *}  (ta-err p.fec)
+        {$err *}  +>(..ta (output %side-effect bel+~))
+        ::{$nex *}  ta-nex
+        {$nex *}  +>
+        ::{$pro *}  (ta-pro +.fec)
+        {$pro *}  +>
+        {$say *}  +>(say [[own=his his=own]:ven leg=~ buf]:p.fec)
+      ==
+    ::
     ++  from-agent
       |=  agg/agent-to-guardian  ^+  +>
       ?-  -.agg
@@ -621,11 +723,10 @@
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
-  ::%_  $
-  ::  +>.^$  (abet-agent (from-guardian:run-agent i.out))
-  ::  out  t.out
-  ::==
-  !!
+  %_  $
+    +>.^$  (abet-agent (from-guardian:run-agent i.out))
+    out  t.out
+  ==
 ::
 ++  wrap-agent
   =>  v=.
@@ -651,7 +752,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-diff-backlog:(ta dok) tot fec)
+  (abet-guardian (diff-backlog:run-guardian dok tot fec))
 ::
 ++  diff-sole-effect-phat                               ::< console output
   ::> receive update to virual console
@@ -665,7 +766,7 @@
   =<  se-abet  =<  se-view
   =+  dok=(drum-phat way)
   ?:  (se-aint dok)  +>.$
-  ta-abet:(ta-diff-effect:(ta dok) fec)
+  (abet-guardian (diff-effect:run-guardian dok fec))
 ::
 ++  peer                                                ::< new connection
   ::>  incoming subscription
@@ -1062,7 +1163,7 @@
   |=  mov/move
   %_(+> moz [mov moz])
 ::
-++  se-text  (. print-message):wrap-agent               ::DEPRECATED
+++  se-text  (. print-text):wrap-agent               ::DEPRECATED
 ++  se-poke                                             ::< send a poke
   ::> dok: target app
   ::> par: request data
@@ -1221,7 +1322,7 @@
   ::  ::
   ::  ^+  .
   ::  ?:  =((lent buf.say.inp) pos.inp)
-  ::    ta-bel
+  ::  ?(  ta-bel -.fec)
   ::  (ta-hom %del pos.inp)
   ::
   ::++  ta-erl                                            ::< hear local error
@@ -1237,67 +1338,7 @@
   ::  |=  pos/@ud
   ::  (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ++  ta-diff-backlog                                   ::< apply backlog
-    ::> tot: total number of emitted updates, including
-    ::>      skipped %det
-    ::> fes: list of backlog effects
-    |=  {tot/@u fes/(list sole-effect)}
-    ::REVIEW clarity
-    ::=/  buf  buf.say.inp
-    =/  buf  buf.say
-    ::=.  inp  *sole-cursor-share
-    =.  say  *sole-share
-    =.  ta-hom  (ta-hom %set buf)   :: XX cleaner sole share sync?
-    ::=;  nex  ?>((lte rec.ses.nex tot) nex(rec.ses tot))
-    |-  ^+  ta-this
-    ?~  fes  ta-this
-    $(fes t.fes, ta-this (ta-diff-effect i.fes))
-  ::
-  ++  ta-diff-effect                                    ::< record and apply
-    ::> register output, and apply it
-    ::
-    |=  fec/sole-effect
-    ::=.  rec.ses  +(rec.ses)
-    (ta-apply-effect fec)
-  ::
-  ++  ta-apply-effect                                   ::< apply effect
-    ::> translate sole- output to raw dill-
-    ::
-    |=  fec/sole-effect
-    ^+  +>
-    ?-  fec
-      {$bel *}  ta-bel
-      {$blk *}  +>
-      {$clr *}  +>(..ta (se-blit fec))
-      ::{$det *}  +>(inp +:(~(receive cursored:sole inp) +.fec))
-      {$det *}  +>(say +:(~(receive shared:sole say) +.fec))
-      ::{$err *}  (ta-err p.fec)
-      {$err *}  ta-bel
-      {$klr *}  +>(..ta (se-blit %klr (make:klr p.fec)))
-      {$mor *}  |-  ^+  +>.^$
-                ?~  p.fec  +>.^$
-                $(p.fec t.p.fec, +>.^$ ^$(fec i.p.fec))
-      ::{$nex *}  ta-nex
-      {$nex *}  +>
-      ::{$pro *}  (ta-pro +.fec)
-      {$pro *}  +>
-      {$tan *}  +>(..ta (se-dump p.fec))
-      {$sag *}  +>(..ta (se-blit fec))
-      {$sav *}  +>(..ta (se-blit fec))
-      {$txt *}  +>(..ta (se-text p.fec))
-      {$url *}  +>(..ta (se-blit fec))
-      {$say *}  +>(say [[own=his his=own]:ven leg=~ buf]:p.fec)
-    ==
-  ::
-  ++  ta-hom                                            ::< local edit
-    ::> ted: local change to apply
-    ::
-    |=  ted/sole-edit
-    ^+  +>
-    ::=^  det  say  (~(transmit cursored:sole inp) ted)
-    =^  det  say  (~(transmit shared:sole say) ted)
-    (ta-act %det det)
-  ::
+  ::++  ta-hom  DEPRECATED see local-edit in agent, guardian
   ::++  ta-jump                                           ::< buffer pos
   ::  ::> get cursor location after moving
   ::  ::>
