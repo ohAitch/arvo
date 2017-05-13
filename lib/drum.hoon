@@ -1208,8 +1208,6 @@
   ::>  ||
   ::>    minor incantations
   ::+|
-  ++  ta-this    .                                      ::< self
-  ::
   ++  ta-abet                                           ::< resolve
     ::>  exit {ta}, saving changed connection to {dok}
     ::
@@ -1260,13 +1258,6 @@
       $new  (ta-poke %sole-id-action se-sole-id %new)
     ==
   ::
-  ++  ta-act                                            ::< send action
-    ::> act: action to send to {dok}
-    ::
-    |=  act/sole-action
-    ^+  +>
-    (ta-poke %sole-id-action se-sole-id act)
-  ::
   ::++  ta-aro                                            ::< process arrow
   ::  ::> key: arrow direction
   ::  ::
@@ -1288,12 +1279,7 @@
   ::    ::    (ta-hom:ta-nex %set ~)
   ::  ==
   ::
-  ++  ta-bel                                            ::< beep
-    ::> send "bell" signal to terminal
-    ::
-    :: producing a bell interupts a command sequence
-    ::.(..ta (se-blit %bel ~), q.blt ~)
-    .(..ta (se-blit %bel ~))
+  ::++  ta-bel  ::DEPRECATED ring-bell:agent                ::< beep
   ::
   ::++  ta-belt                                           ::< handle input
   ::  ::> bet: input keystroke
