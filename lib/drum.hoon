@@ -284,44 +284,39 @@
 ::
 ::::
   ::
+|%
+++  agent-to-guardian
+  $%  {$sole p/sole-id-action}
+      {$sole-edit p/sole-edit}  ::TEMPORARY
+  ==
+++  guardian-to-agent
+  $%  {$sole-change p/sole-change}
+      {$side-effect p/side-effect}
+      {$prompt-update p/(pair @ud stub:^dill)}
+  ==
+--
+
 ::> ||
 ::> ||  %app
 ::> ||
 ::>   event + state -> reactions + state
 ::>
-=>  ::>  ||
-    ::>  ||  %interface-types
-    ::>  ||
-    ::
-    |%
-    ++  pear                                            ::> request (poke)
-      $%  {$sole-id-action p/sole-id-action}            ::< buffer update
-          ::{$talk-command command:talk}                ::< render stack trace
-      ==                                                ::
-    ++  lime                                            ::> typed diff
-      $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
-      ==                                                ::
-    ++  card                                            ::> general card
-      $%  {$conf wire dock $load ship term}             ::< configure app
-          {$diff lime}                                  ::< give update
-          {$peer wire dock path}                        ::< subscribe
-          {$poke wire dock pear}                        ::< send message
-          {$pull wire dock $~}                          ::< unsubscribe
-      ==                                                ::
-    ++  move  (pair bone card)                          ::< user-level move
-    ::
-    ++  agent-to-guardian
-      $%  {$sole p/sole-id-action}
-          {$sole-edit p/sole-edit}  ::TEMPORARY
-      ==
-    ++  guardian-to-agent
-      $%  {$sole-change p/sole-change}
-          {$side-effect p/side-effect}
-          {$prompt-update p/(pair @ud stub:^dill)}
-      ==
-    --
 |%
 ++  agent
+  =>  ::>  ||
+      ::>  ||  %interface-types
+      ::>  ||
+      ::
+      |%
+      ++  lime                                            ::> typed diff
+        $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
+        ==                                                ::
+      ++  card                                            ::> general card
+        $%  {$conf wire dock $load ship term}             ::< configure app
+            {$diff lime}                                  ::< give update
+        ==                                                ::
+      ++  move  (pair bone card)                          ::< user-level move
+      --
   =|  {mov/(list move) out/(list agent-to-guardian) biz/(list dill-blit:^dill)}
   |_  {bow/bowl:^gall agent-state}
   ++  abet
@@ -554,6 +549,27 @@
   --
 ::
 ++  guardian
+  =>  ::>  ||
+      ::>  ||  %interface-types
+      ::>  ||
+      ::
+      |%
+      ++  pear                                            ::> request (poke)
+        $%  {$sole-id-action p/sole-id-action}            ::< buffer update
+        ==                                                ::
+      ++  lime                                            ::> typed diff
+        _!!
+  ::       $%  {$sole-effect sole-effect}                  ::< console changes
+  ::       ==                                                ::
+      ++  card                                            ::> general card
+        $%  ::  {$conf wire dock $load ship term}             ::< configure app
+            {$diff lime}                                  ::< give update
+  ::           {$peer wire dock path}                        ::< subscribe
+            {$poke wire dock pear}                        ::< send message
+  ::           {$pull wire dock $~}                          ::< unsubscribe
+        ==                                                ::
+      ++  move  (pair bone card)                          ::< user-level move
+      --
   =|  {mov/(list move) out/(list guardian-to-agent)}
   |_  {bow/bowl:^gall guardian-state}
   ++  abet
@@ -771,6 +787,27 @@
     --
   --
 --
+=>  ::>  ||
+    ::>  ||  %interface-types
+    ::>  ||
+    ::
+    |%
+    ++  pear                                            ::> request (poke)
+      $%  {$sole-id-action p/sole-id-action}            ::< buffer update
+          ::{$talk-command command:talk}                ::< render stack trace
+      ==                                                ::
+    ++  lime                                            ::> typed diff
+      $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
+      ==                                                ::
+    ++  card                                            ::> general card
+      $%  {$conf wire dock $load ship term}             ::< configure app
+          {$diff lime}                                  ::< give update
+          {$peer wire dock path}                        ::< subscribe
+          {$poke wire dock pear}                        ::< send message
+          {$pull wire dock $~}                          ::< unsubscribe
+      ==                                                ::
+    ++  move  (pair bone card)                          ::< user-level move
+    --
 |=  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
