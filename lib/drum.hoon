@@ -35,7 +35,7 @@
 ::                                                      ::
 ::TODO separate agent state
 ::++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
-++  drum-pith  {gas/guardian-state}     ::<  all drum state
+++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
 ++  agent-state  {say/sole-share}
 ++  guardian-state
   ::>
@@ -53,6 +53,7 @@
       fur/(map dude:^gall (unit server))                ::< servers
       :: bin/(map bone source)
       bin/target                             ::< terminals
+      gen/{say/sole-share}                       ::< state for agents
   ==                                                    ::
 ::
 ::> ||
@@ -287,7 +288,6 @@
 |%
 ++  agent-to-guardian
   $%  {$sole p/sole-id-action}
-      {$sole-edit p/sole-edit}  ::TEMPORARY
   ==
 ++  guardian-to-agent
   $%  {$sole-change p/sole-change}
@@ -344,7 +344,6 @@
   ::+|
   ++  output  |=(a/agent-to-guardian +>(out [a out]))
   ++  do-action  |=(a/sole-action (output %sole our-sole-id a))
-  ++  local-edit  |=(a/sole-edit (output %sole-edit a))
   ++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
   ::+|
   ++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
@@ -392,10 +391,17 @@
     ((slog (flop tac)) +>)
     ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
     ::(said:talk our.bow %drum now.bow eny.bow tac)
-  ::++  local-edit
-  ::  |=  a/sole-edit  ^+  +>
-  ::  !! ::TODO transmit
+  ::
+  ++  local-edit                                       ::< local edit
+    ::> ted: local change to apply
+    ::
+    |=  ted/sole-edit
+    ^+  +>
+    ::=^  det  say  (~(transmit cursored:sole inp) ted)
+    =^  det  say  (~(transmit shared:sole say) ted)
+    (do-action %det det)
   ::+|
+  ::
   ++  from-guardian
     |=  gug/guardian-to-agent  ^+  +>
     ?-  -.gug
@@ -795,7 +801,6 @@
       |=  agg/agent-to-guardian  ^+  +>
       ?-  -.agg
         $sole  (agent-sole p.agg)
-        $sole-edit  (local-edit p.agg)
       ==
     ::
     ++  local-edit                                       ::< local edit
@@ -818,8 +823,14 @@
       ==
     ::
     ++  agent-change
-      |=  a/sole-change
-      !!  ::TODO recieve, retransmit
+      ::> soc: local change to apply
+      |=  soc/sole-change
+      ^+  +>
+      =^  ted  say.gen  (~(receive shared:sole say.gen) soc)
+      ::=^  det  say  (~(transmit cursored:sole inp) ted)
+      =^  det  say  (~(transmit shared:sole say) ted)
+      (send-action %det det)
+    ::
     ::
     ::+|
     ++  send-action                                            ::< send action
@@ -881,8 +892,7 @@
 ::>  ||
 ::>    subcore interfaces
 ::+|
-::++  run-agent  `_agent`~(. agent bow ges)) ::TODO
-++  run-agent  `_agent`~(. agent bow say.dev) ::FIXME separate agent/target buffers
+++  run-agent  `_agent`~(. agent bow ges)
 ++  run-guardian  ~(. guardian bow gas(bin dev))
 ++  abet-agent
   |=  age/_agent
@@ -893,8 +903,7 @@
           ==
       abet:age
   ^+  +>.$
-  ::=.  ^ges  ges ::TODO
-  =.  say.dev  ges
+  =.  ^ges  ges
   =.  biz  (welp bil biz)
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
