@@ -580,6 +580,8 @@
   |_  {bow/bowl:^gall guardian-state}
   ++  abet
     ^-  {(list move) (list guardian-to-agent) guardian-state}
+    ~|  [buf.say.bin buf.say.gen]
+    ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
     [mov out +<+]
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
