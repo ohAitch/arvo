@@ -405,7 +405,7 @@
   ++  from-guardian
     |=  gug/guardian-to-agent  ^+  +>
     ?-  -.gug
-      $sole-change  !! ::TODO handle
+      $sole-change  +>(say +:(~(receive shared:sole say) p.gug))
       $side-effect  (do-effect p.gug)
       $prompt-update  (update-prompt p.gug)
     ==
@@ -786,8 +786,12 @@
       ?.  ?=(?($det $err $nex $say $pro) -.fec)
         +>(..ta (output %side-effect fec))
       ?-  fec
-        ::{$det *}  +>(inp +:(~(receive cursored:sole inp) +.fec))
-        {$det *}  +>(say +:(~(receive shared:sole say) +.fec))
+        {$det *}
+           :: =^  det  inp  (~(receive cursored:sole inp) +.fec))
+           =^  det  say  (~(receive shared:sole say) +.fec)
+           =^  soc  say.gen  (~(transmit shared:sole say.gen) det)
+           +>.$(..ta (output %sole-change soc))
+        ::
         ::{$err *}  (ta-err p.fec)
         {$err *}  +>(..ta (output %side-effect bel+~))
         ::{$nex *}  ta-nex
@@ -810,6 +814,8 @@
       ^+  +>
       ::=^  det  say  (~(transmit cursored:sole inp) ted)
       =^  det  say  (~(transmit shared:sole say) ted)
+      =^  soc  say.gen  (~(transmit shared:sole say.gen) ted)
+      =.  ..ta  (output %sole-change soc)
       (send-action %det det)
     ::
     ++  agent-sole
