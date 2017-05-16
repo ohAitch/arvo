@@ -990,49 +990,44 @@
   ::ta-abet:(ta-belt:(ta u.gul) bet)
   ::
 ::
-++  poke-start                                          ::< |start %app
-  ::> init an app using gall, and link to its console
-  ::
-  |=  wel/well:^gall
-  =<  se-abet  =<  se-view  ^+  +>
-  !!
-  ::?:  (~(has in ray) wel)
-  ::  (se-text "[already running {<p.wel>}/{<q.wel>}]")
-  ::%=  +>
-  ::  ray  (~(put in ray) wel)
-  ::  eel  (~(put in eel) [our.bow q.wel])
-  ::==
+:: ++  poke-start                                          ::< |start %app
+::   ::> init an app using gall, and link to its console
+::   ::
+::   |=  wel/well:^gall
+::   =<  se-abet  =<  se-view  ^+  +>
+::   ::?:  (~(has in ray) wel)
+::   ::  (se-text "[already running {<p.wel>}/{<q.wel>}]")
+::   ::%=  +>
+::   ::  ray  (~(put in ray) wel)
+::   ::  eel  (~(put in eel) [our.bow q.wel])
+::   ::==
 ::
-++  poke-link                                           ::< |link %app, connect
-  ::> connnect to an app's console
-  ::
-  |=  dok/dock
-  ^+(se-abet !!)
-  ::=<  se-abet  =<  se-view
-  ::+>(eel (~(put in eel) dok))
-::
-++  poke-unlink                                         ::< |unlink %app, close
-  ::> disconnnect from an app's console
-  ::
-  |=  dok/dock
-  ^+(se-abet !!)
-  ::=<  se-abet  =<  se-view
-  ::+>(eel (~(del in eel) dok))
-::
-++  poke-exit                                           ::< |exit, shutdown urbit
-  ::> shutdown running urbit instance
-  ::
-  |=  $~
-  ^+(se-abet !!)
-  ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
-::
-++  poke-put                                            ::< write file
-  ::> write a text file to the pier's `.urb/put`
-  ::> directory
-  ::
-  |=  {pax/path txt/@}
-  ^+(se-abet !!)
-  ::se-abet:(se-blit-sys [%sav pax txt])
+:: ++  poke-link                                           ::< |link %app, connect
+::   ::> connnect to an app's console
+::   ::
+::   |=  dok/dock
+::   ::=<  se-abet  =<  se-view
+::   ::+>(eel (~(put in eel) dok))
+:: ::
+:: ++  poke-unlink                                         ::< |unlink %app, close
+::   ::> disconnnect from an app's console
+::   ::
+::   |=  dok/dock
+::   ::=<  se-abet  =<  se-view
+::   ::+>(eel (~(del in eel) dok))
+:: ::
+:: ++  poke-exit                                           ::< |exit, shutdown urbit
+::   ::> shutdown running urbit instance
+::   ::
+::   |=  $~
+::   ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
+:: ::
+:: ++  poke-put                                            ::< write file
+::   ::> write a text file to the pier's `.urb/put`
+::   ::> directory
+::   ::
+::   |=  {pax/path txt/@}
+::   ::se-abet:(se-blit-sys [%sav pax txt])
 ::
 ++  reap-phat                                           ::< get ack for connection
   ::> receive acknowledgment on an app connection
