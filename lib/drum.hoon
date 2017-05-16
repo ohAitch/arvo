@@ -562,11 +562,11 @@
   ::       $%  {$sole-effect sole-effect}                  ::< console changes
   ::       ==                                                ::
       ++  card                                            ::> general card
-        $%  ::  {$conf wire dock $load ship term}             ::< configure app
+        $%  {$conf wire dock $load ship term}             ::< configure app
             {$diff lime}                                  ::< give update
-  ::           {$peer wire dock path}                        ::< subscribe
+            {$peer wire dock path}                        ::< subscribe
             {$poke wire dock pear}                        ::< send message
-  ::           {$pull wire dock $~}                          ::< unsubscribe
+::             {$pull wire dock $~}                          ::< unsubscribe
         ==                                                ::
       ++  move  (pair bone card)                          ::< user-level move
       --
@@ -580,6 +580,7 @@
   ::+|
   ::REVIEW pubsub? things might get more interesting with multiple agents
   ++  output  |=(a/guardian-to-agent +>(out [a out]))
+  ++  print-text  |=(txt/tape (output %side-effect %txt txt))
   ::+|
   ::++  show-cropped                                             ::< show adjusted buffer
   ::  ::> lin: buffer to display. {q.lin} is cropped to
@@ -604,6 +605,8 @@
     ::
     (output %prompt-update lin)
   ::+|
+  ++  connect  |=(dok/dock abet:connect:(ta dok))    ::< connect
+  ++  peered  |=(dok/dock abet:peered:(ta dok))      ::< peered
   ++  diff-backlog                                   ::< apply backlog
     ::> tot: total number of emitted updates, including
     ::>      skipped %det
@@ -662,8 +665,17 @@
     ::=+  `target`(~(got by fug) dok)                       ::< app and state
     =+  `target`bin                       ::< app and state
     |%
-    ++  abet  ..ta(bin +<)
+    ::>  ||
+    ::>  ||  %convenience
+    ::>  ||
+    ::>    minor incantations
+    ::+|
+    ++  abet                                           ::< resolve
+      ::>  exit {ta}, saving changed connection to {dok}
+      ::..ta(fug (~(put by fug) dok `target`+<))
+      ..ta(bin +<)
     ++  this  .
+    ::
     ::+|
     ++  computed-prompt                                      ::< computed prompt
       ::> active i-search or app prompt, followed by
@@ -696,8 +708,45 @@
       ::?~  buf.say.inp  ~
       :::(welp "<" (scow %p (end 4 1 (sham buf.say.inp))) "> ")
     ::
-
     ::+|
+    ::
+    ::>  ||
+    ::>  ||  %interfaces
+    ::>  ||
+    ::+|
+    ::
+    ++  peered                                         ::< subscription ack
+      ::> on successful session {con}nection,
+      ::> display "[linked]" message
+      ::
+      ~&  ta+peered+dok
+      ~?  =(%liv con)
+        ta+connection-succeeded-again+con
+      =.  con  %liv
+      =.  ta  (print-text "[linked to {<dok>}]")
+      ?.  =(%new con)  .
+      ::(ta-pro & %$ "<awaiting prompt> ")
+      .
+    ::
+    ++  disconnect  .(con %ded)                         ::< disconnect
+    ++  connect                                         ::< send a peer
+      ::> this currently resolves between the %inc- and
+      ::> %sole- protocols by hardcoded app name, sending
+      ::> a subscription to the appropriate path
+      ::
+      ::WIP merge the sole- and inc- protocols
+      ~&  [%ta-adze dok con]
+      ::=.  sus.ses  rec.ses
+      ::=<  (ta-peer /sole/(encode-id:sole our-sole-id)/(scot %ud sus.ses))
+      =<  (send-peer /sole/(encode-id:sole our-sole-id)/0)
+      ^+  .
+      ?-  con
+        $ded  .
+        $liv  ~|(%ta-pull !!)
+        ::$liv  ta-pull
+        $new  (send-poke %sole-id-action our-sole-id %new)
+      ==
+    ::
     ++  diff-backlog                                   ::< apply backlog
       ::> tot: total number of emitted updates, including
       ::>      skipped %det
@@ -784,6 +833,11 @@
       ::
       |=  par/pear
       +>(..ta (emit [ost.bow %poke (drum-path dok) dok par]))
+    ::++  send-pull                                         ::< pull dok
+    ::  .(..ta (emit ost.bow %pull (drum-path dok)))
+    ++  send-peer                                           ::< peer dok
+      |=  a/path
+      +>(..ta (emit [ost.bow %peer (drum-path dok) dok a]))
     --
   --
 --
@@ -934,8 +988,7 @@
   ::?:  |(?=($~ gul) (se-aint u.gul))
   ::  (se-blit %bel ~)
   ::ta-abet:(ta-belt:(ta u.gul) bet)
-  ::::
-
+  ::
 ::
 ++  poke-start                                          ::< |start %app
   ::> init an app using gall, and link to its console
@@ -992,7 +1045,7 @@
   =<  se-abet  =<  se-view  ^+  +>
   =+  dok=(drum-phat way)
   ?~  saw
-    ta-abet:ta-peered:(ta dok)
+    (abet-guardian (peered:run-guardian dok))
   (mean >%drum-reap-fail< u.saw)
   ::(se-dump:(se-nuke dok) u.saw)
 ::
@@ -1113,11 +1166,11 @@
   ::  ta-abet:ta-adze:(ta dok)
   ::ta-abet:ta-adze:(new-ta dok)
   ?:  nil.dev
-    ~&  se-adze-nil+[dok]
     =.  nil.dev  |
-    ta-abet:ta-adze:(ta dok)
+    (abet-guardian (connect:run-guardian dok))
   ?:  =(%ded con.dev)
-    ta-abet:ta-adze:(ta dok)
+    ~&  se-adze-ded+[dok]
+    (abet-guardian (connect:run-guardian dok))
   ..se-adze
 ::
 ++  se-subze                                            ::< del old connections
@@ -1267,7 +1320,6 @@
 ::  |=  dok/dock
 ::  (se-emit [ost.bow %pull (drum-path dok) dok ~])
 ::
-++  se-sole-id  `sole-id`[0 our dap]:bow                ::< XX multiple?
 ::RENAMEME
 ::> ||
 ::> ||  %ta-core
@@ -1283,70 +1335,33 @@
 ::  =.  fug  (~(put by fug) dok *target)
 ::  (ta dok)
 ::
-++  ta                                                  ::< per target
+:: ++  ta                                                  ::< per target
   ::> this core is used to perform operations specific
   ::> to a {target} app
   ::>
   ::> dok: what app
   ::>
-  |=  dok/dock
+  ::|=  dok/dock
   ::=+  `target`(~(got by fug) dok)                       ::< app and state
-  =+  `target`dev                       ::< app and state
-  |%
+  :: =+  `target`dev                       ::< app and state
+  :: |%
   ::>  ||
   ::>  ||  %convenience
   ::>  ||
   ::>    minor incantations
   ::+|
-  ++  ta-abet                                           ::< resolve
-    ::>  exit {ta}, saving changed connection to {dok}
-    ::
-    ^+  ..ta
-    ::..ta(fug (~(put by fug) dok `target`+<))
-    ..ta(dev `target`+<)
-  ::
-  ++  ta-poke    |=(a/pear +>(..ta (se-poke dok a)))    ::< poke dok
+  ::++  ta-abet                                           ::< resolve
+  ::  ::>  exit {ta}, saving changed connection to {dok}
+  ::  ::
+  ::  ^+  ..ta
+  ::  ::..ta(fug (~(put by fug) dok `target`+<))
+  ::  ..ta(dev `target`+<)
+  ::::
+  ::++  ta-poke    |=(a/pear +>(..ta (se-poke dok a)))    ::< poke dok
   ::++  ta-pull    .(..ta (se-pull dok))                  ::< pull dok
-  ++  ta-peer                                           ::< peer dok
-    |=  a/path
-    +>(..ta (se-emit ost.bow %peer (drum-path dok) dok a))
-  ::
-  ::>  ||
-  ::>  ||  %interfaces
-  ::>  ||
-  ::+|
-  ::
-  ++  ta-peered                                         ::< subscription ack
-    ::> on successful session {con}nection,
-    ::> display "[linked]" message
-    ::
-    ~&  ta-peered+dok
-    ~?  =(%liv con)
-      [%ta %connection-succeeded-again con]
-    =.  con  %liv
-    =.  ta  (se-text "[linked to {<dok>}]")
-    ?.  =(%new con)  .
-    ::(ta-pro & %$ "<awaiting prompt> ")
-    .
-  ::
-  ++  ta-drop  .(con %ded)                              ::< disconnect
-  ++  ta-adze                                           ::< send a peer
-    ::> this currently resolves between the %inc- and
-    ::> %sole- protocols by hardcoded app name, sending
-    ::> a subscription to the appropriate path
-    ::
-    ::WIP merge the sole- and inc- protocols
-    ~&  [%ta-adze dok con]
-    ::=.  sus.ses  rec.ses
-    ::=<  (ta-peer /sole/(encode-id:sole se-sole-id)/(scot %ud sus.ses))
-    =<  (ta-peer /sole/(encode-id:sole se-sole-id)/0)
-    ^+  .
-    ?-  con
-      $ded  .
-      $liv  ~|(%ta-pull !!)
-      ::$liv  ta-pull
-      $new  (ta-poke %sole-id-action se-sole-id %new)
-    ==
+  ::++  ta-peer                                           ::< peer dok
+  ::  |=  a/path
+  ::  +>(..ta (se-emit ost.bow %peer (drum-path dok) dok a))
   ::
   ::++  ta-aro                                            ::< process arrow
   ::  ::> key: arrow direction
@@ -1638,7 +1653,7 @@
   ::  ::> current ctrl-y text from kill ring
   ::  ::
   ::  (snag (sub num.kil pos.kil) old.kil)
-  --
+  ::--
 ::
 ::> ||
 ::> ||  %moveme
