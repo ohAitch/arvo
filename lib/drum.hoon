@@ -441,7 +441,22 @@
       {$txt *}  (print-text p.fec)
     ==
   ::
-  ++  poke-belt                                      ::< terminal event
+  ::
+  ++  peer                                            ::< new connection
+    ::>  incoming subscription
+    ::>
+    ::>  _: unused path attribute
+    |=  path
+    ::TODO assert path is empty or sth
+    ::
+    ::> only allow connections from self or moons
+    ::
+    ~|  [%drum-unauthorized our+our.bow src+src.bow]
+    ?>  (team:title our.bow src.bow)
+    ::
+    (print-text "[{<src.bow>}, driving {<our.bow>}]")
+  ::
+  ++  poke-dill-belt                                 ::< terminal event
     ::> process keystroke
     ::>
     ::> bet: the character, key, or modified-key
@@ -450,6 +465,10 @@
     ?:  ?=(?($cru $hey $rez $yow) -.bet)
       (poke-window-control bet)
     (process-input bet)
+    ::=+  gul=se-current-app
+    ::?:  |(?=($~ gul) (se-aint u.gul))
+    ::  (se-blit %bel ~)
+    ::ta-abet:(ta-belt:(ta u.gul) bet)
   ::
   ++  poke-window-control
     |=  bet/control-belt  ^+  +>
@@ -616,6 +635,102 @@
     ::+>(mir lin)
     ::
     (output %prompt-update lin)
+  ::
+  ::>  ||
+  ::>  ||  %raw-interfaces
+  ::>  ||
+  ::+|
+  ++  diff-sole-backlog-phat                               ::< chunk of output
+    ::> updates to virtual console on re/connect
+    ::>
+    ::> way: identifies the app sending the update,
+    ::>      encoded as /[%p]/[%tas]
+    ::> tot: total number of updates, including skipped %det
+    ::> fec: list of backlog effects
+    ::
+    |=  {way/wire tot/@u fec/(list sole-effect)}
+    =+  dok=(drum-phat way)
+    ?:  (invisible-app dok)  +>.$
+    (diff-backlog dok tot fec)
+  ::
+  ++  diff-sole-effect-phat                               ::< console output
+    ::> receive update to virual console
+    ::>
+    ::> way: identifies the app sending the update,
+    ::>      encoded as /[%p]/[%tas]
+    ::> fec: the update. print lines, delete/replace
+    ::>      chars of input, etc
+    ::
+    |=  {way/wire fec/sole-effect}  ^+  +>
+    =+  dok=(drum-phat way)
+    ?:  (invisible-app dok)  +>.$
+    (diff-effect dok fec)
+  ::
+  ++  reap-phat                                           ::< get ack for connection
+    ::> receive acknowledgment on an app connection
+    ::>
+    ::> way: identifies the app being connected to,
+    ::>      encoded as /[%p]/[%tas]
+    ::> saw: stack trace, if the connection failed
+    ::
+    |=  {way/wire saw/(unit tang)}  ^+  +>
+    =+  dok=(drum-phat way)
+    ?~  saw  (peered dok)
+    (mean >%drum-reap-fail< u.saw)
+    ::(se-dump:(se-nuke dok) u.saw)
+  ::
+  ++  take-coup-phat                                      ::< get ack for poke
+    ::> receive acknowledgment on an app command
+    ::>
+    ::> way: identifies the app being commanded,
+    ::>      encoded as /[%p]/[%tas]
+    ::> saw: stack trace, if the command failed
+    ::
+    |=  {way/wire saw/(unit tang)}  ^+  +>
+    ?~  saw  +>
+    =+  dok=(drum-phat way)
+    ?:  (invisible-app dok)  +>.$
+    (mean >[%drum-coup-fail src.bow ost.bow dok]< u.saw)
+    ::%-  se-dump:(se-nuke dok)
+    :::_  u.saw
+    ::>[%drum-coup-fail src.bow ost.bow dok]<
+  ::
+  ++  take-onto                                           ::< get ack for start
+    ::> receive acknowledgment on an app being started
+    ::>
+    ::> way: identifies the app being started,
+    ::>      encoded as /[%p]/[%tas]
+    ::> saw: stack trace, if the initialization failed
+    ::
+    |=  {way/wire saw/(each suss:^gall tang)}  ^+  +>
+    ?>  ?=({@ @ $~} way)
+    =/  wel/well:^gall  [i.way i.t.way]
+    (started wel saw)
+  ::
+  ++  quit-phat                                           ::< get link termination
+    ::> called when an open console link disconnects
+    ::>
+    ::> way: identifies the app that disconnected,
+    ::>      encoded as /[%p]/[%tas]
+    ::
+    |=  way/wire  ^+  +>
+    =+  dok=(drum-phat way)
+    ~&  [%drum-quit src.bow ost.bow dok]
+    ::
+    ::REVIEW this selects a different non-dropped app,
+    ::       which is not ideal
+    ^+(+>.$ !!)
+    ::=+  lag=se-current-app
+    ::?.  (~(has by fug) dok)  +>.$
+    ::=.  +>.$  (print-text "[dropped {<dok>}, relinking]")
+    ::=.  +>.$  ta-abet:ta-adze:ta-drop:(ta dok)
+    ::?.  &(?=(^ lag) !=(dok u.lag))
+    ::  +>.$(inx 0)
+    ::(se-select-app u.lag)
+  ::
+  ::>  ||
+  ::>  ||  %interfaces
+  ::>  ||
   ::+|
   ++  peered  |=(dok/dock abet:peered:(ta dok))      ::< peered
   ++  add-connections                                ::< add new connections
@@ -1053,8 +1168,15 @@
   =>  v=.
   =+  run-agent.v
   |*  a/$-(* _agent)
-  |=  _+<.a  ^+  v
-  (abet-agent.v (a +<))
+  |=  _+<.a  ^+  se-abet.v
+  se-abet:se-view:(abet-agent.v (a +<))
+::
+++  wrap-guardian
+  =>  v=.
+  =+  run-guardian.v
+  |*  a/$-(* _guardian)
+  |=  _+<.a  ^+  se-abet.v
+  se-abet:se-view:(abet-guardian.v (a +<))
 ::
 ::>  ||
 ::>  ||  %interface-arms
@@ -1062,63 +1184,17 @@
 ::>    accept external events
 ::+|
 ++  diff-sole-backlog-phat                               ::< chunk of output
-  ::> updates to virtual console on re/connect
-  ::>
-  ::> way: identifies the app sending the update,
-  ::>      encoded as /[%p]/[%tas]
-  ::> tot: total number of updates, including skipped %det
-  ::> fec: list of backlog effects
-  ::
   |=  {way/wire tot/@u fec/(list sole-effect)}
-  =<  se-abet  =<  se-view
-  =+  dok=(drum-phat way)
-  ?:  (se-aint dok)  +>.$
-  (abet-guardian (diff-backlog:run-guardian dok tot fec))
-::
+  %.(+< (. diff-sole-backlog-phat):wrap-guardian)
 ++  diff-sole-effect-phat                               ::< console output
-  ::> receive update to virual console
-  ::>
-  ::> way: identifies the app sending the update,
-  ::>      encoded as /[%p]/[%tas]
-  ::> fec: the update. print lines, delete/replace
-  ::>      chars of input, etc
-  ::
   |=  {way/wire fec/sole-effect}
-  =<  se-abet  =<  se-view
-  =+  dok=(drum-phat way)
-  ?:  (se-aint dok)  +>.$
-  (abet-guardian (diff-effect:run-guardian dok fec))
-::
+  %.(+< (. diff-sole-effect-phat):wrap-guardian)
 ++  peer                                                ::< new connection
-  ::>  incoming subscription
-  ::>
-  ::>  _: unused path attribute
-  |=  path
-  ::TODO assert path is empty or sth
-  ::
-  ::> only allow connections from self or moons
-  ::
-  ~|  [%drum-unauthorized our+our.bow src+src.bow]
-  ?>  (team:title our.bow src.bow)
-  ::
-  =<  se-abet  =<  se-view
-  (se-text "[{<src.bow>}, driving {<our.bow>}]")
-::
+  |=  pax/path
+  %.(+< (. peer):wrap-agent)
 ++  poke-dill-belt                                      ::< terminal event
-  ::> process keystroke
-  ::>
-  ::> bet: the character, key, or modified-key
-  ::
   |=  bet/dill-belt:^dill
-  =<  se-abet  =<  se-view
-  (abet-agent (poke-belt:run-agent bet))
-  ::?:  ?=(?($cru $hey $rez $yow) -.bet)
-  ::  (abet-agent (poke-window-control:run-agent bet))
-  ::=+  gul=se-current-app
-  ::?:  |(?=($~ gul) (se-aint u.gul))
-  ::  (se-blit %bel ~)
-  ::ta-abet:(ta-belt:(ta u.gul) bet)
-  ::
+  %.(+< (. poke-dill-belt):wrap-agent)
 ::
 :: ++  poke-start                                          ::< |start %app
 ::   ::> init an app using gall, and link to its console
@@ -1158,73 +1234,18 @@
 ::   ::
 ::   |=  {pax/path txt/@}
 ::   ::se-abet:(se-blit-sys [%sav pax txt])
-::
 ++  reap-phat                                           ::< get ack for connection
-  ::> receive acknowledgment on an app connection
-  ::>
-  ::> way: identifies the app being connected to,
-  ::>      encoded as /[%p]/[%tas]
-  ::> saw: stack trace, if the connection failed
-  ::
   |=  {way/wire saw/(unit tang)}
-  =<  se-abet  =<  se-view  ^+  +>
-  =+  dok=(drum-phat way)
-  ?~  saw
-    (abet-guardian (peered:run-guardian dok))
-  (mean >%drum-reap-fail< u.saw)
-  ::(se-dump:(se-nuke dok) u.saw)
-::
+  %.(+< (. reap-phat):wrap-guardian)
 ++  take-coup-phat                                      ::< get ack for poke
-  ::> receive acknowledgment on an app command
-  ::>
-  ::> way: identifies the app being commanded,
-  ::>      encoded as /[%p]/[%tas]
-  ::> saw: stack trace, if the command failed
-  ::
   |=  {way/wire saw/(unit tang)}
-  =<  se-abet  =<  se-view  ^+  +>
-  ?~  saw  +>
-  =+  dok=(drum-phat way)
-  ?:  (se-aint dok)  +>.$
-  (mean >[%drum-coup-fail src.bow ost.bow dok]< u.saw)
-  ::%-  se-dump:(se-nuke dok)
-  :::_  u.saw
-  ::>[%drum-coup-fail src.bow ost.bow dok]<
-::
+  %.(+< (. take-coup-phat):wrap-guardian)
 ++  take-onto                                           ::< get ack for start
-  ::> receive acknowledgment on an app being started
-  ::>
-  ::> way: identifies the app being started,
-  ::>      encoded as /[%p]/[%tas]
-  ::> saw: stack trace, if the initialization failed
-  ::
   |=  {way/wire saw/(each suss:^gall tang)}
-  =<  se-abet  =<  se-view
-  ?>  ?=({@ @ $~} way)
-  =/  wel/well:^gall  [i.way i.t.way]
-  (abet-guardian (started:run-guardian wel saw))
-::
+  %.(+< (. take-onto):wrap-guardian)
 ++  quit-phat                                           ::< get link termination
-  ::> called when an open console link disconnects
-  ::>
-  ::> way: identifies the app that disconnected,
-  ::>      encoded as /[%p]/[%tas]
-  ::
   |=  way/wire
-  =<  se-abet  =<  se-view
-  =+  dok=(drum-phat way)
-  ~&  [%drum-quit src.bow ost.bow dok]
-  ::
-  ::REVIEW this selects a different non-dropped app,
-  ::       which is not ideal
-  ^+(+> !!)
-  ::=+  lag=se-current-app
-  ::?.  (~(has by fug) dok)  +>.$
-  ::=.  +>.$  (se-text "[dropped {<dok>}, relinking]")
-  ::=.  +>.$  ta-abet:ta-adze:ta-drop:(ta dok)
-  ::?.  &(?=(^ lag) !=(dok u.lag))
-  ::  +>.$(inx 0)
-  ::(se-select-app u.lag)
+  %.(+< (. quit-phat):wrap-guardian)
 ::
 ::> ||
 ::> ||  %resolution
@@ -1249,7 +1270,7 @@
 ::> ||
 ::>   retrieve derived state
 ::+|
-++  se-aint   invisible-app:run-guardian  ::DEPRECATED
+:: ++  se-aint   invisible-app:run-guardian  ::DEPRECATED
 ::
 ::++  se-amor                                             ::< live targets
 ::  ::> list apps which are successfully connected
@@ -1338,7 +1359,7 @@
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
-++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
+:: ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
 ++  se-view                                             ::< flush buffer
   ::> if an app is selected, sync out its input buffer
   ::
@@ -1351,7 +1372,7 @@
   |=  mov/move
   %_(+> moz [mov moz])
 ::
-++  se-text  (. print-text):wrap-agent               ::DEPRECATED
+:: ++  se-text  (. print-text):wrap-agent               ::DEPRECATED
 :: ++  se-poke                                             ::< send a poke
 ::   ::> dok: target app
 ::   ::> par: request data
