@@ -319,9 +319,9 @@
   =|  {mov/(list move) out/(list agent-to-guardian) biz/(list dill-blit:^dill)}
   |_  {bow/bowl:^gall agent-state}
   ++  abet
-    ^-  {(list dill-blit:^dill) (list move) (list agent-to-guardian) agent-state}
-    ::=>  emit-biz
-    [biz mov out +<+]
+    ^-  {(list move) (list agent-to-guardian) agent-state}
+    =>  emit-biz
+    [mov out +<+]
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ++  emit-biz
@@ -894,7 +894,6 @@
 ::> ||
 ::>   more convenient lexical environment within %app
 ::
-=|  biz/(list dill-blit:^dill)  ::FIXME only agent should know about blits
 |_  moz/(list move)
 ::
 ::>  ||
@@ -906,15 +905,13 @@
 ++  run-guardian  ~(. guardian bow gas(bin dev))
 ++  abet-agent
   |=  age/_agent
-  =+  ^-  $:  bil/(list dill-blit:^dill)
-              mov/(list move)
+  =+  ^-  $:  mov/(list move)
               out/(list agent-to-guardian)
               ges/agent-state
           ==
       abet:age
   ^+  +>.$
   =.  ^ges  ges
-  =.  biz  (welp bil biz)
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
@@ -1127,7 +1124,7 @@
 ::>   abet (end a transaction), and its helper arms
 ::+|
 ++  se-abet                                             ::< resolve
-  ::>  marshal {eel}, {bin}, {biz}, and {mow} into a
+  ::>  marshal {eel}, {bin}, and {mow} into a
   ::>  consolidated set of external requests
   ::
   ^-  (quip move *drum-part)
@@ -1137,13 +1134,8 @@
   ::=.  sys  ?^(sys sys `ost.bow)
   =.  .  se-subze:se-adze:se-adit
   :::_  pith(bin (~(put by bin) ost.bow dev))
-  ::FIXME only agent should know about blits
-  :_  pith(bin.gas dev)
-  %-  flop
-  ^-  (list move)
-  ?~  biz  moz
-  :_  moz
-  [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
+  :-  (flop moz)
+  pith(bin.gas dev)
 ::
 ++  se-adit                                             ::< update servers
   ::> start every server that wants to be up
