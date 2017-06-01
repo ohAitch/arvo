@@ -1318,12 +1318,12 @@
   %_(+> moz [mov moz])
 ::
 ++  se-text  (. print-text):wrap-agent               ::DEPRECATED
-++  se-poke                                             ::< send a poke
-  ::> dok: target app
-  ::> par: request data
-  ::
-  |=  {dok/dock par/pear}
-  (se-emit [ost.bow %poke (drum-path dok) dok par])
+:: ++  se-poke                                             ::< send a poke
+::   ::> dok: target app
+::   ::> par: request data
+::   ::
+::   |=  {dok/dock par/pear}
+::   (se-emit [ost.bow %poke (drum-path dok) dok par])
 ::
 ::++  se-pull                                             ::< cancel subscription
 ::  ::> dok: target app
