@@ -592,6 +592,7 @@
   ::REVIEW pubsub? things might get more interesting with multiple agents
   ++  output  |=(a/guardian-to-agent +>(out [a out]))
   ++  print-text  |=(txt/tape (output %side-effect %txt txt))
+  ++  print-tanks  |=(tan/tang (output %side-effect %tan tan))
   ::+|
   ::++  show-cropped                                             ::< show adjusted buffer
   ::  ::> lin: buffer to display. {q.lin} is cropped to
@@ -654,12 +655,17 @@
     ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
     ::=.  +>.$  con
     =/  wel/well:^gall  [%home %dojo]
-    =+  hig=(~(get by fur) q.wel)
-    ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  this
-    =.  this  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
-    %-  emit(fur (~(put by fur) q.wel ~))
-    [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
+    abet:update:(se wel)
   ::
+  ++  started                                           ::< get ack for start
+    ::> receive acknowledgment on an app being started
+    ::>
+    ::> way: identifies the app being started,
+    ::>      encoded as /[%p]/[%tas]
+    ::> saw: stack trace, if the initialization failed
+    ::
+    |=  {wel/well:^gall saw/(each suss:^gall tang)}
+    abet:(on-start:(se wel) saw)
   ::+|
   ++  invisible-app                                     ::< is app ignorable
     ::> if an app has not been connected yet, or the
@@ -684,6 +690,53 @@
     ::`(snag inx `(list dock)`wag)
   ::
   ++  our-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
+  ::+|
+  ++  se                                                  ::< per server
+    ::> this core is used to perform operations specific
+    ::> to a {server} app
+    ::>
+    ::> wel: what server
+    ::>
+    |=  wel/well:^gall
+    =/  new  !(~(has by fur) q.wel)
+    =/  hig/(unit server)  ?:(new ~ (~(got by fur) q.wel))  ::< source state
+    |%
+    ::>  ||
+    ::>  ||  %convenience
+    ::>  ||
+    ::>    minor incantations
+    ::+|
+    ++  abet                                           ::< resolve
+      ::>  exit {se}, saving changed connection to {fur}
+      ..se(fur (~(put by fur) q.wel hig))  ::REVIEW deletion ever necessary?
+    ::
+    ++  this  .
+    ::
+    ::+|
+    ++  update
+      ::REVIEW store "in flight" desk to check for equality?
+      ::>  activate app if not started yet, or if started on different desk
+      ::>
+      ?:  new  activate
+      ?:  ?~(hig & =(p.wel syd.u.hig))  this
+      activate
+    ::
+    ++  activate
+      =.  se  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
+      =/  lod  [[our.bow q.wel] %load our.bow p.wel]
+      this(hig ~, se (emit ost.bow %conf /drum/[p.wel]/[q.wel] lod))
+    ::
+    ++  on-start
+      |=  saw/(each suss:^gall tang)  ^+  +>
+      ?:  new  !!  ::< unknown app
+      ?-  saw
+        {$| *}  +>(se (print-tanks p.saw))
+        {$& *}  ?>  =(q.wel p.p.saw)
+                ::  =.  +>.$  (se-text "live {<p.saw>}")
+                +>(hig `[p.wel %da r.p.saw])
+      ==
+    --
+  ::
   ::+|
   ++  ta                                                  ::< per target
     ::> this core is used to perform operations specific
@@ -1107,14 +1160,8 @@
   |=  {way/wire saw/(each suss:^gall tang)}
   =<  se-abet  =<  se-view
   ?>  ?=({@ @ $~} way)
-  ?>  (~(has by fur.gas) i.t.way)
   =/  wel/well:^gall  [i.way i.t.way]
-  ?-  saw
-    {$| *}  (se-dump p.saw)
-    {$& *}  ?>  =(q.wel p.p.saw)
-            ::  =.  +>.$  (se-text "live {<p.saw>}")
-            +>.$(fur.gas (~(put by fur.gas) q.wel `[p.wel %da r.p.saw]))
-  ==
+  (abet-guardian (started:run-guardian wel saw))
 ::
 ++  quit-phat                                           ::< get link termination
   ::> called when an open console link disconnects
