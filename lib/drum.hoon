@@ -312,8 +312,7 @@
         $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
         ==                                                ::
       ++  card                                            ::> general card
-        $%  {$conf wire dock $load ship term}             ::< configure app
-            {$diff lime}                                  ::< give update
+        $%  {$diff lime}                                  ::< give update
         ==                                                ::
       ++  move  (pair bone card)                          ::< user-level move
       --
