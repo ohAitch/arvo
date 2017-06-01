@@ -617,8 +617,51 @@
     ::
     (output %prompt-update lin)
   ::+|
-  ++  connect  |=(dok/dock abet:connect:(ta dok))    ::< connect
   ++  peered  |=(dok/dock abet:peered:(ta dok))      ::< peered
+  ++  add-connections                                ::< add new connections
+    ::> connect any desired-link that is not connected
+    ::>
+    ::> (apps in {eel} not in {fug})
+    ::
+    ^+  .
+    ::%+  roll  (~(tap in eel))
+    ::=<  .(con +>)
+    ::|=  {dok/dock con/_.}  ^+  con
+    ::=.  +>.$  con
+    =/  dok  [our %dojo]
+    ::?:  (~(has by fug) dok)
+    ::  ?.  =(%ded con:(~(got by fug) dok))
+    ::    ..se-adze
+    ::  ta-abet:ta-adze:(ta dok)
+    ::ta-abet:ta-adze:(new-ta dok)
+    abet:adze:(ta dok)
+  ::
+  ++  gc-connections                                 ::< del old connections
+    .
+    ::::> disconnect no longer desired connections
+    ::::
+    ::=<  .(dev (~(got by bin) ost.bow))
+    ::=.  bin  (~(put by bin) ost.bow dev)
+    ::^+  .
+    ::%-  ~(rep by bin)
+    ::=<  .(con +>)
+    ::|=  {{ost/bone dev/source} con/_.}  ^+  con
+    ::::REVIEW this seems like it should just pass {ost}
+    ::::       down to se-nuke
+    ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
+    ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
+  ::
+  ::++  se-subze-local                                ::< nuke ost.bow apps
+  ::  ::> disconnect anything not in {eel}
+  ::  ^+  .
+  ::  %-  ~(rep by fug)
+  ::  =<  .(con +>)
+  ::  |=  {{dok/dock *} con/_.}  ^+  con
+  ::  =.  +>.$  con
+  ::  ?:  (~(has in eel) dok)
+  ::    +>.$
+  ::  (se-nuke dok)
+  ::
   ++  diff-backlog                                   ::< apply backlog
     ::> tot: total number of emitted updates, including
     ::>      skipped %det
@@ -732,7 +775,7 @@
       ?-  saw
         {$| *}  +>(se (print-tanks p.saw))
         {$& *}  ?>  =(q.wel p.p.saw)
-                ::  =.  +>.$  (se-text "live {<p.saw>}")
+                ::  =.  +>.$  (print-text "live {<p.saw>}")
                 +>(hig `[p.wel %da r.p.saw])
       ==
     --
@@ -797,6 +840,12 @@
     ::>  ||  %interfaces
     ::>  ||
     ::+|
+    ++  adze                                           ::< connect
+      ?:  nil  connect(nil |)
+      ?:  =(%ded con)
+        ~&  ta-adze-ded+[dok]
+        connect
+      .
     ::
     ++  peered                                         ::< subscription ack
       ::> on successful session {con}nection,
@@ -955,8 +1004,6 @@
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
 =*  pith  +<+
-=+  bin.gas
-=*  dev  -
 ::> ||
 ::> ||  %door
 ::> ||
@@ -970,7 +1017,7 @@
 ::>    subcore interfaces
 ::+|
 ++  run-agent  `_agent`~(. agent bow ges)
-++  run-guardian  ~(. guardian bow gas(bin dev))
+++  run-guardian  ~(. guardian bow gas)
 ++  abet-agent
   |=  age/_agent
   =+  ^-  $:  mov/(list move)
@@ -994,7 +1041,6 @@
       abet:ran
   ^+  +>.$
   =.  ^gas  gas
-  =.  dev  bin.gas
   =.  moz  (welp mov moz)
   |-  ^+  +>.^$
   ?~  out  +>.^$
@@ -1194,60 +1240,9 @@
   ?.  caused-by-console:run-agent
     [(flop moz) pith]
   ::=.  sys  ?^(sys sys `ost.bow)
-  =.  .  se-subze:se-adze
+  =.  .  (abet-guardian gc-connections:add-connections:run-guardian)
   :::_  pith(bin (~(put by bin) ost.bow dev))
-  :-  (flop moz)
-  pith(bin.gas dev)
-::
-++  se-adze                                             ::< add new connections
-  ::> connect any desired-link that is not connected
-  ::>
-  ::> (apps in {eel} not in {fug})
-  ::
-  ^+  .
-  ::%+  roll  (~(tap in eel))
-  ::=<  .(con +>)
-  ::|=  {dok/dock con/_.}  ^+  con
-  ::=.  +>.$  con
-  =/  dok  [our %dojo]
-  ::?:  (~(has by fug) dok)
-  ::  ?.  =(%ded con:(~(got by fug) dok))
-  ::    ..se-adze
-  ::  ta-abet:ta-adze:(ta dok)
-  ::ta-abet:ta-adze:(new-ta dok)
-  ?:  nil.dev
-    =.  nil.dev  |
-    (abet-guardian (connect:run-guardian dok))
-  ?:  =(%ded con.dev)
-    ~&  se-adze-ded+[dok]
-    (abet-guardian (connect:run-guardian dok))
-  ..se-adze
-::
-++  se-subze                                            ::< del old connections
-  .
-  ::::> disconnect no longer desired connections
-  ::::
-  ::=<  .(dev (~(got by bin) ost.bow))
-  ::=.  bin  (~(put by bin) ost.bow dev)
-  ::^+  .
-  ::%-  ~(rep by bin)
-  ::=<  .(con +>)
-  ::|=  {{ost/bone dev/source} con/_.}  ^+  con
-  ::::REVIEW this seems like it should just pass {ost}
-  ::::       down to se-nuke
-  ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
-  ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
-::
-::++  se-subze-local                                      ::< nuke ost.bow apps
-::  ::> disconnect anything not in {eel}
-::  ^+  .
-::  %-  ~(rep by fug)
-::  =<  .(con +>)
-::  |=  {{dok/dock *} con/_.}  ^+  con
-::  =.  +>.$  con
-::  ?:  (~(has in eel) dok)
-::    +>.$
-::  (se-nuke dok)
+  [(flop moz) pith]
 ::
 ::> ||
 ::> ||  %accessors
