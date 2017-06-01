@@ -813,11 +813,6 @@
     ::
     ++  disconnect  .(con %ded)                         ::< disconnect
     ++  connect                                         ::< send a peer
-      ::> this currently resolves between the %inc- and
-      ::> %sole- protocols by hardcoded app name, sending
-      ::> a subscription to the appropriate path
-      ::
-      ::WIP merge the sole- and inc- protocols
       ~&  [%ta-adze dok con]
       ::=.  sus.ses  rec.ses
       ::=<  (ta-peer /sole/(encode-id:sole our-sole-id)/(scot %ud sus.ses))
