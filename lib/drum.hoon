@@ -399,6 +399,9 @@
     ::=^  det  say  (~(transmit cursored:sole inp) ted)
     =^  det  say  (~(transmit shared:sole say) ted)
     (do-action %det det)
+  ::  ||
+  ::  ||  %interfaces
+  ::  ||
   ::+|
   ::
   ++  from-guardian
