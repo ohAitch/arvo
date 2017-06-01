@@ -580,6 +580,7 @@
       --
   =|  {mov/(list move) out/(list guardian-to-agent)}
   |_  {bow/bowl:^gall guardian-state}
+  ++  this  .
   ++  abet
     ^-  {(list move) (list guardian-to-agent) guardian-state}
     ~|  [buf.say.bin buf.say.gen]
@@ -640,6 +641,25 @@
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
     abet:(from-agent:(ta our %dojo) agg)
+  ::
+  ++  update-servers
+    ::> start every server that wants to be up
+    ::> that is not already up
+    ::>
+    ::> (apps in {ray} and not in {fur})
+    ::
+    ^+  .
+    ::%+  roll  (~(tap in ray))
+    ::=<  .(con +>)
+    ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
+    ::=.  +>.$  con
+    =/  wel/well:^gall  [%home %dojo]
+    =+  hig=(~(get by fur) q.wel)
+    ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  this
+    =.  this  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
+    %-  emit(fur (~(put by fur) q.wel ~))
+    [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
+  ::
   ::+|
   ++  invisible-app                                     ::< is app ignorable
     ::> if an app has not been connected yet, or the
@@ -1128,32 +1148,14 @@
   ::>  consolidated set of external requests
   ::
   ^-  (quip move *drum-part)
+  =.  .  (abet-guardian update-servers:run-guardian)
   ?.  caused-by-console:run-agent
-    =.  .  se-adit
     [(flop moz) pith]
   ::=.  sys  ?^(sys sys `ost.bow)
-  =.  .  se-subze:se-adze:se-adit
+  =.  .  se-subze:se-adze
   :::_  pith(bin (~(put by bin) ost.bow dev))
   :-  (flop moz)
   pith(bin.gas dev)
-::
-++  se-adit                                             ::< update servers
-  ::> start every server that wants to be up
-  ::> that is not already up
-  ::>
-  ::> (apps in {ray} and not in {fur})
-  ::
-  ^+  .
-  ::%+  roll  (~(tap in ray))
-  ::=<  .(con +>)
-  ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
-  ::=.  +>.$  con
-  =/  wel/well:^gall  [%home %dojo]
-  =+  hig=(~(get by fur.gas) q.wel)
-  ?:  &(?=(^ hig) |(?=($~ u.hig) =(p.wel syd.u.u.hig)))  ..se-adit
-  =.  ..se-adit  (se-text "activated app {(trip p.wel)}/{(trip q.wel)}")
-  %-  se-emit(fur.gas (~(put by fur.gas) q.wel ~))
-  [ost.bow %conf [%drum p.wel q.wel ~] [our.bow q.wel] %load our.bow p.wel]
 ::
 ++  se-adze                                             ::< add new connections
   ::> connect any desired-link that is not connected
