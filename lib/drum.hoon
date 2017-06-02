@@ -1358,11 +1358,11 @@
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
 :: ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
-++  se-emit                                             ::< emit move
-  ::> mov: side-effect to queue for sending
-  ::
-  |=  mov/move
-  %_(+> moz [mov moz])
+:: ++  se-emit                                             ::< emit move
+::   ::> mov: side-effect to queue for sending
+::   ::
+::   |=  mov/move
+::   %_(+> moz [mov moz])
 ::
 :: ++  se-text  (. print-text):wrap-agent               ::DEPRECATED
 :: ++  se-poke                                             ::< send a poke
