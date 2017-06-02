@@ -36,7 +36,10 @@
 ::TODO separate agent state
 ::++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
 ++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
-++  agent-state  {say/sole-share}
+++  agent-state
+  $%  say/sole-share
+      ::sys/(unit bone)                                   ::< local console 
+  ==
 ++  guardian-state
   ::>
   ::>  sys: used for |exit
@@ -47,7 +50,7 @@
   ::>  bin: (most of the state is here) per-terminal state
   ::>       TODO move a lot of this out into fur
   ::
-  $:  * ::sys/(unit bone)                                   ::< local console
+  $:  *
       * ::eel/(set dock)                                    ::< connect to
       * ::ray/(set well:^gall)                              ::< app desks
       fur/(map dude:^gall (unit server))                ::< servers
@@ -320,6 +323,7 @@
   |_  {bow/bowl:^gall agent-state}
   ++  abet
     ^-  {(list move) (list agent-to-guardian) agent-state}
+    ::=.  sys  ?^(sys sys `ost.bow)
     =>  emit-biz
     [mov out +<+]
   ::
@@ -602,11 +606,63 @@
   ++  this  .
   ++  abet
     ^-  {(list move) (list guardian-to-agent) guardian-state}
+    ::REVIEW why not check connections?
+    ::?.  caused-by-console:run-agent
+    ::  [(flop moz) pith]
+    ::
+    =.  .  gc-connections:add-connections:update-servers
     ~|  [buf.say.bin buf.say.gen]
     ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
     [mov out +<+]
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
+  ::
+  ++  update-servers
+    ::> start every server that wants to be up
+    ::> that is not already up
+    ::>
+    ::> (apps in {ray} and not in {fur})
+    ::
+    ^+  .
+    ::%+  roll  (~(tap in ray))
+    ::=<  .(con +>)
+    ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
+    ::=.  +>.$  con
+    =/  wel/well:^gall  [%home %dojo]
+    abet:update:(se wel)
+  ::
+  ++  add-connections                                ::< add new connections
+    ::> connect any desired-link that is not connected
+    ::>
+    ::> (apps in {eel} not in {fug})
+    ::
+    ^+  .
+    ::%+  roll  (~(tap in eel))
+    ::=<  .(con +>)
+    ::|=  {dok/dock con/_.}  ^+  con
+    ::=.  +>.$  con
+    =/  dok  [our %dojo]
+    ::?:  (~(has by fug) dok)
+    ::  ?.  =(%ded con:(~(got by fug) dok))
+    ::    ..se-adze
+    ::  ta-abet:ta-adze:(ta dok)
+    ::ta-abet:ta-adze:(new-ta dok)
+    abet:adze:(ta dok)
+  ::
+  ++  gc-connections                                 ::< del old connections
+    .
+    ::::> disconnect no longer desired connections
+    ::::
+    ::=<  .(dev (~(got by bin) ost.bow))
+    ::=.  bin  (~(put by bin) ost.bow dev)
+    ::^+  .
+    ::%-  ~(rep by bin)
+    ::=<  .(con +>)
+    ::|=  {{ost/bone dev/source} con/_.}  ^+  con
+    ::::REVIEW this seems like it should just pass {ost}
+    ::::       down to se-nuke
+    ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
+    ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
   ::+|
   ::REVIEW pubsub? things might get more interesting with multiple agents
   ++  output  |=(a/guardian-to-agent +>(out [a out]))
@@ -733,38 +789,6 @@
   ::>  ||
   ::+|
   ++  peered  |=(dok/dock abet:peered:(ta dok))      ::< peered
-  ++  add-connections                                ::< add new connections
-    ::> connect any desired-link that is not connected
-    ::>
-    ::> (apps in {eel} not in {fug})
-    ::
-    ^+  .
-    ::%+  roll  (~(tap in eel))
-    ::=<  .(con +>)
-    ::|=  {dok/dock con/_.}  ^+  con
-    ::=.  +>.$  con
-    =/  dok  [our %dojo]
-    ::?:  (~(has by fug) dok)
-    ::  ?.  =(%ded con:(~(got by fug) dok))
-    ::    ..se-adze
-    ::  ta-abet:ta-adze:(ta dok)
-    ::ta-abet:ta-adze:(new-ta dok)
-    abet:adze:(ta dok)
-  ::
-  ++  gc-connections                                 ::< del old connections
-    .
-    ::::> disconnect no longer desired connections
-    ::::
-    ::=<  .(dev (~(got by bin) ost.bow))
-    ::=.  bin  (~(put by bin) ost.bow dev)
-    ::^+  .
-    ::%-  ~(rep by bin)
-    ::=<  .(con +>)
-    ::|=  {{ost/bone dev/source} con/_.}  ^+  con
-    ::::REVIEW this seems like it should just pass {ost}
-    ::::       down to se-nuke
-    ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
-    ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
   ::
   ::++  se-subze-local                                ::< nuke ost.bow apps
   ::  ::> disconnect anything not in {eel}
@@ -800,20 +824,6 @@
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
     abet:(from-agent:(ta our %dojo) agg)
-  ::
-  ++  update-servers
-    ::> start every server that wants to be up
-    ::> that is not already up
-    ::>
-    ::> (apps in {ray} and not in {fur})
-    ::
-    ^+  .
-    ::%+  roll  (~(tap in ray))
-    ::=<  .(con +>)
-    ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
-    ::=.  +>.$  con
-    =/  wel/well:^gall  [%home %dojo]
-    abet:update:(se wel)
   ::
   ++  started                                           ::< get ack for start
     ::> receive acknowledgment on an app being started
@@ -1125,6 +1135,7 @@
 ::>   more convenient lexical environment within %app
 ::
 |_  moz/(list move)
+++  se-abet  `(quip move *drum-part)`[(flop moz) pith]  ::< resolve moves
 ::
 ::>  ||
 ::>  ||  %multitude
@@ -1246,24 +1257,6 @@
 ++  quit-phat                                           ::< get link termination
   |=  way/wire
   %.(+< (. quit-phat):wrap-guardian)
-::
-::> ||
-::> ||  %resolution
-::> ||
-::>   abet (end a transaction), and its helper arms
-::+|
-++  se-abet                                             ::< resolve
-  ::>  marshal {eel}, {bin}, and {mow} into a
-  ::>  consolidated set of external requests
-  ::
-  ^-  (quip move *drum-part)
-  =.  .  (abet-guardian update-servers:run-guardian)
-  ?.  caused-by-console:run-agent
-    [(flop moz) pith]
-  ::=.  sys  ?^(sys sys `ost.bow)
-  =.  .  (abet-guardian gc-connections:add-connections:run-guardian)
-  :::_  pith(bin (~(put by bin) ost.bow dev))
-  [(flop moz) pith]
 ::
 ::> ||
 ::> ||  %accessors
