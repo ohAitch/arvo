@@ -27,6 +27,7 @@
   ==                                                    ::
 ++  axon                                                ::  dill per duct
   $:  ram/term                                          ::  console program
+      ::> XX the unit nil case is encoding something weird
       tem/(unit (list dill-belt))                       ::  pending, reverse
       wid/_80                                           ::  terminal width
       pos/@ud                                           ::  cursor position
@@ -129,7 +130,7 @@
                  =+  yen=(scot %p (shax :(mix %ticket eny now)))
                  =+  ^=  beg  ^-  {his/@p tic/@p yen/@t ges/gens:^ames}
                      [p.kyz q.kyz yen ges]
-                 =+  cmd=[%hood %poke `cage`[%helm-begin !>(beg)]]
+                 =+  cmd=[ram %poke `cage`[%helm-begin !>(beg)]]
                  %=    +>.$
                      moz
                    :_(moz [hen %pass ~ %g %deal [our our] cmd])
@@ -439,11 +440,10 @@
       %.  q.kyz
       %~  into  as
           :-  [~ hen u.ore.all]
-          :*  p.kyz
-              [~ ~]
-              80
-              0
-              (tuba "<awaiting {(trip p.kyz)}, this may take a few minutes>")
+          %*  .  *axon
+            ram  p.kyz
+            tem  (some ~)  ::REVIEW
+            see  (tuba "<awaiting {(trip p.kyz)}, this may take a few minutes>")
       ==  ==
     --
 |%                                                      ::  poke+peek pattern
