@@ -39,6 +39,7 @@
 ++  agent-state
   $%  say/sole-share
       ::sys/(unit bone)                                   ::< local console 
+      ::pom/stub:^dill ::TODO cache prompt
   ==
 ++  guardian-state
   ::>
@@ -610,10 +611,14 @@
     ::?.  caused-by-console:run-agent
     ::  [(flop moz) pith]
     ::
-    =.  .  gc-connections:add-connections:update-servers
-    ~|  [buf.say.bin buf.say.gen]
-    ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
-    [mov out +<+]
+    =~  update-servers
+        add-connections
+        gc-connections
+        flush-buffer
+      ~|  [buf.say.bin buf.say.gen]
+      ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
+      [mov out +<+]
+    ==
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ::
@@ -663,6 +668,13 @@
     ::::       down to se-nuke
     ::=+  xeno=se-subze-local:%_(con ost.bow ost, dev dev)
     ::xeno(ost.bow ost.bow.con, dev dev.con, bin (~(put by bin) ost dev.xeno))
+  ++  flush-buffer
+    ^+  .
+    =+  gul=current-app
+    ?:  |(?=($~ gul) (invisible-app u.gul))  +
+    ::(show-cropped computed-prompt:(ta u.gul))
+    (show-raw-prompt computed-prompt:(ta u.gul))
+  ::
   ::+|
   ::REVIEW pubsub? things might get more interesting with multiple agents
   ++  output  |=(a/guardian-to-agent +>(out [a out]))
@@ -813,13 +825,6 @@
     ::
     |=  {dok/dock fec/sole-effect}
     abet:(diff-effect:(ta dok) fec)
-  ::
-  ++  flush-buffer
-    ^+  .
-    =+  gul=current-app
-    ?:  |(?=($~ gul) (invisible-app u.gul))  +
-    ::(show-cropped computed-prompt:(ta u.gul))
-    (show-raw-prompt computed-prompt:(ta u.gul))
   ::
   ++  from-agent
     |=  agg/agent-to-guardian  ^+  +>
@@ -1180,14 +1185,14 @@
   =+  run-agent.v
   |*  a/$-(* _agent)
   |=  _+<.a  ^+  se-abet.v
-  se-abet:se-view:(abet-agent.v (a +<))
+  se-abet:(abet-agent.v (a +<))
 ::
 ++  wrap-guardian
   =>  v=.
   =+  run-guardian.v
   |*  a/$-(* _guardian)
   |=  _+<.a  ^+  se-abet.v
-  se-abet:se-view:(abet-guardian.v (a +<))
+  se-abet:(abet-guardian.v (a +<))
 ::
 ::>  ||
 ::>  ||  %interface-arms
@@ -1353,12 +1358,6 @@
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
 :: ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
-++  se-view                                             ::< flush buffer
-  ::> if an app is selected, sync out its input buffer
-  ::
-  ^+  .
-  (abet-guardian flush-buffer:run-guardian)
-::
 ++  se-emit                                             ::< emit move
   ::> mov: side-effect to queue for sending
   ::
