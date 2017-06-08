@@ -27,8 +27,6 @@
   ==                                                    ::
 ++  axon                                                ::  dill per duct
   $:  ram/term                                          ::  console program
-      ::> XX the unit nil case is encoding something weird
-      tem/(unit (list dill-belt))                       ::  pending, reverse
       wid/_80                                           ::  terminal width
       pos/@ud                                           ::  cursor position
       see/(list @c)                                     ::  current line
@@ -97,9 +95,11 @@
 |=  {now/@da eny/@ ski/sley}                            ::  current invocation
 =>  |%
     ++  as                                              ::  per cause
-      |_  $:  {moz/(list move) hen/duct our/ship}
+      =|  moz/(list move)
+      |_  $:  {hen/duct our/ship}
               axon
           ==
+      ++  this  .
       ++  abet                                          ::  resolve
         ^-  {(list move) axle}
         [(flop moz) all(dug (~(put by dug.all) hen +<+))]
@@ -266,42 +266,34 @@
       ::
       ++  init                                          ::  initialize
         ~&  [%dill-init our ram]
-        =+  myt=(flop (need tem))
         =+  can=(clan:title our)
-        =.  tem  ~
         =.  moz  :_(moz [hen %pass / %c %merg our %home our %base da+now %init])
         =.  moz  :_(moz [hen %pass ~ %g %conf [[our ram] %load our %home]])
-        =.  +>  ?:  ?=(?($czar $pawn) can)  +>
-                (sync %base (sein:title our) %kids)
-        =.  +>  ?:  ?=(?($czar $pawn) can)
-                  (sync %home our %base)
-                (init-sync %home our %base)
-        =.  +>  ?.  ?=(?($duke $king $czar) can)  +>
-                (sync %kids our %base)
-        =.  +>  autoload
-        =.  +>  peer
-        |-  ^+  +>+
-        ?~  myt  +>+
-        $(myt t.myt, +>+ (send i.myt))
+        =.  this  ?:  ?=(?($czar $pawn) can)  this
+                  (sync %base (sein:title our) %kids)
+        =.  this  ?:  ?=(?($czar $pawn) can)
+                    (sync %home our %base)
+                  (init-sync %home our %base)
+        =.  this  ?.  ?=(?($duke $king $czar) can)  this
+                  (sync %kids our %base)
+        =.  this  autoload
+        =.  this  peer
+        this
       ::
       ++  into                                          ::  preinitialize
         |=  gyl/(list dock)
+        =.  ..into
+          |-  ^+  ..into
+          ?~  gyl  ..into
+          $(gyl t.gyl, ..into (send [%yow i.gyl]))
         %_    +>
-            tem  `(turn gyl |=(a/dock [%yow a]))
             moz
           :_  moz
-          :*  hen
-              %pass
-              /
-              %c
-              [%warp [our our] %base `[%sing %y [%ud 1] /]]
-          ==
+          [hen %pass / %c [%warp [our our] %base `[%sing %y [%ud 1] /]]]
         ==
       ::
       ++  send                                          ::  send action
         |=  bet/dill-belt
-        ?^  tem
-          +>(tem `[bet u.tem])
         %_    +>
             moz
           :_  moz
@@ -434,15 +426,14 @@
       ?~  ore.all  ~
       =+  nux=(~(get by dug.all) hen)
       ?^  nux
-        (some ~(. as [~ hen u.ore.all] u.nux))
+        (some ~(. as [hen u.ore.all] u.nux))
       ?.  ?=($flow -.kyz)  ~
       %-  some
-      %.  q.kyz
+      %.  q.kyz  ::REVIEW ever not ~?
       %~  into  as
-          :-  [~ hen u.ore.all]
+          :-  [hen u.ore.all]
           %*  .  *axon
             ram  p.kyz
-            tem  (some ~)  ::REVIEW
             see  (tuba "<awaiting {(trip p.kyz)}, this may take a few minutes>")
       ==  ==
     --
@@ -529,6 +520,6 @@
     [~ ..^$]
   =+  our=?>(?=(^ ore.all) u.ore.all)
   =^  moz  all
-    abet:(~(take as [~ hen our] (~(got by dug.all) hen)) q.hin)
+    abet:(~(take as [hen our] (~(got by dug.all) hen)) q.hin)
   [moz ..^$]
 --
