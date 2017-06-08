@@ -65,9 +65,10 @@
 ::::                                                    ::  ::
   ::                                                    ::  ::
 ++  prep
-  |=  old/(unit hood-old)  ^-  (quip _!! +>)            ::
+  |=  old/(unit hood-old)
+  ?~  old  start-drum
+  ^-  (quip _!! +>)            ::
   :-  ~
-  ?~  old  +>
   +>(lac (~(run by lac.u.old) hood-port))
 ::
 ++  coup-kiln-fancy  (wrap take-coup-fancy):from-kiln
@@ -91,6 +92,19 @@
   ?>  =(our src)
   ~&  loaded+-.dat
   [~ %_(+> lac (~(put by lac) -.dat dat))]
+::
+++  start-drum  (poke-drum-init ~)  ::TEMPORARY drum is moving out
+::   :_  .
+::   :~  [ost.hid %conf /cone [our.hid %cone] %load our.hid q.byk.hid]
+::       [ost.hid %conf /deck [our.hid %deck] %load our.hid q.byk.hid]
+::       [ost.hid %poke /deck [our.hid %deck] %deck-init ~]
+::   ==
+++  onto
+  |=  {wire saw/(each suss:^gall tang)}
+  ?-  -.saw
+    $&  ~&([%live p.saw] [~ +>.$])
+    $|  ((slog p.saw) [~ +>.$])
+  ==
 ::
 ++  coup-drum-phat  (wrap take-coup-phat):from-drum
 ++  coup-helm-hi    (wrap coup-hi):from-helm
@@ -124,6 +138,7 @@
 ++  peek-x-womb               peek-x:(womb hid (able %womb))
 ++  peer-scry-x-womb          (wrap peer-scry-x):from-womb
 ++  poke-dill-belt            (wrap poke-dill-belt):from-drum
+++  poke-drum-init            (wrap poke-drum-init):from-drum
 :: ++  poke-drum-put             (wrap poke-put):from-drum
 :: ++  poke-drum-link            (wrap poke-link):from-drum
 :: ++  poke-drum-unlink          (wrap poke-unlink):from-drum

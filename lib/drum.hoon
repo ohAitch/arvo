@@ -708,6 +708,10 @@
   ::>  ||  %raw-interfaces
   ::>  ||
   ::+|
+  ++  poke-deck-init
+    |=  $~  ::REVIEW implicit in abet, only exists to start
+    +>.$    ::       dojo which should maybe be explicit
+  ::
   ++  diff-sole-backlog-phat                               ::< chunk of output
     ::> updates to virtual console on re/connect
     ::>
@@ -1211,6 +1215,10 @@
 ++  poke-dill-belt                                      ::< terminal event
   |=  bet/dill-belt:^dill
   %.(+< (. poke-dill-belt):wrap-agent)
+::
+++  poke-drum-init                                      ::< urbit boot
+  |=  $~
+  %.(+< (. poke-deck-init):wrap-guardian)
 ::
 :: ++  poke-start                                          ::< |start %app
 ::   ::> init an app using gall, and link to its console
