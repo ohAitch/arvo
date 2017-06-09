@@ -265,10 +265,11 @@
         ==
       ::
       ++  init                                          ::  initialize
-        ~&  [%dill-init our ram]
+        ~&  [%dill-init our ram also=%hood2]
         =+  can=(clan:title our)
         =.  moz  :_(moz [hen %pass / %c %merg our %home our %base da+now %init])
         =.  moz  :_(moz [hen %pass ~ %g %conf [[our ram] %load our %home]])
+        =.  moz  :_(moz [hen %pass ~ %g %conf [[our %hood2] %load our %home]])
         =.  this  ?:  ?=(?($czar $pawn) can)  this
                   (sync %base (sein:title our) %kids)
         =.  this  ?:  ?=(?($czar $pawn) can)
@@ -297,12 +298,12 @@
         %_    +>
             moz
           :_  moz
-          [hen %pass ~ %g %deal [our our] ram %poke [%dill-belt -:!>(bet) bet]]
+          [hen %pass ~ %g %deal [our our] %hood2 %poke [%dill-belt -:!>(bet) bet]]
         ==
       ++  peer
         %_    .
             moz
-          :_(moz [hen %pass ~ %g %deal [our our] ram %peer /drum])
+          :_(moz [hen %pass ~ %g %deal [our our] %hood2 %peer /drum])
         ==
       ::
       ++  sync
@@ -337,7 +338,7 @@
       ++  pump                                          ::  send diff ack
         %_    .
             moz
-          :_(moz [hen %pass ~ %g %deal [our our] ram %pump ~])
+          :_(moz [hen %pass ~ %g %deal [our our] %hood2 %pump ~])
         ==
       ::
       ++  take                                          ::  receive
