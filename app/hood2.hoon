@@ -8,14 +8,10 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-::
-  =<  drum
-  |%
-  ++  drum
-    =~
-::
+  ::
 :: TODO replace with =, rune ?
 [. ^sole]
+::
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1744,12 +1740,22 @@
 ::  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
 ::  q.p:(fel [0 0] inp)
 --
+[drum=. ..zuse]
 ::
 ::>  ||
 ::>  ||  %app
 ::>  ||
 ::>    application shim, late of :hood
-[. drum=.]
+::
+::::
+  ::
+=<  drum
+|%
+++  drum
+::
+::::
+  ::
+=>  [^drum .]
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1758,9 +1764,9 @@
       {$2 lac/hood-part}                     ::
     ++  hood-good                                       ::
       |*  hed/hood-head                                 ::
-      |=  paw/hood-part  ^-  drum-part                               ::
+      |=  paw/hood-part  ^-  drum-part             ::
       ?-  hed                                           ::
-        $drum  ?>(?=($drum -.paw) `drum-part`paw)       ::
+        $drum  ?>(?=($drum -.paw) `drum-part`paw)  ::
       ==                                                ::
     ++  hood-head  _-:*hood-part                        ::
     ++  hood-make                                       ::
@@ -1812,8 +1818,8 @@
 ++  diff-sole-backlog-drum-phat  (wrap diff-sole-backlog-phat):from-drum
 ::
 ++  from-drum
-  =-  [wrap=- *drum]                 ::  usage (wrap handle-arm):from-drum
-  |*  wrapped-arm/$-(* _se-abet:*drum)
+  =-  [wrap=- (^drum)]                 ::  usage (wrap handle-arm):from-drum
+  |*  wrapped-arm/$-(* _se-abet:(^drum))
   |=  _+<.wrapped-arm
   =.  +>.wrapped-arm  (drum hid (able %drum))
   (ably (wrapped-arm +<))
@@ -1829,5 +1835,7 @@
 ++  quit-drum-phat            (wrap quit-phat):from-drum
 ++  reap-drum-phat            (wrap reap-phat):from-drum
 --
-    ==
-  --
+::
+::::
+  ::
+--
