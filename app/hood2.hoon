@@ -1,5 +1,5 @@
 ::                                                      ::  ::
-::::  /hoon/drum/lib                                    ::  ::
+::::  /hoon/drum/app                                    ::  ::
   ::                                                    ::  ::
 ::
 /?    310                                               ::<  hoon version
@@ -1135,17 +1135,16 @@
       ==                                                ::
     ++  move  (pair bone card)                          ::< user-level move
     --
-|=  {bow/bowl:^gall drum-part}                          ::  main drum work
+=|  moz/(list move)
+|_  {bow/bowl:^gall drum-part}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
-=*  pith  +<+
 ::> ||
 ::> ||  %door
 ::> ||
 ::>   more convenient lexical environment within %app
 ::
-|_  moz/(list move)
-++  se-abet  `(quip move *drum-part)`[(flop moz) pith]  ::< resolve moves
+++  se-abet  `(quip move .)`[(flop moz) .(moz ~)]  ::< resolve moves
 ::
 ::>  ||
 ::>  ||  %multitude
@@ -1740,22 +1739,13 @@
 ::  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
 ::  q.p:(fel [0 0] inp)
 --
-[drum=. ..zuse]
+[cone=. ..zuse]
 ::
 ::>  ||
 ::>  ||  %app
 ::>  ||
 ::>    application shim, late of :hood
-::
-::::
-  ::
-=<  drum
-|%
-++  drum
-::
-::::
-  ::
-=>  [^drum .]
+=,  cone
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1780,16 +1770,25 @@
 ::::                                                    ::  ::
   ::                                                    ::  ::
 =,  ^gall
+::
+::::
+  ::
+=<  drum
+|%
+++  drum  ::HACK
+::
+::::
+  ::
 |_  $:  hid/bowl                                       ::  system state
         hood-2                                          ::  server state
     ==                                                  ::
 ++  able                                                ::  find+make part
-  |*  hed/hood-head
+  |=  hed/hood-head
   ((hood-good hed) lac)
 ::
 ++  ably                                                ::  save part
-  |*  {(list) hood-part}
-  [(flop +<-) %_(+> lac `hood-part`+<+)]
+  |=  {mow/(list move:cone) {* {* state/hood-part} *}}
+  [(flop mow) %_(+> lac state)]
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1818,12 +1817,13 @@
 ++  diff-sole-backlog-drum-phat  (wrap diff-sole-backlog-phat):from-drum
 ::
 ++  from-drum
-  =-  [wrap=- (^drum)]                 ::  usage (wrap handle-arm):from-drum
-  |*  wrapped-arm/$-(* _se-abet:(^drum))
+  =-  [wrap=- cone]                 ::  usage (wrap handle-arm):from-drum
+  |*  wrapped-arm/$-(* _se-abet:cone)
   |=  _+<.wrapped-arm
-  =.  +>.wrapped-arm  (drum hid (able %drum))
+  =.  +>.wrapped-arm  ~(. cone hid (able %drum))
   (ably (wrapped-arm +<))
 ++  onto-drum                 (wrap take-onto):from-drum
+::++  peer-drum   peer-cone  :: XX dill thinks drum is still at /drum
 ++  peer-drum                 (wrap peer):from-drum
 ++  poke-dill-belt            (wrap poke-dill-belt):from-drum
 ++  poke-drum-init            (wrap poke-drum-init):from-drum
@@ -1838,4 +1838,4 @@
 ::
 ::::
   ::
---
+-- ::HACK
