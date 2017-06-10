@@ -280,7 +280,7 @@
 ++  drum-path                                           ::< encode wire
   ::>  `wire`[%drum %phat (dray `dock`dok /[%p]/[%tas])]
   |=  dok/dock  ^-  wire
-  [%drum %phat (scot %p p.dok) q.dok ~]
+  [%phat (scot %p p.dok) q.dok ~]
 ::
 ++  drum-phat                                           ::< decode wire
   ::>  `dock`(raid `wire`way /[%p]/[%tas])
@@ -1812,9 +1812,9 @@
     $|  ((slog p.saw) [~ +>.$])
   ==
 ::
-++  coup-drum-phat  (wrap take-coup-phat):from-drum
-++  diff-sole-effect-drum-phat  (wrap diff-sole-effect-phat):from-drum
-++  diff-sole-backlog-drum-phat  (wrap diff-sole-backlog-phat):from-drum
+++  coup-phat  (wrap take-coup-phat):from-drum
+++  diff-sole-effect-phat  (wrap diff-sole-effect-phat):from-drum
+++  diff-sole-backlog-phat  (wrap diff-sole-backlog-phat):from-drum
 ::
 ++  from-drum
   =-  [wrap=- cone]                 ::  usage (wrap handle-arm):from-drum
@@ -1832,8 +1832,8 @@
 :: ++  poke-drum-unlink          (wrap poke-unlink):from-drum
 :: ++  poke-drum-exit            (wrap poke-exit):from-drum
 :: ++  poke-drum-start           (wrap poke-start):from-drum
-++  quit-drum-phat            (wrap quit-phat):from-drum
-++  reap-drum-phat            (wrap reap-phat):from-drum
+++  quit-phat            (wrap quit-phat):from-drum
+++  reap-phat            (wrap reap-phat):from-drum
 --
 ::
 ::::
