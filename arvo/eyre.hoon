@@ -137,7 +137,7 @@
   $%  {$auth p/perk-auth}
       {$away $~}
       {$oath p/knot q/(list @t)}
-      {$bugs p/?($as $to) $~}
+      {$bugs p/?({?($as $to) $~} {$se p/{iden (list @t)}})} :: XX $%
       {$beam p/beam}
       {$deps p/?($put $delt) q/@uvH}
       {$mess p/dock q/mark r/wire s/json}
@@ -1292,9 +1292,10 @@
         ?.(aut [%& `pest`-] [%| `_done`(resolve ~ -)])
       ::
           $bugs
-        ?-  p.hem
+        ?-  -.p.hem
           $as  (show-login-page)
           $to  [%& %html poke-test:xml]
+          $se  [%& %json bugs-json:(dom-vi p.p.hem)]
         ==
       ::
           $deps
@@ -1773,6 +1774,8 @@
           ?~(- ~ (de:crua load-secret u))  :: XX clay permissions
         `(bale)`[[our now (shas %bale eny) root-beak] [usr dom] key]
       ==
+    ::
+    ++  bugs-json  (jobe queued+(jone ~(wyt in req)) overfull+[%b (lte 15 ~(wyt in req))] ~)
     ::
     ++  pump
       ^+  abet
