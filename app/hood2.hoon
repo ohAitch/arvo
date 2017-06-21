@@ -1773,12 +1773,6 @@
 ::
 ::::
   ::
-=<  drum
-|%
-++  drum  ::HACK
-::
-::::
-  ::
 |_  $:  hid/bowl                                       ::  system state
         hood-2                                          ::  server state
     ==                                                  ::
@@ -1835,7 +1829,3 @@
 ++  quit-phat            (wrap quit-phat):from-drum
 ++  reap-phat            (wrap reap-phat):from-drum
 --
-::
-::::
-  ::
--- ::HACK
