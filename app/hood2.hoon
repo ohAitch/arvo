@@ -394,7 +394,7 @@
     :: XX talk should be usable for stack traces, see urbit#584 which this change
     :: closed for the problems there
     ((slog (flop tac)) +>)
-    ::=-  (se-emit 0 %poke /drum/talk [our.bow %talk] -)
+    ::=-  (se-emit 0 %poke /talk [our.bow %talk] -)
     ::(said:talk our.bow %drum now.bow eny.bow tac)
   ::
   ++  local-edit                                       ::< local edit
@@ -902,7 +902,7 @@
     ++  activate
       =.  se  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
       =/  lod  [[our.bow q.wel] %load our.bow p.wel]
-      this(hig ~, se (emit ost.bow %conf /drum/[p.wel]/[q.wel] lod))
+      this(hig ~, se (emit ost.bow %conf /[p.wel]/[q.wel] lod))
     ::
     ++  on-start
       |=  saw/(each suss:^gall tang)  ^+  +>
@@ -1799,12 +1799,6 @@
 ::       [ost.hid %conf /deck [our.hid %deck] %load our.hid q.byk.hid]
 ::       [ost.hid %poke /deck [our.hid %deck] %deck-init ~]
 ::   ==
-++  onto
-  |=  {wire saw/(each suss:^gall tang)}
-  ?-  -.saw
-    $&  ~&([%live p.saw] [~ +>.$])
-    $|  ((slog p.saw) [~ +>.$])
-  ==
 ::
 ++  coup-phat  (wrap take-coup-phat):from-drum
 ++  diff-sole-effect-phat  (wrap diff-sole-effect-phat):from-drum
@@ -1816,7 +1810,7 @@
   |=  _+<.wrapped-arm
   =.  +>.wrapped-arm  ~(. cone hid (able %drum))
   (ably (wrapped-arm +<))
-++  onto-drum                 (wrap take-onto):from-drum
+++  onto                      (wrap take-onto):from-drum
 ::++  peer-drum   peer-cone  :: XX dill thinks drum is still at /drum
 ++  peer-drum                 (wrap peer):from-drum
 ++  poke-dill-belt            (wrap poke-dill-belt):from-drum
