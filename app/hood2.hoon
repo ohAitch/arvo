@@ -24,15 +24,6 @@
 ::  having => on structure cores
 ::
 |%                                                      ::  ::
-++  drum-part      {$drum $2 drum-pith}                 ::  drum state for hood
-++  drum-part-old
-  ::>  used to contain the definitions of versions %1
-  ::>  and %0 of {drum-part}; those are no longer
-  ::>  necessary for state adaption. will contain
-  ::>  variants %2, %3, etc. in future {drum-part}s
-  ::>  %3, %4. etc.
-  ::
-  _!!
 ::                                                      ::
 ::TODO separate agent state
 ::++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
@@ -231,15 +222,15 @@
   ::       useful to be able to force dojo reconnect
   ::       from unix, for one thing
   ::
-  ::> make initial {drum-part} state, by adding some
+  ::> make initial {drum-pith} state, by adding some
   ::> default apps to the bunt
   ::>
   ::> our: comets run off %base, moons use parent's talk
   ::>
   |=  our/ship
-  *drum-part
-  ::|^  ^-  drum-part
-  ::    %*  .  *drum-part
+  *drum-pith
+  ::|^  ^-  drum-pith
+  ::    %*  .  *drum-pith
   ::      eel  deft-fish
   ::      ray  deft-apps
   ::    ==
@@ -1136,7 +1127,7 @@
     ++  move  (pair bone card)                          ::< user-level move
     --
 =|  moz/(list move)
-|_  {bow/bowl:^gall drum-part}                          ::  main drum work
+|_  {bow/bowl:^gall drum-pith}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
 ::> ||
@@ -1204,7 +1195,7 @@
 ::>    accept external events
 ::+|
 ++  prep
-  |=  old/(unit drum-part)
+  |=  old/(unit drum-pith)
   ~&  %cone-2-prep
   ?^  old  [~ +>(+<+ u.old)]
   %.(~ (. prep-nil):wrap-guardian)
@@ -1747,27 +1738,7 @@
 ::>  ||  %app
 ::>  ||
 ::>    application shim, late of :hood
-=,  cone
-::                                                      ::  ::
-::::                                                    ::  ::
-  ::                                                    ::  ::
-=>  |%                                                  ::  module boilerplate
-    ++  hood-2                                          ::
-      {$2 lac/hood-part}                     ::
-    ++  hood-good                                       ::
-      |*  hed/hood-head                                 ::
-      |=  paw/hood-part  ^-  drum-part             ::
-      ?-  hed                                           ::
-        $drum  ?>(?=($drum -.paw) `drum-part`paw)  ::
-      ==                                                ::
-    ++  hood-head  _-:*hood-part                        ::
-    ++  hood-make                                       ::
-      |*  {our/@p hed/hood-head}                        ::
-      ?-  hed                                           ::
-        $drum  (drum-make our)                          ::
-      ==                                                ::
-    ++  hood-part  {$drum $2 drum-pith}
-    --                                                  ::
+cone
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1776,15 +1747,11 @@
 ::::
   ::
 |_  $:  hid/bowl                                       ::  system state
-        hood-2                                          ::  server state
+        dum/drum-pith                                   ::  server state
     ==                                                  ::
-++  able                                                ::  find+make part
-  |=  hed/hood-head
-  ((hood-good hed) lac)
-::
 ++  ably                                                ::  save part
-  |=  {mow/(list move:cone) {* {* state/hood-part} *}}
-  [mow %_(+> lac state)]
+  |=  {mow/(list move:cone) {* {* state/drum-pith} *}}
+  [mow %_(+> dum state)]
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
@@ -1805,7 +1772,7 @@
   =-  [wrap=- cone]                 ::  usage (wrap handle-arm):from-drum
   |*  wrapped-arm/$-(* _se-abet:cone)
   |=  _+<.wrapped-arm
-  =.  +>.wrapped-arm  ~(. cone hid (able %drum))
+  =.  +>.wrapped-arm  ~(. cone hid dum)
   (ably (wrapped-arm +<))
 ++  onto                      (wrap onto):from-drum
 ::++  peer-drum   peer-cone  :: XX dill thinks drum is still at /drum
