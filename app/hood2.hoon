@@ -752,7 +752,7 @@
     (mean >%drum-reap-fail< u.saw)
     ::(se-dump:(se-nuke dok) u.saw)
   ::
-  ++  take-coup-phat                                      ::< get ack for poke
+  ++  coup-phat                                      ::< get ack for poke
     ::> receive acknowledgment on an app command
     ::>
     ::> way: identifies the app being commanded,
@@ -768,7 +768,7 @@
     :::_  u.saw
     ::>[%drum-coup-fail src.bow ost.bow dok]<
   ::
-  ++  take-onto                                           ::< get ack for start
+  ++  onto                                           ::< get ack for start
     ::> receive acknowledgment on an app being started
     ::>
     ::> way: identifies the app being started,
@@ -1263,12 +1263,12 @@
 ++  reap-phat                                           ::< get ack for connection
   |=  {way/wire saw/(unit tang)}
   %.(+< (. reap-phat):wrap-guardian)
-++  take-coup-phat                                      ::< get ack for poke
+++  coup-phat                                      ::< get ack for poke
   |=  {way/wire saw/(unit tang)}
-  %.(+< (. take-coup-phat):wrap-guardian)
-++  take-onto                                           ::< get ack for start
+  %.(+< (. coup-phat):wrap-guardian)
+++  onto                                           ::< get ack for start
   |=  {way/wire saw/(each suss:^gall tang)}
-  %.(+< (. take-onto):wrap-guardian)
+  %.(+< (. onto):wrap-guardian)
 ++  quit-phat                                           ::< get link termination
   |=  way/wire
   %.(+< (. quit-phat):wrap-guardian)
@@ -1797,7 +1797,7 @@
 ::       [ost.hid %poke /deck [our.hid %deck] %deck-init ~]
 ::   ==
 ::
-++  coup-phat  (wrap take-coup-phat):from-drum
+++  coup-phat  (wrap coup-phat):from-drum
 ++  diff-sole-effect-phat  (wrap diff-sole-effect-phat):from-drum
 ++  diff-sole-backlog-phat  (wrap diff-sole-backlog-phat):from-drum
 ::
@@ -1807,9 +1807,9 @@
   |=  _+<.wrapped-arm
   =.  +>.wrapped-arm  ~(. cone hid (able %drum))
   (ably (wrapped-arm +<))
-++  onto                      (wrap take-onto):from-drum
+++  onto                      (wrap onto):from-drum
 ::++  peer-drum   peer-cone  :: XX dill thinks drum is still at /drum
-++  peer-drum                 (wrap peer):from-drum
+++  peer                      (wrap peer):from-drum
 ++  poke-dill-belt            (wrap poke-dill-belt):from-drum
 :: ++  poke-drum-put             (wrap poke-put):from-drum
 :: ++  poke-drum-link            (wrap poke-link):from-drum
