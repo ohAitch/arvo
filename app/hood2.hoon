@@ -709,7 +709,7 @@
   ::>  ||  %raw-interfaces
   ::>  ||
   ::+|
-  ++  poke-deck-init
+  ++  prep-nil
     |=  $~  ::REVIEW implicit in abet, only exists to start
     +>.$    ::       dojo which should maybe be explicit
   ::
@@ -1203,6 +1203,12 @@
 ::>  ||
 ::>    accept external events
 ::+|
+++  prep
+  |=  old/(unit drum-part)
+  ~&  %cone-2-prep
+  ?^  old  [~ +>(+<+ u.old)]
+  %.(~ (. prep-nil):wrap-guardian)
+::
 ++  diff-sole-backlog-phat                               ::< chunk of output
   |=  {way/wire tot/@u fec/(list sole-effect)}
   %.(+< (. diff-sole-backlog-phat):wrap-guardian)
@@ -1215,10 +1221,6 @@
 ++  poke-dill-belt                                      ::< terminal event
   |=  bet/dill-belt:^dill
   %.(+< (. poke-dill-belt):wrap-agent)
-::
-++  poke-drum-init                                      ::< urbit boot
-  |=  $~
-  %.(+< (. poke-deck-init):wrap-guardian)
 ::
 :: ++  poke-start                                          ::< |start %app
 ::   ::> init an app using gall, and link to its console
@@ -1788,12 +1790,7 @@
   ::                                                    ::  ::
 ++  prep
   |=  old/(unit hood-2)
-  ~&  %hood-2-prep
-  ?~  old  start-drum(lac (drum-make our.hid))
-  ^-  (quip _!! +>)            ::
-  [~ +>(lac lac.u.old)]
-::
-++  start-drum  (poke-drum-init ~)  ::TEMPORARY drum is moving out
+  ((wrap prep):from-drum (bind old tail))
 ::   :_  .
 ::   :~  [ost.hid %conf /cone [our.hid %cone] %load our.hid q.byk.hid]
 ::       [ost.hid %conf /deck [our.hid %deck] %load our.hid q.byk.hid]
@@ -1814,7 +1811,6 @@
 ::++  peer-drum   peer-cone  :: XX dill thinks drum is still at /drum
 ++  peer-drum                 (wrap peer):from-drum
 ++  poke-dill-belt            (wrap poke-dill-belt):from-drum
-++  poke-drum-init            (wrap poke-drum-init):from-drum
 :: ++  poke-drum-put             (wrap poke-put):from-drum
 :: ++  poke-drum-link            (wrap poke-link):from-drum
 :: ++  poke-drum-unlink          (wrap poke-unlink):from-drum
