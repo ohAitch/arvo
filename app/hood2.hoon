@@ -1144,7 +1144,7 @@
 ::> ||
 ::>   more convenient lexical environment within %app
 ::
-++  se-abet  `(quip move .)`[(flop moz) .(moz ~)]  ::< resolve moves
+++  se-abet  `(quip move .)`[moz .(moz ~)]  ::< resolve moves
 ::
 ::>  ||
 ::>  ||  %multitude
@@ -1784,7 +1784,7 @@
 ::
 ++  ably                                                ::  save part
   |=  {mow/(list move:cone) {* {* state/hood-part} *}}
-  [(flop mow) %_(+> lac state)]
+  [mow %_(+> lac state)]
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
