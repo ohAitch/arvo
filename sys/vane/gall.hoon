@@ -144,25 +144,31 @@
   ++  mo-boom                                           ::  complete new boot
     |=  {dap/dude byk/beak dep/@uvH gux/gage:^ford}
     ^+  +>
+    ::REVIEW do we still want to send the onto somewhere?
     ?-    -.gux
         $tabl  ~|(%made-tabl !!)
         $|
       =.  +>  (mo-bold byk dap dep)
-      =.  +>  (mo-give %onto %| p.gux)
-      +>
+      :: =.  +>  (mo-give %onto %| p.gux)
+      ((slog >[%g %boot dap]< p.gux) +>.$)
         $&
       ?>  ?=(@ p.p.gux)
       ?.  (mo-okay q.p.gux)
-        (mo-give %onto %| [%leaf "{<dap>}: bogus core"]~)
+        :: (mo-give %onto %| [%leaf "{<dap>}: bogus core"]~)
+        ((slog >[%g %boot dap]< [%leaf "{<dap>}: bogus core"]~) +>.$)
       =.  +>  (mo-bold byk dap dep)
       =.  +>  (mo-born dap byk q.p.gux)
       =+  old=+>.$
       =+  wag=(ap-prop:(ap-abed:ap dap [%high [~ our]]) ~)
       ?^  -.wag
         =.  +>.$  old
-        (mo-give %onto %| u.-.wag)
+        :: (mo-give %onto %| u.-.wag)
+        ((slog >[%g %boot dap]< u.-.wag) +>.$)
       =.  +>.$  ap-abet:+.wag
-      (mo-give:(mo-claw dap) %onto %& dap %boot now)
+      =.  +>.$  (mo-claw dap)
+      :: (mo-give %onto %& dap %boot now)
+      ~&  [%g %booted dap now]
+      +>.$
     ==
   ::
   ++  mo-born                                           ::  new seat
@@ -192,7 +198,8 @@
     =.  +>.$  (mo-bold byk dap dep)
     ?-  -.gux
       $tabl  ~|(%made-tabl !!)
-      $|     (mo-give %onto %| p.gux)
+      $|     :: (mo-give %onto %| p.gux) 
+             ((slog >[%g %boot dap]< p.gux) +>.$)
       $&     ?>  ?=(@ p.p.gux)
              ap-abet:(ap-peep:(ap-abed:ap dap [%high [~ our]]) q.p.gux)
     ==
@@ -482,12 +489,20 @@
   ++  mo-club                                           ::  local action
     |=  {dap/dude pry/prey cub/club}
     ^+  +>
-    ?:  |(!(~(has by bum) dap) (~(has by wub) dap))
-      ~&  >>  [%mo-not-running dap -.cub]
-      ::  ~&  [%mo-club-qeu dap cub]
-      =+  syf=(fall (~(get by wub) dap) *sofa)
-      +>.$(wub (~(put by wub) dap syf(kys (~(put to kys.syf) [hen pry cub]))))
-    (mo-clip dap pry cub)
+    ?.  |(!(~(has by bum) dap) (~(has by wub) dap))
+      (mo-clip dap pry cub)
+    =/  is-new  !(~(has by wub) dap)
+    =+  syf=(fall (~(get by wub) dap) *sofa)
+    =.  kys.syf  (~(put to kys.syf) [hen pry cub])
+    =.  wub  (~(put by wub) dap syf)
+    ?.  is-new  +>.$
+    ~&  >>  [%mo-boot dap -.cub]
+    (mo-boot dap %new (mo-default-beak dap))
+  ::
+  ++  mo-default-beak                                   ::  app source
+    |=  dap/dude  ::REVIEW configurable?
+    =/  syd  ?+((clan:title our) %home $pawn %base)
+    [our syd da+now]
   ::
   ++  mo-gawk                                           ::  ames forward
     |=  {him/@p dap/dude num/@ud rok/rook}
