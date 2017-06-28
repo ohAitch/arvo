@@ -563,7 +563,8 @@
       =>  ap-abut
       %_  +>
         bum  (~(put by bum) dap +<+)
-        moz  :(weld (turn zip ap-aver) (turn dub ap-avid) moz)
+        :: moz  :(weld (turn zip ap-aver) (turn dub ap-avid) moz)
+        moz  (weld (turn zip ap-aver) moz) ::REVIEW add printfs?
       ==
     ::
     ++  ap-abut                                         ::  track queue
@@ -609,8 +610,8 @@
         ==
       ==
     ::
-    ++  ap-avid                                         ::  onto results
-      |=(a/(each suss tang) [hen %give %onto a])
+::     ++  ap-avid                                         ::  onto results
+::       |=(a/(each suss tang) [hen %give %onto a])
     ::
     ++  ap-call                                         ::  call into server
       ~/  %ap-call
