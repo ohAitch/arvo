@@ -280,20 +280,6 @@
   |=  way/wire  ^-  dock
   ?>(?=({@ @ $~} way) [(slav %p i.way) i.t.way])
 --
-::
-::::
-  ::
-|%
-++  agent-to-guardian
-  $%  {$sole p/sole-id-action}
-  ==
-++  guardian-to-agent
-  $%  {$sole-change p/sole-change}
-      {$side-effect p/side-effect}
-      {$prompt-update p/(pair @ud stub:^dill)}
-  ==
---
-
 ::> ||
 ::> ||  %app
 ::> ||
@@ -309,18 +295,22 @@
       ++  lime                                            ::> typed diff
         $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
         ==                                                ::
+      ++  pear                                            ::> typed poke
+        $%  {$sole-id-action p/sole-id-action}            ::< console command
+        ==                                                ::
       ++  card                                            ::> general card
         $%  {$diff lime}                                  ::< give update
+            {$poke wire {ship $deck} pear}                ::< send message
         ==                                                ::
       ++  move  (pair bone card)                          ::< user-level move
       --
-  =|  {mov/(list move) out/(list agent-to-guardian) biz/(list dill-blit:^dill)}
+  =|  {mov/(list move) biz/(list dill-blit:^dill)}
   |_  {bow/bowl:^gall agent-state}
   ++  abet
-    ^-  {(list move) (list agent-to-guardian) agent-state}
+    ^-  {(list move) agent-state}
     ::=.  sys  ?^(sys sys `ost.bow)
     =>  emit-biz
-    [mov out +<+]
+    [mov +<+]
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ++  emit-biz
@@ -340,8 +330,8 @@
   ::
   ++  ring-bell  (do-blit %bel ~)
   ::+|
-  ++  output  |=(a/agent-to-guardian +>(out [a out]))
-  ++  do-action  |=(a/sole-action (output %sole our-sole-id a))
+  ++  poke-deck  |=(a/pear (emit ost.bow %poke /todo [our %deck] a))
+  ++  do-action  |=(a/sole-action (poke-deck %sole-id-action [our-sole-id a]))
   ++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
   ::+|
   ++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
@@ -403,15 +393,26 @@
   ::  ||
   ::+|
   ::
-  ++  from-guardian
-    |=  gug/guardian-to-agent  ^+  +>
+  ::>  temporary wrapper arm
+  ++  diff
+    =/  a-diff  $%  {$sole-change p/sole-change}
+                    {$side-effect p/side-effect}
+                    {$prompt-update p/(pair @ud stub:^dill)}
+                ==
+    |=  gug/a-diff  ^+  ..diff
     ?-  -.gug
-      $sole-change  +>(say +:(~(receive shared:sole say) p.gug))
-      $side-effect  (do-effect p.gug)
-      $prompt-update  (update-prompt p.gug)
+      $sole-change  (diff-sole-change p.gug)
+      $side-effect  (diff-side-effect p.gug)
+      $prompt-update  (diff-prompt-update p.gug)
     ==
   ::
-  ++  update-prompt                                           ::< show buffer, raw
+  ++  diff-sole-change                                        ::< apply sole change
+    ::> update buffer changes
+    ::
+    |=  soc/sole-change  ^+  +>.$
+    +>(say +:(~(receive shared:sole say) soc))
+  ::
+  ++  diff-prompt-update                                      ::< show buffer, raw
     ::> send updates for cursor position and/or buffer
     ::> contents
     ::
@@ -424,7 +425,7 @@
     ::
     (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
   ::
-  ++  do-effect
+  ++  diff-side-effect
     |=  fec/side-effect  ^+  +>
     ?-  fec
       {$bel *}  ring-bell
@@ -584,9 +585,10 @@
         $%  {$sole-id-action p/sole-id-action}            ::< buffer update
         ==                                                ::
       ++  lime                                            ::> typed diff
-        _!!
-  ::       $%  {$sole-effect sole-effect}                  ::< console changes
-  ::       ==                                                ::
+        $%  {$sole-change p/sole-change}
+            {$side-effect p/side-effect}
+            {$prompt-update p/(pair @ud stub:^dill)}
+        ==
       ++  card                                            ::> general card
         $%  {$diff lime}                                  ::< give update
             {$peer wire dock path}                        ::< subscribe
@@ -595,11 +597,11 @@
         ==                                                ::
       ++  move  (pair bone card)                          ::< user-level move
       --
-  =|  {mov/(list move) out/(list guardian-to-agent)}
+  =|  mov/(list move)
   |_  {bow/bowl:^gall guardian-state}
   ++  this  .
   ++  abet
-    ^-  {(list move) (list guardian-to-agent) guardian-state}
+    ^-  {(list move) guardian-state}
     ::REVIEW why not check connections?
     ::?.  caused-by-console:run-agent
     ::  [(flop moz) pith]
@@ -610,7 +612,7 @@
         flush-buffer
       ~|  [buf.say.bin buf.say.gen]
       ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
-      [mov out +<+]
+      [mov +<+]
     ==
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
@@ -670,7 +672,7 @@
   ::
   ::+|
   ::REVIEW pubsub? things might get more interesting with multiple agents
-  ++  output  |=(a/guardian-to-agent +>(out [a out]))
+  ++  output  |=(a/lime (emit ost.bow %diff a)) ::TODO correct bone?
   ++  print-text  |=(txt/tape (output %side-effect %txt txt))
   ++  print-tanks  |=(tan/tang (output %side-effect %tan tan))
   ::+|
@@ -823,9 +825,9 @@
     |=  {dok/dock fec/sole-effect}
     abet:(diff-effect:(ta dok) fec)
   ::
-  ++  from-agent
-    |=  agg/agent-to-guardian  ^+  +>
-    abet:(from-agent:(ta our %dojo) agg)
+  ++  poke-sole-id-action
+    |=  act/sole-id-action  ^+  +>
+    abet:(poke-action:(ta our %dojo) act)
   ::
   :: ++  started                                           ::< get ack for start
   ::   ::> receive acknowledgment on an app being started
@@ -1048,12 +1050,6 @@
         {$say *}  +>(say [[own=his his=own]:ven leg=~ buf]:p.fec)
       ==
     ::
-    ++  from-agent
-      |=  agg/agent-to-guardian  ^+  +>
-      ?-  -.agg
-        $sole  (agent-sole p.agg)
-      ==
-    ::
     ++  local-edit                                       ::< local edit
       ::> ted: local change to apply
       ::
@@ -1065,7 +1061,7 @@
       =.  ..ta  (output %sole-change soc)
       (send-action %det det)
     ::
-    ++  agent-sole
+    ++  poke-action
       |=  sol/sole-id-action
       ::TODO use id
       ?@  q.sol  !! ::TODO new sessions
@@ -1134,7 +1130,7 @@
 ::> ||
 ::>   more convenient lexical environment within %app
 ::
-++  se-abet  `(quip move .)`[moz .(moz ~)]  ::< resolve moves
+++  se-abet  `(quip move .)`[(flop moz) .(moz ~)]  ::< resolve moves
 ::
 ::>  ||
 ::>  ||  %multitude
@@ -1145,33 +1141,34 @@
 ++  run-guardian  ~(. guardian bow gas)
 ++  abet-agent
   |=  age/_agent
-  =+  ^-  $:  mov/(list move)
-              out/(list agent-to-guardian)
+  =+  ^-  $:  mov/(list move:agent)
               ges/agent-state
           ==
       abet:age
   ^+  +>.$
   =.  ^ges  ges
-  =.  moz  (welp mov moz)
   |-  ^+  +>.^$
-  ?~  out  +>.^$
+  ?~  mov  +>.^$
+  ?.  ?=({$poke *} q.i.mov)
+    $(mov t.mov, moz [i.mov moz])
   %_  $
-    +>.^$  (abet-guardian (from-agent:run-guardian i.out))
-    out  t.out
+    mov  t.mov
+    +>.^$  (abet-guardian (poke-sole-id-action:run-guardian p.q.i.mov))
   ==
 ::
 ++  abet-guardian
   |=  ran/_guardian
-  =+  ^-  {mov/(list move) out/(list guardian-to-agent) gas/guardian-state}
+  =+  ^-  {mov/(list move:guardian) gas/guardian-state}
       abet:ran
   ^+  +>.$
   =.  ^gas  gas
-  =.  moz  (welp mov moz)
   |-  ^+  +>.^$
-  ?~  out  +>.^$
+  ?~  mov  +>.^$
+  ?.  ?=({$diff *} q.i.mov)
+    $(mov t.mov, moz [i.mov moz])
   %_  $
-    +>.^$  (abet-agent (from-guardian:run-agent i.out))
-    out  t.out
+    mov  t.mov
+    +>.^$  (abet-agent (diff:run-agent +.q.i.mov))
   ==
 ::
 ++  wrap-agent
