@@ -91,12 +91,6 @@
   ~&  loaded+-.dat
   [~ %_(+> lac (~(put by lac) -.dat dat))]
 ::
-::++  start-drum ::drum moved
-::   :_  .
-::   :~  [ost.hid %conf /cone [our.hid %cone] %load our.hid q.byk.hid]
-::       [ost.hid %conf /deck [our.hid %deck] %load our.hid q.byk.hid]
-::       [ost.hid %poke /deck [our.hid %deck] %deck-init ~]
-::   ==
 ++  onto
   |=  {wire saw/(each suss:^gall tang)}
   ?-  -.saw

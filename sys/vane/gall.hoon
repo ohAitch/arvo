@@ -123,7 +123,9 @@
     |=  {dap/dude lum/culm}
     ?-    -.lum
         $load
-      (mo-boot dap ?:((~(has by bum) dap) %old %new) p.p.lum q.p.lum da+now)
+::       (mo-boot dap ?:((~(has by bum) dap) %old %new) p.p.lum q.p.lum da+now)
+      ~&  %conf-load-ignored
+      +>.$
     ==
   ::
   ++  mo-pass                                           ::  standard pass

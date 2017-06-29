@@ -268,8 +268,6 @@
         ~&  [%dill-init our ram also=%hood2]
         =+  can=(clan:title our)
         =.  moz  :_(moz [hen %pass / %c %merg our %home our %base da+now %init])
-        =.  moz  :_(moz [hen %pass ~ %g %conf [[our ram] %load our %home]])
-        =.  moz  :_(moz [hen %pass ~ %g %conf [[our %hood2] %load our %home]])
         =.  this  ?:  ?=(?($czar $pawn) can)  this
                   (sync %base (sein:title our) %kids)
         =.  this  ?:  ?=(?($czar $pawn) can)

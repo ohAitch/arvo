@@ -46,7 +46,9 @@
   $:  *
       * ::eel/(set dock)                                    ::< connect to
       * ::ray/(set well:^gall)                              ::< app desks
-      fur/(map dude:^gall (unit server))                ::< servers
+      ::
+      ::REVIEW no longer necessary?
+      :: fur/(map dude:^gall (unit server))                ::< servers
       :: bin/(map bone source)
       bin/target                             ::< terminals
       gen/{say/sole-share}                       ::< state for agents
@@ -586,8 +588,7 @@
   ::       $%  {$sole-effect sole-effect}                  ::< console changes
   ::       ==                                                ::
       ++  card                                            ::> general card
-        $%  {$conf wire dock $load ship term}             ::< configure app
-            {$diff lime}                                  ::< give update
+        $%  {$diff lime}                                  ::< give update
             {$peer wire dock path}                        ::< subscribe
             {$poke wire dock pear}                        ::< send message
 ::             {$pull wire dock $~}                          ::< unsubscribe
@@ -603,7 +604,7 @@
     ::?.  caused-by-console:run-agent
     ::  [(flop moz) pith]
     ::
-    =~  update-servers
+    =~  :: update-servers
         add-connections
         gc-connections
         flush-buffer
@@ -614,19 +615,19 @@
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ::
-  ++  update-servers
-    ::> start every server that wants to be up
-    ::> that is not already up
-    ::>
-    ::> (apps in {ray} and not in {fur})
-    ::
-    ^+  .
-    ::%+  roll  (~(tap in ray))
-    ::=<  .(con +>)
-    ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
-    ::=.  +>.$  con
-    =/  wel/well:^gall  [%home %dojo]
-    abet:update:(se wel)
+  ::++  update-servers
+  ::  ::> start every server that wants to be up
+  ::  ::> that is not already up
+  ::  ::>
+  ::  ::> (apps in {ray} and not in {fur})
+  ::  ::
+  ::  ^+  .
+  ::  ::%+  roll  (~(tap in ray))
+  ::  ::=<  .(con +>)
+  ::  ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
+  ::  ::=.  +>.$  con
+  ::  =/  wel/well:^gall  [%home %dojo]
+  ::  abet:update:(se wel)
   ::
   ++  add-connections                                ::< add new connections
     ::> connect any desired-link that is not connected
@@ -759,17 +760,17 @@
     :::_  u.saw
     ::>[%drum-coup-fail src.bow ost.bow dok]<
   ::
-  ++  onto                                           ::< get ack for start
-    ::> receive acknowledgment on an app being started
-    ::>
-    ::> way: identifies the app being started,
-    ::>      encoded as /[%p]/[%tas]
-    ::> saw: stack trace, if the initialization failed
-    ::
-    |=  {way/wire saw/(each suss:^gall tang)}  ^+  +>
-    ?>  ?=({@ @ $~} way)
-    =/  wel/well:^gall  [i.way i.t.way]
-    (started wel saw)
+  :: ++  onto                                           ::< get ack for start
+  ::   ::> receive acknowledgment on an app being started
+  ::   ::>
+  ::   ::> way: identifies the app being started,
+  ::   ::>      encoded as /[%p]/[%tas]
+  ::   ::> saw: stack trace, if the initialization failed
+  ::   ::
+  ::   |=  {way/wire saw/(each suss:^gall tang)}  ^+  +>
+  ::   ?>  ?=({@ @ $~} way)
+  ::   =/  wel/well:^gall  [i.way i.t.way]
+  ::   (started wel saw)
   ::
   ++  quit-phat                                           ::< get link termination
     ::> called when an open console link disconnects
@@ -826,15 +827,15 @@
     |=  agg/agent-to-guardian  ^+  +>
     abet:(from-agent:(ta our %dojo) agg)
   ::
-  ++  started                                           ::< get ack for start
-    ::> receive acknowledgment on an app being started
-    ::>
-    ::> way: identifies the app being started,
-    ::>      encoded as /[%p]/[%tas]
-    ::> saw: stack trace, if the initialization failed
-    ::
-    |=  {wel/well:^gall saw/(each suss:^gall tang)}
-    abet:(on-start:(se wel) saw)
+  :: ++  started                                           ::< get ack for start
+  ::   ::> receive acknowledgment on an app being started
+  ::   ::>
+  ::   ::> way: identifies the app being started,
+  ::   ::>      encoded as /[%p]/[%tas]
+  ::   ::> saw: stack trace, if the initialization failed
+  ::   ::
+  ::   |=  {wel/well:^gall saw/(each suss:^gall tang)}
+  ::   abet:(on-start:(se wel) saw)
   ::+|
   ++  invisible-app                                     ::< is app ignorable
     ::> if an app has not been connected yet, or the
@@ -859,54 +860,53 @@
     ::`(snag inx `(list dock)`wag)
   ::
   ++  our-sole-id  `sole-id`[1 our dap]:bow                ::< XX multiple?
-  ::+|
-  ++  se                                                  ::< per server
-    ::> this core is used to perform operations specific
-    ::> to a {server} app
-    ::>
-    ::> wel: what server
-    ::>
-    |=  wel/well:^gall
-    =/  new  !(~(has by fur) q.wel)
-    =/  hig/(unit server)  ?:(new ~ (~(got by fur) q.wel))  ::< source state
-    |%
-    ::>  ||
-    ::>  ||  %convenience
-    ::>  ||
-    ::>    minor incantations
-    ::+|
-    ++  abet                                           ::< resolve
-      ::>  exit {se}, saving changed connection to {fur}
-      ..se(fur (~(put by fur) q.wel hig))  ::REVIEW deletion ever necessary?
-    ::
-    ++  this  .
-    ::
-    ::+|
-    ++  update
-      ::REVIEW store "in flight" desk to check for equality?
-      ::>  activate app if not started yet, or if started on different desk
-      ::>
-      ?:  new  activate
-      ?:  ?~(hig & =(p.wel syd.u.hig))  this
-      activate
-    ::
-    ++  activate
-      =.  se  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
-      =/  lod  [[our.bow q.wel] %load our.bow p.wel]
-      this(hig ~, se (emit ost.bow %conf /[p.wel]/[q.wel] lod))
-    ::
-    ++  on-start
-      |=  saw/(each suss:^gall tang)  ^+  +>
-      ?:  new  !!  ::< unknown app
-      ?-  saw
-        {$| *}  +>(se (print-tanks p.saw))
-        {$& *}  ?>  =(q.wel p.p.saw)
-                ::  =.  +>.$  (print-text "live {<p.saw>}")
-                +>(hig `[p.wel %da r.p.saw])
-      ==
-    --
   ::
   ::+|
+  ::++  se                                                  ::< per server
+  ::  ::> this core is used to perform operations specific
+  ::  ::> to a {server} app
+  ::  ::>
+  ::  ::> wel: what server
+  ::  ::>
+  ::  |=  wel/well:^gall
+  ::  =/  new  !(~(has by fur) q.wel)
+  ::  =/  hig/(unit server)  ?:(new ~ (~(got by fur) q.wel))  ::< source state
+  ::  |%
+  ::  ::>  ||
+  ::  ::>  ||  %convenience
+  ::  ::>  ||
+  ::  ::>    minor incantations
+  ::  ::+|
+  ::  ++  abet                                           ::< resolve
+  ::    ::>  exit {se}, saving changed connection to {fur}
+  ::    ..se(fur (~(put by fur) q.wel hig))  ::REVIEW deletion ever necessary?
+  ::  ::
+  ::  ++  this  .
+  ::  ::
+  ::  ::+|
+  ::  ++  update
+  ::    ::REVIEW store "in flight" desk to check for equality?
+  ::    ::>  activate app if not started yet, or if started on different desk
+  ::    ::>
+  ::    ?:  new  activate
+  ::    ?:  ?~(hig & =(p.wel syd.u.hig))  this
+  ::    activate
+  ::  ::
+  ::  ++  activate
+  ::    =.  se  (print-text "activated app {(trip p.wel)}/{(trip q.wel)}")
+  ::    =/  lod  [[our.bow q.wel] %load our.bow p.wel]
+  ::    this(hig ~, se (emit ost.bow %conf /[p.wel]/[q.wel] lod))
+  ::  ::
+  ::  ++  on-start
+  ::    |=  saw/(each suss:^gall tang)  ^+  +>
+  ::    ?:  new  !!  ::< unknown app
+  ::    ?-  saw
+  ::      {$| *}  +>(se (print-tanks p.saw))
+  ::      {$& *}  ?>  =(q.wel p.p.saw)
+  ::              ::  =.  +>.$  (print-text "live {<p.saw>}")
+  ::              +>(hig `[p.wel %da r.p.saw])
+  ::    ==
+  ::  --
   ++  ta                                                  ::< per target
     ::> this core is used to perform operations specific
     ::> to a {target} app
@@ -1118,8 +1118,7 @@
       $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
       ==                                                ::
     ++  card                                            ::> general card
-      $%  {$conf wire dock $load ship term}             ::< configure app
-          {$diff lime}                                  ::< give update
+      $%  {$diff lime}                                  ::< give update
           {$peer wire dock path}                        ::< subscribe
           {$poke wire dock pear}                        ::< send message
           {$pull wire dock $~}                          ::< unsubscribe
@@ -1257,9 +1256,9 @@
 ++  coup-phat                                      ::< get ack for poke
   |=  {way/wire saw/(unit tang)}
   %.(+< (. coup-phat):wrap-guardian)
-++  onto                                           ::< get ack for start
-  |=  {way/wire saw/(each suss:^gall tang)}
-  %.(+< (. onto):wrap-guardian)
+:: ++  onto                                           ::< get ack for start
+::   |=  {way/wire saw/(each suss:^gall tang)}
+::   %.(+< (. onto):wrap-guardian)
 ++  quit-phat                                           ::< get link termination
   |=  way/wire
   %.(+< (. quit-phat):wrap-guardian)
