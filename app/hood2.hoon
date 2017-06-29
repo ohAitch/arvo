@@ -396,7 +396,8 @@
   ::+|
   ::
   ++  prep
-    |=  a/(unit agent-state)  ^+  +>
+    |=  a/(unit agent-state)
+    =<  abet  ^+  +>
     ?^  a  +>(+<+ u.a)
     (peer-deck /)  ::REVIEW sole-id?
   ::
@@ -406,7 +407,7 @@
                     {$side-effect p/side-effect}
                     {$prompt-update p/(pair @ud stub:^dill)}
                 ==
-    |=  gug/a-diff  ^+  ..diff
+    |=  gug/a-diff  ^+  abet
     ?-  -.gug
       $sole-change  (diff-sole-change p.gug)
       $side-effect  (diff-side-effect p.gug)
@@ -416,7 +417,8 @@
   ++  diff-sole-change                                        ::< apply sole change
     ::> update buffer changes
     ::
-    |=  soc/sole-change  ^+  +>.$
+    |=  soc/sole-change
+    =<  abet  ^+  +>
     +>(say +:(~(receive shared:sole say) soc))
   ::
   ++  diff-prompt-update                                      ::< show buffer, raw
@@ -424,7 +426,7 @@
     ::> contents
     ::
     |=  lin/(pair @ud stub:^dill)
-    ^+  +>
+    =<  abet  ^+  +>
     ::?:  =(mir lin)  +>
     ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
     ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
@@ -433,7 +435,8 @@
     (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
   ::
   ++  diff-side-effect
-    |=  fec/side-effect  ^+  +>
+    |=  fec/side-effect
+    =<  abet  ^+  +>
     ?-  fec
       {$bel *}  ring-bell
       {$blk *}  +>
@@ -454,6 +457,7 @@
     ::>
     ::>  _: unused path attribute
     |=  path
+    =<  abet  ^+  +>
     ::TODO assert path is empty or sth
     ::
     ::> only allow connections from self or moons
@@ -468,7 +472,8 @@
     ::>
     ::> bet: the character, key, or modified-key
     ::
-    |=  bet/dill-belt:^dill  ^+  +>
+    |=  bet/dill-belt:^dill
+    =<  abet  ^+  +>
     ?:  ?=(?($cru $hey $rez $yow) -.bet)
       (poke-window-control bet)
     (process-input bet)
@@ -476,6 +481,8 @@
     ::?:  |(?=($~ gul) (se-aint u.gul))
     ::  (se-blit %bel ~)
     ::ta-abet:(ta-belt:(ta u.gul) bet)
+  ::
+  ::+|
   ::
   ++  poke-window-control
     |=  bet/control-belt  ^+  +>
@@ -711,13 +718,17 @@
   ::>  ||
   ::+|
   ++  prep
-    |=  a/(unit guardian-state)  ^+  +>
+    |=  a/(unit guardian-state)
+    =<  abet  ^+  +>
     ?^  a  +>(+<+ u.a)
-    (prep-nil a)
+    ::REVIEW nil case implicit in abet, only exists to start
+    ::       dojo which should maybe be explicit
+    +>.$    
   ::
-  ++  prep-nil
-    |=  $~  ::REVIEW implicit in abet, only exists to start
-    +>.$    ::       dojo which should maybe be explicit
+  ++  poke-sole-id-action
+    |=  act/sole-id-action
+    =<  abet  ^+  +>
+    (poke-action act)
   ::
   ++  diff-sole-backlog-phat                               ::< chunk of output
     ::> updates to virtual console on re/connect
@@ -728,6 +739,7 @@
     ::> fec: list of backlog effects
     ::
     |=  {way/wire tot/@u fec/(list sole-effect)}
+    =<  abet  ^+  +>
     =+  dok=(drum-phat way)
     ?:  (invisible-app dok)  +>.$
     (diff-backlog dok tot fec)
@@ -740,7 +752,8 @@
     ::> fec: the update. print lines, delete/replace
     ::>      chars of input, etc
     ::
-    |=  {way/wire fec/sole-effect}  ^+  +>
+    |=  {way/wire fec/sole-effect}
+    =<  abet  ^+  +>
     =+  dok=(drum-phat way)
     ?:  (invisible-app dok)  +>.$
     (diff-effect dok fec)
@@ -752,7 +765,8 @@
     ::>      encoded as /[%p]/[%tas]
     ::> saw: stack trace, if the connection failed
     ::
-    |=  {way/wire saw/(unit tang)}  ^+  +>
+    |=  {way/wire saw/(unit tang)}
+    =<  abet  ^+  +>
     =+  dok=(drum-phat way)
     ?~  saw  (peered dok)
     (mean >%drum-reap-fail< u.saw)
@@ -765,7 +779,8 @@
     ::>      encoded as /[%p]/[%tas]
     ::> saw: stack trace, if the command failed
     ::
-    |=  {way/wire saw/(unit tang)}  ^+  +>
+    |=  {way/wire saw/(unit tang)}
+    =<  abet  ^+  +>
     ?~  saw  +>
     =+  dok=(drum-phat way)
     ?:  (invisible-app dok)  +>.$
@@ -781,7 +796,8 @@
   ::   ::>      encoded as /[%p]/[%tas]
   ::   ::> saw: stack trace, if the initialization failed
   ::   ::
-  ::   |=  {way/wire saw/(each suss:^gall tang)}  ^+  +>
+  ::   |=  {way/wire saw/(each suss:^gall tang)}
+  ::   =<  abet  ^+  +>
   ::   ?>  ?=({@ @ $~} way)
   ::   =/  wel/well:^gall  [i.way i.t.way]
   ::   (started wel saw)
@@ -792,7 +808,8 @@
     ::> way: identifies the app that disconnected,
     ::>      encoded as /[%p]/[%tas]
     ::
-    |=  way/wire  ^+  +>
+    |=  way/wire
+    =<  abet  ^+  +>
     =+  dok=(drum-phat way)
     ~&  [%drum-quit src.bow ost.bow dok]
     ::
@@ -837,7 +854,7 @@
     |=  {dok/dock fec/sole-effect}
     abet:(diff-effect:(ta dok) fec)
   ::
-  ++  poke-sole-id-action
+  ++  poke-action
     |=  act/sole-id-action  ^+  +>
     abet:(poke-action:(ta our %dojo) act)
   ::
@@ -1152,11 +1169,7 @@
 ++  run-agent  `_agent`~(. agent bow ges)
 ++  run-guardian  ~(. guardian bow gas)
 ++  abet-agent
-  |=  age/_agent
-  =+  ^-  $:  mov/(list move:agent)
-              ges/agent-state
-          ==
-      abet:age
+  |=  {mov/(list move:agent) ges/agent-state}
   ^+  +>.$
   =.  ^ges  ges
   |-  ^+  +>.^$
@@ -1169,9 +1182,7 @@
   ==
 ::
 ++  abet-guardian
-  |=  ran/_guardian
-  =+  ^-  {mov/(list move:guardian) gas/guardian-state}
-      abet:ran
+  |=  {mov/(list move:guardian) gas/guardian-state}
   ^+  +>.$
   =.  ^gas  gas
   |-  ^+  +>.^$
@@ -1186,14 +1197,14 @@
 ++  wrap-agent
   =>  v=.
   =+  run-agent.v
-  |*  a/$-(* _agent)
+  |*  a/$-(* _abet:agent)
   |=  _+<.a  ^+  se-abet.v
   se-abet:(abet-agent.v (a +<))
 ::
 ++  wrap-guardian
   =>  v=.
   =+  run-guardian.v
-  |*  a/$-(* _guardian)
+  |*  a/$-(* _abet:guardian)
   |=  _+<.a  ^+  se-abet.v
   se-abet:(abet-guardian.v (a +<))
 ::
@@ -1206,7 +1217,7 @@
   |=  old/(unit drum-pith)
   ~&  %cone-2-prep
   ?^  old  [~ +>(+<+ u.old)]
-  %.(~ (. prep-nil):wrap-guardian)
+  se-abet:(abet-guardian (prep:run-guardian ~))
 ::
 ++  diff-sole-backlog-phat                               ::< chunk of output
   |=  {way/wire tot/@u fec/(list sole-effect)}
