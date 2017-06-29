@@ -301,6 +301,7 @@
       ++  card                                            ::> general card
         $%  {$diff lime}                                  ::< give update
             {$poke wire {ship $deck} pear}                ::< send message
+            {$peer wire {ship $deck} path}                ::< subscribe
         ==                                                ::
       ++  move  (pair bone card)                          ::< user-level move
       --
@@ -331,6 +332,7 @@
   ++  ring-bell  (do-blit %bel ~)
   ::+|
   ++  poke-deck  |=(a/pear (emit ost.bow %poke /todo [our %deck] a))
+  ++  peer-deck  |=(a/path (emit ost.bow %peer /todo [our %deck] a))
   ++  do-action  |=(a/sole-action (poke-deck %sole-id-action [our-sole-id a]))
   ++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
   ::+|
@@ -392,6 +394,11 @@
   ::  ||  %interfaces
   ::  ||
   ::+|
+  ::
+  ++  prep
+    |=  a/(unit agent-state)  ^+  +>
+    ?^  a  +>(+<+ u.a)
+    (peer-deck /)  ::REVIEW sole-id?
   ::
   ::>  temporary wrapper arm
   ++  diff
@@ -703,6 +710,11 @@
   ::>  ||  %raw-interfaces
   ::>  ||
   ::+|
+  ++  prep
+    |=  a/(unit guardian-state)  ^+  +>
+    ?^  a  +>(+<+ u.a)
+    (prep-nil a)
+  ::
   ++  prep-nil
     |=  $~  ::REVIEW implicit in abet, only exists to start
     +>.$    ::       dojo which should maybe be explicit
