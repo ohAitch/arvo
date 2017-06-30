@@ -265,7 +265,7 @@
         ==
       ::
       ++  init                                          ::  initialize
-        ~&  [%dill-init our ram also=%hood2]
+        ~&  [%dill-init our ram]
         =+  can=(clan:title our)
         =.  moz  :_(moz [hen %pass / %c %merg our %home our %base da+now %init])
         =.  this  ?:  ?=(?($czar $pawn) can)  this
@@ -296,12 +296,12 @@
         %_    +>
             moz
           :_  moz
-          [hen %pass ~ %g %deal [our our] %hood2 %poke [%dill-belt -:!>(bet) bet]]
+          [hen %pass ~ %g %deal [our our] %cone %poke [%dill-belt -:!>(bet) bet]]
         ==
       ++  peer
         %_    .
             moz
-          :_(moz [hen %pass ~ %g %deal [our our] %hood2 %peer /drum])
+          :_(moz [hen %pass ~ %g %deal [our our] %cone %peer /drum])
         ==
       ::
       ++  sync
@@ -336,7 +336,7 @@
       ++  pump                                          ::  send diff ack
         %_    .
             moz
-          :_(moz [hen %pass ~ %g %deal [our our] %hood2 %pump ~])
+          :_(moz [hen %pass ~ %g %deal [our our] %cone %pump ~])
         ==
       ::
       ++  take                                          ::  receive
