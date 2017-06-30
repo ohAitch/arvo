@@ -730,6 +730,13 @@
     =<  abet  ^+  +>
     (poke-action act)
   ::
+  ++  peer                                                ::< new connection
+    |=  pax/path
+    =<  abet  ^+  +>
+    ::TODO backlog?
+    +>.$
+  ::
+  ::
   ++  diff-sole-backlog-phat                               ::< chunk of output
     ::> updates to virtual console on re/connect
     ::>
@@ -1214,7 +1221,7 @@
   %.(+< (. diff-sole-effect-phat):wrap-guardian)
 ++  peer                                                ::< new connection
   |=  pax/path
-  %.(+< (. peer):wrap-agent)
+  %.(+< (. peer):wrap-guardian)
 ++  poke-dill-belt                                      ::< terminal event
   |=  bet/dill-belt:^dill
   %.(+< (. poke-dill-belt):wrap-agent)
