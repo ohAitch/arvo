@@ -308,10 +308,10 @@
   =|  {mov/(list move) biz/(list dill-blit:^dill)}
   |_  {bow/bowl:^gall agent-state}
   ++  abet
-    ^-  {(list move) agent-state}
+    ^-  {(list move) _.}
     ::=.  sys  ?^(sys sys `ost.bow)
     =>  emit-biz
-    [mov +<+]
+    [mov .(mov ~)]
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
   ++  emit-biz
@@ -1170,9 +1170,9 @@
 ++  run-agent  `_agent`~(. agent bow ges)
 ++  run-guardian  ~(. guardian bow gas)
 ++  abet-agent
-  |=  {mov/(list move:agent) ges/agent-state}
+  |=  {mov/(list move:agent) age/_agent}
   %_  +>.$
-    ges  ges
+    ges  +<+.age
     moz  (weld (flop mov) moz)
   ==
 ::

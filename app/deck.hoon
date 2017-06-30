@@ -615,7 +615,7 @@
   |_  {bow/bowl:^gall guardian-state}
   ++  this  .
   ++  abet
-    ^-  {(list move) guardian-state}
+    ^-  {(list move) _this}
     ::REVIEW why not check connections?
     ::?.  caused-by-console:run-agent
     ::  [(flop moz) pith]
@@ -626,7 +626,7 @@
         flush-buffer
       ~|  [buf.say.bin buf.say.gen]
       ?>  =(buf.say.bin buf.say.gen)  ::REVIEW necessary?
-      [mov +<+]
+      [mov this(mov ~)]
     ==
   ::
   ++  emit  |=(mow/move %_(+> mov [mow mov]))
@@ -1175,9 +1175,9 @@
   !!
 ::
 ++  abet-guardian
-  |=  {mov/(list move:guardian) gas/guardian-state}
+  |=  {mov/(list move:guardian) gar/_guardian}
   %_  +>.$
-    gas  gas
+    gas  +<+.gar
     moz  (weld (flop mov) moz)
   ==
 ::
@@ -1202,7 +1202,7 @@
 ::+|
 ++  prep
   |=  old/(unit drum-pith)
-  ~&  %cone-2-prep
+  ~&  %deck-prep
   ?^  old  [~ +>(+<+ u.old)]
   se-abet:(abet-guardian (prep:run-guardian ~))
 ::
