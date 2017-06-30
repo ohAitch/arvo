@@ -407,17 +407,17 @@
                     {$side-effect p/side-effect}
                     {$prompt-update p/(pair @ud stub:^dill)}
                 ==
-    |=  gug/a-diff  ^+  abet
+    |=  {wir/wire gug/a-diff}  ^+  abet
     ?-  -.gug
-      $sole-change  (diff-sole-change p.gug)
-      $side-effect  (diff-side-effect p.gug)
-      $prompt-update  (diff-prompt-update p.gug)
+      $sole-change  (diff-sole-change wir p.gug)
+      $side-effect  (diff-side-effect wir p.gug)
+      $prompt-update  (diff-prompt-update wir p.gug)
     ==
   ::
   ++  diff-sole-change                                        ::< apply sole change
     ::> update buffer changes
     ::
-    |=  soc/sole-change
+    |=  {wire soc/sole-change}
     =<  abet  ^+  +>
     +>(say +:(~(receive shared:sole say) soc))
   ::
@@ -425,7 +425,7 @@
     ::> send updates for cursor position and/or buffer
     ::> contents
     ::
-    |=  lin/(pair @ud stub:^dill)
+    |=  {wire lin/(pair @ud stub:^dill)}
     =<  abet  ^+  +>
     ::?:  =(mir lin)  +>
     ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
@@ -435,7 +435,7 @@
     (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
   ::
   ++  diff-side-effect
-    |=  fec/side-effect
+    |=  {wire fec/side-effect}
     =<  abet  ^+  +>
     ?-  fec
       {$bel *}  ring-bell
@@ -1206,6 +1206,9 @@
   ?^  old  [~ +>(+<+ u.old)]
   se-abet:(abet-agent (prep:run-agent ~))
 ::
+++  diff-sole-change    (. diff-sole-change):wrap-agent
+++  diff-prompt-update  (. diff-prompt-update):wrap-agent
+++  diff-side-effect    (. diff-side-effect):wrap-agent
 ++  diff-sole-backlog-phat                               ::< chunk of output
   |=  {way/wire tot/@u fec/(list sole-effect)}
   %.(+< (. diff-sole-backlog-phat):wrap-guardian)

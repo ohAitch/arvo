@@ -1219,6 +1219,8 @@
   |=  bet/dill-belt:^dill
   %.(+< (. poke-dill-belt):wrap-agent)
 ::
+++  poke-sole-id-action  (. poke-sole-id-action):wrap-guardian
+::
 :: ++  poke-start                                          ::< |start %app
 ::   ::> init an app using gall, and link to its console
 ::   ::
