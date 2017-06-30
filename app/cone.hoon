@@ -1266,6 +1266,10 @@
 ++  coup-phat                                      ::< get ack for poke
   |=  {way/wire saw/(unit tang)}
   %.(+< (. coup-phat):wrap-guardian)
+++  coup                                      ::< get ack for poke
+  |=  {way/wire saw/(unit tang)}
+  ?~  saw  se-abet
+  ((slog >[%coup way]< u.saw) se-abet)
 :: ++  onto                                           ::< get ack for start
 ::   |=  {way/wire saw/(each suss:^gall tang)}
 ::   %.(+< (. onto):wrap-guardian)
