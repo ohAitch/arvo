@@ -1149,7 +1149,7 @@
           {$pull wire dock $~}                          ::< unsubscribe
       ==                                                ::
 ::     ++  move  (pair bone card)                          ::< user-level move
-    ++  move  move:agent
+    ++  move  move:guardian
     --
 =|  moz/(list move)
 |_  {bow/bowl:^gall drum-pith}                          ::  main drum work
@@ -1171,15 +1171,15 @@
 ++  run-guardian  ~(. guardian bow gas)
 ++  abet-agent
   |=  {mov/(list move:agent) ges/agent-state}
-  %_  +>.$
-    ges  ges
-    moz  (weld (flop mov) moz)
-  ==
+  ^+  +>.$
+  !!
 ::
 ++  abet-guardian
   |=  {mov/(list move:guardian) gas/guardian-state}
-  ^+  +>.$
-  !!
+  %_  +>.$
+    gas  gas
+    moz  (weld (flop mov) moz)
+  ==
 ::
 ++  wrap-agent
   =>  v=.
@@ -1204,7 +1204,7 @@
   |=  old/(unit drum-pith)
   ~&  %cone-2-prep
   ?^  old  [~ +>(+<+ u.old)]
-  se-abet:(abet-agent (prep:run-agent ~))
+  se-abet:(abet-guardian (prep:run-guardian ~))
 ::
 ++  diff-sole-backlog-phat                               ::< chunk of output
   |=  {way/wire tot/@u fec/(list sole-effect)}
