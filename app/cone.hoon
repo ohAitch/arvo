@@ -393,24 +393,20 @@
   ::  ||
   ::+|
   ::
+  ++  coup                                      ::< get ack for poke
+    |=  {way/wire saw/(unit tang)}
+    ?~  saw  abet
+    ((slog >[%coup way]< u.saw) abet)
+  ++  reap                                      ::< get ack for peer
+    |=  {way/wire saw/(unit tang)}
+    ?~  saw  abet
+    ((slog >[%reap way]< u.saw) abet)
+  ::
   ++  prep
     |=  a/(unit agent-state)
     =<  abet  ^+  +>
     ?^  a  +>(+<+ u.a)
     (peer-deck /)  ::REVIEW sole-id?
-  ::
-  ::>  temporary wrapper arm
-  ++  diff
-    =/  a-diff  $%  {$sole-change p/sole-change}
-                    {$side-effect p/side-effect}
-                    {$prompt-update p/(pair @ud stub:^dill)}
-                ==
-    |=  {wir/wire gug/a-diff}  ^+  abet
-    ?-  -.gug
-      $sole-change  (diff-sole-change wir p.gug)
-      $side-effect  (diff-side-effect wir p.gug)
-      $prompt-update  (diff-prompt-update wir p.gug)
-    ==
   ::
   ++  diff-sole-change                                        ::< apply sole change
     ::> update buffer changes
@@ -631,6 +627,9 @@
   ?^  old  se-abet(+<+ u.old)
   se-abet:(abet-agent (prep:run-agent ~))
 ::
+++  coup    (. coup):wrap-agent
+++  reap    (. reap):wrap-agent
+::
 ++  diff-sole-change    (. diff-sole-change):wrap-agent
 ++  diff-prompt-update  (. diff-prompt-update):wrap-agent
 ++  diff-side-effect    (. diff-side-effect):wrap-agent
@@ -679,14 +678,6 @@
 ::   ::
 ::   |=  {pax/path txt/@}
 ::   ::se-abet:(se-blit-sys [%sav pax txt])
-++  coup                                      ::< get ack for poke
-  |=  {way/wire saw/(unit tang)}
-  ?~  saw  se-abet
-  ((slog >[%coup way]< u.saw) se-abet)
-++  reap                                      ::< get ack for peer
-  |=  {way/wire saw/(unit tang)}
-  ?~  saw  se-abet
-  ((slog >[%reap way]< u.saw) se-abet)
 ::
 ::> ||
 ::> ||  %accessors
