@@ -372,10 +372,7 @@
   ::
   ::+|
   ::REVIEW pubsub? things might get more interesting with multiple agents
-  ++  output  
-    |=  a/lime
-    ~&  [%output -.a ost.bow sup.bow]
-    (emit ost.bow %diff a) ::TODO correct bone?
+  ++  output  |=(a/lime (emit ost.bow %diff a)) ::TODO correct bone?
   ++  print-text  |=(txt/tape (output %side-effect %txt txt))
   ++  print-tanks  |=(tan/tang (output %side-effect %tan tan))
   ::+|
@@ -477,7 +474,6 @@
     ::> saw: stack trace, if the command failed
     ::
     |=  {way/wire saw/(unit tang)}
-    ~&  [%coup-phat =(~ saw)]
     =<  abet  ^+  +>
     ?~  saw  +>
     =+  dok=(drum-phat way)
@@ -802,11 +798,9 @@
       ::> soc: local change to apply
       |=  soc/sole-change
       ^+  +>
-      ~&  agent-change+[soc (tufa buf.say)]
       =^  ted  say.gen  (~(receive shared:sole say.gen) soc)
       ::=^  det  say  (~(transmit cursored:sole inp) ted)
       =^  det  say  (~(transmit shared:sole say) ted)
-      ~&  agent-changed+[ted (tufa buf.say)]
       (send-action %det det)
     ::
     ::
