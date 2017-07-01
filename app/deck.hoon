@@ -826,7 +826,7 @@
 --
 =*  move  move:guardian
 =|  moz/(list move)
-|_  {bow/bowl:^gall * gas/guardian-state}                          ::  main drum work
+|_  {bow/bowl:^gall gas/guardian-state}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
 ::> ||
@@ -862,7 +862,7 @@
 ::>    accept external events
 ::+|
 ++  prep
-  |=  old/(unit {* guardian-state})
+  |=  old/(unit guardian-state)
   ^+  se-abet
   ~&  %deck-prep
   ?^  old  se-abet(+<+ u.old)

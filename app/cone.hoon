@@ -585,7 +585,7 @@
 --
 =/  move  move:agent
 =|  moz/(list move)
-|_  {bow/bowl:^gall ges/agent-state *}                          ::  main drum work
+|_  {bow/bowl:^gall ges/agent-state}                          ::  main drum work
 ::  new subscriptions default empty
 ::=+  (fall (~(get by bin) ost.bow) *source)
 ::> ||
@@ -621,7 +621,7 @@
 ::>    accept external events
 ::+|
 ++  prep
-  |=  old/(unit {agent-state *})
+  |=  old/(unit agent-state)
   ^+  se-abet
   ~&  %cone-prep
   ?^  old  se-abet(+<+ u.old)
