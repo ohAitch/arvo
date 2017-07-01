@@ -283,362 +283,309 @@
 ::> ||
 ::>   event + state -> reactions + state
 ::>
-|%
-++  agent
-  =>  ::>  ||
-      ::>  ||  %interface-types
-      ::>  ||
-      ::
-      |%
-      ++  lime                                            ::> typed diff
-        $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
-        ==                                                ::
-      ++  pear                                            ::> typed poke
-        $%  {$sole-id-action p/sole-id-action}            ::< console command
-        ==                                                ::
-      ++  card                                            ::> general card
-        $%  {$diff lime}                                  ::< give update
-            {$poke wire {ship $deck} pear}                ::< send message
-            {$peer wire {ship $deck} path}                ::< subscribe
-        ==                                                ::
-      ++  move  (pair bone card)                          ::< user-level move
-      --
-  =|  {mov/(list move) biz/(list dill-blit:^dill)}
-  |_  {bow/bowl:^gall agent-state}
-  ++  abet
-    ^-  {(list move) _.}
-    ::=.  sys  ?^(sys sys `ost.bow)
-    =>  emit-biz
-    [mov .(mov ~)]
-  ::
-  ++  emit  |=(mow/move %_(+> mov [mow mov]))
-  ++  emit-biz
-    %_    .
-        biz  ~
-        mov
-      ?~  biz  mov
-      :_  mov
-      [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
-    ==
-  ::
-  ++  do-blit                                             ::< give output
-    ::> bil: blit to queue; later consolidated into a
-    ::>      single %dill-blit diff
-    ::REVIEW still less consolidated than a drum-wide one
-    |=(bil/dill-blit:^dill +>(biz [bil biz]))
-  ::
-  ++  ring-bell  (do-blit %bel ~)
-  ::+|
-  ++  poke-deck  |=(a/pear (emit ost.bow %poke /todo [our %deck] a))
-  ++  peer-deck  |=(a/path (emit ost.bow %peer /todo [our %deck] a))
-  ++  do-action  |=(a/sole-action (poke-deck %sole-id-action [our-sole-id a]))
-  ++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
-  ::+|
-  ++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
-  ::+|
-  ++  print-tanks                                             ::< print tanks
-    ::> tac: pretty-print objects to output as %out lines
+=>  ::>  ||
+    ::>  ||  %interface-types
+    ::>  ||
     ::
-    |=  tac/(list tank)
-    ^+  +>
-    ?.  caused-by-console  (show-in-talk tac)
-    =/  wol/wall
-      (zing (turn (flop tac) |=(a/tank (~(win re a) [0 120]))))
-    |-  ^+  +>.^$
-    ?~  wol  +>.^$
-    ?.  ((sane %t) (crip i.wol))  :: XX upstream validation
-      ~&  bad-text+<`*`i.wol>
-      $(wol t.wol)
-    $(wol t.wol, +>.^$ (do-blit %out (tuba i.wol)))
-  ::
-  ++  print-text                                          ::< return text
-    ::> print message to screen, whatever that means
-    ::>
-    ::> usually this means sending a %out effect, but
-    ::> when the message wasn't caused by a stack trace
-    ::> it is still recorded
-    ::>
-    ::> txt: the message. sanitized if invalid @t
-    ::
-    |=  txt/tape
-    ^+  +>
-    ?.  ((sane %t) (crip txt))  :: XX upstream validation
-      ~&  bad-text+<`*`txt>
-      +>
-    ?.  caused-by-console  (show-in-talk [%leaf txt]~)
-    (do-blit %out (tuba txt))
-  ::
-  ++  show-in-talk                                          ::< show in talk
-    ::> display stack trace using talk if not cause by console
-    ::
-    ::REVIEW maybe at least use {se-blit-sys}?
-    |=  tac/(list tank)
-    ^+  +>
-    :: XX talk should be usable for stack traces, see urbit#584 which this change
-    :: closed for the problems there
-    ((slog (flop tac)) +>)
-    ::=-  (se-emit 0 %poke /talk [our.bow %talk] -)
-    ::(said:talk our.bow %drum now.bow eny.bow tac)
-  ::
-  ++  local-edit                                       ::< local edit
-    ::> ted: local change to apply
-    ::
-    |=  ted/sole-edit
-    ^+  +>
-    ::=^  det  say  (~(transmit cursored:sole inp) ted)
-    =^  det  say  (~(transmit shared:sole say) ted)
-    (do-action %det det)
-  ::  ||
-  ::  ||  %interfaces
-  ::  ||
-  ::+|
-  ::
-  ++  coup                                      ::< get ack for poke
-    |=  {way/wire saw/(unit tang)}
-    ?~  saw  abet
-    ((slog >[%coup way]< u.saw) abet)
-  ++  reap                                      ::< get ack for peer
-    |=  {way/wire saw/(unit tang)}
-    ?~  saw  abet
-    ((slog >[%reap way]< u.saw) abet)
-  ::
-  ++  prep
-    |=  a/(unit agent-state)
-    =<  abet  ^+  +>
-    ?^  a  +>(+<+ u.a)
-    (peer-deck /)  ::REVIEW sole-id?
-  ::
-  ++  diff-sole-change                                        ::< apply sole change
-    ::> update buffer changes
-    ::
-    |=  {wire soc/sole-change}
-    =<  abet  ^+  +>
-    +>(say +:(~(receive shared:sole say) soc))
-  ::
-  ++  diff-prompt-update                                      ::< show buffer, raw
-    ::> send updates for cursor position and/or buffer
-    ::> contents
-    ::
-    |=  {wire lin/(pair @ud stub:^dill)}
-    =<  abet  ^+  +>
-    ::?:  =(mir lin)  +>
-    ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
-    ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
-    ::+>(mir lin)
-    ::
-    (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
-  ::
-  ++  diff-side-effect
-    |=  {wire fec/side-effect}
-    =<  abet  ^+  +>
-    ?-  fec
-      {$bel *}  ring-bell
-      {$blk *}  +>
-    ::
-      {$sag *}  (do-blit fec)
-      {$sav *}  (do-blit fec)
-      {$url *}  (do-blit fec)
-      {$clr *}  (do-blit fec)
-    ::
-      {$klr *}  (do-blit %klr (make:klr p.fec))
-      {$tan *}  (print-tanks p.fec)
-      {$txt *}  (print-text p.fec)
-    ==
-  ::
-  ::
-  ++  peer                                            ::< new connection
-    ::>  incoming subscription
-    ::>
-    ::>  _: unused path attribute
-    |=  path
-    =<  abet  ^+  +>
-    ::TODO assert path is empty or sth
-    ::
-    ::> only allow connections from self or moons
-    ::
-    ~|  [%drum-unauthorized our+our.bow src+src.bow]
-    ?>  (team:title our.bow src.bow)
-    ::
-    (print-text "[{<src.bow>}, driving {<our.bow>}]")
-  ::
-  ++  poke-dill-belt                                 ::< terminal event
-    ::> process keystroke
-    ::>
-    ::> bet: the character, key, or modified-key
-    ::
-    |=  bet/dill-belt:^dill
-    =<  abet  ^+  +>
-    ?:  ?=(?($cru $hey $rez $yow) -.bet)
-      (poke-window-control bet)
-    (process-input bet)
-    ::=+  gul=se-current-app
-    ::?:  |(?=($~ gul) (se-aint u.gul))
-    ::  (se-blit %bel ~)
-    ::ta-abet:(ta-belt:(ta u.gul) bet)
-  ::
-  ::+|
-  ::
-  ++  poke-window-control
-    |=  bet/control-belt  ^+  +>
-    ?-  bet
-      {$cru *}  (print-tanks:(print-text (trip p.bet)) q.bet)
-      {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
-      {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
-      {$yow *}  ~&([%no-yow -.bet] +>)
-    ==
-  ::
-  ++  process-input
-    |=  bet/app-specific-belt  ^+  +>
-    =<  ?+  -.bet  ring-bell ::TODO handle all
-          $ret  (do-action %ret ~)
-          $txt  (hear-text p.bet)
-          $bac  backspace
-          $ctl  (key-ctl p.bet)
-        ==
     |%
-    ++  hear-text                                            ::< hear text
-      ::> hear regular text, into main buffer or
-      ::> reverse-i-search if active
-      ::>
-      ::> ext: text to append, usually single character
-      ::
-      |=  txt/(list @c)
-      ^+  +>.^$
-      ::?^  ris
-      ::  (ta-ser txt)
-      ::(local-edit (cat:block:sole pos.inp txt))
-      (local-edit (cat:block:sole (lent buf.say) txt))
-    ::
-    ++  backspace                                            ::< hear backspace
-      ::> delete character under cursor from
-      ::> reverse-i-search or buffer, sending a [%clr ~]
-      ::> if the buffer is empty.
-      ::
-      ^+  ..process-input
-      ::?^  ris
-      ::  ?:  =(~ str.u.ris)
-      ::    ta-bel
-      ::  .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
-      ::?:  =(0 pos.inp)
-      ::  ?~  buf.say.inp
-      ::    (ta-act %clr ~)
-      ::  ta-bel
-      ::(ta-hom %del (dec pos.inp))
-      ?~  buf.say
-        (do-action %clr ~)
-      (local-edit %del (dec (lent buf.say)))
-    ++  key-ctl                                            ::< hear control
-      ::> handle ctrl key
-      ::
-      |=  key/@ud
-      ^+  ..process-input
-      ::=.  ris  ?.(?=(?($g $r) key) ~ ris)
-      ?+    key    ring-bell
-          ::$a  +>(pos.inp 0)
-          ::$b  (ta-aro %l)
-          $c  ring-bell
-          ::$d  ?^  buf.say.inp
-          ::    ta-del
-          ::    > talk and dojo close console on ^d
-          ::    > instead of actually disconnecting
-          ::
-          ::    ?:  (~(has in eel:(drum-make our.bow)) dok)
-          ::      +>(..ta (se-blit qit+~))                  ::< quit pier
-          ::    +>(eel (~(del in eel) dok))                 ::< unlink app
-          $d  (do-blit qit+~)                               ::< quit pier
-          ::$e  +>(pos.inp (lent buf.say.inp))
-          ::$f  (ta-aro %r)
-          ::$g  ?~  ris  ring-bell
-          ::    (ta-hom(pos.hit num.hit, ris ~) [%set ~])
-          ::$k  =+  len=(lent buf.say.inp)
-          ::    ?:  =(pos.inp len)
-          ::      ring-bell
-          ::    (ta-kil %r [pos.inp (sub len pos.inp)])
-          $l  (do-blit %clr ~)
-          ::$n  (ta-aro %d)
-          ::$p  (ta-aro %u)
-          ::$r  ?~  ris
-          ::      +>(ris `[pos.hit ~])
-          ::    ?:  =(0 pos.u.ris)
-          ::      ring-bell
-          ::    (ta-ser ~)
-          ::$t  =+  len=(lent buf.say.inp)
-          ::    ?:  |(=(0 pos.inp) (lth len 2))
-          ::      ring-bell
-          ::    =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
-          ::    (ta-hom (rep:block:sole [sop 2] (flop (swag [sop 2] buf.say.inp))))
-          ::$u  ?:  =(0 pos.inp)
-          ::      ring-bell
-          ::    (ta-kil %l [0 pos.inp])
-          $v  ring-bell
-          ::$w  ?:  =(0 pos.inp)
-          ::      ring-bell
-          ::    =+  sop=(ta-off %l %ace pos.inp)
-          ::    (ta-kil %l [(sub pos.inp sop) sop])
-          ::$x  +>(..ta se-next-app)
-          ::$y  ?:  =(0 num.kil)
-          ::      ring-bell
-          ::    (ta-hom (cat:block:sole pos.inp ta-yan))
-      ==
+    ++  lime                                            ::> typed diff
+      $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
+      ==                                                ::
+    ++  pear                                            ::> typed poke
+      $%  {$sole-id-action p/sole-id-action}            ::< console command
+      ==                                                ::
+    ++  card                                            ::> general card
+      $%  {$diff lime}                                  ::< give update
+          {$poke wire {ship $deck} pear}                ::< send message
+          {$peer wire {ship $deck} path}                ::< subscribe
+      ==                                                ::
+    ++  move  (pair bone card)                          ::< user-level move
     --
-  --
---
-=/  move  move:agent
-=|  moz/(list move)
-|_  {bow/bowl:^gall ges/agent-state}                          ::  main drum work
-::  new subscriptions default empty
-::=+  (fall (~(get by bin) ost.bow) *source)
-::> ||
-::> ||  %door
-::> ||
-::>   more convenient lexical environment within %app
+=|  {mov/(list move) biz/(list dill-blit:^dill)}
+|_  {bow/bowl:^gall agent-state}
+++  abet
+  ^-  {(list move) _.}
+  ::=.  sys  ?^(sys sys `ost.bow)
+  =>  emit-biz
+  [mov .(mov ~)]
 ::
-++  se-abet  `(quip move .)`[(flop moz) .(moz ~)]  ::< resolve moves
-::
-::>  ||
-::>  ||  %multitude
-::>  ||
-::>    subcore interfaces
-::+|
-++  run-agent  `_agent`~(. agent bow ges)
-++  abet-agent
-  |=  {mov/(list move:agent) age/_agent}
-  %_  +>.$
-    ges  +<+.age
-    moz  (weld (flop mov) moz)
+++  emit  |=(mow/move %_(+> mov [mow mov]))
+++  emit-biz
+  %_    .
+      biz  ~
+      mov
+    ?~  biz  mov
+    :_  mov
+    [ost.bow %diff %dill-blit ?~(t.biz i.biz [%mor (flop biz)])]
   ==
 ::
-++  wrap-agent
-  =>  v=.
-  =+  run-agent.v
-  |*  a/$-(* _abet:agent)
-  |=  _+<.a  ^+  se-abet.v
-  se-abet:(abet-agent.v (a +<))
+++  do-blit                                             ::< give output
+  ::> bil: blit to queue; later consolidated into a
+  ::>      single %dill-blit diff
+  ::REVIEW still less consolidated than a drum-wide one
+  |=(bil/dill-blit:^dill +>(biz [bil biz]))
+::
+++  ring-bell  (do-blit %bel ~)
+::+|
+++  poke-deck  |=(a/pear (emit ost.bow %poke /todo [our %deck] a))
+++  peer-deck  |=(a/path (emit ost.bow %peer /todo [our %deck] a))
+++  do-action  |=(a/sole-action (poke-deck %sole-id-action [our-sole-id a]))
+++  our-sole-id  `sole-id`[2 our dap]:bow                ::< XX multiple?
+::+|
+++  caused-by-console  (~(has by sup.bow) ost.bow)                ::< caused by console
+::+|
+++  print-tanks                                             ::< print tanks
+  ::> tac: pretty-print objects to output as %out lines
+  ::
+  |=  tac/(list tank)
+  ^+  +>
+  ?.  caused-by-console  (show-in-talk tac)
+  =/  wol/wall
+    (zing (turn (flop tac) |=(a/tank (~(win re a) [0 120]))))
+  |-  ^+  +>.^$
+  ?~  wol  +>.^$
+  ?.  ((sane %t) (crip i.wol))  :: XX upstream validation
+    ~&  bad-text+<`*`i.wol>
+    $(wol t.wol)
+  $(wol t.wol, +>.^$ (do-blit %out (tuba i.wol)))
+::
+++  print-text                                          ::< return text
+  ::> print message to screen, whatever that means
+  ::>
+  ::> usually this means sending a %out effect, but
+  ::> when the message wasn't caused by a stack trace
+  ::> it is still recorded
+  ::>
+  ::> txt: the message. sanitized if invalid @t
+  ::
+  |=  txt/tape
+  ^+  +>
+  ?.  ((sane %t) (crip txt))  :: XX upstream validation
+    ~&  bad-text+<`*`txt>
+    +>
+  ?.  caused-by-console  (show-in-talk [%leaf txt]~)
+  (do-blit %out (tuba txt))
+::
+++  show-in-talk                                          ::< show in talk
+  ::> display stack trace using talk if not cause by console
+  ::
+  ::REVIEW maybe at least use {se-blit-sys}?
+  |=  tac/(list tank)
+  ^+  +>
+  :: XX talk should be usable for stack traces, see urbit#584 which this change
+  :: closed for the problems there
+  ((slog (flop tac)) +>)
+  ::=-  (se-emit 0 %poke /talk [our.bow %talk] -)
+  ::(said:talk our.bow %drum now.bow eny.bow tac)
+::
+++  local-edit                                       ::< local edit
+  ::> ted: local change to apply
+  ::
+  |=  ted/sole-edit
+  ^+  +>
+  ::=^  det  say  (~(transmit cursored:sole inp) ted)
+  =^  det  say  (~(transmit shared:sole say) ted)
+  (do-action %det det)
+::  ||
+::  ||  %interfaces
+::  ||
+::+|
+::
+++  coup                                      ::< get ack for poke
+  |=  {way/wire saw/(unit tang)}
+  ?~  saw  abet
+  ((slog >[%coup way]< u.saw) abet)
+++  reap                                      ::< get ack for peer
+  |=  {way/wire saw/(unit tang)}
+  ?~  saw  abet
+  ((slog >[%reap way]< u.saw) abet)
+::
+++  prep
+  |=  a/(unit agent-state)
+  =<  abet  ^+  +>
+  ?^  a  +>(+<+ u.a)
+  (peer-deck /)  ::REVIEW sole-id?
+::
+++  diff-sole-change                                        ::< apply sole change
+  ::> update buffer changes
+  ::
+  |=  {wire soc/sole-change}
+  =<  abet  ^+  +>
+  +>(say +:(~(receive shared:sole say) soc))
+::
+++  diff-prompt-update                                      ::< show buffer, raw
+  ::> send updates for cursor position and/or buffer
+  ::> contents
+  ::
+  |=  {wire lin/(pair @ud stub:^dill)}
+  =<  abet  ^+  +>
+  ::?:  =(mir lin)  +>
+  ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
+  ::=.  +>  ?:(=(q.mir q.lin) +> (se-blit %pom q.lin))
+  ::+>(mir lin)
+  ::
+  (do-blit %mor [%pom q.lin] [%hop (add p.lin (lent-stye:klr q.lin))] ~)
+::
+++  diff-side-effect
+  |=  {wire fec/side-effect}
+  =<  abet  ^+  +>
+  ?-  fec
+    {$bel *}  ring-bell
+    {$blk *}  +>
+  ::
+    {$sag *}  (do-blit fec)
+    {$sav *}  (do-blit fec)
+    {$url *}  (do-blit fec)
+    {$clr *}  (do-blit fec)
+  ::
+    {$klr *}  (do-blit %klr (make:klr p.fec))
+    {$tan *}  (print-tanks p.fec)
+    {$txt *}  (print-text p.fec)
+  ==
+::
+::
+++  peer                                            ::< new connection
+  ::>  incoming subscription
+  ::>
+  ::>  _: unused path attribute
+  |=  path
+  =<  abet  ^+  +>
+  ::TODO assert path is empty or sth
+  ::
+  ::> only allow connections from self or moons
+  ::
+  ~|  [%drum-unauthorized our+our.bow src+src.bow]
+  ?>  (team:title our.bow src.bow)
+  ::
+  (print-text "[{<src.bow>}, driving {<our.bow>}]")
+::
+++  poke-dill-belt                                 ::< terminal event
+  ::> process keystroke
+  ::>
+  ::> bet: the character, key, or modified-key
+  ::
+  |=  bet/dill-belt:^dill
+  =<  abet  ^+  +>
+  ?:  ?=(?($cru $hey $rez $yow) -.bet)
+    (poke-window-control bet)
+  (process-input bet)
+  ::=+  gul=se-current-app
+  ::?:  |(?=($~ gul) (se-aint u.gul))
+  ::  (se-blit %bel ~)
+  ::ta-abet:(ta-belt:(ta u.gul) bet)
+::
+::+|
+::
+++  poke-window-control
+  |=  bet/control-belt  ^+  +>
+  ?-  bet
+    {$cru *}  (print-tanks:(print-text (trip p.bet)) q.bet)
+    {$hey *}  +> ::+>(mir [0 ~])                             ::< refresh
+    {$rez *}  +> ::+>(edg (dec p.bet))                       ::< resize window
+    {$yow *}  ~&([%no-yow -.bet] +>)
+  ==
+::
+++  process-input
+  |=  bet/app-specific-belt  ^+  +>
+  =<  ?+  -.bet  ring-bell ::TODO handle all
+        $ret  (do-action %ret ~)
+        $txt  (hear-text p.bet)
+        $bac  backspace
+        $ctl  (key-ctl p.bet)
+      ==
+  |%
+  ++  hear-text                                            ::< hear text
+    ::> hear regular text, into main buffer or
+    ::> reverse-i-search if active
+    ::>
+    ::> ext: text to append, usually single character
+    ::
+    |=  txt/(list @c)
+    ^+  +>.^$
+    ::?^  ris
+    ::  (ta-ser txt)
+    ::(local-edit (cat:block:sole pos.inp txt))
+    (local-edit (cat:block:sole (lent buf.say) txt))
+  ::
+  ++  backspace                                            ::< hear backspace
+    ::> delete character under cursor from
+    ::> reverse-i-search or buffer, sending a [%clr ~]
+    ::> if the buffer is empty.
+    ::
+    ^+  ..process-input
+    ::?^  ris
+    ::  ?:  =(~ str.u.ris)
+    ::    ta-bel
+    ::  .(str.u.ris (scag (dec (lent str.u.ris)) str.u.ris))
+    ::?:  =(0 pos.inp)
+    ::  ?~  buf.say.inp
+    ::    (ta-act %clr ~)
+    ::  ta-bel
+    ::(ta-hom %del (dec pos.inp))
+    ?~  buf.say
+      (do-action %clr ~)
+    (local-edit %del (dec (lent buf.say)))
+  ++  key-ctl                                            ::< hear control
+    ::> handle ctrl key
+    ::
+    |=  key/@ud
+    ^+  ..process-input
+    ::=.  ris  ?.(?=(?($g $r) key) ~ ris)
+    ?+    key    ring-bell
+        ::$a  +>(pos.inp 0)
+        ::$b  (ta-aro %l)
+        $c  ring-bell
+        ::$d  ?^  buf.say.inp
+        ::    ta-del
+        ::    > talk and dojo close console on ^d
+        ::    > instead of actually disconnecting
+        ::
+        ::    ?:  (~(has in eel:(drum-make our.bow)) dok)
+        ::      +>(..ta (se-blit qit+~))                  ::< quit pier
+        ::    +>(eel (~(del in eel) dok))                 ::< unlink app
+        $d  (do-blit qit+~)                               ::< quit pier
+        ::$e  +>(pos.inp (lent buf.say.inp))
+        ::$f  (ta-aro %r)
+        ::$g  ?~  ris  ring-bell
+        ::    (ta-hom(pos.hit num.hit, ris ~) [%set ~])
+        ::$k  =+  len=(lent buf.say.inp)
+        ::    ?:  =(pos.inp len)
+        ::      ring-bell
+        ::    (ta-kil %r [pos.inp (sub len pos.inp)])
+        $l  (do-blit %clr ~)
+        ::$n  (ta-aro %d)
+        ::$p  (ta-aro %u)
+        ::$r  ?~  ris
+        ::      +>(ris `[pos.hit ~])
+        ::    ?:  =(0 pos.u.ris)
+        ::      ring-bell
+        ::    (ta-ser ~)
+        ::$t  =+  len=(lent buf.say.inp)
+        ::    ?:  |(=(0 pos.inp) (lth len 2))
+        ::      ring-bell
+        ::    =+  sop=(sub pos.inp ?:(=(len pos.inp) 2 1))
+        ::    (ta-hom (rep:block:sole [sop 2] (flop (swag [sop 2] buf.say.inp))))
+        ::$u  ?:  =(0 pos.inp)
+        ::      ring-bell
+        ::    (ta-kil %l [0 pos.inp])
+        $v  ring-bell
+        ::$w  ?:  =(0 pos.inp)
+        ::      ring-bell
+        ::    =+  sop=(ta-off %l %ace pos.inp)
+        ::    (ta-kil %l [(sub pos.inp sop) sop])
+        ::$x  +>(..ta se-next-app)
+        ::$y  ?:  =(0 num.kil)
+        ::      ring-bell
+        ::    (ta-hom (cat:block:sole pos.inp ta-yan))
+    ==
+  --
+--
 ::
 ::>  ||
 ::>  ||  %interface-arms
 ::>  ||
 ::>    accept external events
 ::+|
-++  prep
-  |=  old/(unit agent-state)
-  ^+  se-abet
-  ~&  %cone-prep
-  ?^  old  se-abet(+<+ u.old)
-  se-abet:(abet-agent (prep:run-agent ~))
-::
-++  coup    (. coup):wrap-agent
-++  reap    (. reap):wrap-agent
-::
-++  diff-sole-change    (. diff-sole-change):wrap-agent
-++  diff-prompt-update  (. diff-prompt-update):wrap-agent
-++  diff-side-effect    (. diff-side-effect):wrap-agent
-++  peer                                                ::< new connection
-  |=  pax/path
-  %.(+< (. peer):wrap-agent)
-++  poke-dill-belt                                      ::< terminal event
-  |=  bet/dill-belt:^dill
-  %.(+< (. poke-dill-belt):wrap-agent)
 ::
 :: ++  poke-start                                          ::< |start %app
 ::   ::> init an app using gall, and link to its console
@@ -1146,4 +1093,4 @@
 ::  ::
 ::  |=  {fel/$-(nail edge) inp/(list @)}  ^-  @ud
 ::  q.p:(fel [0 0] inp)
---
+:: --
