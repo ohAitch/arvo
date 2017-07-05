@@ -386,9 +386,11 @@
   ::=^  det  say  (~(transmit cursored:sole inp) ted)
   =^  det  say  (~(transmit shared:sole say) ted)
   (do-action %det det)
+::
 ::  ||
-::  ||  %interfaces
+::  ||  %interfaces-take
 ::  ||
+::    responses to previous events
 ::+|
 ::
 ++  coup                                      ::< get ack for poke
@@ -400,7 +402,7 @@
   ?~  saw  abet
   ((slog >[%reap way]< u.saw) abet)
 ::
-++  prep
+++  prep                                                ::< initialization
   |=  a/(unit agent-state)
   =<  abet  ^+  +>
   ?^  a  +>(+<+ u.a)
@@ -443,7 +445,11 @@
     {$txt *}  (print-text p.fec)
   ==
 ::
-::
+::>  ||
+::>  ||  %interfaces-call
+::>  ||
+::>    accept external events
+::+|
 ++  peer                                            ::< new connection
   ::>  incoming subscription
   ::>
