@@ -25,13 +25,12 @@
 ::
 |%                                                      ::  ::
 ::                                                      ::
-:: ++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
-++  agent-state
+++  cone-state
   $%  say/sole-share
       ::sys/(unit bone)                                   ::< local console
       ::pom/stub:^dill ::TODO cache prompt
   ==
-:: ++  guardian-state
+:: ++  deck-state
 ::   ::>
 ::   ::>  sys: used for |exit
 ::   ::>  eel: apps we want to connect to
@@ -49,7 +48,7 @@
 ::       :: fur/(map dude:^gall (unit server))                ::< servers
 ::       :: bin/(map bone source)
 ::       bin/target                             ::< terminals
-::       gen/{say/sole-share}                       ::< state for agents
+::       gen/{say/sole-share}                       ::< state for clients
 ::   ==                                                    ::
 ::
 ::> ||
@@ -216,52 +215,6 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-:: |%
-:: ++  drum-make                                           ::< initial part
-::   ::REVIEW move config to file system? It seems maybe
-::   ::       useful to be able to force dojo reconnect
-::   ::       from unix, for one thing
-::   ::
-::   ::> make initial {drum-pith} state, by adding some
-::   ::> default apps to the bunt
-::   ::>
-::   ::> our: comets run off %base, moons use parent's talk
-::   ::>
-::   |=  our/ship
-::   *drum-pith
-::   ::|^  ^-  drum-pith
-::   ::    %*  .  *drum-pith
-::   ::      eel  deft-fish
-::   ::      ray  deft-apps
-::   ::    ==
-::   ::::
-::   ::::++  deft-fish                                           ::< default connects
-::   ::::  ::> apps to connect to by default: talk, dojo
-::   ::::  ::>
-::   ::::  ::> if on a moon, use parent's talk instead of own
-::   ::::  ::
-::   ::::  %-  ~(gas in *(set dock))
-::   ::::  ^-  (list dock)
-::   ::::  ?:  ?=($earl (clan:title our))
-::   ::::    [[(sein:title our) %talk] [our %dojo] ~]
-::   ::::  [[our %talk] [our %dojo] ~]
-::   ::::
-::   ::++  deft-apps                                           ::< default servers
-::   ::  ::> apps to start by default: talk, dojo
-::   ::  ::>
-::   ::  ::> if on a comet, use %base instead of %home;
-::   ::  ::> if on a moon, don't start local %talk
-::   ::  ::
-::   ::  %-  ~(gas in *(set well:^gall))
-::   ::  ^-  (list well:^gall)
-::   ::  =+  myr=(clan:title our)
-::   ::  ?:  ?=($pawn myr)
-::   ::    [[%base %talk] [%base %dojo] ~]
-::   ::  ?:  ?=($earl myr)
-::   ::    [[%home %dojo] ~]
-::   ::  [[%home %talk] [%home %dojo] ~]
-::   ::--
-::
 ::>  ||
 ::>  || %wire-serdes
 ::>  ||
@@ -302,7 +255,7 @@
     ++  move  (pair bone card)                          ::< user-level move
     --
 =|  {mov/(list move) biz/(list dill-blit:^dill)}
-|_  {bow/bowl:^gall agent-state}
+|_  {bow/bowl:^gall cone-state}
 ++  abet
   ^-  {(list move) _.}
   ::=.  sys  ?^(sys sys `ost.bow)
@@ -403,7 +356,7 @@
   ((slog >[%reap way]< u.saw) abet)
 ::
 ++  prep                                                ::< initialization
-  |=  a/(unit agent-state)
+  |=  a/(unit cone-state)
   =<  abet  ^+  +>
   ?^  a  +>(+<+ u.a)
   (peer-deck /)  ::REVIEW sole-id?
@@ -615,7 +568,7 @@
 ::> ||
 ::>   retrieve derived state
 ::+|
-:: ++  se-aint   invisible-app:run-guardian  ::DEPRECATED
+:: ++  se-aint   invisible-app:run-deck  ::DEPRECATED
 ::
 ::++  se-amor                                             ::< live targets
 ::  ::> list apps which are successfully connected
@@ -704,14 +657,14 @@
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
-:: ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
+:: ++  se-dump   (. print-tanks):wrap-cone                ::DEPRECATED
 :: ++  se-emit                                             ::< emit move
 ::   ::> mov: side-effect to queue for sending
 ::   ::
 ::   |=  mov/move
 ::   %_(+> moz [mov moz])
 ::
-:: ++  se-text  (. print-text):wrap-agent               ::DEPRECATED
+:: ++  se-text  (. print-text):wrap-cone               ::DEPRECATED
 :: ++  se-poke                                             ::< send a poke
 ::   ::> dok: target app
 ::   ::> par: request data
@@ -789,7 +742,7 @@
   ::    ::    (ta-hom:ta-nex %set ~)
   ::  ==
   ::
-  ::++  ta-bel  ::DEPRECATED ring-bell:agent                ::< beep
+  ::++  ta-bel  ::DEPRECATED ring-bell:cone                ::< beep
   ::
   ::++  ta-belt                                           ::< handle input
   ::  ::> bet: input keystroke
@@ -834,7 +787,7 @@
   ::  |=  pos/@ud
   ::  (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ::++  ta-hom  DEPRECATED see local-edit in agent, guardian
+  ::++  ta-hom  DEPRECATED see local-edit in cone, deck
   ::++  ta-jump                                           ::< buffer pos
   ::  ::> get cursor location after moving
   ::  ::>

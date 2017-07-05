@@ -25,14 +25,12 @@
 ::
 |%                                                      ::  ::
 ::                                                      ::
-::TODO separate agent state
-::++  drum-pith  {ges/agent-state gas/guardian-state}     ::<  all drum state
-:: ++  agent-state
+:: ++  cone-state
 ::   $%  say/sole-share
 ::       ::sys/(unit bone)                                   ::< local console
 ::       ::pom/stub:^dill ::TODO cache prompt
 ::   ==
-++  guardian-state
+++  deck-state
   ::>
   ::>  sys: used for |exit
   ::>  eel: apps we want to connect to
@@ -49,7 +47,7 @@
       ::REVIEW no longer necessary?
       :: bin/(map bone source)
       bin/target                             ::< terminals
-      gen/{say/sole-share}                       ::< state for agents
+      gen/{say/sole-share}                       ::< state for clients
   ==                                                    ::
 ::
 ::> ||
@@ -219,9 +217,9 @@
   ::> our: comets run off %base, moons use parent's talk
   ::>
   |=  our/ship
-  *guardian-state
-  ::|^  ^-  guardian-state
-  ::    %*  .  *guardian-state
+  *deck-state
+  ::|^  ^-  deck-state
+  ::    %*  .  *deck-state
   ::      eel  deft-fish
   ::      ray  deft-apps
   ::    ==
@@ -296,12 +294,12 @@
     ++  move  (pair bone card)                          ::< user-level move
     --
 =|  mov/(list move)
-|_  {bow/bowl:^gall guardian-state}
+|_  {bow/bowl:^gall deck-state}
 ++  this  .
 ++  abet
   ^-  {(list move) _this}
   ::REVIEW why not check connections?
-  ::?.  caused-by-console:run-agent
+  ::?.  caused-by-console:run-cone
   ::  [(flop moz) pith]
   ::
   =~  :: update-servers
@@ -370,7 +368,8 @@
 ::
 ::+|
 ::REVIEW pubsub? things might get more interesting with multiple agents
-++  output  |=(a/lime (emit ost.bow %diff a)) ::TODO correct bone?
+++  output  |=(a/lime (emit ost.bow %diff a))
+::
 ++  print-text  |=(txt/tape (output %side-effect %txt txt))
 ++  print-tanks  |=(tan/tang (output %side-effect %tan tan))
 ::+|
@@ -426,7 +425,7 @@
 ::     interfaces with abet in
 ::+|
 ++  prep
-  |=  a/(unit guardian-state)
+  |=  a/(unit deck-state)
   =<  abet  ^+  +>
   ?^  a  +>(+<+ u.a)
   ::REVIEW nil case implicit in abet, only exists to start
@@ -814,10 +813,10 @@
     ?-  -.q.sol
       $ret  (send-action q.sol)
       $clr  (send-action q.sol)
-      $det  (agent-change +.q.sol)
+      $det  (cone-change +.q.sol)
     ==
   ::
-  ++  agent-change
+  ++  cone-change
     ::> soc: local change to apply
     |=  soc/sole-change
     ^+  +>
@@ -852,7 +851,7 @@
 ::> ||
 ::>   retrieve derived state
 ::+|
-:: ++  se-aint   invisible-app:run-guardian  ::DEPRECATED
+:: ++  se-aint   invisible-app:run-deck  ::DEPRECATED
 ::
 ::++  se-amor                                             ::< live targets
 ::  ::> list apps which are successfully connected
@@ -941,14 +940,14 @@
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
-:: ++  se-dump   (. print-tanks):wrap-agent                ::DEPRECATED
+:: ++  se-dump   (. print-tanks):wrap-cone                ::DEPRECATED
 :: ++  se-emit                                             ::< emit move
 ::   ::> mov: side-effect to queue for sending
 ::   ::
 ::   |=  mov/move
 ::   %_(+> moz [mov moz])
 ::
-:: ++  se-text  (. print-text):wrap-agent               ::DEPRECATED
+:: ++  se-text  (. print-text):wrap-cone               ::DEPRECATED
 :: ++  se-poke                                             ::< send a poke
 ::   ::> dok: target app
 ::   ::> par: request data
@@ -1026,7 +1025,7 @@
   ::    ::    (ta-hom:ta-nex %set ~)
   ::  ==
   ::
-  ::++  ta-bel  ::DEPRECATED ring-bell:agent                ::< beep
+  ::++  ta-bel  ::DEPRECATED ring-bell:cone                ::< beep
   ::
   ::++  ta-belt                                           ::< handle input
   ::  ::> bet: input keystroke
@@ -1071,7 +1070,7 @@
   ::  |=  pos/@ud
   ::  (ta-erl (~(transpose shared:sole say.inp) pos))
   ::
-  ::++  ta-hom  DEPRECATED see local-edit in agent, guardian
+  ::++  ta-hom  DEPRECATED see local-edit in cone, deck
   ::++  ta-jump                                           ::< buffer pos
   ::  ::> get cursor location after moving
   ::  ::>
