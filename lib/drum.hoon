@@ -341,7 +341,6 @@
   =+  lag=se-agon
   ?.  (~(has by fug) gyl)  +>.$
   =.  fug  (~(del by fug) gyl)
-  =.  eel  ?.(pej eel (~(del in eel) gyl))
   =.  +>.$  ?.  &(?=(^ lag) !=(gyl u.lag))
               +>.$(inx 0)
             (se-alas u.lag)
