@@ -121,8 +121,7 @@
 =*  dev  -
 =>  |%                                                ::  arvo structures
     ++  pear                                          ::  request
-      $%  {$sole-action p/sole-action}                ::
-          {$sole-id-action p/sole-id-action}          ::
+      $%  {$sole-id-action p/sole-id-action}          ::
           {$talk-command command:talk}                ::
       ==                                              ::
     ++  lime                                          ::  update
