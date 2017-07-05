@@ -186,7 +186,7 @@
   =+  gyl=(drum-phat way)
   ?~  saw
     (se-join gyl)
-  (se-dump:(se-drop & gyl) u.saw)
+  (se-dump:(se-nuke gyl) u.saw)
 ::
 ++  take-coup-phat                                    ::  ack poke
   |=  {way/wire saw/(unit tang)}
@@ -194,7 +194,7 @@
   ?~  saw  +>
   =+  gyl=(drum-phat way)
   ?:  (se-aint gyl)  +>.$
-  %-  se-dump:(se-drop & gyl)
+  %-  se-dump:(se-nuke gyl)
   :_  u.saw
   >[%drum-coup-fail src.hid ost.hid gyl]<
 ::
@@ -216,7 +216,7 @@
   =<  se-abet  =<  se-view
   =+  gyl=(drum-phat way)
   ~&  [%drum-quit src.hid ost.hid gyl]
-  (se-drop %| gyl)
+  (se-drop gyl)
 ::                                                    ::  ::
 ::::                                                  ::  ::
   ::                                                  ::  ::
@@ -337,7 +337,7 @@
   ==
 ::
 ++  se-drop                                           ::  disconnect
-  |=  {pej/? gyl/gill:^gall}
+  |=  gyl/gill:^gall
   ^+  +>
   =+  lag=se-agon
   ?.  (~(has by fug) gyl)  +>.$
@@ -374,7 +374,8 @@
 ++  se-nuke                                           ::  teardown connection
   |=  gyl/gill:^gall
   ^+  +>
-  (se-drop:(se-pull gyl) & gyl)
+  =.  eel  (~(del in eel) gyl)
+  (se-drop:(se-pull gyl) gyl)
 ::
 ++  se-klin                                           ::  disconnect app
   |=  gyl/gill:^gall
