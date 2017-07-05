@@ -6,6 +6,7 @@
 :: /-  gene  :: XX kind of - this is all handled with axis math rn
 /+  sole                                                ::  console library
 [. sole]
+=,  pubsub:userlib
 =,  space:userlib
 =,  format
 ::                                                      ::  ::
@@ -852,7 +853,13 @@
   ++  he-diff                                           ::  emit update
     |=  fec/sole-effect
     ^+  +>
-    (he-card %diff %sole-effect fec)
+    =.  log  [fec log]
+    =;  neu/_+>.$  ?>(=(neu(moz ~) +>.$(moz ~)) neu)
+    =/  cad/card  [%diff %sole-effect fec]
+    =/  mos
+      %+  turn  (prey /sole/(encode-id:sole sid) hid)
+      |=({ost/bone ^} [ost cad])
+    +>.$(moz (welp mos moz))
   ::
   ++  he-stop                                           ::  abort work
     ^+  .
