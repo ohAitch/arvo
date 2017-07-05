@@ -398,8 +398,32 @@
   (output %prompt-update lin)
 ::
 ::>  ||
-::>  ||  %raw-interfaces
+::>  ||  %interfaces-misc
 ::>  ||
+::>    accept minor pokes
+::+|
+++  poke-link                                           ::< |link %app, connect
+  ::> connnect to an app's console
+  ::
+  |=  dok/dock
+  ~&  deck+link-stub+dok
+  abet  ::TODO actually link/unlink apps
+  ::=<  se-abet  =<  se-view
+  ::+>(eel (~(put in eel) dok))
+::
+++  poke-unlink                                         ::< |unlink %app, close
+  ::> disconnnect from an app's console
+  ::
+  |=  dok/dock
+  ~&  deck+unlink-stub+dok
+  abet  ::TODO actually link/unlink apps
+  ::=<  se-abet  =<  se-view
+  ::+>(eel (~(del in eel) dok))
+::
+::>  ||
+::>  ||  %interfaces-raw
+::>  ||
+::     interfaces with abet in
 ::+|
 ++  prep
   |=  a/(unit guardian-state)
@@ -420,6 +444,7 @@
   ::TODO backlog?
   +>.$
 ::
+::+|
 ::
 ++  diff-sole-backlog-phat                               ::< chunk of output
   ::> updates to virtual console on re/connect
@@ -821,50 +846,6 @@
     +>(..ta (emit [ost.bow %peer (drum-path dok) dok a]))
   --
 --
-::>  ||
-::>  ||  %interface-arms
-::>  ||
-::>    accept external events
-::+|
-::
-:: ++  poke-start                                          ::< |start %app
-::   ::> init an app using gall, and link to its console
-::   ::
-::   |=  wel/well:^gall
-::   =<  se-abet  =<  se-view  ^+  +>
-::   ::?:  (~(has in ray) wel)
-::   ::  (se-text "[already running {<p.wel>}/{<q.wel>}]")
-::   ::%=  +>
-::   ::  ray  (~(put in ray) wel)
-::   ::  eel  (~(put in eel) [our.bow q.wel])
-::   ::==
-::
-:: ++  poke-link                                           ::< |link %app, connect
-::   ::> connnect to an app's console
-::   ::
-::   |=  dok/dock
-::   ::=<  se-abet  =<  se-view
-::   ::+>(eel (~(put in eel) dok))
-:: ::
-:: ++  poke-unlink                                         ::< |unlink %app, close
-::   ::> disconnnect from an app's console
-::   ::
-::   |=  dok/dock
-::   ::=<  se-abet  =<  se-view
-::   ::+>(eel (~(del in eel) dok))
-:: ::
-:: ++  poke-exit                                           ::< |exit, shutdown urbit
-::   ::> shutdown running urbit instance
-::   ::
-::   |=  $~
-::   ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
-:: ::
-:: ++  poke-put                                            ::< write file
-::   ::> write a text file to the pier's `.urb/put`
-::   ::> directory
-::   ::
-::   |=  {pax/path txt/@}
-::   ::se-abet:(se-blit-sys [%sav pax txt])
 ::
 ::> ||
 ::> ||  %accessors

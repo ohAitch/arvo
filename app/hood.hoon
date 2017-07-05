@@ -114,6 +114,18 @@
 ++  from-womb  (from-lib %womb [..$ _abet]:(womb))
 ++  from-write  (from-lib %write [..$ _abet]:(write))
 ::
+++  send-to
+  |*  {dap/term typ/mark}
+  |*  a/*
+  :_  ..send-to
+  [ost.hid %poke /to/[dap]/[typ] [our dap] [typ a]]~
+::
+++  coup-to
+  |=  {wir/wire saw/(unit tang)}
+  ?~  saw  [~ +>.$]
+  ~&  coup-to+wir
+  ((slog u.saw) [~ +>.$])
+::
 ++  init-helm                 |=({way/wire *} [~ +>])
 ++  made-write                (wrap made):from-write
 ++  made-kiln                 (wrap take-made):from-kiln
@@ -123,6 +135,10 @@
 ++  note-helm                 (wrap take-note):from-helm
 ++  peek-x-womb               peek-x:(womb hid (able %womb))
 ++  peer-scry-x-womb          (wrap peer-scry-x):from-womb
+++  poke-drum-link            (send-to %deck %deck-link)
+++  poke-drum-unlink          (send-to %deck %deck-unlink)
+++  poke-drum-exit            (send-to %cone %cone-exit)
+++  poke-drum-put             (send-to %cone %cone-put)
 ++  poke-helm-hi              (wrap poke-hi):from-helm
 ++  poke-helm-init            (wrap poke-init):from-helm   :: XX used?
 ::++  poke-helm-invite          (wrap poke-invite):from-helm
