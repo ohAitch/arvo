@@ -607,6 +607,7 @@
       {$sav *}  +>(..ta (se-blit fec))
       {$txt *}  +>(..ta (se-text p.fec))
       {$url *}  +>(..ta (se-blit fec))
+      {$say *}  +>(say.inp [[own=his his=own]:ven leg=~ buf]:p.fec)
     ==
   ::
   ++  ta-got                                          ::  apply change

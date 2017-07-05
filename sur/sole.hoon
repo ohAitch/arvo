@@ -39,6 +39,7 @@
   ::  {$taq p/tanq}                                     ::  modern tank
       {$txt p/tape}                                     ::  text line
       {$url p/@t}                                       ::  activate url
+      {$say p/sole-share}                               ::  reset buffer
   ==                                                    ::
 ++  sole-id  {@u dock}                                  ::  client source
 ++  sole-cursor-share                                   ::  command state
@@ -50,6 +51,10 @@
       tag/term                                          ::  history mode
       cad/styx:^dill                                    ::  caption
   ==                                                    ::
+++  sole-state
+  $:  log/(list sole-effect)
+      say/sole-share
+  ==
 ++  sole-share                                          ::  symmetric state
   $:  ven/sole-clock                                    ::  our vector clock
       leg/(list sole-edit)                              ::  unmerged edits
