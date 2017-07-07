@@ -8,6 +8,7 @@
 ::::
   ::
 =>  [gene g=dsl:gene]
+=,  html
 :-  %ask
 |=  $:  {now/@da eny/@uvJ bec/beak}
         {arg/$@($~ {jon/json $~})}
@@ -19,10 +20,10 @@
 =-  ?~  arg  -
     (fun.q.q jon.arg)
 %+  lo.g  [%& %oauth-json "json credentials: "]
-%+  go.g  apex:poja
+%+  go.g  apex:de-json
 |=  jon/json
 =+  ~|  bad-json+jon
     =-  `{cid/@t cis/@t}`(need (rep jon))
     rep=(ot web+(ot 'client_id'^so 'client_secret'^so ~) ~):jo
 %+  so.g  %write-sec-atom    :: XX typed pair
-[hot (role cid cis ~)]
+[hot (of-wain cid cis ~)]

@@ -13,7 +13,7 @@
   ++  email  @t
 --
 ::
-=,  ^gall
+=,  gall
 =|  mow/(list {bone card})
 |_  $:  bow/bowl
         adr/(map email {time invited})

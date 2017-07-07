@@ -28,4 +28,4 @@
 %+  go.g  (boss 256 (star prn))
 |=  sec/@t
 %+  so.g  %write-sec-atom    :: XX typed pair
-[hot (role key sec ~)]
+[hot (of-wain key sec ~)]

@@ -29,7 +29,7 @@
       {$clr $~}                                         ::  clear screen
       {$det sole-change}                                ::  edit command
       {$err p/@ud}                                      ::  error point
-      {$klr p/styx:^dill}                               ::  styled text line
+      {$klr p/styx:dill}                               ::  styled text line
       {$mor p/(list sole-effect)}                       ::  multiple effects
       {$nex $~}                                         ::  save clear command
       {$pro sole-prompt}                                ::  set prompt
@@ -49,7 +49,7 @@
 ++  sole-prompt                                         ::  prompt definition
   $:  vis/?                                             ::  command visible
       tag/term                                          ::  history mode
-      cad/styx:^dill                                    ::  caption
+      cad/styx:dill                                    ::  caption
   ==                                                    ::
 ++  sole-state
   $:  log/(list sole-effect)
