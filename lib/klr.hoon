@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/klr/lib
   ::
-=,  ^dill
+=,  dill
 |%
 ++  tufa                                                ::< strip styl, utf32
   |=  a/stub  ^-  tape

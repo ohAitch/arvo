@@ -45,7 +45,7 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-=,  ^gall
+=,  gall
 |_  $:  hid/bowl                                       ::  system state
         hood-1                                          ::  server state
     ==                                                  ::
@@ -92,7 +92,7 @@
   [~ %_(+> lac (~(put by lac) -.dat dat))]
 ::
 ++  onto
-  |=  {wire saw/(each suss:^gall tang)}
+  |=  {wire saw/(each suss:gall tang)}
   ?-  -.saw
     $&  ~&([%live p.saw] [~ +>.$])
     $|  ((slog p.saw) [~ +>.$])

@@ -28,7 +28,7 @@
 ++  cone-state
   $%  say/sole-share
       ::sys/(unit bone)                                   ::< local console
-      ::pom/stub:^dill ::TODO cache prompt
+      ::pom/stub:dill ::TODO cache prompt
   ==
 :: ++  deck-state
 ::   ::>
@@ -42,10 +42,10 @@
 ::   ::
 ::   $:  *
 ::       * ::eel/(set dock)                                    ::< connect to
-::       * ::ray/(set well:^gall)                              ::< app desks
+::       * ::ray/(set well:gall)                              ::< app desks
 ::       ::
 ::       ::REVIEW no longer necessary?
-::       :: fur/(map dude:^gall (unit server))                ::< servers
+::       :: fur/(map dude:gall (unit server))                ::< servers
 ::       :: bin/(map bone source)
 ::       bin/target                             ::< terminals
 ::       gen/{say/sole-share}                       ::< state for clients
@@ -104,7 +104,7 @@
 ::       off/@ud                                           ::< window offset
 ::      kil/kill                                          ::< kill buffer
 ::      {inx/@ud fug/(map dock target)}                   ::< connections
-::      mir/(pair @ud stub:^dill)                         ::< mirrored terminal
+::      mir/(pair @ud stub:dill)                         ::< mirrored terminal
 ::  ==                                                    ::
 ::++  history                                             ::> past commands
 ::  ::> old inputs, used for arrow up/down
@@ -152,8 +152,8 @@
 ::   ::
 ::   $:  :: $=  blt                                           ::< command sequence
 ::       ::   %+  pair                                        ::
-::       ::     (unit dill-belt:^dill)                        ::< previous event
-::       ^ :: (unit dill-belt:^dill)                          ::< current event
+::       ::     (unit dill-belt:dill)                        ::< previous event
+::       ^ :: (unit dill-belt:dill)                          ::< current event
 ::       * ::ris/(unit search)                                 ::< reverse-i-search
 ::       * ::hit/history                                       ::< all past input
 ::       * ::pom/sole-prompt                                   ::< static prompt
@@ -189,12 +189,12 @@
       {$txt p/(list @c)}                              ::< utf32 text
   ==                                                  ::
 ++  typecheck                                         ::> -belt type completeness
-  `dill-belt:^dill`*?(control-belt app-specific-belt)
+  `dill-belt:dill`*?(control-belt app-specific-belt)
 ++  side-effect
   $%  {$bel $~}                                         ::< beep
       {$blk p/@ud q/@c}                                 ::< blink+match char at
       {$clr $~}                                         ::< clear screen
-      {$klr p/styx:^dill}                               ::< styled text line
+      {$klr p/styx:dill}                               ::< styled text line
       {$sag p/path q/*}                                 ::< save to jamfile
       {$sav p/path q/@}                                 ::< save to file
       {$tan p/(list tank)}                              ::< classic tank
@@ -242,7 +242,7 @@
     ::
     |%
     ++  lime                                            ::> typed diff
-      $%  {$dill-blit dill-blit:^dill}                  ::< screen or buf update
+      $%  {$dill-blit dill-blit:dill}                  ::< screen or buf update
       ==                                                ::
     ++  pear                                            ::> typed poke
       $%  {$sole-id-action p/sole-id-action}            ::< console command
@@ -254,8 +254,8 @@
       ==                                                ::
     ++  move  (pair bone card)                          ::< user-level move
     --
-=|  {mov/(list move) biz/(list dill-blit:^dill)}
-|_  {bow/bowl:^gall cone-state}
+=|  {mov/(list move) biz/(list dill-blit:dill)}
+|_  {bow/bowl:gall cone-state}
 ++  abet
   ^-  {(list move) _.}
   ::=.  sys  ?^(sys sys `ost.bow)
@@ -276,7 +276,7 @@
   ::> bil: blit to queue; later consolidated into a
   ::>      single %dill-blit diff
   ::REVIEW still less consolidated than a drum-wide one
-  |=(bil/dill-blit:^dill +>(biz [bil biz]))
+  |=(bil/dill-blit:dill +>(biz [bil biz]))
 ::
 ++  ring-bell  (do-blit %bel ~)
 ::+|
@@ -372,7 +372,7 @@
   ::> send updates for cursor position and/or buffer
   ::> contents
   ::
-  |=  {wire lin/(pair @ud stub:^dill)}
+  |=  {wire lin/(pair @ud stub:dill)}
   =<  abet  ^+  +>
   ::?:  =(mir lin)  +>
   ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
@@ -411,7 +411,7 @@
   |=  $~
   ~&  cone+%exit-stub
   abet
-  ::se-abet:(se-blit-sys `dill-blit:^dill`[%qit ~])
+  ::se-abet:(se-blit-sys `dill-blit:dill`[%qit ~])
 ::
 ++  poke-cone-put                                   ::< write file
   ::> write a text file to the pier's `.urb/put`
@@ -447,7 +447,7 @@
   ::>
   ::> bet: the character, key, or modified-key
   ::
-  |=  bet/dill-belt:^dill
+  |=  bet/dill-belt:dill
   =<  abet  ^+  +>
   ?:  ?=(?($cru $hey $rez $yow) -.bet)
     (poke-window-control bet)
@@ -653,7 +653,7 @@
 ::  ::> shutting down urbit or logging to the
 ::  ::> pier's `.urb/put/` directory
 ::  ::
-::  |=  bil/dill-blit:^dill  ^+  +>
+::  |=  bil/dill-blit:dill  ^+  +>
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::

@@ -25,8 +25,8 @@
   %+  each  (unit out)                                  ::  ~ is abort
   %^    trel                                            ::  fetch and continue
       (unit knot)                                       ::
-    hiss:^eyre                                          ::
-  $-(httr:^eyre (request out))                          ::
+    hiss:eyre                                          ::
+  $-(httr:eyre (request out))                          ::
 ::                                                      ::
 ::                                                      ::
 ++  generator                                           ::  XX virtual type
@@ -56,7 +56,7 @@
   ::                                                    ::
   ++  at                                                ::  fetch url
     =|  usr/knot                                        ::
-    |*  {pul/_purl:^eyre fun/$-(httr:^eyre *)}          ::
+    |*  {pul/_purl:eyre fun/$-(httr:eyre *)}          ::
     :-  p=*(list tank)                                  ::
     q=[%| p=`usr q=[pul %get ~ ~] r=fun]                ::
   ::                                                    ::

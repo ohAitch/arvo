@@ -84,7 +84,7 @@
       ==                                                ::
     ++  card                                            ::  general card
       $%  {$diff lime}                                  ::
-          {$info wire @p @tas nori:^clay}               ::
+          {$info wire @p @tas nori:clay}               ::
           {$peer wire dock path}                        ::
           {$poke wire dock pear}                        ::
           {$pull wire dock $~}                          ::
@@ -185,7 +185,7 @@
     q.nb
   --
 --
-=,  ^gall
+=,  gall
 |_  {hid/bowl house}
 ++  ra                                                  ::  per transaction
   |_  moves/(list move)
@@ -285,7 +285,7 @@
           %+  stag  %say
           %+  most  (jest '•')
           ;~  pose
-            (stag %url aurf:urlp:url:eyre)
+            (stag %url aurf:de-purl:html)
             :(stag %lin | ;~(pfix pat text))
             :(stag %lin & ;~(less sem hax text))
           ==
@@ -1444,7 +1444,7 @@
     =.  +>.$  pa-abet:(~(pa-reform pa man pur) con)
     ?:(neu +>.$ ra-homes)
   ::
-  ++  ra-base-hart  .^(hart:^eyre %e /(scot %p our.hid)/host/(scot %da now.hid))
+  ++  ra-base-hart  .^(hart:eyre %e /(scot %p our.hid)/host/(scot %da now.hid))
   ++  ra-fora-post
     |=  {pax/path sup/path hed/@t txt/@t}
     =.  ..ra-emit
@@ -1481,7 +1481,7 @@
         now.hid
         (sy /fora-post eyre+pax ~)
       :-  %mor  :~
-        [%fat text+(lore:lines:clay txt) [%url [ra-base-hart `pax ~] `fra]]
+        [%fat text+(to-wain:format txt) [%url [ra-base-hart `pax ~] `fra]]
         [%app %tree (crip "forum post: '{(trip hed)}'")]
       ==
     ==
@@ -1522,7 +1522,7 @@
         now.hid
         (sy /comment eyre+pax ~)
       :-  %mor  :~
-        [%fat text+(lore:lines:clay txt) [%url [ra-base-hart `pax ~] `fra]]
+        [%fat text+(to-wain:format txt) [%url [ra-base-hart `pax ~] `fra]]
         [%app %tree (crip "comment on /{nam}")]
       ==
     ==
@@ -2157,6 +2157,7 @@
   --
 ::
 ++  tr                                                  ::  telegram renderer
+  =*  en-purf  apix:en-purl:html
   |_  $:  man/knot
           sef/(set knot)
           who/ship
@@ -2204,7 +2205,7 @@
       $lin  tan+~[leaf+"{?:(p.sep "" "@ ")}{(trip q.sep)}"]
       $non  tan+~
       $app  tan+~[rose+[": " ~ ~]^~[leaf+"[{(trip p.sep)}]" leaf+(trip q.sep)]]
-      $url  url+(crip (earf:url:eyre p.sep))
+      $url  url+(crip (en-purf p.sep))
       $mor  mor+(turn p.sep |=(speech ^$(sep +<)))
       $fat  [%mor $(sep q.sep) tan+(tr-rend-tors p.sep) ~]
       $api
@@ -2214,7 +2215,7 @@
           [": " ~ ~]
         :~  leaf+"[{(trip id.sep)} on {(trip service.sep)}]"
             leaf+(trip body.sep)
-            leaf+(earf:url:eyre url.sep)
+            leaf+(en-purf url.sep)
         ==
     ==
   ::
@@ -2265,7 +2266,7 @@
       ==
     ::
         $exp  (tr-chow 66 '#' ' ' (trip p.sep))
-        $url  =+  ful=(earf:url:eyre p.sep)
+        $url  =+  ful=(en-purf p.sep)
               ?:  (gth 64 (lent ful))  ['/' ' ' ful]
               :+  '/'  '_'
               =+  hok=r.p.p.p.sep

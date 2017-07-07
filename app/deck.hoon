@@ -28,7 +28,7 @@
 :: ++  cone-state
 ::   $%  say/sole-share
 ::       ::sys/(unit bone)                                   ::< local console
-::       ::pom/stub:^dill ::TODO cache prompt
+::       ::pom/stub:dill ::TODO cache prompt
 ::   ==
 ++  deck-state
   ::>
@@ -42,7 +42,7 @@
   ::
   $:  *
       * ::eel/(set dock)                                    ::< connect to
-      * ::ray/(set well:^gall)                              ::< app desks
+      * ::ray/(set well:gall)                              ::< app desks
       ::
       ::REVIEW no longer necessary?
       :: bin/(map bone source)
@@ -94,7 +94,7 @@
 ::       off/@ud                                           ::< window offset
 ::      kil/kill                                          ::< kill buffer
 ::      {inx/@ud fug/(map dock target)}                   ::< connections
-::      mir/(pair @ud stub:^dill)                         ::< mirrored terminal
+::      mir/(pair @ud stub:dill)                         ::< mirrored terminal
 ::  ==                                                    ::
 ::++  history                                             ::> past commands
 ::  ::> old inputs, used for arrow up/down
@@ -142,8 +142,8 @@
   ::
   $:  :: $=  blt                                           ::< command sequence
       ::   %+  pair                                        ::
-      ::     (unit dill-belt:^dill)                        ::< previous event
-      ^ :: (unit dill-belt:^dill)                          ::< current event
+      ::     (unit dill-belt:dill)                        ::< previous event
+      ^ :: (unit dill-belt:dill)                          ::< current event
       * ::ris/(unit search)                                 ::< reverse-i-search
       * ::hit/history                                       ::< all past input
       * ::pom/sole-prompt                                   ::< static prompt
@@ -179,12 +179,12 @@
       {$txt p/(list @c)}                              ::< utf32 text
   ==                                                  ::
 ++  typecheck                                         ::> -belt type completeness
-  `dill-belt:^dill`*?(control-belt app-specific-belt)
+  `dill-belt:dill`*?(control-belt app-specific-belt)
 ++  side-effect
   $%  {$bel $~}                                         ::< beep
       {$blk p/@ud q/@c}                                 ::< blink+match char at
       {$clr $~}                                         ::< clear screen
-      {$klr p/styx:^dill}                               ::< styled text line
+      {$klr p/styx:dill}                               ::< styled text line
       {$sag p/path q/*}                                 ::< save to jamfile
       {$sav p/path q/@}                                 ::< save to file
       {$tan p/(list tank)}                              ::< classic tank
@@ -241,8 +241,8 @@
   ::  ::> if on a comet, use %base instead of %home;
   ::  ::> if on a moon, don't start local %talk
   ::  ::
-  ::  %-  ~(gas in *(set well:^gall))
-  ::  ^-  (list well:^gall)
+  ::  %-  ~(gas in *(set well:gall))
+  ::  ^-  (list well:gall)
   ::  =+  myr=(clan:title our)
   ::  ?:  ?=($pawn myr)
   ::    [[%base %talk] [%base %dojo] ~]
@@ -283,7 +283,7 @@
     ++  lime                                            ::> typed diff
       $%  {$sole-change p/sole-change}
           {$side-effect p/side-effect}
-          {$prompt-update p/(pair @ud stub:^dill)}
+          {$prompt-update p/(pair @ud stub:dill)}
       ==
     ++  card                                            ::> general card
       $%  {$diff lime}                                  ::< give update
@@ -294,7 +294,7 @@
     ++  move  (pair bone card)                          ::< user-level move
     --
 =|  mov/(list move)
-|_  {bow/bowl:^gall deck-state}
+|_  {bow/bowl:gall deck-state}
 ++  this  .
 ++  abet
   ^-  {(list move) _this}
@@ -322,9 +322,9 @@
 ::  ^+  .
 ::  ::%+  roll  (~(tap in ray))
 ::  ::=<  .(con +>)
-::  ::|=  {wel/well:^gall con/_..se-adit}  ^+  con
+::  ::|=  {wel/well:gall con/_..se-adit}  ^+  con
 ::  ::=.  +>.$  con
-::  =/  wel/well:^gall  [%home %dojo]
+::  =/  wel/well:gall  [%home %dojo]
 ::  abet:update:(se wel)
 ::
 ++  add-connections                                ::< add new connections
@@ -378,7 +378,7 @@
 ::  ::> the terminal width {edg}, keeping the
 ::  ::> cursor {p.lin} visible
 ::  ::
-::  |=  lin/(pair @ud stub:^dill)
+::  |=  lin/(pair @ud stub:dill)
 ::  ^+  +>
 ::  =.  off  ?:((lth p.lin edg) 0 (sub p.lin edg))
 ::  (show-raw-prompt (sub p.lin off) (scag:klr edg (slag:klr off q.lin)))
@@ -387,7 +387,7 @@
   ::> send updates for cursor position and/or buffer
   ::> contents
   ::
-  |=  lin/(pair @ud stub:^dill)
+  |=  lin/(pair @ud stub:dill)
   ^+  +>
   ::?:  =(mir lin)  +>
   ::=.  +>  ?:(=(p.mir p.lin) +> (se-blit %hop (add p.lin (lent-stye:klr q.lin))))
@@ -512,10 +512,10 @@
 ::   ::>      encoded as /[%p]/[%tas]
 ::   ::> saw: stack trace, if the initialization failed
 ::   ::
-::   |=  {way/wire saw/(each suss:^gall tang)}
+::   |=  {way/wire saw/(each suss:gall tang)}
 ::   =<  abet  ^+  +>
 ::   ?>  ?=({@ @ $~} way)
-::   =/  wel/well:^gall  [i.way i.t.way]
+::   =/  wel/well:gall  [i.way i.t.way]
 ::   (started wel saw)
 ::
 ++  quit-phat                                           ::< get link termination
@@ -581,7 +581,7 @@
 ::   ::>      encoded as /[%p]/[%tas]
 ::   ::> saw: stack trace, if the initialization failed
 ::   ::
-::   |=  {wel/well:^gall saw/(each suss:^gall tang)}
+::   |=  {wel/well:gall saw/(each suss:gall tang)}
 ::   abet:(on-start:(se wel) saw)
 ::+|
 ++  invisible-app                                     ::< is app ignorable
@@ -615,7 +615,7 @@
 ::  ::>
 ::  ::> wel: what server
 ::  ::>
-::  |=  wel/well:^gall
+::  |=  wel/well:gall
 ::  =/  new  !(~(has by fur) q.wel)
 ::  =/  hig/(unit server)  ?:(new ~ (~(got by fur) q.wel))  ::< source state
 ::  |%
@@ -645,7 +645,7 @@
 ::    this(hig ~, se (emit ost.bow %conf /[p.wel]/[q.wel] lod))
 ::  ::
 ::  ++  on-start
-::    |=  saw/(each suss:^gall tang)  ^+  +>
+::    |=  saw/(each suss:gall tang)  ^+  +>
 ::    ?:  new  !!  ::< unknown app
 ::    ?-  saw
 ::      {$| *}  +>(se (print-tanks p.saw))
@@ -681,13 +681,13 @@
     ::> input text if visible or hash if typing in a
     ::> password etc
     ::
-    ^-  (pair @ud stub:^dill)
-    =/  lin/stub:^dill  [[~ ~ %b] (tuba "> ")]~
-    :_  (welp lin [*stye:^dill buf.say]~)
+    ^-  (pair @ud stub:dill)
+    =/  lin/stub:dill  [[~ ~ %b] (tuba "> ")]~
+    :_  (welp lin [*stye:dill buf.say]~)
     (add (lent buf.say) (lent-char:klr lin))
-    ::=;  vew/(pair (list @c) styx:^dill)
+    ::=;  vew/(pair (list @c) styx:dill)
     ::  =+  lin=(make:klr q.vew)
-    ::  :_  (welp lin [*stye:^dill p.vew]~)
+    ::  :_  (welp lin [*stye:dill p.vew]~)
     ::  (add pos.inp (lent-char:klr lin))
     ::?:  vis.pom
     ::  ::
@@ -936,7 +936,7 @@
 ::  ::> shutting down urbit or logging to the
 ::  ::> pier's `.urb/put/` directory
 ::  ::
-::  |=  bil/dill-blit:^dill  ^+  +>
+::  |=  bil/dill-blit:dill  ^+  +>
 ::  ?~  sys  ~&(%se-blit-no-sys +>)
 ::  (se-emit [u.sys %diff %dill-blit bil])
 ::
