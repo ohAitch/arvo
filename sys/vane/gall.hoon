@@ -578,7 +578,7 @@
           $(pyz t.pyz)
         =^  vad  +>  ap-fill(ost p.i.pyz)
         $(pyz t.pyz, ful ?:(vad ful (~(put in ful) p.i.pyz)))
-      =+  ded=(~(tap in ful) ~)
+      =+  ded=~(tap in ful)
       |-  ^+  +>.^$
       ?~  ded  +>.^$
       =>  %*(. $(ded t.ded) ost i.ded)
@@ -1217,6 +1217,7 @@
         $info  `%c
         $merg  `%c
         $mont  `%c
+        $dirk  `%c
         $ogre  `%c
         $serv  `%e
         $them  `%e
@@ -1280,12 +1281,12 @@
     :^  hen  %give  %mass
     :-  %gall
     :-  %|
-    %+  turn  (~(tap by pol.all))     :: XX single-home
+    %+  turn  ~(tap by pol.all)       :: XX single-home
     |=  {our/@ mast}  ^-  mass
     :+  (scot %p our)  %|
     :~  [%foreign [%& sap]]
-        [%blocked [%| (sort (~(tap by (~(run by wub) |=(sofa [%& +<])))) aor)]]
-        [%active [%| (sort (~(tap by (~(run by bum) |=(seat [%& +<])))) aor)]]
+        [%blocked [%| (sort ~(tap by (~(run by wub) |=(sofa [%& +<]))) aor)]]
+        [%active [%| (sort ~(tap by (~(run by bum) |=(seat [%& +<]))) aor)]]
     ==
   ==
 ::
