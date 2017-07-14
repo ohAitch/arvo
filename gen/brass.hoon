@@ -1,5 +1,5 @@
 ::
-::::  /hoon/metal/gen
+::::  /hoon/brass/gen
   ::
 /?    310
 ::
@@ -7,7 +7,7 @@
   !:
 :-  %say
 |=  $:  {now/@da * bec/beak}
-        {{who/@p $~} try/_| $~}
+        {$~ try/_| $~}
     ==
 ::
 ::  we're creating an event series E whose lifecycle can be computed
@@ -116,7 +116,7 @@
         ::  compile the compiler source, producing (pair span nock).
         ::  the compiler ignores its input so we use a trivial span.
         ::
-        ~>  %slog.[0 leaf+"1-c"]
+        ~>  %slog.[0 leaf+"1-c (compiling compiler, wait a few minutes)"]
         =+  ^=  compiler-tool
             .*(compiler-gate(+< [%noun compiler-source]) -.compiler-gate)
         ::
@@ -173,15 +173,20 @@
 ::
 =+  arvo-source=.^(@t %cx (welp sys /arvo/hoon))
 ::
-::  main-moves: installation actions
+::  boot-ova: startup events
 ::
-=+  ^=  main-moves
-    |^  ^-  (list ovum)
-        :~  ::
-            ::  configure identity
-            ::
-            [[%name (scot %p who) ~] [%veal who]]
-            ::
+=+  ^=  boot-ova  ^-  (list *)
+    :~  boot-one
+        boot-two
+        compiler-formula
+        compiler-source
+        arvo-source
+    ==
+::
+::  module-ova: vane load operations.
+::
+=+  ^=  module-ova  ^-  (list ovum)
+    |^  :~  ::
             ::  sys/zuse: standard library
             ::
             (vent %$ /zuse)
@@ -217,71 +222,7 @@
             ::  sys/vane/jael: security
             ::
             (vent %j /vane/jael)
-            ::
-            ::  legacy boot event
-            ::
-            [[%$ %term '1' ~] [%boot %sith who `@uw`who &]]
-            ::
-            ::  userspace:
-            ::
-            ::    /app    %gall applications
-            ::    /gen    :dojo generators
-            ::    /lib    %ford libraries
-            ::    /mar    %ford marks
-            ::    /sur    %ford structures
-            ::    /ren    %ford renderers
-            ::    /web    %eyre web content
-            ::    /sys    system files
-            ::    /neo    new system files
-            ::
-            (user /app /gen /lib /mar /neo /ren /sec /sur /sys /web ~)
         ==
-    ::                                                  ::  
-    ++  user                                            ::  userspace loading
-      |=  ::  sal: all spurs to load from
-          ::
-          sal/(list spur)
-      ^-  ovum
-      ::
-      ::  hav: all user files 
-      ::  
-      =;  hav  ~&  user-files+(lent hav)
-               [[%$ %sync ~] [%into %$ & hav]]
-      =|  hav/mode:clay
-      |-  ^+  hav
-      ?~  sal  ~
-      =.  hav  $(sal t.sal)
-      ::
-      ::  tyl: spur 
-      ::
-      =/  tyl  i.sal
-      |-  ^+  hav
-      ::
-      ::  pax: full path at `tyl`
-      ::  lon: directory at `tyl`
-      ::
-      =/  pax  (en-beam:format bec tyl)
-      =/  lon  .^(arch %cy pax)
-      =?  hav  ?=(^ fil.lon)  
-          ?.  ?=({$hoon *} tyl)
-            ::
-            ::  install only hoon files for now
-            ::
-            hav
-          ::
-          ::  cot: file as plain-text octet-stream
-          ::
-          =;  cot  [[(flop `path`tyl) `[/text/plain cot]] hav]
-          ^-  octs
-          ?-    tyl  
-              {$hoon *}
-            =/  dat  .^(@t %cx pax)
-            [(met 3 dat) dat]
-          ==
-      =/  all  (~(tap by dir.lon) ~)
-      |-  ^-  mode:clay
-      ?~  all  hav
-      $(all t.all, hav ^$(tyl [p.i.all tyl]))
     ::
     ++  vent
       |=  {abr/term den/path}
@@ -290,34 +231,64 @@
       `ovum`[[%vane den] [%veer abr pax txt]]
     --
 ::
-::  main-events: full events with advancing times
+::  file-ovum: userspace filesystem load
 ::
-=.  now  ~2017.3.1
-=+  ^=  main-events
-    |-  ^-  (list (pair @da ovum))
-    ?~  main-moves  ~
-    :-  [now i.main-moves]
-    $(main-moves t.main-moves, now (add now (bex 48)))
+=+  ^=  file-ovum  ^-  ovum
+    ::
+    ::    /app    %gall applications
+    ::    /gen    :dojo generators
+    ::    /lib    %ford libraries
+    ::    /mar    %ford marks
+    ::    /sur    %ford structures
+    ::    /ren    %ford renderers
+    ::    /web    %eyre web content
+    ::    /sys    system files
+    ::    /neo    new system files
+    ::
+    %.  [/app /gen /lib /mar /neo /ren /sec /sur /sys /web ~]
+    |=  ::  sal: all spurs to load from
+        ::
+        sal/(list spur)
+    ^-  ovum
+    ::
+    ::  hav: all user files 
+    ::  
+    =;  hav  ~&  user-files+(lent hav)
+             [[%$ %sync ~] [%into %$ & hav]]
+    =|  hav/mode:clay
+    |-  ^+  hav
+    ?~  sal  ~
+    =.  hav  $(sal t.sal)
+    ::
+    ::  tyl: spur 
+    ::
+    =/  tyl  i.sal
+    |-  ^+  hav
+    ::
+    ::  pax: full path at `tyl`
+    ::  lon: directory at `tyl`
+    ::
+    =/  pax  (en-beam:format bec tyl)
+    =/  lon  .^(arch %cy pax)
+    =?  hav  ?=(^ fil.lon)  
+        ?.  ?=({$hoon *} tyl)
+          ::
+          ::  install only hoon files for now
+          ::
+          hav
+        ::
+        ::  cot: file as plain-text octet-stream
+        ::
+        =;  cot  [[(flop `path`tyl) `[/text/plain cot]] hav]
+        ^-  octs
+        ?-    tyl  
+            {$hoon *}
+          =/  dat  .^(@t %cx pax)
+          [(met 3 dat) dat]
+        ==
+    =/  all  ~(tap by dir.lon)
+    |-  ^-  mode:clay
+    ?~  all  hav
+    $(all t.all, hav ^$(tyl [p.i.all tyl]))
 ::
-~?  try
-  ~&  %metal-testing
-  =+  ^=  yop
-      ^-  @p
-      %-  mug
-      .*  :*  boot-one
-              boot-two
-              compiler-formula
-              compiler-source
-              arvo-source
-              main-events
-          ==
-      [2 [0 3] [0 2]]
-  [%metal-tested yop]
-::
-:*  boot-one
-    boot-two
-    compiler-formula
-    compiler-source
-    arvo-source
-    main-events
-==
+[boot-ova module-ova file-ovum]

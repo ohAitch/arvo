@@ -98,6 +98,13 @@
   (emit %serv /helm/serv top)
 ::
 ++  poke-hi  |=(mes/@t abet:(emit %flog /di %text "< {<src>}: {(trip mes)}"))
+++  poke-atom  
+  |=  ato/@
+  =+  len=(scow %ud (met 3 ato))
+  =+  gum=(scow %p (mug ato))
+  =<  abet
+  (emit %flog /di %text "< {<src>}: atom: {len} bytes, mug {gum}")
+::
 ++  coup-hi
   |=  {pax/path cop/(unit tang)}  =<  abet
   ?>  ?=({@t $~} pax)

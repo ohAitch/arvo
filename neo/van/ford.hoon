@@ -217,7 +217,7 @@
       ?+  -.p.+.sih  ~|(ford-strange-unto+-.p.+.sih !!)
         $diff  (~(resd zo [num u.tus]) [van ren bem] p.p.+.sih)
         $reap  ?~  p.p.+.sih  +>.$
-               ((slog leaf+"ford-reap-fail" u.p.p.+.sih) +>.$)
+               ((slog:error:userlib leaf+"ford-reap-fail" u.p.p.+.sih) +>.$)
       ==
     ==
   ::
@@ -238,20 +238,20 @@
         :-  [%done ~]
         ;:  weld
           (axap dep (~(del in q.dap) bem))              ::  cancel outstanding
-          (turn ~(tap in p.dap) |=(hen/duct [hen %give %news dep]))
+          (turn (~(tap in p.dap)) |=(hen/duct [hen %give %news dep]))
           mow
     ==  ==
       ==
   ::
   ++  axap                                              ::  unsubscribe beams
     |=  {dep/@uvH dap/(set beam)}
-    %+  turn  ~(tap in dap)
+    %+  turn  (~(tap in dap))
     |=  bem/beam
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (en-beam bem)]
     [%c %warp [our p.bem] q.bem ~]
   ::
   ++  awap                                              ::  get next revision
-    ~%  %ford-w  ..is  ~
+    ~%  %ford-w  ..ship  ~
     |=  {dep/@uvH ask/?}
     ?:  =(`@`0 dep)
       ~&(dep-empty+hen +>.$)
@@ -277,14 +277,14 @@
           (~(put by deh.bay) dep [%sent [hen ~ ~] p.u.dap])
         ::
             mow
-          =<  (welp :_(mow (turn ~(tap in p.u.dap) .)))
+          =<  (welp :_(mow (turn (~(tap in p.u.dap)) .)))
           |=  bem/beam
           :^  hen  %pass  [(scot %p our) (scot %uv dep) (en-beam bem)]
           [%c [%warp [our p.bem] q.bem ~ [%next %z r.bem (flop s.bem)]]]
     ==  ==
   ::
   ++  zo
-    ~%  %ford-z  ..is  ~
+    ~%  %ford-z  ..ship  ~
     =|  dyv/@
     |_  {num/@ud task}
     ++  abet  %_(..zo q.tad.bay (~(put by q.tad.bay) num +<+))
@@ -295,7 +295,7 @@
       ==
     ++  camo                                            ::  stop requests
       ^+  .
-      =+  kiz=~(tap in kig)
+      =+  kiz=(~(tap in kig))
       |-  ^+  +>
       ?~  kiz  +>
       $(kiz t.kiz, mow :_(mow [hen (cancel i.kiz)]))
@@ -569,7 +569,7 @@
       |=  {dep/(set beam) deh/(map @uvH deps)}
       ^+  [*@uvH deh.bay]
       =.  dep
-        =<  (silt (skip ~(tap in dep) .))
+        =<  (silt (skip (~(tap in dep)) .))
         |=  dap/beam  ^-  ?
         ?~  s.dap  |
         =>(.(s.dap t.s.dap) |((~(has in dep) dap) $))
@@ -588,7 +588,7 @@
       ?-  -.q.bot
         $0  amok:(expo [%made dep q.q.bot])
         $2  amok:(expo [%made dep %| q.q.bot])
-        $1  =+  zuk=~(tap by p.q.bot)
+        $1  =+  zuk=(~(tap by p.q.bot) ~)
             =<  abet
             |-  ^+  ..exec
             ?~  zuk  ..exec
@@ -1107,7 +1107,7 @@
       |=  {cof/cafe mal/(map mark $~)}
       ?:  (~(has by mal) for)
         (cope (lace cof for bem) (flux some))
-      =+  opt=(silt (turn ~(tap by mal) head))          ::  XX asymptotics
+      =+  opt=(silt (turn (~(tap by mal)) head))        ::  XX asymptotics
       %+  cope  (lion cof for opt)
       |=  {cof/cafe wuy/(list @tas)}
       ?~  wuy  (flue cof)
@@ -1188,7 +1188,7 @@
       |=  {cof/cafe fro/(set mark)}  ^-  (bolt (list mark))
       ?:  (~(has in tag) p.won)
         (fine cof (flop pax))
-      =+  for=(skip ~(tap by fro) ~(has by war))
+      =+  for=(skip (~(tap by fro)) ~(has by war))
       =.  for  (sort for aor)         ::  XX useful?
       =:  q.won  (~(gas to q.won) for)
           war  (~(gas by war) (turn for |=(mark [+< pax])))
@@ -1225,7 +1225,7 @@
       ^-  (bolt vase)
       %+  cope  (mail cof p.vax gen)
       |=  {cof/cafe typ/span fol/nock}
-      %+  (coup cof)  (mock [q.vax fol] (sloy syve))
+      %+  (coup cof)  (mock [q.vax fol] (sloy:error:userlib syve))
       |=(val/* `vase`[typ val])
     ::
     ++  make-norm-bek                                   ::  normalize root beak
@@ -1432,7 +1432,7 @@
       ^-  (bolt vase)
       %+  cope  (malt cof p.gat p.sam)
       |=  {cof/cafe typ/span}
-      %+  (coup cof)  (mong [q.gat q.sam] (sloy syve))
+      %+  (coup cof)  (mong [q.gat q.sam] (sloy:error:userlib syve))
       |=(val/* `vase`[typ val])
     ::
     ++  meow                                            ::  assemble
@@ -1498,14 +1498,14 @@
         |=  {cof/cafe sel/_..body}
         ^$(src t.src, ..body sel, cof cof)
       ::
-      :: ++  libs  `(set term)`(silt (turn ~(tap by bil) head.is))
+      :: ++  libs  `(set term)`(silt (turn (~(tap by bil)) head.is))
       ++  chad                                          ::  atomic list
         |=  {cof/cafe bax/vase doe/term hon/horn}
         ^-  (bolt vase)
         %+  cope  (lash cof how (flux (slat doe)))
         |=  {cof/cafe yep/(map knot @)}
         =+  ^=  poy  ^-  (list (pair knot @))
-            %+  sort  ~(tap by yep)
+            %+  sort  (~(tap by yep) ~)
             |=({{* a/@} {* b/@}} (lth a b))
         %+  cope
           |-  ^-  (bolt (list (pair @ vase)))
@@ -1885,7 +1885,7 @@
 =*  lex  -
 |=  {now/@da eny/@ ski/sley}                            ::  activate
 ^?                                                      ::  opaque core
-~%  %ford-d  ..is  ~
+~%  %ford-d  ..ship  ~
 |%                                                      ::
 ++  call                                                ::  request
   |=  {hen/duct hic/(hypo (hobo task:able))}
@@ -1905,7 +1905,7 @@
         ?~  -.q.i.i.a
           [%& (turn (turn a2 head) |=(b/mass ?~(-.q.b p.q.b !!)))]
         [%| $(a (turn (turn a2 head) |=(b/mass ?~(-.q.b !! p.q.b))))]
-    %+  turn  ~(tap by pol)
+    %+  turn  (~(tap by pol))
     |=  {@ baby}
     :~  =<  cache+[%| (turn `(list term)`/hood/bake/slit/slim/slap/slam .)]
         =-  |=(a/term [a %& (~(get ja dep) a)])
@@ -1985,112 +1985,4 @@
         ==
     abet:(~(axon za [our hen [now eny ski] ~] bay) num [van ren bem] q.hin)
   [mos ..^$(pol (~(put by pol) our bay))]
-::
-++  neon  !:
-  |=  our/ship
-  ^-  (^vane task:able gift:able sign note axle axle)
-  =|  axle
-  =*  lex  -
-  |%
-  ++  load  |=(axle +>)
-  ++  stay  `axle`+<(pol (~(run by pol) |=(a/baby [tad.a dym.a deh.a ~])))
-  ++  plow
-    =|  $:  now/@da
-            eny/@e
-            sky/roof
-        ==
-    |%
-    ++  doze  ~
-    ++  peek
-      |=  $:  lyc/(unit (set ship))
-              car/term
-              bem/beam
-          ==
-      ^-  (unit (unit (cask vase)))
-      [~ ~]
-    ::
-    ++  spin
-      =|  $:  hen/duct
-              moz/(list (pair duct (wind note gift:able)))
-          ==
-      |%
-      ++  call  
-        |=  tac/task:able
-        ^+  +>
-        =^  vam  +>
-          ^+  [p=*(list move) q=+>.$]
-          ?:  ?=($wegh -.tac)
-            :_  +>.$  :_  ~
-            :^  hen  %give  %mass
-            :-  %ford
-            :-  %|
-            %-  |=  a/(list (list mass))  ^-  (list mass)
-                =+  a2=a
-                ?~  a  !!
-                ?~  i.a  ~
-                :_  $(a (turn a2 tail))
-                :-  p.i.i.a
-                ?~  -.q.i.i.a
-                  [%& (turn (turn a2 head) |=(b/mass ?~(-.q.b p.q.b !!)))]
-                [%| $(a (turn (turn a2 head) |=(b/mass ?~(-.q.b !! p.q.b))))]
-            %+  turn  ~(tap by pol)
-            |=  {@ baby}
-            :~  =<  :+  %cache
-                      %| 
-                    (turn `(list term)`/hood/bake/slit/slim/slap/slam .)
-                =-  |=(a/term [a %& (~(get ja dep) a)])
-                =<  `dep/(jar term *)`(~(rep by jav) .)
-                |=({{* a/{term *}} b/(jar term *)} (~(add ja b) -.a +.a))
-            ::
-                =<  depends+[%| (turn `(list term)`/init/sent/done .)]
-                =-  |=(a/term [a %& (~(get ja dep) a)])
-                =<  `dep/(jar term *)`(~(rep by deh) .)
-                |=({{@ a/{term *}} b/(jar term *)} (~(add ja b) -.a +.a))
-            ::
-                tasks+[%& dym tad]
-            ==
-          =+  our=p.tac
-          =+  ^=  bay  ^-  baby
-              =+  buy=(~(get by pol.lex) our)
-              ?~(buy *baby u.buy)
-          =^  mos  bay
-            ?-    -.tac
-                $wipe  ~&(%ford-cache-wiped [~ bay(jav ~)])
-                $wasp
-              abet:(~(awap za [our hen [now eny ski] ~] bay) q.tac)
-                $exec
-              ?~  q.tac
-                abet:~(apax za [our hen [now eny ski] ~] bay)
-              abet:(~(apex za [our hen [now eny ski] ~] bay) u.q.tac)
-            ==
-          [mos +>.$(pol (~(put by pol) our bay))]
-        +>.$(moz (weld `(list move)`vam moz))
-      ::
-      ++  take  
-        |=  {tea/wire hin/sign}
-        ^+  +>
-        =^  vam  +>
-          ^+  [p=*(list move) q=+>.$]
-          ?>  ?=({@ @ *} tea)
-          =+  our=(slav %p i.tea)
-          =+  bay=(~(got by pol.lex) our)
-          =^  mos  bay
-            =+  dep=(slaw %uv i.t.tea)
-            ?^  dep
-              =+  bem=(need (de-beam t.t.tea))
-              =<  abet
-              (~(axun za [our hen [now eny ski] ~] bay) tea u.dep bem hin)
-            ?>  ?=({@ @ ^} t.t.tea)
-            =+  :*  num=(slav %ud i.t.tea)
-                    van=((hard vane) i.t.t.tea)
-                    ren=((hard care:clay) i.t.t.t.tea)
-                    bem=(need (de-beam t.t.t.t.tea))
-                ==
-            =<  abet
-            (~(axon za [our hen [now eny ski] ~] bay) num [van ren bem] hin)
-          [mos +>.$(pol (~(put by pol) our bay))]
-        +>.$(moz (weld `(list move)`vam moz))
-      --
-    --
-  --
 --

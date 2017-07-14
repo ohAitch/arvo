@@ -1,15 +1,16 @@
 ::                                                      ::  ::
-::::  /hoon/ames/arvo                                   ::::::  vane prelude
+::::  /hoon/xmas/arvo                                   ::::::  vane prelude
   !:                                                    ::  ::
+=+  our=~zod    ::  XX placeholder
 |=  pit/vase                                            ::  kernel vase
 =>  =~                                                  ::
 =,  xmas
 ::                                                      ::  ::
-::::                                                    ::::::  ames structures
+::::                                                    ::::::  xmas structures
   ::                                                    ::  ::
 ::
-=*  pipe  channel:able:jael                             ::  secure channel
-=*  gree  farm:pki:jael                                 ::  pki information
+=*  pipe  channel:able:jael                            ::  secure channel
+=*  gree  farm:pki:jael                                ::  pki information
 |%                                                      ::
 ++  bait  {p/skin q/@ud r/dove}                         ::  fmt nrecvd spec
 ++  bath                                                ::  per friend
@@ -152,7 +153,7 @@
       ?>  =(our q.p.kec)
       =+  buh=(~(get by pol) p.p.kec)
       ?~  buh
-        ~&  [%ames-from p.p.kec]
+        ~&  [%xmas-from p.p.kec]
         =+  nut=(fall (~(get by ech) p.p.kec) *mute)
         %_  +>.$
           fex  [[%veil p.p.kec] fex]
@@ -163,7 +164,7 @@
         $mess
       =+  buh=(~(get by pol) p.job)
       ?~  buh
-        ~&  [%ames-unto p.job]
+        ~&  [%xmas-unto p.job]
         =+  nut=(fall (~(get by ech) p.job) *mute)
         %_  +>.$
           fex  [[%veil p.job] fex]
@@ -709,10 +710,10 @@
     ++  aver                                            ::  verify
       ?>  (lte cur.saw max.saw)
       ?>  !=(0 max.saw)
-      ?.  =(cur.saw (lent ~(tap to liv)))
-        ~&  [%aver-cur cur.saw (lent ~(tap to liv))]
+      ?.  =(cur.saw (lent (~(tap to liv))))
+        ~&  [%aver-cur cur.saw (lent (~(tap to liv)))]
         !!
-      ?>  =(rey.saw (lent ~(tap to lop)))
+      ?>  =(rey.saw (lent (~(tap to lop))))
       ?>  =+  |=  {a/coal b/coal}
               &((lth out.a out.b) (lth lod.a lod.b))
           |-  ?|  ?=($~ liv)
@@ -771,7 +772,7 @@
           [& $(liv l.liv)]
       ?~  ack  [~ ~ liv]
       =.  ded  ?:(top [n.liv ded] ded)
-      =?  ded  vig.clu.u.ack  (weld ~(tap to r.liv) ded)
+      =.  ded  ?:(vig.clu.u.ack (~(tap to r.liv) ded) ded)
       =.  lov  ?:(top [n.liv lov ~] lov)
       [ack ded lov]
     ::                                                  ::
@@ -851,7 +852,7 @@
         ::
         ::  everything in front of a dead packet is dead
         ::
-        $(liv l.liv, ded (welp ~(tap to r.liv) [n.liv ded]))
+        $(liv l.liv, ded (~(tap to r.liv) [n.liv ded]))
       =+  ryt=$(liv r.liv)
       [p.ryt [n.liv l.liv q.ryt]]
     ::                                                  ::
@@ -1194,64 +1195,6 @@
       [(turn fex lung) ..^$]
     --
 |%                                                    ::  vane interface
-++  neon
-  |=  our/ship
-  ^-  (vane task:able gift:able sign:able note:able silo silo)
-  =|  syl/silo
-  |%
-  ++  load  |=(silo +>)
-  ++  stay  syl
-  ++  plow
-    =|  $:  now/@da
-            eny/@e
-            sky/roof
-        ==
-    |%
-    ++  doze  ~
-    ++  peek
-      |=  $:  lyc/(unit (set ship))
-              car/term
-              bem/beam
-          ==
-      ^-  (unit (unit (cask vase)))
-      ~
-    ::
-    ++  spin
-      =|  $:  hen/duct
-              moz/(list move)
-          ==
-      |%
-      ++  call  
-        |=  tac/task:able
-        ^+  +>
-        =*  job  ^-  task:loft
-            ?-  -.tac
-              $hear  tac
-              $mess  [%mess p.tac hen q.tac r.tac]
-              $wake  tac
-            ==
-        =^  fex  syl  abet:(apex:love job)
-        +>.$(moz (weld (turn fex lung) moz))
-      ::
-      ++  take  
-        |=  {tea/wire hin/sign:able}
-        =*  job  ^-  task:loft
-          ?+    -.tea  !!
-              $msg
-            ?>  ?=({@ @ $~} +.tea)
-            =+  [who kos]=[(slav %p i.t.tea) (slav %ud i.t.t.tea)]
-            ?-  +<.hin
-                $rend  
-              [%rend who kos p.+.hin q.+.hin]
-                $mack  
-              [%done who kos ?~(p.+.hin ~ `coop`[~ `[%fail u.p.+.hin]])]
-            ==
-          ==
-        =^  fex  syl  abet:(apex:love job)
-        +>.$(moz (weld (turn fex lung) moz))
-      --
-    --
-  --
 ++  call                                              ::  handle request
   |=  $:  hen/duct
           hic/(hypo task:able:xmas)

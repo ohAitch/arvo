@@ -3,6 +3,8 @@
 ::::  /hoon/merge/hood/gen
   ::
 /?    310
+/+  *old-zuse
+=,  old-zuse  ::XX ?? should be implied by /+ *foo
 ::
 |%
 ++  beaky  {knot knot knot $~}

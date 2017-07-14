@@ -12,18 +12,28 @@
 ::
 ::::  6a: arvo core
   ::
-++  mean  |=(a/tang (fear (flop a) |.(!!)))             ::  deify stack trace
-++  fear                                                ::  insert user mean
+::                                                  ::  ++mean:error:
+++  mean                                            ::  deify stack trace
+  |=(a/tang (fear (flop a) |.(!!)))
+::                                                  ::  ++fear:error:
+++  fear                                            ::  insert user mean
   |*  {a/tang _|?(**)}
   ^+  (+<+)
   =>  .(a `tang`a)
   ?~  a  (+<+)
   ~_(i.a $(a t.a))
-::
-++  slog                                                ::  deify printf
-  =|  pri/@                                             ::  priority level
-  |=  a/tang  ^+  same                                  ::  .=  ~&(%a 1)
-  ?~(a same ~>(%slog.[pri i.a] $(a t.a)))               ::  ((slog ~[>%a<]) 1)
+::                                                  ::  ++slog:error:
+++  slog                                            ::  deify printf
+  ::  pri: priority level
+  =|  pri/@
+  ::
+  ::  .=  ~&(%a 1)
+  ::
+  |=  a/tang  ^+  same
+  ::
+  ::  ((slog ~[>%a<]) 1)
+  ::
+  ?~(a same ~>(%slog.[pri i.a] $(a t.a)))
 ::
 ++  sloy
   |=  sod/slyd
@@ -626,7 +636,7 @@
     =+  gen=(rain pax.fav txt.fav)
     =+  vax=(slap pit gen)
     =+  orb=`@p`?~(urb 0xffff.ffff.ffff.ffff.ffff.ffff.ffff.ffff u.urb)
-    +>.^$(bod `[[%cell [%face %our [%atom %p ~]] p.vax] [orb q.vax]])
+    +>.^$(bod `[[%cell [%face [~ %our] [%atom %p ~]] p.vax] [orb q.vax]])
   %_    +>.^$
       q.niz
     |-  ^+  q.niz

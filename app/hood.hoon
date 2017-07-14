@@ -65,7 +65,7 @@
   |=  old/(unit hood-old)
   ::?~  old  start-drum TODO start :cone and :deck
   ?~  old  [~ +>.$]
-  ^-  (quip _!! +>)            ::
+  ^-  (quip _!! _+>)            ::
   :-  ~
   +>(lac (~(run by lac.u.old) hood-port))
 ::
@@ -135,6 +135,7 @@
 ++  note-helm                 (wrap take-note):from-helm
 ++  peek-x-womb               peek-x:(womb hid (able %womb))
 ++  peer-scry-x-womb          (wrap peer-scry-x):from-womb
+++  poke-atom                 (wrap poke-atom):from-helm
 ++  poke-drum-link            (send-to %deck %deck-link)
 ++  poke-drum-unlink          (send-to %deck %deck-unlink)
 ++  poke-drum-exit            (send-to %cone %cone-exit)

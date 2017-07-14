@@ -550,7 +550,7 @@
       |-  ^-  $?  $%  {$atom @tas (unit @)}
                       {$cell _$ _$}
                       {$cube * _$}
-                      {$face $@(term tune) _$}
+                      {$face {what $@(term tune)} _$}
                       {$fork (set _$)}
                       {$hold _$ twig}
                   ==
@@ -561,6 +561,7 @@
         {?($cube $face) ^}  a(q $(a q.a))
         {$cell ^}  a(p $(a p.a), q $(a q.a))
         {$fork *}  a(p (silt (turn ~(tap in p.a) |=(b/span ^$(a b)))))
+        {$help *}  !!
         {$core ^}  `wain`/core
         {$hold *}  a(p $(a p.a))
       ==
@@ -665,7 +666,7 @@
       %+  sloop
         %-  ~(rep by var)
         |=  {{a/term @ b/vase} c/vase}  ^-  vase
-        (sloop b(p face+[a p.b]) c)
+        (sloop b(p face+[[~ a] p.b]) c)
       !>([our=our now=now eny=eny]:hid)
     ::
     ++  dy-made-dial                                    ::  dialog product
@@ -1029,7 +1030,7 @@
             :+  %as  `mark`(cat 3 api.sink.com '-poke')
             :-  1
             :+  %do
-              :+  %gill  [%base %noun]
+              :^  %gill  [~ ~]  [%base %noun]
               :^  %cont  [%rock %tas %post]
                 [%rock %$ endpoint.sink.com]
               [%make ~[[%.y 6]] ~]
@@ -1152,7 +1153,7 @@
   =-  [wrap=- +]
   |*  he-arm/_he-span
   |=  _+<.he-arm
-  ^-  (quip move ..he)
+  ^-  (quip move _..he)
   he-abet:(he-arm +<)
 ::
 ++  peer-sole
