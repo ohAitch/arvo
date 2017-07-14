@@ -7,10 +7,10 @@
 ++  fu          fu:number                               ::  modulo (mul p q)
 ++  aes         aes:crypto                              ::  aes, all sizes
 ++  crua        crua:crypto                             ::  cryptosuite A (RSA)
-++  bruw        bruw:suite:crypto                       ::  create keypair
-++  haul        haul:suite:crypto                       ::  activate public key
-++  weur        weur:suite:crypto                       ::  activate secret key
-++  trua        trua:test:crypto                        ::  test rsa
+:: ++  bruw        bruw:suite:crypto                       ::  create keypair
+:: ++  haul        haul:suite:crypto                       ::  activate public key
+:: ++  weur        weur:suite:crypto                       ::  activate secret key
+:: ++  trua        trua:test:crypto                        ::  test rsa
 ++  crub        crub:crypto                             ::  cryptosuite B (Ed)
 ++  trub        trub:test:crypto                        ::  test crub
 ++  hmac        hmac:crypto                             ::  HMAC-SHA1
@@ -96,7 +96,7 @@
 ++  bitt        bitt:gall                               ::  incoming subs
 ++  blob        blob:clay                               ::  fs blob
 ++  boat        boat:gall                               ::  outgoing subs
-++  boon        boon:ames                               ::  fort output
+:: ++  boon        boon:ames                               ::  fort output
 ++  bowl        bowl:gall                               ::  standard app state
 ++  bray        bray:ames                               ::  our parent us now
 ++  brow        !!                                      ::  XX deprecated
