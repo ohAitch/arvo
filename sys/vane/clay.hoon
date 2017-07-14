@@ -3767,7 +3767,7 @@
           ?-    -.tac
               $boat
             :_  +>.$
-            [hen %give %hill (turn (~(tap by mon.ruf)) head)]~
+            [hen %give %hill (turn ~(tap by mon.ruf) head)]~
           ::
               $drop
             =^  mos  ruf
@@ -3893,11 +3893,11 @@
             :_  %_    +>.$
                     mon.ruf
                   %-  molt
-                  %+  skip  (~(tap by mon.ruf))
+                  %+  skip  ~(tap by mon.ruf)
                   (corl (cury test p.tac) tail)
                 ==
             %+  turn
-              (skim (~(tap by mon.ruf)) (corl (cury test p.tac) tail))
+              (skim ~(tap by mon.ruf) (corl (cury test p.tac) tail))
             |=  {pot/term bem/beam}
             [u.hez.ruf %give %ogre pot]
           ::
@@ -4099,7 +4099,7 @@
               $note  [[hen %give +.hin]~ +>.$]
               $wake
             ~|  %why-wakey  !!
-            ::  =+  dal=(turn (~(tap by fat.ruf) ~) |=([a=@p b=room] a))
+            ::  =+  dal=(turn ~(tap by fat.ruf) |=([a=@p b=room] a))
             ::  =|  mos=(list move)
             ::  |-  ^-  [p=(list move) q=_..^^$]
             ::  ?~  dal  [mos ..^^$]

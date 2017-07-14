@@ -2033,7 +2033,7 @@
                 ?~  -.q.i.i.a
                   [%& (turn (turn a2 head) |=(b/mass ?~(-.q.b p.q.b !!)))]
                 [%| $(a (turn (turn a2 head) |=(b/mass ?~(-.q.b !! p.q.b))))]
-            %+  turn  (~(tap by pol))
+            %+  turn  ~(tap by pol)
             |=  {@ baby}
             :~  =<  :+  %cache
                       %| 
