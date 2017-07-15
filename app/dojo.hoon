@@ -1131,7 +1131,7 @@
   ?+  -.u.old  !!
     $4  $(-.u.old %5, q.u.old (~(run by q.u.old) |=(session-4 +<(sur ~, lib ~))))
     $5  =;  q-new  $(-.u.old %6, q.u.old q-new)
-        =<  (malt (turn (~(tap by q.u.old)) .))
+        =<  (malt (turn ~(tap by q.u.old) .))
         |=({p/bone q/session} [[p [our dap]:hid] q])
   ::
     $6  `..prep(+<+ u.old)
@@ -1175,7 +1175,7 @@
   he-abet:(~(he-peer he ~ sid u.ses) pax)
 ::
 ++  poke-sole-id-action
-  |=  act/sole-id-action  ^-  (quip move +>)
+  |=  act/sole-id-action  ^-  (quip move _+>)
   ~|  poke+act
   ?:  ?=($new q.act)
     ?<  (~(has by hoc) p.act)  :: REVIEW nop instead of crashing?

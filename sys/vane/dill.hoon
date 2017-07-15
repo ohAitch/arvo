@@ -605,7 +605,7 @@
             [~ +>.$]
           =+  our=?>(?=(^ ore.all) u.ore.all)
           =^  moz  all
-            abet:(~(take as [~ hen our] (~(got by dug.all) hen)) hin)
+            abet:(~(take as [hen our] (~(got by dug.all) hen)) hin)
           [moz +>.$]
         +>.$(moz (weld `(list move)`vam moz))
       --
