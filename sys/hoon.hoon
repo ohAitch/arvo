@@ -8822,7 +8822,7 @@
             |-  ^-  @
             ?-  q.s.q.sut
               $~         0
-              {* $~ $~}  1
+              {* $~ $~}  1  ::FIXME measuer actual arm counts, not chapters
               {* $~ *}   +($(q.s.q.sut r.q.s.q.sut))
               {* * $~}   +($(q.s.q.sut l.q.s.q.sut))
               {* * *}    .+  %+  add
@@ -8945,7 +8945,9 @@
   ?+    typ  ~
       {$hold *}  $(typ ~(repo ut typ))
       {$core *}
-    (turn ~(tap by q.s.q.typ) |=({a/term *} a))
+    %-  zing
+    %+  turn  ~(tap by q.s.q.typ)
+    |=({@ tomb} `(list term)`~(tap in ~(key by q)))
   ==
 ::
 ++  slop                                                ::  cons two vases
