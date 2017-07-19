@@ -64,8 +64,8 @@
 ++  prep
   |=  old/(unit hood-old)
   ::?~  old  start-drum TODO start :cone and :deck
-  ?~  old  [~ +>.$]
   ^-  (quip _!! _+>)            ::
+  ?~  old  [~ +>.$]
   :-  ~
   +>(lac (~(run by lac.u.old) hood-port))
 ::
