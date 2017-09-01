@@ -914,6 +914,7 @@
   ++  our-host  `hart`[& ~ %& /org/urbit/(rsh 3 1 (scot %p our))]
   ::                  [| [~ 8.443] `/localhost]       :: XX testing
   ::
+  ::
   ++  eyre-them
     |=  {tea/whir vax/vase:hiss}
     (pass-note tea [%e %meta :(slop !>(%them) !>(~) vax)])
@@ -1007,12 +1008,26 @@
     ?~  dom  ~
     (rush i.dom fed:ag)
   ::
+  ::
   ++  load-secret
     ^-  @ta
     =+  pax=/(scot %p our)/code/(scot %da now)/(scot %p our)
     %^  rsh  3  1
     (scot %p (@ (need (sky [151 %noun] %a pax))))
   ::
+  ++  gen-code
+    ^-  @pF
+    =/  wen  (div now ~s0..1000)
+    (can 4 [1 wen] [3 (shaf load-secret wen)] ~)  ::  low 2-byte is timestamp
+  ::
+  ++  ver-code
+    |=  cod/@pF  ^-  ?
+    =/  nao  (div now ~s0..1000)
+    =/  wen  (cat 4 (end 4 1 cod) (rsh 4 1 nao))
+    =.  wen  ?.((gth wen nao) wen (sub wen 0x1.0000))   :: wrap backwards
+    ?&  (gte wen (sub nao ^~((div timeout=~m15 ~s0..1000))))
+        =((rsh 4 1 cod) (end 4 3 (shaf load-secret wen)))
+    ==
   ::
   ++  handle
     ~%  %eyre-h  ..is  ~
@@ -1984,6 +1999,18 @@
   ?.  ?=($$ ren)  [~ ~]
   ?.  ?=($$ -.lot)  [~ ~]
   ?+    syd  [~ ~]
+      $code
+    %-  (lift (lift |=(a/@pF [%code !>(a)])))
+    ^-  (unit (unit @pF))
+    ?.  ?=($da p.p.lot)
+      ~&  [%e %login-timeless]
+      ~
+    ?.  (gte q.p.lot now)  [~ ~]  :: algorithm may change
+    ?.  =(our who)  ::REVIEW team maybe?
+      ~&  [%e %login-foreign-host who]
+      ~
+    ``~(gen-code ye [`duct`~[/] [q.p.lot eny our sky] ~] bol)
+  ::
       $host
     %-  (lift (lift |=(a/hart [%hart !>(a)])))
     ^-  (unit (unit hart))

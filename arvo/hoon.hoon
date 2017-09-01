@@ -10964,13 +10964,14 @@
     ^-  slyd
     |=  {* fur/(unit (set monk)) ron/term bed/beam}
     ^-  (unit (unit (cask)))
+    =/  beck  ..$                                       ::  immutable clone
     =>  .(fur ?^(fur fur `[[%& p.bed] ~ ~]))            ::  XX heinous
     =+  lal=(end 3 1 ron)
     =+  ren=(care (rsh 3 1 ron))
     |-  ^-  (unit (unit (cask)))
     ?~  q.niz  ~
     ?.  =(lal p.i.q.niz)  $(q.niz t.q.niz)
-    %-  scry:(wink:(vent lal vil bud p.niz q.i.q.niz) now (shax now) ..^$)
+    %-  scry:(wink:(vent lal vil bud p.niz q.i.q.niz) now (shax now) beck)
     [fur ren bed]
   ::
   ++  dink                                              ::  vase by char
