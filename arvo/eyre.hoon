@@ -99,6 +99,7 @@
       sec/(map {iden (list @t)} driv)                   ::  security drivers
   ==                                                    ::
 ::
+++  toke  @pF                                           ::  single-use auth code
 ++  driv                                                ::  driver state
   %+  pair  (unit $@($~ vase))                          ::  main core
   {liv/? req/(qeu (trel duct mark vase:hiss))}          ::  waiting requests
@@ -1015,18 +1016,18 @@
     %^  rsh  3  1
     (scot %p (@ (need (sky [151 %noun] %a pax))))
   ::
-  ++  gen-code
-    ^-  @pF
+  ++  gen-toke
+    ^-  toke
     =/  wen  (div now ~s0..1000)
     (can 4 [1 wen] [3 (shaf load-secret wen)] ~)  ::  low 2-byte is timestamp
   ::
-  ++  ver-code
-    |=  cod/@pF  ^-  ?
+  ++  ver-toke
+    |=  tok/toke  ^-  ?
     =/  nao  (div now ~s0..1000)
-    =/  wen  (cat 4 (end 4 1 cod) (rsh 4 1 nao))
+    =/  wen  (cat 4 (end 4 1 tok) (rsh 4 1 nao))
     =.  wen  ?.((gth wen nao) wen (sub wen 0x1.0000))   :: wrap backwards
     ?&  (gte wen (sub nao ^~((div timeout=~m15 ~s0..1000))))
-        =((rsh 4 1 cod) (end 4 3 (shaf load-secret wen)))
+        =((rsh 4 1 tok) (end 4 3 (shaf load-secret wen)))
     ==
   ::
   ++  handle
@@ -1999,8 +2000,8 @@
   ?.  ?=($$ ren)  [~ ~]
   ?.  ?=($$ -.lot)  [~ ~]
   ?+    syd  [~ ~]
-      $code
-    %-  (lift (lift |=(a/@pF [%code !>(a)])))
+      $toke
+    %-  (lift (lift |=(a/@pF [%toke !>(a)])))
     ^-  (unit (unit @pF))
     ?.  ?=($da p.p.lot)
       ~&  [%e %login-timeless]
@@ -2009,7 +2010,7 @@
     ?.  =(our who)  ::REVIEW team maybe?
       ~&  [%e %login-foreign-host who]
       ~
-    ``~(gen-code ye [`duct`~[/] [q.p.lot eny our sky] ~] bol)
+    ``~(gen-toke ye [`duct`~[/] [q.p.lot eny our sky] ~] bol)
   ::
       $host
     %-  (lift (lift |=(a/hart [%hart !>(a)])))
