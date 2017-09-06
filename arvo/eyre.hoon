@@ -499,8 +499,8 @@
                 ;label.sig: ~
                 ;input#ship.mono(contenteditable "", placeholder "your-urbit");
               ==
-              ;input#pass.mono(type "password", placeholder "passcode");
-              ;h2.advice: Type +{;code:("+code")} in your dojo for your passcode.
+              ;input#pass.mono(placeholder "token");
+              ;h2.advice: Type +{;code:("+code")} in your dojo for a single-use login token.
               ;pre:code#err;
             ==
           ==
@@ -1405,7 +1405,7 @@
             ~|  %new-session
             ?~  paz.ham  ~|(%no-token !!)
             ?.  (ver-toke u.paz.ham)
-              ~|(%bad-token !!)
+              ~|(%token-expired-or-invalid !!)
             ?:  (lien tos |=({@ a/toke} =(a u.paz.ham)))
               ~|(%token-redeemed !!)
             %&
