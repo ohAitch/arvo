@@ -80,7 +80,7 @@
 --                                                      ::
 |%                                                      ::  models
 ++  bolo                                                ::  eyre state
-  $:  $6                                                ::  version
+  $:  $7                                                ::  version
       gub/@t                                            ::  random identity
       hov/(unit ship)                                   ::  master for remote
       top/beam                                          ::  ford serve prefix
@@ -155,7 +155,7 @@
       {$get him/ship rem/pork}
       {$js $~}
       {$json $~}
-      {$try him/ship paz/(unit cord)}
+      {$try him/ship paz/(unit toke)}
       {$xen ses/hole rem/pork}
   ==
 ::
@@ -1261,7 +1261,7 @@
                 $get   [%json ~]
                 $put
               ~|  parsing+bod
-              [%try (need-body (ot ship+(su fed:ag) code+(mu so) ~):jo)]
+              [%try (need-body (ot ship+(su fed:ag) code+(mu (su fed:ag)) ~):jo)]
             ::
                 $delt
               ~|  parsing+bod
@@ -1401,11 +1401,20 @@
         :-  %|
         ?.  =(our him.ham)
           ~|(stub-foreign+him.ham !!)
-        ?.  ?|  (~(has in aut.yac) him.ham)
-                ?~(paz.ham | =(u.paz.ham load-secret))
-            ==
-          ~|(%auth-fail !!)
+        ?>  ?:  (~(has in aut.yac) him.ham)  %&
+            ~|  %new-session
+            ?~  paz.ham  ~|(%no-token !!)
+            ?.  (ver-toke u.paz.ham)
+              ~|(%bad-token !!)
+            ?:  (lien tos |=({@ a/toke} =(a u.paz.ham)))
+              ~|(%token-redeemed !!)
+            %&
         =^  jon  ..ya  stat-json:(logon:yac him.ham)
+        =.  tos
+          ?~  paz.ham  tos
+          ~&  used-token+u.paz.ham
+          :-  [now u.paz.ham]
+          (skip tos |=({a/@da @} (gth now (add ~m15 a)))) ::XX hardcoded
         =.  cug.yac  :_(cug.yac (set-cookie %ship (scot %p him.ham)))
         (give-json 200 cug.yac jon)
       ==
