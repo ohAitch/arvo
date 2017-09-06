@@ -153,6 +153,7 @@
   $%  {$at p/pork}                                      ::  inject auth
       {$del p/(unit ship)}
       {$get him/ship rem/pork}
+      {$lon tok/toke rem/pork}
       {$js $~}
       {$json $~}
       {$try him/ship paz/(unit toke)}
@@ -1250,6 +1251,10 @@
               wir=(need-body (ot wire+(cu stab so) ~):jo)
           [%subs mef hap u.p.pok wir +.t.but]
         ::
+            $go
+          ?~  but  !!
+          [%auth %lon (rash i.but fed:ag) pok(q ['~~' t.but])]
+        ::
             $auth
           :-  %auth
           |-  ^-  perk-auth
@@ -1417,6 +1422,22 @@
           (skip tos |=({a/@da @} (gth now (add ~m15 a)))) ::XX hardcoded
         =.  cug.yac  :_(cug.yac (set-cookie %ship (scot %p him.ham)))
         (give-json 200 cug.yac jon)
+      ::
+          $lon
+        =.  tos.yac
+          ?:  (~(has in aut.yac) our)  tos.yac
+          ~|  %new-session
+          ?.  (ver-toke tok.ham)
+            ~|(%token-expired-or-invalid !!)
+          ?:  (lien tos.yac |=({@ a/toke} =(a tok.ham)))
+            ~|(%token-already-redeemed !!)
+          ~&  used-token+tok.ham
+          :-  [now tok.ham]
+          (skip tos.yac |=({a/@da @} (gth now (add ~h1 a)))) ::XX hardcoded
+        =.  cug.yac  :_(cug.yac (set-cookie %ship (scot %p our)))
+        =.  ..ya  abet:(logon:yac our)
+        =/  url  (apex:earn %| rem.ham quy)
+        [%| (give-thou (add-cookies cug.yac [307 [location+(crip url)]~ ~]))]
       ==
     ::
     ++  show-login-page
