@@ -97,6 +97,7 @@
       sop/(map hole {ship ?})                           ::  foreign sess names
       wix/(map ixor stem)                               ::  open views
       sec/(map {iden (list @t)} driv)                   ::  security drivers
+      tos/(list {@da toke})                             ::  used login tokens
   ==                                                    ::
 ::
 ++  toke  @pF                                           ::  single-use auth code
@@ -1981,12 +1982,15 @@
   ~
 ::
 ++  load                                                ::  take previous state
+  =+  bolo-7=bolo
+  =+  bolo-6={$6 _%*(+ *bolo-7 |15 sec=sec:*bolo-7)}
   =+  driv-5=_=>(*driv [cor=p req=req.q])
-  =+  bolo-5={$5 _=+(*bolo +.-(sec (~(run by sec.-) driv-5)))}
+  =+  bolo-5={$5 _=+(*bolo-6 +.-(sec (~(run by sec.-) driv-5)))}
   =+  bolo-4={$4 _%*(+ *bolo-5 lyv *(map duct ^))}
-  |=  old/?(bolo bolo-5 bolo-4)
+  |=  old/?(bolo bolo-4 bolo-5 bolo-6)
   ?-  -.old
-    $6  ..^$(+>- old)
+    $7  ..^$(+>- old)
+    $6  $(old [%7 +.old(|15 [|15.+.old ~])])
     $5  $(old [%6 +.old(sec (~(run by sec.old) |=(driv-5 [cor & req])))])
     $4  $(old [%5 +.old(lyv ~)])          :: minor leak
   ==
