@@ -146,10 +146,11 @@
           [p=`cafe`a q=[%0 p=*sept q=b]]                ::
 ++  flaw  |=  {a/cafe b/tang}                           ::  bolt from error
           [p=a q=[%2 p=*sept q=b]]                      ::
-++  flag                                                ::  beam into deps
-  |*  {a/beam b/(bolt)}                                 ::
+++  flag                                                ::  add dependency
+  |*  {a/dent b/(bolt)}                                 ::
   ?:  ?=($1 -.q.b)  b
-  =.  p.q.b  (~(put in p.q.b) %beam a %z)
+  =.  p.q.b  (~(put in p.q.b) a)
+  b
   b
 ::                                                      ::
 ++  flue  |=(a/cafe (fine a ~))                         ::  cafe to empty
@@ -195,9 +196,10 @@
   ++  dep-warps                                         ::  create %warp's
     |=  {dep/@uvH bes/sept rav/$-({beam care} (unit rave))}
     ^-  (list move)
-    %+  turn  (~(tap in bes))
-    |=  den/dent
-    ?>  ?=($beam -.den)
+    %+  murn  (~(tap in bes))
+    |=  den/dent  ^-  (unit move)
+    ?.  ?=($beam -.den)  ~
+    %-  some
     =/  bem/beam  bem.den
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
     [%c [%warp [our p.bem] q.bem (rav +.den)]]
@@ -644,13 +646,13 @@
     ++  daze                                            ::  remember depends
       |=  {sep/sept deh/(map @uvH deps)}
       ^+  [*@uvH deh.bay]
-      =.  sep
+      =.  sep                                           ::  collapse subdirs 
         =<  (silt (skip (~(tap in sep)) .))
         |=  den/dent  ^-  ?
-        ?>  ?=($beam -.den)
+        ?.  ?=($beam -.den)  |
         ?~  s.bem.den  |
         =>  .(s.bem.den t.s.bem.den)
-        |((~(any in sep) |=(d/dent =(bem.d bem.den))) $)
+        |((~(any in sep) |=(d/dent =(d den))) $)
       ?~  sep  [0v0 deh]
       =+  hap=(sham sep)
       ?:  (~(has by deh) hap)
@@ -1127,7 +1129,7 @@
       =+  arc=((hard arch) q.q.u.u.von)
       %+  cope  (normalize-beak cof bem)
       |=  {cof/cafe bem/beam}
-      (flag bem (fine cof arc))
+      (flag [%beam bem %z] (fine cof arc))
     ::
     ++  load-file
       ~/  %load-file
@@ -1145,7 +1147,7 @@
     ++  load-to-mark
       ~/  %load-to-mark
       |=  {cof/cafe for/mark bem/beam}
-      %+  (clef %load)  (flag bem (fine cof for bem))
+      %+  (clef %load)  (flag [%beam bem %z] (fine cof for bem))
       |=  {cof/cafe for/mark bem/beam}
       ^-  (bolt (unit vase))
       %+  cope  (laze cof bem)
@@ -1337,6 +1339,8 @@
       ::
           $bake
         ^-  (bolt gage)
+        %+  flag  `dent`[%bake [r p q]:kas] 
+        ^-  (bolt gage)
         %+  cool
           |.(leaf+"ford: bake {<p.kas>} {<(tope r.kas)>} {~(rend co q.kas)}")
         %+  cope  (normalize-beak cof r.kas)
@@ -1391,10 +1395,7 @@
         %+  cool  |.(leaf+"ford: core {<(tope p.kas)>}")
         ::  code runtime behaviour is frequently affected by marks
         ::  TODO: track this more formally
-        %+  flag  [bek /mar]
-        ::  until /? is in use, any hoon may implicitly depend on arvo types
-        %+  flag  [bek /arvo/hoon]
-        %+  flag  [bek /arvo/zuse]
+        %+  flag  [%beam [bek /mar] %z]
         (cope (load-core cof p.kas) (flux |=(a/vase [%& %core a])))
       ::
           $diff
@@ -1439,7 +1440,12 @@
         (pact cof p.kas q.kas)
       ::
           $plan  (cope (abut:(meow p.kas q.kas) cof r.kas) faun)
-          $reef  (faun cof pit)
+          $reef
+        %+  flag  [%beam [bek /arvo/hoon] %z]
+        %+  flag  [%beam [bek /arvo/zuse] %z]
+        ::  until /? is in use, any hoon may implicitly depend on arvo types
+        (faun cof pit)
+      ::
           $ride
         %+  cool  |.(leaf+"ford: build failed {<hen>}")
         %+  cope  $(kas q.kas)
@@ -1523,7 +1529,9 @@
         %+  cope  (apex cof hyd)
         |=  {cof/cafe sel/_..abut}
         =.  ..abut  sel
-        %+  cope  (wrapped-slap cof pit able)
+        %+  cope  (cope (make cof %reef ~) furl)
+        |=  {cof/cafe mark zus/vase}
+        %+  cope  (wrapped-slap cof zus able)
         |=  {cof/cafe bax/vase}
         %+  cope  (chap cof bax [%fsdt fan.hyd])
         |=  {cof/cafe mar/mark gox/vase}
