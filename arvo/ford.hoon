@@ -46,9 +46,9 @@
   |*  a/mold                                            ::  product clam
   $:  p/cafe                                            ::  cache
     $=  q                                               ::
-      $%  {$0 p/(set beam) q/a}                         ::  depends+product
+      $%  {$0 p/sept q/a}                               ::  depends+product
           {$1 p/(set {van/vane ren/care bem/beam tan/tang})}  ::  blocks
-          {$2 p/(set beam) q/tang}                      ::  depends+error
+          {$2 p/sept q/tang}                            ::  depends+error
       ==                                                ::
   ==                                                    ::
 ::                                                      ::
@@ -64,23 +64,32 @@
 ::                                                      ::
 ++  calm                                                ::  cache metadata
   $:  laz/@da                                           ::  last accessed
-      dep/(set beam)                                    ::  dependencies
+      dep/sept                                          ::  dependencies
   ==                                                    ::
 ++  calx                                                ::  concrete cache line
   $%  {$hood p/calm q/(pair beam cage) r/hood}          ::  compile
-      {$bake p/calm q/(pair mark beam) r/(unit vase)}   ::  load
       {$boil p/calm q/(trel coin beam beam) r/vase}     ::  execute
+      {$load p/calm q/(pair mark beam) r/(unit vase)}   ::  load
       {$path p/calm q/beam r/(unit beam)}               ::  -to/ transformation
       {$slit p/calm q/{p/span q/span} r/span}           ::  slam type
-      {$slim p/calm q/{p/span q/twig} r/(pair span nock)}::  mint
+      {$slim p/calm q/{p/span q/twig} r/(pair span nock)}  ::  mint
       {$slap p/calm q/{p/vase q/twig} r/vase}           ::  compute
       {$slam p/calm q/{p/vase q/vase} r/vase}           ::  compute
   ==                                                    ::
 ++  deps                                                ::  depend state
-  $%  {$init p/(set beam)}                              ::  given out
-      {$sent p/(set duct) q/(set beam)}                 ::  listener exists
+  %+  pair  sept
+  $%  {$init $~}                                        ::  given out
+      {$sent dux/(set duct)}                            ::  listener exists
       {$done $~}                                        ::  change seen
   ==                                                    ::
+::
+++  sept  (set dent)                                    ::  set of depends
+::
+++  dent                                                ::  individual dep
+  $%  {$beam bem/beam ren/care}
+      {$bake bem/beam mar/mark arg/coin}
+  ==
+::
 ++  task                                                ::  problem in progress
   $:  nah/duct                                          ::  cause
       {bek/beak kas/silk}                               ::  problem
@@ -109,7 +118,7 @@
   |=  a/cafe                                            ::
   |=  {b/@tas c/*}                                      ::
   ^-  {(unit calx) cafe}                                ::
-  =+  d=(~(get by q.a) [b c])                           ::
+  =+  d=(~(get by q.a) [b c])                           ::  calx key is [p q]
   ?~  d  [~ a]                                          ::
   [d a(p (~(put in p.a) u.d))]                          ::
 ::                                                      ::
@@ -134,13 +143,13 @@
   [p.a [%0 p.q.a `gage`[%| q.q.a]]]
 ::
 ++  fine  |*  {a/cafe b/*}                              ::  bolt from data
-          [p=`cafe`a q=[%0 p=*(set beam) q=b]]          ::
+          [p=`cafe`a q=[%0 p=*sept q=b]]                ::
 ++  flaw  |=  {a/cafe b/tang}                           ::  bolt from error
-          [p=a q=[%2 p=*(set beam) q=b]]                ::
+          [p=a q=[%2 p=*sept q=b]]                      ::
 ++  flag                                                ::  beam into deps
   |*  {a/beam b/(bolt)}                                 ::
   ?:  ?=($1 -.q.b)  b
-  =.  p.q.b  (~(put in p.q.b) a)
+  =.  p.q.b  (~(put in p.q.b) %beam a %z)
   b
 ::                                                      ::
 ++  flue  |=(a/cafe (fine a ~))                         ::  cafe to empty
@@ -184,12 +193,14 @@
     [(flop mow) bay]
   ::
   ++  dep-warps                                         ::  create %warp's
-    |=  {dep/@uvH bes/(set beam) rav/$-(beam (unit rave))}
+    |=  {dep/@uvH bes/sept rav/$-({beam care} (unit rave))}
     ^-  (list move)
     %+  turn  (~(tap in bes))
-    |=  bem/beam
+    |=  den/dent
+    ?>  ?=($beam -.den)
+    =/  bem/beam  bem.den
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
-    [%c [%warp [our p.bem] q.bem (rav bem)]]
+    [%c [%warp [our p.bem] q.bem (rav +.den)]]
   ::
   ++  deps-take                                         ::  take rev update
     |=  {tea/wire dep/@uvH bem/beam sih/sign}
@@ -199,16 +210,16 @@
     ?~  p.sih  +>.$                :: acknowledged
     :: ~&  writ+tea
     =+  dap=(~(got by deh.bay) dep)
-    =-  +>.$(mow mow, deh.bay ?~(dop deh.bay (~(put by deh.bay) dep dop)))
-    ^-  {dop/$@($~ _dap) mow/_mow}
-    ?-    -.dap
-        $done  `mow                ::  writ redundant
+    =-  +>.$(mow mow, deh.bay (~(put by deh.bay) dep dap))
+    ^+  [dap=dap mow=mow]
+    ?-    -.q.dap
+        $done  [dap mow]               ::  writ redundant
         $init  ~|(never-subscribed+dep !!)
         $sent
-      :-  [%done ~]
-      ;:  weld
-        (dep-warps dep (~(del in q.dap) bem) |=(beam ~))  ::  cancel outstanding
-        (turn (~(tap in p.dap)) |=(hen/duct [hen %give %news dep]))
+      :-  dap(q [%done ~])
+      ;:  weld                                          ::  cancel rest
+        (dep-warps dep (~(del in p.dap) bem) |=({beam care} ~))
+        (turn (~(tap in dux.q.dap)) |=(hen/duct [hen %give %news dep]))
         mow
       ==
     ==
@@ -249,40 +260,41 @@
     =<  abet  ^+  +>
     ?:  =(`@`0 dep)
       ~&(dep-empty+hen +>.$)
-    ?:  =(dep 0vtest)                 ::  upstream testing
+    ?:  =(dep 0vtest)                                   ::  upstream testing
       +>.$(mow ?.(ask mow :_(mow [hen %give %news dep])))
     =+  dap=(~(get by deh.bay) dep)
-    ?~  dap  ~&(dep-missed+dep +>.$)  ::  XX  ~|  !!
+    ?~  dap  ~&(dep-missed+dep +>.$)                    ::  XX  ~|  !!
+    =>  .(dap `deps`u.dap)
     ::
-    |^  =^  u-dap  .  ?:(ask start cancel)
-        +>.^$(deh.bay (~(put by deh.bay) dep u-dap))
+    |^  =^  q-dap  .  ?:(ask start cancel)
+        +>.^$(deh.bay (~(put by deh.bay) dep [p.dap q-dap]))
     ::
     ++  cancel
-      ^+  [u.dap ..$]
-      ?-  -.u.dap
-        $done  [u.dap ..$]
-        $init  ~&(on-wasp-kill-empty+dep [u.dap ..$])  :: crash?
+      ^+  [q.dap ..$]
+      ?-  -.q.dap
+        $done  [q.dap ..$]
+        $init  ~&(on-wasp-kill-empty+dep [q.dap ..$])   :: crash?
         $sent
-          =.  p.u.dap  (~(del in p.u.dap) hen)
-          ?^  p.u.dap
-            [u.dap ..$]
-          =/  ded  (dep-warps dep p.u.dap |=(beam ~))
-          :-  [%init q.u.dap]
+          =.  dux.q.dap  (~(del in dux.q.dap) hen)
+          ?^  dux.q.dap
+            [q.dap ..$]
+          =/  ded  (dep-warps dep p.dap |=({beam care} ~))
+          :-  [%init ~]
           ..$(mow (welp ded mow))
       ==
     ::
     ++  start
-      ^+  [u.dap ..$]
-      ?-  -.u.dap
-        $done  [u.dap ..$(mow :_(mow [hen %give %news dep]))]
+      ^+  [q.dap ..$]
+      ?-  -.q.dap
+        $done  [q.dap ..$(mow :_(mow [hen %give %news dep]))]
         $sent
-          =.  p.u.dap  (~(put in p.u.dap) hen)
-          [u.dap .]
+          =.  dux.q.dap  (~(put in dux.q.dap) hen)
+          [q.dap .]
       ::
         $init
-          =/  new  %^  dep-warps  dep  p.u.dap
-                   |=(bem/beam `[%next %z r.bem (flop s.bem)])
-          :-  [%sent [hen ~ ~] p.u.dap]
+          =/  new  %^  dep-warps  dep  p.dap
+                   |=({bem/beam ren/care} `[%next ren r.bem (flop s.bem)])
+          :-  [%sent [hen ~ ~]]
           ..$(mow (welp new mow))
       ==
     --
@@ -490,20 +502,20 @@
     ::
     ++  coup                                            ::  toon to bolt
       |=  cof/cafe
-      |*  {ton/toon fun/gate}
+      |*  {ton/toon fun/gate}                           ::  TODO use cope
       :-  p=cof
       ^=  q
       ?-  -.ton
-        $2  [%2 p=*(set beam) q=p.ton]
-        $0  [%0 p=*(set beam) q=(fun p.ton)]
+        $2  [%2 p=*sept q=p.ton]
+        $0  [%0 p=*sept q=(fun p.ton)]
         $1  ::  ~&  [%coup-need ((list path) p.ton)]
-            =-  ?-  -.faw
+            =-  ?-  -.faw                               ::TODO =;
                   $&  :-  %1
                       ^=  p
                       %-  silt
                       %+  turn  p.faw
                       |=(a/{vane care beam} [-.a +<.a +>.a *tang])
-                  $|  [%2 p=*(set beam) q=p.faw]
+                  $|  [%2 p=*sept q=p.faw]
                 ==
             ^=  faw
             |-  ^-  (each (list (trel vane care beam)) tang)
@@ -630,18 +642,20 @@
       ==
     ::
     ++  daze                                            ::  remember depends
-      |=  {dep/(set beam) deh/(map @uvH deps)}
+      |=  {sep/sept deh/(map @uvH deps)}
       ^+  [*@uvH deh.bay]
-      =.  dep
-        =<  (silt (skip (~(tap in dep)) .))
-        |=  dap/beam  ^-  ?
-        ?~  s.dap  |
-        =>(.(s.dap t.s.dap) |((~(has in dep) dap) $))
-      ?~  dep  [0v0 deh]
-      =+  hap=(sham dep)
+      =.  sep
+        =<  (silt (skip (~(tap in sep)) .))
+        |=  den/dent  ^-  ?
+        ?>  ?=($beam -.den)
+        ?~  s.bem.den  |
+        =>  .(s.bem.den t.s.bem.den)
+        |((~(any in sep) |=(d/dent =(bem.d bem.den))) $)
+      ?~  sep  [0v0 deh]
+      =+  hap=(sham sep)
       ?:  (~(has by deh) hap)
         [hap deh]
-      [hap (~(put by deh) hap [%init dep])]
+      [hap (~(put by deh) hap [sep %init ~])]
     ::
     ++  exec                                            ::  execute task
       ^+  ..zo
@@ -1131,7 +1145,7 @@
     ++  load-to-mark
       ~/  %load-to-mark
       |=  {cof/cafe for/mark bem/beam}
-      %+  (clef %bake)  (flag bem (fine cof for bem))
+      %+  (clef %load)  (flag bem (fine cof for bem))
       |=  {cof/cafe for/mark bem/beam}
       ^-  (bolt (unit vase))
       %+  cope  (laze cof bem)
@@ -1397,16 +1411,15 @@
         =+  rez=$(kas q.kas)
         ?:  ?=($1 -.q.rez)  rez
         =-  rez(p.q -)
-        |-  ^-  (set beam)
+        |-  ^-  sept
         ?~  p.kas  p.q.rez
         =.  p.q.rez  $(p.kas l.p.kas)
         =.  p.q.rez  $(p.kas r.p.kas)
         ?^  n.p.kas
-          (~(put in p.q.rez) n.p.kas)
+          (~(put in p.q.rez) %beam n.p.kas %z)
         =+  dap=(~(get by deh.bay) n.p.kas)
         ?~  dap    ~&(flag-missed+n.p.kas p.q.rez)
-        %-  ~(uni in p.q.rez)  ^-  (set beam)
-        ?-(-.u.dap $init p.u.dap, $sent q.u.dap, $done [[bek ~] ~ ~])
+        (~(uni in p.q.rez) p.u.dap)
       ::                              XX revisit ^ during dependency review
           $join
         %+  cool
@@ -1873,7 +1886,7 @@
     ::
         =/  depends/(jar term *)
           %-  ~(rep by deh)
-          |=({{@ a/{term *}} b/(jar term *)} (~(add ja b) -.a +.a))
+          |=({{@ a/{* term *}} b/(jar term *)} (~(add ja b) &2.a a))
         =/  dep-for  |=(a/term [a %& (~(get ja depends) a)])
         depends+[%| (turn `(list term)`/init/sent/done dep-for)]
     ::
