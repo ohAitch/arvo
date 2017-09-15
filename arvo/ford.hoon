@@ -802,11 +802,11 @@
       ++  hoof
         %+  cook  |=(a/^hoof a)
         ;~  plug
-          sym
-          ;~  pose
-            %+  stag  ~
-            ;~(plug ;~(pfix fas case) ;~(pfix ;~(plug fas sig) fed:ag))
-            (easy ~)
+          sym                                           ::  file or
+          %-  punt                                      ::  file/case/~ship
+          ;~  plug
+            ;~(pfix fas case)
+            ;~(pfix fas sig fed:ag)
           ==
         ==
       ::
