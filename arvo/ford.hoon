@@ -40,6 +40,7 @@
   $:  tad/{p/@ud q/(map @ud task)}                      ::  tasks by number
       dym/(map duct @ud)                                ::  duct to task number
       deh/(map @uvH deps)                               ::  depends by hash
+      gaf/(jug dent dent)                               ::  dep graph
       jav/(map * calx)                                  ::  cache
   ==                                                    ::
 ++  bolt                                                ::  gonadic edge
@@ -59,7 +60,8 @@
 ++  cafe                                                ::  live cache
   $:  p/(set calx)                                      ::  used
       q/(map * calx)                                    ::  cache
-      r/(map @uvH deps)                                 ::  dependss
+      r/(map @uvH deps)                                 ::  deps
+      s/(jug dent dent)                                 ::  dep graph
   ==                                                    ::
 ::                                                      ::
 ++  calm                                                ::  cache metadata
@@ -596,7 +598,7 @@
     ++  dash                                            ::  process cache
       |=  cof/cafe
       ^+  +>
-      %_(+> jav.bay q.cof, deh.bay r.cof)
+      %_(+> jav.bay q.cof, deh.bay r.cof, gaf.bay s.cof)
     ::
     ++  diff                                            ::  diff
       |=  {cof/cafe kas/silk kos/silk}
@@ -662,7 +664,7 @@
     ++  exec                                            ::  execute task
       ^+  ..zo
       ?:  !=(~ kig)  ..zo
-      =+  bot=(make-with-normalized-beak [~ jav.bay deh.bay] kas)
+      =+  bot=(make-with-normalized-beak [~ jav.bay deh.bay gaf.bay] kas)
       =^  dep  bot  (clad bot)
       =.  ..exec  (dash p.bot)
       ?-  -.q.bot
@@ -1945,7 +1947,7 @@
   [~ ~]
 ::
 ++  stay                                                ::  save w+o cache
-  `axle`+>-.$(pol (~(run by pol) |=(a/baby [tad.a dym.a deh.a ~])))
+  `axle`+>-.$(pol (~(run by pol) |=(a/baby a(jav ~))))
 ::
 ++  take                                                ::  response
   |=  {tea/wire hen/duct hin/(hypo sign)}
