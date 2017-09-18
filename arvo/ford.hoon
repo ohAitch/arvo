@@ -153,7 +153,6 @@
   ?:  ?=($1 -.q.b)  b
   =.  p.q.b  (~(put in p.q.b) a)
   b
-  b
 ::                                                      ::
 ++  flue  |=(a/cafe (fine a ~))                         ::  cafe to empty
 ++  flux  |*  a/_*                                      ::  bolt lift (fmap)
