@@ -33,7 +33,7 @@
 --                                                      ::
 |%                                                      ::  structures
 ++  axle                                                ::  all %ford state
-  $:  $2                                                ::  version for update
+  $:  $3                                                ::  version for update
       pol/(map ship baby)                               ::
   ==                                                    ::
 ++  baby                                                ::  state by ship
@@ -212,7 +212,9 @@
       ~|(%bad-axun !!)
     ?~  p.sih  +>.$                :: acknowledged
     :: ~&  writ+tea
-    =+  dap=(~(got by deh.bay) dep)
+    =+  udap=(~(get by deh.bay) dep)
+    ?~  udap  ~&(dep-lost+dep +>.$)
+    =+  dap=u.udap
     =-  +>.$(mow mow, deh.bay (~(put by deh.bay) dep dap))
     ^+  [dap=dap mow=mow]
     ?-    -.q.dap
@@ -1923,6 +1925,22 @@
   ~
 ::
 ++  load                                                ::  highly forgiving
+  =/  axle-3  axle
+  =/  baby-3  baby
+  =/  deps-3  deps
+  =/  deps-2  
+    $%  {$init p/(set beam)}
+        {$sent p/(set duct) q/(set beam)}
+        {$done $~}
+    ==
+  =/  baby-2  _=+(*baby-3 [tad=tad dym=dym deh=*(map @uvH deps-2) jav=jav])
+  =/  axle-2  {$2 pol/(map ship baby-2)}
+  ::
+  |=  old/?(axle-3 axle-2)
+  ?-  -.old
+    $3  ..^$(lex old)
+    $2  
+  ==
   :: |=(old/axle ..^$(+>- old))
   ::=.  old
   ::    ?.  ?=([%0 *] old)  old                           ::  remove at 1
@@ -1932,13 +1950,14 @@
   ::    ?>  ?=([n=[p=* q=[tad=* dym=* deh=* jav=*]] l=* r=*] +.old)
   ::    :-  [p.n.+.old [tad.q.n.+.old dym.q.n.+.old deh.q.n.+.old ~]]
   ::    [$(+.old l.+.old) $(+.old r.+.old)]
-  |=  old/*
-  =+  lox=((soft axle) old)
-  ^+  ..^$
-  ?~  lox
-   ~&  %ford-reset
-   ..^$
-  ..^$(+>- u.lox)
+  ::
+  ::|=  old/*
+  ::=+  lox=((soft axle) old)
+  ::^+  ..^$
+  ::?~  lox
+  :: ~&  %ford-reset
+  :: ..^$
+  ::..^$(+>- u.lox)
 ::
 ++  scry
   |=  {fur/(unit (set monk)) ren/@tas who/ship syd/desk lot/coin tyl/path}
