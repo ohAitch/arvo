@@ -64,13 +64,14 @@
               q/span                                    ::
               r/{p/?($~ ^) q/(map term foot)}           ::
           ==                                            ::
-++  coin  $%  {$$ p/dime}                               ::
-              {$blob p/*}                               ::
-              {$many p/(list coin)}                     ::
+++  coin                                                ::  url-safe literal
+          $%  {$$ p/dime}                               ::  atom
+              {$blob p/*}                               ::  base32 noun
+              {$many p/(list coin)}                     ::  tuple of coins
           ==                                            ::
 ++  cord  @t                                            ::  text atom (UTF-8)
 ++  date  {{a/? y/@ud} m/@ud t/tarp}                    ::  parsed date
-++  dime  {p/@ta q/@}                                   ::
+++  dime  {p/@ta q/@}                                   ::  atom with aura
 ++  dock  (pair @p term)                                ::  message target
 ++  each  |*  {a/mold b/mold}                           ::  either a or b
           $%({$& p/a} {$| p/b})                         ::    a default
@@ -815,7 +816,7 @@
   ^+  t.a
   [i.a $(a (skim t.a |=(c/_i.a !(b c i.a))))]
 ::
-++  spin
+++  spin                                                ::  initialized spun
   |*  {a/(list) b/_|=({* *} [** +<+]) c/*}
   ::  ?<  ?=($-([_?<(?=($~ a) i.a) _c] [* _c]) b)
   |-
@@ -824,7 +825,7 @@
   =+  v=(b i.a c)
   [i=-.v t=$(a t.a, c +.v)]
 ::
-++  spun
+++  spun                                                ::  map with state
   |*  {a/(list) b/_|=({* *} [** +<+])}
   =|  c/_+<+.b
   |-
