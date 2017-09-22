@@ -125,7 +125,7 @@
           ==                                            ::
 ++  rung  $:  rus/(map desk rede)                       ::  neighbor desks
           ==                                            ::
-++  tage  {{$tabl p/(list (pair marc marc))} q/vase}    ::  %tabl gage
+++  tage  (each (list {cage cage}) tang)                ::  result table
 ++  dork                                                ::  diff work
           $:  del/(list path)                           ::  deletes
               ink/(list (pair path cage))               ::  hoo{nk}
@@ -266,19 +266,19 @@
   ++  gage-to-tage
     |=  gag/gage
     ^-  (each (list (pair cage cage)) tang)
-    ?:  ?=($| -.gag)  (mule |.(`$~`(ford-fail p.gag)))
+    ?:  ?=($| -.gag)  (mule |.((ford-fail p.gag)))
     ?.  ?=($tabl -.gag)
-      (mule |.(`$~`(ford-fail >%strange-gage p.p.gag< ~)))
+      (mule |.((ford-fail >%strange-gage p.p.gag< ~)))
     =<  ?+(. [%& .] {@ *} .)
     |-  ^-  ?((list {cage cage}) (each $~ tang))
     ?~  p.gag  ~
     =*  hed  i.p.gag
     ?-  -.p.i.p.gag
-      $tabl  (mule |.(`$~`(ford-fail >%strange-gage< ~)))
-      $|     (mule |.(`$~`(ford-fail p.p.i.p.gag)))
+      $tabl  (mule |.((ford-fail >%strange-gage< ~)))
+      $|     (mule |.((ford-fail p.p.i.p.gag)))
       $&     ?-  -.q.i.p.gag
-        $tabl  (mule |.(`$~`(ford-fail >%strange-gage< ~)))
-        $|     (mule |.(`$~`(ford-fail p.q.i.p.gag)))
+        $tabl  (mule |.((ford-fail >%strange-gage< ~)))
+        $|     (mule |.((ford-fail p.q.i.p.gag)))
         $&     =+  $(p.gag t.p.gag)
                ?+(- [[p.p p.q]:i.p.gag -] {@ *} -)
     ==       ==
@@ -290,7 +290,7 @@
     ?~  tay   [%& can]
     =*  pax  p.i.tay
     ?.  ?=($path p.pax)
-      (mule |.(`$~`~|([%expected-path got=p.pax] !!)))
+      (mule |.(~|([%expected-path got=p.pax] !!)))
     $(tay t.tay, can (~(put by can) ((hard path) q.q.pax) q.i.tay))
   ::
   ++  emit
