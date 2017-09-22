@@ -489,6 +489,7 @@
     ==
   ::
   ++  login-page
+    |=  err/(unit term)
     %+  titl  'Sign in - Urbit'
     ;=  ;div.container.top
           ;div.row
@@ -496,13 +497,13 @@
               ;h1.sign: Sign in
             ==
             ;div.col-md-8
+              ;pre:code#err:"{?~(err ~ <u.err>)}"
               ;p.ship
                 ;label.sig: ~
                 ;input#ship.mono(contenteditable "", placeholder "your-urbit");
               ==
               ;input#pass.mono(placeholder "token");
               ;h2.advice: Type +{;code:("+code")} in your dojo for a single-use login token.
-              ;pre:code#err;
             ==
           ==
         ==
@@ -1400,7 +1401,7 @@
           [%| (resolve ~ p.pez)]
         ?.  =(our him.ham)
           [%| ((teba foreign-auth.yac) him.ham hat rem.ham quy)]
-        (show-login-page ~)
+        (show-login-page)
       ::
           $try
         :-  %|
@@ -1424,35 +1425,45 @@
         (give-json 200 cug.yac jon)
       ::
           $lon
-        =.  tos.yac
-          ?:  (~(has in aut.yac) our)  tos.yac
-          ~|  %new-session
-          ?.  (ver-toke tok.ham)
-            ~|(%token-expired-or-invalid !!)
-          ?:  (lien tos.yac |=({@ a/toke} =(a tok.ham)))
-            ~|(%token-already-redeemed !!)
-          ~&  used-token+tok.ham
-          :-  [now tok.ham]
-          (skip tos.yac |=({a/@da @} (gth now (add ~h1 a)))) ::XX hardcoded
-        =.  cug.yac  :_(cug.yac (set-cookie %ship (scot %p our)))
-        =.  ..ya  abet:(logon:yac our)
-        =/  url  (apex:earn %| rem.ham quy)
-        [%| (give-thou (add-cookies cug.yac [307 [location+(crip url)]~ ~]))]
+        ?:  (~(has in aut.yac) our)
+          [%| (authorize rem.ham)]
+        ?.  (ver-toke tok.ham)
+          [%& (login-error %token-expired-or-invalid)]
+        ?:  (lien tos |=({@ a/toke} =(a tok.ham)))
+          [%& (login-error %token-already-redeemed)]
+        ~&  used-token+tok.ham
+        =.  tos  (skip tos |=({a/@da @} (gth now (add ~h1 a)))) ::XX hardcoded
+        =.  tos  :_(tos [now tok.ham])
+        [%| (authorize rem.ham)]
       ==
+    ::
+    ++  authorize
+      |=  rem/pork  ^+  done
+      =/  yac  for-client
+      =.  cug.yac  :_(cug.yac (set-cookie %ship (scot %p our)))
+      =.  ..ya  abet:(logon:yac our)
+      =/  url  (apex:earn %| rem quy)
+      (give-thou (add-cookies cug.yac [307 [location+(crip url)]~ ~]))
+    ::
+    ++  login-error
+      |=  msg/term  ^-  pest
+      ?.  ?=($@($~ {$~ $html}) p.pok)
+        [%red ~]
+      [%htme (login-page:xml `msg)]
     ::
     ++  show-login-page
       |=  ses/(unit hole)  ^-  (each pest _done)
       ?.  ?=($@($~ {$~ $html}) p.pok)
         [%& %red ~]
       ?~  ses
-        [%& %htme login-page:xml]
+        [%& %htme *login-page:xml]
       ?:  (~(has by wup) u.ses)
-        [%& %htme login-page:xml]
+        [%& %htme *login-page:xml]
       =+  yac=(new-ya u.ses)
       =+  =-  lon=?~(- | (~(has in aut.u.-) our))
           (biff (session-from-cookies cookie-prefix maf) ~(get by wup))
       =.  yac  ?.(lon yac (logon.yac our))
-      [%| (give-html(..ya abet.yac) 401 cug.yac login-page:xml)]
+      [%| (give-html(..ya abet.yac) 401 cug.yac *login-page:xml)]
     ::
     ++  cookie-prefix  (rsh 3 1 (scot %p our))
     ++  cookie-domain
