@@ -1905,26 +1905,34 @@
         |=  (list move)
         %_(+> ..ze (^emil +<))
       ::
+      ++  merge-wire
+        |=  wat/wait  ^-  wire
+        [%merge wat (scot %p p.bob) q.bob (scot %p p.ali) q.ali ~]
+      ::
       ++  route
-        |=  {sat/term res/(each riot gage)}
+        |=  {wat/wait res/(each riot gage)}
         ^+  +>.$
-        ?.  =(sat wat.dat)
+        ?.  =(wat wat.dat)
           ~|  :*  %hold-your-horses-merge-out-of-order
-                  sat=sat
-                  wat=wat.dat
+                  wat=[wat wat.dat]
                   ali=ali
                   bob=bob
                   hepres=-.res
               ==
            !!
-        ?+  +<  ~|((crip <[%bad-stage sat ?~(-.res %riot %gage)]>) !!)
-          {$ali $& *}       %.(p.res fetched-ali)
-          {$diff-ali $| *}  %.(p.res diffed-ali)
-          {$diff-bob $| *}  %.(p.res diffed-bob)
-          {$merge $| *}     %.(p.res merged)
-          {$build $| *}     %.(p.res built)
-          {$checkout $| *}  %.(p.res checked-out)
-          {$ergo $| *}      %.(p.res ergoed)
+        ?<  ?=($null wat)
+        ?:  ?=($& -.res)
+          ?.  ?=($ali wat)
+            ~|([%bad-stage wat %riot] !!)
+          %.(p.res did-ali)
+        ?:  ?=($ali wat)  ~|([%bad-stage wat %gage] !!)
+        ?-  wat
+          $diff-ali  %.(p.res did-diff-ali)
+          $diff-bob  %.(p.res did-diff-bob)
+          $merge     %.(p.res did-merge)
+          $build     %.(p.res did-build)
+          $checkout  %.(p.res did-checkout)
+          $ergo      %.(p.res did-ergo)
         ==
       ::
       ++  start
@@ -1947,13 +1955,12 @@
       ++  fetch-ali
         ^+  .
         %-  emit(wat.dat %ali)
-        :*  hen  %pass
-            [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali %ali ~]
+        :*  hen  %pass  (merge-wire %ali)
             %c  %warp  [p.bob p.ali]  q.ali
             `[%sing %v cas.dat /]
         ==
       ::
-      ++  fetched-ali
+      ++  did-ali
         |=  rot/riot
         ^+  +>
         ?~  rot
@@ -2127,8 +2134,7 @@
         ^+  +>
         =.  wat.dat  wat
         %-  emit
-        %+  exec-table
-          [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali wat ~]
+        %+  exec-table  (merge-wire wat)
         %+  murn  (~(tap by q.bas.dat))
         |=  {pax/path lob/lobe}
         ^-  (unit (pair silk silk))
@@ -2150,7 +2156,7 @@
         ^+  .
         (diff-bas %diff-ali ali.dat [p.ali q.ali cas.dat] bob.dat)
       ::
-      ++  diffed-ali
+      ++  did-diff-ali
         |=  res/gage
         ^+  +>
         =+  tay=(try-extract-table res)
@@ -2191,7 +2197,7 @@
         ^+  .
         (diff-bas %diff-bob bob.dat [p.bob q.bob da+now] ali.dat)
       ::
-      ++  diffed-bob
+      ++  did-diff-bob
         |=  res/gage
         ^+  +>
         =+  tay=(try-extract-table res)
@@ -2234,8 +2240,7 @@
         ?+    gem.dat  ~|  [%merge-weird-gem gem.dat]  !!
             ?($mate $meld)
           %-  emit(wat.dat %merge)
-          %+  exec-table
-            [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali %merge ~]
+          %+  exec-table  (merge-wire %merge)
           %+  turn  (~(tap by (~(int by can.dal.dat) can.dob.dat)))
           |=  {pax/path *}  ^-  {silk silk}
           ^-  (pair silk silk)
@@ -2246,7 +2251,7 @@
           [%join mar [%$ cal] [%$ cob]]
         ==
       ::
-      ++  merged
+      ++  did-merge
         |=  res/gage
         =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
@@ -2261,8 +2266,7 @@
       ++  build
         ^+  .
         %-  emit(wat.dat %build)
-        %+  exec-table
-          [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali %build ~]
+        %+  exec-table  (merge-wire %build)
         %+  murn  (~(tap by bof.dat))
         |=  {pax/path cay/(unit cage)}
         ^-  (unit (pair silk silk))
@@ -2273,7 +2277,7 @@
         ~|  %mate-strange-diff-no-base
         (~(got by q.bas.dat) pax)
       ::
-      ++  built
+      ++  did-build
         |=  res/gage
         ^+  +>
         =+  tay=(try-extract-table res)
@@ -2385,8 +2389,7 @@
               [p.ali q.ali cas.dat]
             [p.bob q.bob da+now]
         %-  emit(wat.dat %checkout)
-        %+  exec-table
-          [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali %checkout ~]
+        %+  exec-table  (merge-wire %checkout)
         %+  murn  (~(tap by q.new.dat))
         |=  {pax/path lob/lobe}
         ^-  (unit (pair silk silk))
@@ -2394,7 +2397,7 @@
           ~
         `[[%$ %path !>(pax)] (merge-lobe-to-silk:he pax lob)]
       ::
-      ++  checked-out
+      ++  did-checkout
         |=  res/gage
         ^+  +>
         =+  tay=(try-extract-table res)
@@ -2430,8 +2433,7 @@
               [p.ali q.ali cas.dat]
             [p.bob q.bob da+now]
         %-  emit(wat.dat %ergo)
-        %+  exec-table
-          [%merge (scot %p p.bob) q.bob (scot %p p.ali) q.ali %ergo ~]
+        %+  exec-table  (merge-wire %ergo)
         %+  turn  (~(tap in sum))
         |=  a/path  ^-  {silk silk}
         :-  [%$ %path !>(a)]
@@ -2441,7 +2443,7 @@
         :+  %cast  %mime
         (lobe-to-silk:zez a (~(got by q.new.dat) a))
       ::
-      ++  ergoed
+      ++  did-ergo
         |=  res/gage
         ^+  +>
         =+  tay=(try-extract-table res)
@@ -2807,11 +2809,11 @@
   ^+  [p=*(list move) q=..^$]
   ?:  ?=({$merge @ @ @ @ @ $~} tea)
     ?>  ?=(?($writ $made) +<.q.hin)
-    =+  our=(slav %p i.t.tea)
-    =*  syd  i.t.t.tea
-    =+  her=(slav %p i.t.t.t.tea)
-    =*  sud  i.t.t.t.t.tea
-    =*  sat  i.t.t.t.t.t.tea
+    ?>  ?=({wat/wait our/@ syd/@ her/@ sud/@ $~} t.tea)
+    =>  .(t.tea `{wat/wait our/@ syd/@ her/@ sud/@ $~}`t.tea)
+    =/  our  (slav %p our.t.tea)
+    =/  her  (slav %p her.t.tea)
+    =+  [wat=wat syd=syd sud=sud]:t.tea
     =+  dat=?-(+<.q.hin $writ [%& p.q.hin], $made [%| q.q.hin])
     =+  ^-  kan/(unit dome)
         %+  biff  (~(get by fat.ruf) her)
@@ -2821,7 +2823,7 @@
         dom
     =^  mos  ruf
       =+  den=((de now hen ruf) [. .]:our syd)
-      abet:abet:(route:(me:ze:den [her sud] kan |) sat dat)
+      abet:abet:(route:(me:ze:den [her sud] kan |) wat dat)
     [mos ..^$]
   ?:  ?=({$blab care @ @ *} tea)
     ?>  ?=($made +<.q.hin)
