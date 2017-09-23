@@ -137,6 +137,7 @@
               mut/(unit (list (trel path lobe cage)))   ::  mutations
               mim/(map path mime)                       ::  mime cache
           ==                                            ::
+++  errs  |*(a/mold (each a tang))
 --  =>
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::  section 4cA, filesystem logic
@@ -238,15 +239,19 @@
     ?~(nao ~ (read-at-aeon:ze u.nao mun))
   ::
   ++  ford-fail  |=(tan/tang ~|(%ford-fail (mean tan)))
-  ++  unwrap-tang
-    |*  res/(each * tang)
+  ++  unwrap
+    |*  res/(errs)
     ?:(?=($& -.res) p.res (mean p.res))
   ::
-  ++  gage-to-cages
-    |=  gag/gage  ^-  (list (pair cage cage))
-    (unwrap-tang (gage-to-tage gag))
+  ++  on-good
+   |*  {a/(errs) b/gate}
+   ?:(?=($| -.a) a (b p.a))
   ::
-  ++  gage-to-success-cages
+  ++  extract-table
+    |=  gag/gage  ^-  (list (pair cage cage))
+    (unwrap (try-extract-table gag))
+  ::
+  ++  extract-successes
     |=  gag/gage
     ^-  (list (pair cage cage))
     ?.  ?=($tabl -.gag)
@@ -256,42 +261,44 @@
     ?.  ?=($& -.key)
       (ford-fail ?-(-.key $| p.key, $tabl [>%strange-gage<]~))
     ?-  -.val
-      $tabl  (ford-fail >%strange-gage< ~)
-      $&     (some [p.key p.val])
-      $|     =.  p.val  [(sell q.p.key) p.val]
-             ~>  %slog.[0 %*(. >%ford-fail syd %her %why< |2.+> p.val)]
-             ~
+      $tabl   (ford-fail >%strange-gage< ~)
+      $&  (some [p.key p.val])
+      $|  =.  p.val  [(sell q.p.key) p.val]
+          ~>  %slog.[0 %*(. >%ford-fail syd %her %why< |2.+> p.val)]
+          ~
     ==
   ::
-  ++  gage-to-tage
-    |=  gag/gage
-    ^-  (each (list (pair cage cage)) tang)
-    ?:  ?=($| -.gag)  (mule |.((ford-fail p.gag)))
-    ?.  ?=($tabl -.gag)
-      (mule |.((ford-fail >%strange-gage p.p.gag< ~)))
-    =<  ?+(. [%& .] {@ *} .)
-    |-  ^-  ?((list {cage cage}) (each $~ tang))
-    ?~  p.gag  ~
-    =*  hed  i.p.gag
-    ?-  -.p.i.p.gag
-      $tabl  (mule |.((ford-fail >%strange-gage< ~)))
-      $|     (mule |.((ford-fail p.p.i.p.gag)))
-      $&     ?-  -.q.i.p.gag
-        $tabl  (mule |.((ford-fail >%strange-gage< ~)))
-        $|     (mule |.((ford-fail p.q.i.p.gag)))
-        $&     =+  $(p.gag t.p.gag)
-               ?+(- [[p.p p.q]:i.p.gag -] {@ *} -)
-    ==       ==
+  ++  gage-to-cage
+    |=  a/gage  ^-  (errs cage)
+    ?-  -.a
+      $&  a
+      $|  (mule |.((ford-fail p.a)))
+      $tabl   (mule |.((ford-fail >%strange-gage< ~)))
+    ==
   ::
-  ++  cages-to-map
-    |=  tay/(list (pair cage cage))
-    =|  can/(map path cage)
-    |-  ^-  (each (map path cage) tang)
-    ?~  tay   [%& can]
-    =*  pax  p.i.tay
-    ?.  ?=($path p.pax)
-      (mule |.(~|([%expected-path got=p.pax] !!)))
-    $(tay t.tay, can (~(put by can) ((hard path) q.q.pax) q.i.tay))
+  ++  try-extract-table
+    |=  gag/gage
+    ^-  (errs (list (pair cage cage)))
+    ?.  ?=($tabl -.gag)  ~|(%expected-list !!)
+    |-  ^-  (errs (list {cage cage}))
+    ?~  p.gag  &+~
+    %+  on-good  $(p.gag t.p.gag)
+    |=  tal/(list {cage cage})
+    %+  on-good  (gage-to-cage p.i.p.gag)
+    |=  key/cage
+    %+  on-good  (gage-to-cage q.i.p.gag)
+    |=  val/cage
+    &+[[key val] tal]
+  ::
+  ++  with-keys
+    |*  {{mar/mark typ/mold} tay/(list {cage cage})}
+    =>  .(+<- [mar typ]=+<-) ::FIXME by reglazing
+    ^-  (list {typ cage})
+    %+  turn  tay
+    |=  {key/cage val/cage}
+    ?.  =(mar p.key)
+      ~|([%expected mar got=p.key] !!)
+    [((hard typ) q.q.key) val]
   ::
   ++  emit
     |=  mof/move
@@ -750,6 +757,7 @@
   ++  take-inserting
     |=  {wen/@da res/gage}
     ^+  +>
+    ~|  %take-inserting
     ?~  dok
       ~&  %clay-take-inserting-unexpected-made  +>.$
     ?.  =(~ ins.u.dok)
@@ -761,15 +769,12 @@
           (apply-edit wen)
         +>.$
     ^-  (list (pair path cage))
-    %+  turn  (gage-to-success-cages res)
-    |=  {pax/cage cay/cage}
-    ?.  ?=($path p.pax)
-      ~|(%clay-take-inserting-strange-path-mark !!)
-    [((hard path) q.q.pax) cay]
+    (with-keys [%path path] (extract-successes res))
   ::
   ++  take-diffing
     |=  {wen/@da res/gage}
     ^+  +>
+    ~|  %take-diffing
     ?~  dok
       ~&  %clay-take-diffing-unexpected-made  +>.$
     ?.  =(~ dif.u.dok)
@@ -781,13 +786,10 @@
           (apply-edit wen)
         +>.$
     ^-  (list (trel path lobe cage))
-    %+  turn  (gage-to-cages res)
-    |=  {pax/cage cay/cage}
+    %+  turn  (with-keys [%path path] (extract-table res))
+    |=  {pax/path cay/cage}
     ^-  (pair path (pair lobe cage))
-    ?.  ?=($path p.pax)
-      ~|(%clay-take-diffing-strange-path-mark !!)
-    =+  paf=((hard path) q.q.pax)
-    [paf (page-to-lobe:ze [p q.q]:cay) (~(got by dig.u.dok) paf)]
+    [pax (page-to-lobe:ze [p q.q]:cay) (~(got by dig.u.dok) pax)]
   ::
   ++  take-castify
     |=  {wen/@da res/gage}
@@ -796,12 +798,8 @@
       ~&  %clay-take-castifying-unexpected-made  +>.$
     ?.  =(~ muh.u.dok)
       ~&  %clay-take-castifying-redundant-made  +>.$
-    =+  ^-  cat/(list (pair path cage))
-        %+  turn  (gage-to-cages res)
-        |=  {pax/cage cay/cage}
-        ?.  ?=($path p.pax)
-          ~|(%castify-bad-path-mark !!)
-        [((hard path) q.q.pax) cay]
+    =/  cat/(list (pair path cage))
+      (with-keys [%path path] (extract-table res))
     =.  muh.u.dok
           %-  malt
           %+  turn  cat
@@ -833,20 +831,18 @@
           (apply-edit wen)
         +>.$
     ^-  (list (trel path lobe cage))
-    %+  murn  (gage-to-cages res)
-    |=  {pax/cage cay/cage}
+    %+  murn  (with-keys [%path path] (extract-table res))
+    |=  {pax/path cay/cage}
     ^-  (unit (pair path (pair lobe cage)))
-    ?.  ?=($path p.pax)
-      ~|(%clay-take-mutating-strange-path-mark !!)
     ?:  ?=($null p.cay)
       ~
-    =+  paf=((hard path) q.q.pax)
-    `[paf (~(got by muh.u.dok) paf) cay]
+    `[pax (~(got by muh.u.dok) pax) cay]
   ::
   ++  take-patch
     |=  res/gage
     ^+  +>
     ::  ~&  %taking-patch
+    ::REVIEW errors inside patch?
     ?:  ?=($| -.res)
       =.  dok  ~
       (print-to-dill '!' %rose [" " "" ""] leaf+"clay patch failed" p.res)
@@ -882,12 +878,11 @@
         (echo now %& sim)
       ==
     ?~  dok  ~&  %no-dok  +>.$
-    =+  ^-  cat/(list (trel path lobe cage))
-        %+  turn  (gage-to-cages res)
-        |=  {pax/cage cay/cage}
-        ?.  ?=($path-hash p.pax)
-          ~|(%patch-bad-path-mark !!)
-        [-< -> +]:[((hard {path lobe}) q.q.pax) cay]
+    =/  cat/(list (trel path lobe cage))
+      %+  turn
+        %+  with-keys  [%path-lobe {path lobe}] 
+        (extract-table res)
+      |=({{pax/path lob/lobe} cay/cage} [pax lob cay])
     ::  ~&  %canned
     ::  ~&  %checking-out
     =.  ank.dom  (checkout-ankh:ze (malt cat))
@@ -931,16 +926,15 @@
   ++  take-ergo
     |=  res/gage
     ^+  +>
+    ::REVIEW errors inside patch?
     ?:  ?=($| -.res)
       (print-to-dill '!' %rose [" " "" ""] leaf+"clay ergo failed" p.res)
     ?~  hez  ~|(%no-sync-duct !!)
     =+  ^-  can/(map path (unit mime))
         %-  malt  ^-  mode
-        %+  turn  (gage-to-cages res)
-        |=  {pax/cage mim/cage}
-        ?.  ?=($path p.pax)
-          ~|(%ergo-bad-path-mark !!)
-        :-  ((hard path) q.q.pax)
+        %+  turn  (with-keys [%path path] (extract-table res))
+        |=  {pax/path mim/cage}
+        :-  pax
         ?.  ?=($mime p.mim)
           ~
         `((hard mime) q.q.mim)
@@ -965,7 +959,7 @@
         %+  turn  (~(tap by hat))
         |=  {a/path b/lobe}
         ^-  (pair silk silk)
-        :-  [%$ %path-hash !>([a b])]
+        :-  [%$ %path-lobe !>([a b])]
         (lobe-to-silk:ze a b)
     ==
   ::
@@ -1144,7 +1138,6 @@
       =+  why=?-(-.res $| p.res, $tabl ~[>%bad-marc<])
       ~>  %mean.|.(%*(. >[%plop-fail %why]< |1.+> why))
       !!
-    ?>  ?=(@ p.p.res)
     wake(haw.u.ref (~(put by haw.u.ref) [car cas pax] `p.res))
   ::
   ++  validate-plops
@@ -1171,12 +1164,9 @@
     ?>  ?=(^ ref)
     ?>  ?=(^ nak.u.ref)
     =+  ^-  lat/(list blob)
-        %+  turn  ~|("validate foreign plops failed" (gage-to-cages res))
-        |=  {bob/cage cay/cage}
-        ?.  ?=($blob p.bob)
-          ~|  %plop-not-blob
-          !!
-        =+  bol=((hard blob) q.q.bob)
+        ~|  "validate foreign plops failed"
+        %+  turn  (with-keys [%blob blob] (extract-table res))
+        |=  {bol/blob cay/cage}
         ?-  -.bol
           $delta      [-.bol p.bol q.bol p.cay q.q.cay]
           $direct     [-.bol p.bol p.cay q.q.cay]
@@ -2188,12 +2178,10 @@
       ++  diffed-ali
         |=  res/gage
         ^+  +>
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %diff-ali-bad-made leaf+"merge diff ali failed" p.tay)
-        =+  can=(cages-to-map p.tay)
-        ?:  ?=($| -.can)
-          (error:he %diff-ali p.can)
+        =+  can=(malt (with-keys [%path path] p.tay))
         ?:  ?=($| -.gon.dat)
           +>.$
         =.  new.dal.dat
@@ -2214,7 +2202,7 @@
               ==
             ~
           `[pax +.a]
-        =.  can.dal.dat  p.can
+        =.  can.dal.dat  can
         =.  old.dal.dat
           %-  malt  ^-  (list {path $~})
           %+  murn  (~(tap by q.bas.dat))
@@ -2231,12 +2219,10 @@
       ++  diffed-bob
         |=  res/gage
         ^+  +>
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %diff-bob-bad-made leaf+"merge diff bob failed" p.tay)
-        =+  can=(cages-to-map p.tay)
-        ?:  ?=($| -.can)
-          (error:he %diff-bob p.can)
+        =+  can=(malt (with-keys [%path path] p.tay))
         ?:  ?=($| -.gon.dat)
           +>.$
         =.  new.dob.dat
@@ -2257,7 +2243,7 @@
               ==
             ~
           `[pax +.b]
-        =.  can.dob.dat  p.can
+        =.  can.dob.dat  can
         =.  old.dob.dat
           %-  malt  ^-  (list {path $~})
           %+  murn  (~(tap by q.bas.dat))
@@ -2292,13 +2278,11 @@
       ::
       ++  merged
         |=  res/gage
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %merge-bad-made leaf+"merging failed" p.tay)
-        =+  can=(cages-to-map p.tay)
-        ?:  ?=($| -.can)
-          (error:he %merge p.can)
-        =+  bof=(~(run by p.can) (flit |=({a/mark ^} !?=($null a))))
+        =+  can=(malt (with-keys [%path path] p.tay))
+        =+  bof=(~(run by can) (flit |=({a/mark ^} !?=($null a))))
         ?:  ?=($| -.gon.dat)
           +>.$
         =.  bof.dat  bof
@@ -2328,15 +2312,11 @@
       ++  built
         |=  res/gage
         ^+  +>
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %build-bad-made leaf+"delta building failed" p.tay)
-        =+  bop=(cages-to-map p.tay)
-        ?:  ?=($| -.bop)
-          (error:he %built p.bop)
         ?:  ?=($| -.gon.dat)
           +>.$
-        =.  bop.dat  p.bop
         =+  ^-  con/(map path *)                        ::  2-change conflict
             %-  molt
             %+  skim  (~(tap by bof.dat))
@@ -2456,19 +2436,17 @@
       ++  checked-out
         |=  res/gage
         ^+  +>
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %checkout-bad-made leaf+"merge checkout failed" p.tay)
-        =+  can=(cages-to-map p.tay)
-        ?:  ?=($| -.can)
-          (error:he %checkout p.can)
+        =+  can=(malt (with-keys [%path path] p.tay))
         ?:  ?=($| -.gon.dat)
           +>.$
         =.  let.dom  +(let.dom)
         =.  hit.dom  (~(put by hit.dom) let.dom r.new.dat)
         =.  ank.dat
           %-  checkout-ankh:ze
-          %-  ~(run by (~(uni by bop.dat) p.can))
+          %-  ~(run by (~(uni by bop.dat) can))
           |=(cage [(page-to-lobe p q.q) +<])
         =.  ank.dom  ank.dat
         =>  .(..wake wake)
@@ -2509,7 +2487,7 @@
       ++  ergoed
         |=  res/gage
         ^+  +>
-        =+  tay=(gage-to-tage res)
+        =+  tay=(try-extract-table res)
         ?:  ?=($| -.tay)
           (error:he %ergo-bad-made leaf+"merge ergo failed" p.tay)
         =+  =|  nac/mode
