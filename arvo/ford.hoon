@@ -40,7 +40,7 @@
   $:  tad/{p/@ud q/(map @ud task)}                      ::  tasks by number
       dym/(map duct @ud)                                ::  duct to task number
       deh/(map @uvH deps)                               ::  depends by hash
-      gaf/(jug dent dent)                               ::  dep graph
+      gaf/(jug dent dent)                               ::  part to product
       jav/(map * calx)                                  ::  cache
   ==                                                    ::
 ++  bolt                                                ::  gonadic edge
@@ -649,7 +649,7 @@
     ++  daze                                            ::  remember depends
       |=  {sep/sept deh/(map @uvH deps)}
       ^+  [*@uvH deh.bay]
-      =.  sep                                           ::  collapse subdirs 
+      =.  sep                                           ::  collapse subdirs
         =<  (silt (skip (~(tap in sep)) .))
         |=  den/dent  ^-  ?
         ?.  ?=($beam -.den)  |
@@ -665,7 +665,7 @@
     ++  exec                                            ::  execute task
       ^+  ..zo
       ?:  !=(~ kig)  ..zo
-      =+  bot=(make-with-normalized-beak [~ jav.bay deh.bay gaf.bay] kas)
+      =+  bot=(make-with-concrete-revision [~ jav.bay deh.bay gaf.bay] kas)
       =^  dep  bot  (clad bot)
       =.  ..exec  (dash p.bot)
       ?-  -.q.bot
@@ -1021,6 +1021,7 @@
         ?:  (~(nest ut p.typ) | b)  ~
         %^  some  %palm  ["." ~ ~ ~]
         ~[(show [%c %mute] %l a) >[p.typ b]<]
+      ::
       %^  wrapped-slap  cof
         %+  slop  suh
         |-  ^-  vase
@@ -1088,12 +1089,12 @@
         (fine cof typ q.pro)
       (flaw cof [%leaf "ford: invalid content: {<[for bek]>}"]~)
     ::
-    ++  normalize-beak
+    ++  to-concrete-revision                            ::  numerical r.bem
       |=  {cof/cafe bem/beam}
       ^-  (bolt beam)
       ?:  ?=($ud -.r.bem)  (fine cof bem)
       =+  von=(syve [151 %noun] ~ %cw bem(s ~))
-      ?~  von  [p=cof q=[%1 [%c %w bem ~] ~ ~]]
+      ?~  von  [p=cof q=[%1 [%c %w bem(s ~) ~] ~ ~]]
       (fine cof bem(r [%ud ((hard @) +.+:(need u.von))]))
     ::
     ++  infer-product-span
@@ -1108,14 +1109,14 @@
     ::
     ++  load-core
       |=  {cof/cafe bem/beam}  ^-  (bolt vase)
-      %+  cope  (normalize-beak cof bem)
+      %+  cope  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
       (load-with-path cof many+~ bem bem)
     ::
     ++  load-with-path
       ~/  %load-with-path
       |=  {cof/cafe arg/coin bem/beam bom/beam}
-      %+  cope  (normalize-beak cof bem)
+      %+  cope  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
       %+  (clef %boil)  (fine cof arg bem bom)
       |=  {cof/cafe arg/coin bem/beam bom/beam}
@@ -1130,7 +1131,7 @@
       ?~  von  [p=cof q=[%1 [%c %y bem ~] ~ ~]]
       ?>  ?=({$~ $arch ^} u.von)
       =+  arc=((hard arch) q.q.u.u.von)
-      %+  cope  (normalize-beak cof bem)
+      %+  cope  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
       (flag [%beam bem %z] (fine cof arc))
     ::
@@ -1298,9 +1299,9 @@
       %+  (coup cof)  (mock [q.vax fol] (sloy syve))
       |=(val/* `vase`[typ val])
     ::
-    ++  make-with-normalized-beak                       ::  normalize root beak
+    ++  make-with-concrete-revision                    ::  numerical r.bek
       |=  {cof/cafe kas/silk}
-      %+  cope  (normalize-beak cof bek ~)
+      %+  cope  (to-concrete-revision cof bek ~)
       |=({cof/cafe byk/beak *} (make(bek byk) cof kas))
     ::
     ++  abbrev                                          ::  shorten coin
@@ -1346,7 +1347,7 @@
         ^-  (bolt gage)
         %+  cool
           |.(leaf+"ford: bake {<p.kas>} {<(tope r.kas)>} {~(rend co q.kas)}")
-        %+  cope  (normalize-beak cof r.kas)
+        %+  cope  (to-concrete-revision cof r.kas)
         |=  {cof/cafe bem/beam}
         %+  cope  (render-or-load cof p.kas q.kas bem)
         |=  {cof/cafe vax/vase}
