@@ -6695,12 +6695,7 @@
 ::
 ++  slam                                                ::  slam a gate
   |=  {gat/vase sam/vase}  ^-  vase
-  =+  :-  ^=  typ  ^-  span
-          [%cell p.gat p.sam]
-      ^=  gen  ^-  twig
-      [%open [%$ ~] [%$ 2] [%$ 3] ~]
-  =+  gun=(~(mint ut typ) %noun gen)
-  [p.gun .*([q.gat q.sam] q.gun)]
+  (slap (slop gat sam) [%call $+2 $+3])
 ::
 ++  slim                                                ::  identical to seer?
   |=  old/vise  ^-  vase
@@ -6716,7 +6711,7 @@
   (slap gat(+<.q sam) [%limb %$])
 ::
 ++  slap
-  |=  {vax/vase gen/twig}  ^-  vase                     ::  untyped vase .*
+  |=  {vax/vase gen/twig}  ^-  vase                     ::  typed vase .*
   =+  gun=(~(mint ut p.vax) %noun gen)
   [p.gun .*(q.vax q.gun)]
 ::
