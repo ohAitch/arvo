@@ -1925,39 +1925,23 @@
   ^-  (unit @da)
   ~
 ::
-++  load
-  =/  axle-3  axle
-  =/  axle-2  {$2 pol/(map ship baby-2)}
-  ::
-  =/  baby-3  baby
-  =/  baby-2  _=+(*baby-3 [tad=tad dym=dym deh=*(map @uvH deps-2) jav=jav])
-  ::
-  =/  deps-3  deps
-  =/  deps-2  
-    $%  {$init p/(set beam)}
-        {$sent p/(set duct) q/(set beam)}
-        {$done $~}
-    ==
-  ::
-  =/  baby-2-3
-    |=  old/baby-2  ^-  baby-3
-    :*  tad=tad.old
-        dym=dym.old
-        deh=(~(run by deh.old) deps-2-3)
-        gaf=*(jug dent dent)                            ::  no intermediates
-        jav=*(map * calx)                               ::  drop the cache
-    ==
-  =/  deps-2-3
-    |=  old/deps-2  ^-  deps-3
-    :-  p=`sept`(~(run in p.old) |=(b/beam [%beam b %z]))
-    q=[%init ~]
-  ::
-  |=  old/?(axle-3 axle-2)
-  ^-  axle-3
-  ?-  -.old
-    $3  ..^$(lex old)
-    $2  ..^$(lex (~(run by old) baby-2-3))
-  ==
+++  load                                                ::  highly forgiving
+  :: |=(old/axle ..^$(+>- old))
+  ::=.  old
+  ::    ?.  ?=([%0 *] old)  old                           ::  remove at 1
+  ::    :-  %1
+  ::    |-  ^-  *
+  ::    ?~  +.old  ~
+  ::    ?>  ?=([n=[p=* q=[tad=* dym=* deh=* jav=*]] l=* r=*] +.old)
+  ::    :-  [p.n.+.old [tad.q.n.+.old dym.q.n.+.old deh.q.n.+.old ~]]
+  ::    [$(+.old l.+.old) $(+.old r.+.old)]
+  |=  old/*
+  =+  lox=((soft axle) old)
+  ^+  ..^$
+  ?~  lox
+   ~&  %ford-reset
+   ..^$
+  ..^$(+>- u.lox)
 ::
 ++  scry
   |=  {fur/(unit (set monk)) ren/@tas who/ship syd/desk lot/coin tyl/path}
