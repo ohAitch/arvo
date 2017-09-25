@@ -151,23 +151,14 @@
       %-  flop
       ^-  (list (list @t))
       :-  :_  ~
-          %^  cat  3  '<<<<<<<<<<<<' 
-          %^  cat  3  ' '
-          %^  cat  3  `@t`(scot %p bos)
-          %^  cat  3  '/'
-          bod
-
+          (rap 3 '<<<<<<<<<<<<' ' ' (scot %p bos) '/' bod ~)
       :-  bob
       :-  ~['------------']
       :-  bas
       :-  ~['++++++++++++']
       :-  ali
       :-  :_  ~
-          %^  cat  3  '>>>>>>>>>>>>' 
-          %^  cat  3  ' '
-          %^  cat  3  `@t`(scot %p als)
-          %^  cat  3  '/'
-          ald
+          (rap 3 '<<<<<<<<<<<<' ' ' (scot %p als) '/' ald ~)
       ~
     ::
     ++  clean                                          ::  clean
