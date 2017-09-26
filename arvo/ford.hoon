@@ -174,10 +174,45 @@
   ++  err  |=  {a/cafe b/tang}                          ::  bolt from error
            [p=a q=[%2 p=*sept q=b]]
   ::
-  ++  add-deps
+  ++  add-dep
     |*  {a/dent b/(bolt)}
     ?:  ?=($1 -.q.b)  b
     =.  p.q.b  (~(put in p.q.b) a)
+    b
+  ::
+  ++  ren-beamcare
+    |=({a/beam b/care} `path`[(crip %c b ~) (tope a)])
+  ::
+  ++  ren-dent
+    |=  a/dent  ::^-  $^({path mark @p} path)
+    ?-  -.a
+      $beam  [%| (ren-beamcare +.a)]
+      $bake  [%& (tope bem.a) mar.a `@p`(mug arg.a)]
+    ==
+  ::
+  ++  ren-jug
+    |=  a/(jug dent dent)
+    %-  malt  ^-  (list (pair ren-dent (set ren-dent)))
+    %+  turn  (~(tap by a))
+    |=  {b/dent c/(set dent)}
+    [(ren-dent b) (silt (turn (~(tap in c)) ren-dent))]
+  ::
+  ++  under-dep                                         ::  link deps with
+    |*  {a/dent b/(bolt)}                               ::  a as current dep
+    ?:  ?=($1 -.q.b)  b                                 ::  and links a to
+    ::  =;  ret
+    ::    ~&  :*  %under-dep
+    ::            und=(ren-dent a)
+    ::            old=~(wyt by s.p.b)
+    ::            new=~(wyt by s.p.ret)
+    ::        ==
+    ::    ret
+    =:  p.q.b  (sy a ~)                                 ::  s.p.b so a depends
+        s.p.b  %+  roll  (~(tap in p.q.b))              ::  on all deps in s.p.b
+               =+  [k=*dent s=s.p.b]
+               |.
+               (~(put ju s) k a)
+      ==
     b
   ::
   ++  with  |*  a/_|=(* +<)                             ::  bolt lift (fmap)
@@ -217,7 +252,7 @@
       ==
     ==
   ::
-  ++  cell  !.                                          ::  bolt together
+  ++  cell  ::                                          ::  bolt together
     |*  {hoc/(bolt) fun/(burg)}
     ?-  -.q.hoc
       $0  =+  nuf=(fun p.hoc +<+.fun)
@@ -382,16 +417,52 @@
     ^-  {(list move) baby}
     [(flop mow) bay]
   ::
+  ++  reverse-dents
+    |=  a/(jug dent dent)  ^+  a
+    %+  roll  (~(tap by a))
+    |=  {{k/dent v/(set dent)} b/(jug dent dent)}
+    %+  roll  (~(tap in v))
+    =+  [d=*dent b=b]
+    |.
+    (~(put ju b) d k)
+  ::
   ++  dep-warps                                         ::  create %warp's
-    |=  {dep/@uvH bes/sept rav/$-({beam care} (unit rave))}
-    ^-  (list move)
-    %+  murn  (~(tap in bes))
-    |=  den/dent  ^-  (unit move)
-    ?.  ?=($beam -.den)  ~
-    %-  some
-    =/  bem/beam  bem.den
+    |=  {dep/@uvH bes/(set dent) rav/$-({beam care} (unit rave))}
+    (warp-beams dep (dep-beams bes) rav)
+  ::
+  ++  dep-beams  ::DEPRECATED only needed for @uvH handling
+    |=  des/(set dent)  ^-  (set {beam care})
+    ::  =;  ret
+    ::    ~|  dep-beams+[des ret]
+    ::    =;  pretty
+    ::      ~&(dep-beams+[pretty] ret)
+    ::    =/  pretty-beamcare
+    ::      |=({a/beam b/care} `path`[(crip %c b ~) (tope a)])
+    ::    =/  pretty-dent
+    ::      |=  a/dent  ::^-  $^({path mark @p} path)
+    ::      ?-  -.a
+    ::        $beam  [%| (pretty-beamcare +.a)]
+    ::        $bake  [%& (tope bem.a) mar.a `@p`(mug arg.a)]
+    ::      ==
+    ::    :-  %-  silt
+    ::        (turn (~(tap in des)) pretty-dent)
+    ::    %-  silt
+    ::    (turn (~(tap in ret)) pretty-beamcare)
+    =/  gof  (reverse-dents gaf.bay)
+    |-  ^-  (set {beam care})
+    %+  roll  (~(tap in des))
+    |=  {den/dent bes/(set {beam care})}  ^+  bes
+    ?-  -.den
+      $beam  (~(put in bes) +.den)
+      $bake  (~(uni in bes) ^$(des (~(get ju gof) den)))
+    ==
+  ::
+  ++  warp-beams
+    |=  {dep/@uvH bes/(set {beam care}) rav/$-({beam care} (unit rave))}
+    %+  turn  (~(tap in bes))
+    |=  {bem/beam ren/care}  ^-  move
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
-    [%c [%warp [our p.bem] q.bem (rav +.den)]]
+    [%c [%warp [our p.bem] q.bem (rav bem ren)]]
   ::
   ++  deps-take                                         ::  take rev update
     |=  {tea/wire dep/@uvH bem/beam sih/sign}
@@ -1146,13 +1217,13 @@
       =+  arc=((hard arch) q.q.u.u.von)
       %+  tug:bo  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
-      (add-deps:bo [%beam bem %z] (new:bo cof arc))
+      (add-dep:bo [%beam bem %z] (new:bo cof arc))
     ::
     ++  load-file
       ~/  %load-file
       |=  {cof/cafe bem/beam}
       ^-  (bolt cage)
-      ::  TODO  add-deps:bo
+      ::  TODO  add-dep:bo
       ?:  =([%ud 0] r.bem)
         (err:bo cof [leaf+"ford: no data: {<(tope bem(s ~))>}"]~)
       =+  von=(syve [151 %noun] ~ %cx bem)
@@ -1166,8 +1237,8 @@
       ~/  %load-to-mark
       |=  {cof/cafe for/mark bem/beam}
       %+  (with-cache:bo %load)
-        ::  TODO  remove add-deps:bo (should be moved to load-file)
-        (add-deps:bo [%beam bem %z] (new:bo cof for bem))
+        ::  TODO  remove add-dep:bo (should be moved to load-file)
+        (add-dep:bo [%beam bem %z] (new:bo cof for bem))
       |=  {cof/cafe for/mark bem/beam}
       ^-  (bolt (unit vase))
       %+  tug:bo  (laze cof bem)
@@ -1359,13 +1430,11 @@
       ::
           $bake
         ^-  (bolt gage)
-        ::  %+  add-deps-wrap  `dent`[%bake [r p q]:kas]
-        %+  add-deps:bo  `dent`[%bake [r p q]:kas]
-        ^-  (bolt gage)
         %+  admit:bo
           |.(leaf+"ford: bake {<p.kas>} {<(tope r.kas)>} {~(rend co q.kas)}")
         %+  tug:bo  (to-concrete-revision cof r.kas)
         |=  {cof/cafe bem/beam}
+        %+  under-dep:bo  `dent`[%bake bem [p q]:kas]
         %+  tug:bo  (render-or-load cof p.kas q.kas bem)
         |=  {cof/cafe vax/vase}
         (new:bo cof `gage`[%& p.kas vax])
@@ -1416,7 +1485,7 @@
         %+  admit:bo  |.(leaf+"ford: core {<(tope p.kas)>}")
         ::  code runtime behaviour is frequently affected by marks
         ::  TODO: track this more formally
-        %+  add-deps:bo  [%beam [bek /mar] %z]
+        %+  add-dep:bo  [%beam [bek /mar] %z]
         (tug:bo (load-core cof p.kas) (with:bo |=(a/vase [%& %core a])))
       ::
           $diff
@@ -1464,8 +1533,8 @@
       ::
           $plan  (to-gage:bo (abut:(meow p.kas q.kas) cof r.kas))
           $reef
-        %+  add-deps:bo  [%beam [bek /arvo/hoon] %z]
-        %+  add-deps:bo  [%beam [bek /arvo/zuse] %z]
+        %+  add-dep:bo  [%beam [bek /arvo/hoon] %z]
+        %+  add-dep:bo  [%beam [bek /arvo/zuse] %z]
         ::  until /? is in use, any hoon may implicitly depend on arvo types
         (to-gage:bo (new:bo cof pit))
       ::
