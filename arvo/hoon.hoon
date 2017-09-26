@@ -6695,7 +6695,7 @@
 ::
 ++  slam                                                ::  slam a gate
   |=  {gat/vase sam/vase}  ^-  vase
-  (slap (slop gat sam) [%call $+2 $+3])
+  (slap (slop gat sam) [%call $+2 $+3 ~])
 ::
 ++  slim                                                ::  identical to seer?
   |=  old/vise  ^-  vase
