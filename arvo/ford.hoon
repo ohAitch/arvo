@@ -295,7 +295,7 @@
   ::
   ++  catch                                             ::  bolt fallback
     |*  {hoc/(bolt) fun/$-(cafe (bolt))}                ::  TODO: {cafe tang}
-    ?-  -.q.hoc                                         ::  and use ++catch-error
+    ?-  -.q.hoc                                         ::  & use ++catch-error
       $1  hoc
       $0  hoc
       $2  =+  nuf=(fun p.hoc)
@@ -787,7 +787,7 @@
                  ((slog leaf+"ford-reap-fail" u.p.p.sih) ..zo)
         ==
       ==
-    ::
+   ::
     ++  take-diff
       |=  {{van/vane ren/care bem/beam} cag/cage}
       ^+  ..zo
@@ -843,8 +843,10 @@
         %.  [cof p.gag]
         ;~  tug:bo
           ;~  cell:bo
-            |=({cof/cafe {^ q/gage} t/gagl} (catch-error:bo ^^$(cof cof, gag q)))
-            |=({cof/cafe ^ t/gagl} ^$(cof cof, p.gag t))
+            |=  {cof/cafe {^ q/gage} t/gagl}
+            (catch-error:bo ^^$(cof cof, gag q))
+            |=  {cof/cafe ^ t/gagl}
+            ^$(cof cof, p.gag t)
           ==
           (with:bo |=({v/gage t/gagl} [[p.i.p.gag v] t]))
         ==
@@ -1321,11 +1323,11 @@
       |=  {cof/cafe too/mark fro/(set mark)}
       =*  find-translation-path-jet  .
       :: ~&  find-translation-path+[too=too fro=fro]
-      :: =-  =+  (tug:bo - (with:bo |=(a/(list mark) ~&(find-translation-pathed+a ~))))
+      :: =-  =+  (tug:bo - (with:bo |=(a/(list mark) ~&(find-translation+a ~))))
       ::     +<
       ^-  (bolt (list mark))
       =;  gro/(burg (set mark) (list mark))
-        %+  catch:bo  (gro cof too ~ ~)                    :: XX better grab layer
+        %+  catch:bo  (gro cof too ~ ~)                 :: XX better grab layer
         ~%  %grab  find-translation-path-jet  ~
         |=  cof/cafe
         %+  admit:bo  |.(leaf+"cast: finding grabbable grow destinations")
@@ -1377,7 +1379,7 @@
         $&  (new:bo cof p.puz)
       ==
     ::
-    ++  wrapped-slap                                    ::  slap
+    ++  wrapped-slap
       ~/  %wrapped-slap
       |=  {cof/cafe vax/vase gen/twig}
       ^-  (bolt vase)
@@ -1386,7 +1388,7 @@
       %+  (from-toon:bo cof)  (mock [q.vax fol] (sloy syve))
       |=(val/* `vase`[typ val])
     ::
-    ++  make-with-concrete-revision                    ::  numerical r.bek
+    ++  make-with-concrete-revision                     ::  numerical r.bek
       |=  {cof/cafe kas/silk}
       %+  tug:bo  (to-concrete-revision cof bek ~)
       |=({cof/cafe byk/beak *} (make(bek byk) cof kas))
