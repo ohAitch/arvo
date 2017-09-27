@@ -130,18 +130,22 @@
 ++  pin-dephash
   |=  {sep/(set dent) deh/(map @uvH deps)}
   ^+  [*@uvH deh]
-  =.  sep                                               ::  collapse subdirs
-    =<  (silt (skip (~(tap in sep)) .))
-    |=  den/dent  ^-  ?
-    ?.  ?=($beam -.den)  |
-    ?~  s.bem.den  |
-    =>  .(s.bem.den t.s.bem.den)
-    |((~(any in sep) |=(d/dent =(d den))) $)
+  =.  sep  (de-dup-subdirs sep)
   ?~  sep  [0v0 deh]
   =+  hap=(sham sep)
   ?:  (~(has by deh) hap)
     [hap deh]
   [hap (~(put by deh) hap [sep %init ~])]
+::
+++  de-dup-subdirs
+  |=  sep/(set dent)  ^+  sep
+  %-  silt
+  %+  skim  (~(tap in sep))
+  |=  den/dent  ^-  ?
+  ?.  ?=($beam -.den)  &
+  ?~  s.bem.den  &
+  =/  above  den(s.bem t.s.bem.den)
+  &(!(~(has in sep) above) $(den above))
 ::
 ++  bo                                                  ::  bolt operations
   |%
