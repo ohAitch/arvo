@@ -47,9 +47,9 @@
   |*  a/mold                                            ::  product clam
   $:  p/cafe                                            ::  cache
     $=  q                                               ::
-      $%  {$0 p/sept q/a}                               ::  depends+product
+      $%  {$0 p/(set dent) q/a}                         ::  depends+product
           {$1 p/(set {van/vane ren/care bem/beam tan/tang})}  ::  blocks
-          {$2 p/sept q/tang}                            ::  depends+error
+          {$2 p/(set dent) q/tang}                      ::  depends+error
       ==                                                ::
   ==                                                    ::
 ::                                                      ::
@@ -65,7 +65,7 @@
   ==                                                    ::
 ::                                                      ::
 ++  calm                                                ::  cache metadata
-  $:  dep/sept                                          ::  dependencies
+  $:  dep/(set dent)                                    ::  dependencies
   ==                                                    ::
 ++  calx                                                ::  concrete cache line
   $%  {$hood p/calm q/(pair beam cage) r/hood}          ::  compile
@@ -78,19 +78,15 @@
       {$slam p/calm q/{p/vase q/vase} r/vase}           ::  compute
   ==                                                    ::
 ++  deps                                                ::  depend state
-  %+  pair  sept
+  %+  pair  (set dent)
   $%  {$init $~}                                        ::  given out
       {$sent dux/(set duct)}                            ::  listener exists
       {$done $~}                                        ::  change seen
   ==                                                    ::
-::
-++  sept  (set dent)                                    ::  set of depends
-::
 ++  dent                                                ::  individual dep
   $%  {$beam bem/beam ren/care}
       {$bake bem/beam mar/mark arg/coin}
   ==
-::
 ++  task                                                ::  problem in progress
   $:  nah/duct                                          ::  cause
       {bek/beak kas/silk}                               ::  problem
@@ -132,7 +128,7 @@
   --
 ::
 ++  pin-dephash
-  |=  {sep/sept deh/(map @uvH deps)}
+  |=  {sep/(set dent) deh/(map @uvH deps)}
   ^+  [*@uvH deh]
   =.  sep                                               ::  collapse subdirs
     =<  (silt (skip (~(tap in sep)) .))
@@ -169,10 +165,10 @@
     [p.a [%0 p.q.a `gage`[%| q.q.a]]]
   ::
   ++  new  |*  {a/cafe b/*}                             ::  bolt from data
-           [p=`cafe`a q=[%0 p=*sept q=b]]
+           [p=`cafe`a q=[%0 p=*(set dent) q=b]]
   ::
   ++  err  |=  {a/cafe b/tang}                          ::  bolt from error
-           [p=a q=[%2 p=*sept q=b]]
+           [p=a q=[%2 p=*(set dent) q=b]]
   ::
   ++  add-dep
     |*  {a/dent b/(bolt)}
@@ -314,8 +310,8 @@
     :-  p=cof
     ^=  q
     ?-  -.ton
-      $2  [%2 p=*sept q=p.ton]
-      $0  [%0 p=*sept q=(fun p.ton)]
+      $2  [%2 p=*(set dent) q=p.ton]
+      $0  [%0 p=*(set dent) q=(fun p.ton)]
       $1  ::  ~&  [%from-toon:bo-need ((list path) p.ton)]
           =-  ?-  -.faw                                 ::TODO =;
                 $&  :-  %1
@@ -323,7 +319,7 @@
                     %-  silt
                     %+  turn  p.faw
                     |=(a/{vane care beam} [-.a +<.a +>.a *tang])
-                $|  [%2 p=*sept q=p.faw]
+                $|  [%2 p=*(set dent) q=p.faw]
               ==
           ^=  faw
           |-  ^-  (each (list (trel vane care beam)) tang)
@@ -1505,7 +1501,7 @@
         =+  rez=$(kas q.kas)
         ?:  ?=($1 -.q.rez)  rez
         =-  rez(p.q -)
-        |-  ^-  sept
+        |-  ^-  (set dent)
         ?~  p.kas  p.q.rez
         =.  p.q.rez  $(p.kas l.p.kas)
         =.  p.q.rez  $(p.kas r.p.kas)
