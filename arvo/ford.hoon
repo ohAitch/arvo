@@ -382,6 +382,160 @@
     ==
   --
 ::
+++  fair                                                ::  hood parsing rule
+  |=  bem/beam
+  ?>  ?=({$ud $0} r.bem)          ::  XX sentinel
+  =+  vez=(vang & (tope bem))
+  =<  hood
+  |%
+  ++  case                                              ::  %clay revision
+    %+  sear
+      |=  a/coin  ^-  (unit ^case)
+      ?.  ?=({$$ ^case} a)  ~
+      [~ u=p.a]
+    nuck:so
+  ::
+  ++  mota  ;~(pfix pat mota:vez)                       ::  atom odor
+  ++  hath  (sear plex (stag %conl poor)):vez           ::  hood path
+  ++  have  (sear tome ;~(pfix fas hath))               ::  hood beam
+  ++  hith                                              ::  static path
+    =>  vez
+    (sear plex (stag %conl (more fas hasp)))
+  ::
+  ++  hive                                              ::  late-bound path
+    ;~  pfix  fas
+      %+  cook  |=(a/hops a)
+      =>  vez
+      ;~  plug
+        (stag ~ gash)
+        ;~(pose (stag ~ ;~(pfix cen porc)) (easy ~))
+      ==
+    ==
+  ::
+  ++  hood
+    %+  ifix  [gay gay]
+    ;~  plug
+      ;~  pose
+        (ifix [;~(plug fas wut gap) gap] dem)
+        (easy zuse)
+      ==
+    ::
+      ;~  pose
+        (ifix [;~(plug fas hep gap) gap] (most ;~(plug com gaw) hoof))
+        (easy ~)
+      ==
+    ::
+      ;~  pose
+        (ifix [;~(plug fas lus gap) gap] (most ;~(plug com gaw) hoof))
+        (easy ~)
+      ==
+    ::
+      (star ;~(sfix horn gap))
+      (most gap hoop)
+    ==
+  ::
+  ++  hoof
+    %+  cook  |=(a/^hoof a)
+    ;~  plug
+      sym                                               ::  file or
+      %-  punt                                          ::  file/case/~ship
+      ;~  plug
+        ;~(pfix fas case)
+        ;~(pfix fas sig fed:ag)
+      ==
+    ==
+  ::
+  ++  hoop
+    ;~  pose
+      (stag %| ;~(pfix ;~(plug fas fas gap) have))
+      (stag %& tall:vez)
+    ==
+  ::
+  ++  horn                                              ::  horn parser
+    =<  apex
+    =|  tol/?                                           ::  allow tall form
+    |%
+    ++  apex
+      %+  knee  *^horn  |.  ~+
+      ;~  pfix  fas
+        ;~  pose
+          (stag %fssg ;~(pfix sig twig:read))           ::  /~  twig by hand
+          (stag %fsbc ;~(pfix buc twig:read))           ::  /$  extra arguments
+          (stag %fsbr ;~(pfix bar alts:read))           ::  /|  or (options)
+          (stag %fshx ;~(pfix hax horn:read))           ::  /#  insert dephash
+          (stag %fsts ;~(pfix tis name:read))           ::  /=  apply face
+          (stag %fsdt ;~(pfix dot list:read))           ::  /.  list
+          (stag %fscm ;~(pfix com case:read))           ::  /,  switch by path
+          (stag %fscn ;~(pfix cen horn:read))           ::  /%  propagate args
+          (stag %fspm ;~(pfix pam pipe:read))           ::  /&  translates
+          (stag %fscb ;~(pfix cab horn:read))           ::  /_  homo map
+          (stag %fssm ;~(pfix sem gate:read))           ::  /;  operate on
+          (stag %fscl ;~(pfix col path:read))           ::  /:  relative to
+          (stag %fskt ;~(pfix ket cast:read))           ::  /^  cast
+          (stag %fszp ;~(pfix zap ;~(sfix sym fas)))    ::  /!mark/ run to mark
+          (stag %fszy ;~(sfix sym fas))                 ::  /mark/ render file
+        ==
+      ==
+    ::
+    ++  rail                                            ::  wide or tall
+      |*  {wid/rule tal/rule}
+      ?.  tol  wid                                      ::  !tol -> only wide
+      ;~(pose wid tal)
+    ::
+    ++  read
+      |%  ++  twig
+            %+  rail
+              (ifix [sel ser] (stag %conp (most ace wide:vez)))
+            ;~(pfix gap tall:vez)
+      ::
+          ++  alts
+            %+  rail
+              (ifix [pel per] (most ace horn))
+            ;~(sfix (star horn) gap duz)
+      ::
+          ++  horn
+            %+  rail
+              apex(tol |)
+            ;~(pfix gap apex)
+      ::
+          ++  name
+            %+  rail
+              ;~(plug sym ;~(pfix tis horn))
+            ;~(pfix gap ;~(plug sym horn))
+      ::
+          ++  list
+            %+  rail  fail
+            ;~(sfix (star horn) gap duz)
+      ::
+          ++  case
+            %+  rail  fail
+            =-  ;~(sfix (star -) gap duz)
+            ;~(pfix gap fas ;~(plug hith horn))
+      ::
+          ++  pipe
+            %+  rail
+              ;~(plug (plus ;~(sfix sym pam)) horn)
+            =+  (cook |=(a/term [a ~]) sym)
+            ;~(pfix gap ;~(plug - horn))
+      ::
+          ++  gate
+            %+  rail
+              ;~(plug ;~(sfix wide:vez sem) horn)
+            ;~(pfix gap ;~(plug tall:vez horn))
+      ::
+          ++  path
+            %+  rail
+              ;~(plug ;~(sfix hive col) horn)
+            ;~(pfix gap ;~(plug hive horn))
+      ::
+          ++  cast
+            %+  rail
+              ;~(plug ;~(sfix wide:vez ket) horn)
+            ;~(pfix gap ;~(plug tall:vez horn))
+      --
+    --
+  --
+::
 ++  lark                                                ::  filter arch names
   |=  {wox/$-(knot (unit @)) arc/arch}
   ^-  (map @ knot)
@@ -833,160 +987,6 @@
       |=  {cof/cafe for/mark}  ^-  (bolt vase)
       :: ~&  fang+for
       (load-core cof bek /[for]/mar)
-    ::
-    ++  fair                                            ::  hood parsing rule
-      |=  bem/beam
-      ?>  ?=({$ud $0} r.bem)          ::  XX sentinel
-      =+  vez=(vang & (tope bem))
-      =<  hood
-      |%
-      ++  case                                          ::  %clay revision
-        %+  sear
-          |=  a/coin  ^-  (unit ^case)
-          ?.  ?=({$$ ^case} a)  ~
-          [~ u=p.a]
-        nuck:so
-      ::
-      ++  mota  ;~(pfix pat mota:vez)                   ::  atom odor
-      ++  hath  (sear plex (stag %conl poor)):vez       ::  hood path
-      ++  have  (sear tome ;~(pfix fas hath))           ::  hood beam
-      ++  hith                                          ::  static path
-        =>  vez
-        (sear plex (stag %conl (more fas hasp)))
-      ::
-      ++  hive                                          ::  late-bound path
-        ;~  pfix  fas
-          %+  cook  |=(a/hops a)
-          =>  vez
-          ;~  plug
-            (stag ~ gash)
-            ;~(pose (stag ~ ;~(pfix cen porc)) (easy ~))
-          ==
-        ==
-      ::
-      ++  hood
-        %+  ifix  [gay gay]
-        ;~  plug
-          ;~  pose
-            (ifix [;~(plug fas wut gap) gap] dem)
-            (easy zuse)
-          ==
-        ::
-          ;~  pose
-            (ifix [;~(plug fas hep gap) gap] (most ;~(plug com gaw) hoof))
-            (easy ~)
-          ==
-        ::
-          ;~  pose
-            (ifix [;~(plug fas lus gap) gap] (most ;~(plug com gaw) hoof))
-            (easy ~)
-          ==
-        ::
-          (star ;~(sfix horn gap))
-          (most gap hoop)
-        ==
-      ::
-      ++  hoof
-        %+  cook  |=(a/^hoof a)
-        ;~  plug
-          sym                                           ::  file or
-          %-  punt                                      ::  file/case/~ship
-          ;~  plug
-            ;~(pfix fas case)
-            ;~(pfix fas sig fed:ag)
-          ==
-        ==
-      ::
-      ++  hoop
-        ;~  pose
-          (stag %| ;~(pfix ;~(plug fas fas gap) have))
-          (stag %& tall:vez)
-        ==
-      ::
-      ++  horn                                          ::  horn parser
-        =<  apex
-        =|  tol/?                                       ::  allow tall form
-        |%
-        ++  apex
-          %+  knee  *^horn  |.  ~+
-          ;~  pfix  fas
-            ;~  pose
-              (stag %fssg ;~(pfix sig twig:read))       ::  /~  twig by hand
-              (stag %fsbc ;~(pfix buc twig:read))       ::  /$  extra arguments
-              (stag %fsbr ;~(pfix bar alts:read))       ::  /|  or (options)
-              (stag %fshx ;~(pfix hax horn:read))       ::  /#  insert dephash
-              (stag %fsts ;~(pfix tis name:read))       ::  /=  apply face
-              (stag %fsdt ;~(pfix dot list:read))       ::  /.  list
-              (stag %fscm ;~(pfix com case:read))       ::  /,  switch by path
-              (stag %fscn ;~(pfix cen horn:read))       ::  /%  propagate args
-              (stag %fspm ;~(pfix pam pipe:read))       ::  /&  translates
-              (stag %fscb ;~(pfix cab horn:read))       ::  /_  homo map
-              (stag %fssm ;~(pfix sem gate:read))       ::  /;  operate on
-              (stag %fscl ;~(pfix col path:read))       ::  /:  relative to
-              (stag %fskt ;~(pfix ket cast:read))       ::  /^  cast
-              (stag %fszp ;~(pfix zap ;~(sfix sym fas)))::  /!mark/ run to mark
-              (stag %fszy ;~(sfix sym fas))             ::  /mark/ render file
-            ==
-          ==
-        ::
-        ++  rail                                        ::  wide or tall
-          |*  {wid/rule tal/rule}
-          ?.  tol  wid                                  ::  !tol -> only wide
-          ;~(pose wid tal)
-        ::
-        ++  read
-          |%  ++  twig
-                %+  rail
-                  (ifix [sel ser] (stag %conp (most ace wide:vez)))
-                ;~(pfix gap tall:vez)
-          ::
-              ++  alts
-                %+  rail
-                  (ifix [pel per] (most ace horn))
-                ;~(sfix (star horn) gap duz)
-          ::
-              ++  horn
-                %+  rail
-                  apex(tol |)
-                ;~(pfix gap apex)
-          ::
-              ++  name
-                %+  rail
-                  ;~(plug sym ;~(pfix tis horn))
-                ;~(pfix gap ;~(plug sym horn))
-          ::
-              ++  list
-                %+  rail  fail
-                ;~(sfix (star horn) gap duz)
-          ::
-              ++  case
-                %+  rail  fail
-                =-  ;~(sfix (star -) gap duz)
-                ;~(pfix gap fas ;~(plug hith horn))
-          ::
-              ++  pipe
-                %+  rail
-                  ;~(plug (plus ;~(sfix sym pam)) horn)
-                =+  (cook |=(a/term [a ~]) sym)
-                ;~(pfix gap ;~(plug - horn))
-          ::
-              ++  gate
-                %+  rail
-                  ;~(plug ;~(sfix wide:vez sem) horn)
-                ;~(pfix gap ;~(plug tall:vez horn))
-          ::
-              ++  path
-                %+  rail
-                  ;~(plug ;~(sfix hive col) horn)
-                ;~(pfix gap ;~(plug hive horn))
-          ::
-              ++  cast
-                %+  rail
-                  ;~(plug ;~(sfix wide:vez ket) horn)
-                ;~(pfix gap ;~(plug tall:vez horn))
-          --
-        --
-      --
     ::
     ++  join
       |=  {cof/cafe for/mark kas/silk kos/silk}
