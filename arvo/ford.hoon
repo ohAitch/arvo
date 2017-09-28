@@ -40,7 +40,7 @@
   $:  tad/{p/@ud q/(map @ud task)}                      ::  tasks by number
       dym/(map duct @ud)                                ::  duct to task number
       deh/(map @uvH deps)                               ::  depends by hash
-      gaf/(jug dent dent)                               ::  part to product
+      gaf/nozzle                                        ::  product to part
       jav/(map * calx)                                  ::  cache
   ==                                                    ::
 ++  bolt                                                ::  gonadic edge
@@ -61,7 +61,7 @@
   $:  p/(set calx)                                      ::  used
       q/(map * calx)                                    ::  cache
       r/(map @uvH deps)                                 ::  deps
-      s/(jug dent dent)                                 ::  dep graph
+      s/nozzle                                          ::  product to part
   ==                                                    ::
 ::                                                      ::
 ++  calm                                                ::  cache metadata
@@ -83,9 +83,11 @@
       {$sent dux/(set duct)}                            ::  listener exists
       {$done $~}                                        ::  change seen
   ==                                                    ::
+++  nozzle  {for/(jug dent dent) bac/(jug dent dent)}   ::  bidirectional deps
 ++  dent                                                ::  individual dep
   $%  {$beam bem/beam ren/care}
-      {$bake bem/beam mar/mark arg/coin}
+      {$boil bem/beam bom/beam arg/coin}
+      {$load bem/beam mar/mark}
   ==
 ++  task                                                ::  problem in progress
   $:  nah/duct                                          ::  cause
@@ -100,9 +102,8 @@
 ++  ca                                                  ::
   |%
   ++  val                                               ::  reduce calx
-    |*  sem/@tas                                        ::  a typesystem hack
-    |=  cax/calx
-    ?+  sem  !!
+    |*  {sem/@tas cax/calx}
+    ?+  sem  !!                                         ::  a typesystem hack
       $hood  ?>(?=($hood -.cax) r.cax)
       $boil  ?>(?=($boil -.cax) r.cax)
       $load  ?>(?=($load -.cax) r.cax)
@@ -114,17 +115,33 @@
     ==
   ::
   ++  get                                               ::  cache lookup
-    |=  a/cafe                                          ::
-    |=  {b/@tas c/*}                                    ::
+    |=  {a/cafe b/@tas c/*}                             ::
     ^-  {(unit calx) cafe}                              ::
-    =+  d=(~(get by q.a) [b c])                         ::  calx key is [p q]
+    =+  d=(~(get by q.a) [b c])                         ::  calx key is [- q]
     ?~  d  [~ a]                                        ::
     [d a(p (~(put in p.a) u.d))]                        ::
   ::                                                    ::
   ++  put                                               ::  cache install
     |=  {a/cafe b/calx}                                 ::
     ^-  cafe                                            ::
-    a(q (~(put by q.a) [-.b q.b] b))                    ::
+    a(q (~(put by q.a) [- q]:b b))                      ::  calx key is [- q]
+  --
+::
+++  na                                                  ::  nozzle operations
+  |_  a/nozzle
+  ++  put
+    |=  {k/dent v/dent}  ^+  a
+    [(~(put ju for.a) k v) (~(put ju bac.a) v k)]
+  ::
+  ++  del
+    |=  {k/dent v/dent}  ^+  a
+    [(~(del ju for.a) k v) (~(del ju bac.a) v k)]
+  ::
+  ++  add-for
+    |=  {k/dent dez/(set dent)}  ^+  a
+    %+  roll  (~(tap in dez))
+    =+  [v=*dent a=a]
+    |.  (put(a a) k v)
   --
 ::
 ++  pin-dephash
@@ -186,8 +203,9 @@
   ++  ren-dent
     |=  a/dent  ::^-  $^({path mark @p} path)
     ?-  -.a
-      $beam  [%| (ren-beamcare +.a)]
-      $bake  [%& (tope bem.a) mar.a `@p`(mug arg.a)]
+      $beam  [%beam (ren-beamcare +.a)]
+      $boil  [%boil (tope bem.a) (tope bom.a) `@p`(mug arg.a)]
+      $load  [%load (tope bem.a) mar.a]
     ==
   ::
   ++  ren-jug
@@ -208,10 +226,7 @@
     ::        ==
     ::    ret
     =:  p.q.b  (sy a ~)                                 ::  s.p.b so a depends
-        s.p.b  %+  roll  (~(tap in p.q.b))              ::  on all deps in s.p.b
-               =+  [k=*dent s=s.p.b]
-               |.
-               (~(put ju s) k a)
+        s.p.b  (~(add-for na s.p.b) a p.q.b)
       ==
     b
   ::
@@ -234,9 +249,9 @@
         $2  hoc
         $1  hoc
         $0
-      =^  cux  p.hoc  ((get:ca p.hoc) sem q.q.hoc)
+      =^  cux  p.hoc  (get:ca p.hoc sem q.q.hoc)
       ?^  cux
-        [p=p.hoc q=[%0 p=dep.p.u.cux q=((val:ca sem) u.cux)]]
+        [p=p.hoc q=[%0 p=dep.p.u.cux q=(val:ca sem u.cux)]]
       =+  nuf=(tug hoc fun)
       ?-    -.q.nuf
           $2  nuf
@@ -602,14 +617,12 @@
     ::        (turn (~(tap in des)) pretty-dent)
     ::    %-  silt
     ::    (turn (~(tap in ret)) pretty-beamcare)
-    =/  gof  (reverse-dents gaf.bay)
     |-  ^-  (set {beam care})
     %+  roll  (~(tap in des))
     |=  {den/dent bes/(set {beam care})}  ^+  bes
-    ?-  -.den
-      $beam  (~(put in bes) +.den)
-      $bake  (~(uni in bes) ^$(des (~(get ju gof) den)))
-    ==
+    ?:  ?=($beam -.den)
+      (~(put in bes) +.den)
+    (~(uni in bes) ^$(des (~(get ju bac.gaf.bay) den)))
   ::
   ++  warp-beams
     |=  {dep/@uvH bes/(set {beam care}) rav/$-({beam care} (unit rave))}
@@ -824,8 +837,8 @@
       ?~  rot
         =^  dep  deh.bay  (pin-dephash ~ deh.bay)       ::  TODO: dependencies?
         abut:(give [%made dep %| (smyt ren (tope bem)) ~])
-      =+  (cat 3 van ren)
-      exec(keg (~(put by keg) [- bem] r.u.rot))
+      =/  req  (cat 3 van ren)                          ::  e.g. %cx
+      exec(keg (~(put by keg) [req bem] r.u.rot))
     ::
     ::+|
     ::
@@ -911,7 +924,7 @@
       ?-  -.q.bot
         $0  abut:(give [%made dep q.q.bot])
         $2  abut:(give [%made dep %| q.q.bot])
-        $1  =+  zuk=(~(tap by p.q.bot) ~)
+        $1  =+  zuk=(~(tap in p.q.bot) ~)
             =<  abet
             |-  ^+  ..exec
             ?~  zuk  ..exec
@@ -1199,11 +1212,12 @@
       |=  {cof/cafe bem/beam}
       (load-with-path cof many+~ bem bem)
     ::
-    ++  load-with-path
+    ++  load-with-path                                  ::  TODO: rename
       ~/  %load-with-path
       |=  {cof/cafe arg/coin bem/beam bom/beam}
       %+  tug:bo  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
+      %+  under-dep:bo  `dent`[%boil bem bom arg]
       %+  (with-cache:bo %boil)  (new:bo cof arg bem bom)
       |=  {cof/cafe arg/coin bem/beam bom/beam}
       %+  tug:bo  (fame cof bem)
@@ -1238,6 +1252,7 @@
     ++  load-to-mark
       ~/  %load-to-mark
       |=  {cof/cafe for/mark bem/beam}
+      %+  under-dep:bo  `dent`[%load bem for]
       %+  (with-cache:bo %load)
         ::  TODO  remove add-dep:bo (should be moved to load-file)
         (add-dep:bo [%beam bem %z] (new:bo cof for bem))
@@ -1436,7 +1451,6 @@
           |.(leaf+"ford: bake {<p.kas>} {<(tope r.kas)>} {~(rend co q.kas)}")
         %+  tug:bo  (to-concrete-revision cof r.kas)
         |=  {cof/cafe bem/beam}
-        %+  under-dep:bo  `dent`[%bake bem [p q]:kas]
         %+  tug:bo  (render-or-load cof p.kas q.kas bem)
         |=  {cof/cafe vax/vase}
         (new:bo cof `gage`[%& p.kas vax])
@@ -1616,7 +1630,7 @@
         ?:(=(~ bil) [%$ 1] [%core (~(run by bil) |=({^ a/twig} [%ash a]))])
       ::
       ++  abut                                          ::  generate
-        |=  {cof/cafe hyd/hood}
+        |=  {cof/cafe hyd/hood}                         ::  TODO: $ and |^
         ^-  (bolt vase)
         %+  tug:bo  (apex cof hyd)
         |=  {cof/cafe sel/_..abut}
