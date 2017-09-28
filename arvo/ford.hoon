@@ -197,34 +197,9 @@
     =.  p.q.b  (~(put in p.q.b) a)
     b
   ::
-  ++  ren-beamcare
-    |=({a/beam b/care} `path`[(crip %c b ~) (tope a)])
-  ::
-  ++  ren-dent
-    |=  a/dent  ::^-  $^({path mark @p} path)
-    ?-  -.a
-      $beam  [%beam (ren-beamcare +.a)]
-      $boil  [%boil (tope bem.a) (tope bom.a) `@p`(mug arg.a)]
-      $load  [%load (tope bem.a) mar.a]
-    ==
-  ::
-  ++  ren-jug
-    |=  a/(jug dent dent)
-    %-  malt  ^-  (list (pair ren-dent (set ren-dent)))
-    %+  turn  (~(tap by a))
-    |=  {b/dent c/(set dent)}
-    [(ren-dent b) (silt (turn (~(tap in c)) ren-dent))]
-  ::
   ++  under-dep                                         ::  link deps with
     |*  {a/dent b/(bolt)}                               ::  a as current dep
     ?:  ?=($1 -.q.b)  b                                 ::  and links a to
-    ::  =;  ret
-    ::    ~&  :*  %under-dep
-    ::            und=(ren-dent a)
-    ::            old=~(wyt by s.p.b)
-    ::            new=~(wyt by s.p.ret)
-    ::        ==
-    ::    ret
     =:  p.q.b  (sy a ~)                                 ::  s.p.b so a depends
         s.p.b  (~(add-for na s.p.b) a p.q.b)
       ==
@@ -257,11 +232,6 @@
           $2  nuf
           $1  nuf
           $0
-        :: ~&  :-  %with-cache-new
-        ::     ?+  sem  `term`sem
-        ::       $hood  [%hood (tope &1.q.q.hoc)]
-        ::       $bake  [%bake `mark`&1.q.q.hoc (tope |2.q.q.hoc)]
-        ::     ==
         :-  p=(put:ca p.nuf `calx`[sem `calm`p.q.nuf q.q.hoc q.q.nuf])
         q=q.nuf
       ==
@@ -586,75 +556,6 @@
     ^-  {(list move) baby}
     [(flop mow) bay]
   ::
-  ++  reverse-dents
-    |=  a/(jug dent dent)  ^+  a
-    %+  roll  (~(tap by a))
-    |=  {{k/dent v/(set dent)} b/(jug dent dent)}
-    %+  roll  (~(tap in v))
-    =+  [d=*dent b=b]
-    |.
-    (~(put ju b) d k)
-  ::
-  ++  dep-warps                                         ::  create %warp's
-    |=  {dep/@uvH bes/(set dent) rav/$-({beam care} (unit rave))}
-    (warp-beams dep (dep-beams bes) rav)
-  ::
-  ++  dep-beams  ::DEPRECATED only needed for @uvH handling
-    |=  des/(set dent)  ^-  (set {beam care})
-    ::  =;  ret
-    ::    ~|  dep-beams+[des ret]
-    ::    =;  pretty
-    ::      ~&(dep-beams+[pretty] ret)
-    ::    =/  pretty-beamcare
-    ::      |=({a/beam b/care} `path`[(crip %c b ~) (tope a)])
-    ::    =/  pretty-dent
-    ::      |=  a/dent  ::^-  $^({path mark @p} path)
-    ::      ?-  -.a
-    ::        $beam  [%| (pretty-beamcare +.a)]
-    ::        $bake  [%& (tope bem.a) mar.a `@p`(mug arg.a)]
-    ::      ==
-    ::    :-  %-  silt
-    ::        (turn (~(tap in des)) pretty-dent)
-    ::    %-  silt
-    ::    (turn (~(tap in ret)) pretty-beamcare)
-    |-  ^-  (set {beam care})
-    %+  roll  (~(tap in des))
-    |=  {den/dent bes/(set {beam care})}  ^+  bes
-    ?:  ?=($beam -.den)
-      (~(put in bes) +.den)
-    (~(uni in bes) ^$(des (~(get ju bac.gaf.bay) den)))
-  ::
-  ++  warp-beams
-    |=  {dep/@uvH bes/(set {beam care}) rav/$-({beam care} (unit rave))}
-    %+  turn  (~(tap in bes))
-    |=  {bem/beam ren/care}  ^-  move
-    :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
-    [%c [%warp [our p.bem] q.bem (rav bem ren)]]
-  ::
-  ++  deps-take                                         ::  take rev update
-    |=  {tea/wire dep/@uvH bem/beam sih/sign}
-    =<  abet  ^+  +>
-    ?.  ?=($writ &2.sih)
-      ~|(%bad-axun !!)
-    ?~  p.sih  +>.$                :: acknowledged
-    :: ~&  writ+tea
-    =+  udap=(~(get by deh.bay) dep)
-    ?~  udap  ~&(dep-lost+dep +>.$)
-    =+  dap=u.udap
-    =-  +>.$(mow mow, deh.bay (~(put by deh.bay) dep dap))
-    ^+  [dap=dap mow=mow]
-    ?-    -.q.dap
-        $done  [dap mow]               ::  writ redundant
-        $init  ~|(never-subscribed+dep !!)
-        $sent
-      :-  dap(q [%done ~])
-      ;:  weld                                          ::  cancel rest
-        (dep-warps dep (~(del in p.dap) bem) |=({beam care} ~))
-        (turn (~(tap in dux.q.dap)) |=(hen/duct [hen %give %news dep]))
-        mow
-      ==
-    ==
-  ::
   ++  exec-cancel
     =<  abet  ^+  .
     =+  nym=(~(get by dym.bay) hen)
@@ -730,6 +631,54 @@
       ==
     --
   ::
+  ++  deps-take                                         ::  take rev update
+    |=  {tea/wire dep/@uvH bem/beam sih/sign}
+    =<  abet  ^+  +>
+    ?.  ?=($writ &2.sih)
+      ~|(%bad-axun !!)
+    (take-deps-writ tea dep bem p.sih)
+  ::
+  ++  take-deps-writ
+    |=  {tea/wire dep/@uvH bem/beam rit/riot}
+    ?~  rit  +>.$                :: acknowledged
+    :: ~&  writ+tea
+    =+  udap=(~(get by deh.bay) dep)
+    ?~  udap  ~&(dep-lost+dep +>.$)
+    =+  dap=u.udap
+    =-  +>.$(mow mow, deh.bay (~(put by deh.bay) dep dap))
+    ^+  [dap=dap mow=mow]
+    ?-    -.q.dap
+        $done  [dap mow]               ::  writ redundant
+        $init  ~|(never-subscribed+dep !!)
+        $sent
+      :-  dap(q [%done ~])
+      ;:  weld                                          ::  cancel rest
+        (dep-warps dep (~(del in p.dap) bem) |=({beam care} ~))
+        (turn (~(tap in dux.q.dap)) |=(hen/duct [hen %give %news dep]))
+        mow
+      ==
+    ==
+  ::
+  ++  dep-warps                                       ::  create %warp's
+    |=  {dep/@uvH bes/(set dent) rav/$-({beam care} (unit rave))}
+    (warp-beams dep (dep-beams bes) rav)
+  ::
+  ++  dep-beams  ::DEPRECATED only needed for @uvH handling
+    |=  des/(set dent)  ^-  (set {beam care})
+    |-  ^-  (set {beam care})
+    %+  roll  (~(tap in des))
+    |=  {den/dent bes/(set {beam care})}  ^+  bes
+    ?:  ?=($beam -.den)
+      (~(put in bes) +.den)
+    (~(uni in bes) ^$(des (~(get ju bac.gaf.bay) den)))
+  ::
+  ++  warp-beams
+    |=  {dep/@uvH bes/(set {beam care}) rav/$-({beam care} (unit rave))}
+    %+  turn  (~(tap in bes))
+    |=  {bem/beam ren/care}  ^-  move
+    :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
+    [%c [%warp [our p.bem] q.bem (rav bem ren)]]
+  ::
   ++  zo
     ~%  %ford-z  ..is  ~
     =|  dyv/@                                           ::  recursion level
@@ -790,6 +739,7 @@
     ++  take                                            ::  handle ^take
       |=  {{van/vane ren/care bem/beam} sih/sign}
       ^+  ..zo
+      |^
       ?-    &2.sih
           $writ  (take-writ [van ren bem] p.sih)
           $made  (take-made [van ren bem] [p q]:sih)
@@ -800,45 +750,46 @@
                  ((slog leaf+"ford-reap-fail" u.p.p.sih) ..zo)
         ==
       ==
-   ::
-    ++  take-diff
-      |=  {{van/vane ren/care bem/beam} cag/cage}
-      ^+  ..zo
-      ?>  ?=($g van)
-      ?:  |(!?=($x ren) =(-.s.bem p.cag))
+      ::
+      ++  take-diff
+        |=  {{van/vane ren/care bem/beam} cag/cage}
+        ^+  ..zo
+        ?>  ?=($g van)
+        ?:  |(!?=($x ren) =(-.s.bem p.cag))
+          =.  kig  (~(del in kig) +<-.$)
+          =.  mow  :_(mow [hen (cancel van ren bem)])
+          =+  (cat 3 van ren)
+          exec(keg (~(put by keg) [- bem] cag))
+        =.  mow
+          :_  mow
+          :^  hen  %pass  (camp-wire van ren bem)
+          [%f %exec our ~ bek %cast ((hard mark) -.s.bem) %$ cag]
+        ..zo
+      ::
+      ++  take-made
+        |=  {{van/vane ren/care bem/beam} dep/@uvH gag/gage}  ::  XX  depends?
+        ^+  ..zo
+        ?>  ?=($g van)
         =.  kig  (~(del in kig) +<-.$)
         =.  mow  :_(mow [hen (cancel van ren bem)])
+        ?:  ?=($| -.gag)
+          abut:(give [%made dep %| leaf+"ford-scry-made-fail" p.gag])
+        ?:  ?=($tabl -.gag)
+          abut:(give [%made dep %| leaf+"ford-scry-made-strange" ~])
         =+  (cat 3 van ren)
-        exec(keg (~(put by keg) [- bem] cag))
-      =.  mow
-        :_  mow
-        :^  hen  %pass  (camp-wire van ren bem)
-        [%f %exec our ~ bek %cast ((hard mark) -.s.bem) %$ cag]
-      ..zo
-    ::
-    ++  take-made
-      |=  {{van/vane ren/care bem/beam} dep/@uvH gag/gage}  ::  XX  depends?
-      ^+  ..zo
-      ?>  ?=($g van)
-      =.  kig  (~(del in kig) +<-.$)
-      =.  mow  :_(mow [hen (cancel van ren bem)])
-      ?:  ?=($| -.gag)
-        abut:(give [%made dep %| leaf+"ford-scry-made-fail" p.gag])
-      ?:  ?=($tabl -.gag)
-        abut:(give [%made dep %| leaf+"ford-scry-made-strange" ~])
-      =+  (cat 3 van ren)
-      exec(keg (~(put by keg) [- bem] p.gag))
-    ::
-    ++  take-writ
-      |=  {{van/vane ren/care bem/beam} rot/riot}
-      ^+  ..zo
-      ?>  ?=($c van)
-      =.  kig  (~(del in kig) +<-.$)
-      ?~  rot
-        =^  dep  deh.bay  (pin-dephash ~ deh.bay)       ::  TODO: dependencies?
-        abut:(give [%made dep %| (smyt ren (tope bem)) ~])
-      =/  req  (cat 3 van ren)                          ::  e.g. %cx
-      exec(keg (~(put by keg) [req bem] r.u.rot))
+        exec(keg (~(put by keg) [- bem] p.gag))
+      ::
+      ++  take-writ
+        |=  {{van/vane ren/care bem/beam} rot/riot}
+        ^+  ..zo
+        ?>  ?=($c van)
+        =.  kig  (~(del in kig) +<-.$)
+        ?~  rot
+          =^  dep  deh.bay  (pin-dephash ~ deh.bay)     ::  TODO: dependencies?
+          abut:(give [%made dep %| (smyt ren (tope bem)) ~])
+        =/  req  (cat 3 van ren)                        ::  e.g. %cx
+        exec(keg (~(put by keg) [req bem] r.u.rot))
+      --
     ::
     ::+|
     ::
@@ -1222,7 +1173,7 @@
       |=  {cof/cafe arg/coin bem/beam bom/beam}
       %+  tug:bo  (fame cof bem)
       |=  {cof/cafe bem/beam}
-      (tug:bo (compile-to-hood cof bem) abut:(meow bom arg))
+      (tug:bo (compile-to-hood cof bem) (meow bom arg))
     ::
     ++  load-arch
       |=  {cof/cafe bem/beam}
@@ -1547,7 +1498,7 @@
           |.(leaf+"ford: pact {<`@p`(mug p.kas)>} {<`@p`(mug q.kas)>}")
         (pact cof p.kas q.kas)
       ::
-          $plan  (to-gage:bo (abut:(meow p.kas q.kas) cof r.kas))
+          $plan  (to-gage:bo ((meow p.kas q.kas) cof r.kas))
           $reef
         %+  add-dep:bo  [%beam [bek /arvo/hoon] %z]
         %+  add-dep:bo  [%beam [bek /arvo/zuse] %z]
@@ -1622,6 +1573,7 @@
               lit/?                                     ::  drop arguments
           ==
       ~%  %meow  ..meow  ~
+      =<  abut
       |%
       ++  able                                          ::  assemble preamble
         ^-  twig
@@ -1792,7 +1744,7 @@
           %.  [cof how]
           ;~  tug:bo
             compile-to-hood
-            abut:(meow how arg)
+            (meow how arg)
             (lake | q.hon)
             (with:bo |=(a/vase [q.hon a]))
           ==
