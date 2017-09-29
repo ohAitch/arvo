@@ -665,7 +665,6 @@
   ::
   ++  dep-beams  ::DEPRECATED only needed for @uvH handling
     |=  des/(set dent)  ^-  (set {beam care})
-    |-  ^-  (set {beam care})
     %+  roll  (~(tap in des))
     |=  {den/dent bes/(set {beam care})}  ^+  bes
     ?:  ?=($beam -.den)
@@ -678,6 +677,14 @@
     |=  {bem/beam ren/care}  ^-  move
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
     [%c [%warp [our p.bem] q.bem (rav bem ren)]]
+  ::
+  ++  downstream-dents
+    |=  des/(set dent)  ^-  (set dent)
+    %+  roll  (~(tap in des))
+    |=  {den/dent dos/(set dent)}  ^+  des
+    ?<  ?=($beam -.den)
+    =.  dos  (~(put in dos) den)
+    (~(uni in dos) ^$(des (~(get ju for.gaf.bay) den)))
   ::
   ++  zo
     ~%  %ford-z  ..is  ~
