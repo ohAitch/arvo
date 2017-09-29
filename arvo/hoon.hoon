@@ -315,7 +315,7 @@
     {$need p/$@(p/@ {p/@ q/@}) q/twig}                  ::  !?
     {$fail $~}                                          ::  !!
   ==                                                    ::
-++  taco  $@(term (pair term twig))                     ::
+++  taco  $@(term (pair term twig))                     ::  limb and maybe type
 ++  tyre  (list {p/term q/twig})                        ::
 ++  tyke  (list (unit twig))                            ::
 ::                                                      ::::::  virtual nock
@@ -2614,7 +2614,7 @@
 ::
 ++  ju                                                  ::  jug engine
   |_  a/(jug)
-  +-  del                                               ::  del key-set pair
+  +-  del                                               ::  del key-elem pair
     |*  {b/* c/*}
     ^+  a
     =+  d=(get b)
@@ -2641,7 +2641,7 @@
     ^-  ?
     (~(has in (get b)) c)
   ::
-  +-  put                                               ::  add key-set pair
+  +-  put                                               ::  add key-elem pair
     |*  {b/* c/*}
     ^+  a
     =+  d=(get b)
