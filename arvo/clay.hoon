@@ -263,18 +263,19 @@
   ++  extract-successes
     |=  gag/gage
     ^-  (list (pair cage cage))
-    ?.  ?=($tabl -.gag)
-      (ford-fail ?-(-.gag $| p.gag, $& [>%strange-gage p.p.gag<]~))
-    %+  murn  p.gag
-    |=  {key/gage val/gage}  ^-  (unit {cage cage})
-    ?.  ?=($& -.key)
-      (ford-fail ?-(-.key $| p.key, $tabl [>%strange-gage<]~))
+    ?:  ?=($| -.gag)  ~|(%expected-list !!)
+    |-  ^-  (list {cage cage})
+    ?:  ?=($& -.gag)  ~
+    ?@  p.gag  ~|(%expected-pair !!)
+    =/  key  (gage-to-cage p.p.gag)
+    ?:  ?=($| -.key)  (ford-fail p.key)
+    =/  val  q.p.gag
     ?-  -.val
-      $tabl   (ford-fail >%strange-gage< ~)
-      $&  (some [p.key p.val])
+      ^   ~|(%expected-cage !!)
+      $&  [[p.key p.val] $(gag q.gag)]
       $|  =.  p.val  [(sell q.p.key) p.val]
           ~>  %slog.[0 %*(. >%ford-fail syd %her %why< |2.+> p.val)]
-          ~
+         $(gag q.gag)
     ==
   ::
   ++  gage-to-cage
@@ -282,20 +283,21 @@
     ?-  -.a
       $&  a
       $|  (mule |.((ford-fail p.a)))
-      $tabl   (mule |.((ford-fail >%strange-gage< ~)))
+      ^   (mule |.((ford-fail >%strange-gage< ~)))
     ==
   ::
   ++  try-extract-table
     |=  gag/gage
     ^-  (errs (list (pair cage cage)))
-    ?.  ?=($tabl -.gag)  ~|(%expected-list !!)
+    ?:  ?=($| -.gag)  ~|(%expected-list !!)
     |-  ^-  (errs (list {cage cage}))
-    ?~  p.gag  &+~
-    %+  on-good  $(p.gag t.p.gag)
+    ?:  ?=($& -.gag)  &+~
+    ?@  p.gag  ~|(%expected-pair !!)
+    %+  on-good  $(gag q.gag)
     |=  tal/(list {cage cage})
-    %+  on-good  (gage-to-cage p.i.p.gag)
+    %+  on-good  (gage-to-cage p.p.gag)
     |=  key/cage
-    %+  on-good  (gage-to-cage q.i.p.gag)
+    %+  on-good  (gage-to-cage q.p.gag)
     |=  val/cage
     &+[[key val] tal]
   ::
