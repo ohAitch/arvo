@@ -83,7 +83,7 @@
       {$sent dux/(set duct)}                            ::  listener exists
       {$done $~}                                        ::  change seen
   ==                                                    ::
-++  nozzle  {for/(jug dent dent) bac/(jug dent dent)}   ::  bidirectional deps
+++  nozzle  {sub/(jug dent dent) sup/(jug dent dent)}   ::  bidirectional deps
 ++  dent                                                ::  individual dep
   $%  {$beam bem/beam ren/care}
       {$boil bem/beam bom/beam arg/coin}
@@ -131,13 +131,13 @@
   |_  a/nozzle
   ++  put
     |=  {k/dent v/dent}  ^+  a
-    [(~(put ju for.a) k v) (~(put ju bac.a) v k)]
+    [(~(put ju sub.a) k v) (~(put ju sup.a) v k)]
   ::
   ++  del
     |=  {k/dent v/dent}  ^+  a
-    [(~(del ju for.a) k v) (~(del ju bac.a) v k)]
+    [(~(del ju sub.a) k v) (~(del ju sup.a) v k)]
   ::
-  ++  add-for
+  ++  add-sub
     |=  {k/dent dez/(set dent)}  ^+  a
     %+  roll  (~(tap in dez))
     =+  [v=*dent a=a]
@@ -201,7 +201,7 @@
     |*  {a/dent b/(bolt)}                               ::  a as current dep
     ?:  ?=($1 -.q.b)  b                                 ::  and links a to
     =:  p.q.b  (sy a ~)                                 ::  s.p.b so a depends
-        s.p.b  (~(add-for na s.p.b) a p.q.b)
+        s.p.b  (~(add-sub na s.p.b) a p.q.b)
       ==
     b
   ::
@@ -669,7 +669,7 @@
     |=  {den/dent bes/(set {beam care})}  ^+  bes
     ?:  ?=($beam -.den)
       (~(put in bes) +.den)
-    (~(uni in bes) ^$(des (~(get ju bac.gaf.bay) den)))
+    (~(uni in bes) ^$(des (~(get ju sub.gaf.bay) den)))
   ::
   ++  warp-beams
     |=  {dep/@uvH bes/(set {beam care}) rav/$-({beam care} (unit rave))}
