@@ -68,7 +68,7 @@
   $:  dep/(set dent)                                    ::  dependencies
   ==                                                    ::
 ++  calx                                                ::  concrete cache line
-  $%  {$hood p/calm q/(pair beam cage) r/hood}          ::  compile
+  $%  {$hood p/calm q/(pair beam cage) r/hood}          ::  parse
       {$boil p/calm q/(trel coin beam beam) r/vase}     ::  execute
       {$load p/calm q/(pair mark beam) r/(unit vase)}   ::  load
       {$path p/calm q/beam r/(unit beam)}               ::  -to/ transformation
@@ -1168,11 +1168,12 @@
       |=  {cof/cafe bem/beam}  ^-  (bolt vase)
       %+  tug:bo  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
-      (load-with-path cof many+~ bem bem)
+      (boil cof many+~ bem bem)
     ::
-    ++  load-with-path                                  ::  TODO: rename
-      ~/  %load-with-path
+    ++  boil
+      ~/  %boil
       |=  {cof/cafe arg/coin bem/beam bom/beam}
+      ^-  (bolt vase)
       %+  tug:bo  (to-concrete-revision cof bem)
       |=  {cof/cafe bem/beam}
       %+  under-dep:bo  `dent`[%boil bem bom arg]
@@ -1234,7 +1235,7 @@
       ^-  (bolt vase)
       %+  catch:bo
         %+  admit:bo  |.(leaf+"load: attempt renderer")
-        (load-with-path cof arg [-.bem /[for]/ren] bem)
+        (boil cof arg [-.bem /[for]/ren] bem)
       |=  cof/cafe  ^-  (bolt vase)
       %+  admit:bo  |.(leaf+"load: attempt mark")
       %+  tug:bo  (load-to-mark cof for bem)
