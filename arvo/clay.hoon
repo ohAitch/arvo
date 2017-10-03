@@ -48,7 +48,6 @@
 ++  wait  $?  $null   $ali    $diff-ali   $diff-bob     ::  what are we
               $merge  $build  $checkout   $ergo         ::  waiting for?
           ==                                            ::
-++  moot  {p/case q/case r/path s/(map path lobe)}      ::  stored change range
 ++  move  {p/duct q/(wind note gift)}                   ::  local move
 ++  nako  $:  gar/(map aeon tako)                       ::  new ids
               let/aeon                                  ::  next id
@@ -121,7 +120,7 @@
 ++  rove                                                ::  stored request
           $%  {$sing p/mood}                            ::  single request
               {$next p/mood q/(unit (each cage lobe))}  ::  next version
-              {$many p/? q/moot}                        ::  change range
+              {$many p/? q/moat r/(map path lobe)}      ::  change range
           ==                                            ::
 ++  rung  $:  rus/(map desk rede)                       ::  neighbor desks
           ==                                            ::
@@ -397,9 +396,8 @@
         $sing  ~
         $next
       ?~  (case-to-aeon:ze q.p.rov)  ~
-      %-  ~(rep by qyx)
-      |=  {{a/rove *} b/(list rove)}  ^+  b
-      =-  ?.(- b [a b])
+      %+  skim  (~(tap in ~(key by qyx)))
+      |=  a/rove  ^-  ?
       ?&  ?=($next -.a)
           =(p.a p.rov(q q.p.a))
           ?=(^ (case-to-aeon:ze q.p.a))
@@ -407,9 +405,8 @@
     ::
         $many
       ?~  (case-to-aeon:ze p.q.rov)  ~
-      %-  ~(rep by qyx)
-      |=  {{a/rove *} b/(list rove)}  ^+  b
-      =-  ?.(- b [a b])
+      %+  skim  (~(tap in ~(key by qyx)))
+      |=  a/rove  ^-  ?
       ?&  ?=($many -.a)
           =(a rov(p.q p.q.a))
           ?=(^ (case-to-aeon:ze p.q.a))
@@ -507,7 +504,7 @@
       =+  nab=(case-to-aeon:ze p.q.rav)
       ?~  nab
         ?>  =(~ (case-to-aeon:ze q.q.rav))
-        (duce (rive rav))
+        (duce [- p q ~]:rav)
       =+  huy=(case-to-aeon:ze q.q.rav)
       ?:  &(?=(^ huy) |((lth u.huy u.nab) &(=(0 u.huy) =(0 u.nab))))
         (blub hen)
@@ -520,7 +517,7 @@
         (blub hen)
       =+  ^=  ptr  ^-  case
           [%ud +(let.dom)]
-      (duce `rove`[%many p.rav ptr q.q.rav r.q.rav ear])
+      (duce `rove`[%many p.rav [ptr q.q.rav r.q.rav] ear])
     ==
   ::
   ++  echo                                              ::  announce changes
@@ -1216,13 +1213,8 @@
     ?-  -.rov
       $sing  rov
       $next  [- p]:rov
-      $many  [%many p.rov p.q.rov q.q.rov r.q.rov]
+      $many  [- p q]:rov
     ==
-  ::
-  ++  rive
-    |=  rav/{$many p/? q/moat}
-    ^-  rove
-    [%many p.rav p.q.rav q.q.rav r.q.rav ~]
   ::
   ++  wake                                            ::  update subscribers
     ^+  .
@@ -1275,7 +1267,8 @@
       $(xiq t.xiq, ..wake (blab-all q.i.xiq mun u.u.var))
     ::
         $many
-      =+  mot=`moot`q.p.i.xiq
+      =+  mot=`moat`q.p.i.xiq
+      =*  sav  r.p.i.xiq
       =+  nab=(case-to-aeon:ze p.mot)
       ?~  nab
         $(xiq t.xiq, xaq [i.xiq xaq])
@@ -1287,7 +1280,7 @@
           xaq     [i.xiq(q.p mot) xaq]
           ..wake  =+  ^=  ear
                       (lobes-at-path:ze let.dom r.mot)
-                  ?:  =(s.mot ear)  ..wake
+                  ?:  =(sav ear)  ..wake
                   (bleb-all q.i.xiq let.dom ?:(p.p.i.xiq ~ `[u.nab let.dom]))
         ==
       %=  $
@@ -1295,7 +1288,7 @@
         ..wake  =-  (blub-all:- q.i.xiq ~)
                 =+  ^=  ear
                     (lobes-at-path:ze u.huy r.mot)
-                ?:  =(s.mot ear)  (blub-all q.i.xiq ~)
+                ?:  =(sav ear)  (blub-all q.i.xiq ~)
                 (bleb-all q.i.xiq +(u.nab) ?:(p.p.i.xiq ~ `[u.nab u.huy]))
       ==
     ==
