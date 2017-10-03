@@ -659,6 +659,80 @@
       ==
     ==
   ::
+  ++  this  .
+  ++  downstream-dents
+    |=  des/(set dent)  ^-  (set dent)
+    %+  roll  (~(tap in des))
+    |=  {den/dent dos/(set dent)}  ^+  des
+    ?<  ?=($beam -.den)
+    =.  dos  (~(put in dos) den)
+    (~(uni in dos) ^$(des (~(get ju sup.gaf.bay) den)))
+  ::
+  ::+|
+  ::
+  ++  on-update
+    |=  {bem/beam ren/care new/beak}
+    =/  den  (sy [%beam bem ren] ~)
+    =/  dos  (downstream-dents den)
+    =/  todo  (~(tap in dos))
+    =^  old  this  (rebuild new den todo)
+    (promote-unchanged old new)
+  ::
+  ++  rebuild
+    =|  old/(set dent)
+    |=  {bek/beak new/(set dent) todo/(list dent)}  ^+  [old this]
+    ?~  todo  [old this]
+    ?:  (~(has in new) i.todo)  $(todo t.todo)
+    ?:  (~(has in old) i.todo)  $(todo t.todo)
+    =/  dep  (~(get ju sub.gaf.bay) i.todo)
+    =.  dep  (~(dif in dep) old)
+    ?:  =(~ dep)
+      $(old (~(put in old) i.todo), todo t.todo)
+    =.  dep  (~(dif in dep) new)
+    ?.  =(~ dep)
+      $(todo (weld (~(tap in dep)) todo))
+    ::
+    =^  bil  ..zo  (exec-dent:zo i.todo(-.bem bek))
+    ?-  -.q.bil
+      $1  ~|(%stub !!)                ::TODO store state in task
+      $2  $(todo t.todo)              :: errors are probably okay?
+      $0  =/  pre  (~(get by jav.bay) (to-cache-key i.todo))
+          ~!  [r:(need pre) p.q.bil]
+          ?.  ?~(pre | =(r.u.pre q.q.bil))
+            $(todo t.todo)
+          $(old (~(put in old) i.todo), t.todo t.todo)
+    ==
+  ::
+  ++  promote-unchanged
+    |=  {old/(set dent) bek/beak}  ^+  this
+    %_    this
+        jav.bay
+      %-  ~(rep by old)  :: XX iterate per beak at least
+      =+  [a=*dent b=jav.bay]
+      |.  ^+  b
+      =/  cax  (~(get by b) (to-cache-key a))
+      ?~  cax  b
+      ?<  ?=($beam -.a)
+      ::
+      ::REVIEW update deps?
+      =.  u.cax
+        ?-  -.a
+          $load  ?>(?=($load -.u.cax) u.cax(-.q.q bek))
+          $boil  ?>(?=($boil -.u.cax) u.cax(-.q.q bek, -.r.q bek))
+        ==
+      (~(put by b) [- q]:u.cax u.cax)
+    ==
+  ::
+  ++  to-cache-key
+    |=  a/dent  ^-  {term *}
+    ?-  -.a
+      $beam  ~|(%stub !!)  :: ?< because beams should never be downstream?
+      $boil  [%boil arg bem bom]:a
+      $load  [%load mar bem]:a
+    ==
+  ::
+  ::+|
+  ::
   ++  dep-warps                                       ::  create %warp's
     |=  {dep/@uvH bes/(set dent) rav/$-({beam care} (unit rave))}
     (warp-beams dep (dep-beams bes) rav)
@@ -677,14 +751,6 @@
     |=  {bem/beam ren/care}  ^-  move
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (tope bem)]
     [%c [%warp [our p.bem] q.bem (rav bem ren)]]
-  ::
-  ++  downstream-dents
-    |=  des/(set dent)  ^-  (set dent)
-    %+  roll  (~(tap in des))
-    |=  {den/dent dos/(set dent)}  ^+  des
-    ?<  ?=($beam -.den)
-    =.  dos  (~(put in dos) den)
-    (~(uni in dos) ^$(des (~(get ju for.gaf.bay) den)))
   ::
   ++  zo
     ~%  %ford-z  ..is  ~
@@ -872,21 +938,35 @@
           (err:bo cof leaf+"bad ++form:grad" ~)
         (new:bo cof [%& u.for dif])
       ==
+    :: 
+    ::REVIEW control flow duplication
+    ++  exec-dent                                       ::  execute depend
+      |=  a/dent
+      ^+  [*(bolt _[r:*calx]) ..zo]
+      =;  bot/(bolt _[r:*calx])
+        [bot ..zo:(dash p.bot)] ::TODO abet, ie block logic
+      =/  cof/cafe  [~ jav.bay deh.bay gaf.bay]
+      ?-  -.a
+        $beam  !!  ::XX syve?
+        $boil  (boil cof [arg bem bom]:a)
+        $load  (load-to-mark cof [mar bem]:a)
+      ==
     ::
     ++  exec                                            ::  execute task
       ^+  ..zo
       ?:  !=(~ kig)  ..zo
-      =+  bot=(make-with-concrete-revision [~ jav.bay deh.bay gaf.bay] kas)
+      =/  bot/(bolt gage)
+        (make-with-concrete-revision [~ jav.bay deh.bay gaf.bay] kas)
       =^  dep  bot  (pin:bo bot)
       =.  ..exec  (dash p.bot)
       ?-  -.q.bot
         $0  abut:(give [%made dep q.q.bot])
         $2  abut:(give [%made dep %| q.q.bot])
-        $1  =+  zuk=(~(tap in p.q.bot) ~)
-            =<  abet
-            |-  ^+  ..exec
-            ?~  zuk  ..exec
-            $(zuk t.zuk, ..exec `_..exec`(camp van.i.zuk ren.i.zuk bem.i.zuk))
+        $1  =<  abet
+            %+  roll  (~(tap in p.q.bot) ~)
+            =+  [*{van/vane ren/care bem/beam tan/tang} ..exec]
+            |.  ^+  ..exec
+            (camp van ren bem)
       ==
     ::
     ++  give
