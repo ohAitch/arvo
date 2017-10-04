@@ -129,6 +129,7 @@
 ::
 ++  na                                                  ::  nozzle operations
   |_  a/nozzle
+  ::
   ++  put
     |=  {k/dent v/dent}  ^+  a
     [(~(put ju sub.a) k v) (~(put ju sup.a) v k)]
@@ -139,9 +140,10 @@
   ::
   ++  add-sub
     |=  {k/dent dez/(set dent)}  ^+  a
-    %+  roll  (~(tap in dez))
-    =+  [v=*dent a=a]
-    |.  (put(a a) k v)
+    =/  liz  (~(tap in dez))
+    |-  ^+  a
+    ?~  liz  a
+    $(liz t.liz, a (put k i.liz))
   --
 ::
 ++  pin-dephash
@@ -241,7 +243,7 @@
               =+  `{for/mark bem/beam}`q.q.hoc
               [%load (tope bem) for]
           ==
-        ~&  [%caching inf]
+        ::  ~&  [%caching inf]
         :-  p=(put:ca p.nuf `calx`[sem `calm`p.q.nuf q.q.hoc q.q.nuf])
         q=q.nuf
       ==
@@ -686,29 +688,32 @@
     |=  {bem/beam ren/care new/beak}  ^+  this
     =/  den  (sy [%beam bem ren] ~)
     =/  dos  (downstream-dents den)
-    ~&  [%on-update ren (tope bem) (tope new ~) dos]
+    ::  ~&  [%on-update ren (tope bem) (tope new ~) dos]
     =/  todo  (~(tap in dos))
     =^  old  this  (rebuild new den todo)
+    ~|  old=old
     (promote-unchanged old new)
   ::
-  ++  rebuild
+  ++  rebuild  !.
     =|  old/(set dent)
     |=  {bek/beak new/(set dent) todo/(list dent)}  ^+  [old this]
     ?~  todo  [old this]
     ?:  (~(has in new) i.todo)  $(todo t.todo)
     ?:  (~(has in old) i.todo)  $(todo t.todo)
-    =/  dep  (~(get ju sub.gaf.bay) i.todo)
-    =.  dep  (~(dif in dep) old)
-    ?:  =(~ dep)
+    =/  dez  (~(get ju sub.gaf.bay) i.todo)
+    ::  TODO add ++skip and ++skim for sets
+    =.  dez  (silt (skip (~(tap in dez)) |=(a/dent ?=($beam -.a))))
+    =.  dez  (~(dif in dez) old)
+    ?:  =(~ dez)
       $(old (~(put in old) i.todo), todo t.todo)
-    =.  dep  (~(dif in dep) new)
-    ?.  =(~ dep)
-      $(todo (weld (~(tap in dep)) todo))
+    =.  dez  (~(dif in dez) new)
+    ?.  =(~ dez)
+      $(todo (weld (~(tap in dez)) todo))
     ::
     =/  taz/task  [hen [bek *silk] ~ ~] ::XX real silk?
     =^  bil  ..zo  (~(exec-dent zo *@u taz) i.todo(-.bem bek))
     ?-  -.q.bil
-      $1  ~|([%stub p.q.bil] !!)                ::TODO store state in task
+      $1  ~|([%stub-block p.q.bil] !!)  ::TODO store state in task
       $2  $(todo t.todo)              :: errors are probably okay?
       $0  =/  pre  (~(get by jav.bay) (to-cache-key i.todo))
           ~!  [r:(need pre) p.q.bil]
@@ -729,7 +734,7 @@
       ?<  ?=($beam -.a)
       ::
       ::REVIEW update deps?
-      ~&  promo+a
+      ::  ~&  promo+a
       =.  u.cax
         ?-  -.a
           $load  ?>(?=($load -.u.cax) u.cax(-.q.q bek))
@@ -741,7 +746,7 @@
   ++  to-cache-key
     |=  a/dent  ^-  {term *}
     ?-  -.a
-      $beam  ~|(%stub !!)  :: ?< because beams should never be downstream?
+      $beam  ~|(beam-dep+a !!)  :: ?< because beams should never be downstream
       $boil  [%boil arg bem bom]:a
       $load  [%load mar bem]:a
     ==
