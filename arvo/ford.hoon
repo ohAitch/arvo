@@ -725,22 +725,27 @@
   ++  promote-unchanged
     |=  {old/(set dent) bek/beak}  ^+  this
     %_    this
-        jav.bay
+        bay
       %-  ~(rep by old)  :: XX iterate per beak at least
-      =+  [a=*dent b=jav.bay]
+      =+  [a=*dent b=bay]
       |.  ^+  b
-      =/  cax  (~(get by b) (to-cache-key a))
+      =/  cax  (~(get by jav.b) (to-cache-key a))
       ?~  cax  b
       ?<  ?=($beam -.a)
       ::
-      ::REVIEW update deps?
       ::  ~&  promo+a
       =.  u.cax
         ?-  -.a
           $load  ?>(?=($load -.u.cax) u.cax(-.q.q bek))
           $boil  ?>(?=($boil -.u.cax) u.cax(-.q.q bek, -.r.q bek))
         ==
-      (~(put by b) [- q]:u.cax u.cax)
+      %_    b
+          jav                                           ::  promote cache
+        (~(put by jav.b) [- q]:u.cax u.cax)
+      ::
+          gaf                                           ::  promote deps
+        (~(add-sub na gaf.b) a dep.p.u.cax)
+      ==
     ==
   ::
   ++  to-cache-key
