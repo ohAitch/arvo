@@ -2222,7 +2222,7 @@
                  ++  com  |~(a/@ ^?(..nu))              ::  from naked pass
              --                                         ::
           --                                            ::
-++  aeon  @ud                                          ::
+++  aeon  @ud                                           ::  fs revision
 ++  agon  (map {p/ship q/desk} {p/@ud q/@ud r/waks})    ::  mergepts
 ++  ankh                                                ::  fs node (new)
           $:  fil/(unit {p/lobe q/cage})                ::  file
