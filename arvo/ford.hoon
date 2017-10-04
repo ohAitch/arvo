@@ -232,6 +232,16 @@
           $2  nuf
           $1  nuf
           $0
+        =/  inf
+          ?+  sem  [sem `@p`(mug q.q.hoc)]
+            $boil  
+              =+  `{arg/coin bem/beam bom/beam}`q.q.hoc
+              [%boil `@p`(mug arg) (tope bem) (tope bom)]
+            $load
+              =+  `{for/mark bem/beam}`q.q.hoc
+              [%load (tope bem) for]
+          ==
+        ~&  [%caching inf]
         :-  p=(put:ca p.nuf `calx`[sem `calm`p.q.nuf q.q.hoc q.q.nuf])
         q=q.nuf
       ==
@@ -645,18 +655,19 @@
     =+  udap=(~(get by deh.bay) dep)
     ?~  udap  ~&(dep-lost+dep +>.$)
     =+  dap=u.udap
-    =-  +>.$(mow mow, deh.bay (~(put by deh.bay) dep dap))
-    ^+  [dap=dap mow=mow]
     ?-    -.q.dap
-        $done  [dap mow]               ::  writ redundant
+        $done  +>.$               ::  writ redundant
         $init  ~|(never-subscribed+dep !!)
         $sent
-      :-  dap(q [%done ~])
-      ;:  weld                                          ::  cancel rest
-        (dep-warps dep (~(del in p.dap) bem) |=({beam care} ~))
-        (turn (~(tap in dux.q.dap)) |=(hen/duct [hen %give %news dep]))
-        mow
-      ==
+      =.  mow
+        ;:  weld                                          ::  cancel rest
+          (dep-warps dep (~(del in p.dap) bem) |=({beam care} ~))
+          (turn (~(tap in dux.q.dap)) |=(hen/duct [hen %give %news dep]))
+          mow
+        ==
+      =+  `{ren/care wen/case *}`p.u.rit
+      =.  this  (on-update bem ren -.bem(r wen))
+      +>.$(deh.bay (~(put by deh.bay) dep dap(q [%done ~])))
     ==
   ::
   ++  this  .
@@ -664,16 +675,18 @@
     |=  des/(set dent)  ^-  (set dent)
     %+  roll  (~(tap in des))
     |=  {den/dent dos/(set dent)}  ^+  des
-    ?<  ?=($beam -.den)
-    =.  dos  (~(put in dos) den)
+    =.  dos
+      ?:  ?=($beam -.den)  dos
+      (~(put in dos) den)
     (~(uni in dos) ^$(des (~(get ju sup.gaf.bay) den)))
   ::
   ::+|
   ::
   ++  on-update
-    |=  {bem/beam ren/care new/beak}
+    |=  {bem/beam ren/care new/beak}  ^+  this
     =/  den  (sy [%beam bem ren] ~)
     =/  dos  (downstream-dents den)
+    ~&  [%on-update ren (tope bem) (tope new ~) dos]
     =/  todo  (~(tap in dos))
     =^  old  this  (rebuild new den todo)
     (promote-unchanged old new)
@@ -692,9 +705,10 @@
     ?.  =(~ dep)
       $(todo (weld (~(tap in dep)) todo))
     ::
-    =^  bil  ..zo  (exec-dent:zo i.todo(-.bem bek))
+    =/  taz/task  [hen [bek *silk] ~ ~] ::XX real silk?
+    =^  bil  ..zo  (~(exec-dent zo *@u taz) i.todo(-.bem bek))
     ?-  -.q.bil
-      $1  ~|(%stub !!)                ::TODO store state in task
+      $1  ~|([%stub p.q.bil] !!)                ::TODO store state in task
       $2  $(todo t.todo)              :: errors are probably okay?
       $0  =/  pre  (~(get by jav.bay) (to-cache-key i.todo))
           ~!  [r:(need pre) p.q.bil]
@@ -715,6 +729,7 @@
       ?<  ?=($beam -.a)
       ::
       ::REVIEW update deps?
+      ~&  promo+a
       =.  u.cax
         ?-  -.a
           $load  ?>(?=($load -.u.cax) u.cax(-.q.q bek))
