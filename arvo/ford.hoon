@@ -758,6 +758,10 @@
   ::
   ::+|
   ::
+  ::
+  ++  pass
+    |=  {wir/wire noe/note}  ^+  this
+    %_(+> mow :_(mow [hen %pass wir noe]))
   ++  dep-warps                                       ::  create %warp's
     |=  {dep/@uvH bes/(set dent) rav/$-({beam care} (unit rave))}
     (warp-beams dep (dep-beams bes) rav)
@@ -795,13 +799,13 @@
       =+  kiz=(~(tap in kig))
       |-  ^+  +>
       ?~  kiz  +>
-      $(kiz t.kiz, mow :_(mow [hen (cancel i.kiz)]))
+      $(kiz t.kiz, pass (pass (cancel i.kiz)))
     ::
     ++  cancel                                          ::  stop a request
-      |=  {van/vane ren/care bem/beam}  ^-  (wind note gift)
+      |=  {van/vane ren/care bem/beam}  ^-  {wire note}
       ?+  van  ~|(stub-cancel+van !!)
-        $c  [%pass (camp-wire +<) van [%warp [our p.bem] q.bem ~]]
-        $g  [%pass (camp-wire +<) van [%deal [our p.bem] q.bem [%pull ~]]]
+        $c  [(camp-wire +<) van [%warp [our p.bem] q.bem ~]]
+        $g  [(camp-wire +<) van [%deal [our p.bem] q.bem [%pull ~]]]
       ==
     ::
     ++  camp-wire                                       ::  encode block
@@ -812,26 +816,20 @@
       |=  {van/vane ren/care bem/beam}
       ^+  +>
       ~&  >>  [%camping van ren bem]
-      %_    +>.$
-          kig  (~(put in kig) +<)
-          mow
-        :_  mow
-        :-  hen
-        ?+    van  ~&(%camp-stub !!)
-            $g
-          =/  tyl/path
-            ?.  ?=($x ren)
-              s.bem
-            ?>  ?=(^ s.bem)
-            t.s.bem
-          ::
-          :+  %pass  (camp-wire +<.$)
-          [%g [%deal [our p.bem] q.bem [%peer %scry ren (flop tyl)]]]
+      =.  kig  (~(put in kig) +<)
+      %+  pass  (camp-wire +<)
+      ?+    van  ~&(%camp-stub !!)
+          $g
+        =/  tyl/path
+          ?.  ?=($x ren)
+            s.bem
+          ?>  ?=(^ s.bem)
+          t.s.bem
         ::
-            $c
-          :+  %pass  (camp-wire +<.$)
-          [%c [%warp [our p.bem] q.bem [~ %sing ren r.bem (flop s.bem)]]]
-        ==
+        [%g [%deal [our p.bem] q.bem [%peer %scry ren (flop tyl)]]]
+      ::
+          $c
+        [%c [%warp [our p.bem] q.bem [~ %sing ren r.bem (flop s.bem)]]]
       ==
     ::
     ++  take                                            ::  handle ^take
@@ -855,21 +853,18 @@
         ?>  ?=($g van)
         ?:  |(!?=($x ren) =(-.s.bem p.cag))
           =.  kig  (~(del in kig) +<-.$)
-          =.  mow  :_(mow [hen (cancel van ren bem)])
+          =.  pass  (pass (cancel van ren bem))
           =+  (cat 3 van ren)
           exec(keg (~(put by keg) [- bem] cag))
-        =.  mow
-          :_  mow
-          :^  hen  %pass  (camp-wire van ren bem)
-          [%f %exec our ~ bek %cast ((hard mark) -.s.bem) %$ cag]
-        ..zo
+        %+  ^pass  (camp-wire van ren bem)
+        [%f %exec our ~ bek %cast ((hard mark) -.s.bem) %$ cag]
       ::
       ++  take-made
         |=  {{van/vane ren/care bem/beam} dep/@uvH gag/gage}  ::  XX  depends?
         ^+  ..zo
         ?>  ?=($g van)
         =.  kig  (~(del in kig) +<-.$)
-        =.  mow  :_(mow [hen (cancel van ren bem)])
+        =.  pass  (pass (cancel van ren bem))
         ?:  ?=($| -.gag)
           abut:(give [%made dep %| leaf+"ford-scry-made-fail" p.gag])
         ?:  ?=($tabl -.gag)
@@ -997,6 +992,10 @@
     ++  give
       |=  gef/gift
       %_(+> mow :_(mow [hen %give gef]))
+    ::
+    ++  pass
+      |=  {wir/wire noe/note}
+      %_(+> mow :_(mow [hen %pass wir noe]))
     ::
     ++  compile-to-hood
       ~/  %compile-to-hood
