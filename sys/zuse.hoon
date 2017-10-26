@@ -1000,6 +1000,7 @@
           [%vein ~]                                    ::  view signing keys
           [%vest ~]                                    ::  view public balance
           [%vine ~]                                    ::  view secret history
+          [%jaelwomb p=task:womb]                       ::  XX not factored in
           [%west p=ship q=path r=*]                     ::  remote request
       ==                                                ::
     +=  gilt  gilt:womb
