@@ -3,19 +3,23 @@
   ::
 ::
 /?    310
-/=    tub    /$  |=({bem/beam *} (flop s.bem))
+/=    tub    /$  |=({bem/beam *} (slag (lent /web) (flop s.bem)))
 /=    aut
-  /$  %+  cork  fuel:url:eyre                           :: after parsing params,
+  /$  %+  cork  fuel:html                           :: after parsing params,
       =,  title
-      |=  gas/epic:^eyre  ^-  ?                         :: check that the fcgi
-      %+  lien  (~(tap in (~(get ju aut.ced.gas) %$)))  :: has an identity
+      |=  gas/epic:eyre  ^-  ?                         :: check that the fcgi
+      %+  lien  ~(tap in (~(get ju aut.ced.gas) %$))    :: has an identity
       |=(a/knot !=(%pawn (clan (slav %p a))))           :: which isn't a comet
 /=    dbg
   /^  {nopack/? nomin/?}
-  /$  %+  cork  fuel:url:eyre                           :: after parsing params,
-      |=  gas/epic:^eyre  ^-  {? ?}                     :: check if the query
+  /$  %+  cork  fuel:html                           :: after parsing params,
+      |=  gas/epic:eyre  ^-  {? ?}                     :: check if the query
       :-  (~(has by qix.gas) 'dbg.nopack')              :: dictates separate files
       (~(has by qix.gas) 'dbg.nomin')                   :: and/or unminified assets
+::
+/=    extras    /:  /===/ren/tree/head/extras           :: additional scripts
+                /^  (map knot cord)    /_  /js/
+::
 |%
 ++  cdnjs
   |=(a/tape "//cdnjs.cloudflare.com/ajax/libs/{a}{?:(nomin.dbg "" ".min")}.js")
@@ -28,7 +32,7 @@
 ^-  marl
 ;=  ;title: Urbit - A personal server
     ;meta(name "viewport", content "width=device-width, initial-scale=1");
-::     ;link(type "text/css", rel "stylesheet", href "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.min.css");
+    ;link(type "text/css", rel "stylesheet", href "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.min.css");
     ;*  ?.  nopack.dbg
           :_  ~
           ;link(type "text/css", rel "stylesheet", href "/_css/===/web/pack/css/codemirror-fonts-bootstrap-tree");
@@ -45,9 +49,10 @@
     ;script(type "text/javascript", src "https://unpkg.com/react@15/dist/react.js");
     ;script(type "text/javascript", src "https://unpkg.com/react-dom@15/dist/react-dom.js");
     ;script(type "text/javascript", src "{(cdnjs "flux/2.1.1/Flux")}");
-::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js");
-::     ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/".
-::       "codemirror/4.3.0/mode/markdown/markdown.min.js");
+    ;*  (turn ~(tap by extras) |=({@ a/@t} ;script(type "text/javascript"):"{(trip a)}"))
+    ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/codemirror/4.3.0/codemirror.js");
+::    ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/".
+::      "codemirror/4.3.0/mode/markdown/markdown.min.js");
     ;*  ?.  nopack.dbg
           :_  ~
           ;script(type "text/javascript", src "{?.(aut "" "/~~/~/at")}".

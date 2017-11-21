@@ -4,15 +4,13 @@
 /?    310
 /-    tree-include
 /+    tree
-/=    gas    /$    fuel:url:eyre
+/=    gas    /$    fuel:html
 /=    dat    /^    tree-include    /tree-include/
 /=    kid    /^    (map knot tree-include)
              /_    /tree-include/
 =,  ^eyre
 =,  format
-=,  js:eyre
-=,  bytes:eyre
-=,  base64:eyre
+=,  mimes:html
 ::
 ::::
   ::
@@ -57,13 +55,13 @@
   |=  a/$%({$t p/cord} {$r p/json} {$j p/json} {$m mime})
   ?-  -.a
     $t  [%s p.a]
-    $m  (jobe mite+[%s (moon p.a)] octs+(jape (sifo q.q.a)) ~)
+    $m  (pairs:enjs mite+[%s (en-mite p.a)] octs+(tape:enjs (en-base64 q.q.a)) ~)
     $r  p.a
     $j  p.a
   ==
 ++  from-queries
   |=  {bem/beam quy/(list query)}
-  =<  (jobe (turn quy .))
+  =<  (pairs:enjs (turn quy .))
   |=  a/query
   :-  ?@(a a -.a)
   ?-  a
@@ -93,8 +91,8 @@
 =,  tree
 ^-  json
 %+  from-queries  bem.gas
-=+  default=(quay ~[/spur /body /comt /plan /beak /meta kids+'meta head bump'])
-=/  seh/|-((list $@(term {term $})))
+=+  default=;;(quay ~[/spur /body /comt /plan /beak /meta kids+'meta head bump'])
+=/  seh/,|-((list $@(term {term $})))
   ~|(bad-quay+qix.gas (murn (~(tap by qix.gas)) read-quay))
 =.  seh  ?^(seh seh (murn default read-quay))
 ~|(bad-noun+seh ;;((list query) seh))

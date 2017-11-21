@@ -3,80 +3,74 @@
   ::
 /?    310
 /-  talk
-/+  talk,map-to-json
+/+  talk, map-to-json, old-zuse
 ::
-=+  talk
-=,  bytes:eyre
+=,  talk
+=,  mimes:html
+=,  format
+=,  html
+=,  old-zuse
 |_  gam/(list telegram)
 ::
-++  grab
-  |%
+++  grab  
+  |%  
   ++  noun  (list telegram)
-  ++  mime  |=(^mime (json (rash q.q apex:poja)))
+  ++  mime  |=(^mime (json (rash q.q apex:de-json)))
   ++  json
-    =>  [jo ..telegram]
+    =>  [dejs talk old-zuse]
     |=  a/json  ^-  (list telegram)
-    =-  (need ((ar (ot ship+(su fed:ag) thought+thot ~)) a))
-    |%
-    ++  of
-      |*  a/(pole {@tas fist})
-      |=  b/json
-      %.  ((of:jo a) b)
-      %-  slog
-      ?+  b  ~
-          {$o *}
-        %+  murn  `(list {@tas fist})`a
-        |=  {c/term d/fist}  ^-  (unit tank)
-        =+  (~(get by p.b) c)
-        ?~  -  ~
-        =+  (d u)
-        ?~  -  (some >[c u]<)
-        ~
-      ==
-    ++  op                                              ::  parse keys of map
-      |*  {fel/rule wit/fist}
-      %+  cu  malt
-      %+  ci
-        |=  a/(map cord _(need *wit))
-        ^-  (unit (list _[(wonk *fel) (need *wit)]))
-        (zl (turn (~(tap by a)) (head-rush fel)))
-      (om wit)
+    %.  a
+    |^  (ar (ot ship+(su fed:ag) thought+thot ~))
+::     ++  of
+::       |*  a/(pole {@tas fist})
+::       |=  b/json
+::       %.  ((of:jo a) b)
+::       %-  slog
+::       ?+  b  ~
+::           {$o *} 
+::         %+  murn  `(list {@tas fist})`a
+::         |=  {c/term d/fist}  ^-  (unit tank)
+::         =+  (~(get by p.b) c)
+::         ?~  -  ~
+::         =+  (d u)
+::         ?~  -  (some >[c u]<)
+::         ~  
+::       ==
     ::
     ++  as                                              ::  array as set
-      |*  a/fist
-      (cu ~(gas in *(set _(need *a))) (ar a))
+      |*  a/fist 
+      (cu ~(gas in *(set _*a)) (ar a))
     ::
     ++  ke                                              ::  callbacks
       |*  {gar/* sef/_|.(fist)}
       |=  jon/json
-      ^-  (unit _gar)
+      ^+  gar
       =-  ~!  gar  ~!  (need -)  -
       ((sef) jon)
     ::
-    ++  lake  |*(a/_* $-(json (unit a)))
-    ++  head-rush
+    ++  head-rush  
       |*  a/rule
       |*  {cord *}
-      =+  nit=(rush +<- a)
+      =+  nit=(rush +<- a) 
       ?~  nit  ~
       (some [u.nit +>->])
     ::
     ++  thot
-      ^-  $-(json (unit thought))
+      ^-  $-(json thought)
       %-  ot  :~
-        serial+`$-(json (unit serial))`(ci (slat %uv) so)
-        audience+`$-(json (unit audience))`audi
-        statement+`$-(json (unit statement))`stam
+        serial+`$-(json serial)`(ci (slat %uv) so)  
+        audience+`$-(json audience)`audi 
+        statement+`$-(json statement)`stam  
       ==
     ::
-    ++  audi  `$-(json (unit audience))`(op parn memb)
-    ++  auri  (op parn (ci (soft presence) so))
-    ++  memb  ^-  $-(json (unit (pair envelope delivery)))
-              (ot envelope+lope delivery+(ci (soft delivery) so) ~)
+    ++  audi  `$-(json audience)`(op parn memb)  
+    ++  auri  (op parn (ci (soft presence) so))  
+    ++  memb  ^-  $-(json (pair envelope delivery))
+              (ot envelope+lope delivery+(cu (hard delivery) so) ~)
     ++  lope  (ot visible+bo sender+(mu (su parn)) ~)
     ::
     ++  parn
-      ^-  $-(nail (like partner))
+      ^-  $-(nail (like partner))  
       %+  pick
         ;~((glue fas) ;~(pfix sig fed:ag) urs:ab)
       %+  sear  (soft passport)
@@ -86,20 +80,21 @@
     ++  spec
       %+  ke  *speech  |.  ~+
       %-  of  :~
-        lin+(ot say+bo txt+so ~)
+        lin+(ot say+bo txt+so ~) 
         url+(ot txt+(su aurf:urlp) ~)
         exp+(ot txt+so ~)
         app+(ot txt+so src+so ~)
         fat+(ot tor+tors taf+spec ~)
         ext+(ot nom+so txe+blob ~)
         non+ul
+        mor+(ar spec)
         ::  inv+(ot ship+(su fed:ag) party+(su urs:ab) ~)
       ==
-    ++  tors
+    ++  tors  
       %+  ke  *torso  |.  ~+
       %-  of  :~
-        name+(ot nom+so mon+tors ~)
-        text+(cu lore so)
+        name+(ot nom+so mon+tors ~) 
+        text+(cu to-wain so)
         tank+(ot dat+(cu (hard (list tank)) blob) ~)
       ==
     ::
@@ -109,7 +104,7 @@
 ::
 ++  grow
   |%
-  ++  mime  [/text/json (taco (crip (pojo json)))]
+  ++  mime  [/text/json (as-octs (crip (en-json json)))]
   ++  json
     =>  +
     |^
@@ -126,7 +121,7 @@
       ==
     ::
     ++  jope  |=(a/ship (jape +:<a>)) ::[%s (crip +:(scow %p a))])
-    ++  joke  |=(a/tank [%s (role (turn (wash 0^80 a) crip))])
+    ++  joke  |=(a/tank (jape (of-wall (wash 0^80 a))))
     ++  jode  |=(a/time (jone (div (mul (sub a ~1970.1.1) 1.000) ~s1)))
     ::
     ++  thot
@@ -136,7 +131,7 @@
     ++  audi  (map-to-json parn jove)
     ++  bouq
       |=  a/bouquet
-      a+(turn (~(tap in a)) |=(b/path a+(turn b |=(c/knot s+c))))
+      a+(turn ~(tap in a) |=(b/path a+(turn b |=(c/knot s+c))))
     ::
     ++  parn
       |=  a/partner  ^-  cord
@@ -167,6 +162,10 @@
         $fat  (jobe tor+(tors p.a) taf+$(a q.a) ~)
         $ext  (jobe nom+[%s p.a] txe+(jape (sifo (jam +.a))) ~)
         $non  ~
+        $mor  :-  %a
+              |-  ^-  (list json)
+              ?~  p.a  ~
+              [^$(a i.p.a) $(p.a t.p.a)]
         ::  $inv  (jobe ship+(jope p.a) party+[%s q.a] ~)
       ==
     ::
@@ -174,7 +173,7 @@
       |=  a/torso
       %+  joba  -.a
       ?-  -.a
-        $text  [%s (role +.a)]
+        $text  [%s (of-wain +.a)]
         $tank  (jobe txt+[%a (turn +.a joke)] dat+(jape (sifo (jam +.a))) ~)
         $name  (jobe nom+s+p.a mon+$(a q.a) ~)
       ==

@@ -3,15 +3,15 @@
   ::
 /?    310
 /=    dependency-poll-js    /:    /%/dependency-poll    /js/
-=,  js:eyre
-=,  xml:eyre
-=,  bytes:eyre
+=,  format
+=,  mimes:html
+=,  html
 ::
 |_  {{dep/@uvH hed/marl} {dep-bod/@uvH bod/marl}}
 ++  grow                                                ::  convert to
   |%
-  ++  mime  [/text/html (taco html)]                    ::  convert to %mime
-  ++  html  (crip (print hymn))                         ::  convert to %html
+  ++  mime  [/text/html (as-octs html)]                 ::  convert to %mime
+  ++  html  (crip (en-xml hymn))                        ::  convert to %html
   ++  hymn                                              ::  inject dependencies
     ^-  manx
     ;html
@@ -32,7 +32,7 @@
       ==
     ==
   --
-++  grab
+++  grab  
   |%                                                    ::  convert from
   ++  noun  {@uvH manx}                                 ::  clam from %noun
   --

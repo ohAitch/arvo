@@ -3,6 +3,7 @@
   ::
 /?    310
 /-    talk
+/+    old-zuse
 ::
 =,  talk
 |_  cod/command
@@ -11,7 +12,7 @@
   |%
   ++  noun  command                                     ::  clam from %noun
   ++  json
-    =>  [dejs:format ..command:talk]
+    =>  [dejs:format ..command:talk old-zuse]
     |=  a/json  ^-  command
     =-  ((of -) a)
     =<  :~  publish+(ar thot)
@@ -19,16 +20,6 @@
             design+(ot party+so config+(mu conf) ~)
         ==
     |%
-    ++  op                                              ::  parse keys of map
-      |*  {fel/rule wit/fist}
-      %+  cu  malt
-      %+  ci
-        |=  a/(map cord _*wit)
-        ^-  (unit (list _[(wonk *fel) *wit]))
-        =,  unity
-        (drop-list (turn (~(tap by a)) (head-rush fel)))
-      (om wit)
-    ::
     ++  ke                                              ::  callbacks
       |*  {gar/* sef/_|.(fist)}
       |=  jon/json  ^-  _gar

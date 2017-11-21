@@ -1,9 +1,9 @@
-!:::::
+::::::
 ::  ::  %ford, new execution control
 !?  164
 ::::
 |=  pit/vase
-=,  ^ford
+=,  ford
 =,  format
 =>  =~
 ::  structures
@@ -12,23 +12,23 @@
 ++  move  {p/duct q/(wind note gift:able)}              ::  local move
 ++  note                                                ::  out request $->
           $%  $:  $c                                    ::  to %clay
-          $%  {$warp p/sock q/riff:^clay}               ::
+          $%  {$warp p/sock q/riff:clay}               ::
           ==  ==                                        ::
               $:  $f                                    ::  to %ford
-          $%  {$exec p/@p q/(unit bilk:^ford)}          ::
+          $%  {$exec p/@p q/(unit bilk:ford)}          ::
           ==  ==                                        ::
               $:  $g                                    ::  to %gall
-          $%  {$deal p/sock q/cush:^gall}               ::
+          $%  {$deal p/sock q/cush:gall}               ::
           ==  ==  ==                                    ::
 ++  sign                                                ::  in result $<-
           $%  $:  $c                                    ::  by %clay
-          $%  {$writ p/riot:^clay}                      ::
+          $%  {$writ p/riot:clay}                      ::
           ==  ==                                        ::
               $:  $f                                    ::  by %ford
-          $%  {$made p/@uvH q/gage:^ford}               ::
+          $%  {$made p/@uvH q/gage:ford}               ::
           ==  ==                                        ::
               $:  $g                                    ::  by %gall
-          $%  {$unto p/cuft:^gall}                      ::
+          $%  {$unto p/cuft:gall}                      ::
           ==  ==  ==                                    ::
 --                                                      ::
 |%                                                      ::  structures
@@ -47,7 +47,7 @@
   $:  p/cafe                                            ::  cache
     $=  q                                               ::
       $%  {$0 p/(set beam) q/a}                         ::  depends+product
-          {$1 p/(set {van/vane ren/care:^clay bem/beam tan/tang})}  ::  blocks
+          {$1 p/(set {van/vane ren/care:clay bem/beam tan/tang})}  ::  blocks
           {$2 p/(set beam) q/tang}                      ::  depends+error
       ==                                                ::
   ==                                                    ::
@@ -71,9 +71,9 @@
       {$bake p/calm q/(pair mark beam) r/(unit vase)}   ::  load
       {$boil p/calm q/(trel coin beam beam) r/vase}     ::  execute
       {$path p/calm q/beam r/(unit beam)}               ::  -to/ transformation
-      {$slit p/calm q/{p/span q/span} r/span}           ::  slam type
-      {$slim p/calm q/{p/span q/twig} r/(pair span nock)}::  mint
-      {$slap p/calm q/{p/vase q/twig} r/vase}           ::  compute
+      {$slit p/calm q/{p/type q/type} r/type}           ::  slam type
+      {$slim p/calm q/{p/type q/hoon} r/(pair type nock)}::  mint
+      {$slap p/calm q/{p/vase q/hoon} r/vase}           ::  compute
       {$slam p/calm q/{p/vase q/vase} r/vase}           ::  compute
   ==                                                    ::
 ++  deps                                                ::  depend state
@@ -85,14 +85,14 @@
   $:  nah/duct                                          ::  cause
       {bek/beak kas/silk}                               ::  problem
       keg/(map (pair term beam) cage)                   ::  block results
-      kig/(set (trel vane care:^clay beam))             ::  blocks
+      kig/(set (trel vane care:clay beam))              ::  blocks
   ==                                                    ::
 ++  gagl  (list (pair gage gage))                       ::
 ++  vane  ?($a $b $c $d $e $f $g)                       ::
 --                                                      ::
 |%                                                      ::
 ++  calf                                                ::  reduce calx
-  |*  sem/*                                             ::  a spansystem hack
+  |*  sem/*                                             ::  a typesystem hack
   |=  cax/calx
   ?+  sem  !!
     $hood  ?>(?=($hood -.cax) r.cax)
@@ -119,8 +119,7 @@
   a(q (~(put by q.a) [-.b q.b] b))                      ::
 ::                                                      ::
 ++  faun  (flux |=(a/vase [%& %noun a]))                ::  vase to gage
-++  feel  (flux |=(a/cage q.a))                         ::  cage to vase
-++  furl                                                ::  unwrap gage to cage
+++  flay                                                ::  unwrap gage to cage
   |=  {a/cafe b/gage}  ^-  (bolt cage)
   ?-  -.b
     $tabl  (flaw a >%bad-marc< ~)
@@ -203,7 +202,7 @@
     ~(exec zo [num `task`[hen kub ~ ~]])
   ::
   ++  axon                                              ::  take
-    |=  {num/@ud {van/vane ren/care:^clay bem/beam} sih/sign}
+    |=  {num/@ud {van/vane ren/care:clay bem/beam} sih/sign}
     ^+  +>
     ?:  ?=({$unto $quit *} +.sih)
       +>.$
@@ -239,14 +238,14 @@
         :-  [%done ~]
         ;:  weld
           (axap dep (~(del in q.dap) bem))              ::  cancel outstanding
-          (turn (~(tap in p.dap)) |=(hen/duct [hen %give %news dep]))
+          (turn ~(tap in p.dap) |=(hen/duct [hen %give %news dep]))
           mow
     ==  ==
       ==
   ::
   ++  axap                                              ::  unsubscribe beams
     |=  {dep/@uvH dap/(set beam)}
-    %+  turn  (~(tap in dap))
+    %+  turn  ~(tap in dap)
     |=  bem/beam
     :^  hen  %pass  [(scot %p our) (scot %uv dep) (en-beam bem)]
     [%c %warp [our p.bem] q.bem ~]
@@ -278,7 +277,7 @@
           (~(put by deh.bay) dep [%sent [hen ~ ~] p.u.dap])
         ::
             mow
-          =<  (welp :_(mow (turn (~(tap in p.u.dap)) .)))
+          =<  (welp :_(mow (turn ~(tap in p.u.dap) .)))
           |=  bem/beam
           :^  hen  %pass  [(scot %p our) (scot %uv dep) (en-beam bem)]
           [%c [%warp [our p.bem] q.bem ~ [%next %z r.bem (flop s.bem)]]]
@@ -296,24 +295,24 @@
       ==
     ++  camo                                            ::  stop requests
       ^+  .
-      =+  kiz=(~(tap in kig))
+      =+  kiz=~(tap in kig)
       |-  ^+  +>
       ?~  kiz  +>
       $(kiz t.kiz, mow :_(mow [hen (cancel i.kiz)]))
     ::
     ++  cancel                                          ::  stop a request
-      |=  {van/vane ren/care:^clay bem/beam}
+      |=  {van/vane ren/care:clay bem/beam}  
       ^-  (wind note gift:able)
       ?+  van  ~|(stub-cancel+van !!)
         $c  [%pass (camp-wire +<) van [%warp [our p.bem] q.bem ~]]
         $g  [%pass (camp-wire +<) van [%deal [our p.bem] q.bem [%pull ~]]]
       ==
     ++  camp-wire                                       ::  encode block
-      |=  {van/vane ren/care:^clay bem/beam}  ^-  wire
+      |=  {van/vane ren/care:clay bem/beam}  ^-  wire
       [(scot %p our) (scot %ud num) van ren (en-beam bem)]
     ::
     ++  camp                                            ::  request a file
-      |=  {van/vane ren/care:^clay bem/beam}
+      |=  {van/vane ren/care:clay bem/beam}
       ^+  +>
       ~&  >>  [%camping van ren bem]
       %_    +>.$
@@ -439,17 +438,17 @@
                       ^=  p
                       %-  silt
                       %+  turn  p.faw
-                      |=(a/{vane care:^clay beam} [-.a +<.a +>.a *tang])
+                      |=(a/{vane care:clay beam} [-.a +<.a +>.a *tang])
                   $|  [%2 p=*(set beam) q=p.faw]
                 ==
             ^=  faw
-            |-  ^-  (each (list (trel vane care:^clay beam)) tang)
+            |-  ^-  (each (list (trel vane care:clay beam)) tang)
             ?~  p.ton  [%& ~]
             =+  nex=$(p.ton t.p.ton)
             =+  err=|=(a/tape [%| leaf+a ?:(?=($& -.nex) ~ p.nex)])
             =+  pax=(path i.p.ton)
             ?~  pax  (err "blocking empty")
-            =+  ren=((soft care:^clay) (rsh 3 1 i.pax))
+            =+  ren=((soft care:clay) (rsh 3 1 i.pax))
             ?~  ren
               (err "blocking not care: {<i.pax>}")
             =+  zis=(de-beam t.pax)
@@ -483,7 +482,7 @@
       |=  {cof/cafe gag/gage}
       ^-  (bolt gage)
       ?.  ?=($tabl -.gag)
-        (cope (furl cof gag) fun)
+        (cope (flay cof gag) fun)
       %+  cope
         |-  ^-  (bolt (list (pair gage gage)))
         ?~  p.gag  (fine cof ~)
@@ -527,8 +526,8 @@
       %.  [cof kas kos]
       ;~  cope
         ;~  coax
-          |=({cof/cafe p/silk q/silk} (cope (make cof p) furl))
-          |=({cof/cafe p/silk q/silk} (cope (make cof q) furl))
+          |=({cof/cafe p/silk q/silk} (cope (make cof p) flay))
+          |=({cof/cafe p/silk q/silk} (cope (make cof q) flay))
         ==
         |=  {cof/cafe cay/cage coy/cage}  ^-  (bolt gage)
         ?.  =(p.cay p.coy)
@@ -570,7 +569,7 @@
       |=  {dep/(set beam) deh/(map @uvH deps)}
       ^+  [*@uvH deh.bay]
       =.  dep
-        =<  (silt (skip (~(tap in dep)) .))
+        =<  (silt (skip ~(tap in dep) .))
         |=  dap/beam  ^-  ?
         ?~  s.dap  |
         =>(.(s.dap t.s.dap) |((~(has in dep) dap) $))
@@ -589,12 +588,14 @@
       ?-  -.q.bot
         $0  amok:(expo [%made dep q.q.bot])
         $2  amok:(expo [%made dep %| q.q.bot])
-        $1  =+  zuk=(~(tap by p.q.bot) ~)
+        $1  =+  zuk=~(tap by p.q.bot)
             =<  abet
             |-  ^+  ..exec
             ?~  zuk  ..exec
-            $(zuk t.zuk, ..exec `_..exec`(camp van.i.zuk ren.i.zuk bem.i.zuk))
-      ==
+            %=  $
+              zuk     t.zuk
+              ..exec  `_..exec`(camp van.p.i.zuk ren.q.i.zuk bem.q.i.zuk)
+      ==    ==
     ::
     ++  expo                                            ::  return gift
       |=  gef/gift:able
@@ -682,11 +683,11 @@
         nuck:so
       ::
       ++  mota  ;~(pfix pat mota:vez)                   ::  atom odor
-      ++  hath  (sear plex (stag %conl poor)):vez       ::  hood path
+      ++  hath  (sear plex (stag %clsg poor)):vez       ::  hood path
       ++  have  (sear de-beam ;~(pfix fas hath))           ::  hood beam
       ++  hith                                          ::  static path
         =>  vez
-        (sear plex (stag %conl (more fas hasp)))
+        (sear plex (stag %clsg (more fas hasp)))
       ::
       ++  hive                                          ::  late-bound path
         ;~  pfix  fas
@@ -778,7 +779,7 @@
         ++  read
           |%  ++  ape
                 %+  rail
-                  (ifix [sel ser] (stag %conp (most ace wide:vez)))
+                  (ifix [sel ser] (stag %cltr (most ace wide:vez)))
                 ;~(pfix gap tall:vez)
           ::
               ++  alt
@@ -848,8 +849,8 @@
       %.  [cof kas kos]
       ;~  cope
         ;~  coax
-          |=({cof/cafe p/silk q/silk} (cope (make cof p) furl))
-          |=({cof/cafe p/silk q/silk} (cope (make cof q) furl))
+          |=({cof/cafe p/silk q/silk} (cope (make cof p) flay))
+          |=({cof/cafe p/silk q/silk} (cope (make cof q) flay))
         ==
         |=  {cof/cafe cay/cage coy/cage}  ^-  (bolt gage)
         ::
@@ -891,8 +892,8 @@
       %.  [cof r.mas r.mos]
       ;~  cope
         ;~  coax
-          |=({cof/cafe p/silk q/silk} (cope (make cof p) furl))
-          |=({cof/cafe p/silk q/silk} (cope (make cof q) furl))
+          |=({cof/cafe p/silk q/silk} (cope (make cof p) flay))
+          |=({cof/cafe p/silk q/silk} (cope (make cof q) flay))
         ==
         |=  {cof/cafe cay/cage coy/cage}  ^-  (bolt gage)
         %+  cope  (fang cof for)
@@ -933,7 +934,7 @@
       %+  cope
         |-  ^-  (bolt (list (pair wing vase)))
         ?~  muy  (flue cof)
-        %+  cope  (cope (make cof q.i.muy) furl)
+        %+  cope  (cope (make cof q.i.muy) flay)
         |=  {cof/cafe cay/cage}
         %+  cope  ^$(muy t.muy)
         |=  {cof/cafe rex/(list (pair wing vase))}
@@ -952,7 +953,7 @@
         =<  |.  ^-  tank
             :+  %palm  [" " ~ ~ ~]
             ~[leaf+"ford: keel" rose+[" " ~ ~]^(murn yom +)]
-        |=  {a/wing b/span *}  ^-  (unit tank)
+        |=  {a/wing b/type *}  ^-  (unit tank)
         =+  typ=(mule |.(p:(slap suh wing+a)))
         ?:  ?=($| -.typ)
           (some (show [%c %pull] %l a))
@@ -964,10 +965,10 @@
         |-  ^-  vase
         ?~  yom  [[%atom %n ~] ~]
         (slop q.i.yom $(yom t.yom))
-      ^-  twig
-      :+  %keep  [%& 2]~
+      ^-  hoon
+      :+  %cncb  [%& 2]~
       =+  axe=3
-      |-  ^-  (list (pair wing twig))
+      |-  ^-  (list (pair wing hoon))
       ?~  yom  ~
       :-  [p.i.yom [%$ (peg axe 2)]]
       $(yom t.yom, axe (peg axe 3))
@@ -1034,10 +1035,10 @@
       ?~  von  [p=cof q=[%1 [%c %w bem ~] ~ ~]]
       (fine cof bem(r [%ud ((hard @) +.+:(need u.von))]))
     ::
-    ++  lane                                            ::  span infer
-      |=  {cof/cafe typ/span gen/twig}
+    ++  lane                                            ::  type infer
+      |=  {cof/cafe typ/type gen/hoon}
       %+  (cowl cof)  (mule |.((~(play ut typ) gen)))
-      |=(ref/span ref)
+      |=(ref/type ref)
     ::
     ++  lash                                            ::  filter at beam
       |*  {cof/cafe bem/beam fun/(burg knot (unit))}
@@ -1108,7 +1109,7 @@
       |=  {cof/cafe mal/(map mark $~)}
       ?:  (~(has by mal) for)
         (cope (lace cof for bem) (flux some))
-      =+  opt=(silt (turn (~(tap by mal)) head))        ::  XX asymptotics
+      =+  opt=(silt (turn ~(tap by mal) head))          ::  XX asymptotics
       %+  cope  (lion cof for opt)
       |=  {cof/cafe wuy/(list @tas)}
       ?~  wuy  (flue cof)
@@ -1135,7 +1136,7 @@
         :: =<  $  ~%  %grow  link-jet  ~  |.
         %+  cope  (keel cof pro [[%& 6]~ vax]~)
         |=  {cof/cafe pox/vase}
-        (maim cof pox [%per [%limb %grow] [%limb too]])
+        (maim cof pox [%tsgr [%limb %grow] [%limb too]])
       %+  cope  (fang cof too)
       ~%  %grab  link-jet  ~
       |=  {cof/cafe pro/vase}
@@ -1179,7 +1180,7 @@
       |=  {cof/cafe fro/(set mark)}  ^-  (bolt (list mark))
       ?:  (~(has in tag) p.won)
         (fine cof (flop pax))
-      =+  for=(skip (~(tap by fro)) ~(has by war))
+      =+  for=(skip ~(tap in fro) ~(has by war))
       =.  for  (sort for aor)         ::  XX useful?
       =:  q.won  (~(gas to q.won) for)
           war  (~(gas by war) (turn for |=(mark [+< pax])))
@@ -1200,10 +1201,10 @@
     ::
     ++  mail                                            ::  cached mint
       ~/  %mail
-      |=  {cof/cafe sut/span gen/twig}
-      ^-  (bolt (pair span nock))
+      |=  {cof/cafe sut/type gen/hoon}
+      ^-  (bolt (pair type nock))
       %+  (clef %slim)  (fine cof sut gen)
-      |=  {cof/cafe sut/span gen/twig}
+      |=  {cof/cafe sut/type gen/hoon}
       =+  puz=(mule |.((~(mint ut sut) [%noun gen])))
       ?-  -.puz
         $|  (flaw cof p.puz)
@@ -1212,10 +1213,10 @@
     ::
     ++  maim                                            ::  slap
       ~/  %maim
-      |=  {cof/cafe vax/vase gen/twig}
+      |=  {cof/cafe vax/vase gen/hoon}
       ^-  (bolt vase)
       %+  cope  (mail cof p.vax gen)
-      |=  {cof/cafe typ/span fol/nock}
+      |=  {cof/cafe typ/type fol/nock}
       %+  (coup cof)  (mock [q.vax fol] (sloy syve))
       |=(val/* `vase`[typ val])
     ::
@@ -1244,8 +1245,8 @@
         %.  [cof p.kas q.kas]
         ;~  cope
           ;~  coax
-            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas p.kas) furl))
-            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas q.kas) furl))
+            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas p.kas) flay))
+            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas q.kas) flay)) 
           ==                          ::  XX merge %tabl
         ::
           |=  {cof/cafe bor/cage heg/cage}  ^-  (bolt gage)
@@ -1293,7 +1294,7 @@
         %.  [cof p.kas q.kas]
         ;~  cope
           ;~  coax
-            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas p) furl))
+            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas p) flay))
             |=({cof/cafe p/silk q/silk} ^$(cof cof, kas q))
           ==
         ::
@@ -1416,10 +1417,10 @@
     ::
     ++  malt                                            ::  cached slit
       ~/  %slit
-      |=  {cof/cafe gat/span sam/span}
-      ^-  (bolt span)
+      |=  {cof/cafe gat/type sam/type}
+      ^-  (bolt type)
       %+  (clef %slit)  (fine cof gat sam)
-      |=  {cof/cafe gat/span sam/span}
+      |=  {cof/cafe gat/type sam/type}
       %+  cool  |.(%.(%have ~(dunk ut sam)))
       %+  cool  |.(%.(%want ~(dunk ut (~(peek ut gat) %free 6))))
       =+  top=(mule |.((slit gat sam)))
@@ -1433,25 +1434,33 @@
       |=  {cof/cafe gat/vase sam/vase}
       ^-  (bolt vase)
       %+  cope  (malt cof p.gat p.sam)
-      |=  {cof/cafe typ/span}
+      |=  {cof/cafe typ/type}
       %+  (coup cof)  (mong [q.gat q.sam] (sloy syve))
       |=(val/* `vase`[typ val])
     ::
     ++  meow                                            ::  assemble
       :: =+  dyv=0
       |=  {how/beam arg/coin}
-      =|  $:  rop/(map term (pair hoof twig))           ::  structures
-              bil/(map term (pair hoof twig))           ::  libraries
-              boy/(list twig)                           ::  body stack
+      =|  $:  rop/(map term (pair hoof hoon))           ::  structures
+              bil/(map term (pair hoof hoon))           ::  libraries
+              boy/(list hoon)                           ::  body stack
               lit/?                                     ::  drop arguments
           ==
       ~%  %meow  ..meow  ~
       |%
       ++  able                                          ::  assemble preamble
-        ^-  twig
-        :+  %per
-          ?:(=(~ rop) [%$ 1] [%core (~(run by rop) |=({^ a/twig} [%ash a]))])
-        ?:(=(~ bil) [%$ 1] [%core (~(run by bil) |=({^ a/twig} [%ash a]))])
+        ^-  hoon
+        :+  %tsgr
+          ?:  =(~ rop)  
+            [%$ 1] 
+          :+  %brcn  [~ ~]
+          =-  [[0 [~ ~] -] ~ ~]
+          (~(run by rop) |=({^ a/hoon} [~ %ash a]))
+        ?:  =(~ bil) 
+          [%$ 1] 
+        :+  %brcn  [~ ~]
+        =-  [[0 [~ ~] -] ~ ~]
+        (~(run by bil) |=({^ a/hoon} [~ %ash a]))
       ::
       ++  abut                                          ::  generate
         |=  {cof/cafe hyd/hood}
@@ -1463,7 +1472,7 @@
         |=  {cof/cafe bax/vase}
         %+  cope  (chap cof bax [%fan fan.hyd])
         |=  {cof/cafe mar/mark gox/vase}
-        %+  cope  (maim cof (slop gox bax) [%tow (flop boy)])
+        %+  cope  (maim cof (slop gox bax) [%tssg (flop boy)])
         |=  {cof/cafe fin/vase}
         (fine cof fin)
         ::  ~>  %slog.[0 ~(duck ut p.q.cay)]
@@ -1492,14 +1501,14 @@
         |=  {cof/cafe sel/_..body}
         ^$(src t.src, ..body sel, cof cof)
       ::
-      :: ++  libs  `(set term)`(silt (turn (~(tap by bil)) head.is))
+      :: ++  libs  `(set term)`(silt (turn ~(tap by bil) head.is))
       ++  chad                                          ::  atomic list
         |=  {cof/cafe bax/vase doe/term hon/horn}
         ^-  (bolt vase)
         %+  cope  (lash cof how (flux (slat doe)))
         |=  {cof/cafe yep/(map knot @)}
         =+  ^=  poy  ^-  (list (pair knot @))
-            %+  sort  (~(tap by yep) ~)
+            %+  sort  ~(tap by yep)
             |=({{* a/@} {* b/@}} (lth a b))
         %+  cope
           |-  ^-  (bolt (list (pair @ vase)))
@@ -1561,7 +1570,7 @@
           %+  cope  $(hon q.hon)
           %-  flux
           |=  {mar/mark vax/vase}
-          [mar [%face p.hon p.vax] q.vax]
+          [mar [%face [~ p.hon] p.vax] q.vax]
         ::
             $fan
           %+  cope
@@ -1594,7 +1603,7 @@
           ?~  p.hon  (fine cof cay)
           %+  cope  $(p.hon t.p.hon)
           |=  {cof/cafe cay/cage}
-          (cope (make cof %cast i.p.hon $+cay) furl)
+          (cope (make cof %cast i.p.hon $+cay) flay)
         ::
             $man
           %+  cope
@@ -1636,7 +1645,7 @@
           =+  vez=(vang & (en-beam how))
           =+  tuz=(posh:vez p.hon)
           ?~  tuz  (flaw cof leaf+"bad tusk: {<p.hon>}" ~)
-          =+  pax=(plex:vez %conl u.tuz)
+          =+  pax=(plex:vez %clsg u.tuz)
           ?~  pax  (flaw cof leaf+"bad path: {<u.tuz>}" ~)
           =+  bem=(de-beam u.pax)
           ?~  bem  (flaw cof leaf+"bad beam: {<u.pax>}" ~)
@@ -1654,7 +1663,7 @@
             $toy
           ?:  p.hon
             =?  arg  lit  many+~
-            =-  (cope - furl)
+            =-  (cope - flay)
             (make cof %alts [%boil q.hon arg how] [%bake q.hon how] ~)
           %+  cool  |.(leaf+"ford: hook {<q.hon>} {<(en-beam how)>}")
           %+  cope  (fade cof how)
@@ -1670,7 +1679,7 @@
           (fine cof ..head)
         =.  boy
           ?:  p.i.bir  boy
-          (welp boy [[%use [%limb q.i.bir] [%$ 1]] ~])
+          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~])
         =+  byf=(~(get by rop) q.i.bir)
         ?^  byf
           ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)
@@ -1688,7 +1697,7 @@
               how  how
               rop  %+  ~(put by (~(uni by rop) rop.sel))
                       q.i.bir
-                   [i.bir [%tow (flop boy.sel)]]
+                   [i.bir [%tssg (flop boy.sel)]]
             ==
         ^^^$(cof cof, bir t.bir)
       ::
@@ -1705,7 +1714,8 @@
         ?~  bir  (fine cof ..neck)
         =.  boy
           ?:  p.i.bir  boy
-          (welp boy [[%use [%limb q.i.bir] [%$ 1]] ~])
+::           ~&  ford+tscm+[q.i.bir boy]
+          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~])
         =+  byf=(~(get by bil) q.i.bir)
         ?^  byf
           ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)
@@ -1722,7 +1732,7 @@
               how  how
               bil  %+  ~(put by (~(uni by bil) bil.sel))
                      q.i.bir
-                   [i.bir [%tow (flop boy.sel)]]
+                   [i.bir [%tssg (flop boy.sel)]]
             ==
         ^^^$(cof cof, bir t.bir)
       ::
@@ -1740,15 +1750,15 @@
             %+  cope  (fade cof p.hop)
             |=  {cof/cafe hyd/hood}
             %+  cope  (apex(boy ~) cof hyd)
-            (flux |=(sel/_..wilt sel(boy [[%tow boy.sel] boy])))
+            (flux |=(sel/_..wilt sel(boy [[%tssg boy.sel] boy])))
           =+  [all=(lark (slat %tas) arc) sel=..wilt]
           %+  cope
-            |-  ^-  (bolt (pair (map term foot) _..wilt))
+            |-  ^-  (bolt (pair (map term (pair what foot)) _..wilt))
             ?~  all  (fine cof ~ ..wilt)
             %+  cope  $(all l.all)
-            |=  {cof/cafe lef/(map term foot) sel/_..wilt}
+            |=  {cof/cafe lef/(map term (pair what foot)) sel/_..wilt}
             %+  cope  ^$(all r.all, cof cof, sel sel)
-            |=  {cof/cafe rig/(map term foot) sel/_..wilt}
+            |=  {cof/cafe rig/(map term (pair what foot)) sel/_..wilt}
             %+  cope
               %=    ^^^^$
                   cof      cof
@@ -1757,18 +1767,21 @@
               ==
             |=  {cof/cafe sel/_..wilt}
             %+  fine  cof
-            [`(map term foot)`[[p.n.all [%ash [%tow boy.sel]]] lef rig] sel]
-          |=  {cof/cafe mav/(map term foot) sel/_..wilt}
+            :_  sel
+            ^-  (map term (pair what foot))
+            [[p.n.all [~ %ash [%tssg boy.sel]]] lef rig]
+          |=  {cof/cafe mav/(map term (pair what foot)) sel/_..wilt}
           ?~  mav
             (flaw cof [%leaf "source missing: {<(en-beam p.hop)>}"]~)
-          (fine cof sel(boy [[%core mav] boy]))
+          (fine cof sel(boy [[%brcn [~ ~] [[0 [~ ~] mav] ~ ~]] boy]))
         ==
       --
     ::
     ++  pact-hoon                                       ::  .hoon special case
-      |=  {a/@t b/(urge:^clay cord)}  ^-  @t
+      |=  {a/@t b/(urge:clay cord)}  ^-  @t
       ~|  %lurk-hoon
-      (role:lines:clay (lurk:differ (lore:lines:clay a) b))
+      =,  format  =,  differ
+      (of-wain (lurk (to-wain a) b))
     ::
     ++  pact                                            ::  patch
       |=  {cof/cafe kas/silk kos/silk}
@@ -1776,8 +1789,8 @@
       %.  [cof kas kos]
       ;~  cope
         ;~  coax
-          |=({cof/cafe p/silk q/silk} (cope (make cof p) furl))
-          |=({cof/cafe p/silk q/silk} (cope (make cof q) furl))
+          |=({cof/cafe p/silk q/silk} (cope (make cof p) flay))
+          |=({cof/cafe p/silk q/silk} (cope (make cof q) flay))
         ==
         |=  {cof/cafe cay/cage coy/cage}  ^-  (bolt gage)
         %+  cope  (fang cof p.cay)
@@ -1810,7 +1823,7 @@
       ==
     ::
     ++  resp
-      |=  {{van/vane ren/care:^clay bem/beam} rot/riot:^clay}
+      |=  {{van/vane ren/care:clay bem/beam} rot/riot:clay}
       ^+  ..zo
       ?>  ?=($c van)
       =.  kig  (~(del in kig) +<-.$)
@@ -1821,7 +1834,7 @@
       exec(keg (~(put by keg) [- bem] r.u.rot))
     ::
     ++  resd                                            ::  take %diff
-      |=  {{van/vane ren/care:^clay bem/beam} cag/cage}
+      |=  {{van/vane ren/care:clay bem/beam} cag/cage}
       ^+  ..zo
       ?>  ?=($g van)
       ?:  |(!?=($x ren) =(-.s.bem p.cag))
@@ -1836,7 +1849,7 @@
       ..zo
     ::
     ++  resm                                            ::  take %made
-      |=  {{van/vane ren/care:^clay bem/beam} dep/@uvH gag/gage}
+      |=  {{van/vane ren/care:clay bem/beam} dep/@uvH gag/gage}
       ^+  ..zo
       ?>  ?=($g van)
       =.  kig  (~(del in kig) +<-.$)
@@ -1856,9 +1869,9 @@
       %-  %-  lift  |=  (unit cage)                     :: ignore block
           %+  biff  +<
           |=  cay/cage  ^-  (unit cage)
-          ?.  -:(nets:wa +.ref `span`p.q.cay)           :: error if bad type
+          ?.  -:(nets:wa +.ref `type`p.q.cay)           :: error if bad type
             ~&  :^  %ford-syve-lost  `path`[tem (en-beam bem)]
-                  want=;;(span +.ref)
+                  want=;;(type +.ref)
                 have=p.q.cay
             ~
           `cay
@@ -1896,7 +1909,7 @@
         ?~  -.q.i.i.a
           [%& (turn (turn a2 head) |=(b/mass ?~(-.q.b p.q.b !!)))]
         [%| $(a (turn (turn a2 head) |=(b/mass ?~(-.q.b !! p.q.b))))]
-    %+  turn  (~(tap by pol))
+    %+  turn  ~(tap by pol)
     |=  {@ baby}
     :~  =<  cache+[%| (turn `(list term)`/hood/bake/slit/slim/slap/slam .)]
         =-  |=(a/term [a %& (~(get ja dep) a)])
@@ -1971,7 +1984,7 @@
     ?>  ?=({@ @ ^} t.t.tea)
     =+  :*  num=(slav %ud i.t.tea)
             van=((hard vane) i.t.t.tea)
-            ren=((hard care:^clay) i.t.t.t.tea)
+            ren=((hard care:clay) i.t.t.t.tea)
             bem=(need (de-beam t.t.t.t.tea))
         ==
     abet:(~(axon za [our hen [now eny ski] ~] bay) num [van ren bem] q.hin)

@@ -3,13 +3,13 @@
   ::
 /?    310
 /-    talk
-/+    talk
+/+    talk, old-zuse
 ::
 =,  talk
-=,  bytes:eyre
-=,  js:eyre
+=,  mimes:html
 =,  html
-=,  lines:clay
+=,  format
+=,  old-zuse
 |_  rep/report
 ::
 ++  grab                                                ::  convert from
@@ -18,13 +18,13 @@
   --
 ++  grow
   |%
-  ++  mime  [/text/json (taco (crip (pojo json)))]
+  ++  mime  [/text/json (as-octs (crip (en-json json)))]
   ++  json
     =>  +
     |^  %+  joba  -.rep
         ?-  -.rep
           $cabal  (cabl +.rep)
-          $house  a+(turn (~(tap by +.rep)) jose)
+          $house  a+(turn ~(tap by +.rep) jose)
           $glyph  ((jome |=(a/char a) nack) +.rep)
           $grams  (jobe num+(jone p.rep) tele+[%a (turn q.rep gram)] ~)
           $group  (jobe local+(grop p.rep) global+%.(q.rep (jome parn grop)) ~)
@@ -41,19 +41,19 @@
         delivery+[%s b]
       ==
     ++  jope  |=(a/ship (jape +:<a>)) ::[%s (crip +:(scow %p a))])
-    ++  joke  |=(a/tank [%s (role (turn (wash 0^80 a) crip))])
+    ++  joke  |=(a/tank (jape (of-wall (wash 0^80 a))))
     ++  jode  |=(a/time (jone (div (mul (sub a ~1970.1.1) 1.000) ~s1)))
     ++  jome                                            ::  stringify keys
       |*  {a/_cord b/_json}
       |=  c/(map _+<.a _+<.b)
-      (jobe (turn (~(tap by c)) (both a b)))
+      (jobe (turn ~(tap by c) (both a b)))
     ::
     ++  both                                            ::  cons two gates
       |*  {a/_* b/_*}
       |=(c/_[+<.a +<.b] [(a -.c) (b +.c)])
     ::
     ::
-    ++  nack  |=(a/(set (set partner)) [%a (turn (~(tap in a)) sorc)])
+    ++  nack  |=(a/(set (set partner)) [%a (turn ~(tap in a) sorc)])
     ++  grop  (jome phon stas)                          ::  (map ship status)
     ++  phon  |=(a/ship (scot %p a))
     ++  stas  |=(status (jobe presence+(joce p) human+(huma q) ~))
@@ -65,7 +65,7 @@
     ++  audi  (jome parn jove)
     ++  bouq
       |=  a/bouquet
-      a+(turn (~(tap in a)) |=(b/path a+(turn b |=(c/knot s+c))))
+      a+(turn ~(tap in a) |=(b/path a+(turn b |=(c/knot s+c))))
     ::
     ++  parn
       |=  a/partner  ^-  cord
@@ -112,7 +112,7 @@
       |=  a/torso
       %+  joba  -.a
       ?-  -.a
-        $text  [%s (role +.a)]
+        $text  [%s (of-wain +.a)]
         $tank  [%a (turn +.a joke)]
         $name  (jobe nom+s+p.a mon+$(a q.a) ~)
       ==
@@ -136,7 +136,7 @@
     ::
     ++  sorc
       |=  a/(set partner)  ^-  json
-      [%a (turn (~(tap in a)) |=(b/partner s+(parn b)))]
+      [%a (turn ~(tap in a) |=(b/partner s+(parn b)))]
     ::
     ++  conf
       |=  config
@@ -144,7 +144,7 @@
         sources+(sorc sources)
         caption+[%s caption]
         =-  cordon+(jobe posture+[%s -.cordon] list+[%a -] ~)
-        (turn (~(tap in q.cordon)) jope)                ::  XX  jase
+        (turn ~(tap in q.cordon) jope)                ::  XX  jase
       ==
   --
 --  --

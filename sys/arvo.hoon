@@ -1,6 +1,6 @@
 ::                                                      ::
 ::::  6: layer six
-  !:
+  ::
 ~>  %slog.[0 leaf+"arvo-boot"]
 =<  |=  {now/@da ovo/*}
     ^-  *
@@ -12,18 +12,28 @@
 ::
 ::::  6a: arvo core
   ::
-++  mean  |=(a/tang (fear (flop a) |.(!!)))             ::  deify stack trace
-++  fear                                                ::  insert user mean
+::                                                  ::  ++mean:error:
+++  mean                                            ::  deify stack trace
+  |=(a/tang (fear (flop a) |.(!!)))
+::                                                  ::  ++fear:error:
+++  fear                                            ::  insert user mean
   |*  {a/tang _|?(**)}
   ^+  (+<+)
   =>  .(a `tang`a)
   ?~  a  (+<+)
   ~_(i.a $(a t.a))
-::
-++  slog                                                ::  deify printf
-  =|  pri/@                                             ::  priority level
-  |=  a/tang  ^+  same                                  ::  .=  ~&(%a 1)
-  ?~(a same ~>(%slog.[pri i.a] $(a t.a)))               ::  ((slog ~[>%a<]) 1)
+::                                                  ::  ++slog:error:
+++  slog                                            ::  deify printf
+  ::  pri: priority level
+  =|  pri/@
+  ::
+  ::  .=  ~&(%a 1)
+  ::
+  |=  a/tang  ^+  same
+  ::
+  ::  ((slog ~[>%a<]) 1)
+  ::
+  ?~(a same ~>(%slog.[pri i.a] $(a t.a)))
 ::
 ++  sloy
   |=  sod/slyd
@@ -488,7 +498,7 @@
 ++  peek                                                ::  external inspect
   |=  {now/@da hap/path}
   ^-  (unit)
-  ?~  hap  [~ hoon]
+  ?~  hap  [~ hoon-version]
   =+  rob=((sloy ~(beck (is vil eny mast niz) now)) [151 %noun] hap)
   ?~  rob  ~
   ?~  u.rob  ~
@@ -563,7 +573,7 @@
   ::
   ::  find the hoon version number of the new kernel
   ::
-  =+  nex=(@ .*(cop q:(~(mint ut p.raw) %noun [%limb %hoon])))
+  =+  nex=(@ .*(cop q:(~(mint ut p.raw) %noun [%limb %hoon-version])))
   ?>  |(=(nex hoon) =(+(nex) hoon))
   ::
   ::  if we're upgrading language versions, recompile the compiler
@@ -625,7 +635,7 @@
     =+  gen=(rain pax.fav txt.fav)
     =+  vax=(slap pit gen)
     =+  orb=`@p`?~(urb 0xffff.ffff.ffff.ffff.ffff.ffff.ffff.ffff u.urb)
-    +>.^$(bod `[[%cell [%face %our [%atom %p ~]] p.vax] [orb q.vax]])
+    +>.^$(bod `[[%cell [%face [~ %our] [%atom %p ~]] p.vax] [orb q.vax]])
   %_    +>.^$
       q.niz
     |-  ^+  q.niz

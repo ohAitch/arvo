@@ -5,7 +5,7 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-=,  ^clay
+=,  clay
 =,  space:userlib
 =,  format
 |%                                                      ::  ::
@@ -29,6 +29,7 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
+++  kiln-commit  term                                   ::
 ++  kiln-mount                                          ::
     $:  pax/path                                        ::
         pot/term                                        ::
@@ -55,14 +56,15 @@
 ::                                                      ::  ::
 ::::                                                    ::  ::
   ::                                                    ::  ::
-|=  {bowl:^gall kiln-part}                              ::  main kiln work
+|=  {bowl:gall kiln-part}                              ::  main kiln work
 ?>  =(src our)
 =>  |%                                                  ::  arvo structures
     ++  card                                            ::
-      $%  {$exec wire @p $~ {beak silk:^ford}}                ::
+      $%  {$exec wire @p $~ {beak silk:ford}}                ::
           {$drop wire @p @tas}                          ::
           {$info wire @p @tas nori}                     ::
-          {$mont wire @tas @p @tas path}                ::
+          {$mont wire @tas beam}                        ::
+          {$dirk wire @tas}                             ::
           {$ogre wire $@(@tas beam)}                    ::
           {$merg wire @p @tas @p @tas case germ}        ::
           {$poke wire dock pear}                        ::
@@ -93,13 +95,17 @@
   :^  %palm  [" " ~ ~ ~]  leaf+mez
   ~[leaf+"from {<sud>}" leaf+"on {<who>}" leaf+"to {<syd>}"]
 ::
+++  poke-commit
+  |=  mon/kiln-commit
+  abet:(emit %dirk /commit mon)
+::
 ++  poke-mount
   |=  kiln-mount
   =+  bem=(de-beam pax)
   ?~  bem
     =+  "can't mount bad path: {<pax>}"
     abet:(spam leaf+- ~)
-  abet:(emit %mont /mount pot p.u.bem q.u.bem (flop s.u.bem))
+  abet:(emit %mont /mount pot u.bem)
 ::
 ++  poke-unmount
   |=  mon/kiln-unmount
@@ -108,7 +114,7 @@
     ?~  bem
       =+  "can't unmount bad path: {<mon>}"
       abet:(spam leaf+- ~)
-    abet:(emit %ogre /unmount-beam [[p q %ud 0] s]:u.bem)
+    abet:(emit %ogre /unmount-beam [[p q r] s]:u.bem)
   abet:(emit %ogre /unmount-point mon)
 ::
 ++  poke-track                                        ::
@@ -128,7 +134,7 @@
   =<  abet  %-  spam
   ?:  =(0 ~(wyt by syn))
     [%leaf "no syncs configured"]~
-  %+  turn  (~(tap in ~(key by syn)))
+  %+  turn  ~(tap in ~(key by syn))
   |=(a/kiln-sync (render "sync configured" [sud her syd]:a))
 ::
 ++  poke-init-sync
@@ -186,7 +192,7 @@
   |%
   ++  emit  |=(a/card +>(..autoload (^emit a)))
   ++  tracked-vanes
-    `(list @tas)`~[%ames %behn %clay %dill %eyre %ford %gall %jael]
+    `(list @tas)`~[%ames %behn %clay %dill %eyre %ford %gall]
   ::
   ++  our-home  /(scot %p our)/home/(scot %da now)
   ++  sys-hash  |=(pax/path .^(@uvI %cz :(welp our-home /sys pax)))
@@ -254,13 +260,15 @@
   |=  tym/@dr
   abet:(emit %wait /kiln/overload/(scot %dr tym) (add ~s10 now))
 ::
+++  poke-wipe-ford  |=($~ abet:(emit %wipe /kiln our ~))
+::
 ++  take  |=(way/wire ?>(?=({@ $~} way) (work i.way))) ::  general handler
 ++  take-mere                                         ::
   |=  {way/wire are/(each (set path) (pair term tang))}
   abet:abet:(mere:(take way) are)
 ::
 ++  take-made                                         ::
-  |=  {way/wire dep/@uvH reg/gage:^ford}
+  |=  {way/wire dep/@uvH reg/gage:ford}
   abet:abet:(made:(take way) dep reg)
 ::
 ++  take-coup-fancy                                   ::
@@ -427,11 +435,11 @@
     (ford-fail p.res)
   ::
   ++  gage-to-cages
-    |=  gag/gage:^ford  ^-  (list (pair cage cage))
+    |=  gag/gage:ford  ^-  (list (pair cage cage))
     (unwrap-tang (gage-to-tage gag))
   ::
   ++  gage-to-tage
-    |=  gag/gage:^ford
+    |=  gag/gage:ford
     ^-  (each (list (pair cage cage)) tang)
     ?.  ?=($tabl -.gag)
       (mule |.(`$~`(ford-fail >%strange-gage< ~)))
@@ -498,11 +506,11 @@
         %-  blab  :_  ~
         :*  ost  %exec  /kiln/[syd]
             our  ~  [our tic %da now]  %tabl
-            ^-  (list (pair silk:^ford silk:^ford))
+            ^-  (list (pair silk:ford silk:ford))
             :: ~&  >  kiln-mashing+[p.are syd=syd +<.abet]
-            %+  turn  (~(tap in p.are))
+            %+  turn  ~(tap in p.are)
             |=  pax/path
-            ^-  (pair silk:^ford silk:^ford)
+            ^-  (pair silk:ford silk:ford)
             :-  [%$ %path -:!>(*path) pax]
             =+  base=[%file [our tic %da now] (flop pax)]
             =+  alis=[%file [her sud cas] (flop pax)]
@@ -566,7 +574,7 @@
     (welp (tape-to-tanks "\0a{c}{a}") >b< ~)
   ::
   ++  made
-    |=  {dep/@uvH reg/gage:^ford}
+    |=  {dep/@uvH reg/gage:ford}
     ^+  +>
     ?:  ?=($| -.reg)
       =+  "failed to mash"

@@ -2,10 +2,11 @@
 ::::  /hoon/stat-all/womb/mar
   ::
 /?    310
-/+    womb
+/+    womb, old-zuse
 ::
 ::::  ~fyr
   ::
+=,  old-zuse
 |_  all/(map ship stat:womb)
 ::
 ++  grab                                                ::  convert from
@@ -16,7 +17,7 @@
   |%
   ++  json
     %-  jobe
-    %+  turn  (~(tap by all))
+    %+  turn  ~(tap by all)
     |=  {a/ship b/stat:womb}  ^-  {cord ^json}
     :-  (crip +:<a>)
     (jobe live+[%s p.b] dist+(json-dist q.b) ~)
