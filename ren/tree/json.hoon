@@ -8,7 +8,7 @@
 /=    dat    /^    tree-include    /tree-include/
 /=    kid    /^    (map knot tree-include)
              /_    /tree-include/
-=,  ^eyre
+=,  eyre
 =,  format
 =,  mimes:html
 ::
@@ -93,6 +93,6 @@
 %+  from-queries  bem.gas
 =+  default=;;(quay ~[/spur /body /comt /plan /beak /meta kids+'meta head bump'])
 =/  seh/,|-((list $@(term {term $})))
-  ~|(bad-quay+qix.gas (murn (~(tap by qix.gas)) read-quay))
+  ~|(bad-quay+qix.gas (murn ~(tap by qix.gas) read-quay))
 =.  seh  ?^(seh seh (murn default read-quay))
 ~|(bad-noun+seh ;;((list query) seh))
