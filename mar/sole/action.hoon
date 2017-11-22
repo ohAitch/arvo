@@ -31,8 +31,10 @@
     ::
     ++  ke                                              ::  callbacks
       |*  {gar/* sef/(trap fist)}
-      |=  jon/json  ^-  (unit _gar)
-      =-  ~!  gar  ~!  (need -)  -
+      |=  jon/json  ^+  gar
+      =-  ~!  gar
+          ~!  (need -)
+          -
       ((sef) jon)
     ::
     ++  change  (ot ler+(at ni ni ~) ted+(pe 0v0 edit) ~)
