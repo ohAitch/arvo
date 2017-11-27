@@ -2,7 +2,7 @@
 ::::  /hoon/plain/mar
   ::
 /?    310
-=,  mime:html
+=,  mimes:html
 =,  html
 |_  own/manx
 ::

@@ -5,13 +5,10 @@
 /^    {dep/@uvh hym/manx}    /#  /|(/hymn/ /~[;none;])
 /^    kid/(map knot $~)    /_    /~  ~
 /^    sib/(map knot $~)    /:  /%%/    /_    /~  ~
-/=    gas    /$  fuel:url:eyre
+/=    gas    /$  fuel:html
 ::
 ::::
   ::
-=,  bytes:eyre
-=,  clay
-=,  ford
 ^-  manx
 =+  fyl=?~(s.bem.gas !! i.s.bem.gas)
 =+  ^-  {hed/marl bod/marl}
@@ -29,7 +26,7 @@
     ;*  hed
   ==
   ;body
-    ;+  =+  all=(sort (~(tap by sib)) aor)
+    ;+  =+  all=(sort ~(tap by sib) aor)
         =/  nex
           ?~  all  ~
           |-  ^-  marl
@@ -46,10 +43,10 @@
         ;div: *{pre} ;{a/"../" "Up"} *{nex}
     ;*  ?~  bod  ~
         [;hr; bod]
-    ;-  <gas>
+::     ;-  <gas>
     ;hr;
     ;ul
-      ;*  %+  turn  (sort (~(tap by kid)) aor)
+      ;*  %+  turn  (sort ~(tap by kid) aor)
           |=  {sub/knot $~}
           ;li: ;{a/"{(trip sub)}/" "{(trip sub)}"}
     ==
