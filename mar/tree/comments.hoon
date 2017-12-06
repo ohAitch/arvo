@@ -18,7 +18,7 @@
     |=  {a/time b/ship c/marl}  ^-  ^json
     =+  bod=[[%div id+(time-to-id a) ~] c]
     =,  enjs
-    (pairs time+(time a) user+(ship b) body+(elem-to-react-json bod) ~)
+    (table time+(time a) user+(ship b) body+(elem-to-react-json bod) ~)
   --
 ++  grab  |%                                            ::  convert from
           ++  noun  (list {time manx})                  ::  clam from %noun

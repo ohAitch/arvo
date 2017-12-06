@@ -38,10 +38,10 @@
   =+  atr=(molt `(list (pair mane tape))`a.g.src)
   ?:  (~(has by atr) [%urb %codemirror])
     $(src (urb-codemirror src))
-  %-  pairs:enjs  :~
+  %-  table:enjs  :~
     c+a+(turn c.src ..$)
     gn+s+(mane-to-cord n.g.src)
-    =<  ga+(pairs:enjs (turn a.g.src .))
+    =<  ga+(table:enjs (turn a.g.src .))
     |=  {a/mane b/tape}  ^-  {cord json}
     :_  (tape:enjs b)
     ?^  a  (mane-to-cord a)

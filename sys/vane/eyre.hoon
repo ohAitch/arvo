@@ -239,7 +239,7 @@
 ::
 ++  ares-to-json
   |=  err/ares  ^-  json
-  =-  (pairs:enjs fail+s+typ mess+(tape:enjs mez) ~)
+  =-  (table:enjs fail+s+typ mess+(tape:enjs mez) ~)
   ^-  {typ/term mez/tape}
   ?~  err  [%fail "Unknown Error"]
   [p.u.err (of-wall (wush 160 q.u.err))]
@@ -822,7 +822,7 @@
       ?:  ?=($ow -.tee)
         abut:(ire-ix p.tee)
       =>  wake:(ire-ix p.tee)
-      (give-json 200 ~ (frond:enjs %beat %b &))
+      (give-json 200 ~ (wrap:enjs %beat %b &))
     ::
         $news                                         ::  dependency updated
       ?:  ?=({$se *} tee)
@@ -1029,7 +1029,7 @@
     [%tang !>(p.res)]
   ::
   ++  mean-json  |=({sas/@uG err/ares} (give-json sas ~ (ares-to-json err)))
-  ++  nice-json  |=(* (give-json 200 ~ (frond:enjs %ok %b &)))
+  ++  nice-json  |=(* (give-json 200 ~ (wrap:enjs %ok %b &)))
   ::
   ++  pass-note  |=(noe/{whir note} +>(mow :_(mow [hen %pass noe])))
   ++  host-to-ship                                              ::  host to ship
@@ -1109,7 +1109,7 @@
           $(pez [%js auth-redir:js])
             {$~ $json}
           =/  red
-            (pairs:enjs ok+b+| red+(tape:enjs url) ~)
+            (table:enjs ok+b+| red+(tape:enjs url) ~)
           $(pez [%json red])
         ==
       ==
@@ -1372,7 +1372,7 @@
           $poll
         ?:  ?=({$~ $js} p.pok)  ::  XX treat non-json cases?
           =+  deps=[%a (turn `(list @uvH)`p.hem |=(a/@ s+(scot %uv a)))]
-          [%& %js (add-json (frond:enjs %deps deps) poll:js)]
+          [%& %js (add-json (wrap:enjs %deps deps) poll:js)]
         =.  lyv  (~(put by lyv) hen %wasp p.hem)
         |-
           =.  done  (new-deps i.p.hem %& hen)
@@ -1421,7 +1421,7 @@
           :~  (set-cookie cookie-prefix '~')
               (set-cookie %ship '~')
           ==
-        [%| (give-json 200 cug (frond:enjs %ok %b &))]
+        [%| (give-json 200 cug (wrap:enjs %ok %b &))]
       ::
           $get
         |-
@@ -1590,7 +1590,7 @@
       =^  orx  ..ya  new-view
       :_  ..ya
       =/  j  enjs
-      %-  pairs.j  :~
+      %-  table.j  :~
         oryx+s+orx
         ixor+s+(oryx-to-ixor orx)
         sein+(ship.j (sein:title our))
@@ -1683,7 +1683,7 @@
       |=  {a/whir-of b/json}  ^+  ..ix
       ?:  ?=($lens r.a)
         (get-lens a b)
-      (get-even [%rush [[(slav %p p.a) q.a] s.a] (frond:enjs %json b)])
+      (get-even [%rush [[(slav %p p.a) q.a] s.a] (wrap:enjs %json b)])
     ::
     ++  get-quit
       |=  a/whir-of  ^+  ..ix
@@ -1721,7 +1721,7 @@
         ==
       ?>  pol                         ::  XX eventstream
       %^  give-json  200  ~
-      %^  pairs:enjs  id+(numb:enjs num)  type+[%s -.ven]
+      %^  table:enjs  id+(numb:enjs num)  type+[%s -.ven]
       ?-  -.ven
         $news  ~[from+[%s (scot %uv p.ven)]]
         $quit  ~[from+(subs-to-json p.ven)]
@@ -1766,7 +1766,7 @@
     ::
     ++  subs-to-json
       |=  {a/dock b/path}
-      %-  pairs:enjs  :~
+      %-  table:enjs  :~
         ship+[%s (rsh 3 1 (scot %p p.a))]
         appl+[%s q.a]
         path+(tape:enjs (spud b))

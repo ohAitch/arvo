@@ -281,12 +281,12 @@
           "https://api.github.com/repos/{-<}/{->}/hooks"
         auri:de-purl
         %post  ~  ~
-        %-  as-octt:mimes  %-  en-json  %-  pairs:enjs:format  :~
+        %-  as-octt:mimes  %-  en-json  %-  table:enjs:format  :~
           name+s+%web
           active+b+&
           events+a+~[s+event] ::(turn `(list ,@t)`t.t.pax |=(a=@t s/a))
           :-  %config
-          %-  pairs:enjs:format  :~
+          %-  table:enjs:format  :~
             =+  =+  clean-event
                 "http://107.170.195.5:8443/~/to/gh/gh-{-}.json?anon&wire=/"
             [%url s+(crip -)]

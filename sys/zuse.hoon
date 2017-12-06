@@ -3032,13 +3032,13 @@
   ::                                                    ::  ++enjs:format
   ++  enjs  ^?                                          ::  json encoders
     |%
-    ::                                                  ::  ++frond:enjs:format
-    ++  frond                                           ::  object from k-v pair
+    ::                                                  ::  ++wrap:enjs:format
+    ++  wrap                                           ::  object from k-v pair
       |=  {p/@t q/json}
       ^-  json
       [%o [[p q] ~ ~]]
-    ::                                                  ::  ++pairs:enjs:format
-    ++  pairs                                           ::  object from k-v list
+    ::                                                  ::  ++table:enjs:format
+    ++  table                                           ::  object from k-v list
       |=  a/(list {p/@t q/json})
       ^-  json
       [%o (~(gas by *(map @t json)) a)]

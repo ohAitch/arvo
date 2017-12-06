@@ -117,7 +117,7 @@
   ::
       :+  method  `math:eyre`(malt ~[content-type+['application/json']~])
       =/  hoon-json-object
-        (frond:enjs:format %raw s+(sifo-google (message-to-rfc822:rfc mes)))
+        (wrap:enjs:format %raw s+(sifo-google (message-to-rfc822:rfc mes)))
       =+  request-body=(as-octt (en-json hoon-json-object))
       (some request-body)
       ::(some (en-json label-req-to-json:gmail-label label-req:gmail-label ~)) XX
@@ -143,12 +143,12 @@
       $x
     =,  enjs:format
     ?~  r.res
-      json+(pairs err+s+%empty-response code+(numb p.res) ~)
+      json+(table err+s+%empty-response code+(numb p.res) ~)
     =+  jon=(rush q.u.r.res apex:de-json)
     ?~  jon
-      json+(pairs err+s+%bad-json code+(numb p.res) body+s+q.u.r.res ~)
+      json+(table err+s+%bad-json code+(numb p.res) body+s+q.u.r.res ~)
     ?.  =(2 (div p.res 100))
-      json+(pairs err+s+%request-rejected code+(numb p.res) msg+u.jon ~)
+      json+(table err+s+%request-rejected code+(numb p.res) msg+u.jon ~)
     ::
     ::  Once we know we have good data, we drill into the JSON
     ::  to find the specific piece of data referred to by 'arg'
@@ -201,7 +201,7 @@
     ==
   ::
   =+  dir=((om:dejs-soft:format some) u.jon)
-  ?~  dir  json+(pairs:enjs:format err+s+%no-children ~)
+  ?~  dir  json+(table:enjs:format err+s+%no-children ~)
   =+  new-jon=(~(get by u.dir) i.arg)
   `subscription-result`$(arg t.arg, u.jon ?~(new-jon ~ u.new-jon))
            ::  redo with next argument

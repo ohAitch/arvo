@@ -46,13 +46,13 @@
   |=  a/$%({$t p/cord} {$r p/json} {$j p/json} {$m mime})
   ?-  -.a
     $t  [%s p.a]
-    $m  (pairs:enjs mite+[%s (en-mite p.a)] octs+(tape:enjs (en-base64 q.q.a)) ~)
+    $m  (table:enjs mite+[%s (en-mite p.a)] octs+(tape:enjs (en-base64 q.q.a)) ~)
     $r  p.a
     $j  p.a
   ==
 ++  from-queries
   |=  {bem/beam quy/(list query)}
-  =<  (pairs:enjs (turn quy .))
+  =<  (table:enjs (turn quy .))
   |=  a/query
   :-  -.a
   ?-  -.a

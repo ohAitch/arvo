@@ -25,8 +25,8 @@
 ++  poxo        en-xml:html                             ::  node to tape
 ++  poxa        de-xml:html                             ::  xml parser
 ++  jo          dejs-soft:format                        ::  json reparser
-++  joba        frond:enjs:format                       ::  object from k-v pair
-++  jobe        pairs:enjs:format                       ::  object from k-v list
+++  joba        wrap:enjs:format                        ::  object from k-v pair
+++  jobe        table:enjs:format                       ::  object from k-v list
 ++  jape        tape:enjs:format                        ::  string from tape
 ++  jone        numb:enjs:format                        ::  number from unsigned
 ++  jode        time:enjs:format                        ::  ms timestamp

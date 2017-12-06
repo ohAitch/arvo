@@ -19,14 +19,14 @@
       ^-  ^json
       =,  enjs
       =;  edi
-        =,(cha (pairs ted+(edi ted) ler+a+~[(numb own.ler) (numb his.ler)] ~))
+        =,(cha (table ted+(edi ted) ler+a+~[(numb own.ler) (numb his.ler)] ~))
       |=  det/sole-edit
       ?-  -.det
         $nop  [%s 'nop']
         $mor  [%a (turn p.det ..$)]
-        $del  (frond %del (numb p.det))
-        $set  (frond %set (tape (tufa p.det)))
-        $ins  (frond %ins (pairs at+(numb p.det) cha+s+(tuft q.det) ~))
+        $del  (wrap %del (numb p.det))
+        $set  (wrap %set (tape (tufa p.det)))
+        $ins  (wrap %ins (table at+(numb p.det) cha+s+(tuft q.det) ~))
       ==
     --  
   --
@@ -57,7 +57,7 @@
         $tan  (wall (turn (flop p.sef) |=(a/tank ~(ram re a))))
         $txt  s+(crip p.sef)
         $sav
-      (pairs file+s+(crip <`path`p.sef>) data+s+(crip (sifo q.sef)) ~)
+      (table file+s+(crip <`path`p.sef>) data+s+(crip (sifo q.sef)) ~)
     ::
         $mor
       =+  all=(turn p.sef |=(a/sole-effect lens-json(sef a)))
@@ -72,17 +72,17 @@
     ?+    -.sef  
               ~|(unsupported-effect+-.sef !!)
         $mor  [%a (turn p.sef |=(a/sole-effect json(sef a)))]
-        $err  (frond %hop (numb p.sef))
-        $txt  (frond %txt (tape p.sef))
-        $tan  (frond %tan (tape (wush 160 p.sef)))
-        $det  (frond %det json:~(grow mar-sole-change +.sef))
+        $err  (wrap %hop (numb p.sef))
+        $txt  (wrap %txt (tape p.sef))
+        $tan  (wrap %tan (tape (wush 160 p.sef)))
+        $det  (wrap %det json:~(grow mar-sole-change +.sef))
     ::
         $pro
-      %+  frond  %pro
-      (pairs vis+b+vis.sef tag+s+tag.sef cad+(tape (purge cad.sef)) ~)
+      %+  wrap  %pro
+      (table vis+b+vis.sef tag+s+tag.sef cad+(tape (purge cad.sef)) ~)
     ::
         ?($bel $clr $nex)
-      (frond %act %s -.sef)
+      (wrap %act %s -.sef)
     ==
   --
 --

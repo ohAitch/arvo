@@ -25,7 +25,7 @@
     ?~(url.b ~ [', ' (apix:en-purl u.url.b)])
   ::
   ++  plan-json
-    %-  pairs:enjs  :~
+    %-  table:enjs  :~
       who+?~(who ~ s+who)
       loc+?~(loc ~ s+loc)
       acc+o+(~(run by acc) json-acct)
@@ -33,7 +33,7 @@
   ++  json-acct                       ::  helper                     
     |=  a/plan-acct  ^-  json
     =/  url  ?~(url.a ~ (tape:enjs (apix:en-purl u.url.a)))
-    (pairs:enjs usr+s+usr.a url+url ~)
+    (table:enjs usr+s+usr.a url+url ~)
   --
 ++  grab  |%                                            ::  convert from
           ++  noun  {{cord cord} (map knot plan-acct)}  ::  clam from %noun
