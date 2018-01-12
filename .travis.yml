@@ -3,10 +3,11 @@ node_js:
   - 4
 before_install:
   - cd .travis # keep main directory clear
-  
-  - wget -i pin-urbit-release.url -O ./urbit.deb
-  - sudo apt install ./urbit.deb
-  
+  - >
+      wget $(cat ./pin-urbit-release.url)/urbit -O ./urbit &&
+      chmod +x ./urbit;
+      echo "FIXME downloaded raw urbit binary releaseinstead of .deb";
+      echo "FIXME used full pinned url instead of tag name"
       
 before_script: bash get-or-build-pill.sh
 
