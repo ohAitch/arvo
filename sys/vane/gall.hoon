@@ -217,7 +217,7 @@
       $tabl  ~|(%made-tabl !!)
       $|     (mo-give %onto %| p.gux)
       $&     ?>  ?=(@ p.p.gux)
-             ap-abet:(ap-peep:(ap-abed:ap dap [%high [~ our]]) q.p.gux)
+             ap-abet:(ap-peep:ap-unvel:(ap-abed:ap dap [%high [~ our]]) q.p.gux)
     ==
   ::
   ++  mo-bold                                           ::  wait for dep
@@ -564,6 +564,9 @@
         q.zam    (~(put by q.zam) hen p.zam)
         r.zam    (~(put by r.zam) p.zam hen)
       ==
+    ::
+    :: clear references to old app type to avoid space leak
+    ++  ap-unvel  .(vel *worm)                          ::NAMEME
     ::
     ++  ap-abet                                         ::  resolve
       ^+  +>
