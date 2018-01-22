@@ -43,7 +43,7 @@
       jav=(map * calx)                                  ::  cache
       deh=deps                                          ::  dephash definitions
       sup=(jug @uvH duct)                               ::  hash listeners
-      out=(set [beam care:clay])                        ::  listening beams
+      out=(jug beak [care:clay path])                   ::  listening beams
   ==                                                    ::
 +=  deps                                                ::
   $:  def=(map @uvH (set dent))                         ::  hash obligations
@@ -129,6 +129,17 @@
     ^-  cafe                                            ::
     a(q (~(put by q.a) [- q]:b b))                      ::  calx key is [- q]
   --
+::
+::MOVEME to h/h
+++  jy                                                  ::  construct jug
+  |*  a/(list (pair))
+  =>  .(a ^.(ly a))
+  (~(gas ju `(jug _,.-.i.-.a _,.+.i.-.a)`~) a)
+::
+::MOVEME to h/h
+++  add-ju                                              ::  put set
+  |*  [a=(jug) b=* c=(set)]  ^+  a
+  (~(put by a) b (~(uni in (~(get ju a) b)) c))
 ::
 ++  na                                                  ::  nozzle operations
   |_  a=nozzle
@@ -654,48 +665,60 @@
   ::
   ++  wasp-start
     |=  dep=@uvH  ^+  this
+    =,  clay
     ?:  (~(has by sup.bay) dep)                       ::  already requested
       this(sup.bay (~(put ju sup.bay) dep hen))
     =.  sup.bay  (~(put ju sup.bay) dep hen)
     ::
-    =/  des  (~(got by def.deh.bay) dep)
-    =/  bes=(list [beam care:clay])  ~(tap in (dep-beams des))
+    =/  des  (dep-beams (~(got by def.deh.bay) dep))
+    =/  bel=(list (pair beak [care path]))
+      %+  turn  ~(tap in des)
+      |=([bem=beam ren=care] [-.bem ren (flop s.bem)])
+    ::
+    =/  bes=(list [p=beak q=(set [care path])])  ~(tap by (jy bel))
     |-  ^+  this
     ?~  bes  this
-    :: already sent
-    ?:  (~(has in out.bay) i.bes)  $(bes t.bes)
+    =/  ous  (~(get ju out.bay) p.i.bes)
+    ?~  (~(dif in q.i.bes) ous)  this  :: already sent all
+    =.  q.i.bes  (~(uni in q.i.bes) ous)
     %_  $
-      out.bay  (~(put in out.bay) i.bes)
       bes  t.bes
-      mow  :_(mow [hen (pass-warp & i.bes)])
+      mow  :_(mow [hen (pass-warp i.bes)])
+      out.bay  (~(put by out.bay) i.bes)
     ==
   ::
   ++  wasp-cancel
     |=  dep=@uvH  ^+  this
+    =,  clay
     =.  sup.bay  (~(del ju sup.bay) dep hen)
     ?:  (~(has by sup.bay) dep)  :: other listeners exist
       this
     ::
-    =/  des  (~(got by def.deh.bay) dep)
-    =/  bes=(list [beam care:clay])  ~(tap in (dep-beams des))
+    =/  des  (dep-beams (~(got by def.deh.bay) dep))
+    =/  bel=(list [beak care path])
+      %+  turn  (skip ~(tap in des) beam-has-subscribers)
+      |=([bem=beam ren=care] [-.bem ren (flop s.bem)])
+    ::
+    =/  bes=(list [p=beak q=(set [care path])])  ~(tap by (jy bel))
     |-  ^+  this
     ?~  bes  this
-    ?.  (~(has in out.bay) i.bes)  $(bes t.bes)  ::  already cancelled
-    ?:  (dent-has-subscribers [%beam i.bes])
-      ::  if any other dep cares about this beam, stay subscribed
-      $(bes t.bes)
+    =/  ous  (~(get ju out.bay) p.i.bes)
+    ?~  (~(uni in ous) q.i.bes)  this  :: already cancelled
+    =.  q.i.bes  (~(dif in ous) q.i.bes)
     %_  $
-      out.bay  (~(del in out.bay) i.bes)
       bes  t.bes
-      mow  :_(mow [hen (pass-warp | i.bes)])
+      mow  :_(mow [hen (pass-warp i.bes)])
+      out.bay  ?~  q.i.bes  (~(del by out.bay) p.i.bes)
+               (~(put by out.bay) i.bes)
     ==
   ::
-  ++  dent-has-subscribers
+  ++  beam-has-subscribers
+    |=  [bem=beam ren=care:clay]  ^-  ?
+    %.  [%beam bem ren]
     :>  does the dent or any dent that depends on it have subscribers?
-    |=  den/dent
-    ^-  ?
+    |=  den=dent  ^-  ?
     ?|  (~(any in (~(get ju bak.deh.bay) den)) ~(has by sup.bay))
-        (~(any in (~(get ju sup.gaf.bay) den)) dent-has-subscribers)
+        (~(any in (~(get ju sup.gaf.bay) den)) ..$)
     ==
   ::
   ++  dep-beams  ::DEPRECATED only needed for @uvH handling
@@ -708,10 +731,10 @@
     (~(uni in bes) ^$(des (~(get ju sub.gaf.bay) den)))
   ::
   ++  pass-warp
-    |=  [ask=? bem=beam ren=care:clay]
+    |=  [bek=beak sup=(set [care:clay path])]
     :: ~&  warp+[(en-beam bem) ask]
-    :+  %pass  [(scot %p our) ren (en-beam bem)]
-    [%c [%warp [our p.bem] q.bem ?.(ask ~ `[%next ren r.bem (flop s.bem)])]]
+    :+  %pass  [(scot %p our) (en-beam bek ~)]
+    [%c [%warp [our p.bek] q.bek ?~(sup ~ `[%mult r.bek sup])]]
   ::
   ++  deps-take                                         ::  take rev update
     |=  [ren=care:clay bem=beam sih=sign]
