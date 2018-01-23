@@ -23,6 +23,7 @@
 +=  sign                                                ::  in result $<-
           $%  $:  %c                                    ::  by %clay
           $%  [%writ p=riot:clay]                       ::
+              [%wris p=mool:clay]                       ::
           ==  ==                                        ::
               $:  %f                                    ::  by %ford
           $%  [%made p=@uvH q=gage]                     ::
@@ -160,6 +161,12 @@
     $(liz t.liz, a (put k i.liz))
   ::
   ++  beam-dents-in-dir
+    |=  all=(set dent)  ^-  (set dent)
+    ?~  all  ~
+    %-  ~(uni in $(all l.all))
+    %-  ~(uni in $(all r.all))
+    ?.  ?=(%beam -.n.all)  ~
+    %.  n.all
     :>  find all %beam dents inside the folder {bem} with care {ren}.
     |=  folder=[%beam bem=beam ren=care:clay]
     ^-  (set dent)
@@ -737,28 +744,29 @@
     [%c [%warp [our p.bek] q.bek ?~(sup ~ `[%mult r.bek sup])]]
   ::
   ++  deps-take                                         ::  take rev update
-    |=  [ren=care:clay bem=beam sih=sign]
+    |=  [bek=beak sih=sign]
     =<  abet  ^+  this
+    =,  clay
     ::
     ::  sample destructuring and validation
-    ?.  ?=(%writ &2.sih)  ~|([%bad-dep &2.sih] !!)      ::  dep must be a %writ
-    ?~  p.sih  this                                     ::  ack from %clay, noop
+    ?.  ?=(%wris &2.sih)  ~|([%bad-dep &2.sih] !!)      ::  dep must be a %writ
     ::
-    =+  `[ren=care:clay wen=case *]`p.u.p.sih           ::  destructure sih
-    ?.  =(ren ^ren)  ~|([%bad-care ren ^ren] !!)        ::  cares should match
+    ::  %clay subscriptions no longer exist for this beak
+    =.  out.bay  (~(del by out.bay) bek)
+    ::
+    =+  `[wen=case ups=(set [care path])]`p.sih         ::  destructure sih
+    ::
+    =/  den=(set dent)
+      (sy (turn ~(tap in ups) |=([a=care b=path] [%beam [bek (flop b)] a])))
     ::
     ::  rebuild and promote all affected builds
-    =.  this  (on-update bem ren -.bem(r wen))
+    =.  this  (on-update den bek(r wen))
     ::
-    ::  %clay subscription no longer exists for this beam
-    =.  out.bay  (~(del in out.bay) bem)
     ::
     ::  for each affected build (keyed by hash),
     ::  send %news moves to listeners and cancel listeners
     ::  TODO: don't send %news for unchanged builds
-    =/  den=dent  [%beam bem ren]
-    =/  dos=(set dent)  (downstream-dents (sy den ~))
-    =.  dos  (~(put in dos) den)
+    =/  dos=(set dent)  (~(uni in den) (downstream-dents den))
     =/  hashes=(list @uvH)
       =-  ~(tap in hashes)
       %-  ~(rep in dos)
@@ -794,10 +802,10 @@
   +|
   ::
   ++  on-update
-    :>  {bem} is at the old revision, {bek} is at the new revision.
-    |=  {bem/beam ren/care:clay bek/beak}  ^+  this
-    =/  new  (~(beam-dents-in-dir na gaf.bay) %beam bem ren)
-    ~?  dbg  new-dents+[(en-beam bem) new]
+    :>  {new} are at the old revision, {bek} is at the new revision.
+    |=  {new/(set dent) bek/beak}  ^+  this
+    ~?  dbg  new-dents+new
+    =.  new  (~(beam-dents-in-dir na gaf.bay) new)
     =/  dos  (downstream-dents new)
     =/  todo  ~(tap in dos)
     =^  unchanged  this  (rebuild bek new todo)
@@ -983,6 +991,7 @@
       ^+  ..zo
       |^
       ?-    &2.sih
+          $wris  ~|(%wris-not-dep !!)
           $writ  (take-writ [van ren bem] p.sih)
           $made  (take-made [van ren bem] [p q]:sih)
           $unto
@@ -2289,10 +2298,10 @@
   =+  bay=(~(got by pol.lex) our)
   =^  mos  bay
     ~|  tea
-    =+  dep=((soft care:clay) i.t.tea)
-    ?^  dep
-      =+  bem=(need (de-beam t.t.tea))
-      (~(deps-take za [our hen [now eny ski] ~] bay) u.dep bem q.hin)
+    ?^  (slaw %p i.t.tea)
+      =+  bem=(need (de-beam t.tea))
+      ?>  ?=(~ s.bem)
+      (~(deps-take za [our hen [now eny ski] ~] bay) -.bem q.hin)
     ::
     ?>  ?=({@ @ ^} t.t.tea)
     =+  :*  num=(slav %ud i.t.tea)
