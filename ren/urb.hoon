@@ -6,6 +6,8 @@
 /%    /^  {hed/{@uvH marl} bod/{@uvH marl}}
       /,      /web/pages
           /;  urb-split  /#  /!hymn/
+              /web/collections
+          /urb-collections/
               /
           /urb-tree/
       ==
