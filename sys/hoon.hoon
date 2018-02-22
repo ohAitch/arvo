@@ -12840,12 +12840,13 @@
     ?:  (lth (mul 15 ott) tot)  ~                       :: omit misc
     ;:  welp
       [(welp "label: " (spud pax)) ~]
-      [(welp "price: " (scow %ud (div (mul 100 ott) tot))) ~]
+::       [(welp "price: " (scow %ud ott)) ~]
+      [:(welp "price: " (scow %ud (div (mul 100 ott) tot)) "%") ~]
       [(welp "shape: " (pi-mumm mon.hup)) ~]
     ::
       ?:  =(~ inn.hup)  ~
       ?:  &(?=([^ ~ ~] inn.hup) =(ott q.n.inn.hup))
-        ["from: {(spud p.n.inn.hup)}" ~]
+        ["from: {(trip -.p.n.inn.hup)}" ~]
       :-  "from:"
       ^-  wall
       %+  murn
@@ -12853,9 +12854,10 @@
         |=({{* a/@ud} {* b/@ud}} (lth a b))
       |=  {pax/path num/@ud}
       ^-  (unit tape)
-      ?:  (lth (mul 20 num) ott)  ~
-      =.  num  (div (mul 100 num) ott)
-      (some :(welp "  " (spud pax) ": " (scow %ud num)))
+      =.  num  (div (mul 100 num) tot)
+      ?:  (lth num 1)  ~
+::       (some :(welp "  " (spud pax) ": " (scow %ud num)))
+      (some "  {(trip -.pax)} -> {(trip -.^pax)}: {(scow %ud num)}%")
     ::
       ?:  =(~ out.hup)  ~
       :: ?:  &(?=([^ ~ ~] out.hup) =(ott q.n.out.hup))
@@ -12867,9 +12869,10 @@
         |=({{* a/@ud} {* b/@ud}} (lth a b))
       |=  {pax/path num/@ud}
       ^-  (unit tape)
-      ?:  (lth (mul 20 num) ott)  ~
-      =.  num  (div (mul 100 num) ott)
-      (some :(welp "  " (spud pax) ": " (scow %ud num)))
+      =.  num  (div (mul 100 num) tot)
+      ?:  (lth num 1)  ~
+::       (some :(welp "  " (spud pax) ": " (scow %ud num)))
+      (some "  {(trip -.^pax)} -> {(trip -.pax)}: {(scow %ud num)}%")
     ::
     ::
       ["" ~]
