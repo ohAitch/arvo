@@ -12752,6 +12752,11 @@
     =+  lam=(~(get by hit.day) nam)
     day(hit (~(put by hit.day) nam ?~(lam 1 +(u.lam))))
 ::
+++  pi-noony                                             ::  sample trace
+  |=  {mot/term paz/(list path) day/(map (list path) @u)}
+  ^+  day
+  (~(put by day) paz +((fall (~(get by day) paz) 0)))
+::
 ++  pi-noon                                             ::  sample trace
   |=  {mot/term paz/(list path) day/doss}
   =|  lax/(unit path)
@@ -12821,6 +12826,22 @@
     (welp (scow %ud (div (mul 100 euq.mon) tot)) "e ")
   ==
 ::
+++  pi-telly  !:
+  =/  join
+    |=  [a=char b=(list tape)]  ^+  ""
+    ?~(b "" |-(^+("" ?~(t.b i.b (weld i.b a $(b t.b))))))
+  ::
+  |=  sta=(map (list path) @u)  ^-  (list tape)
+  %+  turn
+::     %+  scag  50 
+    %+  sort  ~(tap by sta)
+    |=([[a=* an=@] [b=* bn=@]] !(lor [an a] [bn b]))
+  |=  [paz=(list path) num=@u]  ^-  tape
+  =.  paz  (flop paz) 
+  =.  paz
+    (turn paz |=(a=path ?~(a "~" ?~(t.a (trip i.a) "{(trip i.a)}:{(trip i.t.a)}"))))
+  "{(join ';' paz)} {|2:(scow %ui num)}"
+::  
 ++  pi-tell                                              ::  produce dump
   |=  day/doss
   ^-  (list tape)
