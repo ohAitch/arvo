@@ -8,10 +8,10 @@
   (expect-eq (from-list [5 ~]) [~ 5] "from-list")
 ::
 ++  test-to-list-null
-  (expect-eq (to-list ~) ~ "to-list")
+  (expect-eq (to-list ~) `~`!! "to-list")
 ::
 ++  test-to-list-real
-  (expect-eq (to-list [~ 5]) [5 ~] "to-list")
+  (expect-eq (to-list [~ 5]) [5 5 ~] "to-list")
 ::
 ++  test-concat-null
   (expect-eq (concat ~) ~ "concat")
