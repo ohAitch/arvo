@@ -64,8 +64,8 @@
     /ren/test-tree   :: recursive
     /sys             :: generally out of scope
   ::
-    /app/pipe        ::  wants "flavor"
-    /gen/capitalize  :: wants unicode-data/txt
+::     /app/pipe        ::  wants "flavor"
+::     /gen/capitalize  :: wants unicode-data/txt
   ::
     /lib/down-jet/parse    :: // nonsense
     /lib/down-jet/rend     :: // nonsense
