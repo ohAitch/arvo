@@ -49,14 +49,16 @@
 ++  poke-fora-post-code
   |=  {pax/path sup/spur hed/@t txt/@t cod/@t}
   ^-  (quip move _+>)
-  ?:  (starts-with '::PLACEHOLDER' cod)
-    ~|(%posted-dummy-code !!)
+  ?~  txt  ~|(%no-text !!)
+  ?~  cod  ~|(%no-code !!)
   =.  txt  (rap 3 txt '\0a```\0a' cod '\0a```\0a' ~)
   (poke-fora-post pax sup hed txt)
 ::
 ++  poke-fora-post
   |=  {pax/path sup/spur hed/@t txt/@t}
   ^-  (quip move _+>)
+  ?~  hed  ~|(%no-title !!)
+  ?~  txt  ~|(%no-text !!)
   :_  +>
   :~  %-  act
       :+  %phrase  [[our.bol %fora-posts] ~ ~]
