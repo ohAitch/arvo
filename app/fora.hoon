@@ -22,6 +22,12 @@
   ==
 --
 ::
+|%
+++  starts-with
+  |=  [a=@t b=@t]
+  =(a (end 3 (met 3 a) b))
+--
+::
 |_  {bol/bowl:gall $~}
 ::
 ++  prep
@@ -40,9 +46,12 @@
 ::
 ++  ra-base-hart  .^(hart:eyre %e /(scot %p our.bol)/host/(scot %da now.bol))
 ::
-++  poke-fora-post
-  |=  {pax/path sup/spur hed/@t txt/@t}
+++  poke-fora-post-code
+  |=  {pax/path sup/spur hed/@t txt/@t cod/@t}
   ^-  (quip move _+>)
+  ?:  (starts-with '::PLACEHOLDER' cod)
+    ~|(%posted-dummy-code !!)
+  =.  txt  (rap 3 txt '\0a```\0a' cod '\0a```\0a' ~)
   :_  +>
   :~  %-  act
       :+  %phrase  [[our.bol %fora-posts] ~ ~]

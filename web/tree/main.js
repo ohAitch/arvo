@@ -86,13 +86,14 @@ module.exports = {
       };
     })(this));
   },
-  addPost: function(pax, sup, hed, txt) {
+  addPost: function(pax, sup, hed, txt, cod) {
     return TreePersistence.put({
       pax: pax,
       sup: sup,
       hed: hed,
-      txt: txt
-    }, "fora-post", "fora", (function(_this) {
+      txt: txt,
+      cod: cod
+    }, "fora-post-code", "fora", (function(_this) {
       return function(err, res) {
         if (err == null) {
           _this.clearData();
@@ -1898,6 +1899,7 @@ module.exports = query({
     return {
       loading: null,
       value: "",
+      codeValue: "::PLACEHOLDER insert code here",
       user: (ref1 = urb.user) != null ? ref1 : ""
     };
   },
@@ -1932,8 +1934,9 @@ module.exports = query({
     });
     title = this.refs["in"].title.value;
     comment = this.refs["in"].comment.value;
+    code = this.refs["in"].code.value;
     path = this.props.path || "/";
-    TreeActions.addPost(path, this.props.spur, title, comment);
+    TreeActions.addPost(path, this.props.spur, title, comment, code);
     return e.preventDefault();
   },
   onChange: function(e) {
@@ -1941,8 +1944,13 @@ module.exports = query({
       value: e.target.value
     });
   },
+  onCodeChange: function(e) {
+    return this.setState({
+      codeValue: e.target.value
+    });
+  },
   render: function() {
-    var bodyTextArea, postButton, titleInput;
+    var bodyTextArea, codeTextArea, postButton, titleInput;
     titleInput = input({
       disabled: this.state.loading ? "true" : void 0,
       type: "text",
@@ -1955,6 +1963,13 @@ module.exports = query({
       name: "comment",
       value: this.state.value,
       onChange: this.onChange
+    });
+    codeTextArea = textarea({
+      disabled: this.state.loading ? "true" : void 0,
+      type: "text",
+      name: "code",
+      value: this.state.codeValue,
+      onChange: this.onCodeChange
     });
     postButton = input({
       disabled: this.state.loading ? "true" : void 0,
@@ -1969,7 +1984,7 @@ module.exports = query({
       onSubmit: this.onSubmit
     }, rele(Ship, {
       ship: this.state.user
-    }), titleInput, bodyTextArea, postButton)));
+    }), titleInput, bodyTextArea, codeTextArea, postButton)));
   }
 }));
 
@@ -2053,7 +2068,7 @@ Virtual = name("Virtual", function(arg) {
   }, function(str) {
     return str;
   }, function(arg1, key) {
-    var c, e, ga, gn, props, ref1;
+    var c, e, error, ga, gn, props, ref1;
     gn = arg1.gn, ga = arg1.ga, c = arg1.c;
     props = {
       key: key
@@ -2478,7 +2493,7 @@ module.exports = query({
     if (this.props.match) {
       comp = gn === this.props.match;
     } else {
-      comp = gn && gn[0] === 'h' && parseInt(gn[1]) !== (0/0);
+      comp = gn && gn[0] === 'h' && parseInt(gn[1]) !== NaN;
     }
     if (comp) {
       ga = _.clone(ga);
