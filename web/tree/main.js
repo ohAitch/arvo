@@ -86,7 +86,23 @@ module.exports = {
       };
     })(this));
   },
-  addPost: function(pax, sup, hed, txt, cod) {
+  addPost: function(pax, sup, hed, txt) {
+    return TreePersistence.put({
+      pax: pax,
+      sup: sup,
+      hed: hed,
+      txt: txt
+    }, "fora-post", "fora", (function(_this) {
+      return function(err, res) {
+        if (err == null) {
+          _this.clearData();
+          history.pushState({}, "", "..");
+          return _this.setCurr(pax);
+        }
+      };
+    })(this));
+  },
+  addPostCode: function(pax, sup, hed, txt, cod) {
     return TreePersistence.put({
       pax: pax,
       sup: sup,
@@ -1864,7 +1880,7 @@ module.exports = query({
 
 
 },{"../actions/TreeActions.coffee":1,"./Async.coffee":2,"./LoadComponent.coffee":12}],17:[function(require,module,exports){
-var DEFER_USER, Ship, TreeActions, a, clas, code, div, form, h2, img, input, load, p, query, reactify, recl, ref, rele, textarea, util;
+var DEFER_USER, Ship, TreeActions, a, clas, div, form, h2, img, input, load, p, query, reactify, recl, ref, rele, textarea, util;
 
 clas = require('classnames');
 
@@ -1884,7 +1900,7 @@ recl = React.createClass;
 
 rele = React.createElement;
 
-ref = React.DOM, div = ref.div, p = ref.p, h2 = ref.h2, img = ref.img, a = ref.a, form = ref.form, textarea = ref.textarea, input = ref.input, code = ref.code;
+ref = React.DOM, div = ref.div, p = ref.p, h2 = ref.h2, img = ref.img, a = ref.a, form = ref.form, textarea = ref.textarea, input = ref.input;
 
 DEFER_USER = false;
 
@@ -1899,7 +1915,7 @@ module.exports = query({
     return {
       loading: null,
       value: "",
-      codeValue: "::PLACEHOLDER insert code here",
+      codeValue: this.props.type === "code" ? "::PLACEHOLDER insert code here" : void 0,
       user: (ref1 = urb.user) != null ? ref1 : ""
     };
   },
@@ -1928,15 +1944,19 @@ module.exports = query({
     }
   },
   onSubmit: function(e) {
-    var comment, path, title;
+    var code, comment, path, ref1, title;
     this.setState({
       loading: true
     });
     title = this.refs["in"].title.value;
     comment = this.refs["in"].comment.value;
-    code = this.refs["in"].code.value;
+    code = (ref1 = this.refs["in"].code) != null ? ref1.value : void 0;
     path = this.props.path || "/";
-    TreeActions.addPost(path, this.props.spur, title, comment, code);
+    if (code) {
+      TreeActions.addPostCode(path, this.props.spur, title, comment, code);
+    } else {
+      TreeActions.addPost(path, this.props.spur, title, comment);
+    }
     return e.preventDefault();
   },
   onChange: function(e) {
@@ -1964,13 +1984,16 @@ module.exports = query({
       value: this.state.value,
       onChange: this.onChange
     });
-    codeTextArea = textarea({
+    codeTextArea = this.props.type === "code" ? textarea({
       disabled: this.state.loading ? "true" : void 0,
       type: "text",
       name: "code",
+      style: {
+        fontFamily: "monospace"
+      },
       value: this.state.codeValue,
       onChange: this.onCodeChange
-    });
+    }) : void 0;
     postButton = input({
       disabled: this.state.loading ? "true" : void 0,
       type: "submit",
