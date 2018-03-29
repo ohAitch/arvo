@@ -6,10 +6,10 @@ set -x
 HASH=$(git -C .. log -1 HEAD --format=%H -- sys/)
 export PILL_NAME="git-${HASH:0:10}"
 
-if [ ! ${PILL_FORCE:-} ]; then
-  : Trying pill for commit
-  wget https://bootstrap.urbit.org/$PILL_NAME.pill -O urbit.pill && exit 0
-fi
+# if [ ! ${PILL_FORCE:-} ]; then
+#   : Trying pill for commit
+#   wget https://bootstrap.urbit.org/$PILL_NAME.pill -O urbit.pill && exit 0
+# fi
 
 # if wget failed
 
@@ -56,3 +56,4 @@ mkdir built-pill; cp urbit.pill built-pill/$PILL_NAME.pill
 :
 : Created $PILL_NAME.pill, to be uploaded if tests pass
 :
+md5sum urbit.pill; : was f2f9e08fb37badf0ed13f6fb27d7688e before travis changes
