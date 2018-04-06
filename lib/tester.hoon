@@ -144,6 +144,16 @@
       ~
     :~  "expected: '{(text (slot 2 a))}'"
         "actual:   '{(text (slot 3 a))}'"
+    ==  
+  ::
+  ++  expect-fail
+    |=  a=(trap)  ^-  wall
+    ?-  [-:(mule a)]
+      %|  ~
+      %&  ~["result produced"]  ::REVIEW (trap vase)? (trap tank)?
+      ::%vere-fail
+      ::  not a real result, but expect-fail tests are frequently
+      ::  trying to hang/abort the runtime instead. run them with caution
     ==
   :>  #
   :>  #  %formatting
