@@ -1513,23 +1513,12 @@
     ++  meow                                            ::  assemble
       :: =+  dyv=0
       |=  {how/beam arg/coin}
-      =|  $:  bil/(map term (pair hoof hoon))           ::  libraries
-              boy/(list hoon)                           ::  body stack
+      =|  $:  boy/(list hoon)                           ::  body stack
               lit/?                                     ::  drop arguments
           ==
       ~%  %meow  ..meow  ~
       |%
-      ++  able                                          ::  assemble preamble
-        |=  [cof=cafe hed=vase]  ^-  (bolt vase)
-        (wrapped-slap cof hed able-2)
-      ::
       ::NAMEME
-      ++  slop-uni  :: concatenate maybe vases
-        |=  [a=(unit vase) b=(unit vase)]  ^-  (unit vase)
-        ?~  a  b
-        ?~  b  a
-        `(slop u.a u.b)
-      ::
       ++  slop-list
         |=  [a=(list vase) b=vase]  ^-  vase
         ?~  a  b
@@ -1537,45 +1526,29 @@
           |-(?~(t.a i.a (slop i.a $(a t.a))))
         b
       ::
-      ++  able-2                                          ::  assemble preamble
-        ^-  hoon
-        ?:  =(~ bil) 
-          [%$ 1] 
-        :+  %brcn  [~ ~]
-        =-  [[0 [~ ~] -] ~ ~]
-        (~(run by bil) |=({^ a/hoon} [~ %ash a]))
       ::
       ++  abut                                          ::  generate
         |=  {cof/cafe hyd/hood}
         ^-  (bolt vase)
-        %+  cope  (apex cof hyd)
-        |=  {cof/cafe sel/_..abut}
-        =.  ..abut  sel
-        %+  cope  (head cof sur.hyd)
-        |=  {cof/cafe hed/(list vase)}
-        %+  cope  (able cof (slop-list hed pit))
+        %+  cope  (apex cof lib.hyd sur.hyd)
         |=  {cof/cafe bax/vase}
         %+  cope  (chap cof bax [%fsdt fan.hyd])
-        |=  {cof/cafe mar/mark gox/vase}
-        %+  cope  (wrapped-slap cof (slop gox bax) [%tssg (flop boy)])
-        |=  {cof/cafe fin/vase}
-        (fine cof fin)
-        ::  ~>  %slog.[0 ~(duck ut p.q.cay)]
-      ::
-      :: ++  libs  `(set term)`(silt (turn ~(tap by bil) head.is))
-      ++  apex                                          ::  build to body
-        |=  {cof/cafe hyd/hood}
-        ^-  (bolt _..apex)
+        |=  {cof/cafe @tas gox/vase}
         %+  cope  (body cof src.hyd)
         ::=.  dyv  +(dyv)
         ::~&  [`term`(cat 3 %apex (fil 4 dyv '  ')) `path`(flop s.how) libs]
         ::=-  ~&  [`term`(cat 3 %xepa (fil 4 dyv '  ')) `path`(flop s.how)]  -
-        |=  {cof/cafe sel/_..apex}
-        =.  ..apex  sel
-        %+  cope  (neck cof lib.hyd)
-        |=  {cof/cafe sel/_..apex}
-        =.  ..apex  sel
-        (fine cof sel)
+        |=  {cof/cafe sel/_..abut}
+        (wrapped-slap cof (slop gox bax) [%tssg (flop boy.sel)])
+      ::
+      ++  apex                                          ::  build to body
+        |=  {cof/cafe lib/(list hoof) sur/(list hoof)}
+        ^-  (bolt vase)
+        %+  cope  (surs cof sur)
+        |=  {cof/cafe sur/(list vase)}
+        %+  cope  (libs cof lib)
+        |=  {cof/cafe lib/(list vase)}
+        (fine cof :(slop-list lib sur pit))
       ::
       ++  body                                          ::  produce functions
         |=  {cof/cafe src/(list hoop)}
@@ -1725,7 +1698,7 @@
         ?:  (~(has in a) q.i.b)  `q.i.b
         $(a (~(put in a) q.i.b), b t.b)
       ::
-      ++  head                                          ::  consume structures
+      ++  surs                                          ::  consume structures
         =|  rop=(map term (unit {case ship}))
         |=  {cof/cafe bir/(list hoof)}  ::TODO pure
         ^-  (bolt (list vase))
@@ -1754,33 +1727,27 @@
           how(s ~[q.huf way])
         [[q.u.r.huf q.how p.u.r.huf] ~[q.huf way]]
       ::
-      ++  neck                                          ::  consume libraries
+      ++  libs                                          ::  consume libraries
+        ::REVIEW dedup with ++surs?
+        =|  rop=(map term (unit {case ship}))
         |=  {cof/cafe bir/(list hoof)}  ::TODO pure
-        ^-  (bolt _..neck)
-        ?~  bir  (fine cof ..neck)
-        =.  boy
-          ?:  p.i.bir  boy
-::           ~&  ford+tscm+[q.i.bir boy]
-          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~])
-        =+  byf=(~(get by bil) q.i.bir)
-        ?^  byf
-          ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)
-            (flaw cof [%leaf "library mismatch: {<~[p.u.byf i.bir]>}"]~)
-          $(bir t.bir)
+        ^-  (bolt (list vase))
+        =/  dup/(unit term)  (any-dup bir)
+        ?^  dup  (flaw cof leaf+"library duplicated: {<u.dup>}" ~)
+        :: =.  boy  ::TODO use %face =, magic here
+        ::   ?:  p.i.bir  boy
+        ::   (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~]) 
+        |-  ^-  (bolt (list vase))
+        ?~  bir  (fine cof ~)
         %+  cope  (fame cof (hone %lib i.bir))
         |=  {cof/cafe bem/beam}
-        %+  cope  (compile-to-hood cof bem)
-        |=  {cof/cafe hyd/hood}
-        %+  cope  (apex(how bem, boy ~) cof hyd)
-        |=  {cof/cafe sel/_..neck}
-        =.  ..neck
-            %=  sel
-              how  how
-              bil  %+  ~(put by (~(uni by bil) bil.sel))
-                     q.i.bir
-                   [i.bir [%tssg (flop boy.sel)]]
-            ==
-        ^^^$(cof cof, bir t.bir)
+        %+  cope  (load-core cof bem)
+        |=  [cof=cafe lib=vase]
+        %.  [cof lib]
+        ;~  coax
+          |=({cof/cafe lib/vase} (fine cof [[%face `q.i.bir p.lib] q.lib]))
+          |=({cof/cafe ^} ^^^$(cof cof, bir t.bir))
+        ==
       ::
       ++  wilt                                          ::  process body entry
         |=  {cof/cafe hop/hoop}
@@ -1795,7 +1762,9 @@
           ?:  (~(has by dir.arc) %hoon)
             %+  cope  (compile-to-hood cof p.hop)
             |=  {cof/cafe hyd/hood}
-            %+  cope  (apex(boy ~) cof hyd)
+            ?^  (weld sur.hyd lib.hyd)
+              (flaw cof leaf+"ford: STUB lib/sur inside // not supported" ~)
+            %+  cope  (body(boy ~) cof src.hyd)
             (flux |=(sel/_..wilt sel(boy [[%tssg boy.sel] boy])))
           =+  [all=(lark (slat %tas) arc) sel=..wilt]
           %+  cope
