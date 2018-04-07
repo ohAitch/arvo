@@ -1513,16 +1513,15 @@
     ++  meow                                            ::  assemble
       :: =+  dyv=0
       |=  {how/beam arg/coin}
-      =|  $:  rop/(map term (pair hoof vase))           ::  structures
-              bil/(map term (pair hoof hoon))           ::  libraries
+      =|  $:  bil/(map term (pair hoof hoon))           ::  libraries
               boy/(list hoon)                           ::  body stack
               lit/?                                     ::  drop arguments
           ==
       ~%  %meow  ..meow  ~
       |%
       ++  able                                          ::  assemble preamble
-        |=  cof=cafe  ^-  (bolt vase)
-        (wrapped-slap cof able-1 able-2)
+        |=  [cof=cafe hed=vase]  ^-  (bolt vase)
+        (wrapped-slap cof hed able-2)
       ::
       ::NAMEME
       ++  slop-uni  :: concatenate maybe vases
@@ -1531,19 +1530,12 @@
         ?~  b  a
         `(slop u.a u.b)
       ::
-      ++  able-1                                          ::  assemble preamble
-        ^-  vase
-        %-  need
-        %-  slop-uni  :_  `pit
-        |-  ^-  (unit vase)
-        ?~  rop  ~
-        ::~&  able-1+(~(urn by `(map term *)`rop) _~)
-        =/  hed=[p=term ^ q=vase]  n.rop
-        ;:  slop-uni
-          `[[%face `p.hed p.q.hed] q.q.hed]
-          $(rop l.rop)
-          $(rop r.rop)
-        ==
+      ++  slop-list
+        |=  [a=(list vase) b=vase]  ^-  vase
+        ?~  a  b
+        %+  slop
+          |-(?~(t.a i.a (slop i.a $(a t.a))))
+        b
       ::
       ++  able-2                                          ::  assemble preamble
         ^-  hoon
@@ -1559,7 +1551,9 @@
         %+  cope  (apex cof hyd)
         |=  {cof/cafe sel/_..abut}
         =.  ..abut  sel
-        %+  cope  (able cof)
+        %+  cope  (head cof sur.hyd)
+        |=  {cof/cafe hed/(list vase)}
+        %+  cope  (able cof (slop-list hed pit))
         |=  {cof/cafe bax/vase}
         %+  cope  (chap cof bax [%fsdt fan.hyd])
         |=  {cof/cafe mar/mark gox/vase}
@@ -1581,8 +1575,6 @@
         %+  cope  (neck cof lib.hyd)
         |=  {cof/cafe sel/_..apex}
         =.  ..apex  sel
-        %+  cope  (head cof sur.hyd)
-        |=  {cof/cafe sel/_..apex}
         (fine cof sel)
       ::
       ++  body                                          ::  produce functions
@@ -1725,25 +1717,35 @@
             (cope (make cof %bake q.hon arg how) flay)
         ==
       ::
+      ::NAMEME 
+      ++  any-dup
+        =|  a=(set term)
+        |=  b=(list hoof)  ^-  (unit term)
+        ?~  b  ~
+        ?:  (~(has in a) q.i.b)  `q.i.b
+        $(a (~(put in a) q.i.b), b t.b)
+      ::
       ++  head                                          ::  consume structures
+        =|  rop=(map term (unit {case ship}))
         |=  {cof/cafe bir/(list hoof)}  ::TODO pure
-        ^-  (bolt _..head)
-        ?~  bir
-          (fine cof ..head)
-        =.  boy
-          ?:  p.i.bir  boy
-          ::TODO incorrect if lib name collision
-          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~]) 
-        =+  byf=(~(get by rop) q.i.bir)
-        ?^  byf
-          ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)  :: TODO just build map
-            (flaw cof [%leaf "structure mismatch: {<~[p.u.byf q.i.bir]>}"]~)
-          $(bir t.bir)
+        ^-  (bolt (list vase))
+        =/  dup/(unit term)  (any-dup bir)
+        ?^  dup  (flaw cof leaf+"structure duplicated: {<u.dup>}" ~)
+        :: =.  boy  ::TODO use %face =, magic here
+        ::   ?:  p.i.bir  boy
+        ::   ::TODO incorrect if lib name collision
+        ::   (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~]) 
+        |-  ^-  (bolt (list vase))
+        ?~  bir  (fine cof ~)
         %+  cope  (fame cof (hone %sur i.bir))
         |=  {cof/cafe bem/beam}
         %+  cope  (load-core cof bem)
-        |=  {cof/cafe sur/vase}
-        ^^$(rop (~(put by rop) q.i.bir i.bir sur))
+        |=  [cof=cafe sur=vase]
+        %.  [cof sur]
+        ;~  coax
+          |=({cof/cafe sur/vase} (fine cof [[%face `q.i.bir p.sur] q.sur]))
+          |=({cof/cafe ^} ^^^$(cof cof, bir t.bir))
+        ==
       ::
       ++  hone                                          ::  plant hoof
         |=  {way/@tas huf/hoof}
