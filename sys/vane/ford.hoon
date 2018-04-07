@@ -1513,7 +1513,7 @@
     ++  meow                                            ::  assemble
       :: =+  dyv=0
       |=  {how/beam arg/coin}
-      =|  $:  rop/(map term (pair hoof hoon))           ::  structures
+      =|  $:  rop/(map term (pair hoof vase))           ::  structures
               bil/(map term (pair hoof hoon))           ::  libraries
               boy/(list hoon)                           ::  body stack
               lit/?                                     ::  drop arguments
@@ -1521,13 +1521,32 @@
       ~%  %meow  ..meow  ~
       |%
       ++  able                                          ::  assemble preamble
+        |=  cof=cafe  ^-  (bolt vase)
+        (wrapped-slap cof able-1 able-2)
+      ::
+      ::NAMEME
+      ++  slop-uni  :: concatenate maybe vases
+        |=  [a=(unit vase) b=(unit vase)]  ^-  (unit vase)
+        ?~  a  b
+        ?~  b  a
+        `(slop u.a u.b)
+      ::
+      ++  able-1                                          ::  assemble preamble
+        ^-  vase
+        %-  need
+        %-  slop-uni  :_  `pit
+        |-  ^-  (unit vase)
+        ?~  rop  ~
+        ::~&  able-1+(~(urn by `(map term *)`rop) _~)
+        =/  hed=[p=term ^ q=vase]  n.rop
+        ;:  slop-uni
+          `[[%face `p.hed p.q.hed] q.q.hed]
+          $(rop l.rop)
+          $(rop r.rop)
+        ==
+      ::
+      ++  able-2                                          ::  assemble preamble
         ^-  hoon
-        :+  %tsgr
-          ?:  =(~ rop)  
-            [%$ 1] 
-          :+  %brcn  [~ ~]
-          =-  [[0 [~ ~] -] ~ ~]
-          (~(run by rop) |=({^ a/hoon} [~ %ash a]))
         ?:  =(~ bil) 
           [%$ 1] 
         :+  %brcn  [~ ~]
@@ -1540,7 +1559,7 @@
         %+  cope  (apex cof hyd)
         |=  {cof/cafe sel/_..abut}
         =.  ..abut  sel
-        %+  cope  (wrapped-slap cof pit able)
+        %+  cope  (able cof)
         |=  {cof/cafe bax/vase}
         %+  cope  (chap cof bax [%fsdt fan.hyd])
         |=  {cof/cafe mar/mark gox/vase}
@@ -1561,7 +1580,7 @@
         =.  ..apex  sel
         %+  cope  (neck cof lib.hyd)
         |=  {cof/cafe sel/_..apex}
-        =.  ..apex  sel(boy boy)
+        =.  ..apex  sel
         %+  cope  (head cof sur.hyd)
         |=  {cof/cafe sel/_..apex}
         (fine cof sel)
@@ -1707,33 +1726,24 @@
         ==
       ::
       ++  head                                          ::  consume structures
-        |=  {cof/cafe bir/(list hoof)}
+        |=  {cof/cafe bir/(list hoof)}  ::TODO pure
         ^-  (bolt _..head)
         ?~  bir
           (fine cof ..head)
         =.  boy
           ?:  p.i.bir  boy
-          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~])
+          ::TODO incorrect if lib name collision
+          (welp boy [[%tscm [%limb q.i.bir] [%$ 1]] ~]) 
         =+  byf=(~(get by rop) q.i.bir)
         ?^  byf
-          ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)
+          ?.  =(+:`hoof`i.bir +:`hoof`p.u.byf)  :: TODO just build map
             (flaw cof [%leaf "structure mismatch: {<~[p.u.byf q.i.bir]>}"]~)
           $(bir t.bir)
         %+  cope  (fame cof (hone %sur i.bir))
         |=  {cof/cafe bem/beam}
-        %+  cope  (compile-to-hood cof bem)
-        |=  {cof/cafe hyd/hood}
-        %+  cope  (apex(how bem, boy ~) cof hyd)
-        |=  {cof/cafe sel/_..head}
-        =.  ..head
-            %=  sel
-              boy  boy
-              how  how
-              rop  %+  ~(put by (~(uni by rop) rop.sel))
-                      q.i.bir
-                   [i.bir [%tssg (flop boy.sel)]]
-            ==
-        ^^^$(cof cof, bir t.bir)
+        %+  cope  (load-core cof bem)
+        |=  {cof/cafe sur/vase}
+        ^^$(rop (~(put by rop) q.i.bir i.bir sur))
       ::
       ++  hone                                          ::  plant hoof
         |=  {way/@tas huf/hoof}
@@ -1743,7 +1753,7 @@
         [[q.u.r.huf q.how p.u.r.huf] ~[q.huf way]]
       ::
       ++  neck                                          ::  consume libraries
-        |=  {cof/cafe bir/(list hoof)}
+        |=  {cof/cafe bir/(list hoof)}  ::TODO pure
         ^-  (bolt _..neck)
         ?~  bir  (fine cof ..neck)
         =.  boy
