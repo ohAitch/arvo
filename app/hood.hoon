@@ -3,6 +3,7 @@
   ::                                                    ::  ::
 /?    310                                               ::  zuse version
 /+  sole,                                               ::  libraries
+    not-even-trying, :: XX removeme when boot otherwise works
     ::  XX these should really be separate apps, as
     ::     none of them interact with each other in
     ::     any fashion; however, to reduce boot-time
