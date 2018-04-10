@@ -17,6 +17,7 @@
 ::
 ::
 /+  tester
+~!  .
 =,  keccak:crypto
 ::
 ::  per bytelength, an example input.

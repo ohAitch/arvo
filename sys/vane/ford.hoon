@@ -1289,7 +1289,8 @@
       |=  {cof/cafe sut/type gen/hoon}
       =+  puz=(mule |.((~(mint ut sut) [%noun gen])))
       ?-  -.puz
-        $|  (flaw cof p.puz)
+        $|  %-  (slog leaf+"ford: MINT" p.puz)
+            (flaw cof p.puz)
         $&  (fine cof p.puz)
       ==
     ::

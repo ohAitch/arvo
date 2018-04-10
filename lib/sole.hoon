@@ -3,8 +3,8 @@
   ::
 /?    310
 /-    sole
-[. ^sole]
-::
+sole  ::  =,  ^?(sole)
+:: 
 ::::
   ::
 |_  sole-share                                          ::  shared-state engine

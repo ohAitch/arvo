@@ -13,6 +13,7 @@
 ::  since that's the only thing the client ever
 ::  subscribes to.
 ::
+NAHH
 /-    hall, sole                                        ::  structures
 /+    hall, sole                                        ::  libraries
 /=    seed  /~  !>(.)
