@@ -1,96 +1,17 @@
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-10#l9
-sys/hoon.hoon 944:3 barcen:arm-indent cell #63 @944:3; over by 2
-sys/hoon.hoon 945:3 luslus:arm-body-indent cell body @945:3; under by 2
+# ??    = misannotated
+# ::NB  = preserving line numbers, delete this
+# ::\n  = preserving line numbers, expand this line
 
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-10#l9
+# ?? See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-10#l9
 sys/hoon.hoon 2096:5 kethep:indent backdent #2 @2096:5; over by 2
-
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-12#l37
-sys/hoon.hoon 8743:19 tisket:indent backdent #3 @8743:19; over by 2
-sys/hoon.hoon 10029:13 tisket:indent backdent #3 @10029:13; over by 2
-
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-12#l39
-sys/hoon.hoon 2303:13 wutdot:indent backdent #1 @2303:13; under by 2
-sys/hoon.hoon 2306:11 wutdot:indent backdent #2 @2306:11; under by 2
-sys/hoon.hoon 2307:9 wutdot:indent backdent #3 @2307:9; under by 2
-
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-12#l40
-sys/hoon.hoon 11135:9 tisdot:indent backdent #2 @11135:9; under by 2
-
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-12#l41
-sys/hoon.hoon 9769:11 tisfas:indent backdent #2 @9769:11; over by 2
-
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-12#l43
-sys/hoon.hoon 5300:5 cendot:indent backdent #2 @5300:5; under by 11
 
 # In hoon.hoon, a lot of COLHEP's are luslus-style, but this is rarely
 # the case in the rest of arvo
 # See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-16#l14
-sys/hoon.hoon 11685:9 colhep:indent backdent #2 @11685:9; over by 2
-sys/hoon.hoon 11687:9 colhep:indent backdent #2 @11687:9; over by 2
-sys/hoon.hoon 11689:9 colhep:indent backdent #2 @11689:9; over by 2
-sys/hoon.hoon 11702:9 colhep:indent backdent #2 @11702:9; over by 2
-sys/hoon.hoon 11714:9 colhep:indent backdent #2 @11714:9; over by 2
-sys/hoon.hoon 11719:9 colhep:indent backdent #2 @11719:9; over by 2
-sys/hoon.hoon 11721:9 colhep:indent backdent #2 @11721:9; over by 2
-sys/hoon.hoon 11723:9 colhep:indent backdent #2 @11723:9; over by 2
-sys/hoon.hoon 11725:9 colhep:indent backdent #2 @11725:9; over by 2
-sys/hoon.hoon 11727:9 colhep:indent backdent #2 @11727:9; over by 2
-sys/hoon.hoon 11732:9 colhep:indent backdent #2 @11732:9; over by 2
-sys/hoon.hoon 11734:9 colhep:indent backdent #2 @11734:9; over by 2
-sys/hoon.hoon 11739:9 colhep:indent backdent #2 @11739:9; over by 2
-sys/hoon.hoon 11745:9 colhep:indent backdent #2 @11745:9; over by 2
-sys/hoon.hoon 11757:9 colhep:indent backdent #2 @11757:9; over by 2
-sys/hoon.hoon 11762:9 colhep:indent backdent #2 @11762:9; over by 2
-sys/hoon.hoon 11767:9 colhep:indent backdent #2 @11767:9; over by 2
-sys/hoon.hoon 11769:9 colhep:indent backdent #2 @11769:9; over by 2
-sys/hoon.hoon 11782:9 colhep:indent backdent #2 @11782:9; over by 2
-sys/hoon.hoon 11794:9 colhep:indent backdent #2 @11794:9; over by 2
-sys/hoon.hoon 11801:9 colhep:indent backdent #2 @11801:9; over by 2
-sys/hoon.hoon 11803:9 colhep:indent backdent #2 @11803:9; over by 2
-sys/hoon.hoon 11805:9 colhep:indent backdent #2 @11805:9; over by 2
-sys/hoon.hoon 11807:9 colhep:indent backdent #2 @11807:9; over by 2
-sys/hoon.hoon 11812:9 colhep:indent backdent #2 @11812:9; over by 2
-sys/hoon.hoon 11814:9 colhep:indent backdent #2 @11814:9; over by 2
-sys/hoon.hoon 11826:9 colhep:indent backdent #2 @11826:9; over by 2
-sys/hoon.hoon 11837:9 colhep:indent backdent #2 @11837:9; over by 2
-sys/hoon.hoon 11842:9 colhep:indent backdent #2 @11842:9; over by 2
-sys/hoon.hoon 11847:9 colhep:indent backdent #2 @11847:9; over by 2
-sys/hoon.hoon 11854:9 colhep:indent backdent #2 @11854:9; over by 2
-sys/hoon.hoon 11856:9 colhep:indent backdent #2 @11856:9; over by 2
-sys/hoon.hoon 11861:9 colhep:indent backdent #2 @11861:9; over by 2
-sys/hoon.hoon 11863:9 colhep:indent backdent #2 @11863:9; over by 2
-sys/hoon.hoon 11868:9 colhep:indent backdent #2 @11868:9; over by 2
-sys/hoon.hoon 11882:9 colhep:indent backdent #2 @11882:9; over by 2
-sys/hoon.hoon 11887:9 colhep:indent backdent #2 @11887:9; over by 2
-sys/hoon.hoon 11889:9 colhep:indent backdent #2 @11889:9; over by 2
-sys/hoon.hoon 11896:9 colhep:indent backdent #2 @11896:9; over by 2
-sys/hoon.hoon 11915:9 colhep:indent backdent #2 @11915:9; over by 2
-sys/hoon.hoon 11917:9 colhep:indent backdent #2 @11917:9; over by 2
-sys/hoon.hoon 11919:9 colhep:indent backdent #2 @11919:9; over by 2
-sys/hoon.hoon 11950:17 colhep:indent backdent #2 @11950:17; over by 2
-sys/hoon.hoon 11965:15 colhep:indent backdent #2 @11965:15; over by 2
-sys/hoon.hoon 11978:15 colhep:indent backdent #2 @11978:15; over by 2
-sys/hoon.hoon 11994:15 colhep:indent backdent #2 @11994:15; over by 2
-sys/hoon.hoon 12009:15 colhep:indent backdent #2 @12009:15; over by 2
-sys/hoon.hoon 12024:15 colhep:indent backdent #2 @12024:15; over by 2
-sys/hoon.hoon 12036:15 colhep:indent backdent #2 @12036:15; over by 2
-sys/hoon.hoon 12047:15 colhep:indent backdent #2 @12047:15; over by 2
-sys/hoon.hoon 12062:15 colhep:indent backdent #2 @12062:15; over by 2
-sys/hoon.hoon 12080:15 colhep:indent backdent #2 @12080:15; over by 2
-sys/hoon.hoon 12090:15 colhep:indent backdent #2 @12090:15; over by 2
-sys/hoon.hoon 12110:15 colhep:indent backdent #2 @12110:15; over by 2
-sys/hoon.hoon 12129:15 colhep:indent backdent #2 @12129:15; over by 2
-
-# Various irregular COLHEP indentations
-sys/hoon.hoon 2244:9 colhep:indent backdent #2 @2244:9; under by 8
-sys/hoon.hoon 2505:5 colhep:indent backdent #2 @2505:5; under by 37
-sys/hoon.hoon 2520:5 colhep:indent backdent #2 @2520:5; under by 37
-sys/hoon.hoon 2554:5 colhep:indent backdent #2 @2554:5; under by 21
-sys/hoon.hoon 7362:13 colhep:indent backdent #2 @7362:13; over by 4
-sys/hoon.hoon 7819:17 colhep:indent backdent #2 @7819:17; under by 1
-sys/hoon.hoon 8436:15 colhep:indent backdent #2 @8436:15; over by 4
-sys/hoon.hoon 8453:13 colhep:indent backdent #2 @8453:13; over by 4
+# See https://github.com/jeffreykegler/yahc/issues/13#issuecomment-466732963
+# TODO: add outdented :: gaps
+# sys/hoon.hoon 11685:9 colhep:indent backdent #2 @11685:9; over by 2
+# etc.
 
 # "Flatward" indentation, correct to lint, see:
 # https://github.com/jeffreykegler/yahc/issues/4#issuecomment-459867919
@@ -99,15 +20,6 @@ lib/hood/drum.hoon 794:18 wuthep:jog-head-indent Jog queenside head @794:18; ove
 lib/hood/drum.hoon 797:14 wuthep:jog-head-indent Jog queenside head @797:14; over by 5
 lib/hood/drum.hoon 792:13 wuthep:head-hgap 1-jogging queenside head @792:13; under by 2
 lib/hood/drum.hoon 796:9 wuthep:head-hgap 1-jogging queenside head @796:9; under by 2
-
-# "Floats", see
-# https://github.com/jeffreykegler/yahc/issues/4#issuecomment-459867919
-sys/hoon.hoon 2114:28 wuthep:jog-head-indent Jog kingside head @2114:28; over by 19
-sys/hoon.hoon 2115:28 wuthep:jog-head-indent Jog kingside head @2115:28; over by 19
-sys/hoon.hoon 2131:30 wuthep:jog-head-indent Jog kingside head @2131:30; over by 19
-sys/hoon.hoon 2132:30 wuthep:jog-head-indent Jog kingside head @2132:30; over by 19
-sys/hoon.hoon 2148:30 wuthep:jog-head-indent Jog kingside head @2148:30; over by 19
-sys/hoon.hoon 2149:30 wuthep:jog-head-indent Jog kingside head @2149:30; over by 19
 
 # Stray space, see
 # https://github.com/jeffreykegler/yahc/issues/4#issuecomment-459867919
@@ -155,16 +67,6 @@ lib/hall-json.hoon 76:9 wuthep:head-hgap 1-jogging queenside head @76:9; under b
 mar/txt.hoon 130:11 wuthep:head-hgap 1-jogging queenside head @130:11; under by 2
 mar/txt.hoon 71:11 wuthep:head-hgap 1-jogging queenside head @71:11; under by 2
 
-# See github issue #8: https://github.com/jeffreykegler/yahc/issues/8
-sys/hoon.hoon 6397:7 wuthep:head-hgap 1-jogging queenside head @6397:7; under by 2
-sys/hoon.hoon 6401:9 wuthep:head-hgap 1-jogging queenside head @6401:9; under by 2
-sys/hoon.hoon 6450:7 wuthep:head-hgap 1-jogging queenside head @6450:7; under by 2
-sys/hoon.hoon 6483:7 wuthep:head-hgap 1-jogging queenside head @6483:7; under by 2
-sys/hoon.hoon 6384:17 wuthep:jog-body-indent Jog queenside body @6384:17; under by 2
-sys/hoon.hoon 7754:11 wuthep:head-hgap 1-jogging queenside head @7754:11; under by 2
-# From issue #8: 'seem consistently  by 3 spaces instead of 2,
-# I wonder if this is related to the inconsistent indent by 3 spaces in other places?'
-sys/hoon.hoon 8880:9 wuthep:head-hgap 1-jogging queenside head @8880:9; under by 2
 
 # See github issue #8: https://github.com/jeffreykegler/yahc/issues/8
 sys/vane/ames.hoon 1638:9 wuthep:head-hgap 1-jogging queenside head @1638:9; under by 2
@@ -232,15 +134,6 @@ lib/hood/womb.hoon 610:17 wuthep:jog-body-indent Jog kingside body @610:17; unde
 lib/sole.hoon 15:9 wuthep:head-hgap 1-jogging kingside head @15:9; over by 2
 
 # See github issue #7: https://github.com/jeffreykegler/yahc/issues/7
-# "hoon - compiler jogs, referents, heads - all look like good fixes"
-sys/hoon.hoon 8021:18 wuthep:jog-body-indent Jog kingside body @8021:18; over by 1
-sys/hoon.hoon 8023:18 wuthep:jog-body-indent Jog kingside body @8023:18; over by 1
-sys/hoon.hoon 9591:19 wuthep:jog-body-indent Jog kingside body @9591:19; over by 1
-sys/hoon.hoon 9592:20 wuthep:jog-body-indent Jog kingside body @9592:20; over by 2
-sys/hoon.hoon 12620:10 wuthep:jog-head-indent Jog kingside head @12620:10; over by 1
-sys/hoon.hoon 12621:10 wuthep:jog-head-indent Jog kingside head @12621:10; over by 1
-
-# See github issue #7: https://github.com/jeffreykegler/yahc/issues/7
 # "clay %tabl - oof. I see what it's doing, and am probably responsible; fix it yeah(also %tabl is gone in 2019 iirc)"
 # "clay ++execute-changes - should be queenside"
 # "clay ++read-at-aeon - uh, split kingside as suggested is reasonable yeah"hoons/arvo/sys/vane/clay.hoon 2162:12 wuthep:jog-body-indent Jog kingside body @2162:12; over by 1
@@ -287,17 +180,6 @@ lib/hall.hoon 172:9 centis:head-hgap 1-jogging queenside head @172:9; under by 2
 lib/hall.hoon 195:9 centis:head-hgap 1-jogging queenside head @195:9; under by 2
 
 lib/hood/drum.hoon 666:9 centis:head-hgap 1-jogging queenside head @666:9; under by 2
-# "hoon:2325 is interesting? But indenting everything in it(including the `==`) seems reasonable"
-sys/hoon.hoon 2326:11 centis:jog-head-indent Jog kingside head @2326:11; under by 2
-sys/hoon.hoon 2327:11 centis:jog-head-indent Jog kingside head @2327:11; under by 2
-sys/hoon.hoon 2328:11 centis:jog-head-indent Jog kingside head @2328:11; under by 2
-sys/hoon.hoon 2329:11 centis:jog-head-indent Jog kingside head @2329:11; under by 2
-sys/hoon.hoon 2330:11 centis:jog-head-indent Jog kingside head @2330:11; under by 2
-sys/hoon.hoon 4056:16 centis:head-hgap 1-jogging kingside head @4056:16; over by 2
-sys/hoon.hoon 4057:13 centis:jog-head-indent Jog kingside head @4057:13; over by 1
-sys/hoon.hoon 4058:13 centis:jog-head-indent Jog kingside head @4058:13; over by 1
-sys/hoon.hoon 4059:13 centis:jog-head-indent Jog kingside head @4059:13; over by 1
-sys/hoon.hoon 5090:22 centis:jog-body-indent Jog kingside body @5090:22; over by 4
 # "ames:1323 is doing the "sidenote" or w/e we decided to call it stacked indentation style,
 # but should be a `%_` instead"
 sys/vane/xmas.hoon 863:13 centis:head-hgap 1-jogging kingside head @863:13; over by 2
@@ -307,7 +189,6 @@ sys/zuse.hoon 4166:13 centis:head-hgap 1-jogging kingside head @4166:13; over by
 # From Github issue #15
 lib/down-jet/rend.hoon 153:1 wuthep:tistis-gap:empty-line wuthep @153:1; empty line in comment
 mar/txt.hoon 126:9 wuthep:tistis-gap:comment-indent wuthep @126:9; comment over by 2
-sys/hoon.hoon 11271:9 wuthep:jogging-gap:comment-indent 1-jogging kingside jogging @11271:9; comment under by 4
 sys/vane/clay.hoon 4059:5 wuthep:tistis-gap:comment-indent wuthep @4059:5; comment over by 2
 sys/vane/clay.hoon 4060:5 wuthep:tistis-gap:comment-indent wuthep @4060:5; comment over by 2
 sys/vane/clay.hoon 4061:5 wuthep:tistis-gap:comment-indent wuthep @4061:5; comment over by 2
@@ -407,23 +288,9 @@ sys/zuse.hoon 3969:10 semsig:runstep-indent runstep #4 @3969:10; over by 1
 sys/zuse.hoon 3970:10 semsig:runstep-indent runstep #5 @3970:10; over by 1
 sys/zuse.hoon 4264:15 semsig:runstep-indent runstep #1 @4264:15; over by 2
 sys/zuse.hoon 4265:15 semsig:runstep-indent runstep #2 @4265:15; over by 2
-sys/hoon.hoon 4801:14 semsig:runstep-indent runstep #1 @4801:14; over by 2
-sys/hoon.hoon 4802:14 semsig:runstep-indent runstep #2 @4802:14; over by 2
-sys/hoon.hoon 4803:14 semsig:runstep-indent runstep #3 @4803:14; over by 2
-sys/hoon.hoon 4844:14 semsig:runstep-indent runstep #1 @4844:14; over by 2
-sys/hoon.hoon 4845:14 semsig:runstep-indent runstep #2 @4845:14; over by 2
-sys/hoon.hoon 4848:14 semsig:runstep-indent runstep #1 @4848:14; over by 2
-sys/hoon.hoon 4849:14 semsig:runstep-indent runstep #2 @4849:14; over by 2
-sys/hoon.hoon 12272:22 semsig:runstep-indent runstep #1 @12272:22; over by 1
-sys/hoon.hoon 12278:22 semsig:runstep-indent runstep #2 @12278:22; over by 1
-sys/hoon.hoon 12279:22 semsig:runstep-indent runstep #3 @12279:22; over by 1
 
 # WUTBAR, WUTPAM anomalies from Github issue #19
 lib/down-jet/parse.hoon 414:9 wutpam:runstep-indent runstep #2 @414:9; under by 2
-
-# "One-line" runnings in hoon.hoon -- Github issue #32
-sys/hoon.hoon 5329:43 semsig:tistis-gap:missing-newline 1-running TISTIS @5329:45; missing newline @5329:43
-sys/hoon.hoon 5347:45 semsig:tistis-gap:missing-newline 1-running TISTIS @5347:47; missing newline @5347:45
 
 # Github issue #34
 app/fora.hoon 64:5 colsig:runstep-vgap:comment-indent colsig @64:5; comment over by 2
@@ -478,11 +345,6 @@ app/talk.hoon 863:9 semsig:runstep-vgap:comment-indent semsig @863:9; comment un
 # Github issue #40
 lib/down-jet/parse.hoon 96:1 barcen:hephep-alone HEPHEP @96:1 should only share line with other HEPHEP's
 mar/recoverable-error.hoon 29:33 barcen:hephep-alone HEPHEP @29:33 should only share line with other HEPHEP's
-sys/hoon.hoon 12:1 barcen:hephep-alone HEPHEP @12:1 should only share line with other HEPHEP's
-sys/hoon.hoon 13:1 tisgar:indent backdent #1 @13:1; under by 6
-sys/hoon.hoon 3664:1 barcen:hephep-alone HEPHEP @3664:1 should only share line with other HEPHEP's
-sys/hoon.hoon 360:1 barcen:hephep-alone HEPHEP @360:1 should only share line with other HEPHEP's
-sys/hoon.hoon 1947:1 barcen:hephep-alone HEPHEP @1947:1 should only share line with other HEPHEP's
 sys/vane/clay.hoon 321:5 tisgar:indent backdent #2 @321:5; over by 4
 sys/vane/clay.hoon 321:1 barcen:hephep-alone HEPHEP @321:1 should only share line with other HEPHEP's
 sys/vane/clay.hoon 322:1 tisgar:indent backdent #1 @322:1; under by 6
@@ -646,13 +508,6 @@ lib/tree.hoon 30:24 wutpat:hgap joined backdent @30:24 element #2 of @30:5; over
 ren/tree/combine.hoon 17:7 kethep:hgap joined backdent @17:7 element #1 of @17:1; over by 2
 ren/tree/comments.hoon 7:13 tishep:hgap joined backdent @7:13 element #1 of @7:7; over by 2
 sys/arvo.hoon 308:31 cenket:hgap joined backdent @308:31 element #3 of @308:11; over by 1
-sys/hoon.hoon 483:8 barhep:hgap joined backdent @483:8 element #1 of @483:3; over by 1
-sys/hoon.hoon 4319:11 barhep:hgap joined backdent @4319:11 element #1 of @4319:5; over by 2
-sys/hoon.hoon 4889:21 cenlus:hgap joined backdent @4889:21 element #2 of @4889:10; over by 1
-sys/hoon.hoon 5026:16 wutsig:hgap joined backdent @5026:16 element #1 of @5026:11; over by 1
-sys/hoon.hoon 8620:14 wutgar:hgap joined backdent @8620:14 element #1 of @8620:9; over by 1
-sys/hoon.hoon 10078:15 colket:hgap joined backdent @10078:15 element #2 of @10078:7; over by 1
-sys/hoon.hoon 10966:30 wutdot:hgap joined backdent @10966:30 element #2 of @10966:11; over by 1
 sys/vane/ames.hoon 1323:27 ketlus:hgap joined backdent @1323:27 element #2 of @1323:19; over by 1
 sys/vane/clay.hoon 542:15 wutsig:hgap joined backdent @542:15 element #2 of @542:5; over by 1
 sys/vane/ford.hoon 653:13 collus:hgap joined backdent @653:13 element #1 of @653:7; over by 2
@@ -672,7 +527,6 @@ app/ask.hoon 58:16 luslus:bad-tight-indent Cell body @58:16; over by 1
 lib/hood/kiln.hoon 471:13 luslus:bad-tight-indent Cell body @471:13; over by 1
 sur/gh.hoon 184:12 luslus:bad-tight-indent Cell body @184:12; over by 1
 sur/hall.hoon 97:17 luslus:bad-interline-indent Cell body @97:17; over by 1
-sys/hoon.hoon 635:12 luslus:bad-tight-indent Cell body @635:12; over by 1
 sys/zuse.hoon 1512:14 luslus:bad-tight-indent Cell body @1512:14; over by 2
 
 # Github issue #43
@@ -1086,21 +940,15 @@ ren/urb/tree.hoon 6:6 fastis:head-hgap fastis symbol @6:6; over by 1
 ren/urb/tree.hoon 7:6 fastis:head-hgap fastis symbol @7:6; over by 1
 ren/test-tree.hoon 2:12 fastis:body-hgap fastis horn @2:12; over by 1
 
-# 2-Jogging aberrations
-sys/zuse.hoon 4602:13 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @4602:13; over by 1
-sys/hoon.hoon 4322:9 wutlus:queenside:joined:head-hgap 2-jogging queenside head @4322:9; under by 2
-sys/hoon.hoon 5461:5 wutlus:queenside:split:subhead-indent queenside wutlus subhead @5461:5; under by 2
-sys/hoon.hoon 7465:15 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @7465:15; over by 1
-sys/hoon.hoon 7489:9 wutlus:queenside:joined:head-hgap 2-jogging queenside head @7489:9; under by 2
-sys/hoon.hoon 7489:20 wutlus:queenside:joined:subhead-hgap 2-jogging queenside subhead @7489:20; over by 6
+# NOLINT 2-Jogging aberrations
 sys/hoon.hoon 8314:22 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8314:22; over by 4
 sys/hoon.hoon 8322:22 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8322:22; over by 4
-sys/hoon.hoon 8340:13 wutlus:kingside:joined:head-hgap 2-jogging kingside head @8340:13; over by 2
 sys/hoon.hoon 8340:20 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8340:20; over by 2
 sys/hoon.hoon 9389:20 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @9389:20; over by 4
 sys/hoon.hoon 9863:20 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @9863:20; over by 4
 sys/hoon.hoon 10111:13 wutlus:kingside:split:head-hgap 2-jogging kingside head @10111:13; over by 2
-sys/hoon.hoon 10422:7 wutlus:queenside:joined:head-hgap 2-jogging queenside head @10422:7; under by 2
+
+# 2-Jogging aberrations
 sys/arvo.hoon 218:23 wutlus:queenside:joined:subhead-hgap 2-jogging queenside subhead @218:23; over by 1
 sys/vane/dill.hoon 109:15 wutlus:kingside:joined:head-hgap 2-jogging kingside head @109:15; over by 2
 sys/vane/gall.hoon 774:16 wutlus:kingside:split:subhead-indent kingside wutlus subhead @774:16; over by 7
@@ -1158,18 +1006,6 @@ sys/zuse.hoon 4604:65 wutlus:jog-head-indent Jog kingside head @4604:65; over by
 sys/zuse.hoon 4605:15 wutlus:jog-head-indent Jog kingside head @4605:15; over by 8
 sys/zuse.hoon 4605:25 wutlus:jog-head-indent Jog kingside head @4605:25; over by 18
 sys/zuse.hoon 4605:35 wutlus:jog-head-indent Jog kingside head @4605:35; over by 28
-sys/hoon.hoon 2114:28 wuthep:jog-head-indent Jog kingside head @2114:28; over by 19
-sys/hoon.hoon 2115:28 wuthep:jog-head-indent Jog kingside head @2115:28; over by 19
-sys/hoon.hoon 2114:26 wuthep:jogging:missing-newline wuthep @2114:26; missing newline @2114:26
-sys/hoon.hoon 2115:26 wuthep:jogging:missing-newline wuthep @2115:26; missing newline @2115:26
-sys/hoon.hoon 2131:28 wuthep:jogging:missing-newline wuthep @2131:28; missing newline @2131:28
-sys/hoon.hoon 2132:28 wuthep:jogging:missing-newline wuthep @2132:28; missing newline @2132:28
-sys/hoon.hoon 2148:28 wuthep:jogging:missing-newline wuthep @2148:28; missing newline @2148:28
-sys/hoon.hoon 2149:28 wuthep:jogging:missing-newline wuthep @2149:28; missing newline @2149:28
-sys/hoon.hoon 5477:5 wutlus:jogging:comment-indent wutlus @5477:5; comment over by 2
-sys/hoon.hoon 11274:9 wuthep:jogging:comment-indent wuthep @11274:9; comment under by 4
-sys/hoon.hoon 11277:11 wuthep:jogging:comment-indent wuthep @11277:11; comment under by 2
-sys/hoon.hoon 11280:9 wuthep:jogging:comment-indent wuthep @11280:9; comment under by 4
 sys/vane/eyre.hoon 1474:1 wuthep:jogging:empty-line wuthep @1474:1; empty line in comment
 sys/vane/clay.hoon 2173:12 wuthep:jogging:comment-indent wuthep @2173:12; comment over by 3
 sys/vane/clay.hoon 4033:5 wuthep:jogging:comment-indent wuthep @4033:5; comment over by 2
@@ -1233,16 +1069,10 @@ sys/zuse.hoon 4604:63 wutlus:jogging:missing-newline wutlus @4604:63; missing ne
 sys/zuse.hoon 4605:13 wutlus:jogging:missing-newline wutlus @4605:13; missing newline @4605:13
 sys/zuse.hoon 4605:22 wutlus:jogging:missing-newline wutlus @4605:22; missing newline @4605:22
 sys/zuse.hoon 4605:33 wutlus:jogging:missing-newline wutlus @4605:33; missing newline @4605:33
+# linter incorrect (
 sys/hoon.hoon 7530:20 wuthep:jog-body-indent Jog queenside body @7530:20; under by 1
-sys/hoon.hoon 7755:19 wuthep:jog-body-indent Jog queenside body @7755:19; over by 4
 sys/hoon.hoon 7926:16 wuthep:jog-body-indent Jog kingside body @7926:16; under by 1
-sys/hoon.hoon 8255:11 wuthep:head-hgap 1-jogging kingside head @8255:11; over by 2
-sys/hoon.hoon 8818:15 wuthep:head-hgap 1-jogging kingside head @8818:15; over by 2
-sys/hoon.hoon 8959:11 wuthep:head-hgap 1-jogging kingside head @8959:11; over by 2
-sys/hoon.hoon 8972:11 wuthep:head-hgap 1-jogging kingside head @8972:11; over by 2
-sys/hoon.hoon 9346:13 wuthep:head-hgap 1-jogging kingside head @9346:13; over by 2
-sys/hoon.hoon 9590:19 wuthep:jog-body-indent Jog kingside body @9590:19; over by 1
-sys/hoon.hoon 12436:11 wuthep:head-hgap 1-jogging kingside head @12436:11; over by 2
+# )
 sys/vane/eyre.hoon 1199:18 wutlus:jog-body-indent Jog kingside body @1199:18; under by 16
 sys/vane/eyre.hoon 1286:26 wutlus:jog-body-indent Jog queenside body @1286:26; over by 7
 sys/vane/eyre.hoon 1287:27 wutlus:jog-body-indent Jog queenside body @1287:27; over by 2
