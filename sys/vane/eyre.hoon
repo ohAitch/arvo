@@ -5,7 +5,7 @@
 |=  pit/vase
 =,  eyre
 =,  wired
-=,  unity 
+=,  unity
 =,  format
 =,  mimes:html
 =,  html
@@ -456,7 +456,7 @@
       mount.outerHTML = "Redirecting to <a href=\""+url+"\">"+url+"</a>"
       document.location = url
     }
-    urb.redir = function(ship){ 
+    urb.redir = function(ship){
       if(ship){
         var location = new URL(document.location)
         location.pathname = location.pathname.replace(/^\/~~|\/~\/as\/any/,'/~/as/~'+ship)
@@ -1412,7 +1412,7 @@
           [%| (resolve ~ p.pez(p [%at ses.yac p.p.pez]))]
         ::
             $js
-          =^  jon  ..ya  stat-json.yac  
+          =^  jon  ..ya  stat-json.yac
           [%| (resolve cug.yac p.pez(p (add-json jon p.p.pez)))]
         ==
       ::
@@ -1784,7 +1784,7 @@
         ==
     ++  self  .
     ++  abet  +>(sec (~(put by sec) +<- +<+))
-    ++  execute  
+    ++  execute
       |=({a/whir-se b/{beak silk:ford}} (execute:abet se+[a usr dom] b))
     ++  dead-this  |=(a/tang (fail:abet 500 0v0 a))
     ++  dead-hiss  |=(a/tang pump(req ~(nap to req), ..vi (give-sigh %| a)))
@@ -1824,7 +1824,7 @@
       %_    u.cor
           +12.q
         =+  ^=  ato
-            %-  sky 
+            %-  sky
             [[151 %noun] %cx (en-beam root-beak [%atom (flop %_(dom . sec+dom))])]
         =+  key=?~(ato '' ;;(@t u.ato))  ::  XX jael
         =.  key

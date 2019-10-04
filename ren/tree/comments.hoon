@@ -7,7 +7,7 @@
       =-    (sort - dor)
       %+  turn  ~(tap by a)
       |=({b/knot c/{ship marl}} [(slav %da b) c])
-  /_ 
+  /_
   /;  |=  a/manx  ^-  {ship marl}
       ~|  a
       ?>  ?=(_[/div ;/(~) ~[[%h2 **] ~[[%code **] ;/(who=**)]] kid=**] a)

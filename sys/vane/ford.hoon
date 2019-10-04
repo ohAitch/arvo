@@ -200,7 +200,7 @@
     %_    $
         sup.bay  (~(del by sup.bay) i.des)
         des  t.des
-        mow 
+        mow
       %-  weld  :_  mow
       %+  turn  ~(tap in (~(get ju sup.bay) i.des))
       |=(a/duct `move`[a %give %news i.des])
@@ -318,7 +318,7 @@
       $(kiz t.kiz, mow :_(mow [hen (cancel i.kiz)]))
     ::
     ++  cancel                                          ::  stop a request
-      |=  {van/vane ren/care:clay bem/beam}  
+      |=  {van/vane ren/care:clay bem/beam}
       ^-  (wind note gift:able)
       ?+  van  ~|(stub-cancel+van !!)
         $c  [%pass (camp-wire +<) van [%warp [our p.bem] q.bem ~]]
@@ -1329,7 +1329,7 @@
         ;~  cope
           ;~  coax
             |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas p.kas) flay))
-            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas q.kas) flay)) 
+            |=({cof/cafe p/silk q/silk} (cope ^$(cof cof, kas q.kas) flay))
           ==                          ::  XX merge %tabl
         ::
           |=  {cof/cafe bor/cage heg/cage}  ^-  (bolt gage)
@@ -1523,13 +1523,13 @@
       ++  able                                          ::  assemble preamble
         ^-  hoon
         :+  %tsgr
-          ?:  =(~ rop)  
-            [%$ 1] 
+          ?:  =(~ rop)
+            [%$ 1]
           :+  %brcn  [~ ~]
           =-  [[0 [~ ~] -] ~ ~]
           (~(run by rop) |=({^ a/hoon} [~ %ash a]))
-        ?:  =(~ bil) 
-          [%$ 1] 
+        ?:  =(~ bil)
+          [%$ 1]
         :+  %brcn  [~ ~]
         =-  [[0 [~ ~] -] ~ ~]
         (~(run by bil) |=({^ a/hoon} [~ %ash a]))

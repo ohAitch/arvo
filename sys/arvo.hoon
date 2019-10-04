@@ -50,7 +50,7 @@
   ==                                                    ::
 ++  mark  @tas                                          ::  content type
 ++  mash  |=(* (mass +<))                               ::  producing mass
-++  mass  (pair cord (each noun (list mash)))           ::  memory usage  
+++  mass  (pair cord (each noun (list mash)))           ::  memory usage
 ++  mill  (each vase milt)                              ::  vase+metavase
 ++  milt  {p/* q/*}                                     ::  metavase
 ++  monk  (each ship {p/@tas q/@ta})                    ::  general identity
@@ -208,7 +208,7 @@
       ^-  (unit (pair move worm))
       %+  biff  ((soft duct) -.q.wec)
       |=  a/duct
-      %+  bind  
+      %+  bind
         =-  ?-  -.har
               $|  ~&  [%dead-card p.har]  ~             ::  XX properly log?
               $&  (some p.har)
@@ -549,7 +549,7 @@
   =^  zef  niz
     (~(hurl (is vil eny bud niz) now) lac ovo)
   [zef +>.$]
-::                                                
+::
 ++  veke                                                ::  build new kernel
   |=  {now/@da hap/path zup/path}
   ^-  *
@@ -575,7 +575,7 @@
   =-  ?:(?=($| -.res) ((slog p.res) ~) `p.res)
   ^=  res  %-  mule  |.
   =+  ken=(veke now hap zup)
-  ~&  [%vega-kernel `@ux`(mug ken)] 
+  ~&  [%vega-kernel `@ux`(mug ken)]
   =+  ^=  nex
       =+  gat=.*(ken .*(ken [0 87]))
       (need ((hard (unit @)) .*([-.gat [[now ~] +>.gat]] -.gat)))

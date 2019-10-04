@@ -138,7 +138,7 @@
     """
     y - invite current ask
     n - ignore current ask
-    
+
     """
   """
   l - list new asks
@@ -152,7 +152,7 @@
   |=  ask/email
   :-  ost.bow
   ^-  card
-  :^  %poke  /invite/(scot %t ask)  [(need wom) %hood]  
+  :^  %poke  /invite/(scot %t ask)  [(need wom) %hood]
   :-  %womb-invite
   =,  hood-womb
   ^-  [cord reference invite]

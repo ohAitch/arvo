@@ -19,7 +19,7 @@
 |=  pit/vase
 =,  pki:jael
 =,  rights:jael
-=,  able:jael 
+=,  able:jael
 =,  title
 =,  crypto
 =,  jael
@@ -1512,7 +1512,7 @@
             ::  nym: self-description
             ::
             now/@da
-            eny/@e 
+            eny/@e
             gen/@pG
             nym/arms
         ==
@@ -1529,7 +1529,7 @@
     ::
     ::  initialize hierarchical property
     ::
-    =.  +>.$  
+    =.  +>.$
       =-  abet:(deal:~(able ex our) our - ~)
       ^-  safe
       %-  intern:up
@@ -1560,7 +1560,7 @@
     ::  had: key handle
     ::  ryt: initial right
     ::
-    =/  key  (ypt:scr (mix our %jael-make) gen)  
+    =/  key  (ypt:scr (mix our %jael-make) gen)
     =*  had  (shaf %hand key)
     =*  ryt  `rite`[%urban [had (add ~m1 now) key] ~ ~]
     ::
@@ -1922,13 +1922,13 @@
               moz/(list (pair duct (wind note gift)))
           ==
       |%
-      ++  call  
+      ++  call
         |=  tac/task
         ^+  +>
         =^  did  lex  abet:(~(call of [now eny] lex) hen tac)
         +>.$(moz (weld moz did))
       ::
-      ++  take  
+      ++  take
         |=  {tea/wire hin/sign}
         +>
       --

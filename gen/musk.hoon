@@ -20,22 +20,22 @@
 |%
 ++  musk                                                ::  nock with block set
   =>  |%
-      ++  block  
+      ++  block
         ::  identity of resource awaited
         ::  XX parameterize
         noun
       ::
-      ++  result  
+      ++  result
         ::  internal interpreter result
         ::
         $@(~ seminoun)
       ::
-      ++  seminoun  
-        ::  partial noun; blocked subtrees are ~ 
+      ++  seminoun
+        ::  partial noun; blocked subtrees are ~
         ::
         {mask/stencil data/noun}
       ::
-      ++  stencil  
+      ++  stencil
         ::  noun knowledge map
         ::
         $%  ::  no; noun has partial block substructure
@@ -44,7 +44,7 @@
             ::  yes; noun is either fully complete, or fully blocked
             ::
             {$& blocks/(set block)}
-        == 
+        ==
       ::
       ++  output
         ::  nil; interpreter stopped
@@ -53,8 +53,8 @@
         ::  yes, complete noun; no, list of blocks
         ::
         (each noun (list block))
-      -- 
-  |%  
+      --
+  |%
   ++  bran
     |=  sut/type
     =+  gil=*(set type)
@@ -64,10 +64,10 @@
       $void      [&+[~ ~ ~] ~]
       {$atom *}  ?~(q.sut [&+[~ ~ ~] ~] [&+~ u.q.sut])
       {$cell *}  (combine $(sut p.sut) $(sut q.sut))
-      {$core *}  %+  combine:musk 
+      {$core *}  %+  combine:musk
                    ?~  p.s.q.sut  [&+[~ ~ ~] ~]
                    [&+~ p.s.q.sut]
-                 $(sut p.sut) 
+                 $(sut p.sut)
       {$face *}  $(sut ~(repo ut sut))
       {$fork *}  [&+[~ ~ ~] ~]
       {$help *}  $(sut ~(repo ut sut))
@@ -89,7 +89,7 @@
     :-  ~
     ::  merge all blocking sets
     ::
-    =/  blocks  (squash mask.noy) 
+    =/  blocks  (squash mask.noy)
     ?:  =(~ blocks)
       ::  no blocks, data is complete
       ::
@@ -120,11 +120,11 @@
     ::      foo
     ::  ^=  foo
     ::  ^-  result
-    ?@  fol  
+    ?@  fol
       ::  bad formula, stop
       ::
       ~
-    ?:  ?=(^ -.fol)  
+    ?:  ?=(^ -.fol)
       ::  hed: interpret head
       ::
       =+  hed=$(fol -.fol)
@@ -137,10 +137,10 @@
       ::  propagate stop
       ::
       ?~  tal  ~
-      ::  combine 
+      ::  combine
       ::
       (combine hed tal)
-    ?+    fol  
+    ?+    fol
     ::  bad formula; stop
     ::
         ~
@@ -228,28 +228,28 @@
     ::
     ::  7; composition
     ::
-        {$7 b/* c/*}       
+        {$7 b/* c/*}
       ::  use standard macro expansion (slow)
       ::
       $(fol =>(fol [2 b 1 c]))
     ::
     ::  8; declaration
     ::
-        {$8 b/* c/*}       
+        {$8 b/* c/*}
       ::  use standard macro expansion (slow)
       ::
       $(fol =>(fol [7 [[7 [0 1] b] 0 1] c]))
     ::
     ::  9; invocation
     ::
-        {$9 b/* c/*}       
+        {$9 b/* c/*}
       ::  use standard macro expansion (slow)
       ::
       $(fol =>(fol [7 c 2 [0 1] 0 b]))
     ::
     ::  10; static hint
     ::
-        {$10 @ c/*}        
+        {$10 @ c/*}
       ::  ignore hint
       ::
       $(fol c.fol)
@@ -274,7 +274,7 @@
     |=  $:  ::  hed: head of pair
             ::  tal: tail of pair
             ::
-            hed/seminoun 
+            hed/seminoun
             tal/seminoun
         ==
     ^-  seminoun
@@ -329,8 +329,8 @@
           ::
           %=  $
             axe  lat
-            bus  ?:  =(2 now) 
-                   [left.mask.bus -.data.bus] 
+            bus  ?:  =(2 now)
+                   [left.mask.bus -.data.bus]
                  [rite.mask.bus +.data.bus]
     ==    ==
   ::  require complete intermediate step

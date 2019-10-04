@@ -28,7 +28,7 @@
         $set  (frond %set (tape (tufa p.det)))
         $ins  (frond %ins (pairs at+(numb p.det) cha+s+(tuft q.det) ~))
       ==
-    --  
+    --
   --
 ++  wush
   |=  {wid/@u tan/tang}
@@ -69,7 +69,7 @@
   ::
   ++  json
     ^-  ^json
-    ?+    -.sef  
+    ?+    -.sef
               ~|(unsupported-effect+-.sef !!)
         $mor  [%a (turn p.sef |=(a/sole-effect json(sef a)))]
         $err  (frond %hop (numb p.sef))

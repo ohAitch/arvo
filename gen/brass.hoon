@@ -122,7 +122,7 @@
         ::
         ::  switch to the second-generation compiler.  we want to be
         ::  able to generate matching reflection nouns even if the
-        ::  language changes -- the first-generation formula will 
+        ::  language changes -- the first-generation formula will
         ::  generate last-generation spans for `!>`, etc.
         ::
         ~>  %slog.[0 leaf+"1-d"]
@@ -251,8 +251,8 @@
         sal/(list spur)
     ^-  ovum
     ::
-    ::  hav: all user files 
-    ::  
+    ::  hav: all user files
+    ::
     =;  hav  ~&  user-files+(lent hav)
              [[%$ %sync ~] [%into %$ & hav]]
     =|  hav/mode:clay
@@ -260,7 +260,7 @@
     ?~  sal  ~
     =.  hav  $(sal t.sal)
     ::
-    ::  tyl: spur 
+    ::  tyl: spur
     ::
     =/  tyl  i.sal
     |-  ^+  hav
@@ -270,7 +270,7 @@
     ::
     =/  pax  (en-beam:format bec tyl)
     =/  lon  .^(arch %cy pax)
-    =?  hav  ?=(^ fil.lon)  
+    =?  hav  ?=(^ fil.lon)
         ?.  ?=({$hoon *} tyl)
           ::
           ::  install only hoon files for now
@@ -281,7 +281,7 @@
         ::
         =;  cot  [[(flop `path`tyl) `[/text/plain cot]] hav]
         ^-  octs
-        ?-    tyl  
+        ?-    tyl
             {$hoon *}
           =/  dat  .^(@t %cx pax)
           [(met 3 dat) dat]

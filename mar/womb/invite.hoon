@@ -17,7 +17,7 @@
   ++  json
     |=  jon/^json  ^-  {cord reference invite}
     %-  need
-    %.  jon 
+    %.  jon
     =>  jo
     =/  mail
       ;~  simu

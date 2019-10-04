@@ -19,7 +19,7 @@
   ::
 |%
 ++  parse-url  parse-url:interpolate
-++  join  
+++  join
   |=  {a/cord b/(list cord)}
   ?~  b  ''
   (rap 3 |-([i.b ?~(t.b ~ [a $(b t.b)])]))
@@ -157,7 +157,7 @@
   %&
 ::
 ++  auth
-  |%  
+  |%
   ++  header
     |=  {auq/quay url/purl med/meth math bod/(unit octs)}
     ^-  cord
@@ -238,7 +238,7 @@
     |=  a/httr  ^-  core-move
     ?^  tok  [%give a]
     ?.  =(%true (grab-quay r.a 'oauth_callback_confirmed'))
-      ~|(%callback-rejected !!)    
+      ~|(%callback-rejected !!)
     =+  request-token=(grab-token-response a)
     [[%redo ~] (save `token`[%request-token request-token])]
   ::
@@ -266,7 +266,7 @@
 ::::  Example "standard" sec/ core:
   ::
 ::
-::  :: 
+::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
 ::  /+    oauth1
@@ -292,7 +292,7 @@
 ::::  Equivalent imperative code:
   ::
 ::
-::  :: 
+::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
 ::  /+    oauth1

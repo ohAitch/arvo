@@ -1,5 +1,5 @@
 ::  Compile arvo as a pill noun, without compiler changes.
-::  usage 
+::  usage
 ::
 ::    .urbit/pill +solid
 ::
@@ -62,7 +62,7 @@
         [%g /vane/gall]
         [%e /vane/eyre]
         [%f /vane/ford]
-        
+
     ==
 |-  ^+  all
 ?~  vay  all

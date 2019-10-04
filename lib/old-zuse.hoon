@@ -19,7 +19,7 @@
 ++  unt         unt:chrono:userlib                      ::  UGT to UTC time
 ++  yu          yu:chrono:userlib                       ::  UTC format constants
 ++  moon        en-mite:mimes:html                      ::  mime type to text
-++  perk        perk.is                                 ::  parse cube fork 
+++  perk        perk.is                                 ::  parse cube fork
 ++  poja        de-json:html                            ::  parse JSON
 ++  pojo        en-json:html                            ::  print json
 ++  poxo        en-xml:html                             ::  node to tape
@@ -64,7 +64,7 @@
 ++  gnow        gnow:title                              ::  display gcos
 ++  pale        pale:pubsub:userlib                     ::  filter peers
 ++  prix        prix:pubsub:userlib                     ::  filter gate
-++  prey        prey:pubsub:userlib                     ::  prefix 
+++  prey        prey:pubsub:userlib                     ::  prefix
 ++  hunt        !!                                      ::  YY in hoon with dif abi
 ++  mole        !!                                      ::  XX deprecated
 ++  myle        !!                                      ::  XX deprecated
@@ -220,7 +220,7 @@
 ++  tako        tako:clay                               ::  yaki ref
 ++  tick        tick:ames                               ::  process id
 ++  tint        tint:dill                               ::  text color
-++  toro        toro:clay                               ::  general change 
+++  toro        toro:clay                               ::  general change
 ++  town        town:ames                               ::  all security state
 ++  tube        !!                                      ::  canonical path
 ++  tutu        !!                                      ::  XX deprecated

@@ -23,7 +23,7 @@
 ::::  structures
 ::::
 +=  move  [bone card]
-+=  card 
++=  card
   $%  [%poke wire dock poke]
       [%exec wire ship (unit bilk:ford)]
       [%info wire ship toro:clay]
@@ -69,7 +69,7 @@
   ((hard relative) a)
   ;~  plug
   ::
-    ;~  pose  
+    ;~  pose
       (cold %root fas)
     ::
       (cold [%up 1] ;~(plug dot fas))
@@ -89,13 +89,13 @@
     ~(rent co b)
     (more fas nuck:so)
   ::
-    ;~  pose 
-      (cold %html (jest '.html')) 
-      (cold %md (jest '.md')) 
-      (cold %umd (jest '.umd')) 
-      (cold %hoon (jest '.hoon')) 
-      (cold %js (jest '.js')) 
-      (cold %css (jest '.css')) 
+    ;~  pose
+      (cold %html (jest '.html'))
+      (cold %md (jest '.md'))
+      (cold %umd (jest '.umd'))
+      (cold %hoon (jest '.hoon'))
+      (cold %js (jest '.js'))
+      (cold %css (jest '.css'))
       (easy %$)
     ==
   ==
@@ -149,7 +149,7 @@
   =/  sil  (find-file in.act ext.act)
   =/  wir=wire  /build/(scot %p (sham [in.act out.act]))
   =/  car  [%exec wir our.bol `[-.in.act sil]]
-  :-  [ost.bol car]~ 
+  :-  [ost.bol car]~
     %=  this
       waiting.sta  (~(put by waiting.sta) wir [in.act out.act])
     ==
@@ -223,7 +223,7 @@
   ?:  ?=(%| -.gag)
     ~_  p.gag  !!
   ?>  ?=(%& -.gag)
-  ::  retrieve the build in/out beams  
+  ::  retrieve the build in/out beams
   ::
   =/  bem=[in=beam out=beam]  (need (~(get by waiting.sta) wir))
   ?>  &(!?=(~ s.in.bem) !?=(~ s.out.bem))
