@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/jam/mar
   ::
-/?    310
+/?  310
 ::
 =,  mimes:html
 |_  mud/@

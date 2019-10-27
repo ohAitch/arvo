@@ -1,8 +1,8 @@
 ::
 ::::  /mar/hall/telegrams/hoon
   ::
-/-    hall
-/+    hall-json
+/-  hall
+/+  hall-json
 ::
 |_  gaz/(list telegram:hall)
 ::

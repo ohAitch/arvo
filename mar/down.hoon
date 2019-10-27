@@ -1,9 +1,9 @@
 ::
 ::::  /hoon/down/mar
   ::
-/?    310
-/-    markdown
-/+    down-jet, frontmatter
+/?  310
+/-  markdown
+/+  down-jet, frontmatter
 ::
 ::::
   ::

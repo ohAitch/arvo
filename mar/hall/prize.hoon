@@ -1,8 +1,8 @@
 ::
 ::::  /mar/hall/prize/hoon
   ::
-/-    hall
-/+    hall-json
+/-  hall
+/+  hall-json
 ::
 |_  piz/prize:hall
 ::

@@ -1,8 +1,8 @@
 ::
 ::::  /mar/hall/rumor/hoon
   ::
-/-    hall
-/+    hall-json
+/-  hall
+/+  hall-json
 ::
 |_  rum/rumor:hall
 ::

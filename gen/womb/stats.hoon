@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/stats/womb/gen
   ::
-/?    310
-/+    hood-womb
+/?  310
+/+  hood-womb
 :-  %say
 |=  $:  {now/@da eny/@uvJ bec/beak}
         $~

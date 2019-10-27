@@ -1,7 +1,7 @@
 ::                                                      ::  ::
 ::::  /hoon/hood/app                                    ::  ::
   ::                                                    ::  ::
-/?    310                                               ::  zuse version
+/?  310                                                 ::  zuse version
 /+  sole,                                               ::  libraries
     ::  XX these should really be separate apps, as
     ::     none of them interact with each other in

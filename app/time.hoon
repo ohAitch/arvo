@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/time/app
   ::
-/?    310
+/?  310
 /+  old-zuse
 =,  old-zuse
 |%

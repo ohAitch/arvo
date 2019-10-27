@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/will/mar
   ::
-/?    310
+/?  310
 |_  wyl/(unit wyll:ames)
 ::
 ++  grab                                                ::  convert from

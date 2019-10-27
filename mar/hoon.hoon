@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/hoon/mar
   ::
-/?    310
+/?  310
 ::
 =,  eyre
 |_  own/@t

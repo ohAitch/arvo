@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/index/tree/mar
   ::
-/?    310
-/+    tree,map-to-json,elem-to-react-json
+/?  310
+/+  tree,map-to-json,elem-to-react-json
 [. tree]
 ::
 ::::

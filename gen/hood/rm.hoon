@@ -2,6 +2,6 @@
 ::
 ::::  /hoon/rm/hood/gen
   ::
-/?    310
+/?  310
 :-  %say
 |=({^ {input/path $~} $~} kiln-rm+input)

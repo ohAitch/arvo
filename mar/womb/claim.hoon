@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/claim/womb/mar
   ::
-/?    310
-/+    old-zuse
+/?  310
+/+  old-zuse
 =,  old-zuse
 |_  {aut/@uvH her/@p}
 ::

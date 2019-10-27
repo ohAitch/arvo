@@ -1,8 +1,8 @@
 ::
 ::::  /lib/hall-json/hoon
   ::
-/-    hall
-/+    old-zuse
+/-  hall
+/+  old-zuse
 =,    hall
 ::
 |_  bol/bowl:gall

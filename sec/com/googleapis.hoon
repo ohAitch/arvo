@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/googleapis/com/sec
   ::
-/+    oauth2, interpolate, hep-to-cab
+/+  oauth2, interpolate, hep-to-cab
 ::
 ::::
   ::

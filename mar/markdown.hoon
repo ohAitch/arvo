@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/markdown/mar
   ::
-/?    310
+/?  310
 ::
 =,  mimes:html
 =,  format

@@ -1,9 +1,9 @@
 ::
 ::::  /hoon/blit/dill/mar
   ::
-/?    310
-/-    sole
-/+    old-zuse
+/?  310
+/-  sole
+/+  old-zuse
 =,  sole
 =,  old-zuse
 |_  dib/dill-blit

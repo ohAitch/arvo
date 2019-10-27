@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/curl/gen
   ::
-/?    310
+/?  310
 /-  sole
 /+  old-zuse
 =,  old-zuse

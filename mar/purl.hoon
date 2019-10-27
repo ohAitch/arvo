@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/purl/mar
   ::
-/?    310
+/?  310
 =,  eyre
 |_  url/purl
 ::

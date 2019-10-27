@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/instagram/com/sec
   ::
-/+    oauth2
+/+  oauth2
 ::
 ::::
   ::

@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/txt-diff/mar
   ::
-/?    310
+/?  310
 |_  txt-diff/(urge:clay cord)
 ::
 ++  grab                                                ::  convert from

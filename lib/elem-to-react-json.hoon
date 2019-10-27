@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/elem-to-react-json/lib
   ::
-/?    310
+/?  310
 =,  format
 |%
 ++  react-attrs                                         ::  uppercase mapping

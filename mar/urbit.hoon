@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/urbit/mar
   ::
-/?    310
+/?  310
 ::::  A minimal urbit mark
 ::
 |_  her/@p

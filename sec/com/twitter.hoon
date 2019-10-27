@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/twitter/com/sec
   ::
-/+    oauth1
+/+  oauth1
 ::
 ::::
   ::

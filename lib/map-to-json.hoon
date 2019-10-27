@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/map-to-json/lib
   ::
-/?    310
+/?  310
 =,  format
 |*  {a/_cord b/_json}                 ::  XX {a/$-(* cord) b/$-(* json)}
 |=  c/(map _+<.a _+<.b)

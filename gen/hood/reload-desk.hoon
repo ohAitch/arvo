@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/reload-desk/hood/gen
   ::
-/?    310
+/?  310
 ::
 ::::
   ::

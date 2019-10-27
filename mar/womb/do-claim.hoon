@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/do-claim/womb/mar
   ::
-/?    310
+/?  310
 |_  {her/ship tik/@p}
 ::
 ++  grab                                                ::  convert from

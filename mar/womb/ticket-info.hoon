@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/stat-all/womb/mar
   ::
-/?    310
-/+    old-zuse
+/?  310
+/+  old-zuse
 ::
 ::::  ~fyr
   ::

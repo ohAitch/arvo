@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/ships/mar
   ::
-/?    310
+/?  310
 =,  format
 |_  all/(list ship)
 ++  grab  |%

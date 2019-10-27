@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/tang/mar
   ::
-/?    310
+/?  310
 ::
 =,  format
 |_  tan/(list tank)

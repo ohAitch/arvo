@@ -13,8 +13,8 @@
 ::  since that's the only thing the client ever
 ::  subscribes to.
 ::
-/-    hall, sole                                        ::  structures
-/+    hall, sole                                        ::  libraries
+/-  hall, sole                                          ::  structures
+/+  hall, sole                                          ::  libraries
 /=    seed  /~  !>(.)
 ::
 ::::

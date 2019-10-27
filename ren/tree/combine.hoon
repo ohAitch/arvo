@@ -1,9 +1,9 @@
 ::
 ::::  /hoon/combine/tree/ren
   ::
-/?    310
-/-    tree-include
-/+    elem-to-react-json
+/?  310
+/-  tree-include
+/+  elem-to-react-json
 /=    mime    /mime/
 /=    body    /tree-elem/
 /=    sect    /&json&/tree-index/

@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/plan/mar
   ::
-/?    310
-/-    plan-acct, plan-diff
+/?  310
+/-  plan-acct, plan-diff
 ::
 ::::  ~fyr
   ::

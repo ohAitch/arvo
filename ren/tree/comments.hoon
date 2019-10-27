@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/comments/tree/ren
   ::
-/?    310
+/?  310
 /:    /%/comments
   /;  |=  a/(map knot {ship marl})
       =-    (sort - dor)

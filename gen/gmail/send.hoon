@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/send/gmail/gen
   ::
-/?    310
-/-    rfc
+/?  310
+/-  rfc
 :-  %say
 |=  {^ {to/tape subject/tape opt/$@($~ {mess/tape $~})} _from="urbit-test@gmail.com"}
 :-  %gmail-req

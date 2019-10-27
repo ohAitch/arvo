@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/ping/hood/gen
   ::
-/?    310
+/?  310
 :-  %say
 |=  $:  {now/@da eny/@ bec/beak}
         {{exp/@ud $~} $~}

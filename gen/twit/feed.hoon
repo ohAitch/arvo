@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/feed/twit/gen
   ::
-/?    310
-/-    twitter
+/?  310
+/-  twitter
 /+  old-zuse
 =,  old-zuse
 ::

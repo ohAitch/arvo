@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/recycle/womb/mar
   ::
-/?    310
-/+    old-zuse
+/?  310
+/+  old-zuse
 =,  old-zuse
 |_  {who/@txmail him/knot tik/knot}
 ::

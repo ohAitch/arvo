@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/elem/mar
   ::
-/?    310
+/?  310
 =,  mimes:html
 =,  html
 |_  own/manx

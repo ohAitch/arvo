@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/asana/com/sec
   ::
-/+    oauth2
+/+  oauth2
 ::
 ::::
   ::

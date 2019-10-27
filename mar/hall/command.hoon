@@ -1,9 +1,9 @@
 ::
 ::::  /mar/hall/command/hoon
   ::
-/?    310
-/-    hall
-/+    hall-json
+/?  310
+/-  hall
+/+  hall-json
 ::
 =,  hall
 |_  cod/command

@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/email/mar
   ::
-/?    310
+/?  310
 |_  {adr/@ta tyl/tape mez/wall}
 ::
 ++  grab                                                ::  convert from

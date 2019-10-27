@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/parse/down-jet/lib
   ::
-/?    310
+/?  310
 =,  html
 =,  format
 =+  =~

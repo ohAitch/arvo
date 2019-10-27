@@ -1,5 +1,5 @@
 ::
-/?    310
+/?  310
 /-  hall
 /+  old-zuse
 [old-zuse .]

@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/twit/app
   ::
-/-    plan-acct
-/+    twitter, hall
+/-  plan-acct
+/+  twitter, hall
 ::
 ::::  ~fyr
   ::

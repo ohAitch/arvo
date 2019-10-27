@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/dojo/web
   ::
-/?    310
+/?  310
 |%
 ++  cdnj  |=(a/tape ;script(src "//cdnjs.cloudflare.com/ajax/libs/{a}");)
 --

@@ -1,8 +1,8 @@
 ::                                                      ::  ::
 ::::  /hoon/helm/hood/lib                               ::  ::
   ::                                                    ::  ::
-/?    310                                               ::  version
-/-    sole, hall
+/?  310                                                 ::  version
+/-  sole, hall
 [. sole]
 ::                                                      ::  ::
 ::::                                                    ::  ::

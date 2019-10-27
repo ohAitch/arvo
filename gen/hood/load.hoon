@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/load/hood/gen
   ::
-/?    310
-/+    hood-womb,  old-zuse
+/?  310
+/+  hood-womb,    old-zuse
 =,  old-zuse
 ::
 ::::

@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/ask/app
   ::
-/?    310
-/+    sole, hood-womb, prey
+/?  310
+/+  sole, hood-womb, prey
 [. sole]
 |%
   ++  card

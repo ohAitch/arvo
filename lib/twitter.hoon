@@ -2,9 +2,9 @@
 ::
 ::::  /hoon/twitter/lib
   ::
-/?    314
-/-    twitter
-/+    interpolate, hep-to-cab
+/?  314
+/-  twitter
+/+  interpolate, hep-to-cab
 =+  sur-twit:^twitter  :: XX
 =,  eyre
 =,  mimes:html

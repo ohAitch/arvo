@@ -1,7 +1,7 @@
 ::
 ::::  /lib/hall/hoon
   ::
-/-    hall
+/-  hall
 ::
 ::::
   ::

@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/down-jet/lib
   ::
-/?    310
-/-    markdown
+/?  310
+/-  markdown
 ::
 ::::
   ::

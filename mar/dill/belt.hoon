@@ -1,9 +1,9 @@
 ::
 ::::  /hoon/belt/dill/mar
   ::
-/?    310
-/-    kyev, sole
-/+    old-zuse
+/?  310
+/-  kyev, sole
+/+  old-zuse
 ::
 ::::
   ::

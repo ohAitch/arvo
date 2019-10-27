@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/tree/urb/ren
   ::
-/?    310
+/?  310
 /=   hed    /#    /%   /tree-head/
 /=   bod    /#    /%   /tree-body/
 ^-  {hed/{@uvH marl} bod/{@uvH marl}}

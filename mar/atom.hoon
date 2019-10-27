@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/atom/mar
   ::
-/?    310
+/?  310
 ::
 ::::  A minimal atom mark
   ::

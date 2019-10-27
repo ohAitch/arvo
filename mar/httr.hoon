@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/httr/mar
   ::
-/?    310
+/?  310
 ::
 =,  eyre
 =,  format

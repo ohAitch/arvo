@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/noun/mar
   ::
-/?    310
+/?  310
 !:
 ::::  A minimal noun mark
 |_  non/*

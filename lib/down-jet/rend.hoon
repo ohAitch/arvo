@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/rend/down-jet/lib
   ::
-/?    310
+/?  310
 ::
 |%
 ++  into-inner

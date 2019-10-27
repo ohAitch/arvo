@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/oauth2/lib
   ::
-/+    hep-to-cab, interpolate, old-zuse
+/+  hep-to-cab, interpolate, old-zuse
 =,  old-zuse
 =,  eyre
 =,  mimes:html
@@ -283,7 +283,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth2
+::  /+  oauth2
 ::  ::
 ::  ::::
 ::    ::
@@ -307,7 +307,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth2
+::  /+  oauth2
 ::  ::
 ::  ::::
 ::    ::
@@ -344,7 +344,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth2
+::  /+  oauth2
 ::  ::
 ::  ::::
 ::    ::
@@ -371,7 +371,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth2
+::  /+  oauth2
 ::  ::
 ::  ::::
 ::    ::

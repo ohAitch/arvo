@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/cp/hood/gen
   ::
-/?    310
+/?  310
 :-  %say
 =,  space:userlib
 |=  {^ {input/path output/path $~} $~}

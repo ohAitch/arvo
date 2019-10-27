@@ -1,9 +1,9 @@
 ::
 ::::  /hoon/effect/sole/mar
   ::
-/?    310
-/-    sole
-/+    old-zuse
+/?  310
+/-  sole
+/+  old-zuse
 ::
 ::::
   ::

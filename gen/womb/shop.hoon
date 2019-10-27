@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/shop/womb/gen
   ::
-/?    310
+/?  310
 :-  %say
 |=  $:  {now/@da eny/@uvJ bec/beak}
         arg/$@($~ {typ/?($planets $galaxies $stars) $~})

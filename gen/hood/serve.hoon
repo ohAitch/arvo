@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/serve/hood/gen
   ::
-/?    310
+/?  310
 /+  old-zuse
 =,  old-zuse
 ::

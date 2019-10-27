@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/tree/lib
   ::
-/?    314
+/?  314
 ::
 |%
 ++  getall                                              :: search in manx

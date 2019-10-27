@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/part/womb/mar
   ::
-/?    310
-/+    hood-womb
+/?  310
+/+  hood-womb
 |_  all/part:hood-womb
 ++  grad  %jam
 ++  grow  |%  ++  jam  (^jam all)

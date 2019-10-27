@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/rss-xml/ren
   ::
-/?    310
+/?  310
 /=  sum  /&snip&elem&/|(/elem/ /~[;div;])
 /=  kid  /^  (map knot {marl marl})
          /_  /&snip&/elem/

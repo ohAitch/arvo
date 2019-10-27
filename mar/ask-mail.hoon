@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/ask-mail/mar
   ::
-/?    310
+/?  310
 =,  format
 =,  mimes:html
 |_  txt/cord

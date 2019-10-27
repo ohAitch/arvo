@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/tree/write/mar
   ::
-/?    310
+/?  310
 ::
 =,  mimes:html
 =,  format

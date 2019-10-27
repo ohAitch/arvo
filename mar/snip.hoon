@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/snip/mar
   ::
-/?    310
+/?  310
 =,  html
 |%
   ++  words  1

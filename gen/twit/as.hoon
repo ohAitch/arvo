@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/as/twit/gen
   ::
-/-    twitter
+/-  twitter
 ::
 ::::
   ::

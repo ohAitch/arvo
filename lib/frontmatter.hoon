@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/frontmatter/lib
   ::
-/?    310
+/?  310
 ::
 =,  format
 |%

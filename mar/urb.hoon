@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/urb/mar
   ::
-/?    310
+/?  310
 /=  urb-wasp-data-js    /:    /%/wasp-data    /js/
 =,  format
 =,  mimes:html

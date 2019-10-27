@@ -1,8 +1,8 @@
 ::
 ::::  /mar/hall/action/hoon
   ::
-/-    hall
-/+    hall-json
+/-  hall
+/+  hall-json
 ::
 |_  act/action:hall
 ::

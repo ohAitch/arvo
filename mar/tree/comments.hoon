@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/comments/tree/mar
   ::
-/?    310
-/+    elem-to-react-json, time-to-id
+/?  310
+/+  elem-to-react-json, time-to-id
 =,  format
 ::
 ::::

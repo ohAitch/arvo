@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/womb/web
   ::
-/?    310
+/?  310
 ;module(nav_title "Hello", nav_no-dpad "", nav_no-sibs "")
   ;script@"/~/at/=home=/web/lib/js/urb.js";
   ;link/"./main.css"(rel "stylesheet");

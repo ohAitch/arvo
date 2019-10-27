@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/oauth1/lib
   ::
-/+    interpolate, hep-to-cab
+/+  interpolate, hep-to-cab
 =,  mimes:html
 =,  eyre
 |%
@@ -269,7 +269,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth1
+::  /+  oauth1
 ::  ::
 ::  ::::
 ::    ::
@@ -295,7 +295,7 @@
 ::  ::
 ::  ::::  /hoon/my-api/com/sec
 ::    ::
-::  /+    oauth1
+::  /+  oauth1
 ::  ::
 ::  ::::
 ::    ::

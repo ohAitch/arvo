@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/css/mar
   ::
-/?    310
+/?  310
 =,  eyre
 =,  mimes:html
 |_  mud/@t

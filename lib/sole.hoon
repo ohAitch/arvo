@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/sole/lib
   ::
-/?    310
-/-    sole
+/?  310
+/-  sole
 [. ^sole]
 ::
 ::::

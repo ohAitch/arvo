@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/recoverable-error/mar
   ::
-/-    recoverable-error
+/-  recoverable-error
 ::
 ::::  ~fyr
   ::

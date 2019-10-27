@@ -2,9 +2,9 @@
 ::
 ::::  /hoon/pope/gen
   ::
-/?    310
+/?  310
 ::  Input twitter keys
-/-    sole
+/-  sole
 /+  old-zuse
 =,  old-zuse
 ::

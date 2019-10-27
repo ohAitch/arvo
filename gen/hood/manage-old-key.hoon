@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/manage-old-key/hood/gen
   ::
-/?    310
+/?  310
 ::
 ::::
   ::

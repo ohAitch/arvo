@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/quri/mar
   ::
-/?    310
+/?  310
 =,  eyre
 =,  mimes:html
 =,  html

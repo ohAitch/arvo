@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/hymn/tree/mar
   ::
-/?    310
-/+    old-zuse
+/?  310
+/+  old-zuse
 =,  mimes:html
 =,  old-zuse
 |_  own/manx

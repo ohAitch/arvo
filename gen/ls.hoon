@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/ls/gen
   ::
-/?    310
-/+    show-dir
+/?  310
+/+  show-dir
 ::
 ::::
   ::

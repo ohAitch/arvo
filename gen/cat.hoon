@@ -2,8 +2,8 @@
 ::
 ::::  /hoon/cat/gen
   ::
-/?    310
-/+    pretty-file, show-dir
+/?  310
+/+  pretty-file, show-dir
 ::
 ::::
   ::

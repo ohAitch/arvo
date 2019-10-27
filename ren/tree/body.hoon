@@ -1,7 +1,7 @@
 ::
 ::::  /hoon/body/tree/ren
   ::
-/?    310
+/?  310
 /=    dat    /%  /tree-json/ :: default include
 /=    dat-sen  /|   /:  /%%/  /%  /tree-json/ :: default include
                     /~  ~

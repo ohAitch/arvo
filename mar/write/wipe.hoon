@@ -1,8 +1,8 @@
 ::
 ::::  /hoon/wipe/write/mar
   ::
-/?    310
-/+    old-zuse
+/?  310
+/+  old-zuse
 ::
 =,  old-zuse
 |_  spur

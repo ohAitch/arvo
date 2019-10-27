@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/slack/com/sec
   ::
-/+    oauth2
+/+  oauth2
 ::
 ::::
   ::

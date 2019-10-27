@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/github/com/sec
   ::
-/+    basic-auth
+/+  basic-auth
 ::
 |_  {bal/(bale:eyre keys:basic-auth) $~}
 ++  aut  ~(standard basic-auth bal ~)

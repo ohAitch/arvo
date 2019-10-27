@@ -8,8 +8,8 @@
 ::      lists of moons (or just ships in general?) that we define as "standalone"
 ::      so that the "convert to true identity" doesn't happen for them.
 ::
-/-    hall                                              ::  structures
-/+    hall, hall-legacy                                 ::  libraries
+/-  hall                                                ::  structures
+/+  hall, hall-legacy                                   ::  libraries
 /=    seed  /~  !>(.)
 /=    filter-gram
       /^  $-({telegram:hall bowl:gall} telegram:hall)

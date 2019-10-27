@@ -1,6 +1,6 @@
 ::
 ::::  /hoon/down/sur
   ::
-/?    310
+/?  310
 /-  markdown
 down:markdown
