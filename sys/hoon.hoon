@@ -11680,243 +11680,243 @@
     %+  knee  *root  |.  ~+
     %-  stew
     ^.  stet  ^.  limo
-    :~  ::TODO add :: gaps
-      :-  '_'
-      ;~(pfix cab (stag %bccb wide))
-      :-  ','
-      ;~(pfix com (stag %bcsm wide))
-      :-  '$'
-      ;~  pose
-        ;~  pfix  buc
-          ;~  pose
-            (stag %leaf (stag %tas (cold %$ buc)))
-            (stag %leaf (stag %f (cold & pam)))
-            (stag %leaf (stag %f (cold | bar)))
-            (stag %leaf (stag %t qut))
-            (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
+::NB
+    :~  :-  '_'  ::TODO add :: gaps
+        ;~(pfix cab (stag %bccb wide))
+        :-  ','
+        ;~(pfix com (stag %bcsm wide))
+        :-  '$'
+        ;~  pose
+          ;~  pfix  buc
+            ;~  pose
+              (stag %leaf (stag %tas (cold %$ buc)))
+              (stag %leaf (stag %f (cold & pam)))
+              (stag %leaf (stag %f (cold | bar)))
+              (stag %leaf (stag %t qut))
+              (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
+            ==
+          ==
+          (stag %bcsm rump)
+        ==
+        :-  '%'
+        ;~  pose
+          ;~  pfix  cen
+            ;~  pose
+              (stag %leaf (stag %tas (cold %$ buc)))
+              (stag %leaf (stag %f (cold & pam)))
+              (stag %leaf (stag %f (cold | bar)))
+              (stag %leaf (stag %t qut))
+              (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
+            ==
           ==
         ==
-        (stag %bcsm rump)
-      ==
-      :-  '%'
-      ;~  pose
-        ;~  pfix  cen
-          ;~  pose
-            (stag %leaf (stag %tas (cold %$ buc)))
-            (stag %leaf (stag %f (cold & pam)))
-            (stag %leaf (stag %f (cold | bar)))
-            (stag %leaf (stag %t qut))
-            (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
-          ==
+        :-  '('
+        %+  stag  %bcsm
+        %+  stag  %cnhp
+        %+  ifix  [pel per]
+        ;~(plug wide ;~(pose ;~(pfix ace (most ace wyde)) (easy ~)))
+        :-  '{'
+        (stag %bccl (ifix [kel ker] (most ace wyde)))
+        :-  '['
+        (stag %bccl (ifix [sel ser] (most ace wyde)))
+        :-  '*'
+        (cold [%base %noun] tar)
+        :-  '@'
+        ;~(pfix pat (stag %base (stag %atom mota)))
+        :-  '?'
+        ;~  pose
+          (stag %bcwt ;~(pfix wut (ifix [pel per] (most ace wyde))))
+          (cold [%base %bean] wut)
         ==
-      ==
-      :-  '('
-      %+  stag  %bcsm
-      %+  stag  %cnhp
-      %+  ifix  [pel per]
-      ;~(plug wide ;~(pose ;~(pfix ace (most ace wyde)) (easy ~)))
-      :-  '{'
-      (stag %bccl (ifix [kel ker] (most ace wyde)))
-      :-  '['
-      (stag %bccl (ifix [sel ser] (most ace wyde)))
-      :-  '*'
-      (cold [%base %noun] tar)
-      :-  '@'
-      ;~(pfix pat (stag %base (stag %atom mota)))
-      :-  '?'
-      ;~  pose
-        (stag %bcwt ;~(pfix wut (ifix [pel per] (most ace wyde))))
-        (cold [%base %bean] wut)
-      ==
-      :-  '~'
-      (cold [%base %null] sig)
-      :-  '^'
-      ;~  pose
-        scab
-        (cold [%base %cell] ket)
-      ==
-      :-  '='
-      ;~  pfix  tis
-        %+  cook
-          |=([mot=term rot=root] [%bcts mot rot])
-        (sear espy wyde)
-      ==
-      :-  ['a' 'z']
-      ;~  pose
-        (stag %bcts ;~(plug sym ;~(pfix ;~(pose fas tis) wyde)))
-        scab
-      ==
-    ==
+        :-  '~'
+        (cold [%base %null] sig)
+        :-  '^'
+        ;~  pose
+          scab
+          (cold [%base %cell] ket)
+        ==
+        :-  '='
+        ;~  pfix  tis
+          %+  cook
+            |=([mot=term rot=root] [%bcts mot rot])
+          (sear espy wyde)
+        ==
+        :-  ['a' 'z']
+        ;~  pose
+          (stag %bcts ;~(plug sym ;~(pfix ;~(pose fas tis) wyde)))
+          scab
+    ==  ==
+::NB
   ::
   ++  scat  !:
     %+  knee  *hoon  |.  ~+
     %-  stew
     ^.  stet  ^.  limo
-    :~  ::TODO add :: gaps
-      :-  ','
-      ;~  pose
-        ;~(pfix com wyde)
-        (stag %wing rope)
-      ==
-      :-  '!'
-      ;~  pose
-        (stag %wtzp ;~(pfix zap wide))
-        (stag %zpzp (cold ~ ;~(plug zap zap)))
-      ==
-      :-  '_'
-      ;~(pfix cab (stag %bccb wide))
-      :-  '$'
-      ;~  pose
-        ;~  pfix  buc
+::NB
+    :~  :-  ','  ::TODO add :: gaps
+        ;~  pose
+          ;~(pfix com wyde)
+          (stag %wing rope)
+        ==
+        :-  '!'
+        ;~  pose
+          (stag %wtzp ;~(pfix zap wide))
+          (stag %zpzp (cold ~ ;~(plug zap zap)))
+        ==
+        :-  '_'
+        ;~(pfix cab (stag %bccb wide))
+        :-  '$'
+        ;~  pose
+          ;~  pfix  buc
+            ;~  pose
+              (stag %leaf (stag %tas (cold %$ buc)))
+              (stag %leaf (stag %f (cold & pam)))
+              (stag %leaf (stag %f (cold | bar)))
+              (stag %leaf (stag %t qut))
+              (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
+            ==
+          ==
+          rump
+        ==
+        :-  '%'
+        ;~  pfix  cen
           ;~  pose
-            (stag %leaf (stag %tas (cold %$ buc)))
-            (stag %leaf (stag %f (cold & pam)))
-            (stag %leaf (stag %f (cold | bar)))
-            (stag %leaf (stag %t qut))
-            (stag %leaf (sear |=(a/coin ?:(?=($$ -.a) (some +.a) ~)) nuck:so))
+            (stag %clsg (sear |~({a/@ud b/tyke} (posh ~ ~ a b)) porc))
+            (stag %rock (stag %tas (cold %$ buc)))
+            (stag %rock (stag %f (cold & pam)))
+            (stag %rock (stag %f (cold | bar)))
+            (stag %rock (stag %t qut))
+            (cook (jock &) nuck:so)
+            (stag %clsg (sear |=(a/(list) (posh ~ ~ (lent a) ~)) (star cen)))
           ==
         ==
-        rump
-      ==
-      :-  '%'
-      ;~  pfix  cen
+        :-  '&'
         ;~  pose
-          (stag %clsg (sear |~({a/@ud b/tyke} (posh ~ ~ a b)) porc))
-          (stag %rock (stag %tas (cold %$ buc)))
-          (stag %rock (stag %f (cold & pam)))
-          (stag %rock (stag %f (cold | bar)))
-          (stag %rock (stag %t qut))
-          (cook (jock &) nuck:so)
-          (stag %clsg (sear |=(a/(list) (posh ~ ~ (lent a) ~)) (star cen)))
+          (cook |=(a/wing [%cnts a ~]) rope)
+          (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
+          ;~(plug (stag %rock (stag %f (cold & pam))) wede)
+          (stag %sand (stag %f (cold & pam)))
         ==
-      ==
-      :-  '&'
-      ;~  pose
-        (cook |=(a/wing [%cnts a ~]) rope)
-        (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
-        ;~(plug (stag %rock (stag %f (cold & pam))) wede)
-        (stag %sand (stag %f (cold & pam)))
-      ==
-      :-  '\''
-      (stag %sand (stag %t qut))
-      :-  '('
-      (stag %cnhp (ifix [pel per] (most ace wide)))
-      :-  '{'
-      (stag %bccl (ifix [kel ker] (most ace wyde)))
-      :-  '*'
-      ;~  pose
-        (stag %bunt ;~(pfix tar wyde))
-        (cold [%base %noun] tar)
-      ==
-      :-  '@'
-      ;~(pfix pat (stag %base (stag %atom mota)))
-      :-  '+'
-      ;~  pose
-        (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
-      ::
-        %+  cook
-          |=  a/(list (list woof))
-          :-  %smfs
-          [%knit |-(^-((list woof) ?~(a ~ (weld i.a $(a t.a)))))]
-        (most dog ;~(pfix lus soil))
-      ::
-        (cook |=(a/wing [%cnts a ~]) rope)
-      ==
-      :-  '-'
-      ;~  pose
-        (stag %sand tash:so)
-      ::
-        %+  cook
-          |=  a/(list (list woof))
-          [%clsg (phax a)]
-        (most dog ;~(pfix hep soil))
-      ::
-        (cook |=(a/wing [%cnts a ~]) rope)
-      ==
-      :-  '.'
-      ;~  pose
-        (cook (jock |) ;~(pfix dot perd:so))
-        (cook |=(a/wing [%cnts a ~]) rope)
-      ==
-      :-  ['0' '9']
-      %+  cook
-        |=  {a/dime b/(unit hoon)}
-        ?~(b [%sand a] [[%rock a] u.b])
-      ;~(plug bisk:so (punt wede))
-      :-  ':'
-      ;~  pfix  col
+        :-  '\''
+        (stag %sand (stag %t qut))
+        :-  '('
+        (stag %cnhp (ifix [pel per] (most ace wide)))
+        :-  '{'
+        (stag %bccl (ifix [kel ker] (most ace wyde)))
+        :-  '*'
         ;~  pose
-          (stag %smcl (ifix [pel per] (most ace wide)))
-          ;~(pfix fas (stag %smfs wide))
+          (stag %bunt ;~(pfix tar wyde))
+          (cold [%base %noun] tar)
         ==
-      ==
-      :-  '='
-      (stag %dtts ;~(pfix tis (ifix [pel per] ;~(glam wide wide))))
-      :-  '?'
-      ;~  pose
-        (stag %bcwt ;~(pfix wut (ifix [pel per] (most ace wyde))))
-        (cold [%base %bean] wut)
-      ==
-      :-  '['
-      rupl
-      :-  '^'
-      ;~  pose
-        (stag %wing rope)
-        (cold [%base %cell] ket)
-      ==
-      :-  '`'
-      ;~  pfix  tec
+        :-  '@'
+        ;~(pfix pat (stag %base (stag %atom mota)))
+        :-  '+'
         ;~  pose
+          (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
+        ::
           %+  cook
-            |=({a/@ta b/hoon} [%ktls [%sand a 0] [%ktls [%sand %$ 0] b]])
-          ;~(pfix pat ;~(plug mota ;~(pfix tec wide)))
-          ;~  pfix  tar
-            (stag %kthp (stag [%base %noun] ;~(pfix tec wide)))
-          ==
-          (stag %kthp ;~(plug wyde ;~(pfix tec wide)))
-          (stag %ktls ;~(pfix lus ;~(plug wide ;~(pfix tec wide))))
-          (cook |=(a/hoon [[%rock %n ~] a]) wide)
+            |=  a/(list (list woof))
+            :-  %smfs
+            [%knit |-(^-((list woof) ?~(a ~ (weld i.a $(a t.a)))))]
+          (most dog ;~(pfix lus soil))
+        ::
+          (cook |=(a/wing [%cnts a ~]) rope)
         ==
-      ==
-      :-  '"'
-      %+  cook
-        |=  a/(list (list woof))
-        [%knit |-(^-((list woof) ?~(a ~ (weld i.a $(a t.a)))))]
-      (most dog soil)
-      :-  ['a' 'z']
-      rump
-      :-  '|'
-      ;~  pose
-        (cook |=(a/wing [%cnts a ~]) rope)
-        (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
-        ;~(plug (stag %rock (stag %f (cold | bar))) wede)
-        (stag %sand (stag %f (cold | bar)))
-      ==
-      :-  '~'
-      ;~  pose
-        rupl
-      ::
-        ;~  pfix  sig
+        :-  '-'
+        ;~  pose
+          (stag %sand tash:so)
+        ::
+          %+  cook
+            |=  a/(list (list woof))
+            [%clsg (phax a)]
+          (most dog ;~(pfix hep soil))
+        ::
+          (cook |=(a/wing [%cnts a ~]) rope)
+        ==
+        :-  '.'
+        ;~  pose
+          (cook (jock |) ;~(pfix dot perd:so))
+          (cook |=(a/wing [%cnts a ~]) rope)
+        ==
+        :-  ['0' '9']
+        %+  cook
+          |=  {a/dime b/(unit hoon)}
+          ?~(b [%sand a] [[%rock a] u.b])
+        ;~(plug bisk:so (punt wede))
+        :-  ':'
+        ;~  pfix  col
           ;~  pose
-            (stag %clsg (ifix [sel ser] (most ace wide)))
-          ::
-            %+  stag  %cnsg
-            %+  ifix
-              [pel per]
-            ;~(glam rope wide (most ace wide))
-          ::
-            (cook (jock |) twid:so)
-            (stag [%bust %null] wede)
-            (easy [%bust %null])
+            (stag %smcl (ifix [pel per] (most ace wide)))
+            ;~(pfix fas (stag %smfs wide))
           ==
         ==
-      ==
-      :-  '/'
-      rood
-      :-  '<'
-      (ifix [gal gar] (stag %tell (most ace wide)))
-      :-  '>'
-      (ifix [gar gal] (stag %yell (most ace wide)))
+        :-  '='
+        (stag %dtts ;~(pfix tis (ifix [pel per] ;~(glam wide wide))))
+        :-  '?'
+        ;~  pose
+          (stag %bcwt ;~(pfix wut (ifix [pel per] (most ace wyde))))
+          (cold [%base %bean] wut)
+        ==
+        :-  '['
+        rupl
+        :-  '^'
+        ;~  pose
+          (stag %wing rope)
+          (cold [%base %cell] ket)
+        ==
+        :-  '`'
+        ;~  pfix  tec
+          ;~  pose
+            %+  cook
+              |=({a/@ta b/hoon} [%ktls [%sand a 0] [%ktls [%sand %$ 0] b]])
+            ;~(pfix pat ;~(plug mota ;~(pfix tec wide)))
+            ;~  pfix  tar
+              (stag %kthp (stag [%base %noun] ;~(pfix tec wide)))
+            ==
+            (stag %kthp ;~(plug wyde ;~(pfix tec wide)))
+            (stag %ktls ;~(pfix lus ;~(plug wide ;~(pfix tec wide))))
+            (cook |=(a/hoon [[%rock %n ~] a]) wide)
+          ==
+        ==
+        :-  '"'
+        %+  cook
+          |=  a/(list (list woof))
+          [%knit |-(^-((list woof) ?~(a ~ (weld i.a $(a t.a)))))]
+        (most dog soil)
+        :-  ['a' 'z']
+        rump
+        :-  '|'
+        ;~  pose
+          (cook |=(a/wing [%cnts a ~]) rope)
+          (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
+          ;~(plug (stag %rock (stag %f (cold | bar))) wede)
+          (stag %sand (stag %f (cold | bar)))
+        ==
+        :-  '~'
+        ;~  pose
+          rupl
+        ::
+          ;~  pfix  sig
+            ;~  pose
+              (stag %clsg (ifix [sel ser] (most ace wide)))
+            ::
+              %+  stag  %cnsg
+              %+  ifix
+                [pel per]
+              ;~(glam rope wide (most ace wide))
+            ::
+              (cook (jock |) twid:so)
+              (stag [%bust %null] wede)
+              (easy [%bust %null])
+            ==
+          ==
+        ==
+        :-  '/'
+        rood
+        :-  '<'
+        (ifix [gal gar] (stag %tell (most ace wide)))
+        :-  '>'
+        (ifix [gar gal] (stag %yell (most ace wide)))
     ==
   ++  soil
     ;~  pose
@@ -12033,16 +12033,16 @@
               ==
             ==
             :-  '.'
-              ;~  pfix  dot
-                %-  stew
-                ^.  stet  ^.  limo
-                :~  ['+' (rune lus %dtls expa)]
-                    ['*' (rune tar %dttr expb)]
-                    ['=' (rune tis %dtts expb)]
-                    ['?' (rune wut %dtwt expa)]
-                    ['^' (rune ket %dtkt exqn)]
-                ==
+            ;~  pfix  dot
+              %-  stew
+              ^.  stet  ^.  limo
+              :~  ['+' (rune lus %dtls expa)]
+                  ['*' (rune tar %dttr expb)]
+                  ['=' (rune tis %dtts expb)]
+                  ['?' (rune wut %dtwt expa)]
+                  ['^' (rune ket %dtkt exqn)]
               ==
+            ==
             :-  '^'
             ;~  pfix  ket
               %-  stew
