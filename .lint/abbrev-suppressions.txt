@@ -2,8 +2,24 @@
 # ::NB  = preserving line numbers, delete this
 # ::\n  = preserving line numbers, expand this line
 
-# ?? See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-10#l9
-sys/hoon.hoon 2096:5 kethep:indent backdent #2 @2096:5; over by 2
+# TODO idek when these slipped through
+sys/hoon.hoon 899:5 barhep:indent backdented element #1 @899:5; under by 12
+sys/hoon.hoon 909:13 tisfas:hgap joined backdent element #2 of @909:3 is at @909:13; should be one of @909:11 (tight); @909:16 (chain)
+sys/hoon.hoon 2306:11 wutdot:indent backdented element #2 @2306:11; under by 2
+sys/hoon.hoon 2307:9 wutdot:indent backdented element #3 @2307:9; under by 2
+sys/hoon.hoon 7489:20 wutlus:queenside:joined:subhead-hgap queenside wutlus subhead @7489:20; over by 4
+sys/hoon.hoon 8509:9 barcen:hephep-indent battery hephep @8509:9; under by 2
+sys/hoon.hoon 8536:9 barcen:hephep-indent battery hephep @8536:9; under by 2
+sys/hoon.hoon 10994:15 buccol:runstep-indent runstep #2 @10994:15; under by 4
+sys/hoon.hoon 10999:15 buccol:runstep-indent runstep #2 @10999:15; under by 4
+
+# casualties of ::\n, fix once other suppressions are addressed
+sys/hoon.hoon 895:3 tislus:pseudojoin-mismatch:pseudojoin Pseudo-joined backdented element 2; element/comment mismatch @895:3; under by 50
+sys/hoon.hoon 8537:7 barcen:hephep-indent battery hephep @8537:7; under by 2
+sys/hoon.hoon 8570:7 barcen:hephep-indent battery hephep @8570:7; under by 2
+sys/hoon.hoon 8571:5 barcen:hephep-indent battery hephep @8571:5; under by 2
+sys/hoon.hoon 12940:5 tissig:tistis-alone TISTIS @12940:5 should only share line with other TISTIS's
+sys/hoon.hoon 12940:1 barcen:hephep-alone HEPHEP @12940:1 should only share line with other HEPHEP's
 
 # In hoon.hoon, a lot of COLHEP's are luslus-style, but this is rarely
 # the case in the rest of arvo
@@ -775,7 +791,6 @@ sys/zuse.hoon 4605:22 wutlus:jogging:missing-newline wutlus @4605:22; missing ne
 sys/zuse.hoon 4605:33 wutlus:jogging:missing-newline wutlus @4605:33; missing newline @4605:33
 # linter incorrect (
 sys/hoon.hoon 7530:20 wuthep:jog-body-indent Jog queenside body @7530:20; under by 1
-sys/hoon.hoon 7926:16 wuthep:jog-body-indent Jog kingside body @7926:16; under by 1
 # )
 sys/vane/eyre.hoon 1199:18 wutlus:jog-body-indent Jog kingside body @1199:18; under by 16
 sys/vane/eyre.hoon 1286:26 wutlus:jog-body-indent Jog queenside body @1286:26; over by 7
@@ -1259,6 +1274,7 @@ sys/vane/clay.hoon 3279:11 kethep:indent backdent #2 @3279:11; under by 2
 sys/zuse.hoon 2495:19 kethep:indent backdent #2 @2495:19; over by 8
 sys/zuse.hoon 2551:18 kethep:indent backdent #2 @2551:18; over by 7
 sys/zuse.hoon 2596:11 kethep:indent backdent #2 @2596:11; under by 14
+sys/hoon.hoon 10386:11 kethep:indent backdent #2 @10386:11; over by 2
 
 # Backdented hoon aberrations
 mar/txt.hoon 163:1 colhep:empty-line backdent #2, @163:1; empty line in comment
@@ -1297,62 +1313,6 @@ sys/vane/clay.hoon 2241:57 wutsig:comment-indent wutsig child 3 @2241:57; commen
 sys/vane/dill.hoon 538:7 wutcol:comment-indent wutcol child 3 @538:7; comment over by 2
 sys/vane/eyre.hoon 909:11 wutcol:comment-indent wutcol child 3 @909:11; comment over by 2
 sys/vane/ford.hoon 251:9 wutcol:comment-indent wutcol child 3 @251:9; comment over by 4
-
-# NOLINT tread trailers!
-sys/hoon.hoon 363:3 tisgar:comment-indent tisgar child 1 @363:3; comment over by 2
-sys/hoon.hoon 364:3 tisgar:comment-indent tisgar child 1 @364:3; comment over by 2
-sys/hoon.hoon 365:3 tisgar:comment-indent tisgar child 1 @365:3; comment over by 2
-sys/hoon.hoon 366:3 tisgar:comment-indent tisgar child 1 @366:3; comment over by 2
-sys/hoon.hoon 367:3 tisgar:comment-indent tisgar child 1 @367:3; comment over by 2
-sys/hoon.hoon 368:3 tisgar:comment-indent tisgar child 1 @368:3; comment over by 2
-sys/hoon.hoon 369:3 tisgar:comment-indent tisgar child 1 @369:3; comment over by 2
-sys/hoon.hoon 370:3 tisgar:comment-indent tisgar child 1 @370:3; comment over by 2
-sys/hoon.hoon 371:3 tisgar:comment-indent tisgar child 1 @371:3; comment over by 2
-sys/hoon.hoon 372:3 tisgar:comment-indent tisgar child 1 @372:3; comment over by 2
-sys/hoon.hoon 373:3 tisgar:comment-indent tisgar child 1 @373:3; comment over by 2
-sys/hoon.hoon 374:3 tisgar:comment-indent tisgar child 1 @374:3; comment over by 2
-sys/hoon.hoon 375:3 tisgar:comment-indent tisgar child 1 @375:3; comment over by 2
-sys/hoon.hoon 376:3 tisgar:comment-indent tisgar child 1 @376:3; comment over by 2
-sys/hoon.hoon 377:3 tisgar:comment-indent tisgar child 1 @377:3; comment over by 2
-sys/hoon.hoon 378:3 tisgar:comment-indent tisgar child 1 @378:3; comment over by 2
-sys/hoon.hoon 379:3 tisgar:comment-indent tisgar child 1 @379:3; comment over by 2
-sys/hoon.hoon 380:3 tisgar:comment-indent tisgar child 1 @380:3; comment over by 2
-sys/hoon.hoon 381:3 tisgar:comment-indent tisgar child 1 @381:3; comment over by 2
-sys/hoon.hoon 1950:3 tisgar:comment-indent tisgar child 1 @1950:3; comment over by 2
-sys/hoon.hoon 1951:3 tisgar:comment-indent tisgar child 1 @1951:3; comment over by 2
-sys/hoon.hoon 1952:3 tisgar:comment-indent tisgar child 1 @1952:3; comment over by 2
-sys/hoon.hoon 1953:3 tisgar:comment-indent tisgar child 1 @1953:3; comment over by 2
-sys/hoon.hoon 1954:3 tisgar:comment-indent tisgar child 1 @1954:3; comment over by 2
-sys/hoon.hoon 1955:3 tisgar:comment-indent tisgar child 1 @1955:3; comment over by 2
-sys/hoon.hoon 1956:3 tisgar:comment-indent tisgar child 1 @1956:3; comment over by 2
-sys/hoon.hoon 1957:3 tisgar:comment-indent tisgar child 1 @1957:3; comment over by 2
-sys/hoon.hoon 1958:3 tisgar:comment-indent tisgar child 1 @1958:3; comment over by 2
-sys/hoon.hoon 3667:3 tisgar:comment-indent tisgar child 1 @3667:3; comment over by 2
-sys/hoon.hoon 3668:3 tisgar:comment-indent tisgar child 1 @3668:3; comment over by 2
-sys/hoon.hoon 3669:3 tisgar:comment-indent tisgar child 1 @3669:3; comment over by 2
-sys/hoon.hoon 3670:3 tisgar:comment-indent tisgar child 1 @3670:3; comment over by 2
-sys/hoon.hoon 3671:3 tisgar:comment-indent tisgar child 1 @3671:3; comment over by 2
-sys/hoon.hoon 3672:3 tisgar:comment-indent tisgar child 1 @3672:3; comment over by 2
-sys/hoon.hoon 3673:3 tisgar:comment-indent tisgar child 1 @3673:3; comment over by 2
-sys/hoon.hoon 3674:3 tisgar:comment-indent tisgar child 1 @3674:3; comment over by 2
-sys/hoon.hoon 3675:3 tisgar:comment-indent tisgar child 1 @3675:3; comment over by 2
-sys/hoon.hoon 3676:3 tisgar:comment-indent tisgar child 1 @3676:3; comment over by 2
-sys/hoon.hoon 3677:3 tisgar:comment-indent tisgar child 1 @3677:3; comment over by 2
-sys/hoon.hoon 3678:3 tisgar:comment-indent tisgar child 1 @3678:3; comment over by 2
-sys/hoon.hoon 3679:3 tisgar:comment-indent tisgar child 1 @3679:3; comment over by 2
-sys/hoon.hoon 3680:3 tisgar:comment-indent tisgar child 1 @3680:3; comment over by 2
-sys/hoon.hoon 3681:3 tisgar:comment-indent tisgar child 1 @3681:3; comment over by 2
-sys/hoon.hoon 3682:3 tisgar:comment-indent tisgar child 1 @3682:3; comment over by 2
-sys/hoon.hoon 3683:3 tisgar:comment-indent tisgar child 1 @3683:3; comment over by 2
-sys/hoon.hoon 6237:3 tisgar:comment-indent tisgar child 2 @6237:3; comment over by 2
-sys/hoon.hoon 6238:3 tisgar:comment-indent tisgar child 2 @6238:3; comment over by 2
-sys/hoon.hoon 6239:3 tisgar:comment-indent tisgar child 2 @6239:3; comment over by 2
-sys/hoon.hoon 6240:3 tisgar:comment-indent tisgar child 2 @6240:3; comment over by 2
-sys/hoon.hoon 6241:3 tisgar:comment-indent tisgar child 2 @6241:3; comment over by 2
-sys/hoon.hoon 6242:3 tisgar:comment-indent tisgar child 2 @6242:3; comment over by 2
-sys/hoon.hoon 6243:3 tisgar:comment-indent tisgar child 2 @6243:3; comment over by 2
-sys/hoon.hoon 6244:3 tisgar:comment-indent tisgar child 2 @6244:3; comment over by 2
-sys/hoon.hoon 6245:3 tisgar:comment-indent tisgar child 2 @6245:3; comment over by 2
 
 # CENLUS aberrations
 app/dojo.hoon 718:13 cenlus:indent backdent #3 @718:13; over by 2
@@ -1471,9 +1431,6 @@ sys/arvo.hoon 10:1 tisgar:indent backdent #1 @10:1; under by 2
 sys/arvo.hoon 611:7 wutdot:indent backdent #3 @611:7; over by 2
 sys/arvo.hoon 612:5 sigpam:indent backdent #2 @612:5; under by 2
 sys/arvo.hoon 619:3 bartis:indent backdent #2 @619:3; over by 1
-# ?? (
-sys/hoon.hoon 9593:18 tislus:indent backdent #2 @9593:18; under by 2
-# )
 sys/vane/ames.hoon 820:11 tisket:indent backdent #3 @820:11; over by 2
 sys/vane/ames.hoon 1314:19 tisket:indent backdent #3 @1314:19; over by 2
 sys/vane/ames.hoon 1387:15 tisdot:indent backdent #2 @1387:15; over by 2
@@ -1520,7 +1477,6 @@ lib/hood/drum.hoon 63:9 buctis:indent backdent #2 @63:9; over by 2
 
 # KETHEP reanchoring outliers
 lib/http.hoon 27:7 kethep:indent backdent #2 @27:7; over by 2
-sys/hoon.hoon 11136:11 kethep:indent backdent #2 @11136:11; over by 2
 sys/vane/ford.hoon 1899:9 kethep:indent backdent #2 @1899:9; over by 2
 sys/vane/xmas.hoon 1228:13 kethep:indent backdent #2 @1228:13; over by 2
 sys/zuse.hoon 4580:9 kethep:indent backdent #2 @4580:9; over by 2
@@ -1587,13 +1543,19 @@ sys/vane/eyre.hoon 1188:13 cenhep:indent backdent #2 @1188:13; over by 2
 sys/vane/clay.hoon 1719:13 cenhep:indent backdent #2 @1719:13; over by 2
 app/pipe.hoon 28:7 cenhep:indent backdent #2 @28:7; over by 2
 
+# TISSIG currying outdent - nolint-children
+sys/hoon.hoon 9:1 tissig:runstep-indent runstep #1 @9:1; under by 2
+sys/hoon.hoon 13:1 tissig:runstep-indent runstep #2 @13:1; under by 2
+sys/hoon.hoon 382:1 tissig:runstep-indent runstep #3 @382:1; under by 2
+sys/hoon.hoon 1959:1 tissig:runstep-indent runstep #4 @1959:1; under by 2
+sys/hoon.hoon 3684:1 tissig:runstep-indent runstep #5 @3684:1; under by 2
+sys/hoon.hoon 6246:1 tissig:runstep-indent runstep #6 @6246:1; under by 2
+
 # Misc fixes arity reanchoring outliers
 app/hall.hoon 2544:13 cendot:indent backdent #2 @2544:13; under by 8
 lib/down-jet/parse.hoon 566:3 bartis:indent backdent #2 @566:3; under by 13
 lib/down-jet/rend.hoon 25:7 bartis:indent backdent #2 @25:7; under by 20
 lib/hall.hoon 178:15 dottis:indent backdent #2 @178:15; over by 4
-sys/hoon.hoon 9:1 tisgar:indent backdent #1 @9:1; under by 2
-sys/hoon.hoon 12:5 tisgar:indent backdent #2 @12:5; over by 4
 sys/hoon.hoon 879:3 bartis:indent backdent #2 @879:3; under by 7
 sys/hoon.hoon 2287:9 wutdot:indent backdent #3 @2287:9; under by 5
 sys/hoon.hoon 3750:7 siglus:indent backdent #1 @3750:7; under by 13
