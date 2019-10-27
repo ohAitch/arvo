@@ -2,32 +2,15 @@
 # ::NB  = preserving line numbers, delete this
 # ::\n  = preserving line numbers, expand this line
 
-# TODO idek when these slipped through
-sys/hoon.hoon 899:5 barhep:indent backdented element #1 @899:5; under by 12
-sys/hoon.hoon 909:13 tisfas:hgap joined backdent element #2 of @909:3 is at @909:13; should be one of @909:11 (tight); @909:16 (chain)
-sys/hoon.hoon 2306:11 wutdot:indent backdented element #2 @2306:11; under by 2
-sys/hoon.hoon 2307:9 wutdot:indent backdented element #3 @2307:9; under by 2
-sys/hoon.hoon 7489:20 wutlus:queenside:joined:subhead-hgap queenside wutlus subhead @7489:20; over by 4
-sys/hoon.hoon 8509:9 barcen:hephep-indent battery hephep @8509:9; under by 2
-sys/hoon.hoon 8536:9 barcen:hephep-indent battery hephep @8536:9; under by 2
-sys/hoon.hoon 10994:15 buccol:runstep-indent runstep #2 @10994:15; under by 4
-sys/hoon.hoon 10999:15 buccol:runstep-indent runstep #2 @10999:15; under by 4
-
 # casualties of ::\n, fix once other suppressions are addressed
 sys/hoon.hoon 895:3 tislus:pseudojoin-mismatch:pseudojoin Pseudo-joined backdented element 2; element/comment mismatch @895:3; under by 50
+sys/hoon.hoon 899:5 barhep:pseudojoin-mismatch:pseudojoin Pseudo-joined backdented element 1; element/comment mismatch @899:5; under by 16
+sys/hoon.hoon 8536:9 barcen:hephep-indent battery hephep @8536:9; under by 2
 sys/hoon.hoon 8537:7 barcen:hephep-indent battery hephep @8537:7; under by 2
 sys/hoon.hoon 8570:7 barcen:hephep-indent battery hephep @8570:7; under by 2
 sys/hoon.hoon 8571:5 barcen:hephep-indent battery hephep @8571:5; under by 2
 sys/hoon.hoon 12940:5 tissig:tistis-alone TISTIS @12940:5 should only share line with other TISTIS's
 sys/hoon.hoon 12940:1 barcen:hephep-alone HEPHEP @12940:1 should only share line with other HEPHEP's
-
-# In hoon.hoon, a lot of COLHEP's are luslus-style, but this is rarely
-# the case in the rest of arvo
-# See https://colabti.org/irclogger/irclogger_log/marpa?date=2019-01-16#l14
-# See https://github.com/jeffreykegler/yahc/issues/13#issuecomment-466732963
-# TODO: add outdented :: gaps
-# sys/hoon.hoon 11685:9 colhep:indent backdent #2 @11685:9; over by 2
-# etc.
 
 # "Flatward" indentation, correct to lint, see:
 # https://github.com/jeffreykegler/yahc/issues/4#issuecomment-459867919
@@ -661,6 +644,7 @@ ren/urb/tree.hoon 7:6 fastis:head-hgap fastis symbol @7:6; over by 1
 ren/test-tree.hoon 2:12 fastis:body-hgap fastis horn @2:12; over by 1
 
 # NOLINT 2-Jogging aberrations
+sys/hoon.hoon 7489:20 wutlus:queenside:joined:subhead-hgap queenside wutlus subhead @7489:20; over by 4
 sys/hoon.hoon 8314:22 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8314:22; over by 4
 sys/hoon.hoon 8322:22 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8322:22; over by 4
 sys/hoon.hoon 8340:20 wutlus:kingside:joined:subhead-hgap 2-jogging kingside subhead @8340:20; over by 2
@@ -1024,8 +1008,7 @@ sur/gmail-label.hoon 21:1 barcen:arm-vgap:empty-line barcen @21:1; empty line in
 sur/gmail-label.hoon 24:1 barcen:arm-vgap:empty-line barcen @24:1; empty line in comment
 sur/sole.hoon 81:1 barcen:arm-vgap:empty-line barcen @81:1; empty line in comment
 sur/twitter.hoon 37:7 barcen:battery-indent split Barcen battery @37:7; over by 2
-sys/hoon.hoon 7278:5 barcen:arm-vgap:comment-indent barcen @7278:5; comment under by 2
-# duper don't have the line budget to fix, but
+# super don't have the line budget to fix, but
 # this should be de-crisscrossed (
 sys/hoon.hoon 8545:13 barcen:battery-indent split Barcen battery @8545:13; under by 6
 sys/hoon.hoon 8548:9 barcen:hephep-indent battery hephep @8548:9; under by 10
@@ -1274,7 +1257,6 @@ sys/vane/clay.hoon 3279:11 kethep:indent backdent #2 @3279:11; under by 2
 sys/zuse.hoon 2495:19 kethep:indent backdent #2 @2495:19; over by 8
 sys/zuse.hoon 2551:18 kethep:indent backdent #2 @2551:18; over by 7
 sys/zuse.hoon 2596:11 kethep:indent backdent #2 @2596:11; under by 14
-sys/hoon.hoon 10386:11 kethep:indent backdent #2 @10386:11; over by 2
 
 # Backdented hoon aberrations
 mar/txt.hoon 163:1 colhep:empty-line backdent #2, @163:1; empty line in comment
@@ -1475,8 +1457,12 @@ lib/hood/drum.hoon 63:9 buctis:indent backdent #2 @63:9; over by 2
 # That is, I silence the warnings for reanchoring "outliers".
 # note: NOLINT
 
+# TISFAS run unrecognized
+sys/hoon.hoon 909:13 tisfas:hgap joined backdent element #2 of @909:3 is at @909:13; should be one of @909:11 (tight); @909:16 (chain)
+
 # KETHEP reanchoring outliers
 lib/http.hoon 27:7 kethep:indent backdent #2 @27:7; over by 2
+sys/hoon.hoon 10386:11 kethep:indent backdent #2 @10386:11; over by 2
 sys/vane/ford.hoon 1899:9 kethep:indent backdent #2 @1899:9; over by 2
 sys/vane/xmas.hoon 1228:13 kethep:indent backdent #2 @1228:13; over by 2
 sys/zuse.hoon 4580:9 kethep:indent backdent #2 @4580:9; over by 2
@@ -1556,10 +1542,7 @@ app/hall.hoon 2544:13 cendot:indent backdent #2 @2544:13; under by 8
 lib/down-jet/parse.hoon 566:3 bartis:indent backdent #2 @566:3; under by 13
 lib/down-jet/rend.hoon 25:7 bartis:indent backdent #2 @25:7; under by 20
 lib/hall.hoon 178:15 dottis:indent backdent #2 @178:15; over by 4
-sys/hoon.hoon 879:3 bartis:indent backdent #2 @879:3; under by 7
-sys/hoon.hoon 2287:9 wutdot:indent backdent #3 @2287:9; under by 5
-sys/hoon.hoon 3750:7 siglus:indent backdent #1 @3750:7; under by 13
-sys/hoon.hoon 4502:3 bartar:indent backdent #2 @4502:3; under by 8
+sys/hoon.hoon 3750:7 siglus:pseudojoin-mismatch:pseudojoin Pseudo-joined backdented element 1; element/comment mismatch @3750:7; under by 17
 sys/vane/ford.hoon 1865:11 bartis:indent backdent #2 @1865:11; under by 10
 sys/zuse.hoon 2625:9 tislus:indent backdent #2 @2625:9; under by 9
 sys/zuse.hoon 4190:7 siglus:indent backdent #1 @4190:7; under by 8

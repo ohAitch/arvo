@@ -873,9 +873,9 @@
     b   (rsh 0 1 b)
     c   +(c)
     d   (add d (lsh 0 c =((end 0 1 a) (end 0 1 b))))
-  ==
-::
-++  not  |=  {a/bloq b/@ c/@}                           ::  binary not (sized)
+  ==  ::\n ::
+++  not                                                 ::  binary not (sized)
+  |=  {a/bloq b/@ c/@}
   (mix c (dec (bex (mul b (bex a)))))
 ::                                                      ::
 ::::  2e: insecure hashing                              ::
@@ -895,7 +895,7 @@
   =/  blocks  (rip 5 key)
   =/  i  nblocks
   =.  h1
-    =/  hi  h1  |-
+    =/  hi  h1  |-  ::\n
     ?:  =(0 i)  hi
     =/  k1  (snag (sub nblocks i) blocks)  ::  negative array index
     =.  k1  (sit (mul k1 c1))
@@ -2283,7 +2283,7 @@
                ?:  (^lth b y)  a  a(a +(a.a))
         ==
       ::
-      =.  a  ?.  =((met 0 a.a) +(prc))  a
+      =?  a  !=((met 0 a.a) +(prc))
         a(a (rsh 0 1 a.a), e (sum:si e.a --1))
       ?~  a.a  [%f & zer]
       ::
@@ -2299,10 +2299,10 @@
       =+  s=(lsh 0 ?.((syn:si e.a) (abs:si e.a) 0) 1)
       =+  mn=(lsh 0 ?:((syn:si e.a) (abs:si e.a) 0) 1)
       =+  mp=mn
-      =>  ?.  ?&  =(a.a (bex (dec prc)))                  ::  if next smallest
-                  |(!=(e.a emn) =(den %i))                ::  float is half ULP,
-              ==                                          ::  tighten lower bound
-::NB
+      =>
+        ?.  ?&  =(a.a (bex (dec prc)))                  ::  if next smallest
+                |(!=(e.a emn) =(den %i))                ::  float is half ULP,
+            ==                                          ::  tighten lower bound
           .
         %=  .
           mp  (lsh 0 1 mp)
@@ -3746,7 +3746,7 @@
 ::
 ++  fa                                                  ::  base58check
   =+  key='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-  =+  ^-  yek/@ux  ~+
+  =+  ^-  yek/@ux  ~+  ::nolint
       =-  yek:(roll (rip 3 key) -)
       =+  [a=*char b=*@ yek=`@ux`(fil 3 256 0xff)]
       |.
@@ -4496,9 +4496,9 @@
   =+  vex=(sef tub)
   ?~  q.vex
     vex
-  [p=p.vex q=[~ u=[p=(hez [p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
-::
-++  inde  |*  sef/rule                                  :: indentation block
+  [p=p.vex q=[~ u=[p=(hez [p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]  ::\n ::
+++  inde                                                :: indentation block
+  |*  sef/rule
   |=  nail  ^+  (sef)
   =+  [har tap]=[p q]:+<
   =+  lev=(fil 3 (dec q.har) ' ')
@@ -7267,14 +7267,14 @@
     ++  gray
       ^-  ?
       |
-      ::  on reflection, perhaps just obsessive linting
-      ::
-      ::  ?|  ?=(^ lab)
-      ::      ?=(^ boy)
-      ::      |-  ^-  ?
-      ::      ?~  def  |
-      ::      |($(def l.def) $(def r.def) !(~(has in use) p.n.def))
-      ::  ==
+:: on reflection, perhaps just obsessive linting
+::
+::    ?|  ?=(^ lab)
+::        ?=(^ boy)
+::        |-  ^-  ?
+::        ?~  def  |
+::        |($(def l.def) $(def r.def) !(~(has in use) p.n.def))
+::    ==
     ::
     ++  grad
       |=  $:  gen/hoon
@@ -8506,8 +8506,8 @@
           |%  ++  trep  $-({claw wing bath} {axis claw})
               ++  tasp  $-({{axis claw} fleg fult} fult)
               ++  tyle  $-(fult foat)
-        --    --
-      ::
+          --
+        --  ::\n ::
       ++  make
         =>  (def make:arc)
         |%
@@ -10991,14 +10991,14 @@
           ==                                            ::
         ++  trig-style                                  ::  type of parsed line
           $%  $:  $end                                  ::  terminator
-              $?  $done                                 ::    end of input
-                  $stet                                 ::    == end of markdown
-                  $dent                                 ::    outdent
+                  $?  $done                             ::    end of input
+                      $stet                             ::    == end of markdown
+                      $dent                             ::    outdent
               ==  ==                                    ::
               $:  $one                                  ::  leaf node
-              $?  $rule                                 ::    --- horz rule
-                  $fens                                 ::    ``` code fence
-                  $expr                                 ::    ;sail expression
+                  $?  $rule                             ::    --- horz rule
+                      $fens                             ::    ``` code fence
+                      $expr                             ::    ;sail expression
               ==  ==                                    ::
               {$new p/trig-new}                         ::  open container
               {$old $text}                              ::  anything else
