@@ -865,21 +865,6 @@ sys/zuse.hoon 4539:7 luslus:arm-body-indent cell body @4539:7; over by 2
 # this seems correct? (
 sys/hoon.hoon 1938:11 luslus:arm-body-indent cell body @1938:11; over by 8
 # )
-sys/hoon.hoon 5959:11 luslus:arm-body-indent cell body @5959:11; over by 8
-sys/hoon.hoon 5968:11 luslus:arm-body-indent cell body @5968:11; over by 8
-sys/hoon.hoon 5972:11 luslus:arm-body-indent cell body @5972:11; over by 8
-sys/hoon.hoon 5989:11 luslus:arm-body-indent cell body @5989:11; over by 8
-sys/hoon.hoon 6001:11 luslus:arm-body-indent cell body @6001:11; over by 8
-sys/hoon.hoon 6192:11 luslus:arm-body-indent cell body @6192:11; over by 8
-sys/hoon.hoon 6197:11 luslus:arm-body-indent cell body @6197:11; over by 8
-sys/hoon.hoon 6203:11 luslus:arm-body-indent cell body @6203:11; over by 8
-sys/hoon.hoon 6214:11 luslus:arm-body-indent cell body @6214:11; over by 8
-sys/hoon.hoon 6227:11 luslus:arm-body-indent cell body @6227:11; over by 8
-sys/hoon.hoon 8662:19 luslus:arm-body-indent cell body @8662:19; over by 8
-sys/hoon.hoon 12713:10 luslus:arm-body-indent cell body @12713:10; over by 7
-sys/hoon.hoon 12721:11 luslus:arm-body-indent cell body @12721:11; over by 8
-sys/hoon.hoon 12778:11 luslus:arm-body-indent cell body @12778:11; over by 8
-sys/hoon.hoon 12784:11 luslus:arm-body-indent cell body @12784:11; over by 8
 sys/arvo.hoon 18:11 luslus:arm-body-indent cell body @18:11; over by 8
 sys/arvo.hoon 26:11 luslus:arm-body-indent cell body @26:11; over by 8
 sys/arvo.hoon 70:11 luslus:arm-body-indent cell body @70:11; over by 8

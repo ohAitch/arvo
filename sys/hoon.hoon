@@ -5955,7 +5955,7 @@
 ++  noun  *                                             ::  any noun
 ++  null  $~                                            ::  null, nil, etc
 ++  onyx  (list (pair type foot))                       ::  arm activation
-++  opal                                                ::  limb match
+++  opal  ::                                            ::  limb match
           $%  {$& p/type}                               ::  leg
               {$| p/axis q/(set {p/type q/foot})}       ::  arm
           ==                                            ::
@@ -5964,11 +5964,11 @@
 ++  pock  (pair axis nock)                              ::  changes
 ++  port  (each palo (pair type nock))                  ::  successful match
 ++  root  hoon                                          ::  produce model
-++  tent                                                ::  model builder
+++  tent  ::                                            ::  model builder
           $%  {$| p/wing q/tent r/(list tile)}          ::  ~(p q r...)
               {$& p/(list wing)}                        ::  a.b:c.d
           ==                                            ::
-++  tiki                                                ::  test case
+++  tiki  ::                                            ::  test case
           $%  {$& p/(unit term) q/wing}                 ::  simple wing
               {$| p/(unit term) q/hoon}                 ::  named wing
           ==                                            ::
@@ -5985,19 +5985,19 @@
               {$vine p/tile q/tile}                     ::  pair+tag
               {$weed p/hoon}                            ::  example
           ==                                            ::
-++  toga                                                ::  face control
+++  toga  ::                                            ::  face control
           $@  p/term                                    ::  two togas
           $%  {$0 $~}                                   ::  no toga
               {$1 p/(pair what term) q/toga}            ::  deep toga
               {$2 p/toga q/toga}                        ::  cell toga
           ==                                            ::
 ++  tomb  (pair chap (map term (pair what foot)))       ::  core chapter
-++  tope                                                ::  topographic type
-  $@  $?  %&                                            ::  cell or atom
-          %|                                            ::  atom
-      ==                                                ::
-  (pair tope tope)                                      ::  cell
-++  tuna                                                ::  tagflow
+++  tope  ::                                            ::  topographic type
+          $@  $?  %&                                    ::  cell or atom
+                  %|                                    ::  atom
+              ==                                        ::
+          (pair tope tope)                              ::  cell
+++  tuna  ::                                            ::  tagflow
           $%  {$a p/hoon}                               ::  plain text
               {$b p/hoon}                               ::  single tag
               {$c p/hoon}                               ::  simple list
@@ -6188,18 +6188,18 @@
               {$1 p/(list)}                             ::  blocks
               {$2 p/(list {@ta *})}                     ::  error ~_s
           ==                                            ::
-++  tony                                                ::  ++tone done right
+++  tony  ::                                            ::  ++tone done right
           $%  {$0 p/tine q/*}                           ::  success
               {$1 p/(set)}                              ::  blocks
               {$2 p/(list {@ta *})}                     ::  error ~_s
           ==                                            ::
-++  tine                                                ::  partial noun
+++  tine  ::                                            ::  partial noun
           $@  $~                                        ::  open
           $%  {$& p/tine q/tine}                        ::  half-blocked
               {$| p/(set)}                              ::  fully blocked
           ==                                            ::
 ++  tool  $@(term tune)                                 ::  type decoration
-++  tune                                                ::  complex
+++  tune  ::                                            ::  complex
           $:  p/(map term (pair what (unit hoon)))      ::  aliases
               q/(list hoon)                             ::  bridges
           ==                                            ::
@@ -6210,7 +6210,7 @@
 ++  vair  ?($gold $iron $lead $zinc)                    ::  in/contra/bi/co
 ++  vein  (list (unit axis))                            ::  search trace
 ++  sect  (list pica)                                   ::  paragraph
-++  whit                                                ::
+++  whit  ::                                            ::
           $:  lab/(unit term)                           ::  label
               boy/(unit (pair cord (list sect)))        ::  body
               def/(map term (pair cord (list sect)))    ::  definitions
@@ -6223,7 +6223,7 @@
       pay/(map (pair type hoon) type)                   ::  ++play
       mit/(map (pair type hoon) (pair type nock))       ::  ++mint
   ==                                                    ::
-++  writ                                                ::  type annotation
+++  writ  ::                                            ::  type annotation
           $%  {$docs p/cord q/(list sect)}              ::  description
               {$made p/type q/tile}                     ::  construction
           ::  $mark                                     ::  described as mark?
@@ -8658,7 +8658,7 @@
     ~/  %fond
     |=  {way/vial hyp/wing}
     =>  |%
-        ++  pony                                        ::  raw match
+        ++  pony  ::                                    ::  raw match
                   $@  $~                                ::  void
                   %+  each                              ::  natural/abnormal
                     (pair what palo)                    ::  arm or leg
@@ -12709,15 +12709,15 @@
 ++  beak  {p/ship q/desk r/case}                        ::  path prefix
 ++  beam  {{p/ship q/desk r/case} s/spur}               ::  global name
 ++  bone  @ud                                           ::  opaque duct
-++  case                                                ::  version
-         $%  {$da p/@da}                                ::  date
-             {$tas p/@tas}                              ::  label
-             {$ud p/@ud}                                ::  sequence
-         ==                                             ::
+++  case  ::                                            ::  version
+          $%  {$da p/@da}                               ::  date
+              {$tas p/@tas}                             ::  label
+              {$ud p/@ud}                               ::  sequence
+          ==                                            ::
 ++  desk  @tas                                          ::  ship desk case spur
 ++  cage  (cask vase)                                   ::  global metadata
 ++  cask  |*(a/mold (pair mark a))                      ::  global data
-++  cuff                                                ::  permissions
+++  cuff  ::                                            ::  permissions
           $:  p/(unit (set monk))                       ::  can be read by
               q/(set monk)                              ::  caused or created by
           ==                                            ::
@@ -12774,13 +12774,13 @@
 ++  slyt  $-({* *} (unit (unit)))                       ::  old namespace
 ++  spur  path                                          ::  ship desk case spur
 ++  time  @da                                           ::  galactic time
-++  vile                                                ::  reflexive constants
+++  vile  ::                                            ::  reflexive constants
           $:  typ/type                                  ::  -:!>(*type)
               duc/type                                  ::  -:!>(*duct)
               pah/type                                  ::  -:!>(*path)
               mev/type                                  ::  -:!>([%meta *vase])
           ==                                            ::
-++  wind                                                ::  new kernel action
+++  wind  ::                                            ::  new kernel action
           |*  {a/gate b/gate}                           ::  forward+reverse
           $%  {$pass p/path q/a}                        ::  advance
               {$slip p/a}                               ::  lateral
