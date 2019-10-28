@@ -3693,7 +3693,7 @@
   ::
 ++  po                                                  ::  phonetic base
   ~/  %po
-  =+  :-  ^=  sis                                       ::  prefix syllables
+  =+  :-  ^=  sis  :::sic :/                            ::  prefix syllables
       'dozmarbinwansamlitsighidfidlissogdirwacsabwissib\
       /rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
       /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
@@ -7486,7 +7486,7 @@
   ::
   ++  boil
     ^-  tile
-    ?+    gen      [%herb gen]
+    ?+    gen      [%herb gen]    :::sic??
         {$base *}  [%axil p.gen]
         {$dbug *}  [%deet p.gen boil(gen q.gen)]
         {$leaf *}  [%leaf p.gen]
@@ -8311,7 +8311,7 @@
         sut
       ?-    sut
           {$atom *}
-        ?+  ref      sint
+        ?+  ref      sint    :::sic??
           {$atom *}  ?^  q.sut
                        ?^(q.ref ?:(=(q.ref q.sut) %void sut) %void)
                      ?^(q.ref sut %void)
@@ -8319,7 +8319,7 @@
         ==
       ::
           {$cell *}
-        ?+  ref      sint
+        ?+  ref      sint    :::sic??
           {$atom *}  sut
           {$cell *}  ?.  (nest(sut p.ref) | p.sut)  sut
                      (cell p.sut dext(sut q.sut, ref q.ref))
@@ -8337,7 +8337,7 @@
     ::
     ++  sint
       ^-  type
-      ?+  ref      !!
+      ?+  ref      !!    :::sic??
         {$core *}  sut
         {$face *}  dext(ref repo(sut ref))
         {$fork *}  =+  yed=~(tap in p.ref)
@@ -9386,7 +9386,7 @@
                      gil  (~(put in gil) -)
       ==           ==
     ++  sint
-      ?+  ref      dext(sut ref, ref sut)
+      ?+  ref      dext(sut ref, ref sut)    :::sic??
         {$atom *}  ?.  ?=({$atom *} sut)  &
                    ?&  ?=(^ q.ref)
                        ?=(^ q.sut)
@@ -9860,7 +9860,7 @@
     ?~  vit  (duz sut)
     ?~  i.vit
       |-  ^-  type
-      ?+  sut      ^$(vit t.vit)
+      ?+  sut      ^$(vit t.vit)    :::sic??
         {$face *}  (face p.sut ^$(vit t.vit, sut q.sut))
         {$fork *}  (fork (turn ~(tap in p.sut) |=(type ^$(sut +<))))
         {$hold *}  $(sut repo)
@@ -10108,7 +10108,7 @@
         ~
       :+  ~
         %leaf
-      ?+    (rash p.q.ham ;~(sfix (cook crip (star low)) (star hig)))
+      ?+    (rash p.q.ham ;~(sfix (cook crip (star low)) (star hig)))  :::sic??
           ~(rend co [%$ p.q.ham lum])
         $$    ~(rend co [%$ %ud lum])
         $t    (dash (rip 3 lum) '\'' ~)
@@ -10382,7 +10382,7 @@
 ::
 ++  slam                                                ::  slam a gate
   |=  {gat/vase sam/vase}  ^-  vase
-  =+  :-  ^-  typ=type
+  =+  :-  ^-  typ=type  :::sic (reanchor)
           [%cell p.gat p.sam]
       ^-  gen=hoon
       [%cnsg [%$ ~] [%$ 2] [%$ 3] ~]
@@ -12372,7 +12372,7 @@
     ::    hint syntax
     ::
     ++  hinb  |.(;~(gunk bont loaf))                    ::  hint and hoon
-    ++  hinc  |.                                        ::  optional =en, hoon
+    ++  hinc  |.   :::sic??                             ::  optional =en, hoon
               ;~(pose ;~(gunk bony loaf) (stag ~ loaf)) ::
     ++  hind  |.(;~(gunk bonk loaf bonz loaf))          ::  jet hoon "bon"s hoon
     ++  hine  |.(;~(gunk bonk loaf))                    ::  jet-hint and hoon
