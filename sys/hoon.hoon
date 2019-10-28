@@ -2,7 +2,8 @@
 ::::    /sys/hoon                                       ::
   ::                                                    ::
 =<  ride
-=>  %143  =~  :::sic
+=>  %143
+  =~  :::sic
 ::                                                      ::
 ::::    0: version stub                                 ::
   ::                                                    ::
@@ -873,7 +874,8 @@
     b   (rsh 0 1 b)
     c   +(c)
     d   (add d (lsh 0 c =((end 0 1 a) (end 0 1 b))))
-  ==  ::\n ::
+  ==
+::
 ++  not                                                 ::  binary not (sized)
   |=  {a/bloq b/@ c/@}
   (mix c (dec (bex (mul b (bex a)))))
@@ -891,11 +893,13 @@
   =/  pad      (sub len (met 3 key))
   =/  data     (weld (rip 3 key) (reap pad 0))
   =/  nblocks  (div len 4)  ::  intentionally off-by-one
-  =/  h1  syd  =+  [c1=0xcc9e.2d51 c2=0x1b87.3593]  ::\n
+  =/  h1  syd
+  =+  [c1=0xcc9e.2d51 c2=0x1b87.3593]
   =/  blocks  (rip 5 key)
   =/  i  nblocks
   =.  h1
-    =/  hi  h1  |-  ::\n
+    =/  hi  h1
+    |-
     ?:  =(0 i)  hi
     =/  k1  (snag (sub nblocks i) blocks)  ::  negative array index
     =.  k1  (sit (mul k1 c1))
@@ -1245,7 +1249,8 @@
     ?~  a  c
     =.  c  (~(put in c) (b n.a))
     =.  c  $(a l.a, c c)
-    $(a r.a, c c) ::\n ::
+    $(a r.a, c c)
+  ::
   +-  tap                                               ::  convert to list
     =<  $
     ~/  %tap
@@ -2242,7 +2247,8 @@
         ?:  =((cmp:si e.a emn) -1)  (dif:si emn e.a)  --0
       =^  b  a
         :-  (end 0 q a.a)
-        a(e (sum:si e.a (sun:si q)), a (rsh 0 q a.a))   ::\n ::
+        a(e (sum:si e.a (sun:si q)), a (rsh 0 q a.a))
+      ::
       ?~  a.a
         ?<  =(den %i)
         ?-  t
@@ -2509,7 +2515,10 @@
       ?:  &(=(a.a 0) =(a.b 0))  |
       ?:  =(a.a 0)  s.b  !s.a
     ?:  !=(s.a s.b)  s.b
-    ?:  s.a  (^lth +>.a +>.b)  (^lth +>.b +>.a)         ::\n ::
+    ?:  s.a
+      (^lth +>.a +>.b)
+    (^lth +>.b +>.a)
+  ::
   ++  lte                                               ::  less-equal
     |=  {a/fn b/fn}  ^-  (unit ?)
     %+  bind  (lth b a)  |=  a/?  !a
@@ -2523,7 +2532,8 @@
     ?:  |(=(a.a 0) =(a.b 0))
       ?:  &(=(a.a 0) =(a.b 0))  &  |
     ?:  |(=(e.a e.b) !=(s.a s.b))  |
-    (^equ +>.a +>.b)                                    ::\n::
+    (^equ +>.a +>.b)
+  ::
   ++  gte                                               ::  greater-equal
     |=  {a/fn b/fn}  ^-  (unit ?)  (lte b a)
   ::
@@ -2553,7 +2563,8 @@
     ?.  ?=({$f *} b)  ~
     :-  ~
     =+  c=(^^mul (bex (abs:si e.b)) a.b)
-    (new:si s.b c)                                      ::\n::
+    (new:si s.b c)
+  ::
   ++  toj                                               ::  round to integer fn
     |=  {a/fn}  ^-  fn
     ?.  ?=({$f *} a)  a
@@ -3728,20 +3739,24 @@
       /remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
       /lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
   |%
-  ++  ins  ~/  %ins                                     ::  parse prefix
-           |=  a/@tas
-           =+  b=0
-           |-  ^-  (unit @)
-           ?:(=(256 b) ~ ?:(=(a (tos b)) [~ b] $(b +(b))))
-  ++  ind  ~/  %ind                                     ::  parse suffix
-           |=  a/@tas
-           =+  b=0
-           |-  ^-  (unit @)
-           ?:(=(256 b) ~ ?:(=(a (tod b)) [~ b] $(b +(b))))
-  ++  tos  ~/  %tos                                     ::  fetch prefix
-           |=(a/@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] sis)))
-  ++  tod  ~/  %tod                                     ::  fetch suffix
-           |=(a/@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] dex)))
+  ++  ins                                               ::  parse prefix
+    ~/  %ins
+    |=  a/@tas
+    =+  b=0
+    |-  ^-  (unit @)
+    ?:(=(256 b) ~ ?:(=(a (tos b)) [~ b] $(b +(b))))
+  ++  ind                                               ::  parse suffix
+    ~/  %ind
+    |=  a/@tas
+    =+  b=0
+    |-  ^-  (unit @)
+    ?:(=(256 b) ~ ?:(=(a (tod b)) [~ b] $(b +(b))))
+  ++  tos                                               ::  fetch prefix
+    ~/  %tos
+    |=(a/@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] sis)))
+  ++  tod                                               ::  fetch suffix
+    ~/  %tod
+    |=(a/@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] dex)))
   --
 ::
 ++  fa                                                  ::  base58check
@@ -4496,7 +4511,8 @@
   =+  vex=(sef tub)
   ?~  q.vex
     vex
-  [p=p.vex q=[~ u=[p=(hez [p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]  ::\n ::
+  [p=p.vex q=[~ u=[p=(hez [p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
+::
 ++  inde                                                :: indentation block
   |*  sef/rule
   |=  nail  ^+  (sef)
@@ -4516,7 +4532,8 @@
   |-
   ?~  res  |4.roq
   ?.  =(10 -.res)  [-.res $(res +.res)]
-  (welp [`@t`10 (trip lev)] $(res +.res))  ::\n ::
+  (welp [`@t`10 (trip lev)] $(res +.res))
+::
 ++  ifix
   |*  {fel/{rule rule} hof/rule}
   ~!  +<
@@ -4985,7 +5002,8 @@
   ++  lip  =+  tod=(ape ted:ab)
            (bass 256 ;~(plug tod (stun [3 3] ;~(pfix dog tod))))
   ++  mot  ;~  pose
-             ;~  pfix  (just '1')  ::\n
+             ;~  pfix
+               (just '1')
                (cook |=(a/@ (add 10 (sub a '0'))) (shim '0' '2'))
              ==
              sed:ab
@@ -5308,7 +5326,7 @@
         :-  '~'        ;~(pfix sig ;~(pose twid (easy [%$ %n 0])))
     ==
   ++  nusk
-    ~+  :(sear |=(a/@ta (rush a nuck)) wick urt:ab)  ::\n
+    ~+  :(sear |=(a/@ta (rush a nuck)) wick urt:ab)
   ++  perd
     ~+
     ;~  pose
@@ -5324,7 +5342,7 @@
     =/  voy
       %+  cook  royl-cell
       ;~  pose
-        ;~  plug  (easy %d)  ::\n
+        ;~  plug  (easy %d)
           ;~  pose  (cold | hep)  (easy &)
           ==
           ;~  plug  dim:ag
@@ -5341,15 +5359,14 @@
             ==
           ==
         ==
-        ;~  plug  (easy %i) ::\n
+        ;~  plug  (easy %i)
           ;~  sfix
             ;~  pose  (cold | hep)  (easy &)
             ==
             (jest 'inf')
           ==
         ==
-        ;~  plug
-          (easy %n)
+        ;~  plug  (easy %n)
           (cold ~ (jest 'nan'))
         ==
       ==
@@ -7832,10 +7849,10 @@
       |-
       ?~(p.gen [%rock %f 1] [%wtcl i.p.gen [%rock %f 0] $(p.gen t.p.gen)])
     ::
-        {$wtdt *}   [%wtcl p.gen r.gen q.gen]
-        {$wtgl *}   [%wtcl p.gen [%zpzp ~] q.gen]
-        {$wtgr *}   [%wtcl p.gen q.gen [%zpzp ~]]
-        {$wtkt *}   [%wtcl [%wtts [%base %atom %$] p.gen] r.gen q.gen]
+        {$wtdt *}  [%wtcl p.gen r.gen q.gen]
+        {$wtgl *}  [%wtcl p.gen [%zpzp ~] q.gen]
+        {$wtgr *}  [%wtcl p.gen q.gen [%zpzp ~]]
+        {$wtkt *}  [%wtcl [%wtts [%base %atom %$] p.gen] r.gen q.gen]
     ::
         {$wthp *}
       |-
@@ -7866,10 +7883,10 @@
         [(open-mane n) %knit v]
       --
     ::
-        {$wtpt *}   [%wtcl [%wtts [%base %atom %$] p.gen] q.gen r.gen]
-        {$wtsg *}   [%wtcl [%wtts [%base %null] p.gen] q.gen r.gen]
-        {$wtts *}   [%fits ~(bunt al %herb p.gen) q.gen]
-        {$wtzp *}   [%wtcl p.gen [%rock %f 1] [%rock %f 0]]
+        {$wtpt *}  [%wtcl [%wtts [%base %atom %$] p.gen] q.gen r.gen]
+        {$wtsg *}  [%wtcl [%wtts [%base %null] p.gen] q.gen r.gen]
+        {$wtts *}  [%fits ~(bunt al %herb p.gen) q.gen]
+        {$wtzp *}  [%wtcl p.gen [%rock %f 1] [%rock %f 0]]
         {$zpgr *}
       [%cnhp [%limb %onan] [%zpsm [%bunt [%limb %abel]] p.gen] ~]
     ::
@@ -7880,7 +7897,7 @@
         q.gen
       ~_(leaf+"hoon-version" !!)
     ::
-        *           gen
+        *          gen
     ==
   ::
   ++  rake  ~>(%mean.[%leaf "rake-hoon"] (need reek))
@@ -8420,7 +8437,8 @@
       rig  t.rig
       hag  q.dix
       hej  [[p.dix q.zil] hej]
-    ==                                    ::\n::
+    ==
+  ::
   ++  endo
     |=  {lop/(pair palo palo) dox/type rig/(list (pair wing hoon))}
     ^-  (pair type type)
@@ -8456,7 +8474,8 @@
     %=  $
       rig  t.rig
       hag  [q.p.dix q.q.dix]
-    ==                                    ::\n::
+    ==
+  ::
   ++  ad
     |%
     ++  arc
@@ -8480,16 +8499,18 @@
       --
     ++  def
       =+  deft:arc
-      |%  +-  $
-      =>  +<
       |%
-      ++  pord  |*(* (form +< *nock))                   ::  wrap mint formula
-      ++  rosh  |*(* (form +< *(list pock)))            ::  wrap mint changes
-      ++  fleg  _(pord *bath)                           ::  legmatch + code
-      ++  fram  _(pord *claw)                           ::  armmatch +
-      ++  foat  _(rosh *bath)                           ::  leg with changes
-      ++  fult  _(rosh *claw)                           ::  arm with changes
-      --  --
+      +-  $
+        =>  +<
+        |%
+        ++  pord  |*(* (form +< *nock))                 ::  wrap mint formula
+        ++  rosh  |*(* (form +< *(list pock)))          ::  wrap mint changes
+        ++  fleg  _(pord *bath)                         ::  legmatch + code
+        ++  fram  _(pord *claw)                         ::  armmatch +
+        ++  foat  _(rosh *bath)                         ::  leg with changes
+        ++  fult  _(rosh *claw)                         ::  arm with changes
+        --
+      --
     ::
     ++  lib
       |%
@@ -8507,7 +8528,8 @@
               ++  tasp  $-({{axis claw} fleg fult} fult)
               ++  tyle  $-(fult foat)
           --
-        --  ::\n ::
+        --
+      ::
       ++  make
         =>  (def make:arc)
         |%
@@ -8515,73 +8537,84 @@
                   ^-  fleg
                   (mint %noun a)
         ++  vant
-          |%  ++  trep  |=  {a/type b/wing c/type}
-                        ^-  {axis type}
-                        (tack(sut a) b c)
-              ++  tasp  |=  {a/(pair axis type) b/fleg c/foat}
-                        ^-  foat
-                        [q.a [[p.a (skin b)] (skin c)]]
-              ++  tyle  |=(foat +<)
+          |%
+          ++  trep  |=  {a/type b/wing c/type}
+                    ^-  {axis type}
+                    (tack(sut a) b c)
+          ++  tasp  |=  {a/(pair axis type) b/fleg c/foat}
+                    ^-  foat
+                    [q.a [[p.a (skin b)] (skin c)]]
+          ++  tyle  |=(foat +<)
           --
         ++  vunt
-          |%  ++  trep  |=  {a/claw b/wing c/bath}
-                        ^-  (pair axis claw)
-                        (toss b c a)
-              ++  tasp  |~  {a/(pair axis claw) b/fleg c/fult}
-                        ^-  fult
-                        [q.a [[p.a (skin b)] (skin c)]]
-              ++  tyle  |~  fult
-                        ^-  foat
-                        [(fire +<-) +<+]
+          |%
+          ++  trep  |=  {a/claw b/wing c/bath}
+                    ^-  (pair axis claw)
+                    (toss b c a)
+          ++  tasp  |~  {a/(pair axis claw) b/fleg c/fult}
+                    ^-  fult
+                    [q.a [[p.a (skin b)] (skin c)]]
+          ++  tyle  |~  fult
+                    ^-  foat
+                    [(fire +<-) +<+]
+          --
         --
-      --  --  ::\n ::
+      --
+    ::
     ++  bin
       =+  deft:lib
-      |%  +-  $
-      =>  +<
       |%
-      ++  rame
-        =>  vant  |%
-            ++  clom  bath
-            ++  chog  fleg
-            ++  ceut  foat
-        --
-      ++  gelp
-        =>  vunt  |%
-            ++  clom  claw
-            ++  chog  fram
-            ++  ceut  fult
-        --
-      ++  ecbo  (ecco rame)
-      ++  eclo  (ecco gelp)
-      ++  ecco
-        =+  rame
-        |%  +-  $
+      +-  $
         =>  +<
-        |=  {rum/clom rig/(list (pair wing hoon))}
-        ^-  foat
-        %-  tyle
-        |-  ^-  ceut
-        ?~  rig  (rosh rum)
-        =+  mor=$(rig t.rig)
-        =+  zil=(halp q.i.rig)
-        =+  dar=(trep (meat mor) p.i.rig (meat zil))
-        (tasp dar zil mor)
-      --  --
-    --  --   ::\n ::
+        |%
+        ++  rame
+          =>  vant
+          |%
+          ++  clom  bath
+          ++  chog  fleg
+          ++  ceut  foat
+          --
+        ++  gelp
+          =>  vunt
+          |%
+          ++  clom  claw
+          ++  chog  fram
+          ++  ceut  fult
+          --
+        ++  ecbo  (ecco rame)
+        ++  eclo  (ecco gelp)
+        ++  ecco
+          =+  rame
+          |%
+          +-  $
+            =>  +<
+            |=  {rum/clom rig/(list (pair wing hoon))}
+            ^-  foat
+            %-  tyle
+            |-  ^-  ceut
+            ?~  rig  (rosh rum)
+            =+  mor=$(rig t.rig)
+            =+  zil=(halp q.i.rig)
+            =+  dar=(trep (meat mor) p.i.rig (meat zil))
+            (tasp dar zil mor)
+      --  --  :::sic!
+    --  --    :::sic!
+  ::
   ++  oc
     =+  inc=(bin:ad)
-    |%  +-  $
-    =>  inc
     |%
-    ++  echo
-      |=  {rum/bath rig/(list (pair wing hoon))}
-      (ecbo rum rig)
-    ::
-    ++  ecmo
-      |=  {hag/claw rig/(list (pair wing hoon))}
-      (eclo hag rig)
-    --  --
+    +-  $
+      =>  inc
+      |%
+      ++  echo
+        |=  {rum/bath rig/(list (pair wing hoon))}
+        (ecbo rum rig)
+      ::
+      ++  ecmo
+        |=  {hag/claw rig/(list (pair wing hoon))}
+        (eclo hag rig)
+      --
+    --
   ::
   ++  etco
     |=  {lop/palo rig/(list (pair wing hoon))}
@@ -10260,7 +10293,8 @@
             =(1 (met 3 p.i.p.din))
             =(1 (met 3 p.i.t.p.din))
         ==
-      :+  %list  (cat 3 p.i.p.din p.i.t.p.din)  ::\n
+      :+  %list
+        (cat 3 p.i.p.din p.i.t.p.din)
       q.i.p.din
     ?:  ?&  ?=  $:  $plot
                     {$face *}
@@ -11103,7 +11137,8 @@
           $lime  %li
           $poem  %div ::REVIEW actual container element?
           $bloc  %blockquote
-        ==    ::\n::
+        ==
+      ::
       ++  close-item                                    ::  complete and pop
         ^+  .
         ?~  hac  .
@@ -11198,7 +11233,8 @@
         =<  ?:(?=($head p.cur) close-item ..$)
         ::
         ::  save good result, clear buffer
-        ..$(par ~, q.cur (weld p.u.q.vex q.cur))  ::\n::
+        ..$(par ~, q.cur (weld p.u.q.vex q.cur))
+      ::
       ++  line                                          ::  body line loop
         ^+  .
         ::
@@ -11309,7 +11345,8 @@
           $expr  (parse-block expr:parse)
           $rule  (parse-block hrul:parse)
           $fens  (parse-block (fens:parse inr.ind))
-        ==  ::\n ::
+        ==
+      ::
       ++  open-item                                     ::  enter list/quote
         |=  saw/trig-new
         =<  +>.$:apex
@@ -12937,4 +12974,5 @@
       ~
     ==
   ==
---  == ::\n
+--
+  ==
