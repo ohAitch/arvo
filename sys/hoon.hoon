@@ -7536,15 +7536,15 @@
         {$eror *}  ~|(p.gen !!)
     ::
         {$knit *}                                       ::
-      :+  %tsgr  [%ktts %v %$ 1]                         ::  =>  v=.
+      :+  %tsgr  [%ktts %v %$ 1]                        ::  =>  v=.
       :+  %brhp  [~ ~]                                  ::  |-
       :+  %ktls                                         ::  ^+
-        :+  %brhp  [~ ~]                                ::  |-
-        :^    %wtcl                                       ::  ?:
-            [%bust %bean]                               ::  ?
-          [%bust %null]                                 ::  ~
-        :-  [%ktts %i [%sand 'tD' *@]]                  ::  :-  i=~~
-        [%ktts %t [%limb %$]]                           ::  t=$
+        :+  %brhp  [~ ~]                                ::    |-
+        :^    %wtcl                                     ::    ?:
+            [%bust %bean]                               ::        *?
+          [%bust %null]                                 ::      *~
+        :-  [%ktts %i [%sand 'tD' *@]]                  ::    :-  i=~~
+        [%ktts %t [%limb %$]]                           ::    t=$
       |-  ^-  hoon                                      ::
       ?~  p.gen                                         ::
         [%bust %null]                                   ::  ~
@@ -7552,22 +7552,22 @@
       ^-  hoon                                          ::
       ?@  i.p.gen                                       ::
         [[%sand 'tD' i.p.gen] res]                      ::  [~~{i.p.gen} {res}]
-      :+  %tsls                                          ::
+      :+  %tsls                                         ::
         :-  :+  %ktts                                   ::  ^=
-              %a                                        ::  a
+              %a                                        ::    a
             :+  %ktls                                   ::  ^+
-              [%limb %$]                                ::  $
-            [%tsgr [%limb %v] p.i.p.gen]                 ::  =>(v {p.i.p.gen})
+              [%limb %$]                                ::    $
+            [%tsgr [%limb %v] p.i.p.gen]                ::  =>(v {p.i.p.gen})
         [%ktts %b res]                                  ::  b={res}
       ^-  hoon                                          ::
       :+  %brhp  [~ ~]                                  ::  |-
       :^    %wtpt                                       ::  ?@
-          [%a ~]                                        ::  a
-        [%limb %b]                                      ::  b
-      :-  [%tsgl [%$ 2] [%limb %a]]                      ::  :-  -.a
+          [%a ~]                                        ::      a
+        [%limb %b]                                      ::    b
+      :-  [%tsgl [%$ 2] [%limb %a]]                     ::  :-  -.a
       :+  %cnts                                         ::  %=
-        [%$ ~]                                          ::  $
-      [[[%a ~] [%tsgl [%$ 3] [%limb %a]]] ~]             ::  a  +.a
+        [%$ ~]                                          ::    $
+      [[[%a ~] [%tsgl [%$ 3] [%limb %a]]] ~]            ::    a  +.a
     ::
         {$leaf *}  ~(clam al boil)
         {$limb *}  [%cnts [p.gen ~] ~]
