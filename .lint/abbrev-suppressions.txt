@@ -862,9 +862,6 @@ sys/hoon.hoon 8575:5 lushep:arm-body-indent cell body @8575:5; under by 2
 # Silence LUSLUS arm body indent warnings
 sys/zuse.hoon 906:11 luslus:arm-body-indent cell body @906:11; over by 6
 sys/zuse.hoon 4539:7 luslus:arm-body-indent cell body @4539:7; over by 2
-# this seems correct? (
-sys/hoon.hoon 1938:11 luslus:arm-body-indent cell body @1938:11; over by 8
-# )
 sys/arvo.hoon 18:11 luslus:arm-body-indent cell body @18:11; over by 8
 sys/arvo.hoon 26:11 luslus:arm-body-indent cell body @26:11; over by 8
 sys/arvo.hoon 70:11 luslus:arm-body-indent cell body @70:11; over by 8

@@ -1934,7 +1934,7 @@
                   q/(list tank)                         ::
               ==                                        ::
           ==                                            ::
-++  tanq                                                ::  tomorrow's tank
+++  tanq  ::                                            ::  tomorrow's tank
           $?  {$~ p/(list tanq)}                        ::  list of printables
               {$~ $~ p/tape}                            ::  simple string
               (pair @tas tanq)                          ::  captioned
@@ -7532,7 +7532,7 @@
         {$base *}  ~(clam al boil)
         {$bust *}  ~(bunt al %axil p.gen)
         {$cold *}  p.gen
-        {$dbug *}   q.gen
+        {$dbug *}  q.gen
         {$eror *}  ~|(p.gen !!)
     ::
         {$knit *}                                       ::
