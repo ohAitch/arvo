@@ -4513,10 +4513,10 @@
   :+  &3.vex
     &4.vex(q.p (add (dec q.har) q.p.&4.vex))
   =+  res=|4.vex
-  |-  ?~  res  |4.roq
+  |-
+  ?~  res  |4.roq
   ?.  =(10 -.res)  [-.res $(res +.res)]
-  (welp [`@t`10 (trip lev)] $(res +.res))
-::
+  (welp [`@t`10 (trip lev)] $(res +.res))  ::\n ::
 ++  ifix
   |*  {fel/{rule rule} hof/rule}
   ~!  +<
@@ -4813,25 +4813,25 @@
            (cook |=(a/char (sub a 87)) (shim 'a' 'f'))
            (cook |=(a/char (sub a 55)) (shim 'A' 'F'))
          ==
-++  iny                                                 :: indentation block
-  |*  sef/rule
-  |=  nail  ^+  (sef)
-  =+  [har tap]=[p q]:+<
-  =+  lev=(fil 3 (dec q.har) ' ')
-  =+  eol=(just `@t`10)
-  =+  =-  roq=((star ;~(pose prn ;~(sfix eol (jest lev)) -)) har tap)
-      ;~(simu ;~(plug eol eol) eol)
-  ?~  q.roq  roq
-  =+  vex=(sef har(q 1) p.u.q.roq)
-  =+  fur=p.vex(q (add (dec q.har) q.p.vex))
-  ?~  q.vex  vex(p fur)
-  =-  vex(p fur, u.q -)
-  :+  &3.vex
-    &4.vex(q.p (add (dec q.har) q.p.&4.vex))
-  =+  res=|4.vex
-  |-  ?~  res  |4.roq
-  ?.  =(10 -.res)  [-.res $(res +.res)]
-  (welp [`@t`10 (trip lev)] $(res +.res))
+++  iny  inde                                           :: indentation block
+:: this was just a character-for-character duplicate??
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
+::NB
 ::
 ++  low  (shim 'a' 'z')                                 ::  lowercase
 ++  mes  %+  cook                                       ::  hexbyte
@@ -6016,7 +6016,7 @@
       ++  mare  (each manx marl)                        ::  node or nodes
       ++  maru  (each tuna marl)                        ::  interp or nodes
       ++  tuna                                          ::  maybe interpolation
-          $^(manx {?($tape $manx $marl $call) p/hoon})  ::
+        $^(manx {?($tape $manx $marl $call) p/hoon})    ::
       --                                                ::
   $^  {p/hoon q/hoon}                                   ::
   $%                                                    ::
@@ -9930,8 +9930,8 @@
 ++  us                                                  ::  prettyprinter
   =>  |%
       ++  cape  {p/(map @ud wine) q/wine}               ::
-      ++  wine                                          ::
-                $@  $?  $noun                           ::
+::NB
+      ++  wine  $@  $?  $noun                           ::
                         $path                           ::
                         $type                           ::
                         $void                           ::
@@ -11662,19 +11662,19 @@
     (most col rope)
   ::
   ++  espy                                              ::  face for =model
-      |=  rot=root
-      ^-  (unit (pair term root))
-      =;  mot
-        ?~(mot ~ `[u.mot rot])
-      |-  ^-  (unit term)
-      ?+  rot  ~
-        {$bcsm *}  $(rot p.rot)
-        {$wing *}  ?~(p.rot ~ ?^(i.p.rot ~ `i.p.rot))
-        {$limb *}  `p.rot
-        {$dbug *}  $(rot ~(open ap rot))
-        {$tsgl *}  $(rot ~(open ap rot))
-        {$tsgr *}  $(rot q.rot)
-      ==
+    |=  rot=root
+    ^-  (unit (pair term root))
+    =;  mot
+      ?~(mot ~ `[u.mot rot])
+    |-  ^-  (unit term)
+    ?+  rot  ~
+      {$bcsm *}  $(rot p.rot)
+      {$wing *}  ?~(p.rot ~ ?^(i.p.rot ~ `i.p.rot))
+      {$limb *}  `p.rot
+      {$dbug *}  $(rot ~(open ap rot))
+      {$tsgl *}  $(rot ~(open ap rot))
+      {$tsgr *}  $(rot q.rot)
+    ==
   ::
   ++  scad
     %+  knee  *root  |.  ~+
@@ -12710,10 +12710,10 @@
 ++  beam  {{p/ship q/desk r/case} s/spur}               ::  global name
 ++  bone  @ud                                           ::  opaque duct
 ++  case                                                ::  version
-         $%  {$da p/@da}                               ::  date
-             {$tas p/@tas}                             ::  label
-             {$ud p/@ud}                               ::  sequence
-         ==                                            ::
+         $%  {$da p/@da}                                ::  date
+             {$tas p/@tas}                              ::  label
+             {$ud p/@ud}                                ::  sequence
+         ==                                             ::
 ++  desk  @tas                                          ::  ship desk case spur
 ++  cage  (cask vase)                                   ::  global metadata
 ++  cask  |*(a/mold (pair mark a))                      ::  global data
@@ -12812,10 +12812,10 @@
   ==
 ::
 ++  pi-heck
-    |=  {nam/@tas day/doss}
-    ^-  doss
-    =+  lam=(~(get by hit.day) nam)
-    day(hit (~(put by hit.day) nam ?~(lam 1 +(u.lam))))
+  |=  {nam/@tas day/doss}
+  ^-  doss
+  =+  lam=(~(get by hit.day) nam)
+  day(hit (~(put by hit.day) nam ?~(lam 1 +(u.lam))))
 ::
 ++  pi-noon                                             ::  sample trace
   |=  {mot/term paz/(list path) day/doss}

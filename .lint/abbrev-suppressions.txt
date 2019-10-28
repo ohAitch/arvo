@@ -862,26 +862,24 @@ sys/hoon.hoon 8575:5 lushep:arm-body-indent cell body @8575:5; under by 2
 # Silence LUSLUS arm body indent warnings
 sys/zuse.hoon 906:11 luslus:arm-body-indent cell body @906:11; over by 6
 sys/zuse.hoon 4539:7 luslus:arm-body-indent cell body @4539:7; over by 2
+# this seems correct? (
 sys/hoon.hoon 1938:11 luslus:arm-body-indent cell body @1938:11; over by 8
+# )
 sys/hoon.hoon 5959:11 luslus:arm-body-indent cell body @5959:11; over by 8
 sys/hoon.hoon 5968:11 luslus:arm-body-indent cell body @5968:11; over by 8
 sys/hoon.hoon 5972:11 luslus:arm-body-indent cell body @5972:11; over by 8
 sys/hoon.hoon 5989:11 luslus:arm-body-indent cell body @5989:11; over by 8
 sys/hoon.hoon 6001:11 luslus:arm-body-indent cell body @6001:11; over by 8
-sys/hoon.hoon 6019:11 luslus:arm-body-indent cell body @6019:11; over by 2
 sys/hoon.hoon 6192:11 luslus:arm-body-indent cell body @6192:11; over by 8
 sys/hoon.hoon 6197:11 luslus:arm-body-indent cell body @6197:11; over by 8
 sys/hoon.hoon 6203:11 luslus:arm-body-indent cell body @6203:11; over by 8
 sys/hoon.hoon 6214:11 luslus:arm-body-indent cell body @6214:11; over by 8
 sys/hoon.hoon 6227:11 luslus:arm-body-indent cell body @6227:11; over by 8
 sys/hoon.hoon 8662:19 luslus:arm-body-indent cell body @8662:19; over by 8
-sys/hoon.hoon 9934:17 luslus:arm-body-indent cell body @9934:17; over by 8
-sys/hoon.hoon 11665:7 luslus:arm-body-indent cell body @11665:7; over by 2
 sys/hoon.hoon 12713:10 luslus:arm-body-indent cell body @12713:10; over by 7
 sys/hoon.hoon 12721:11 luslus:arm-body-indent cell body @12721:11; over by 8
 sys/hoon.hoon 12778:11 luslus:arm-body-indent cell body @12778:11; over by 8
 sys/hoon.hoon 12784:11 luslus:arm-body-indent cell body @12784:11; over by 8
-sys/hoon.hoon 12815:5 luslus:arm-body-indent cell body @12815:5; over by 2
 sys/arvo.hoon 18:11 luslus:arm-body-indent cell body @18:11; over by 8
 sys/arvo.hoon 26:11 luslus:arm-body-indent cell body @26:11; over by 8
 sys/arvo.hoon 70:11 luslus:arm-body-indent cell body @70:11; over by 8
@@ -1511,8 +1509,6 @@ tests/zuse/crypto/keccak.hoon 199:8 colhep:indent backdent #2 @199:8; over by 1
 # WUTSIG reanchoring outliers
 sys/zuse.hoon 2630:13 wutsig:indent backdent #3 @2630:13; over by 2
 sys/hoon.hoon 1245:5 wutsig:indent backdent #3 @1245:5; under by 4
-sys/hoon.hoon 4517:3 wutsig:indent backdent #3 @4517:3; under by 4
-sys/hoon.hoon 4833:3 wutsig:indent backdent #3 @4833:3; under by 4
 sys/vane/behn.hoon 116:9 wutsig:indent backdent #3 @116:9; over by 2
 
 # BARDOT reanchoring outliers
