@@ -853,7 +853,7 @@ lib/down-jet/parse.hoon 13:1 tissig:runstep-indent runstep #2 @13:1; under by 6
 lib/down-jet/parse.hoon 52:1 tissig:runstep-indent runstep #3 @52:1; under by 6
 lib/down-jet/parse.hoon 448:1 tissig:runstep-indent runstep #2 @448:1; under by 4
 
-# Silence LUSHEP warnings
+# Silence LUSHEP warnings - relevant code gone with lang changes iirc
 sys/hoon.hoon 8484:7 lushep:arm-body-indent cell body @8484:7; under by 2
 sys/hoon.hoon 8541:7 lushep:arm-body-indent cell body @8541:7; under by 2
 sys/hoon.hoon 8560:9 lushep:arm-body-indent cell body @8560:9; under by 2
@@ -1493,12 +1493,10 @@ tests/zuse/crypto/keccak.hoon 199:8 colhep:indent backdent #2 @199:8; over by 1
 
 # WUTSIG reanchoring outliers
 sys/zuse.hoon 2630:13 wutsig:indent backdent #3 @2630:13; over by 2
-sys/hoon.hoon 1245:5 wutsig:indent backdent #3 @1245:5; under by 4
 sys/vane/behn.hoon 116:9 wutsig:indent backdent #3 @116:9; over by 2
 
 # BARDOT reanchoring outliers
 sys/hoon.hoon 12376:15 bardot:indent backdent #1 @12376:15; over by 8
-sys/hoon.hoon 12399:9 bardot:indent backdent #1 @12399:9; over by 2
 
 # CENHEP reanchoring outliers
 sys/vane/eyre.hoon 1188:13 cenhep:indent backdent #2 @1188:13; over by 2

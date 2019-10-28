@@ -1241,11 +1241,11 @@
     ~/  %run
     |*  b/gate
     =|  c/(set _?>(?=(^ a) (b n.a)))
-    |-  ?~  a  c
+    |-
+    ?~  a  c
     =.  c  (~(put in c) (b n.a))
     =.  c  $(a l.a, c c)
-    $(a r.a, c c)
-  ::
+    $(a r.a, c c) ::\n ::
   +-  tap                                               ::  convert to list
     =<  $
     ~/  %tap
@@ -12396,13 +12396,13 @@
         ==
       ==
     ++  hinh  |.                                        ::  1/2 numbers, hoon
-        ;~  gunk
-          ;~  pose
-            dem
-            (ifix [sel ser] ;~(plug dem ;~(pfix ace dem)))
-          ==
-          loaf
+      ;~  gunk
+        ;~  pose
+          dem
+          (ifix [sel ser] ;~(plug dem ;~(pfix ace dem)))
         ==
+        loaf
+      ==
     ++  bont  ;~  (bend)                                ::  term, optional hoon
                 ;~(pfix cen sym)
                 ;~(pfix dot ;~(pose wide ;~(pfix muck loaf)))
