@@ -1,3 +1,4 @@
+dist: trusty
 language: node_js # ish, mainly used as an entry point
 node_js:
   - 4
