@@ -2,7 +2,7 @@
 ::::    /sys/hoon                                       ::
   ::                                                    ::
 =<  ride
-=>  %143  =~
+=>  %143  =~  :::sic
 ::                                                      ::
 ::::    0: version stub                                 ::
   ::                                                    ::
@@ -906,7 +906,7 @@
     =.  hi  (sum (sit (mul hi 5)) 0xe654.6b64)
     $(i (dec i))
   =/  tail  (slag (mul 4 nblocks) data)
-  =/  k1    0  ::nolint
+  =/  k1    0  :::sic
   =/  tlen  (dis len 3)
   =.  h1
     ?+  tlen  h1  ::  fallthrough switch
@@ -3746,7 +3746,7 @@
 ::
 ++  fa                                                  ::  base58check
   =+  key='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-  =+  ^-  yek/@ux  ~+  ::nolint
+  =+  ^-  yek/@ux  ~+  :::sic
       =-  yek:(roll (rip 3 key) -)
       =+  [a=*char b=*@ yek=`@ux`(fil 3 256 0xff)]
       |.
@@ -8998,7 +8998,7 @@
     |=  {gol/type gen/hoon}
     ^-  {p/type q/nock}
     ~&  %pure-mint
-    |^  ^-  {p/type q/nock}   ::nolint this $ should be a named arm tbh
+    |^  ^-  {p/type q/nock}   :::sic this $ should be a named arm tbh
     ?:  ?&(=(%void sut) !?=({$dbug *} gen))
       ?.  |(!vet ?=({$lost *} gen) ?=({$zpzp *} gen))
         ~>(%mean.[%leaf "mint-vain"] !!)
@@ -9174,7 +9174,7 @@
   ++  mull
     ~/  %mull
     |=  {gol/type dox/type gen/hoon}
-    |^  ^-  {p/type q/type}   ::nolint this $ should be a named arm tbh
+    |^  ^-  {p/type q/type}   :::sic this $ should be a named arm tbh
     ?:  =(%void sut)
       ~>(%mean.[%leaf "mull-none"] !!)
     ?-    gen

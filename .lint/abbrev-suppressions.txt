@@ -1457,9 +1457,6 @@ lib/hood/drum.hoon 63:9 buctis:indent backdent #2 @63:9; over by 2
 # That is, I silence the warnings for reanchoring "outliers".
 # note: NOLINT
 
-# TISFAS run unrecognized
-sys/hoon.hoon 909:13 tisfas:hgap joined backdent element #2 of @909:3 is at @909:13; should be one of @909:11 (tight); @909:16 (chain)
-
 # KETHEP reanchoring outliers
 lib/http.hoon 27:7 kethep:indent backdent #2 @27:7; over by 2
 sys/hoon.hoon 10386:11 kethep:indent backdent #2 @10386:11; over by 2
@@ -1468,8 +1465,6 @@ sys/vane/xmas.hoon 1228:13 kethep:indent backdent #2 @1228:13; over by 2
 sys/zuse.hoon 4580:9 kethep:indent backdent #2 @4580:9; over by 2
 sys/vane/ford.hoon 1013:13 kethep:indent backdent #2 @1013:13; over by 2
 
-sys/hoon.hoon 9002:5 kethep:indent backdent #2 @9002:5; under by 4
-sys/hoon.hoon 9178:5 kethep:indent backdent #2 @9178:5; under by 4
 sys/zuse.hoon 3085:9 kethep:indent backdent #2 @3085:9; under by 2
 
 sys/vane/eyre.hoon 1821:7 kethep:indent backdent #2 @1821:7; under by 12
@@ -1529,20 +1524,11 @@ sys/vane/eyre.hoon 1188:13 cenhep:indent backdent #2 @1188:13; over by 2
 sys/vane/clay.hoon 1719:13 cenhep:indent backdent #2 @1719:13; over by 2
 app/pipe.hoon 28:7 cenhep:indent backdent #2 @28:7; over by 2
 
-# TISSIG currying outdent - nolint-children
-sys/hoon.hoon 9:1 tissig:runstep-indent runstep #1 @9:1; under by 2
-sys/hoon.hoon 13:1 tissig:runstep-indent runstep #2 @13:1; under by 2
-sys/hoon.hoon 382:1 tissig:runstep-indent runstep #3 @382:1; under by 2
-sys/hoon.hoon 1959:1 tissig:runstep-indent runstep #4 @1959:1; under by 2
-sys/hoon.hoon 3684:1 tissig:runstep-indent runstep #5 @3684:1; under by 2
-sys/hoon.hoon 6246:1 tissig:runstep-indent runstep #6 @6246:1; under by 2
-
 # Misc fixes arity reanchoring outliers
 app/hall.hoon 2544:13 cendot:indent backdent #2 @2544:13; under by 8
 lib/down-jet/parse.hoon 566:3 bartis:indent backdent #2 @566:3; under by 13
 lib/down-jet/rend.hoon 25:7 bartis:indent backdent #2 @25:7; under by 20
 lib/hall.hoon 178:15 dottis:indent backdent #2 @178:15; over by 4
-sys/hoon.hoon 3750:7 siglus:pseudojoin-mismatch:pseudojoin Pseudo-joined backdented element 1; element/comment mismatch @3750:7; under by 17
 sys/vane/ford.hoon 1865:11 bartis:indent backdent #2 @1865:11; under by 10
 sys/zuse.hoon 2625:9 tislus:indent backdent #2 @2625:9; under by 9
 sys/zuse.hoon 4190:7 siglus:indent backdent #1 @4190:7; under by 8
